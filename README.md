@@ -15,12 +15,6 @@ Estos fueron los pasos primeros para la app básica
 
 ## Instalar Ionic  
     npm install -g @ionic/cli
-
-## Crear app  
-Elegimos template en blanco.
-
-    ionic start ionic-base blank --type=angular  
-    cd ionic-base
     
 # Instalación
 
