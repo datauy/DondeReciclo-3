@@ -12,6 +12,11 @@ export class SidemenuComponent implements OnInit {
       title: 'Inicio',
       url: '/inicio',
       icon: 'home'
+    },
+    {
+      title: 'Mapa',
+      url: '/mapa',
+      icon: 'map'
     }
   ];
 

@@ -5,14 +5,16 @@
       <ion-toolbar>
         <ion-title>Menú</ion-title>
         <ion-menu-toggle slot="end" auto-hide="true">
-          <ion-icon name="close"></ion-icon>
+          <ion-button fill="clear" size="small">
+            <ion-icon name="close"></ion-icon>
+          </ion-button>
         </ion-menu-toggle>
       </ion-toolbar>
     </ion-header>
     <ion-content>
       <ion-list>
         <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
-          <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
+          <ion-item [routerDirection]="'root'" [routerLink]="[p.url]" routerLinkActive="active-item">
             <ion-icon slot="start" [name]="p.icon"></ion-icon>
             <ion-label>
               {{p.title}}
