@@ -29,7 +29,17 @@
                 "glob": "**/*.svg",
                 "input": "node_modules/ionicons/dist/ionicons/svg",
                 "output": "./svg"
-              }
+              },
+              // {
+              //   "glob": "**/*",
+              //   "input": "./node_modules/leaflet/dist/images",
+              //   "output": "leaflet/"
+              // },
+              // {
+              //   "glob": "**/*",
+              //   "input": "./node_modules/leaflet-routing-machine/dist/images",
+              //   "output": "leaflet-routing-machine/"
+              // }
             ],
             "styles": [
               {
@@ -37,7 +47,13 @@
               },
               {
                 "input": "src/global.scss"
-              }
+              },
+              // {
+              //    "input": "./node_modules/leaflet/dist/leaflet.css"
+              // },
+              // {
+              //    "input": "./node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.css"
+              // }
             ],
             "scripts": []
           },

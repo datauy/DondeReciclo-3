@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -18,7 +18,7 @@ import { ComponentsModule } from './components/components.module';
     BrowserModule, 
     IonicModule.forRoot(), 
     AppRoutingModule,
-    ComponentsModule,],
+    ComponentsModule],
   providers: [
     StatusBar,
     SplashScreen,
