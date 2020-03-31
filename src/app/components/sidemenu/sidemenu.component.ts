@@ -11,7 +11,7 @@ export class SidemenuComponent implements OnInit {
     {
       title: 'Inicio',
       url: '/inicio',
-      icon: 'home'
+      icon: 'inicio'
     }
   ];
 
