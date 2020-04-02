@@ -17,7 +17,7 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
   exports: [
     LeafletComponent
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  // schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class LeafletComponentModule {
   // static forRoot(): ModuleWithProviders {

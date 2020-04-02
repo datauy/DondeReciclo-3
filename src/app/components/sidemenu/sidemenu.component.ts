@@ -17,6 +17,16 @@ export class SidemenuComponent implements OnInit {
       title: 'Mapa',
       url: '/mapa',
       icon: 'map'
+    },
+    {
+      title: 'Mapa2',
+      url: '/mapa2',
+      icon: 'map'
+    },
+    {
+      title: 'Mapa3',
+      url: '/mapa3',
+      icon: 'map'
     }
   ];
 
