@@ -18,7 +18,8 @@ import { ComponentsModule } from './components/components.module';
     BrowserModule, 
     IonicModule.forRoot(), 
     AppRoutingModule,
-    ComponentsModule],
+    ComponentsModule
+  ],
   providers: [
     StatusBar,
     SplashScreen,

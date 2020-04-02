@@ -4,12 +4,10 @@ import { IonicModule } from '@ionic/angular';
 
 import { AppRoutingModule } from '../app-routing.module';
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
-import { LeafletComponent } from './leaflet/leaflet.component'; 
 
 @NgModule({
   declarations: [
-    SidemenuComponent,
-    LeafletComponent
+    SidemenuComponent
   ],
   imports: [
     CommonModule,
@@ -17,8 +15,7 @@ import { LeafletComponent } from './leaflet/leaflet.component';
     AppRoutingModule
   ],
   exports: [
-    SidemenuComponent,
-    LeafletComponent
+    SidemenuComponent
   ]
 })
 export class ComponentsModule { }

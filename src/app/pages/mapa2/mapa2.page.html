@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Mapa</ion-title>
+    <ion-title>mapa2</ion-title>
     <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -8,6 +8,10 @@
 </ion-header>
 
 <ion-content>
-  Hola!
-  <app-leaflet></app-leaflet>
+  <div
+	style="height: 100vh;"
+	leaflet
+	[leafletOptions]="options"
+	(leafletMapReady)="onMapReady($event)"
+></div>
 </ion-content>

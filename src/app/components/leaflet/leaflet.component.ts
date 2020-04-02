@@ -1,5 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Map, tileLayer, marker } from 'leaflet';
+// import { latLng, tileLayer, Icon, icon, Marker } from "leaflet";
+
+// import { latLng, tileLayer } from 'leaflet';
+
+declare var L:any;
+import 'leaflet';
+import 'leaflet-routing-machine';
 
 @Component({
   selector: 'app-leaflet',
@@ -7,11 +14,15 @@ import { Map, tileLayer, marker } from 'leaflet';
   styleUrls: ['./leaflet.component.scss'],
 })
 
-export class LeafletComponent {
+export class LeafletComponent implements OnInit {
+
   map: Map;
   propertyList = [];
 
   constructor() { }
+
+  ngOnInit() {
+  }
 
   ionViewDidEnter() {
     this.map = new Map('map').setView([42.35663, -71.1109], 16);
@@ -38,4 +49,6 @@ export class LeafletComponent {
   ionViewWillLeave() {
     this.map.remove();
   }
+
+
 }
