@@ -6,6 +6,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { Mapa3PageRoutingModule } from './mapa3-routing.module';
 
+import { LeafletModule } from "@asymmetrik/ngx-leaflet";
+
 import { Mapa3Page } from './mapa3.page';
 
 // const routes: Routes = [
@@ -20,7 +22,7 @@ import { Mapa3Page } from './mapa3.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    Mapa3PageRoutingModule
+    Mapa3PageRoutingModule, LeafletModule.forRoot()
   ],
   declarations: [Mapa3Page]
 })

@@ -2,7 +2,7 @@ import { NgModule} from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'mapa3', pathMatch: 'full' },
+  { path: '', redirectTo: 'mapa', pathMatch: 'full' },
   {
     path: 'inicio',
     loadChildren: () => import('./pages/inicio/inicio.module').then( m => m.InicioPageModule)
@@ -10,14 +10,6 @@ const routes: Routes = [
   {
     path: 'mapa',
     loadChildren: () => import('./pages/mapa/mapa.module').then( m => m.MapaPageModule)
-  },
-  {
-    path: 'mapa2',
-    loadChildren: () => import('./pages/mapa2/mapa2.module').then( m => m.Mapa2PageModule)
-  },
-  {
-    path: 'mapa3',
-    loadChildren: () => import('./pages/mapa3/mapa3.module').then( m => m.Mapa3PageModule)
   },
 ];
 
