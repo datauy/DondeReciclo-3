@@ -10,6 +10,21 @@ import "leaflet";
 import "leaflet-routing-machine";
 declare let L;
 
+const iconRetinaUrl = 'assets/marker-icon-2x.png';
+const iconUrl = 'assets/marker-icon.png';
+const shadowUrl = 'assets/marker-shadow.png';
+const iconDefault = L.icon({
+  iconRetinaUrl,
+  iconUrl,
+  shadowUrl,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  tooltipAnchor: [16, -28],
+  shadowSize: [41, 41]
+});
+L.Marker.prototype.options.icon = iconDefault;
+
 @Component({
   selector: 'app-mapa',
   templateUrl: './mapa.page.html',
@@ -45,16 +60,16 @@ export class MapaPage {
     return btn;
   };
 
-  // this.map.on('click', function(e) {
-  //     var container = L.DomUtil.create('div'),
-  //         startBtn = createButton('Start from this location', container),
-  //         destBtn = createButton('Go to this location', container);
+  selectPoint (e) {
+      const container = L.DomUtil.create('div'),
+      startBtn = this.createButton('Start from this location', container),
+      destBtn = this.createButton('Go to this location', container);
 
-  //     L.popup()
-  //         .setContent(container)
-  //         .setLatLng(e.latlng)
-  //         .openOn(map);
-  // });
+      L.popup()
+          .setContent(container)
+          .setLatLng(e.latlng)
+          .openOn(this.map);
+  };
 
   ionViewDidEnter() {
     this.loadMap();
@@ -65,20 +80,30 @@ export class MapaPage {
       // maxZoom: 20,
       // minZoom: 6,
       zoomControl: false
-  }).setView([-34.881536, -56.147968], 13);
-  
-  control.zoom({
-      position: 'bottomright'
-  }).addTo(this.map);
+    }).setView([-34.881536, -56.147968], 13);
+    
+    control.zoom({
+        position: 'bottomright'
+    }).addTo(this.map);
 
     tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution:
         'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
     }).addTo(this.map);
+
+    this.map.on("click", <LeafletMouseEvent>(e) => {
+      console.log(e.latlng); // get the coordinates
+      if (this.newMarker) { // check
+        this.map.removeLayer(this.newMarker); // remove
+    } this.newMarker = marker([e.latlng.lat, e.latlng.lng]).addTo(this.map); // add the marker onclick
+    });
   }
 
   locatePosition() {
     this.map.locate({ setView: true }).on("locationfound", (e: any) => {
+      if (this.newMarker) { // check
+        this.map.removeLayer(this.newMarker); // remove
+      }
       this.newMarker = marker([e.latitude, e.longitude], {
         draggable: true
       }).addTo(this.map);
@@ -107,15 +132,6 @@ export class MapaPage {
       console.log(this.address);
     });
     this.drawRute(lat, long);
-  }
-
-  confirmPickupLocation() {
-    let navigationextras: NavigationExtras = {
-      state: {
-        pickupLocation: this.address
-      }
-    };
-    this.router.navigate(["home"], navigationextras);
   }
 
   drawRute(lat: number, long: number) {
