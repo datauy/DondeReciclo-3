@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 import { Router, NavigationExtras } from "@angular/router";
 
-import { Map, tileLayer, marker, Routing, control} from "leaflet";
+// import { Map, tileLayer, marker, Routing, control} from "leaflet";
 import {NativeGeocoder,NativeGeocoderOptions} from "@ionic-native/native-geocoder/ngx";
 
+import { BarriosService } from 'src/app/services/barrios.service';
 
 import "leaflet";
 import "leaflet-routing-machine";
@@ -32,61 +33,52 @@ L.Marker.prototype.options.icon = iconDefault;
 })
 export class MapaPage {
   
-  map: Map;
+  map: L.Map;
   newMarker: any;
   newRute: any;
   address: string[];
 
-  constructor(private geocoder: NativeGeocoder, private router: Router) {}
+  constructor(
+    private geocoder: NativeGeocoder, 
+    private router: Router,
+    private markerService: BarriosService) {
+  }
 
+  // createButton(label, container) {
+  //   var btn = L.DomUtil.create('button', '', container);
+  //   btn.setAttribute('type', 'button');
+  //   btn.innerHTML = label;
+  //   return btn;
+  // };
 
-  // Routing.control({
-  //   //   waypoints: [null],
-  //   waypoints: [
-  //       L.latLng(44.91221, 7.671685),
-  //       L.latLng(44.907852, 7.673789)
-  //   ],
-  //   routeWhileDragging: true,
-  //   show: true,
-  //   language: 'it',
-  //   geocoder: L.Control.Geocoder.nominatim(),
-  //   autoRoute: true
-  //   }).addTo(map);
+  // selectPoint (e) {
+  //     const container = L.DomUtil.create('div'),
+  //     startBtn = this.createButton('Start from this location', container),
+  //     destBtn = this.createButton('Go to this location', container);
 
-  createButton(label, container) {
-    var btn = L.DomUtil.create('button', '', container);
-    btn.setAttribute('type', 'button');
-    btn.innerHTML = label;
-    return btn;
-  };
-
-  selectPoint (e) {
-      const container = L.DomUtil.create('div'),
-      startBtn = this.createButton('Start from this location', container),
-      destBtn = this.createButton('Go to this location', container);
-
-      L.popup()
-          .setContent(container)
-          .setLatLng(e.latlng)
-          .openOn(this.map);
-  };
+  //     L.popup()
+  //         .setContent(container)
+  //         .setLatLng(e.latlng)
+  //         .openOn(this.map);
+  // };
 
   ionViewDidEnter() {
     this.loadMap();
+    this.markerService.makeBarriosMarkers(this.map);
   }
 
   loadMap() {
-    this.map = new Map("map", {
+    this.map = new L.Map("map", {
       // maxZoom: 20,
       // minZoom: 6,
-      zoomControl: false
+      zoomControl: false,
     }).setView([-34.881536, -56.147968], 13);
     
-    control.zoom({
+    L.control.zoom({
         position: 'bottomright'
     }).addTo(this.map);
 
-    tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution:
         'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
     }).addTo(this.map);
@@ -95,7 +87,7 @@ export class MapaPage {
       console.log(e.latlng); // get the coordinates
       if (this.newMarker) { // check
         this.map.removeLayer(this.newMarker); // remove
-    } this.newMarker = marker([e.latlng.lat, e.latlng.lng]).addTo(this.map); // add the marker onclick
+    } this.newMarker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(this.map); // add the marker onclick
     });
   }
 
@@ -104,7 +96,7 @@ export class MapaPage {
       if (this.newMarker) { // check
         this.map.removeLayer(this.newMarker); // remove
       }
-      this.newMarker = marker([e.latitude, e.longitude], {
+      this.newMarker = L.marker([e.latitude, e.longitude], {
         draggable: true
       }).addTo(this.map);
       this.newMarker.bindPopup('Elegir esta ubicación').openPopup();
@@ -135,8 +127,8 @@ export class MapaPage {
   }
 
   drawRute(lat: number, long: number) {
-    this.newRute = Routing.control({ 
-      waypoints: [L.latLng(lat, long), L.latLng(-34.24359472969739, -54.68994140625001)],
+    this.newRute = L.Routing.control({ 
+      waypoints: [L.latLng(lat, long), L.latLng(-34.79688926182469, -56.07833862304688)],
       routeWhileDragging: true,
       router: L.Routing.mapbox('pk.eyJ1IjoiYm90dW0iLCJhIjoiY2s4anBoOHRzMGJ5dzNscDg1c2drMXBoNSJ9.vQ7qAGX7IMadmIfcCp7eRQ')
     }).addTo(this.map);
