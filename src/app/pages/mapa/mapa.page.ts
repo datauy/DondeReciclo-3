@@ -71,12 +71,13 @@ export class MapaPage {
     this.map = new L.Map("map", {
       // maxZoom: 20,
       // minZoom: 6,
-      zoomControl: false,
+      // zoomControl: false,
     }).setView([-34.881536, -56.147968], 13);
     
-    L.control.zoom({
-        position: 'bottomright'
-    }).addTo(this.map);
+    // Add zoom controls in other possition
+    // L.control.zoom({
+    //     position: 'bottomright'
+    // }).addTo(this.map);
 
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution:

@@ -10,12 +10,9 @@
 <ion-content>
 
   <ion-searchbar slot="fixed" color="light"  placeholder="Buscá"></ion-searchbar>
-  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
     <ion-fab-button color="transparent">
       <ion-icon name="locate-outline" (click)="locatePosition()"></ion-icon>
-    </ion-fab-button>
-    <ion-fab-button>
-      <ion-icon name="search"></ion-icon>
     </ion-fab-button>
   </ion-fab>
   <div id="map" style="height:100%; width: 100%;" 
