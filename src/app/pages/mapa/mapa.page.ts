@@ -5,7 +5,7 @@ import { Router, NavigationExtras } from "@angular/router";
 // import { Map, tileLayer, marker, Routing, control} from "leaflet";
 import {NativeGeocoder,NativeGeocoderOptions} from "@ionic-native/native-geocoder/ngx";
 
-import { BarriosService } from 'src/app/services/barrios.service';
+import { NeighbourService } from 'src/app/services/neighbour.service';
 
 import "leaflet";
 import "leaflet-routing-machine";
@@ -41,7 +41,7 @@ export class MapaPage {
   constructor(
     private geocoder: NativeGeocoder, 
     private router: Router,
-    private markerService: BarriosService) {
+    private markerService: NeighbourService) {
   }
 
   // createButton(label, container) {
@@ -64,7 +64,7 @@ export class MapaPage {
 
   ionViewDidEnter() {
     this.loadMap();
-    this.markerService.makeBarriosMarkers(this.map);
+    this.markerService.makeNeighbourMarkers(this.map);
   }
 
   loadMap() {

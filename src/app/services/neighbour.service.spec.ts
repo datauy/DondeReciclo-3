@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { BarriosService } from './barrios.service';
+import { NeighbourService } from './neighbour.service';
 
-describe('BarriosService', () => {
+describe('NeighbourService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: BarriosService = TestBed.get(BarriosService);
+    const service: NeighbourService = TestBed.get(NeighbourService);
     expect(service).toBeTruthy();
   });
 });

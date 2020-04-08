@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { HttpClientModule } from '@angular/common/http';
 
-import { BarriosService } from './../../services/barrios.service';
+import { NeighbourService } from '../../services/neighbour.service';
 
 import { MapaPageRoutingModule } from './mapa-routing.module';
 
@@ -25,7 +25,7 @@ import { MapaPage } from './mapa.page';
     LeafletModule.forRoot()
   ],
   providers: [
-    BarriosService
+    NeighbourService
   ],
   declarations: [MapaPage]
 })

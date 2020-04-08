@@ -10,7 +10,10 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { ComponentsModule } from './components/components.module';
+
+// Geo
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,6 +28,7 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
     StatusBar,
     SplashScreen,
     NativeGeocoder,
+    Geolocation,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
