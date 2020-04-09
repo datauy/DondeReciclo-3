@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ModalController } from '@ionic/angular';
+
 import { Router, NavigationExtras } from "@angular/router";
 
 // import { Map, tileLayer, marker, Routing, control} from "leaflet";
@@ -9,6 +11,8 @@ import { NeighbourService } from 'src/app/services/neighbour.service';
 
 import "leaflet";
 import "leaflet-routing-machine";
+import { ModalCompartirPage } from '../modal-compartir/modal-compartir.page';
+
 declare let L;
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
@@ -41,9 +45,31 @@ export class MapaPage {
   constructor(
     private geocoder: NativeGeocoder, 
     private router: Router,
-    private markerService: NeighbourService) {
+    private markerService: NeighbourService, 
+    public modalController: ModalController) {
   }
 
+  dataReturned:any;
+
+  async openModal() {
+    console.log('click')
+    const modal = await this.modalController.create({
+      component: ModalCompartirPage,
+      componentProps: {
+        "paramURL": "https://data.org.uy"
+      },
+      cssClass: 'custom-modal'
+    });
+
+    modal.onDidDismiss().then((dataReturned) => {
+      if (dataReturned !== null) {
+        this.dataReturned = dataReturned.data;
+        //alert('Modal Sent Data :'+ dataReturned);
+      }
+    });
+
+    return await modal.present();
+  }
   // createButton(label, container) {
   //   var btn = L.DomUtil.create('button', '', container);
   //   btn.setAttribute('type', 'button');

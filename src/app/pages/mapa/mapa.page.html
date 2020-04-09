@@ -1,10 +1,13 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Mapa</ion-title>
+
+    <ion-button color="transparent" (click)="openModal()" slot="end">
+      <ion-icon name="share-social-outline"></ion-icon>
+    </ion-button>
     <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -16,7 +19,6 @@
     </ion-fab-button>
   </ion-fab>
   <div id="map" style="height:100%; width: 100%;" 
-  (leafletMapReady)="onMapReady($event)"
   center='Montevideo, Uruguay'
   ></div>
 </ion-content>

@@ -1,13 +1,12 @@
 # Instalación Ionic-base 
-Esta app es una versión base para diversos proyectos de Data. Basada en Ionic5 y usando varias otras tecnologías para resolver las necesidades habituales en nuestras apps.
+Esta app es una versión base para diversos proyectos de Data. Basada en Ionic5, Angular y usando varias otras tecnologías para resolver las necesidades habituales en nuestras apps.
 
+# Incluye
 
-Todo:
-* Geolocation, Leaflet, Rutes
-* Almacenamiento local 
-* OAuth
-* CRUD/HTTP JSON connection
-* Pie de página con publicidad
+* Leaflet OSM, routing, geolocation
+* Sidemenu as component
+* Progresive Web App
+* 
 
 # Paso seguidos para crear app  
 Estos fueron los pasos primeros para la app básica

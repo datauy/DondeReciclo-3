@@ -1,3 +1,5 @@
+import { ModalCompartirPageModule } from './pages/modal-compartir/modal-compartir.module';
+import { ModalCompartirPage } from './pages/modal-compartir/modal-compartir.page';
 import { NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -16,7 +18,10 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    ModalCompartirPage
+  ],
   entryComponents: [],
   imports: [
     BrowserModule, 
@@ -31,6 +36,9 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
     Geolocation,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    ModalCompartirPage
+  ]
 })
 export class AppModule {}
