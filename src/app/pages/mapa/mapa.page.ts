@@ -7,7 +7,7 @@ import { Router, NavigationExtras } from "@angular/router";
 // import { Map, tileLayer, marker, Routing, control} from "leaflet";
 import {NativeGeocoder,NativeGeocoderOptions} from "@ionic-native/native-geocoder/ngx";
 
-import { NeighbourService } from 'src/app/services/neighbour.service';
+// import { NeighbourService } from 'src/app/services/neighbour.service';
 
 import "leaflet";
 import "leaflet-routing-machine";
@@ -45,7 +45,7 @@ export class MapaPage {
   constructor(
     private geocoder: NativeGeocoder, 
     private router: Router,
-    private markerService: NeighbourService, 
+    // private markerService: NeighbourService, 
     public modalController: ModalController) {
   }
 
@@ -90,7 +90,7 @@ export class MapaPage {
 
   ionViewDidEnter() {
     this.loadMap();
-    this.markerService.makeNeighbourMarkers(this.map);
+    // this.markerService.makeNeighbourMarkers(this.map);
   }
 
   loadMap() {
