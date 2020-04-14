@@ -21,6 +21,9 @@
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
+    "strictInjectionParameters": true,
+    // added so not to install an old typescript, watch out, 
+    // if problem change version in packages to 3.4.5
+    "disableTypeScriptVersionCheck": true
   }
 }

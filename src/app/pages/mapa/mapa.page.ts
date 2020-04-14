@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { ModalController } from '@ionic/angular';
 
@@ -12,6 +12,8 @@ import {NativeGeocoder,NativeGeocoderOptions} from "@ionic-native/native-geocode
 import "leaflet";
 import "leaflet-routing-machine";
 import { ModalCompartirPage } from '../modal-compartir/modal-compartir.page';
+import { ModalSearchPage } from '../modal-search/modal-search.page';
+import { fromEvent, Subscription } from 'rxjs';
 
 declare let L;
 
@@ -42,6 +44,8 @@ export class MapaPage {
   newRute: any;
   address: string[];
 
+  private backbuttonSubscription: Subscription
+  
   constructor(
     private geocoder: NativeGeocoder, 
     private router: Router,
@@ -51,7 +55,7 @@ export class MapaPage {
 
   dataReturned:any;
 
-  async openModal() {
+  async openSocialModal() {
     console.log('click')
     const modal = await this.modalController.create({
       component: ModalCompartirPage,
@@ -59,6 +63,35 @@ export class MapaPage {
         "paramURL": "https://data.org.uy"
       },
       cssClass: 'custom-modal'
+    });
+    // const event = fromEvent(document, 'backbutton');
+    // this.backbuttonSubscription = event.subscribe(async () => {
+    //     const modal = await this.modalController.getTop();
+    //     if (modal) {
+    //         modal.dismiss();
+    //     }
+    // });
+
+    modal.onDidDismiss().then((dataReturned) => {
+      if (dataReturned !== null) {
+        this.dataReturned = dataReturned.data;
+        // this.backbuttonSubscription.unsubscribe();
+        //alert('Modal Sent Data :'+ dataReturned);
+      }
+    });
+
+    return await modal.present();
+  }
+
+
+  async openSearchModal() {
+    console.log('click')
+    const modal = await this.modalController.create({
+      component: ModalSearchPage,
+      componentProps: {
+        "paramURL": "https://data.org.uy"
+      },
+      cssClass: 'search-modal'
     });
 
     modal.onDidDismiss().then((dataReturned) => {
@@ -70,6 +103,11 @@ export class MapaPage {
 
     return await modal.present();
   }
+
+  goSearch(){
+    this.router.navigateByUrl('/buscar');
+  }
+
   // createButton(label, container) {
   //   var btn = L.DomUtil.create('button', '', container);
   //   btn.setAttribute('type', 'button');

@@ -1,3 +1,4 @@
+import { BuscarPageModule } from './pages/buscar/buscar.module';
 import { ModalCompartirPageModule } from './pages/modal-compartir/modal-compartir.module';
 import { ModalCompartirPage } from './pages/modal-compartir/modal-compartir.page';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
@@ -20,21 +21,28 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 // API
 import { NovedadesPageModule } from './pages/novedades/novedades.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ModalSearchPage } from './pages/modal-search/modal-search.page';
 
 // import { Api } from './providers';
 
+// animations
+import { SearchbarAnimation } from './pages/searchbar-animation';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ModalCompartirPage
+    ModalCompartirPage,
+    ModalSearchPage
   ],
   imports: [
     BrowserModule, 
-    IonicModule.forRoot(), 
+    IonicModule.forRoot({
+      navAnimation: SearchbarAnimation
+    }),    
     AppRoutingModule,
     ComponentsModule,
     NovedadesPageModule,
+    BuscarPageModule,
     HttpClientModule,
   ],
   providers: [
@@ -47,7 +55,8 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    ModalCompartirPage
+    ModalCompartirPage,
+    ModalSearchPage
   ],
   schemas : [CUSTOM_ELEMENTS_SCHEMA]
 })

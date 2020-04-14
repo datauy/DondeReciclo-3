@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title>Mapa</ion-title>
 
-    <ion-button color="transparent" (click)="openModal()" slot="end">
+    <ion-button color="light" (click)="openSocialModal()" slot="end">
       <ion-icon name="share-social-outline"></ion-icon>
     </ion-button>
     <ion-buttons slot="end">
@@ -12,7 +12,8 @@
 </ion-header>
 <ion-content>
 
-  <ion-searchbar slot="fixed" color="light"  placeholder="Buscá"></ion-searchbar>
+  <ion-searchbar slot="fixed" color="light" (click)="goSearch()"  placeholder="Buscá"></ion-searchbar>
+
   <ion-fab vertical="top" horizontal="end" slot="fixed">
     <ion-fab-button color="transparent">
       <ion-icon name="locate-outline" (click)="locatePosition()"></ion-icon>

@@ -8,6 +8,9 @@ import { TabsnavPageRoutingModule } from './tabsnav-routing.module';
 
 import { TabsnavPage } from './tabsnav.page';
 
+import { Keyboard } from '@ionic-native/keyboard/ngx';
+
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +18,9 @@ import { TabsnavPage } from './tabsnav.page';
     IonicModule,
     TabsnavPageRoutingModule
   ],
-  declarations: [TabsnavPage]
+  declarations: [TabsnavPage],
+  providers: [
+    Keyboard
+  ]
 })
 export class TabsnavPageModule {}

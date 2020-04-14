@@ -2,7 +2,7 @@ import { NgModule} from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'tabsnav/mapa', pathMatch: 'full' },
+  { path: '', redirectTo: 'buscar', pathMatch: 'full' },
   {
     path: 'inicio',
     loadChildren: () => import('./pages/inicio/inicio.module').then( m => m.InicioPageModule)
@@ -18,6 +18,14 @@ const routes: Routes = [
   {
     path: 'novedades',
     loadChildren: () => import('./pages/novedades/novedades.module').then( m => m.NovedadesPageModule)
+  },
+  {
+    path: 'modal-search',
+    loadChildren: () => import('./pages/modal-search/modal-search.module').then( m => m.ModalSearchPageModule)
+  },
+  {
+    path: 'buscar',
+    loadChildren: () => import('./pages/buscar/buscar.module').then( m => m.BuscarPageModule)
   }
 ];
 

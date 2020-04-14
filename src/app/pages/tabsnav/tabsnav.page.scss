@@ -1,0 +1,9 @@
+ion-tab-bar {
+	-webkit-transition: transform 0.3s linear, height 0.3s linear; 
+	-o-transition: transform 0.3s linear, height 0.3s linear; 
+	transition: transform 0.3s linear, height 0.3s linear;
+	&.hide {
+		transform: translateY(56px);
+		height: 0px;
+	}
+}
