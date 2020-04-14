@@ -7,16 +7,6 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
   styleUrls: ['./tabsnav.page.scss'],
 })
 export class TabsnavPage implements OnInit{
-
-  // @ViewChild('tab', {read: ElementRef}) 
-  // tab: ElementRef;
-	// tabEl : ElementRef;
-	
-	// constructor(
-	// 	private keyboard: Keyboard
-	// ) { }
-
-
  
   constructor(
     private keyboard: Keyboard
@@ -43,41 +33,6 @@ export class TabsnavPage implements OnInit{
     this.keyboard.hide();
   }
 	ngOnInit() {
-    // this.keyboard.show();
-    // console.log(this.keyboard.isVisible)
-    
-		// this.keyboard.onKeyboardWillShow().subscribe(() => {
-    //   console.log('keyboard will show');
-		// 	this.renderer.addClass(this.tab.nativeElement, 'hide');
-		// });
-		// this.keyboard.onKeyboardWillHide().subscribe(() => {
-    //   console.log('keyboard will hide');
-		// 	this.renderer.removeClass(this.tab.nativeElement, 'hide');
-		// });
 	}
-
-	// ngAfterViewInit() {
-	// 	this.tabEl = this.tab.nativeElement;
-	// }
-  // // MyTabs.ts
-  // showListener() {
-  //   console.log('keyboard visible');
-  //   document.body.classList.add('keyboard-is-open');
-  // }
-  // hideListener() {
-  //   console.log('keyboard hides');
-  //   document.body.classList.remove('keyboard-is-open');
-  // }
-
-
-  // ionViewDidEnter() {
-  //   window.addEventListener('keyboardWillShow', this.showListener);
-  //   window.addEventListener('keyboardDidHide', this.hideListener);
-  // }
-
-  // ionViewWillLeave() {
-  //   window.removeEventListener('keyboardWillShow', this.showListener);
-  //   window.removeEventListener('keyboardDidHide', this.hideListener);
-  // }
 
 }

@@ -20,6 +20,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 // API
 import { NovedadesPageModule } from './pages/novedades/novedades.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ModalSearchPage } from './pages/modal-search/modal-search.page';
 
 // import { Api } from './providers';
 
@@ -27,7 +28,8 @@ import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
-    ModalCompartirPage
+    ModalCompartirPage,
+    ModalSearchPage
   ],
   imports: [
     BrowserModule, 
@@ -47,7 +49,8 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    ModalCompartirPage
+    ModalCompartirPage,
+    ModalSearchPage
   ],
   schemas : [CUSTOM_ELEMENTS_SCHEMA]
 })
