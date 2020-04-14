@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
+import { RouterModule } from '@angular/router';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -22,11 +23,17 @@ import { MapaPage } from './mapa.page';
     IonicModule,
     HttpClientModule,
     MapaPageRoutingModule, 
-    LeafletModule.forRoot()
+    LeafletModule.forRoot(),
+    RouterModule.forChild([
+      {
+        path: '',
+        component: MapaPage
+      }
+    ])
   ],
-  providers: [
-    // NeighbourService
-  ],
+  // providers: [
+  //   // NeighbourService
+  // ],
   declarations: [MapaPage]
 })
 export class MapaPageModule {}

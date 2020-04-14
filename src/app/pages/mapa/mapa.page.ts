@@ -104,7 +104,9 @@ export class MapaPage {
     return await modal.present();
   }
 
-
+  goSearch(){
+    this.router.navigateByUrl('/buscar');
+  }
 
   // createButton(label, container) {
   //   var btn = L.DomUtil.create('button', '', container);

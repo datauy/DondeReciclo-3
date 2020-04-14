@@ -1,3 +1,4 @@
+import { BuscarPageModule } from './pages/buscar/buscar.module';
 import { ModalCompartirPageModule } from './pages/modal-compartir/modal-compartir.module';
 import { ModalCompartirPage } from './pages/modal-compartir/modal-compartir.page';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
@@ -24,6 +25,8 @@ import { ModalSearchPage } from './pages/modal-search/modal-search.page';
 
 // import { Api } from './providers';
 
+// animations
+import { SearchbarAnimation } from './pages/searchbar-animation';
 
 @NgModule({
   declarations: [
@@ -33,10 +36,13 @@ import { ModalSearchPage } from './pages/modal-search/modal-search.page';
   ],
   imports: [
     BrowserModule, 
-    IonicModule.forRoot(), 
+    IonicModule.forRoot({
+      navAnimation: SearchbarAnimation
+    }),    
     AppRoutingModule,
     ComponentsModule,
     NovedadesPageModule,
+    BuscarPageModule,
     HttpClientModule,
   ],
   providers: [
