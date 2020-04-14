@@ -26,7 +26,7 @@ import { ModalSearchPage } from './pages/modal-search/modal-search.page';
 // import { Api } from './providers';
 
 // animations
-import { SearchbarAnimation } from './pages/searchbar-animation';
+// import { SearchbarAnimation } from './pages/searchbar-animation';
 
 @NgModule({
   declarations: [
@@ -37,7 +37,7 @@ import { SearchbarAnimation } from './pages/searchbar-animation';
   imports: [
     BrowserModule, 
     IonicModule.forRoot({
-      navAnimation: SearchbarAnimation
+      // navAnimation: SearchbarAnimation
     }),    
     AppRoutingModule,
     ComponentsModule,

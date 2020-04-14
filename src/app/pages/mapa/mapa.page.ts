@@ -105,6 +105,7 @@ export class MapaPage {
   }
 
   goSearch(){
+    
     this.router.navigateByUrl('/buscar');
   }
 

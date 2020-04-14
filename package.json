@@ -84,7 +84,8 @@
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
-      }
+      },
+      "com.telerik.plugins.nativepagetransitions": {}
     },
     "platforms": [
       "android"

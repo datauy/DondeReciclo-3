@@ -6,4 +6,4 @@ export class Novedad extends Base {
     title: string;
     body: string;
     img: string;
-  }   
+}
