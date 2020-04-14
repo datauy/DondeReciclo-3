@@ -36,31 +36,31 @@ export const SearchbarAnimation = (_: HTMLElement, opts: any) => {
     .beforeRemoveClass('ion-page-invisible');
 
   if (!backDirection) {
-    enterTransition
-      .beforeStyles({ border: 'thin solid black' })
-      .keyframes([
-        { offset: 0, transform: 'scale(0)' },
-        { offset: 1, transform: 'scale(1)' }
-      ])
-      .afterClearStyles(['border']);
+    // enterTransition
+    //   .beforeStyles({ border: 'thin solid black' })
+    //   .keyframes([
+    //     { offset: 0, transform: 'scale(0)' },
+    //     { offset: 1, transform: 'scale(1)' }
+    //   ])
+    //   .afterClearStyles(['border']);
 
-    leavingTransition.keyframes([
-      { offset: 0, opacity: 1 },
-      { offset: 1, opacity: 0.1 }
-    ]);
+    // leavingTransition.keyframes([
+    //   { offset: 0, opacity: 1 },
+    //   { offset: 1, opacity: 0.1 }
+    // ]);
   } else {
-    enterTransition.keyframes([
-      { offset: 0, opacity: 0.1 },
-      { offset: 1, opacity: 1 }
-    ]);
+    // enterTransition.keyframes([
+    //   { offset: 0, opacity: 0.1 },
+    //   { offset: 1, opacity: 1 }
+    // ]);
 
-    leavingTransition
-      .beforeStyles({ border: 'thin solid black' })
-      .keyframes([
-        { offset: 0, transform: 'scale(1)' },
-        { offset: 1, transform: 'scale(0)' }
-      ])
-      .afterClearStyles(['border']);
+    // leavingTransition
+    //   .beforeStyles({ border: 'thin solid black' })
+    //   .keyframes([
+    //     { offset: 0, transform: 'scale(1)' },
+    //     { offset: 1, transform: 'scale(0)' }
+    //   ])
+    //   .afterClearStyles(['border']);
   }
 
   rootTransition.addAnimation([enterTransition, leavingTransition]);
