@@ -1,0 +1,8 @@
+{
+  "name": "ionic-base",
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
+  "type": "angular"
+}

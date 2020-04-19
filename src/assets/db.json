@@ -1,0 +1,8 @@
+{
+  "novedad": [
+    { "id": 1, "title": "Una noticia", "body": "Note body...", "img": "/assets/shapes.svg"},
+    { "id": 2, "title": "Nuevas funcionalidades!", "body": "Note body...", "img": "/assets/shapes.svg" },
+    { "id": 3, "title": "Conocé mas sobre nosotros", "body": "Note body...", "img": "/assets/shapes.svg" },
+    { "id": 4, "title": "Conocé nucestros trabajos", "body": "Note body...", "img": "/assets/shapes.svg" }
+  ]
+}
