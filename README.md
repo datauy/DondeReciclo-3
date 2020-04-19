@@ -1,7 +1,7 @@
-# Instalación Ionic-base 
+# Ionic-base v1.0 
 Esta app es una versión base para diversos proyectos de Data. Basada en Ionic5, Angular y usando varias otras tecnologías para resolver las necesidades habituales en nuestras apps.
 
-# Incluye
+## Incluye
 
 * Menú lateral como componente
 * Progresive Web App
@@ -9,23 +9,23 @@ Esta app es una versión base para diversos proyectos de Data. Basada en Ionic5,
 * Busqueda
 * Compartir en redes sociales
 
-# Instalación
+## Instalación
 
-## Instalar Ionic  
+### Instalar Ionic  
 
     npm install -g @ionic/cli
 
-## Instalar servidor json de prueba
+### Instalar servidor json de prueba
 
     npm install json-server
     
-## Instalar app
+### Instalar app
 
     git clone git@github.com:datauy/ionic-base.git
     cd ionic-base
     npm i
 
-# Usar
+## Usar
 
     json-server --watch src/assets/db.json &
     ionic serve &
