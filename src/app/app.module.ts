@@ -1,4 +1,7 @@
-import { NgModule} from '@angular/core';
+import { BuscarPageModule } from './pages/buscar/buscar.module';
+import { ModalCompartirPageModule } from './pages/modal-compartir/modal-compartir.module';
+import { ModalCompartirPage } from './pages/modal-compartir/modal-compartir.page';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -15,22 +18,46 @@ import { ComponentsModule } from './components/components.module';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
+// API
+import { NovedadesPageModule } from './pages/novedades/novedades.module';
+import { HttpClientModule } from '@angular/common/http';
+import { ModalSearchPage } from './pages/modal-search/modal-search.page';
+
+// import { Api } from './providers';
+
+// animations
+// import { SearchbarAnimation } from './pages/searchbar-animation';
+
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [
+    AppComponent,
+    ModalCompartirPage,
+    ModalSearchPage
+  ],
   imports: [
     BrowserModule, 
-    IonicModule.forRoot(), 
+    IonicModule.forRoot({
+      // navAnimation: SearchbarAnimation
+    }),    
     AppRoutingModule,
-    ComponentsModule
+    ComponentsModule,
+    NovedadesPageModule,
+    BuscarPageModule,
+    HttpClientModule,
   ],
   providers: [
     StatusBar,
     SplashScreen,
     NativeGeocoder,
     Geolocation,
+    // Api,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    ModalCompartirPage,
+    ModalSearchPage
+  ],
+  schemas : [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}

@@ -10,13 +10,18 @@ export class SidemenuComponent implements OnInit {
   public appPages = [
     {
       title: 'Inicio',
-      url: '/inicio',
-      icon: 'home'
+      url: '/tabsnav',
+      icon: 'home-outline'
     },
     {
-      title: 'Mapa',
-      url: '/mapa',
-      icon: 'map'
+      title: 'Novedades',
+      url: '/novedades',
+      icon: 'newspaper-outline'
+    },
+    {
+      title: 'Marcas',
+      url: '/marcas',
+      icon: 'briefcase-outline'
     }
   ];
 

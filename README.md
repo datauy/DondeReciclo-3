@@ -1,23 +1,31 @@
-# Instalación Ionic-base 
-Esta app es una versión base para diversos proyectos de Data. Basada en Ionic5 y usando varias otras tecnologías para resolver las necesidades habituales en nuestras apps.
+# Ionic-base v1.0 
+Esta app es una versión base para diversos proyectos de Data. Basada en Ionic5, Angular y usando varias otras tecnologías para resolver las necesidades habituales en nuestras apps.
 
+## Incluye
 
-Todo:
-* Geolocation, Leaflet, Rutes
-* Almacenamiento local 
-* OAuth
-* CRUD/HTTP JSON connection
-* Pie de página con publicidad
+* Menú lateral como componente
+* Progresive Web App
+* Leaflet OSM, Leaflet Routing Machine, Geolocation
+* Busqueda
+* Compartir en redes sociales
 
-# Paso seguidos para crear app  
-Estos fueron los pasos primeros para la app básica
+## Instalación
 
-## Instalar Ionic  
+### Instalar Ionic  
+
     npm install -g @ionic/cli
+
+### Instalar servidor json de prueba
+
+    npm install json-server
     
-# Instalación
+### Instalar app
 
     git clone git@github.com:datauy/ionic-base.git
     cd ionic-base
     npm i
-    ionic serve
+
+## Usar
+
+    json-server --watch src/assets/db.json &
+    ionic serve &

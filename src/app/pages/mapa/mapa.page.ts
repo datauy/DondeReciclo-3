@@ -1,14 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+
+import { ModalController } from '@ionic/angular';
 
 import { Router, NavigationExtras } from "@angular/router";
 
 // import { Map, tileLayer, marker, Routing, control} from "leaflet";
 import {NativeGeocoder,NativeGeocoderOptions} from "@ionic-native/native-geocoder/ngx";
 
-import { NeighbourService } from 'src/app/services/neighbour.service';
+// import { NeighbourService } from 'src/app/services/neighbour.service';
 
 import "leaflet";
 import "leaflet-routing-machine";
+import { ModalCompartirPage } from '../modal-compartir/modal-compartir.page';
+import { ModalSearchPage } from '../modal-search/modal-search.page';
+import { fromEvent, Subscription } from 'rxjs';
+
 declare let L;
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
@@ -38,10 +44,69 @@ export class MapaPage {
   newRute: any;
   address: string[];
 
+  private backbuttonSubscription: Subscription
+  
   constructor(
     private geocoder: NativeGeocoder, 
     private router: Router,
-    private markerService: NeighbourService) {
+    // private markerService: NeighbourService, 
+    public modalController: ModalController) {
+  }
+
+  dataReturned:any;
+
+  async openSocialModal() {
+    console.log('click')
+    const modal = await this.modalController.create({
+      component: ModalCompartirPage,
+      componentProps: {
+        "paramURL": "https://data.org.uy"
+      },
+      cssClass: 'custom-modal'
+    });
+    // const event = fromEvent(document, 'backbutton');
+    // this.backbuttonSubscription = event.subscribe(async () => {
+    //     const modal = await this.modalController.getTop();
+    //     if (modal) {
+    //         modal.dismiss();
+    //     }
+    // });
+
+    modal.onDidDismiss().then((dataReturned) => {
+      if (dataReturned !== null) {
+        this.dataReturned = dataReturned.data;
+        // this.backbuttonSubscription.unsubscribe();
+        //alert('Modal Sent Data :'+ dataReturned);
+      }
+    });
+
+    return await modal.present();
+  }
+
+
+  async openSearchModal() {
+    console.log('click')
+    const modal = await this.modalController.create({
+      component: ModalSearchPage,
+      componentProps: {
+        "paramURL": "https://data.org.uy"
+      },
+      cssClass: 'search-modal'
+    });
+
+    modal.onDidDismiss().then((dataReturned) => {
+      if (dataReturned !== null) {
+        this.dataReturned = dataReturned.data;
+        //alert('Modal Sent Data :'+ dataReturned);
+      }
+    });
+
+    return await modal.present();
+  }
+
+  goSearch(){
+    
+    this.router.navigateByUrl('/buscar');
   }
 
   // createButton(label, container) {
@@ -64,7 +129,7 @@ export class MapaPage {
 
   ionViewDidEnter() {
     this.loadMap();
-    this.markerService.makeNeighbourMarkers(this.map);
+    // this.markerService.makeNeighbourMarkers(this.map);
   }
 
   loadMap() {
