@@ -35,6 +35,7 @@
     "cordova-android": "^8.1.0",
     "cordova-plugin-ionic-keyboard": "2.2.0",
     "core-js": "^2.5.4",
+    "cupertino-pane": "^1.1.33",
     "leaflet": "^1.6.0",
     "leaflet-gesture-handling": "^1.1.8",
     "leaflet-routing-machine": "^3.2.12",

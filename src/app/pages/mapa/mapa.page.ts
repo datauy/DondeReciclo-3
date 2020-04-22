@@ -12,7 +12,7 @@ import {NativeGeocoder,NativeGeocoderOptions} from "@ionic-native/native-geocode
 // API
 import { Subprogram } from "../../models/subprogram.model";
 import { SubprogramService } from "../../services/subprogram.service";
-
+import { CupertinoPane } from 'cupertino-pane';
 
 import "leaflet";
 import "leaflet-routing-machine";
@@ -42,7 +42,7 @@ L.Marker.prototype.options.icon = iconDefault;
   templateUrl: './mapa.page.html',
   styleUrls: ['./mapa.page.scss'],
 })
-export class MapaPage {
+export class MapaPage implements OnInit {
   
   map: L.Map;
   newMarker: any;
@@ -50,6 +50,8 @@ export class MapaPage {
   address: string[];
   subprogram = {} as Subprogram;
   subprograms: Subprogram[];
+  dataReturned:any;
+
 
 
   
@@ -72,6 +74,20 @@ export class MapaPage {
 
   // SocialModal
 
+  ngOnInit() {
+    var myPane = new CupertinoPane(
+      '.cupertino-pane', // Pane container selector
+      { 
+        parentElement: 'body', // Parent container
+        breaks: {
+            middle: { enabled: true, offset: 300 },
+            bottom: { enabled: true, offset: 80 },
+        },
+        onDrag: () => console.log('Drag event')
+      }
+    );
+    myPane.present({animate: true});
+  }
   async openSocialModal() {
     console.log('click')
     const modal = await this.modalController.create({
