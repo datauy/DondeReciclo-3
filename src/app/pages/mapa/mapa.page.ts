@@ -144,7 +144,7 @@ export class MapaPage implements OnInit {
 
 
   async openSearchModal() {
-    console.log('click')
+    // console.log('click')
     const modal = await this.modalController.create({
       component: ModalSearchPage,
       componentProps: {
@@ -164,7 +164,6 @@ export class MapaPage implements OnInit {
   }
 
   goSearch(){
-    
     this.router.navigateByUrl('/buscar');
   }
 
