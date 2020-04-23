@@ -2,11 +2,7 @@ import { NgModule} from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/tabsnav/mapa', pathMatch: 'full' },
-  {
-    path: 'inicio',
-    loadChildren: () => import('./pages/inicio/inicio.module').then( m => m.InicioPageModule)
-  },
+  { path: '', redirectTo: 'intro', pathMatch: 'full' },
   {
     path: 'tabsnav',
     loadChildren: () => import('./pages/tabsnav/tabsnav.module').then( m => m.TabsnavPageModule)
@@ -26,12 +22,20 @@ const routes: Routes = [
   {
     path: 'buscar',
     loadChildren: () => import('./pages/buscar/buscar.module').then( m => m.BuscarPageModule)
+  },
+  {
+    path: 'intro',
+    loadChildren: () => import('./pages/intro/intro.module').then( m => m.IntroPageModule)
   }
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(
+      routes, 
+      { preloadingStrategy: PreloadAllModules},
+      
+      )
   ],
   exports: [RouterModule]
 })

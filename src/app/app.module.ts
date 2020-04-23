@@ -37,7 +37,8 @@ import { ModalSearchPage } from './pages/modal-search/modal-search.page';
   imports: [
     BrowserModule, 
     IonicModule.forRoot({
-      // navAnimation: SearchbarAnimation
+      // navAnimation: SearchbarAnimation,
+        animated: true
     }),    
     AppRoutingModule,
     ComponentsModule,
