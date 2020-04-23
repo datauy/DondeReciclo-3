@@ -51,3 +51,14 @@
     --ion-color-tint: var(--ion-color-mostard-tint);
   }
     
+
+
+.cupertino-pane{
+  .ion-padding{
+    padding-top: 0;
+  }
+  h1{
+    padding-top: 0;
+    margin-top: 0;
+  }
+}
