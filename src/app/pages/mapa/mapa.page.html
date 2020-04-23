@@ -10,16 +10,78 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content no-bounce>
 
-  <ion-searchbar slot="fixed" color="light" (click)="goSearch()"  placeholder="Buscá"></ion-searchbar>
+  <ion-searchbar slot="fixed" color="light" (click)="goSearch()" placeholder="Buscá"></ion-searchbar>
 
   <ion-fab vertical="top" horizontal="end" slot="fixed">
     <ion-fab-button color="transparent">
       <ion-icon name="locate-outline" (click)="locatePosition()"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  <div id="map" style="height:100%; width: 100%;" 
-  center='Montevideo, Uruguay'
-  ></div>
+  <div id="map" style="height:100%; width: 100%;" center='Montevideo, Uruguay'></div>
 </ion-content>
+
+
+<div class="cupertino-pane">
+  <ion-item>
+    <ion-avatar slot="start">
+      <img src="https://ui-avatars.com/api/?background=96DD67&name=P">
+    </ion-avatar>
+    <ion-label>
+      <h2>{{panelData}}</h2>
+    </ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-avatar slot="end">
+      <img src="https://ui-avatars.com/api/?background=96DD67&name=P">
+    </ion-avatar>
+    <ion-label>
+      <h3>Supermercado Disco</h3>
+      <p><b>Bvr. España esq. Bvr. Artigas</b></p>
+      <p>Click this item to launch the WEB Animation API</p>
+    </ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>
+      <h4>Horario</h4>
+      <p>9:00 - 21:00 hs (aprox.)</p>
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>
+      <h4>Busquedas frecuentes</h4>
+    </ion-label>
+
+  </ion-item>
+  <ion-item>
+    <p>
+      <ion-chip solid color="brown">
+        <ion-icon name="cube"></ion-icon>
+        <ion-label>Papel y cartón</ion-label>
+      </ion-chip>
+      <ion-chip solid color="violet">
+        <ion-icon name="wine"></ion-icon>
+        <ion-label>Metales</ion-label>
+      </ion-chip>
+      <ion-chip solid color="danger">
+        <ion-icon name="skull"></ion-icon>
+        <ion-label>Residuos peligrosos</ion-label>
+      </ion-chip>
+      <ion-chip solid color="secondary">
+        <ion-icon name="wine"></ion-icon>
+        <ion-label>Vidrio</ion-label>
+      </ion-chip>
+      <ion-chip solid color="primary">
+        <ion-icon name="pizza"></ion-icon>
+        <ion-label>Organico/humedo</ion-label>
+      </ion-chip>
+      <ion-chip solid color="mostard">
+        <ion-icon name="copy"></ion-icon>
+        <ion-label>Polilaminados</ion-label>
+      </ion-chip>
+    </p>
+  </ion-item>
+</div>

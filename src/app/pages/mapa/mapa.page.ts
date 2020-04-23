@@ -12,7 +12,7 @@ import {NativeGeocoder,NativeGeocoderOptions} from "@ionic-native/native-geocode
 // API
 import { Subprogram } from "../../models/subprogram.model";
 import { SubprogramService } from "../../services/subprogram.service";
-
+import { CupertinoPane } from 'cupertino-pane';
 
 import "leaflet";
 import "leaflet-routing-machine";
@@ -22,11 +22,11 @@ import { fromEvent, Subscription } from 'rxjs';
 
 declare let L;
 
-const iconRetinaUrl = 'assets/marker-icon-2x.png';
+// const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
 const shadowUrl = 'assets/marker-shadow.png';
 const iconDefault = L.icon({
-  iconRetinaUrl,
+  // iconRetinaUrl,
   iconUrl,
   shadowUrl,
   iconSize: [25, 41],
@@ -42,14 +42,20 @@ L.Marker.prototype.options.icon = iconDefault;
   templateUrl: './mapa.page.html',
   styleUrls: ['./mapa.page.scss'],
 })
-export class MapaPage {
+export class MapaPage implements OnInit {
   
   map: L.Map;
   newMarker: any;
+  container: any;
   newRute: any;
   address: string[];
   subprogram = {} as Subprogram;
   subprograms: Subprogram[];
+  dataReturned:any;
+  panelData: any;
+  infoPanel: any;
+
+  private backbuttonSubscription: Subscription;
 
 
   
@@ -63,8 +69,6 @@ export class MapaPage {
     ) {
   }
 
-  dataReturned:any;
-
   ionViewDidEnter() {
     this.loadMap();
     this.loadSubprograms();
@@ -72,8 +76,46 @@ export class MapaPage {
 
   // SocialModal
 
+  ngOnInit() {
+    console.log(this.panelData);
+    this.infoPanel = new CupertinoPane(
+      '.cupertino-pane', // Pane container selector
+      { 
+        parentElement: 'body', // Parent container
+
+        // backdrop: true,
+        bottomClose: true,
+        buttonClose: false,
+        topperOverflow: true,
+        showDraggable: false, 
+        simulateTouch: true,
+        breaks: {
+          middle: {
+            enabled: true,
+            offset: 300
+          },
+          bottom: {
+            enabled: true,
+            offset: 60
+          }
+        },
+        onDrag: () => console.log('Drag event'),
+        // onDidPresent: () => ;
+        // onBackdropTap: () => this.infoPanel.hide(),
+      }
+    );
+
+  }
+
+  showPane() {
+    // this.panelData = containerID;
+    this.infoPanel.present({
+      animate: true,
+    });
+
+  }
+
   async openSocialModal() {
-    console.log('click')
     const modal = await this.modalController.create({
       component: ModalCompartirPage,
       componentProps: {
@@ -131,12 +173,15 @@ export class MapaPage {
   loadSubprograms() {
     this.subprogramsService.get().subscribe((subprograms: Subprogram[]) => {
       this.subprograms = subprograms;
+      let mapBounds = []
       for (var i = 0; i < subprograms.length; i++) {
         console.log(subprograms);
         this.newMarker = new L.marker([subprograms[i].lat,subprograms[i].long])
         .bindPopup(subprograms[i].subprogram)
         .addTo(this.map);
+        mapBounds.push([subprograms[i].lat,subprograms[i].long]);
       }
+      this.map.fitBounds(mapBounds);
     });
   }  
 
@@ -150,15 +195,23 @@ export class MapaPage {
       attribution:
         'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
     }).addTo(this.map);
+    
 
     this.map.on("click", <LeafletMouseEvent>(e) => {
-      console.log(e.latlng); // get the coordinates
       if (this.newMarker) { // check
         this.map.removeLayer(this.newMarker); // remove
-    } this.newMarker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(this.map); // add the marker onclick
+    } 
+    this.newMarker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(this.map); // add the marker onclick
+    this.panelData = e.latlng;
+    this.showPane(); // show the bottom info panel  
+    });
+    
+    this.container = L.marker([-34.881536, -56.147968]).addTo(this.map).on('click', function(e) {
+      console.log(e.latlng);
     });
   }
 
+  
   locatePosition() {
     this.map.locate({ setView: true }).on("locationfound", (e: any) => {
       if (this.newMarker) { // check

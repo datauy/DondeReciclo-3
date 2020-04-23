@@ -10,7 +10,7 @@ export class SidemenuComponent implements OnInit {
   public appPages = [
     {
       title: 'Inicio',
-      url: '/tabsnav',
+      url: '/',
       icon: 'home-outline'
     },
     {

@@ -9,8 +9,8 @@
     {
       "subprogram": "SUb Programa Prueba 1",
       "subprogram_id": 1,
-      "lat": "-34.417016",
-      "long": "-54.13765",
+      "lat": "-34.91056",
+      "long": "-56.163483",
       "location": "Al lado del super",
       "public": true,
       "type_id": 1,
@@ -38,8 +38,8 @@
     {
       "subprogram": "SUb Programa Prueba 1",
       "subprogram_id": 1,
-      "lat": "-34.417016",
-      "long": "-54.13766",
+      "lat": "-34.897318",
+      "long": "-56.125717",
       "location": "",
       "public": true,
       "type_id": 2,
