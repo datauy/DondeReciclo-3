@@ -9,6 +9,11 @@ import {NativeGeocoder,NativeGeocoderOptions} from "@ionic-native/native-geocode
 
 // import { NeighbourService } from 'src/app/services/neighbour.service';
 
+// API
+import { Subprogram } from "../../models/subprogram.model";
+import { SubprogramService } from "../../services/subprogram.service";
+
+
 import "leaflet";
 import "leaflet-routing-machine";
 import { ModalCompartirPage } from '../modal-compartir/modal-compartir.page';
@@ -43,17 +48,29 @@ export class MapaPage {
   newMarker: any;
   newRute: any;
   address: string[];
+  subprogram = {} as Subprogram;
+  subprograms: Subprogram[];
 
-  private backbuttonSubscription: Subscription
+
+  
   
   constructor(
     private geocoder: NativeGeocoder, 
     private router: Router,
-    // private markerService: NeighbourService, 
-    public modalController: ModalController) {
+    public modalController: ModalController,
+    private subprogramsService: SubprogramService,
+    // private backbuttonSubscription: Subscription
+    ) {
   }
 
   dataReturned:any;
+
+  ionViewDidEnter() {
+    this.loadMap();
+    this.loadSubprograms();
+  }
+
+  // SocialModal
 
   async openSocialModal() {
     console.log('click')
@@ -109,40 +126,25 @@ export class MapaPage {
     this.router.navigateByUrl('/buscar');
   }
 
-  // createButton(label, container) {
-  //   var btn = L.DomUtil.create('button', '', container);
-  //   btn.setAttribute('type', 'button');
-  //   btn.innerHTML = label;
-  //   return btn;
-  // };
+  // API
 
-  // selectPoint (e) {
-  //     const container = L.DomUtil.create('div'),
-  //     startBtn = this.createButton('Start from this location', container),
-  //     destBtn = this.createButton('Go to this location', container);
+  loadSubprograms() {
+    this.subprogramsService.get().subscribe((subprograms: Subprogram[]) => {
+      this.subprograms = subprograms;
+      for (var i = 0; i < subprograms.length; i++) {
+        console.log(subprograms);
+        this.newMarker = new L.marker([subprograms[i].lat,subprograms[i].long])
+        .bindPopup(subprograms[i].subprogram)
+        .addTo(this.map);
+      }
+    });
+  }  
 
-  //     L.popup()
-  //         .setContent(container)
-  //         .setLatLng(e.latlng)
-  //         .openOn(this.map);
-  // };
-
-  ionViewDidEnter() {
-    this.loadMap();
-    // this.markerService.makeNeighbourMarkers(this.map);
-  }
+  // Map
 
   loadMap() {
     this.map = new L.Map("map", {
-      // maxZoom: 20,
-      // minZoom: 6,
-      // zoomControl: false,
     }).setView([-34.881536, -56.147968], 13);
-    
-    // Add zoom controls in other possition
-    // L.control.zoom({
-    //     position: 'bottomright'
-    // }).addTo(this.map);
 
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution:

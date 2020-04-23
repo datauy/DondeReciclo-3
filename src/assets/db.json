@@ -4,5 +4,66 @@
     { "id": 2, "title": "Nuevas funcionalidades!", "body": "Note body...", "img": "/assets/shapes.svg" },
     { "id": 3, "title": "Conocé mas sobre nosotros", "body": "Note body...", "img": "/assets/shapes.svg" },
     { "id": 4, "title": "Conocé nucestros trabajos", "body": "Note body...", "img": "/assets/shapes.svg" }
+  ],
+  "subprogram":[
+    {
+      "subprogram": "SUb Programa Prueba 1",
+      "subprogram_id": 1,
+      "lat": "-34.417016",
+      "long": "-54.13765",
+      "location": "Al lado del super",
+      "public": true,
+      "type_id": 1,
+      "materials": [
+        {
+          "id": 1,
+          "name": "Papel",
+          "information": "El papel....",
+          "video": "",
+          "color": "#e71d1d",
+          "created_at": "2020-04-18T05:55:56.263Z",
+          "updated_at": "2020-04-18T05:55:56.263Z"
+        },
+        {
+          "id": 2,
+          "name": "Cartón",
+          "information": "Va otro de cartón",
+          "video": "",
+          "color": "#219c41",
+          "created_at": "2020-04-18T05:55:56.275Z",
+          "updated_at": "2020-04-18T05:55:56.275Z"
+        }
+      ]
+    },
+    {
+      "subprogram": "SUb Programa Prueba 1",
+      "subprogram_id": 1,
+      "lat": "-34.417016",
+      "long": "-54.13766",
+      "location": "",
+      "public": true,
+      "type_id": 2,
+      "materials": [
+        {
+          "id": 1,
+          "name": "Papel",
+          "information": "El papel....",
+          "video": "",
+          "color": "#e71d1d",
+          "created_at": "2020-04-18T05:55:56.263Z",
+          "updated_at": "2020-04-18T05:55:56.263Z"
+        },
+        {
+          "id": 2,
+          "name": "Cartón",
+          "information": "Va otro de cartón",
+          "video": "",
+          "color": "#219c41",
+          "created_at": "2020-04-18T05:55:56.275Z",
+          "updated_at": "2020-04-18T05:55:56.275Z"
+        }
+      ]
+    }
   ]
+  
 }
