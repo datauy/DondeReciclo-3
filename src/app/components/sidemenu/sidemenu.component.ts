@@ -9,13 +9,8 @@ export class SidemenuComponent implements OnInit {
 
   public appPages = [
     {
-<<<<<<< HEAD
-      title: 'Inicio',
-      url: '/',
-=======
       title: 'Intro',
       url: '/intro',
->>>>>>> Slider implemented in basic mode.
       icon: 'home-outline'
     },
     {

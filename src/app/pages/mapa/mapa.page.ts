@@ -46,6 +46,7 @@ export class MapaPage implements OnInit {
   
   map: L.Map;
   newMarker: any;
+  userMarker: any;
   container: any;
   newRute: any;
   address: string[];
@@ -197,16 +198,12 @@ export class MapaPage implements OnInit {
     
 
     this.map.on("click", <LeafletMouseEvent>(e) => {
-      if (this.newMarker) { // check
-        this.map.removeLayer(this.newMarker); // remove
+      if (this.userMarker) { // check
+        this.map.removeLayer(this.userMarker); // remove
     } 
-    this.newMarker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(this.map); // add the marker onclick
+    this.userMarker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(this.map); // add the marker onclick
     this.panelData = e.latlng;
     this.showPane(); // show the bottom info panel  
-    });
-    
-    this.container = L.marker([-34.881536, -56.147968]).addTo(this.map).on('click', function(e) {
-      console.log(e.latlng);
     });
   }
 
