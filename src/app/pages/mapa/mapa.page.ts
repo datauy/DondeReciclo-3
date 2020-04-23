@@ -69,8 +69,6 @@ export class MapaPage implements OnInit {
     ) {
   }
 
-  dataReturned:any;
-
   ionViewDidEnter() {
     this.loadMap();
     this.loadSubprograms();
@@ -175,12 +173,15 @@ export class MapaPage implements OnInit {
   loadSubprograms() {
     this.subprogramsService.get().subscribe((subprograms: Subprogram[]) => {
       this.subprograms = subprograms;
+      let mapBounds = []
       for (var i = 0; i < subprograms.length; i++) {
         console.log(subprograms);
         this.newMarker = new L.marker([subprograms[i].lat,subprograms[i].long])
         .bindPopup(subprograms[i].subprogram)
         .addTo(this.map);
+        mapBounds.push([subprograms[i].lat,subprograms[i].long]);
       }
+      this.map.fitBounds(mapBounds);
     });
   }  
 
