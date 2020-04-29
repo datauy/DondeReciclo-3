@@ -9,6 +9,8 @@ import { SessionService } from './../../services/session.service';
 })
 export class TabsnavPage implements OnInit{
 
+  isLoading = true
+  
   constructor(
     private keyboard: Keyboard,
     public session: SessionService
@@ -24,7 +26,6 @@ export class TabsnavPage implements OnInit{
   }
 
 	ngOnInit() {
-    isLoading = true
 	}
 
   ionViewWillEnter() {
