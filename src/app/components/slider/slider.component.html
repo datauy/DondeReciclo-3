@@ -1,8 +1,6 @@
-
-
 <ion-content no-bounce >
-  <ion-slides #sliderRef pager="true">
-    <ion-slide *ngFor="let slide of slides">
+  <ion-slides #slides pager="true">
+    <ion-slide *ngFor="let slide of homeSlides">
       <div>
       <!-- <img [src]="slide.image" class="slide-image" /> -->
       <h2 class="slide-title" [innerHTML]="slide.title"></h2>
@@ -23,8 +21,12 @@
 </ion-content>
 <ion-footer>
   <ion-toolbar>
-    <ion-buttons slot="end" *ngIf="showSkip">
-      <ion-button (click)="goApp()" color="primary">Saltar</ion-button>
+    <ion-buttons>
+      <ion-button class="swiper-button-prev swiper-button-black" (click)="prevSlide()"></ion-button>
+      <div slot="end">
+        <ion-button (click)="goApp()" color="primary">Saltar</ion-button>
+      </div>
+      <ion-button class="swiper-button-next swiper-button-black" (click)="nextSlide()"></ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>

@@ -1,0 +1,8 @@
+:host {
+  height: calc(100% - 3.5rem);
+  position: relative;
+  z-index: 11;
+  ion-slides {
+    height: 100%;
+  }
+}
