@@ -26,11 +26,9 @@ import { fromEvent, Subscription } from 'rxjs';
 
 declare let L;
 
-// const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
 const shadowUrl = 'assets/marker-shadow.png';
 const iconDefault = L.icon({
-  // iconRetinaUrl,
   iconUrl,
   shadowUrl,
   iconSize: [25, 41],

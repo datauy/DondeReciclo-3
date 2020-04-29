@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   { path: '', redirectTo: 'intro', pathMatch: 'full' },
   {
-    path: 'tabsnav',
+    path: 'intro',
     loadChildren: () => import('./pages/tabsnav/tabsnav.module').then( m => m.TabsnavPageModule)
   },
   {
@@ -22,19 +22,15 @@ const routes: Routes = [
   {
     path: 'buscar',
     loadChildren: () => import('./pages/buscar/buscar.module').then( m => m.BuscarPageModule)
-  },
-  {
-    path: 'intro',
-    loadChildren: () => import('./pages/intro/intro.module').then( m => m.IntroPageModule)
   }
 ];
 
 @NgModule({
   imports: [
     RouterModule.forRoot(
-      routes, 
+      routes,
       { preloadingStrategy: PreloadAllModules},
-      
+
       )
   ],
   exports: [RouterModule]
