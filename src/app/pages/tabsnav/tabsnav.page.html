@@ -17,4 +17,7 @@
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>
+  <div class="overlay" [ngClass]="isLoading ? 'loadingShow' : 'loadingHide'">
+    <img src="assets/img/loading.gif" alt="">
+  </div>
 </ion-content>

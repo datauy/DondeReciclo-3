@@ -13,9 +13,10 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
   ) {
     this.initializeApp();
+
   }
 
   initializeApp() {
