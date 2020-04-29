@@ -12,13 +12,17 @@ import {NativeGeocoder,NativeGeocoderOptions} from "@ionic-native/native-geocode
 // API
 import { Subprogram } from "../../models/subprogram.model";
 import { SubprogramService } from "../../services/subprogram.service";
+
+
 import { CupertinoPane } from 'cupertino-pane';
 
 import "leaflet";
 import "leaflet-routing-machine";
+
 import { ModalCompartirPage } from '../modal-compartir/modal-compartir.page';
 import { ModalSearchPage } from '../modal-search/modal-search.page';
 import { fromEvent, Subscription } from 'rxjs';
+
 
 declare let L;
 
@@ -54,13 +58,8 @@ export class MapaPage implements OnInit {
   subprograms: Subprogram[];
   dataReturned:any;
   panelData: any;
-  infoPanel: any;
+  infoPanel: any;  
 
-  private backbuttonSubscription: Subscription;
-
-
-  
-  
   constructor(
     private geocoder: NativeGeocoder, 
     private router: Router,
@@ -78,6 +77,7 @@ export class MapaPage implements OnInit {
   // SocialModal
 
   ngOnInit() {
+    // this.loadingModal();
     console.log(this.panelData);
     this.infoPanel = new CupertinoPane(
       '.cupertino-pane', // Pane container selector
@@ -115,12 +115,38 @@ export class MapaPage implements OnInit {
     });
 
   }
+  
+  async loadingModal() {
+    const modal = await this.modalController.create({
+      component: ModalCompartirPage,
+      componentProps: {
+        "modalBody": "Loading..."
+      },
+      cssClass: 'modal-fullscreen'
+    });
+    // const event = fromEvent(document, 'backbutton');
+    // this.backbuttonSubscription = event.subscribe(async () => {
+    //     const modal = await this.modalController.getTop();
+    //     if (modal) {
+    //         modal.dismiss();
+    //     }
+    // });
 
+    modal.onDidDismiss().then((dataReturned) => {
+      if (dataReturned !== null) {
+        this.dataReturned = dataReturned.data;
+        // this.backbuttonSubscription.unsubscribe();
+        //alert('Modal Sent Data :'+ dataReturned);
+      }
+    });
+
+    return await modal.present();
+  }
   async openSocialModal() {
     const modal = await this.modalController.create({
       component: ModalCompartirPage,
       componentProps: {
-        "paramURL": "https://data.org.uy"
+        "modalBody": "https://data.org.uy"
       },
       cssClass: 'custom-modal'
     });
@@ -149,7 +175,7 @@ export class MapaPage implements OnInit {
     const modal = await this.modalController.create({
       component: ModalSearchPage,
       componentProps: {
-        "paramURL": "https://data.org.uy"
+        "modalBody": "https://data.org.uy"
       },
       cssClass: 'search-modal'
     });

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController, NavController } from '@ionic/angular';
+
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+
 // import { Router } from "@angular/router";
 // import { ViewChild } from '@angular/core';
 // import { IonSlides } from '@ionic/angular';
@@ -33,8 +36,10 @@ export class IntroPage implements OnInit  {
 
   constructor(
     public menu: MenuController, 
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    private splashScreen: SplashScreen
   ) { 
+
     this.slides = [
       {
         title: "primera",
@@ -59,15 +64,17 @@ export class IntroPage implements OnInit  {
     this.navCtrl.navigateForward('/tabsnav');
   }
 
-  // ionViewDidEnter() {
-  //   // the root left menu should be disabled on the tutorial page
-  //   this.menu.enable(false);
-  // }
+  ionViewDidEnter() {
+    // this.splashScreen.hide();
 
-  // ionViewWillLeave() {
-  //   // enable the root left menu when leaving the tutorial page
-  //   this.menu.enable(true);
-  // }
+    // the root left menu should be disabled on the tutorial page
+    this.menu.enable(false);
+  }
+
+  ionViewWillLeave() {
+    // enable the root left menu when leaving the tutorial page
+    this.menu.enable(true);
+  }
 
   // nextSlide() {
   //   this.ionSlides.slideNext();
@@ -78,6 +85,7 @@ export class IntroPage implements OnInit  {
   }
 
   ngOnInit() {
+    this.splashScreen.show();
   }
 }
 
