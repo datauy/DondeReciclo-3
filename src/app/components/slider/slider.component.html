@@ -22,11 +22,8 @@
 <ion-footer>
   <ion-toolbar>
     <ion-buttons>
-      <ion-button class="swiper-button-prev swiper-button-black" (click)="prevSlide()"></ion-button>
-      <div slot="end">
-        <ion-button (click)="goApp()" color="primary">Saltar</ion-button>
-      </div>
-      <ion-button class="swiper-button-next swiper-button-black" (click)="nextSlide()"></ion-button>
+      <ion-button slot="start" (click)="goApp()" color="primary">Saltar</ion-button>
+      <ion-button slot="end" class="swiper-button-next swiper-button-black" (click)="nextSlide()"></ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>

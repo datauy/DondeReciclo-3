@@ -1,3 +1,6 @@
 <ion-app>
+  <div class="loadingOverlay" [ngClass]="isLoading ? 'loadingShow' : 'loadingHide'">
+    <img src="assets/img/loading.gif" alt="">
+  </div>
   <app-sidemenu></app-sidemenu>
 </ion-app>

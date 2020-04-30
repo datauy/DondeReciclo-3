@@ -55,7 +55,7 @@ export class MapaPage implements OnInit {
   subprogram = {} as Subprogram;
   subprograms: Subprogram[];
   dataReturned:any;
-  panelData: any;
+  // panelData: any;
   infoPanel: any;  
 
   constructor(
@@ -68,52 +68,16 @@ export class MapaPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    this.loadMap();
-    this.loadSubprograms();
   }
 
   // SocialModal
 
   ngOnInit() {
-    // this.loadingModal();
-    console.log(this.panelData);
-    this.infoPanel = new CupertinoPane(
-      '.cupertino-pane', // Pane container selector
-      { 
-        parentElement: 'body', // Parent container
-
-        // backdrop: true,
-        bottomClose: true,
-        buttonClose: false,
-        topperOverflow: true,
-        showDraggable: false, 
-        simulateTouch: true,
-        breaks: {
-          middle: {
-            enabled: true,
-            offset: 300
-          },
-          bottom: {
-            enabled: true,
-            offset: 60
-          }
-        },
-        onDrag: () => console.log('Drag event'),
-        // onDidPresent: () => ;
-        // onBackdropTap: () => this.infoPanel.hide(),
-      }
-    );
+    this.loadMap();
+    this.loadSubprograms();
 
   }
 
-  showPane() {
-    // this.panelData = containerID;
-    this.infoPanel.present({
-      animate: true,
-    });
-
-  }
-  
   async loadingModal() {
     const modal = await this.modalController.create({
       component: ModalCompartirPage,
@@ -226,11 +190,19 @@ export class MapaPage implements OnInit {
         this.map.removeLayer(this.userMarker); // remove
     } 
     this.userMarker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(this.map); // add the marker onclick
-    this.panelData = e.latlng;
-    this.showPane(); // show the bottom info panel  
+    // this.panelData = e.latlng;
+    // this.showPane(); // show the bottom info panel  
     });
+    // setTimeout(() => {
+    //     this.map.invalidateSize();
+    // }, 1000);
   }
-
+  onMapReady() {
+    setTimeout(() => {
+      this.map.invalidateSize();
+      console.log('map ready')
+    }, 0);
+  }
   
   locatePosition() {
     this.map.locate({ setView: true }).on("locationfound", (e: any) => {

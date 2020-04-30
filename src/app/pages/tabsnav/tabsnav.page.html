@@ -1,3 +1,4 @@
+
 <app-slider *ngIf="session.showSlider == 'visible'"></app-slider>
 <ion-content>
   <ion-tabs *ngIf="!keyboard.isVisible" selectedIndex="2">
@@ -18,7 +19,4 @@
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>
-  <div class="overlay" [ngClass]="isLoading ? 'loadingShow' : 'loadingHide'">
-    <img src="assets/img/loading.gif" alt="">
-  </div>
 </ion-content>

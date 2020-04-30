@@ -7,16 +7,19 @@ import { SessionService } from './../../services/session.service';
   templateUrl: './tabsnav.page.html',
   styleUrls: ['./tabsnav.page.scss'],
 })
-export class TabsnavPage implements OnInit{
+export class TabsnavPage implements OnInit {
 
-  isLoading = true
-  
+  isLoading = true;
+
   constructor(
     private keyboard: Keyboard,
     public session: SessionService
   ) {
+    if ( !this.session.get('showSlider') ) {
+      this.session.set('showSlider', 'visible');
+    }
   }
-  
+
   showKeyboard() {
     this.keyboard.isVisible;
   }
@@ -28,12 +31,11 @@ export class TabsnavPage implements OnInit{
 	ngOnInit() {
 	}
 
-  ionViewWillEnter() {
-    setTimeout( () => {
-      this.isLoading = false;
+  // ionViewWillEnter() {
+  //   setTimeout( () => {
+  //     this.isLoading = false;
 
-    }, 2500);    
-    console.log('isloading false')
-  }
+  //   }, 500);
+  // }
 
 }

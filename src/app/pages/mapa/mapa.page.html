@@ -18,11 +18,12 @@
       <ion-icon name="locate-outline" (click)="locatePosition()"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  <div id="map" style="height:100%; width: 100%;" center='Montevideo, Uruguay'></div>
+  <div id="map" style="height:100%; width: 100%;" center='Montevideo, Uruguay'
+  (leafletMapReady)="onMapReady($event)"></div>
 </ion-content>
 
 
-<div class="cupertino-pane">
+<!-- <div class="cupertino-pane">
   <ion-item>
     <ion-avatar slot="start">
       <img src="https://ui-avatars.com/api/?background=96DD67&name=P">
@@ -83,4 +84,4 @@
       </ion-chip>
     </p>
   </ion-item>
-</div>
+</div> -->
