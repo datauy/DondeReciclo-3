@@ -11,6 +11,10 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 })
 export class AppComponent {
 
+  backdropDismiss = true;
+  showBackdrop = false;
+  shouldPropagate = false;
+  
   isLoading = true;
 
   constructor(
@@ -32,6 +36,6 @@ export class AppComponent {
   ngAfterViewInit() {
     setTimeout( () => {
       this.isLoading = false;
-    }, 2500);
+    }, 500);
   }
 }

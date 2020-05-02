@@ -10,18 +10,16 @@
   </ion-toolbar>
 </ion-header>
 <ion-content no-bounce>
-
-  <ion-searchbar slot="fixed" color="light" (click)="goSearch()" placeholder="Buscá"></ion-searchbar>
-
   <ion-fab vertical="top" horizontal="end" slot="fixed">
     <ion-fab-button color="transparent">
       <ion-icon name="locate-outline" (click)="locatePosition()"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+  <h5 *ngIf="dataFromModal">Data from Modal : {{ dataFromModal.data.ionic }}</h5>
   <div id="map" style="height:100%; width: 100%;" center='Montevideo, Uruguay'
   (leafletMapReady)="onMapReady($event)"></div>
-</ion-content>
 
+</ion-content>
 
 <!-- <div class="cupertino-pane">
   <ion-item>

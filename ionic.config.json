@@ -1,11 +1,11 @@
 {
   "name": "Donde Reciclo",
   "integrations": {},
-  "type": "ionic5",
+  "type": "angular",
   "proxies": [
     {
       "path": "/api",
       "proxyUrl": "http://dr3b.dev.data.org.uy/api"
     }
-  ],
+  ]
 }

@@ -16,6 +16,9 @@ import { LeafletModule } from "@asymmetrik/ngx-leaflet";
 
 import { MapaPage } from './mapa.page';
 
+import { SearchComponent } from 'src/app/components/search/search.component';
+
+
 @NgModule({
   imports: [
     CommonModule,
@@ -34,6 +37,10 @@ import { MapaPage } from './mapa.page';
   // providers: [
   //   // NeighbourService
   // ],
-  declarations: [MapaPage]
+  declarations: [MapaPage, SearchComponent], 
+  
+  // necesario para que funcionara
+  entryComponents: [SearchComponent]
+  
 })
 export class MapaPageModule {}
