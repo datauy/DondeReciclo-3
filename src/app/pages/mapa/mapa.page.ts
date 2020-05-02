@@ -1,28 +1,18 @@
+import { SearchComponent } from 'src/app/components/search/search.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { ModalController } from '@ionic/angular';
 
 import { Router, NavigationExtras } from "@angular/router";
 
-// import { Map, tileLayer, marker, Routing, control} from "leaflet";
 import {NativeGeocoder,NativeGeocoderOptions} from "@ionic-native/native-geocoder/ngx";
-
-// import { NeighbourService } from 'src/app/services/neighbour.service';
 
 // API
 import { Subprogram } from "../../models/subprogram.model";
 import { SubprogramService } from "../../services/subprogram.service";
 
-
-import { CupertinoPane } from 'cupertino-pane';
-
 import "leaflet";
 import "leaflet-routing-machine";
-
-import { ModalCompartirPage } from '../modal-compartir/modal-compartir.page';
-import { ModalSearchPage } from '../modal-search/modal-search.page';
-import { fromEvent, Subscription } from 'rxjs';
-
 
 declare let L;
 
@@ -75,6 +65,7 @@ export class MapaPage implements OnInit {
   ngOnInit() {
     this.loadMap();
     this.loadSubprograms();
+    this.openSearchModal();
 
   }
 
@@ -104,40 +95,40 @@ export class MapaPage implements OnInit {
 
     return await modal.present();
   }
-  async openSocialModal() {
-    const modal = await this.modalController.create({
-      component: ModalCompartirPage,
-      componentProps: {
-        "modalBody": "https://data.org.uy"
-      },
-      cssClass: 'custom-modal'
-    });
-    // const event = fromEvent(document, 'backbutton');
-    // this.backbuttonSubscription = event.subscribe(async () => {
-    //     const modal = await this.modalController.getTop();
-    //     if (modal) {
-    //         modal.dismiss();
-    //     }
-    // });
+  // async openSocialModal() {
+  //   const modal = await this.modalController.create({
+  //     component: ModalCompartirPage,
+  //     componentProps: {
+  //       "modalBody": "https://data.org.uy"
+  //     },
+  //     cssClass: 'custom-modal'
+  //   });
+  //   // const event = fromEvent(document, 'backbutton');
+  //   // this.backbuttonSubscription = event.subscribe(async () => {
+  //   //     const modal = await this.modalController.getTop();
+  //   //     if (modal) {
+  //   //         modal.dismiss();
+  //   //     }
+  //   // });
 
-    modal.onDidDismiss().then((dataReturned) => {
-      if (dataReturned !== null) {
-        this.dataReturned = dataReturned.data;
-        // this.backbuttonSubscription.unsubscribe();
-        //alert('Modal Sent Data :'+ dataReturned);
-      }
-    });
+  //   modal.onDidDismiss().then((dataReturned) => {
+  //     if (dataReturned !== null) {
+  //       this.dataReturned = dataReturned.data;
+  //       // this.backbuttonSubscription.unsubscribe();
+  //       //alert('Modal Sent Data :'+ dataReturned);
+  //     }
+  //   });
 
-    return await modal.present();
-  }
+  //   return await modal.present();
+  // }
 
 
   async openSearchModal() {
     // console.log('click')
     const modal = await this.modalController.create({
-      component: ModalSearchPage,
+      component: SearchComponent,
       componentProps: {
-        "modalBody": "https://data.org.uy"
+        "string": "string"
       },
       cssClass: 'search-modal'
     });
@@ -145,15 +136,11 @@ export class MapaPage implements OnInit {
     modal.onDidDismiss().then((dataReturned) => {
       if (dataReturned !== null) {
         this.dataReturned = dataReturned.data;
-        //alert('Modal Sent Data :'+ dataReturned);
+        alert('Modal Sent Data :'+ dataReturned);
       }
     });
 
     return await modal.present();
-  }
-
-  goSearch(){
-    this.router.navigateByUrl('/buscar');
   }
 
   // API
@@ -196,12 +183,36 @@ export class MapaPage implements OnInit {
     // setTimeout(() => {
     //     this.map.invalidateSize();
     // }, 1000);
+
+    this.addControlPlaceholders(this.map);
+
+    // Change the position of the Zoom Control to a newly created placeholder.
+    this.map.zoomControl.setPosition('verticalcenterleft');
+    
+    L.control.locate({position: 'verticalcenterleft'}).addTo(this.map);
+
   }
+
   onMapReady() {
     setTimeout(() => {
       this.map.invalidateSize();
       console.log('map ready')
     }, 0);
+  }
+
+  // Create additional Control placeholders
+  addControlPlaceholders(map) {
+    const corners = map._controlCorners;
+    const l = 'leaflet-';
+    const toolsPanel = map._controlContainer;
+
+    function createCorner(vSide, hSide) {
+        const className = l + vSide + ' ' + l + hSide;
+
+        corners[vSide + hSide] = L.DomUtil.create('div', className, toolsPanel);
+    }
+
+    createCorner('verticalcenter', 'left');
   }
   
   locatePosition() {

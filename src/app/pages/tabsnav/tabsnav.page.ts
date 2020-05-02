@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { SessionService } from './../../services/session.service';
 
@@ -28,14 +28,26 @@ export class TabsnavPage implements OnInit {
     this.keyboard.hide();
   }
 
-	ngOnInit() {
-	}
-
-  // ionViewWillEnter() {
-  //   setTimeout( () => {
-  //     this.isLoading = false;
-
-  //   }, 500);
+  // setFocusSearch() {
+  //   this.searchbar.setFocus();
   // }
+  
+	ngOnInit() {
+  }
+  
+  ngAfterViewChecked() {
+    // this.skipSlides.addEventListener('click', (e: any) => {
+    //   console.log("skip clicked");
+    //   console.log(e);
+    //   console.log(e.target);
+    // });
+  }
+
+  ionViewDidEnter(){
+    setTimeout( () => {
+      this.isLoading = false;
+
+    }, 500);
+  }
 
 }

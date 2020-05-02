@@ -52,11 +52,11 @@ export class SliderComponent implements OnInit {
     this.session.set('showSlider', '0');
   }
   nextSlide() {
-    console.log("GOING NEXT");
+    // console.log("GOING NEXT");
     this.slides.slideNext();
   }
   prevSlide() {
-    console.log('GOING BACK');
+    // console.log('GOING BACK');
     this.slides.slidePrev();
   }
 

@@ -1,6 +1,4 @@
 import { BuscarPageModule } from './pages/buscar/buscar.module';
-import { ModalCompartirPageModule } from './pages/modal-compartir/modal-compartir.module';
-import { ModalCompartirPage } from './pages/modal-compartir/modal-compartir.page';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -21,7 +19,6 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 // API
 import { NovedadesPageModule } from './pages/novedades/novedades.module';
 import { HttpClientModule } from '@angular/common/http';
-import { ModalSearchPage } from './pages/modal-search/modal-search.page';
 
 // import { Api } from './providers';
 
@@ -30,9 +27,7 @@ import { ModalSearchPage } from './pages/modal-search/modal-search.page';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ModalCompartirPage,
-    ModalSearchPage
+    AppComponent
   ],
   imports: [
     BrowserModule, 
@@ -55,10 +50,6 @@ import { ModalSearchPage } from './pages/modal-search/modal-search.page';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [
-    ModalCompartirPage,
-    ModalSearchPage
-  ],
   schemas : [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}

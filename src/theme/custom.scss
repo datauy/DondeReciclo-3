@@ -52,16 +52,21 @@
   }
 
 
-
-.cupertino-pane {
-  .ion-padding {
-    padding-top: 0;
-  }
-  h1 {
-    padding-top: 0;
-    margin-top: 0;
-  }
+  .leaflet-verticalcenter {
+    position: absolute;
+    z-index: 1000;
+    pointer-events: none;
+    top: 80px; 
+    left: 20px;
+    right: auto;
+    // transform: translateY(-50%); /* using the CSS3 Transform technique */
+    padding-top: 10px;
 }
+
+.leaflet-verticalcenter .leaflet-control {
+    margin-bottom: 10px;
+}
+
 
 .modal-fullscreen {
   .modal-wrapper {
@@ -142,4 +147,28 @@
       height: 100%;
     }
 	}
+}
+
+app-search{
+    position: absolute !important;
+    display: block;
+    // min-width: 100%;
+    // min-height: 100%;
+    top: 0px;
+    left: 0px;
+    right: 0;
+    bottom: 0;
+    background: none;
+    z-index: 10000;
+    ion-content, ion-list{
+      --background: none;
+      
+    }
+    .item .item-content {
+      background-color: transparent !important;
+    }
+    #searchBar input{
+       border-radius: 50px;
+   }
+
 }

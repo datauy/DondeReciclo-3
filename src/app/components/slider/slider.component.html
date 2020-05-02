@@ -21,9 +21,30 @@
 </ion-content>
 <ion-footer>
   <ion-toolbar>
-    <ion-buttons>
-      <ion-button slot="start" (click)="goApp()" color="primary">Saltar</ion-button>
-      <ion-button slot="end" class="swiper-button-next swiper-button-black" (click)="nextSlide()"></ion-button>
+    <ion-buttons >
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <div>
+              <ion-button slot="start" (click)="nextSlide()">
+                <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+              </ion-button>            
+            </div>
+          </ion-col>
+          <ion-col>
+            <div class="ion-text-center">
+              <ion-button id="skipSlides" (click)="goApp();" color="primary">Saltar</ion-button>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div class="ion-text-right">
+              <ion-button (click)="nextSlide()">
+                <ion-icon slot="icon-only" name="arrow-forward-outline"></ion-icon>
+              </ion-button>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>

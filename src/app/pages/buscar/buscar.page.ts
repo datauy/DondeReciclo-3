@@ -15,7 +15,6 @@ import { createAnimation } from '@ionic/core';
   styleUrls: ["./buscar.page.scss"],
 })
 export class BuscarPage implements OnInit {
-  @ViewChild("searchbar", { static: false }) private searchbar: IonSearchbar;
 
   constructor(
     ) {
@@ -29,10 +28,6 @@ export class BuscarPage implements OnInit {
         { offset: 1, background: 'green' }
       ]);
     }
-
-  ngAfterViewChecked() {
-    this.searchbar.setFocus();
-  }
 
   ngOnInit() {}
 }
