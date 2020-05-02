@@ -69,32 +69,32 @@ export class MapaPage implements OnInit {
 
   }
 
-  async loadingModal() {
-    const modal = await this.modalController.create({
-      component: ModalCompartirPage,
-      componentProps: {
-        "modalBody": "Loading..."
-      },
-      cssClass: 'modal-fullscreen'
-    });
-    // const event = fromEvent(document, 'backbutton');
-    // this.backbuttonSubscription = event.subscribe(async () => {
-    //     const modal = await this.modalController.getTop();
-    //     if (modal) {
-    //         modal.dismiss();
-    //     }
-    // });
+  // async loadingModal() {
+  //   const modal = await this.modalController.create({
+  //     component: ModalCompartirPage,
+  //     componentProps: {
+  //       "modalBody": "Loading..."
+  //     },
+  //     cssClass: 'modal-fullscreen'
+  //   });
+  //   // const event = fromEvent(document, 'backbutton');
+  //   // this.backbuttonSubscription = event.subscribe(async () => {
+  //   //     const modal = await this.modalController.getTop();
+  //   //     if (modal) {
+  //   //         modal.dismiss();
+  //   //     }
+  //   // });
 
-    modal.onDidDismiss().then((dataReturned) => {
-      if (dataReturned !== null) {
-        this.dataReturned = dataReturned.data;
-        // this.backbuttonSubscription.unsubscribe();
-        //alert('Modal Sent Data :'+ dataReturned);
-      }
-    });
+  //   modal.onDidDismiss().then((dataReturned) => {
+  //     if (dataReturned !== null) {
+  //       this.dataReturned = dataReturned.data;
+  //       // this.backbuttonSubscription.unsubscribe();
+  //       //alert('Modal Sent Data :'+ dataReturned);
+  //     }
+  //   });
 
-    return await modal.present();
-  }
+  //   return await modal.present();
+  // }
   // async openSocialModal() {
   //   const modal = await this.modalController.create({
   //     component: ModalCompartirPage,
@@ -136,7 +136,7 @@ export class MapaPage implements OnInit {
     modal.onDidDismiss().then((dataReturned) => {
       if (dataReturned !== null) {
         this.dataReturned = dataReturned.data;
-        alert('Modal Sent Data :'+ dataReturned);
+        // alert('Modal Sent Data :'+ dataReturned);
       }
     });
 

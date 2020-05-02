@@ -9,7 +9,6 @@ import { ModalComponent } from "./modal/modal.component";
 @NgModule({
   declarations: [
     SidemenuComponent,
-    ModalComponent
   ],
   imports: [
     CommonModule,
@@ -18,7 +17,6 @@ import { ModalComponent } from "./modal/modal.component";
   ],
   exports: [
     SidemenuComponent,
-    ModalComponent
   ],
 })
 export class ComponentsModule { }
