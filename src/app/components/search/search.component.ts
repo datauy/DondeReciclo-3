@@ -11,7 +11,7 @@ import { createAnimation } from '@ionic/core';
 export class SearchComponent implements OnInit {
   @ViewChild(IonButton, { static: false }) private skipSlides: IonButton;
   @ViewChild(IonSearchbar, { static: false }) private searchBar: IonSearchbar;
-  printToConsoleBtn  =  document.querySelector("#searchBar");
+  nextSlideBtn  =  document.querySelector("#searchBar");
   // backdropDismiss = true;
   // showBackdrop = false;
   // shouldPropagate = false;
@@ -38,7 +38,7 @@ export class SearchComponent implements OnInit {
 
   ionViewDidLoad(){
    console.log('didload')
-    this.printToConsoleBtn.addEventListener('click',(e)=>{
+    this.nextSlideBtn.addEventListener('click',(e)=>{
       console.log("Button clicked!");
     });
   }

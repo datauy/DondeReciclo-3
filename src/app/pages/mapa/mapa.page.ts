@@ -46,10 +46,10 @@ export class MapaPage implements OnInit {
   subprograms: Subprogram[];
   dataReturned:any;
   // panelData: any;
-  infoPanel: any;  
+  infoPanel: any;
 
   constructor(
-    private geocoder: NativeGeocoder, 
+    private geocoder: NativeGeocoder,
     private router: Router,
     public modalController: ModalController,
     private subprogramsService: SubprogramService,
@@ -65,7 +65,7 @@ export class MapaPage implements OnInit {
   ngOnInit() {
     this.loadMap();
     this.loadSubprograms();
-    this.openSearchModal();
+    // this.openSearchModal();
 
   }
 
@@ -123,25 +123,25 @@ export class MapaPage implements OnInit {
   // }
 
 
-  async openSearchModal() {
-    // console.log('click')
-    const modal = await this.modalController.create({
-      component: SearchComponent,
-      componentProps: {
-        "string": "string"
-      },
-      cssClass: 'search-modal'
-    });
+  // async openSearchModal() {
+  //   // console.log('click')
+  //   const modal = await this.modalController.create({
+  //     component: SearchComponent,
+  //     componentProps: {
+  //       "string": "string"
+  //     },
+  //     cssClass: 'search-modal'
+  //   });
 
-    modal.onDidDismiss().then((dataReturned) => {
-      if (dataReturned !== null) {
-        this.dataReturned = dataReturned.data;
-        // alert('Modal Sent Data :'+ dataReturned);
-      }
-    });
+  //   modal.onDidDismiss().then((dataReturned) => {
+  //     if (dataReturned !== null) {
+  //       this.dataReturned = dataReturned.data;
+  //       // alert('Modal Sent Data :'+ dataReturned);
+  //     }
+  //   });
 
-    return await modal.present();
-  }
+  //   return await modal.present();
+  // }
 
   // API
 
