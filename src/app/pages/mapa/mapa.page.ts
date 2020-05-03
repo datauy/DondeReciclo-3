@@ -1,4 +1,3 @@
-import { SearchComponent } from 'src/app/components/search/search.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { ModalController } from '@ionic/angular';
