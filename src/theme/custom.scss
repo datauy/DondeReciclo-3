@@ -26,7 +26,68 @@
   --white: #d8d8d8;
   --dark-seafoam: #1eac86;
   --pale-olive-green: #9cd060;
+
+
+--ion-text-color: var(--greyish-brown);
+--ion-tab-bar-background:	var(--dark-sea-green);
+--ion-tab-bar-background-focused: none;
+// --ion-tab-bar-border-color: 
+--ion-tab-bar-color: white;
+--ion-tab-bar-color-selected: var(--pale-olive-green);
+--ion-toolbar-background: var(--dark-sea-green);
+--ion-toolbar-color: var(--pale-olive-green);
+// --ion-toolbar-segment-color	Color of the Segment Buttons in the Toolbar
+// --ion-toolbar-segment-color-checked	Color of the checked Segment Buttons in the Toolbar
+// --ion-toolbar-segment-background	Background of the Segment Buttons in the Toolbar
+// --ion-toolbar-segment-background-checked	Background of the Segment Buttons in the Toolbar
+// --ion-toolbar-segment-indicator-color	Color of the Segment Button indicator in the Toolbar
+// --ion-item-background	Background of the Item
+// --ion-item-border-color	Border color of the Item
+// --ion-item-color	Color of the components in the Item
+// --ion-placeholder-color	Color of the placeholder in Inputs
+
+
+  // components
+
+  ion-header{
+  }
+
+  ion-toolbar{
+    height: 138px;
+  }
+
+  ion-button{
+    
+  }
+  ion-button{
+    --background: white;
+    --background-activated: var(--pale-olive-green);
+    // --background-activated-opacity	Opacity of the button when pressed
+    // --background-focused	Background of the button when focused with the tab key
+    // --background-focused-opacity	Opacity of the button when focused with the tab key
+    --background-hover: var(--pale-olive-green);
+    // --background-hover-opacity	Opacity of the background on hover
+    --border-color: none;
+    --border-radius: 38.5px;
+    --border-style: none;
+    --border-width: none;
+    --box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2);
+    --color: var(--pale-olive-green);
+    --color-activated: white;
+    --color-focused: white;
+    --color-hover: white;
+    // --opacity	Opacity of the button
+    --padding-bottom: 16px;
+    --padding-end: 16px;
+    --padding-start: 16px;
+    --padding-top: 16px;
+    // --ripple-color	Color of the button ripple effect
+    // --transition	Transition of the button
+    
+  }
 }
+
+
 
 // Fonts
 
@@ -122,9 +183,6 @@ p{
   color: #9b9b9b;
 }
 
-ion-button{
-  
-}
 
 .leaflet-verticalcenter {
   position: absolute;
