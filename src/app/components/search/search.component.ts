@@ -1,25 +1,24 @@
-import { Component, OnInit, ViewChild, Injectable } from '@angular/core';
+import { Component, OnInit, ViewChild, Injectable } from "@angular/core";
 import { IonSearchbar, IonButton } from "@ionic/angular";
-import { createAnimation } from '@ionic/core';
+import { createAnimation } from "@ionic/core";
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss'],
+  selector: "app-search",
+  templateUrl: "./search.component.html",
+  styleUrls: ["./search.component.scss"],
 })
-
 export class SearchComponent implements OnInit {
   @ViewChild(IonButton, { static: false }) private skipSlides: IonButton;
   @ViewChild(IonSearchbar, { static: false }) private searchBar: IonSearchbar;
-  nextSlideBtn  =  document.querySelector("#searchBar");
+  nextSlideBtn = document.querySelector("#searchBar");
   // backdropDismiss = true;
   // showBackdrop = false;
   // shouldPropagate = false;
 
   searchString: string;
-  
-  constructor() { 
+  searchVisibility: boolean = true;
 
+  constructor() {
     // createAnimation()
     // .addElement(document.querySelector('ion-searchbar'))
     // .duration(3000)
@@ -36,16 +35,18 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {}
 
-  ionViewDidLoad(){
-   console.log('didload')
-    this.nextSlideBtn.addEventListener('click',(e)=>{
+  ionViewDidLoad() {
+    console.log("didload");
+    this.nextSlideBtn.addEventListener("click", (e) => {
       console.log("Button clicked!");
     });
   }
-  
+
   searchAPI(string) {
-      this.searchString = string;
+    this.searchString = string;
   }
 
-
+  searchBackdropClick() {
+    this.searchVisibility = false;
+  }
 }

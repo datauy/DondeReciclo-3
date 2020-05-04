@@ -1,9 +1,13 @@
 
-<ion-content>
-  <ion-searchbar id="searchBar" type="text" debounce="500" animated 
+
+ 
+<ion-content (click)="searchBackdropClick()"  
+[ngClass]="searchVisibility ? 'showSearch' : 'hideSearch'">
+
+<ion-searchbar id="searchBar" type="text" debounce="500" animated 
   placeholder="Busca materiales" color="dark" 
   (ionChange)="searchAPI($event)" clearInput></ion-searchbar>
-
+  
 <ion-list *ngIf="results">
   <ion-item *ngFor="let result of results" (click)="openMarker(result)">
       {{ result }}

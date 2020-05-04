@@ -333,7 +333,6 @@ app-search{
     right: 0;
     bottom: 0;
     background: none;
-    z-index: 10000;
     ion-content, ion-list{
       --background: none;
       
@@ -344,5 +343,16 @@ app-search{
     #searchBar input{
        border-radius: 50px;
    }
-
+   .showSearch{
+    opacity: 1;
+    display: block;
+    visibility: visible;
+    z-index: 10000;
+   }
+   .hideSearch{
+    opacity: 1;
+    display: block;
+    visibility: visible;
+    z-index: 10000;
+   }
 }
