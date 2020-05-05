@@ -1,43 +1,40 @@
+<ion-searchbar id="searchBar" type="text" debounce="500" animated placeholder="Busca materiales" color="dark"
+  (click)="showSearch()" (ionChange)="searchAPI($event)" clearInput></ion-searchbar>
 
+<div class="searchContent" [ngClass]="searchVisibility ? 'showSearch' : 'hideSearch'">
 
- 
-<ion-content (click)="searchBackdropClick()"  
-[ngClass]="searchVisibility ? 'showSearch' : 'hideSearch'">
-
-<ion-searchbar id="searchBar" type="text" debounce="500" animated 
-  placeholder="Busca materiales" color="dark" 
-  (ionChange)="searchAPI($event)" clearInput></ion-searchbar>
-  
-<ion-list *ngIf="results">
-  <ion-item *ngFor="let result of results" (click)="openMarker(result)">
+  <ion-list *ngIf="results" [ngClass]="searchVisibility ? 'showSearch' : 'hideSearch'">
+    <ion-item *ngFor="let result of results" (click)="openMarker(result)">
       {{ result }}
-  </ion-item>
-</ion-list>
-<ion-list-header>Busquedas frecuentes</ion-list-header>
-<div>
-  <ion-chip solid color="brown">
-    <ion-icon name="cube"></ion-icon>
-    <ion-label>Papel y cartón</ion-label>
-  </ion-chip>
-  <ion-chip solid color="violet">
-    <ion-icon name="wine"></ion-icon>
-    <ion-label>Metales</ion-label>
-  </ion-chip>
-  <ion-chip solid color="danger">
-    <ion-icon name="skull"></ion-icon>
-    <ion-label>Residuos peligrosos</ion-label>
-  </ion-chip>
-  <ion-chip solid color="secondary">
-    <ion-icon name="wine"></ion-icon>
-    <ion-label>Vidrio</ion-label>
-  </ion-chip>
-  <ion-chip solid color="primary">
-    <ion-icon name="pizza"></ion-icon>
-    <ion-label>Organico/humedo</ion-label>
-  </ion-chip>
-  <ion-chip solid color="mostard">
-    <ion-icon name="copy"></ion-icon>
-    <ion-label>Polilaminados</ion-label>
-  </ion-chip>
+    </ion-item>
+  </ion-list>
+
+  <div>
+    <ion-list-header>Busquedas frecuentes</ion-list-header>
+    <ion-chip solid color="brown">
+      <ion-icon name="cube"></ion-icon>
+      <ion-label>Papel y cartón</ion-label>
+    </ion-chip>
+    <ion-chip solid color="violet">
+      <ion-icon name="wine"></ion-icon>
+      <ion-label>Metales</ion-label>
+    </ion-chip>
+    <ion-chip solid color="danger">
+      <ion-icon name="skull"></ion-icon>
+      <ion-label>Residuos peligrosos</ion-label>
+    </ion-chip>
+    <ion-chip solid color="secondary">
+      <ion-icon name="wine"></ion-icon>
+      <ion-label>Vidrio</ion-label>
+    </ion-chip>
+    <ion-chip solid color="primary">
+      <ion-icon name="pizza"></ion-icon>
+      <ion-label>Organico/humedo</ion-label>
+    </ion-chip>
+    <ion-chip solid color="mostard">
+      <ion-icon name="copy"></ion-icon>
+      <ion-label>Polilaminados</ion-label>
+    </ion-chip>
+  </div>
 </div>
-</ion-content>
+<div id="custom_backdrop" (click)="hideSearch()" [ngClass]="searchVisibility ? 'show' : 'hide'"></div>

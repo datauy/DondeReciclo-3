@@ -1,6 +1,6 @@
 import { CommonModule} from '@angular/common';
 import { NgModule} from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, IonBackdrop } from '@ionic/angular';
 
 import { AppRoutingModule } from '../app-routing.module';
 import { SidemenuComponent } from './sidemenu/sidemenu.component';

@@ -16,7 +16,6 @@
       <ion-icon name="locate-outline" (click)="locatePosition()"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  <h5 *ngIf="dataFromModal">Data from Modal : {{ dataFromModal.data.ionic }}</h5>
   <div id="map" style="height:100%; width: 100%;" center='Montevideo, Uruguay'
   (leafletMapReady)="onMapReady($event)"></div>
 

@@ -27,39 +27,36 @@
   --dark-seafoam: #1eac86;
   --pale-olive-green: #9cd060;
 
-
---ion-text-color: var(--greyish-brown);
---ion-tab-bar-background:	var(--dark-sea-green);
---ion-tab-bar-background-focused: none;
-// --ion-tab-bar-border-color: 
---ion-tab-bar-color: white;
---ion-tab-bar-color-selected: var(--pale-olive-green);
---ion-toolbar-background: var(--dark-sea-green);
---ion-toolbar-color: var(--pale-olive-green);
-// --ion-toolbar-segment-color	Color of the Segment Buttons in the Toolbar
-// --ion-toolbar-segment-color-checked	Color of the checked Segment Buttons in the Toolbar
-// --ion-toolbar-segment-background	Background of the Segment Buttons in the Toolbar
-// --ion-toolbar-segment-background-checked	Background of the Segment Buttons in the Toolbar
-// --ion-toolbar-segment-indicator-color	Color of the Segment Button indicator in the Toolbar
-// --ion-item-background	Background of the Item
-// --ion-item-border-color	Border color of the Item
-// --ion-item-color	Color of the components in the Item
-// --ion-placeholder-color	Color of the placeholder in Inputs
-
+  --ion-text-color: var(--greyish-brown);
+  --ion-tab-bar-background: var(--dark-sea-green);
+  --ion-tab-bar-background-focused: none;
+  // --ion-tab-bar-border-color:
+  --ion-tab-bar-color: white;
+  --ion-tab-bar-color-selected: var(--pale-olive-green);
+  --ion-toolbar-background: var(--dark-sea-green);
+  --ion-toolbar-color: var(--pale-olive-green);
+  // --ion-toolbar-segment-color	Color of the Segment Buttons in the Toolbar
+  // --ion-toolbar-segment-color-checked	Color of the checked Segment Buttons in the Toolbar
+  // --ion-toolbar-segment-background	Background of the Segment Buttons in the Toolbar
+  // --ion-toolbar-segment-background-checked	Background of the Segment Buttons in the Toolbar
+  // --ion-toolbar-segment-indicator-color	Color of the Segment Button indicator in the Toolbar
+  // --ion-item-background	Background of the Item
+  // --ion-item-border-color	Border color of the Item
+  // --ion-item-color	Color of the components in the Item
+  // --ion-placeholder-color	Color of the placeholder in Inputs
 
   // components
 
-  ion-header{
+  ion-header {
   }
 
-  ion-toolbar{
+  ion-toolbar {
     height: 138px;
   }
 
-  ion-button{
-    
+  ion-button {
   }
-  ion-button{
+  ion-button {
     --background: white;
     --background-activated: var(--pale-olive-green);
     // --background-activated-opacity	Opacity of the button when pressed
@@ -83,16 +80,13 @@
     --padding-top: 16px;
     // --ripple-color	Color of the button ripple effect
     // --transition	Transition of the button
-    
   }
 }
-
-
 
 // Fonts
 
 @font-face {
-  font-family: 'PTSerif';
+  font-family: "PTSerif";
   src: local(PTSerif-Regular),
     url(/path/to/PTSerif-Regular.woff2) format("woff2"),
     url(/path/to/PTSerif-Regular.woff) format("woff"),
@@ -102,9 +96,8 @@
   font-stretch: normal;
 }
 @font-face {
-  font-family: 'Roboto';
-  src: local(Roboto-Medium),
-    url(/path/to/Roboto-Medium.woff2) format("woff2"),
+  font-family: "Roboto";
+  src: local(Roboto-Medium), url(/path/to/Roboto-Medium.woff2) format("woff2"),
     url(/path/to/Roboto-Medium.woff) format("woff"),
     url(/path/to/Roboto-Medium.ttf) format("truetype");
   font-weight: 500;
@@ -112,25 +105,24 @@
   font-stretch: normal;
 }
 * {
-  font-family: 'PTSerif', sans-serif;
+  font-family: "PTSerif", sans-serif;
 }
 
-ion-title{
+ion-title {
   width: 100%;
   font-family: PTSerif;
   text-align: center;
-  h1{
+  h1 {
     font-size: 24px;
     color: var(--dark-sea-green);
-    .negative{
+    .negative {
       color: #ffffff;
     }
   }
-  h2{
+  h2 {
     font-size: 32px;
     color: var(--greyish-brown);
   }
-
 }
 
 .h2 {
@@ -157,7 +149,7 @@ ion-title{
   letter-spacing: normal;
   color: var(--greyish-brown);
 }
-p{
+p {
   width: 332px;
   height: 196px;
   font-family: PTSerif;
@@ -183,7 +175,6 @@ p{
   color: #9b9b9b;
 }
 
-
 .leaflet-verticalcenter {
   position: absolute;
   z-index: 1000;
@@ -199,22 +190,20 @@ p{
   margin-bottom: 10px;
 }
 
-
-  .leaflet-verticalcenter {
-    position: absolute;
-    z-index: 1000;
-    pointer-events: none;
-    top: 80px; 
-    left: 20px;
-    right: auto;
-    // transform: translateY(-50%); /* using the CSS3 Transform technique */
-    padding-top: 10px;
+.leaflet-verticalcenter {
+  position: absolute;
+  z-index: 1000;
+  pointer-events: none;
+  top: 80px;
+  left: 20px;
+  right: auto;
+  // transform: translateY(-50%); /* using the CSS3 Transform technique */
+  padding-top: 10px;
 }
 
 .leaflet-verticalcenter .leaflet-control {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
-
 
 .modal-fullscreen {
   .modal-wrapper {
@@ -300,17 +289,28 @@ p{
   }
 }
 
-app-search {
-  position: absolute !important;
-  display: block;
-  // min-width: 100%;
-  // min-height: 100%;
-  top: 0px;
-  left: 0px;
-  right: 0;
-  bottom: 0;
-  background: none;
+#custom_backdrop{
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  position:absolute;
+  background: black;
+  opacity: .5;
+  top:0;
   z-index: 10000;
+  &.show {
+    opacity: .4;
+    display: block;
+    visibility: visible;
+  }
+  &.hide {
+    opacity: 0;
+    display: none;
+    visibility: hidden;
+  }
+}
+app-search {
   ion-content,
   ion-list {
     --background: none;
@@ -318,41 +318,35 @@ app-search {
   .item .item-content {
     background-color: transparent !important;
   }
-  #searchBar input {
-    border-radius: 50px;
+  #searchBar {
+    position: absolute;
+    top: 100px;
+    padding: 12px;
+    z-index: 10001;
+    input {
+      border-radius: 50px;
+    }
   }
-}
-
-app-search{
-    position: absolute !important;
-    display: block;
+  .searchContent {
+    z-index: 20000;
+    position: absolute;
+    // display: block;
     // min-width: 100%;
     // min-height: 100%;
-    top: 0px;
-    left: 0px;
-    right: 0;
-    bottom: 0;
-    background: none;
-    ion-content, ion-list{
-      --background: none;
-      
+    // top: 0px;
+    // ion-chip{
+    //   opacity: 1;
+    // }
+    &.showSearch {
+      opacity: 1;
+      display: block;
+      visibility: visible;
     }
-    .item .item-content {
-      background-color: transparent !important;
+    &.hideSearch {
+      opacity: 0;
+      display: none;
+      visibility: hidden;
+      z-index: 0;
     }
-    #searchBar input{
-       border-radius: 50px;
-   }
-   .showSearch{
-    opacity: 1;
-    display: block;
-    visibility: visible;
-    z-index: 10000;
-   }
-   .hideSearch{
-    opacity: 1;
-    display: block;
-    visibility: visible;
-    z-index: 10000;
-   }
+  }
 }
