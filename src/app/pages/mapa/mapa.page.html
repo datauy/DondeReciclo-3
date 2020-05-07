@@ -13,13 +13,14 @@
 <app-search></app-search>
 
 <div id="custom_backdrop" (click)="hideSearch()" [ngClass]="searchVisibility ? 'show' : 'hide'"></div>
-  
+
 <ion-content no-bounce>
   <ion-fab vertical="top" horizontal="end" slot="fixed">
     <ion-fab-button color="transparent">
       <ion-icon name="locate-outline" (click)="locatePosition()"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+  <h5 *ngIf="dataFromModal">Data from Modal : {{ dataFromModal.data.ionic }}</h5>
   <div id="map" style="height:100%; width: 100%;" center='Montevideo, Uruguay'
   (leafletMapReady)="onMapReady($event)"></div>
 

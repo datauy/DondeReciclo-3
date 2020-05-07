@@ -11,7 +11,7 @@ import { SearchService } from 'src/app/services/search.service';
 })
 export class SearchComponent implements OnInit {
   @ViewChild(IonSearchbar, { static: false }) private searchBar: IonSearchbar;
-  
+
   backdrop = document.querySelector('custom-backdrop');
   nextSlideBtn = document.querySelector('#searchBar');
   showBackdrop = true;

@@ -205,6 +205,7 @@ p {
   margin-bottom: 10px;
 }
 
+
 .modal-fullscreen {
   .modal-wrapper {
     position: absolute;
@@ -359,4 +360,28 @@ app-search {
       z-index: 0;
     }
   }
+}
+
+app-search{
+    position: absolute !important;
+    display: block;
+    // min-width: 100%;
+    // min-height: 100%;
+    top: 0px;
+    left: 0px;
+    right: 0;
+    bottom: 0;
+    background: none;
+    z-index: 10000;
+    ion-content, ion-list{
+      --background: none;
+
+    }
+    .item .item-content {
+      background-color: transparent !important;
+    }
+    #searchBar input{
+       border-radius: 50px;
+   }
+
 }

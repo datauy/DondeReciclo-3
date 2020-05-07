@@ -1,3 +1,4 @@
+import { SearchComponent } from 'src/app/components/search/search.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { ModalController } from '@ionic/angular';
@@ -9,7 +10,6 @@ import {NativeGeocoder,NativeGeocoderOptions} from "@ionic-native/native-geocode
 // API
 import { Subprogram } from "../../models/subprogram.model";
 import { SubprogramService } from "../../services/subprogram.service";
-
 
 
 import "leaflet";
@@ -36,7 +36,7 @@ L.Marker.prototype.options.icon = iconDefault;
   styleUrls: ['./mapa.page.scss'],
 })
 export class MapaPage implements OnInit {
-  
+
   map: L.Map;
   newMarker: any;
   userMarker: any;
@@ -159,7 +159,7 @@ export class MapaPage implements OnInit {
       }
       this.map.fitBounds(mapBounds);
     });
-  }  
+  }
 
   // Map
 
@@ -171,15 +171,15 @@ export class MapaPage implements OnInit {
       attribution:
         'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
     }).addTo(this.map);
-    
+
 
     this.map.on("click", <LeafletMouseEvent>(e) => {
       if (this.userMarker) { // check
         this.map.removeLayer(this.userMarker); // remove
-    } 
+    }
     this.userMarker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(this.map); // add the marker onclick
     // this.panelData = e.latlng;
-    // this.showPane(); // show the bottom info panel  
+    // this.showPane(); // show the bottom info panel
     });
     // setTimeout(() => {
     //     this.map.invalidateSize();
@@ -213,7 +213,7 @@ export class MapaPage implements OnInit {
 
     createCorner('verticalcenter', 'left');
   }
-  
+
   locatePosition() {
     this.map.locate({ setView: true }).on("locationfound", (e: any) => {
       if (this.newMarker) { // check
@@ -250,11 +250,11 @@ export class MapaPage implements OnInit {
   }
 
   drawRute(lat: number, long: number) {
-    this.newRute = L.Routing.control({ 
+    this.newRute = L.Routing.control({
       waypoints: [L.latLng(lat, long), L.latLng(-34.79688926182469, -56.07833862304688)],
       routeWhileDragging: true,
       router: L.Routing.mapbox('pk.eyJ1IjoiYm90dW0iLCJhIjoiY2s4anBoOHRzMGJ5dzNscDg1c2drMXBoNSJ9.vQ7qAGX7IMadmIfcCp7eRQ')
     }).addTo(this.map);
-    
+
 	}
 }
