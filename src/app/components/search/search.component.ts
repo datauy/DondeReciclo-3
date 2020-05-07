@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild, Injectable } from '@angular/core';
 import { IonSearchbar, IonButton, IonBackdrop} from '@ionic/angular';
 import { createAnimation } from '@ionic/core';
+import { AutoCompleteOptions } from 'ionic4-auto-complete';
+import { SearchService } from 'src/app/services/search.service';
 
 @Component({
   selector: 'app-search',
@@ -8,8 +10,8 @@ import { createAnimation } from '@ionic/core';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  @ViewChild(IonButton, { static: false }) private skipSlides: IonButton;
   @ViewChild(IonSearchbar, { static: false }) private searchBar: IonSearchbar;
+  
   backdrop = document.querySelector('custom-backdrop');
   nextSlideBtn = document.querySelector('#searchBar');
   showBackdrop = true;
@@ -17,8 +19,22 @@ export class SearchComponent implements OnInit {
   searchString: string;
   searchVisibility = true;
 
+  // autocomplete component
+  public options:AutoCompleteOptions;
+
+  public selected:string = '';
+
   constructor(
+    public provider:SearchService
     ) {
+      this.options = new AutoCompleteOptions();
+
+      this.options.autocomplete = 'on';
+      this.options.debounce = 750;
+      this.options.placeholder = 'Buscá objetos o materiales.';
+      this.options.type = 'add-friend.svg';
+      this.options.clearInvalidInput = false;
+
     // createAnimation()
     // .addElement(document.querySelector('ion-searchbar'))
     // .duration(3000)
@@ -28,31 +44,31 @@ export class SearchComponent implements OnInit {
     //   { offset: 0.72, background: 'var(--background)' },
     //   { offset: 1, background: 'green' }
     // ]);
-    // this.skipSlides.ionFocus('click', (e: any) => {
-    //   this.searchBar.setFocus();
-    // });
   }
 
   ngOnInit() {}
 
   ionViewDidLoad() {
-    console.log('didload');
     this.nextSlideBtn.addEventListener('click', (e) => {
       console.log('Button clicked!');
     });
+    // this.searchBar.ionFocus('click', (e: any) => {
+    //   this.searchVisibility = true;
+    //   console.log('click serarch');
+    // });
     // console.log(this.backdrop);
     // this.backdrop.ionBackdropTap.subscribe((data) => {
     //     console.log('Data received', data);
     // });
-  } 
+  }
   searchAPI(string) {
     this.searchString = string;
   }
 
   showSearch() {
     this.showBackdrop = true;
-
     this.searchVisibility = true;
+    console.log('click show search')
   }
 
   hideSearch() {
@@ -60,6 +76,11 @@ export class SearchComponent implements OnInit {
     // this.backdrop.ionBackdropTap;
     this.showBackdrop = false;
     this.searchVisibility = false;
-    console.log('click')
+    console.log('click hide search')
+  }
+
+  on(output, event):void {
+    console.log(output);
+    // console.log(event);
   }
 }

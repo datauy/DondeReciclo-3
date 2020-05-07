@@ -292,13 +292,11 @@ p {
 #custom_backdrop{
   width: 100%;
   height: 100%;
-  max-width: 100%;
-  max-height: 100%;
   position:absolute;
   background: black;
   opacity: .5;
   top:0;
-  z-index: 10000;
+  z-index: 20000;
   &.show {
     opacity: .4;
     display: block;
@@ -311,6 +309,14 @@ p {
   }
 }
 app-search {
+  margin-top: 105px;
+  z-index: 22000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0 12px  0 12px;
   ion-content,
   ion-list {
     --background: none;
@@ -318,18 +324,22 @@ app-search {
   .item .item-content {
     background-color: transparent !important;
   }
-  #searchBar {
-    position: absolute;
-    top: 100px;
-    padding: 12px;
-    z-index: 10001;
-    input {
-      border-radius: 50px;
+  ion-searchbar{
+    .searchbar-input.sc-ion-searchbar-md {
+      // position: absolute;
+        z-index: 22000;
+        padding: 16px 36px 16px 16px;
+        border-radius: 36px;
     }
+    .searchbar-search-icon.sc-ion-searchbar-md{
+      top: 20px;
+      left: auto;
+      right: 24px;
+    }
+
   }
-  .searchContent {
-    z-index: 20000;
-    position: absolute;
+  .resultsContent {
+    // position: absolute;
     // display: block;
     // min-width: 100%;
     // min-height: 100%;
@@ -337,12 +347,12 @@ app-search {
     // ion-chip{
     //   opacity: 1;
     // }
-    &.showSearch {
+    &.showResults {
       opacity: 1;
       display: block;
       visibility: visible;
     }
-    &.hideSearch {
+    &.hideResults {
       opacity: 0;
       display: none;
       visibility: hidden;

@@ -17,6 +17,9 @@ import { LeafletModule } from "@asymmetrik/ngx-leaflet";
 import { MapaPage } from './mapa.page';
 
 import { SearchComponent } from 'src/app/components/search/search.component';
+import { SimpleServiceModule } from 'src/app/components/simple-service/simple-service.module';
+import { AutoCompleteModule } from 'ionic4-auto-complete';
+import { SearchService } from 'src/app/services/search.service';
 
 
 @NgModule({
@@ -25,22 +28,26 @@ import { SearchComponent } from 'src/app/components/search/search.component';
     FormsModule,
     IonicModule,
     HttpClientModule,
-    MapaPageRoutingModule, 
+    MapaPageRoutingModule,
     LeafletModule.forRoot(),
     RouterModule.forChild([
       {
         path: '',
         component: MapaPage
       }
-    ])
+    ]),
+    // SimpleServiceModule,
+    AutoCompleteModule,
   ],
-  // providers: [
-  //   // NeighbourService
-  // ],
-  declarations: [MapaPage, SearchComponent], 
-  
+  exports: [
+    SearchComponent
+  ],
+  declarations: [MapaPage, SearchComponent],
+
   // necesario para que funcionara
-  entryComponents: [SearchComponent]
-  
+  entryComponents: [SearchComponent],
+  // providers: [
+  //   SearchService
+  // ]
 })
 export class MapaPageModule {}

@@ -20,6 +20,10 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NovedadesPageModule } from './pages/novedades/novedades.module';
 import { HttpClientModule } from '@angular/common/http';
 
+import { AutoCompleteModule } from 'ionic4-auto-complete';
+import { SearchService } from './services/search.service';
+
+
 // import { Api } from './providers';
 
 // animations
@@ -30,11 +34,11 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent
   ],
   imports: [
-    BrowserModule, 
+    BrowserModule,
     IonicModule.forRoot({
       // navAnimation: SearchbarAnimation,
         animated: true
-    }),    
+    }),
     AppRoutingModule,
     ComponentsModule,
     NovedadesPageModule,
@@ -46,10 +50,11 @@ import { HttpClientModule } from '@angular/common/http';
     SplashScreen,
     NativeGeocoder,
     Geolocation,
+    // SearchService,
     // Api,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent],
-  schemas : [CUSTOM_ELEMENTS_SCHEMA]
+  // schemas : [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}

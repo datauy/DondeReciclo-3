@@ -9,7 +9,11 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
 <app-search></app-search>
+
+<div id="custom_backdrop" (click)="hideSearch()" [ngClass]="searchVisibility ? 'show' : 'hide'"></div>
+  
 <ion-content no-bounce>
   <ion-fab vertical="top" horizontal="end" slot="fixed">
     <ion-fab-button color="transparent">
