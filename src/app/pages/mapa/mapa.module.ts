@@ -17,7 +17,6 @@ import { LeafletModule } from "@asymmetrik/ngx-leaflet";
 import { MapaPage } from './mapa.page';
 
 import { SearchComponent } from 'src/app/components/search/search.component';
-import { SimpleServiceModule } from 'src/app/components/simple-service/simple-service.module';
 import { AutoCompleteModule } from 'ionic4-auto-complete';
 import { SearchService } from 'src/app/services/search.service';
 

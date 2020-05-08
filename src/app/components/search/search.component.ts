@@ -33,7 +33,6 @@ export class SearchComponent implements OnInit {
       this.options.debounce = 750;
       this.options.placeholder = 'Buscá objetos o materiales.';
       this.options.type = 'add-friend.svg';
-      this.options.clearInvalidInput = false;
 
     // createAnimation()
     // .addElement(document.querySelector('ion-searchbar'))

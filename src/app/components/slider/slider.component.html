@@ -1,20 +1,14 @@
 <ion-content no-bounce >
   <ion-slides #slides pager="true">
     <ion-slide *ngFor="let slide of homeSlides">
-      <div>
-      <!-- <img [src]="slide.image" class="slide-image" /> -->
-      <h2 class="slide-title" [innerHTML]="slide.title"></h2>
-        <p [innerHTML]="slide.description"></p>
-      </div>
-    </ion-slide>
-    <ion-slide>
-      <div>
-        <!-- <img src="/assets/img/ica-slidebox-img-4.png" class="slide-image" /> -->
-        <h2 class="slide-title">Fin</h2>
-        <ion-button icon-end large clear (click)="goApp()">
-          Comenzar
-          <ion-icon name="arrow-forward"></ion-icon>
-        </ion-button>
+      <div class="slide-container">
+        <div class="slide-top">
+          <img [src]="slide.image" class="slide-image" />
+        </div>
+        <div class="slide-bottom">
+          <h2 class="title" [innerHTML]="slide.title"></h2>
+          <div class="slide-description" [innerHTML]="slide.description"></div>
+        </div>
       </div>
     </ion-slide>
   </ion-slides>
@@ -25,22 +19,13 @@
       <ion-grid>
         <ion-row>
           <ion-col>
-            <div>
-              <ion-button slot="start" (click)="nextSlide()">
-                <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
-              </ion-button>            
-            </div>
-          </ion-col>
-          <ion-col>
-            <div class="ion-text-center">
-              <ion-button id="skipSlides" (click)="goApp();" color="primary">Saltar</ion-button>
+            <div class="ion-text-left">
+              <a id="skipSlides" (click)="goApp();" color="primary">Saltar</a>
             </div>
           </ion-col>
           <ion-col>
             <div class="ion-text-right">
-              <ion-button (click)="nextSlide()">
-                <ion-icon slot="icon-only" name="arrow-forward-outline"></ion-icon>
-              </ion-button>
+              <a class="next"(click)="nextSlide()">Siguiente</a>
             </div>
           </ion-col>
         </ion-row>

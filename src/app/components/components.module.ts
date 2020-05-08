@@ -4,7 +4,6 @@ import { IonicModule, IonBackdrop } from '@ionic/angular';
 
 import { AppRoutingModule } from '../app-routing.module';
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
-import { ModalComponent } from "./modal/modal.component";
 import { SearchService } from '../services/search.service';
 
 
