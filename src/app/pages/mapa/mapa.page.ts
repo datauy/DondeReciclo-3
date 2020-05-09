@@ -8,8 +8,9 @@ import { Router, NavigationExtras } from "@angular/router";
 import {NativeGeocoder,NativeGeocoderOptions} from "@ionic-native/native-geocoder/ngx";
 
 // API
-import { Subprogram } from "../../models/subprogram.model";
-import { SubprogramService } from "../../services/subprogram.service";
+import { Container } from "../../models/container.model";
+import { ContainerType } from "../../models/container_types.model";
+import { ApiService } from "../../services/api.service";
 
 
 import "leaflet";
@@ -40,11 +41,12 @@ export class MapaPage implements OnInit {
   map: L.Map;
   newMarker: any;
   userMarker: any;
-  container: any;
   newRute: any;
   address: string[];
-  subprogram = {} as Subprogram;
-  subprograms: Subprogram[];
+  container = {} as Container;
+  containers: Container[];
+  containerType = {} as ContainerType
+  containerTypes: ContainerType[];
   dataReturned:any;
   // panelData: any;
   infoPanel: any;
@@ -53,19 +55,24 @@ export class MapaPage implements OnInit {
     private geocoder: NativeGeocoder,
     private router: Router,
     public modalController: ModalController,
-    private subprogramsService: SubprogramService,
+    private api: ApiService,
     // private backbuttonSubscription: Subscription
     ) {
   }
 
   ionViewDidEnter() {
+    console.log("ENTER IN VIEW");
   }
 
   // SocialModal
 
   ngOnInit() {
+    this.api.loadInitialData().subscribe((containerTypes) => {
+      console.log(containerTypes);
+    });
+    //console.log(containerTypes);
     this.loadMap();
-    this.loadSubprograms();
+    this.loadNearbyContainers();
     // this.openSearchModal();
 
   }
@@ -146,16 +153,16 @@ export class MapaPage implements OnInit {
 
   // API
 
-  loadSubprograms() {
-    this.subprogramsService.get().subscribe((subprograms: Subprogram[]) => {
-      this.subprograms = subprograms;
+  loadNearbyContainers() {
+    this.api.getNearbyContainers().subscribe((containers) => {
+      this.containers = containers;
       let mapBounds = []
-      for (var i = 0; i < subprograms.length; i++) {
-        console.log(subprograms);
-        this.newMarker = new L.marker([subprograms[i].lat,subprograms[i].long])
-        .bindPopup(subprograms[i].subprogram)
+      for (var i = 0; i < containers.length; i++) {
+        console.log(containers[i]);
+        this.newMarker = new L.marker([containers[i].latitude,containers[i].longitude])
+        .bindPopup(containers[i].program)
         .addTo(this.map);
-        mapBounds.push([subprograms[i].lat,subprograms[i].long]);
+        mapBounds.push([containers[i].latitude,containers[i].longitude]);
       }
       this.map.fitBounds(mapBounds);
     });
@@ -165,8 +172,20 @@ export class MapaPage implements OnInit {
 
   loadMap() {
     this.map = new L.Map("map", {
-    }).setView([-34.881536, -56.147968], 13);
-
+    });//.setView([-34.881536, -56.147968], 13);
+    this.map.locate({
+      setView: true,
+      maxZoom: 16
+    }).on('locationfound', (e :any) => {
+      let markerGroup = L.featureGroup();
+      let marker: any = L.marker([e.latitude, e.longitude]).on('click', () => {
+        alert('Marker clicked');
+      })
+      markerGroup.addLayer(marker);
+      this.map.addLayer(markerGroup);
+      }).on('locationerror', (err) => {
+        alert(err.message);
+    })
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution:
         'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
