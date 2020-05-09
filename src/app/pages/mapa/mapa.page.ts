@@ -185,10 +185,10 @@ export class MapaPage implements OnInit {
     //     this.map.invalidateSize();
     // }, 1000);
 
-    this.addControlPlaceholders(this.map);
+    // this.addControlPlaceholders(this.map);
 
     // Change the position of the Zoom Control to a newly created placeholder.
-    this.map.zoomControl.setPosition('verticalcenterleft');
+    // this.map.zoomControl.setPosition('verticalcenterleft');
 
   }
 

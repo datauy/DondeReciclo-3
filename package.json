@@ -37,6 +37,7 @@
     "cordova-plugin-ionic-keyboard": "2.2.0",
     "core-js": "^2.5.4",
     "cupertino-pane": "^1.1.33",
+    "ionic-cli": "0.0.0",
     "ionic4-auto-complete": "^2.7.2",
     "leaflet": "^1.6.0",
     "leaflet-gesture-handling": "^1.1.8",

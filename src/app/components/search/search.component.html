@@ -1,3 +1,5 @@
+<div id="search-app-content">
+
 <!-- <ion-searchbar id="searchBar" type="text" debounce="500" animated placeholder="Busca materiales" color="dark"
   (click)="showSearch()" (ionChange)="searchAPI($event)" clearInput></ion-searchbar> -->
 
@@ -55,7 +57,6 @@
 </ion-auto-complete>
 
 
-<ion-content>
   <div class="resultsContent" [ngClass]="searchVisibility ? 'showResults' : 'hideResults'">
     <!-- <ion-list *ngIf="results" [ngClass]="searchVisibility ? 'showResults' : 'hideResults'">
       <ion-item *ngFor="let result of results" (click)="openMarker(result)">
@@ -91,4 +92,6 @@
       </ion-chip>
     </div>
   </div>
-</ion-content>
+
+  <div id="custom_backdrop" (click)="hideSearch()" [ngClass]="searchVisibility ? 'show' : 'hide'"></div>
+</div>
