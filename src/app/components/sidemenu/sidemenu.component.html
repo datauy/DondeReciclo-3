@@ -1,7 +1,7 @@
 <ion-split-pane contentId="menu-content">
   <ion-menu contentId="menu-content" menuId="main-menu" type="overlay"
   side="start" class="ion-no-shadow">
-      <ion-header>
+      <ion-header class="ion-no-border">
         <ion-toolbar>
           <ion-title>Menú</ion-title>
           <ion-menu-toggle slot="end" auto-hide="true">
@@ -14,11 +14,13 @@
       <ion-content class="menu-list">
         <ion-list>
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
-            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]" routerLinkActive="active-item">
+            <ion-item lines="none" [routerDirection]="'root'" [routerLink]="[p.url]" routerLinkActive="active-item">
               <ion-icon slot="start" [name]="p.icon"></ion-icon>
               <ion-label>
                 {{p.title}}
               </ion-label>
+              <ion-icon slot="end" [name]="p.icon"></ion-icon>
+
             </ion-item>
           </ion-menu-toggle>
         </ion-list>
