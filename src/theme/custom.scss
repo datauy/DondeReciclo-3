@@ -150,6 +150,17 @@ ion-title {
 }
 
 // menu
+
+// slider
+
+ion-slides .swiper-pagination-bullet {
+  width: 9px;
+  height: 9px;
+  opacity: 0.5;
+}
+
+
+// Leaflet
 .leaflet-verticalcenter {
   position: absolute;
   z-index: 1000;
