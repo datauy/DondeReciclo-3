@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   assets: "assets",
   url: 'http://localhost:3000',
-  backend: "http://dr3b.dev.data.org.uy/api/"
+  backend: "https://dr3b.dev.data.org.uy/api/",
+  ucenter: "[-32.657689, -55.873808]"
 };
 
 /*

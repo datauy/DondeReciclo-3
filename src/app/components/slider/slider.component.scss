@@ -29,12 +29,15 @@
           .title {
             font-size: 28px;
             color: var(--dark-sea-green);
+            margin: 10px auto 40px;
+            max-width: 76%;
           }
           .slide-description {
             font-size: 20px;
             line-height: 1.5;
             color: var(--greyish-brown);
-            margin: 0;
+            margin: 0 auto;
+            max-width: 76%;
           }
         }
       }

@@ -6,7 +6,7 @@ import { ModalController } from '@ionic/angular';
 import { Router, NavigationExtras } from "@angular/router";
 
 import {NativeGeocoder,NativeGeocoderOptions} from "@ionic-native/native-geocoder/ngx";
-
+import {map} from 'rxjs/operators';
 // API
 import { Container } from "../../models/container.model";
 import { ContainerType } from "../../models/container_types.model";
@@ -55,7 +55,7 @@ export class MapaPage implements OnInit {
     private geocoder: NativeGeocoder,
     private router: Router,
     public modalController: ModalController,
-    private api: ApiService,
+    private api: ApiService<any>,
     // private backbuttonSubscription: Subscription
     ) {
   }
@@ -67,12 +67,20 @@ export class MapaPage implements OnInit {
   // SocialModal
 
   ngOnInit() {
-    this.api.loadInitialData().subscribe((containerTypes) => {
-      console.log(containerTypes);
-    });
-    //console.log(containerTypes);
-    this.loadMap();
-    this.loadNearbyContainers();
+    this.api.loadInitialData().subscribe(
+      partials => console.log(partials),
+      err => console.log(err),
+      () => {
+        console.log("Materiales:");
+        console.log(this.api.materials);
+        console.log("Containers:");
+        console.log(this.api.container_types);
+        console.log("PREDEFINED:");
+        console.log(this.api.predefinedSearch);
+        this.loadMap();
+        this.loadNearbyContainers();
+      }
+    );
     // this.openSearchModal();
 
   }
