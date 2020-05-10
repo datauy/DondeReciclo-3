@@ -1,3 +1,45 @@
+ion-menu {
+  --background: none;
+  --minheight: 300px;
+  --max-height: 100%;
+  --width: 100%;
+}
+
+  ion-header {
+    // width: 80%;
+    // left: 10%;
+  }
+
+
+  ion-content{
+    --background: var(--dark-sea-green);
+    --offset-bottom: 200px;
+  }
+
+  ion-list {
+    --background: none;
+    background: var(--dark-sea-green);
+    // --width: 80%;
+    // left: 10%;
+    ion-item {
+      --background: none;
+      background: none;
+    }
+  }
+.menu-rounded-bottom{
+  position: relative;
+  background:var(--dark-sea-green);
+  border-bottom-left-radius: 44px;
+  border-bottom-right-radius: 44px;
+  height: 46px;
+}
+.menu-social-links{
+  height: 100px;
+  background: none;
+}
+
+
+
 .active-item {
   border-left: 8px solid var(--ion-color-primary);
 }

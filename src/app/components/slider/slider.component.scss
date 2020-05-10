@@ -1,9 +1,18 @@
 :host {
   --ion-toolbar-background: #fff;
   --border: none;
-  height: calc(100% - 3.5rem);
-  position: relative;
   z-index: 11;
+  // changed this
+  // height: calc(100% - 3.5rem);
+  // position: relative;
+
+  // for this to have map loaded right.
+  position: absolute;
+  width: 100%;
+  top: 0;
+  bottom: 3.5rem;
+
+
   ion-slides {
     height: 100%;
     font-family: SourceSansPro;
