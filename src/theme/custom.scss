@@ -27,7 +27,6 @@
   --dark-seafoam: #1eac86;
   --pale-olive-green: #9cd060;
   --warm-grey: #9b9b9b;
-
   --ion-text-color: var(--greyish-brown);
   --ion-tab-bar-background: var(--dark-sea-green);
   --ion-tab-bar-background-focused: none;
@@ -45,18 +44,15 @@
   // --ion-item-border-color	Border color of the Item
   // --ion-item-color	Color of the components in the Item
   // --ion-placeholder-color	Color of the placeholder in Inputs
-
   // components
-
-  ion-header {
-  }
+  ion-header {}
 
   ion-toolbar {
     height: 138px;
   }
 
-  ion-button {
-  }
+  ion-button {}
+
   ion-button {
     --background: white;
     --background-activated: var(--pale-olive-green);
@@ -83,99 +79,77 @@
     // --transition	Transition of the button
   }
 }
-
 // Fonts
-
 @font-face {
   font-family: "PTSerif";
-  src: local(PTSerif-Regular),
-    url(/path/to/PTSerif-Regular.woff2) format("woff2"),
-    url(/path/to/PTSerif-Regular.woff) format("woff"),
-    url(/path/to/PTSerif-Regular.ttf) format("truetype");
+  src: local(PTSerif-Regular), url("/path/to/PTSerif-Regular.woff2") format("woff2"), url("/path/to/PTSerif-Regular.woff") format("woff"), url("/path/to/PTSerif-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
 }
 @font-face {
   font-family: "Roboto";
-  src: local(Roboto-Medium), url(/path/to/Roboto-Medium.woff2) format("woff2"),
-    url(/path/to/Roboto-Medium.woff) format("woff"),
-    url(/path/to/Roboto-Medium.ttf) format("truetype");
+  src: local(Roboto-Medium), url("/path/to/Roboto-Medium.woff2") format("woff2"), url("/path/to/Roboto-Medium.woff") format("woff"), url("/path/to/Roboto-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
   font-stretch: normal;
 }
+
 * {
   font-family: "PTSerif", sans-serif;
 }
+
+// Estilos html elements
+
+.h2 {
+  height: 40px;
+  font-family: PTSerif;
+  font-size: 32px;
+  color: var(--greyish-brown);
+}
+
+.subtitulos {
+  font-family: PTSerif;
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--greyish-brown);
+}
+
+p {
+  font-family: PTSerif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--greyish-brown);
+
+  .enphasize {
+    line-height: 1.44;
+    color: --warm-grey;
+  }
+}
+
+// Componentes Ionic
 
 ion-title {
   width: 100%;
   font-family: PTSerif;
   text-align: center;
+
   h1 {
     font-size: 24px;
     color: var(--dark-sea-green);
+
     .negative {
       color: #ffffff;
     }
   }
+
   h2 {
     font-size: 32px;
     color: var(--greyish-brown);
   }
 }
 
-.h2 {
-  width: 312px;
-  height: 40px;
-  font-family: PTSerif;
-  font-size: 32px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: var(--greyish-brown);
-}
-.subtitulos {
-  width: 132px;
-  height: 18px;
-  font-family: PTSerif;
-  font-size: 14px;
-  font-weight: bold;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: var(--greyish-brown);
-}
-p {
-  width: 332px;
-  height: 196px;
-  font-family: PTSerif;
-  font-size: 16px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.5;
-  letter-spacing: normal;
-  color: var(--greyish-brown);
-}
-.p.enphasize {
-  width: 332px;
-  height: 92px;
-  font-family: PTSerif;
-  font-size: 16px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: 1.44;
-  letter-spacing: normal;
-  text-align: center;
-  color: #9b9b9b;
-}
-
+// menu
 .leaflet-verticalcenter {
   position: absolute;
   z-index: 1000;
@@ -205,7 +179,6 @@ p {
 .leaflet-verticalcenter .leaflet-control {
   margin-bottom: 10px;
 }
-
 
 .modal-fullscreen {
   .modal-wrapper {
@@ -230,6 +203,7 @@ p {
   z-index: 10000;
   box-sizing: content-box;
   text-align: center;
+
   img {
     max-height: 100vh;
     margin-top: auto;
@@ -252,7 +226,6 @@ p {
 //   ion-backdrop {
 //     background: white;
 //   }
-
 //   .loading-wrapper {
 //     background: red;
 //     background-size: 100% 100%; /* to change dimension of background */
@@ -267,15 +240,16 @@ p {
 .custom-loading {
   --background: green;
   --backdrop-opacity: 0;
+
   ion-backdrop {
     background-color: green;
     opacity: 0 !important;
   }
+
   .loading-wrapper {
     -webkit-animation: ld-vortex-out 2s ease-out infinite;
     animation: ld-vortex-out 2s ease-out infinite;
     animation-timing-function: cubic-bezier(0.05, 0, 3, 0.05);
-
     width: 100%;
     height: 100%;
     max-width: 100%;
@@ -291,25 +265,28 @@ p {
   }
 }
 
-#custom_backdrop{
+#custom_backdrop {
   width: 100%;
   top: 32px;
-  position:absolute;
+  position: absolute;
   background: black;
-  opacity: .75;
-  bottom:0;
+  opacity: 0.75;
+  bottom: 0;
   z-index: 20000;
+
   &.show {
-    opacity: .75;
+    opacity: 0.75;
     display: block;
     visibility: visible;
   }
+
   &.hide {
     opacity: 0;
     display: none;
     visibility: hidden;
   }
 }
+
 #search-app-content {
   margin-top: 105px;
   z-index: 22000;
@@ -323,33 +300,38 @@ p {
   ion-list {
     --background: none;
   }
+
   .item .item-content {
     background-color: transparent !important;
   }
-  ion-auto-complete{
-      padding: 0 12px 0 12px;
-      overflow: visible !important;
-      max-width: 100% !important;
-      position: relative;
-      z-index: 30000;
-      ul{
-        z-index: 30000 !important;
-      }
+
+  ion-auto-complete {
+    padding: 0 12px;
+    overflow: visible !important;
+    max-width: 100% !important;
+    position: relative;
+    z-index: 30000;
+
+    ul {
+      z-index: 30000 !important;
+    }
   }
-  ion-searchbar{
+
+  ion-searchbar {
     .searchbar-input.sc-ion-searchbar-md {
       // position: absolute;
-        z-index: 22000;
-        padding: 16px 36px 16px 16px;
-        border-radius: 36px;
+      z-index: 22000;
+      padding: 16px 36px 16px 16px;
+      border-radius: 36px;
     }
-    .searchbar-search-icon.sc-ion-searchbar-md{
+
+    .searchbar-search-icon.sc-ion-searchbar-md {
       top: 20px;
       left: auto;
       right: 24px;
     }
-
   }
+
   .resultsContent {
     // position: absolute;
     // display: block;
@@ -361,11 +343,13 @@ p {
     // }
     z-index: 30000;
     position: relative;
+
     &.showResults {
       opacity: 1;
       display: block;
       visibility: visible;
     }
+
     &.hideResults {
       opacity: 0;
       display: none;
