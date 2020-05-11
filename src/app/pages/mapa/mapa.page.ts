@@ -67,22 +67,9 @@ export class MapaPage implements OnInit {
   // SocialModal
 
   ngOnInit() {
-    this.api.loadInitialData().subscribe(
-      partials => console.log(partials),
-      err => console.log(err),
-      () => {
-        console.log("Materiales:");
-        console.log(this.api.materials);
-        console.log("Containers:");
-        console.log(this.api.container_types);
-        console.log("PREDEFINED:");
-        console.log(this.api.predefinedSearch);
-        this.loadMap();
-        this.loadNearbyContainers();
-      }
-    );
+    this.loadMap();
+    this.loadNearbyContainers();
     // this.openSearchModal();
-
   }
 
   // async loadingModal() {

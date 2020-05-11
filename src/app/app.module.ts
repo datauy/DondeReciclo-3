@@ -1,5 +1,6 @@
 import { BuscarPageModule } from './pages/buscar/buscar.module';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+//import { NgModule, APP_INITIALIZER} from '@angular/core';
+import { NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -20,15 +21,15 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NovedadesPageModule } from './pages/novedades/novedades.module';
 import { HttpClientModule } from '@angular/common/http';
 
-import { AutoCompleteModule } from 'ionic4-auto-complete';
-import { SearchService } from './services/search.service';
+//import { ApiService } from './services/api.service';
 
 
-// import { Api } from './providers';
-
-// animations
-// import { SearchbarAnimation } from './pages/searchbar-animation';
-
+/*
+export function initApp(backConfig: ApiService<any>) {
+  console.log("Loading initial data");
+   return () => backConfig.loadInitialData();
+}
+*/
 @NgModule({
   declarations: [
     AppComponent
@@ -52,7 +53,8 @@ import { SearchService } from './services/search.service';
     Geolocation,
     // SearchService,
     // Api,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+//    { provide: APP_INITIALIZER, useFactory: initApp, deps: [ApiService], multi: true }
   ],
   bootstrap: [AppComponent],
   // schemas : [CUSTOM_ELEMENTS_SCHEMA]

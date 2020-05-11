@@ -3,6 +3,9 @@ import { IonSearchbar, IonButton, IonBackdrop} from '@ionic/angular';
 import { createAnimation } from '@ionic/core';
 import { AutoCompleteOptions } from 'ionic4-auto-complete';
 import { SearchService } from 'src/app/services/search.service';
+import { ApiService } from "src/app/services/api.service";
+
+import { SearchParams, Material } from "src/app/models/basic_models.model";
 
 @Component({
   selector: 'app-search',
@@ -13,19 +16,22 @@ export class SearchComponent implements OnInit {
   @ViewChild(IonSearchbar, { static: false }) private searchBar: IonSearchbar;
 
   backdrop = document.querySelector('custom-backdrop');
-  nextSlideBtn = document.querySelector('#searchBar');
-  showBackdrop = true;
+  searchBarElement = document.querySelector('#searchBar');
+
+  showBackdrop = false;
+  searchVisibility = false;
 
   searchString: string;
-  searchVisibility = true;
 
+  predefinedOptions: any;
   // autocomplete component
   public options:AutoCompleteOptions;
 
   public selected:string = '';
 
   constructor(
-    public provider:SearchService
+    public provider:SearchService,
+    public api: ApiService<any>
     ) {
       this.options = new AutoCompleteOptions();
 
@@ -45,10 +51,14 @@ export class SearchComponent implements OnInit {
     // ]);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.api.loadInitialData().subscribe(
+      () =>  {this.predefinedOptions = this.formatSearchOptions(this.api.predefinedSearch); }
+    );
+  }
 
   ionViewDidLoad() {
-    this.nextSlideBtn.addEventListener('click', (e) => {
+    this.searchBarElement.addEventListener('click', (e) => {
       console.log('Button clicked!');
     });
     // this.searchBar.ionFocus('click', (e: any) => {
@@ -59,6 +69,18 @@ export class SearchComponent implements OnInit {
     // this.backdrop.ionBackdropTap.subscribe((data) => {
     //     console.log('Data received', data);
     // });
+  }
+  formatSearchOptions(options: SearchParams[]) :any{
+    console.log("formatting Search");
+    this.predefinedOptions = [];
+    options.forEach( (option) => {
+      this.predefinedOptions.push({
+        icon: this.api.materials[option.material_id].icon,
+        color: this.api.materials[option.material_id].color,
+        name: option.name,
+      });
+    });
+    console.log(this.predefinedOptions);
   }
   searchAPI(string) {
     this.searchString = string;
@@ -79,6 +101,7 @@ export class SearchComponent implements OnInit {
   }
 
   on(output, event):void {
+    console.log("Search::OUTPUT");
     console.log(output);
     // console.log(event);
   }
