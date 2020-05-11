@@ -19,6 +19,8 @@ import { MapaPage } from './mapa.page';
 import { SearchComponent } from 'src/app/components/search/search.component';
 import { AutoCompleteModule } from 'ionic4-auto-complete';
 import { SearchService } from 'src/app/services/search.service';
+import { ComponentsModule } from 'src/app/components/components.module';
+import { HeaderComponent } from 'src/app/components/header/header.component';
 
 
 @NgModule({
@@ -29,19 +31,24 @@ import { SearchService } from 'src/app/services/search.service';
     HttpClientModule,
     MapaPageRoutingModule,
     LeafletModule.forRoot(),
-    RouterModule.forChild([
-      {
-        path: '',
-        component: MapaPage
-      }
-    ]),
+
+    // commented out by Bruno, this is redundant, right?
+    // RouterModule.forChild([
+    //   {
+    //     path: '',
+    //     component: MapaPage
+    //   }
+    // ]),
+    // ComponentsModule,
     // SimpleServiceModule,
     AutoCompleteModule,
   ],
   exports: [
-    SearchComponent
+    SearchComponent,
+    HeaderComponent
   ],
-  declarations: [MapaPage, SearchComponent],
+  declarations: [MapaPage, SearchComponent,
+  HeaderComponent],
 
   // necesario para que funcionara
   entryComponents: [SearchComponent],

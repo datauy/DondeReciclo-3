@@ -11,6 +11,7 @@ import {map} from 'rxjs/operators';
 import { Container } from "../../models/container.model";
 import { ContainerType } from "../../models/container_types.model";
 import { ApiService } from "../../services/api.service";
+import { CupertinoPane } from 'cupertino-pane';
 
 
 import "leaflet";
@@ -48,7 +49,7 @@ export class MapaPage implements OnInit {
   containerType = {} as ContainerType
   containerTypes: ContainerType[];
   dataReturned:any;
-  // panelData: any;
+  panelData: any;
   infoPanel: any;
 
   constructor(
@@ -72,6 +73,14 @@ export class MapaPage implements OnInit {
     // this.openSearchModal();
   }
 
+
+  showPane() {
+    // this.panelData = containerID;
+    this.infoPanel.present({
+      animate: true,
+    });
+
+  }
   // async loadingModal() {
   //   const modal = await this.modalController.create({
   //     component: ModalCompartirPage,
@@ -192,8 +201,8 @@ export class MapaPage implements OnInit {
         this.map.removeLayer(this.userMarker); // remove
     }
     this.userMarker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(this.map); // add the marker onclick
-    // this.panelData = e.latlng;
-    // this.showPane(); // show the bottom info panel
+    this.panelData = e.latlng;
+    this.showPane(); // show the bottom info panel
     });
     // setTimeout(() => {
     //     this.map.invalidateSize();
