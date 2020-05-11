@@ -88,16 +88,20 @@
   font-style: normal;
   font-stretch: normal;
 }
-* {
-  font-family: "PTSerif", sans-serif;
-}
 @font-face {
   font-family: "Roboto";
   src: local(Roboto-Medium),
     url('src/assets/fonts/Roboto-Medium.ttf') format("truetype");
   font-weight: 500;
-  font-style: normal;
-  font-stretch: normal;
+}
+@font-face {
+  font-family: "SourceSansPro";
+  src: local(SourceSansPro-Regular), url("/path/to/SourceSansPro-Regular.woff2") format("woff2"), url("/path/to/SourceSansPro-Regular.woff") format("woff"), url("/path/to/SourceSansPro-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "SourceSansPro";
+  src: local(SourceSansPro-Semibold), url("/path/to/SourceSansPro-Semibold.woff2") format("woff2"), url("/path/to/SourceSansPro-Semibold.woff") format("woff"), url("/path/to/SourceSansPro-Semibold.ttf") format("truetype");
+  font-weight: 600;
 }
 @font-face {
   font-family: "SourceSansPro";
@@ -108,25 +112,24 @@
   font-stretch: normal;
 
 }
-
 // Estilos html elements
+*{
+    font-family: "SourceSansPro";
+}
 
 .h2 {
   height: 40px;
-  font-family: PTSerif;
   font-size: 32px;
   color: var(--greyish-brown);
 }
 
 .subtitulos {
-  font-family: PTSerif;
   font-size: 14px;
   font-weight: bold;
   color: var(--greyish-brown);
 }
 
 p {
-  font-family: PTSerif;
   font-size: 16px;
   line-height: 1.5;
   color: var(--greyish-brown);
@@ -136,12 +139,9 @@ p {
     color: --warm-grey;
   }
 }
-
 // Componentes Ionic
-
 ion-title {
   width: 100%;
-  font-family: PTSerif;
   text-align: center;
 
   h1 {
@@ -158,8 +158,14 @@ ion-title {
     color: var(--greyish-brown);
   }
 }
-
 // menu
+// slider
+ion-slides .swiper-pagination-bullet {
+  width: 9px;
+  height: 9px;
+  opacity: 0.5;
+}
+// Leaflet
 .leaflet-verticalcenter {
   position: absolute;
   z-index: 1000;

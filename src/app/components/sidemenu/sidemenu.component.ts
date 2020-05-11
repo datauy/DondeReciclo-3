@@ -9,19 +9,22 @@ export class SidemenuComponent implements OnInit {
 
   public appPages = [
     {
-      title: 'Inicio',
-      url: '/intro',
-      icon: 'home-outline'
-    },
-    {
       title: 'Novedades',
+      desc: 'Ulitmas noticias relacionadas',
       url: '/novedades',
       icon: 'newspaper-outline'
     },
     {
-      title: 'Marcas',
-      url: '/marcas',
-      icon: 'briefcase-outline'
+      title: 'Programas',
+      desc: 'Y ciclo de vida de los residuos',
+      url: '/programas',
+      icon: 'leaf-outline'
+    },
+    {
+      title: 'Empresas',
+      desc: 'Marcas que hacen posible esta app',
+      url: '/empresas',
+      icon: 'handshake-outline'
     }
   ];
 

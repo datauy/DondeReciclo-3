@@ -1,7 +1,7 @@
 
 <app-slider *ngIf="session.showSlider == 'visible'"></app-slider>
 <ion-content>
-  <ion-tabs *ngIf="!keyboard.isVisible" selectedIndex="2">
+  <ion-tabs *ngIf="!showKeyboard" selectedIndex="2">
     <ion-tab-bar #tab slot="bottom">
       <ion-tab-button tab="sobre-el-proyecto" tabsHideOnSubPages="true">
         <ion-icon name="information-outline"></ion-icon>
