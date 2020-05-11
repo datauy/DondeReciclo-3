@@ -88,9 +88,6 @@
   font-style: normal;
   font-stretch: normal;
 }
-* {
-  font-family: "PTSerif", sans-serif;
-}
 @font-face {
   font-family: "Roboto";
   src: local(Roboto-Medium),
@@ -116,22 +113,23 @@
 
 }
 // Estilos html elements
+*{
+    font-family: "Roboto";
+}
+
 .h2 {
   height: 40px;
-  font-family: PTSerif;
   font-size: 32px;
   color: var(--greyish-brown);
 }
 
 .subtitulos {
-  font-family: PTSerif;
   font-size: 14px;
   font-weight: bold;
   color: var(--greyish-brown);
 }
 
 p {
-  font-family: PTSerif;
   font-size: 16px;
   line-height: 1.5;
   color: var(--greyish-brown);
@@ -144,7 +142,6 @@ p {
 // Componentes Ionic
 ion-title {
   width: 100%;
-  font-family: PTSerif;
   text-align: center;
 
   h1 {

@@ -11,6 +11,13 @@ ion-menu {
   --width: 100%;
 }
 
+ion-split-pane{
+    --border: none !important;
+    ion-menu{
+      --background:rgba(0, 0, 0, 0.8)
+    }
+}
+
 ion-header {
   // width: 80%;
   // left: 10%;
@@ -26,7 +33,7 @@ ion-list {
   background: var(--dark-sea-green);
   // --width: 80%;
   // left: 10%;
-  font-size: 20px;
+  --font-size: 20px;
 
   ion-item {
     --background: none;
@@ -35,6 +42,19 @@ ion-list {
 
     &.active-item {
       border-left: none;
+    }
+    ion-label{
+      font-size: 20px;
+      p{
+      size: 14px;
+      color: white;
+      }
+    }
+    ion-avatar{
+      color: white;
+    }
+    ion-icon{
+      color: white;
     }
   }
 }
@@ -46,6 +66,6 @@ ion-list {
   height: 46px;
 }
 .menu-social-links{
-  height: 100px;
+  height: 150px;
   background: none;
 }
