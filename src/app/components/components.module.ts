@@ -5,26 +5,27 @@ import { IonicModule, IonBackdrop } from '@ionic/angular';
 import { AppRoutingModule } from '../app-routing.module';
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { SearchService } from '../services/search.service';
+import { HeaderComponent } from './header/header.component';
 
 
 @NgModule({
-  declarations: [
-    SidemenuComponent,
-    // SimpleServiceComponent
-  ],
   imports: [
     CommonModule,
     IonicModule,
-    AppRoutingModule,
+    AppRoutingModule
     // SimpleServiceModule
   ],
+  declarations: [
+    SidemenuComponent
+    // SimpleServiceComponent
+  ],
   exports: [
-    SidemenuComponent,
+    SidemenuComponent
     // SimpleServiceComponent
   ],
-  entryComponents: [
-    // SimpleServiceComponent
-  ],
+  // entryComponents: [
+  //   // SimpleServiceComponent
+  // ],
   // schemas : [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     SearchService
