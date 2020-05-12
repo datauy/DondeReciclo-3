@@ -38,6 +38,7 @@ L.Marker.prototype.options.icon = iconDefault;
   styleUrls: ['./mapa.page.scss'],
 })
 export class MapaPage implements OnInit {
+  @ViewChild("cupertino-pane", { static: false }) private infoPanel: CupertinoPane;
 
   map: L.Map;
   newMarker: any;
@@ -50,7 +51,7 @@ export class MapaPage implements OnInit {
   containerTypes: ContainerType[];
   dataReturned:any;
   panelData: any;
-  infoPanel: any;
+  infoPanel: CupertinoPane;
 
   constructor(
     private geocoder: NativeGeocoder,
@@ -71,9 +72,41 @@ export class MapaPage implements OnInit {
     this.loadMap();
     this.loadNearbyContainers();
     // this.openSearchModal();
+    this.loadCupertinoPane();
+    console.log(this.panelData);
+    console.log(infoPanel)
+
   }
 
+  loadCupertinoPane() {
 
+    this.infoPanel = new CupertinoPane(
+      '.cupertino-pane', // Pane container selector
+      {
+        parentElement: 'body', // Parent container
+
+        // backdrop: true,
+        bottomClose: true,
+        buttonClose: false,
+        topperOverflow: true,
+        showDraggable: false,
+        simulateTouch: true,
+        breaks: {
+          middle: {
+            enabled: true,
+            offset: 300
+          },
+          bottom: {
+            enabled: true,
+            offset: 60
+          }
+        },
+        onDrag: () => console.log('Drag event'),
+        // onDidPresent: () => ;
+        // onBackdropTap: () => this.infoPanel.hide(),
+      }
+    );
+  }
   showPane() {
     // this.panelData = containerID;
     this.infoPanel.present({
