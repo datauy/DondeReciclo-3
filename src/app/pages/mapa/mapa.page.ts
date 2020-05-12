@@ -1,5 +1,5 @@
 import { SearchComponent } from 'src/app/components/search/search.component';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 import { ModalController } from '@ionic/angular';
 
@@ -38,7 +38,10 @@ L.Marker.prototype.options.icon = iconDefault;
   styleUrls: ['./mapa.page.scss'],
 })
 export class MapaPage implements OnInit {
-  @ViewChild("cupertino-pane", { static: false }) private infoPanel: CupertinoPane;
+
+  @ViewChild("infoPane", {
+    read: ElementRef
+  }) private infoPane: ElementRef;
 
   map: L.Map;
   newMarker: any;
@@ -51,7 +54,6 @@ export class MapaPage implements OnInit {
   containerTypes: ContainerType[];
   dataReturned:any;
   panelData: any;
-  infoPanel: CupertinoPane;
 
   constructor(
     private geocoder: NativeGeocoder,
@@ -72,15 +74,13 @@ export class MapaPage implements OnInit {
     this.loadMap();
     this.loadNearbyContainers();
     // this.openSearchModal();
-    this.loadCupertinoPane();
-    console.log(this.panelData);
-    console.log(infoPanel)
+    this.loadInfoPane();
 
   }
 
-  loadCupertinoPane() {
+  loadInfoPane() {
 
-    this.infoPanel = new CupertinoPane(
+    this.infoPane = new CupertinoPane(
       '.cupertino-pane', // Pane container selector
       {
         parentElement: 'body', // Parent container
@@ -109,7 +109,7 @@ export class MapaPage implements OnInit {
   }
   showPane() {
     // this.panelData = containerID;
-    this.infoPanel.present({
+    this.infoPane.present({
       animate: true,
     });
 
