@@ -18,7 +18,6 @@ import { MapaPage } from './mapa.page';
 
 import { SearchComponent } from 'src/app/components/search/search.component';
 import { AutoCompleteModule } from 'ionic4-auto-complete';
-import { SearchService } from 'src/app/services/search.service';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 
@@ -52,8 +51,6 @@ import { HeaderComponent } from 'src/app/components/header/header.component';
 
   // necesario para que funcionara
   entryComponents: [SearchComponent],
-  // providers: [
-  //   SearchService
-  // ]
+
 })
 export class MapaPageModule {}

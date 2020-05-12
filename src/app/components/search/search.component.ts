@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, Injectable } from '@angular/core';
 import { IonSearchbar, IonButton, IonBackdrop} from '@ionic/angular';
 import { createAnimation } from '@ionic/core';
 import { AutoCompleteOptions } from 'ionic4-auto-complete';
-import { SearchService } from 'src/app/services/search.service';
 import { ApiService } from "src/app/services/api.service";
 
 import { SearchParams, Material } from "src/app/models/basic_models.model";
@@ -30,7 +29,6 @@ export class SearchComponent implements OnInit {
   public selected:string = '';
 
   constructor(
-    public provider:SearchService,
     public api: ApiService<any>
     ) {
       this.options = new AutoCompleteOptions();
@@ -53,7 +51,7 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {
     this.api.loadInitialData().subscribe(
-      () =>  { this.formatSearchOptions(this.api.predefinedSearch); }
+      () =>  { this.predefinedOptions = this.api.predefinedSearch; }
     );
   }
 
@@ -69,22 +67,6 @@ export class SearchComponent implements OnInit {
     // this.backdrop.ionBackdropTap.subscribe((data) => {
     //     console.log('Data received', data);
     // });
-  }
-  formatSearchOptions(options: SearchParams[]) :void{
-    console.log("formatting Search");
-    this.predefinedOptions = [];
-    options.forEach( (option) => {
-      this.predefinedOptions.push({
-        icon: this.api.materials[option.material_id].icon,
-        color: this.api.materials[option.material_id].color,
-        name: option.name,
-      });
-    });
-    console.log(this.predefinedOptions);
-  }
-
-  searchAPI(string) {
-    this.searchString = string;
   }
 
   showSearch() {

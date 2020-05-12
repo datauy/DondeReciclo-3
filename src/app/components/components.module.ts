@@ -4,7 +4,6 @@ import { IonicModule, IonBackdrop } from '@ionic/angular';
 
 import { AppRoutingModule } from '../app-routing.module';
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
-import { SearchService } from '../services/search.service';
 import { HeaderComponent } from './header/header.component';
 
 
@@ -27,9 +26,7 @@ import { HeaderComponent } from './header/header.component';
   //   // SimpleServiceComponent
   // ],
   // schemas : [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [
-    SearchService
-  ]
+  providers: []
 
 })
 export class ComponentsModule { }

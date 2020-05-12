@@ -44,7 +44,7 @@ export class ApiService<T> {
   loadPredefinedSearchs(): Observable<SearchParams[]> {
     return this.request.get(environment.backend + "search_predefined").pipe(
       map((result: SearchParams[]) => {
-        return this.predefinedSearch = result;
+        return this.predefinedSearch = this.formatSearchOptions(result);
       })
     );
   }
@@ -54,8 +54,6 @@ export class ApiService<T> {
     }
     return  this.request.get(environment.backend + "containers_nearby?lat="+location[0]+"&lon="+location[1]).pipe(map(
       (result: Container[]) => {
-        console.log('Containers Nearby');
-        console.log(result)
         return result
       }
     ));
@@ -64,10 +62,22 @@ export class ApiService<T> {
     if (str.length < 2) { return false; }
     return  this.request.get(environment.backend + "search?q="+str).pipe(map(
       (result: any[]) => {
-        console.log('Search');
-        console.log(result)
-        return result
+        return this.formatSearchOptions(result);
       }
     ));
+  }
+  formatSearchOptions(options: SearchParams[]) :any[]{
+    let res = [];
+    options.forEach( (option) => {
+      if (!option.material_id){
+        option.material_id = 5;
+      }
+      res.push({
+        icon: this.materials[option.material_id].icon,
+        color: this.materials[option.material_id].color,
+        name: option.name,
+      });
+    });
+    return res;
   }
 }
