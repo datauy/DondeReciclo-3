@@ -1,21 +1,31 @@
 
 <app-slider *ngIf="session.showSlider == 'visible'"></app-slider>
 <ion-content>
-  <ion-tabs *ngIf="!showKeyboard" selectedIndex="2">
+  <ion-tabs *ngIf="!showKeyboard" selectedIndex="3">
     <ion-tab-bar #tab slot="bottom">
       <ion-tab-button tab="sobre-el-proyecto" tabsHideOnSubPages="true">
-        <ion-icon name="information-outline"></ion-icon>
-        <ion-label>Sobre el proyecto</ion-label>
+        <ion-icon name="nav-icon-consejos-sobre"></ion-icon>
+        <!-- <ion-label>Sobre el proyecto</ion-label> -->
+      </ion-tab-button>
+
+      <ion-tab-button tab="consejos-ideas" tabsHideOnSubPages="true">
+        <ion-icon name="nav-icon-consejos-color"></ion-icon>
+        <!-- <ion-label>Sobre el proyecto</ion-label> -->
       </ion-tab-button>
 
       <ion-tab-button tab="mapa" tabsHideOnSubPages="true">
-        <ion-icon name="map"></ion-icon>
-        <ion-label>Mapa</ion-label>
+        <ion-icon name="nav-icon-mapa-color"></ion-icon>
+        <!-- <ion-label>Mapa</ion-label> -->
       </ion-tab-button>
 
       <ion-tab-button tab="contacto" tabsHideOnSubPages="true">
-        <ion-icon name="mail-outline"></ion-icon>
-        <ion-label>Contacto</ion-label>
+        <ion-icon name="nav-icon-fichas-color"></ion-icon>
+        <!-- <ion-label>Contacto</ion-label> -->
+      </ion-tab-button>
+
+      <ion-tab-button tab="contacto" tabsHideOnSubPages="true">
+        <ion-icon name="nav-icon-fichas-color"></ion-icon>
+        <!-- <ion-label>Contacto</ion-label> -->
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>

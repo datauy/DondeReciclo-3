@@ -44,6 +44,11 @@
                 "glob": "**/*",
                 "input": "./node_modules/ionic4-auto-complete/assets/",
                 "output": "./assets/"
+              },
+              {
+                "glob": "**/*.svg",
+                "input": "src/assets/custom-icons",
+                "output": "./svg"
               }
             ],
             "styles": [
