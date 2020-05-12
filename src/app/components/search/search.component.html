@@ -9,30 +9,10 @@
 
 <ng-template #suggestions let-attrs="attrs">
   <div>
-    <ion-list-header>Busquedas frecuentes</ion-list-header>
-    <ion-chip solid color="brown">
-      <ion-icon name="cube"></ion-icon>
-      <ion-label>Papel y cartón</ion-label>
-    </ion-chip>
-    <ion-chip solid color="violet">
-      <ion-icon name="wine"></ion-icon>
-      <ion-label>Metales</ion-label>
-    </ion-chip>
-    <ion-chip solid color="danger">
-      <ion-icon name="skull"></ion-icon>
-      <ion-label>Residuos peligrosos</ion-label>
-    </ion-chip>
-    <ion-chip solid color="secondary">
-      <ion-icon name="wine"></ion-icon>
-      <ion-label>Vidrio</ion-label>
-    </ion-chip>
-    <ion-chip solid color="primary">
-      <ion-icon name="pizza"></ion-icon>
-      <ion-label>Organico/humedo</ion-label>
-    </ion-chip>
-    <ion-chip solid color="mostard">
-      <ion-icon name="copy"></ion-icon>
-      <ion-label>Polilaminados</ion-label>
+    <ion-list-header>Categorias de búsqueda NIDEA</ion-list-header>
+    <ion-chip *ngFor="let predefined of predefinedOptions" [color]="predefined.color">
+      <ion-icon><img [src]="predefined.icon"></ion-icon>
+      <ion-label [innerHTML]="predefined.name"></ion-label>
     </ion-chip>
   </div>
 </ng-template>
@@ -43,7 +23,7 @@
   (click)="showSearch()"
   [(model)]="selected"
   [multi]="false"
-  [dataProvider]="provider"
+  [dataProvider]="api"
   [disabled]="false"
   [maxResults]="6"
   [removeButtonColor]="'dark'"
@@ -65,30 +45,10 @@
     </ion-list> -->
 
     <div>
-      <ion-list-header>Busquedas frecuentes</ion-list-header>
-      <ion-chip solid color="brown">
-        <ion-icon name="cube"></ion-icon>
-        <ion-label>Papel y cartón</ion-label>
-      </ion-chip>
-      <ion-chip solid color="violet">
-        <ion-icon name="wine"></ion-icon>
-        <ion-label>Metales</ion-label>
-      </ion-chip>
-      <ion-chip solid color="danger">
-        <ion-icon name="skull"></ion-icon>
-        <ion-label>Residuos peligrosos</ion-label>
-      </ion-chip>
-      <ion-chip solid color="secondary">
-        <ion-icon name="wine"></ion-icon>
-        <ion-label>Vidrio</ion-label>
-      </ion-chip>
-      <ion-chip solid color="primary">
-        <ion-icon name="pizza"></ion-icon>
-        <ion-label>Organico/humedo</ion-label>
-      </ion-chip>
-      <ion-chip solid color="mostard">
-        <ion-icon name="copy"></ion-icon>
-        <ion-label>Polilaminados</ion-label>
+      <ion-list-header>Categorias de búsqueda</ion-list-header>
+      <ion-chip *ngFor="let predefined of predefinedOptions" [ngStyle]="{'background-color': predefined.color, 'border-radius': '6px'}">
+        <img [src]="predefined.icon"/>
+        <ion-label [innerHTML]="predefined.name"></ion-label>
       </ion-chip>
     </div>
   </div>

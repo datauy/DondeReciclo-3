@@ -23,7 +23,7 @@ export class SearchComponent implements OnInit {
 
   searchString: string;
 
-  predefinedOptions: any;
+  predefinedOptions: any[];
   // autocomplete component
   public options:AutoCompleteOptions;
 
@@ -53,7 +53,7 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {
     this.api.loadInitialData().subscribe(
-      () =>  {this.predefinedOptions = this.formatSearchOptions(this.api.predefinedSearch); }
+      () =>  { this.formatSearchOptions(this.api.predefinedSearch); }
     );
   }
 
@@ -70,7 +70,7 @@ export class SearchComponent implements OnInit {
     //     console.log('Data received', data);
     // });
   }
-  formatSearchOptions(options: SearchParams[]) :any{
+  formatSearchOptions(options: SearchParams[]) :void{
     console.log("formatting Search");
     this.predefinedOptions = [];
     options.forEach( (option) => {
@@ -82,6 +82,7 @@ export class SearchComponent implements OnInit {
     });
     console.log(this.predefinedOptions);
   }
+
   searchAPI(string) {
     this.searchString = string;
   }

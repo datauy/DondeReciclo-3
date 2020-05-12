@@ -21,6 +21,7 @@ export class ApiService<T> {
   }
 
   loadInitialData(): Observable<any> {
+    console.log("API loading initial");
     return this.loadContainerTypes().pipe(
       switchMap( () => this.loadMaterials() ),
       switchMap( () => this.loadPredefinedSearchs() ),
@@ -59,7 +60,7 @@ export class ApiService<T> {
       }
     ));
   }
-  searchWastes(str: string){
+  getResults(str: string){
     if (str.length < 2) { return false; }
     return  this.request.get(environment.backend + "search?q="+str).pipe(map(
       (result: any[]) => {
