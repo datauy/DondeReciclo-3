@@ -1,69 +1,69 @@
-:host {
-  ion-auto-complete {
-    padding: 22px;
-    width: 100%;
-    position: relative;
-    z-index: 1001;
-    height: 66px;
-    border-radius: 36px;
-    box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2);
-    ion-searchbar.sc-ion-searchbar-md-h {
-      height: 22px;
-      ion-icon { display: none;}
-    }
-    ul {
-      z-index: 30000 !important;
-    }
-  }
-  // padding: 0 12px  0 12px;
-  ion-content,
-  ion-list {
-    --background: none;
-  }
-
-  .item .item-content {
-    background-color: transparent !important;
-  }
-
-
-  ion-searchbar {
-    .searchbar-input.sc-ion-searchbar-md {
-      // position: absolute;
-      z-index: 22000;
-      padding: 16px 36px 16px 16px;
-      border-radius: 36px;
-    }
-
-    .searchbar-search-icon.sc-ion-searchbar-md {
-      top: 20px;
-      left: auto;
-      right: 24px;
-    }
-  }
-
-  .resultsContent {
-    // position: absolute;
-    // display: block;
-    // min-width: 100%;
-    // min-height: 100%;
-    // top: 0px;
-    // ion-chip{
-    //   opacity: 1;
-    // }
-    z-index: 30000;
-    position: relative;
-
-    &.showResults {
-      opacity: 1;
-      display: block;
-      visibility: visible;
-    }
-
-    &.hideResults {
-      opacity: 0;
-      display: none;
-      visibility: hidden;
-      z-index: 0;
-    }
-  }
-}
+// :host {
+//   ion-auto-complete {
+//     padding: 22px;
+//     width: 100%;
+//     position: relative;
+//     z-index: 1001;
+//     height: 66px;
+//     border-radius: 36px;
+//     box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2);
+//     ion-searchbar.sc-ion-searchbar-md-h {
+//       height: 22px;
+//       ion-icon { display: none;}
+//     }
+//     ul {
+//       z-index: 30000 !important;
+//     }
+//   }
+//   // padding: 0 12px  0 12px;
+//   ion-content,
+//   ion-list {
+//     --background: none;
+//   }
+//
+//   .item .item-content {
+//     background-color: transparent !important;
+//   }
+//
+//
+//   ion-searchbar {
+//     .searchbar-input.sc-ion-searchbar-md {
+//       // position: absolute;
+//       z-index: 22000;
+//       padding: 16px 36px 16px 16px;
+//       border-radius: 36px;
+//     }
+//
+//     .searchbar-search-icon.sc-ion-searchbar-md {
+//       top: 20px;
+//       left: auto;
+//       right: 24px;
+//     }
+//   }
+//
+//   .resultsContent {
+//     // position: absolute;
+//     // display: block;
+//     // min-width: 100%;
+//     // min-height: 100%;
+//     // top: 0px;
+//     // ion-chip{
+//     //   opacity: 1;
+//     // }
+//     z-index: 30000;
+//     position: relative;
+//
+//     &.showResults {
+//       opacity: 1;
+//       display: block;
+//       visibility: visible;
+//     }
+//
+//     &.hideResults {
+//       opacity: 0;
+//       display: none;
+//       visibility: hidden;
+//       z-index: 0;
+//     }
+//   }
+// }
