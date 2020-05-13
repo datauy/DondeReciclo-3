@@ -360,12 +360,20 @@ ion-slides .swiper-pagination-bullet {
     // min-width: 100%;
     // min-height: 100%;
     // top: 0px;
-    // ion-chip{
-    //   opacity: 1;
-    // }
+    ion-chip{
+      &.suggestion{
+        width: 40%;
+        padding: 3px;
+      }
+    }
+    // for two rows display
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
     z-index: 30000;
     position: relative;
-
+    padding: 12px 20px;
     &.showResults {
       opacity: 1;
       display: block;

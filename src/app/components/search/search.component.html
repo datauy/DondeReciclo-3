@@ -10,9 +10,9 @@
 <ng-template #suggestions let-attrs="attrs">
   <div>
     <ion-list-header>Categorias de búsqueda NIDEA</ion-list-header>
-    <ion-chip *ngFor="let predefined of predefinedOptions" [color]="predefined.color">
-      <ion-icon><img [src]="predefined.icon"></ion-icon>
-      <ion-label [innerHTML]="predefined.name"></ion-label>
+    <ion-chip *ngFor="let predefined of predefinedOptions"
+              [color]="predefined.color"
+              [ngClass]="'suggestion'">
     </ion-chip>
   </div>
 </ng-template>
@@ -40,7 +40,9 @@
 
     <div>
       <ion-list-header>Categorias de búsqueda</ion-list-header>
-      <ion-chip *ngFor="let predefined of predefinedOptions" [ngStyle]="{'background-color': predefined.color, 'border-radius': '6px'}">
+      <ion-chip *ngFor="let predefined of predefinedOptions"
+                [ngStyle]="{'background-color': predefined.color, 'border-radius': '6px'}"
+                [ngClass]="predefined.color">
         <img [src]="predefined.icon"/>
         <ion-label [innerHTML]="predefined.name"></ion-label>
       </ion-chip>
