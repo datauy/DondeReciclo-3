@@ -39,9 +39,9 @@ L.Marker.prototype.options.icon = iconDefault;
 })
 export class MapaPage implements OnInit {
 
-  @ViewChild("infoPane", {
-    read: ElementRef
-  }) private infoPane: ElementRef;
+  // @ViewChild("infoPane", {
+  //   read: ElementRef
+  // }) private infoPane: ElementRef;
 
   map: L.Map;
   newMarker: any;
@@ -54,6 +54,7 @@ export class MapaPage implements OnInit {
   containerTypes: ContainerType[];
   dataReturned:any;
   panelData: any;
+  infoPane: CupertinoPane;
 
   constructor(
     private geocoder: NativeGeocoder,
