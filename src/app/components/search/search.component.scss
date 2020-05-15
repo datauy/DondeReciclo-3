@@ -1,4 +1,4 @@
-#search-app-content{
+#search-app-content {
   ion-auto-complete {
     padding: 0 12px;
     overflow: visible !important;
@@ -6,7 +6,6 @@
     max-width: 100% !important;
     position: relative;
     z-index: 30000;
-    background: blue;
     //
     // ul {
     //   // z-index: 30000 !important;
@@ -21,6 +20,7 @@
     // }
   }
 
+
   #suggestions {
     // for two rows display
     // display: flex;
@@ -29,16 +29,16 @@
     z-index: 30000;
     position: relative;
     // padding: 12px 20px;
+    // ion-chip {
+    //   &.suggestion {
+    //     width: 50%;
+    //   }
+    // }
 
-    ion-chip {
-      &.suggestion {
-        width: 50%;
-      }
-
-    }
     ion-list-header {
       --color: white;
     }
+
     &.showResults {
       opacity: 1;
       display: block;
@@ -51,13 +51,18 @@
       visibility: hidden;
       z-index: 0;
     }
-    .resultsWrap{
-      margin: 12px;
+
+    .resultsWrap {
+      margin: -6px;
+      padding: 12px;
       flex-wrap: wrap;
       display: grid;
       grid-template-columns: repeat(auto-fill,minmax(170px, 1fr));
-      & >* {
+
+      & > * {
         flex: 1 1 170px;
+        margin: 6px;
+        height: 40px;
       }
     }
   }

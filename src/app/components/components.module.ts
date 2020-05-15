@@ -5,7 +5,7 @@ import { IonicModule, IonBackdrop } from '@ionic/angular';
 import { AppRoutingModule } from '../app-routing.module';
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { HeaderComponent } from './header/header.component';
-
+import { AutoCompleteModule } from "ionic4-auto-complete";
 
 @NgModule({
   imports: [

@@ -13,6 +13,7 @@ import { SearchParams, Material } from "src/app/models/basic_models.model";
 })
 export class SearchComponent implements OnInit {
   @ViewChild(IonSearchbar, { static: false }) private searchBar: IonSearchbar;
+  // @ViewChild(IonSearchbar, { static: false }) private searchBar: IonSearchbar;
 
   backdrop = document.querySelector('custom-backdrop');
   searchBarElement = document.querySelector('#searchBar');

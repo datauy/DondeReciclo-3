@@ -1,10 +1,23 @@
-<div id="search-app-content" [ngClass]="searchVisibility ? 'expanded' : 'collapsed'">
+<div id="search-app-content"
+  [ngClass]="searchVisibility ? 'expanded' : 'collapsed'">
 
   <!-- <ion-searchbar id="searchBar" type="text" debounce="500" animated placeholder="Busca materiales" color="dark"
   (click)="showSearch()" (ionChange)="searchAPI($event)" clearInput></ion-searchbar> -->
 
-  <ng-template [ngClass]="searchResults" #dondereciclo let-attrs="attrs">
-    <span [innerHTML]="attrs.data.name"></span>
+  <ng-template [ngClass]="searchResults"
+    #dr
+    let-attrs="attrs">
+    <ion-chip [ngStyle]="{'background-color': attrs.data.color, 'border-radius': '6px'}"
+      [ngClass]="attrs.data.color">
+      <ion-icon slot="start"
+        [src]="attrs.data.icon"></ion-icon>
+      <ion-label [innerHTML]="attrs.data.name | boldprefix:attrs.keyword"></ion-label>
+    </ion-chip>
+  </ng-template>
+
+  <ng-template [ngClass]="searchResults"
+    #drempty
+    let-attrs="attrs">no result
   </ng-template>
 
   <!-- <ng-template #suggestions let-attrs="attrs">
@@ -15,19 +28,35 @@
     </div>
   </ng-template> -->
 
-  <ion-auto-complete class="searchContent" [template]="dondereciclo" (click)="showSearch()" [(model)]="selected" [multi]="false" [dataProvider]="api" [disabled]="false" [maxResults]="6" [removeButtonColor]="'dark'">
+  <ion-auto-complete class="searchContent"
+    [template]="dr"
+    [showResultsFirst]="true"
+    (click)="showSearch()"
+    [(model)]="selected"
+    [multi]="false"
+    [dataProvider]="api"
+    [disabled]="false"
+    [maxResults]="6"
+    [removeButtonColor]="'dark'"
+    [clearInvalidInput]="false">
   </ion-auto-complete>
 
 
-  <div id="suggestions" [ngClass]="searchVisibility ? 'showResults' : 'hideResults'">
+  <div id="suggestions"
+    [ngClass]="searchVisibility ? 'showResults' : 'hideResults'">
     <ion-list-header>Categorias de búsqueda</ion-list-header>
     <div class="resultsWrap">
-      <ion-chip *ngFor="let predefined of predefinedOptions" [ngStyle]="{'background-color': predefined.color, 'border-radius': '6px'}" [ngClass]="predefined.color">
+      <ion-chip *ngFor="let predefined of predefinedOptions"
+        [ngStyle]="{'background-color': predefined.color, 'border-radius': '6px'}"
+        [ngClass]="predefined.color">
         <ion-label [innerHTML]="predefined.name"></ion-label>
-        <ion-icon slot="end" name="predefined.icon" ></ion-icon>
+        <ion-icon slot="end"
+          [src]="predefined.icon"></ion-icon>
       </ion-chip>
     </div>
   </div>
 
-  <div id="custom_backdrop" (click)="hideSearch()" [ngClass]="searchVisibility ? 'show' : 'hide'"></div>
+  <div id="custom_backdrop"
+    (click)="hideSearch()"
+    [ngClass]="searchVisibility ? 'show' : 'hide'"></div>
 </div>

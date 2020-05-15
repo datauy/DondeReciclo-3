@@ -149,7 +149,8 @@ export class MapaPage implements OnInit {
       markerGroup.addLayer(marker);
       this.map.addLayer(markerGroup);
       }).on('locationerror', (err) => {
-        alert(err.message);
+        // alert(err.message);
+        console.log(err.message);
     })
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution:
@@ -183,20 +184,20 @@ export class MapaPage implements OnInit {
     }, 0);
   }
 
-  // Create additional Control placeholders
-  addControlPlaceholders(map) {
-    const corners = map._controlCorners;
-    const l = 'leaflet-';
-    const toolsPanel = map._controlContainer;
-
-    function createCorner(vSide, hSide) {
-        const className = l + vSide + ' ' + l + hSide;
-
-        corners[vSide + hSide] = L.DomUtil.create('div', className, toolsPanel);
-    }
-
-    createCorner('verticalcenter', 'left');
-  }
+  // Create additional Control placeholders, to group all control buttons
+  // addControlPlaceholders(map) {
+  //   const corners = map._controlCorners;
+  //   const l = 'leaflet-';
+  //   const toolsPanel = map._controlContainer;
+  //
+  //   function createCorner(vSide, hSide) {
+  //       const className = l + vSide + ' ' + l + hSide;
+  //
+  //       corners[vSide + hSide] = L.DomUtil.create('div', className, toolsPanel);
+  //   }
+  //
+  //   createCorner('verticalcenter', 'left');
+  // }
 
   locatePosition() {
     this.map.locate({ setView: true }).on("locationfound", (e: any) => {
