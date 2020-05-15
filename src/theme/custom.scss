@@ -328,7 +328,18 @@ ion-chip {
   &.expand {
     height: 100%;
   }
-
+  ion-auto-complete {
+      ul {
+        width: 100%;
+        position: relative !important;
+        left:0;
+        right: 0;
+        z-index: 40000;
+        li{
+          background: red;
+        }
+      }
+  }
   ion-content,
   ion-list {
     --background: none;
