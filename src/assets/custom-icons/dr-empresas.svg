@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:version="1.0 (6e3e5246a0, 2020-05-07)"
+   sodipodi:docname="dr-empresas.svg"
+   id="svg275"
+   version="1.1"
+   viewBox="0 0 512 512"
+   height="512"
+   width="512">
+  <metadata
+     id="metadata281">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs279" />
+  <sodipodi:namedview
+     inkscape:current-layer="layer1"
+     inkscape:window-maximized="1"
+     inkscape:window-y="27"
+     inkscape:window-x="67"
+     inkscape:cy="327.33726"
+     inkscape:cx="237.87408"
+     inkscape:zoom="0.90885417"
+     inkscape:snap-bbox-edge-midpoints="true"
+     inkscape:snap-smooth-nodes="true"
+     inkscape:snap-bbox="true"
+     inkscape:object-paths="true"
+     inkscape:guide-bbox="true"
+     showguides="true"
+     showgrid="false"
+     id="namedview277"
+     inkscape:window-height="845"
+     inkscape:window-width="1533"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0"
+     guidetolerance="10"
+     gridtolerance="10"
+     objecttolerance="10"
+     borderopacity="1"
+     bordercolor="#666666"
+     pagecolor="#ffffff">
+    <sodipodi:guide
+       inkscape:color="rgb(0,0,255)"
+       inkscape:locked="false"
+       inkscape:label=""
+       id="guide285"
+       orientation="-1,0"
+       position="48,175.67752" />
+  </sodipodi:namedview>
+  <g
+     inkscape:label="Layer 1"
+     id="layer1"
+     inkscape:groupmode="layer">
+    <g
+       transform="matrix(9.5366212,0,0,9.5366212,52.768311,135.05564)"
+       fill="none"
+       fill-rule="evenodd"
+       stroke="#ffffff"
+       id="g491">
+      <path
+         stroke-width="2"
+         d="M 0,1 H 1.776 C 4.109,1 6,2.722 6,4.847 v 9.306 C 6,16.278 4.11,18 1.776,18 H 0.556 M 41,1 H 35.137 C 34.509,1 34,1.486 34,2.084 V 16.916 C 34,17.514 34.51,18 35.137,18 h 3.318 M 10,13.5 H 6"
+         id="path483" />
+      <path
+         stroke-width="2"
+         d="m 35,3.664 h -5.712 c -0.247,0 -0.49,-0.065 -0.707,-0.189 L 22.8,0.188 c -0.458,-0.26 -1.017,-0.25 -1.465,0.029 L 15.7,3.725 C 14.953,4.19 14.77,5.219 15.311,5.922 v 0 c 0.392,0.511 1.063,0.705 1.658,0.475 l 4.15,-1.594 c 0.566,-0.217 1.204,-0.053 1.605,0.41 l 8.368,9.703 c 0.653,0.757 0.572,2.352 -0.33,2.76 l -9.185,2.234 c -0.505,0.121 -0.996,0.157 -1.413,-0.134 L 20.085,19.688 M 15,4.5 H 6 13.796 M 35,17.5 h -4 2.609"
+         id="path485" />
+      <path
+         stroke-width="2"
+         d="m 19.624,19.228 v 0 c 0.405,-0.743 0.737,-1.233 -0.423,-2.993 l -4.17,-6.085 c -0.954,-0.71 -3.875,1.28 -4.595,2.222 v 0 c -0.719,0.942 -0.53,2.283 0.424,2.994 l 6.071,4.151 c 0.954,0.712 1.973,0.653 2.693,-0.289 z"
+         id="path487" />
+      <path
+         d="m 2,14 c 0,0.552 -0.447,1 -1,1 -0.553,0 -1,-0.448 -1,-1 0,-0.552 0.447,-1 1,-1 0.553,0 1,0.448 1,1 z m 38,0 c 0,0.552 -0.447,1 -1,1 -0.553,0 -1,-0.448 -1,-1 0,-0.552 0.447,-1 1,-1 0.553,0 1,0.448 1,1 z"
+         id="path489" />
+    </g>
+  </g>
+  <g
+     style="display:none"
+     inkscape:label="Layer 2"
+     id="layer2"
+     inkscape:groupmode="layer">
+    <g
+       fill="none"
+       transform="matrix(9.5366212,0,0,9.5366212,160.0553,120.75863)"
+       id="g409">
+      <circle
+         cx="14.5"
+         cy="3.5"
+         r="3.5"
+         fill="#9cd060"
+         id="circle401" />
+      <circle
+         cx="3.5"
+         cy="11.5"
+         r="3.5"
+         fill="#9cd060"
+         id="circle403" />
+      <circle
+         cx="14.5"
+         cy="19.5"
+         r="3.5"
+         fill="#9cd060"
+         id="circle405" />
+      <path
+         stroke="#9cd060"
+         stroke-width="3"
+         d="M 16,3 5,10 M 16,20 5,13 Z"
+         id="path407" />
+    </g>
+    <g
+       fill="#9cd060"
+       transform="matrix(9.5366212,0,0,9.5366212,131.44553,139.83187)"
+       id="g430">
+      <rect
+         y="0"
+         x="0"
+         width="24"
+         height="3"
+         rx="1.5"
+         id="rect424" />
+      <rect
+         x="0"
+         width="24"
+         height="3"
+         y="16"
+         rx="1.5"
+         id="rect426" />
+      <rect
+         width="14"
+         height="3"
+         x="10"
+         y="8"
+         rx="1.5"
+         id="rect428" />
+    </g>
+    <path
+       fill="#9cd060"
+       stroke="#9cd060"
+       stroke-width="9.53662"
+       d="m 245.88489,135.06356 c 42.13279,0 76.29297,32.84412 76.29297,73.35569 0,0.93459 -0.0286,1.86918 -0.0954,2.8133 0.0668,1.33513 0.0954,2.68933 0.0954,4.04353 0,44.30714 -68.37748,110.5199 -76.29297,110.5199 -7.9154,0 -76.29297,-66.21276 -76.29297,-110.5199 0,-1.3542 0.0286,-2.69886 0.0954,-4.04353 -0.0668,-0.94412 -0.0954,-1.87871 -0.0954,-2.8133 0,-40.51157 34.16018,-73.35569 76.29297,-73.35569 z m 0,38.14648 c -21.07593,0 -38.14648,17.07055 -38.14648,38.14649 0,21.07593 17.07055,38.14648 38.14648,38.14648 21.07593,0 38.14648,-17.07055 38.14648,-38.14648 0,-21.07594 -17.07055,-38.14649 -38.14648,-38.14649 z"
+       id="path444" />
+    <g
+       transform="matrix(9.5366212,0,0,9.5366212,18.961084,6.815076)"
+       fill="none"
+       fill-rule="evenodd"
+       stroke="#9cd060"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       stroke-width="2"
+       id="g470">
+      <path
+         fill="#9cd060"
+         d="M 13.59,6.795 C 13.59,3.042 10.548,0 6.795,0 3.042,0 0,3.042 0,6.795 c 0,2.523 1.538,3.855 2.718,5.892 0.42,0.726 0.702,3.358 0.702,3.358 h 6.575 c 0,0 0.284,-2.558 0.702,-3.257 1.247,-2.08 2.893,-3.398 2.893,-5.993 z"
+         transform="translate(17,12)"
+         id="path466" />
+      <path
+         d="M 10.097,19.5 H 3.492 M 8.91,22.896 H 4.681"
+         transform="translate(17,12)"
+         id="path468" />
+    </g>
+  </g>
+</svg>

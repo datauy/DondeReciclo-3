@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="48" height="40" viewBox="0 0 48 40">
-    <g fill="#9CD060" fill-rule="evenodd">
-        <path fill-rule="nonzero" stroke="#9CD060" stroke-width="2" d="M24 1c4.418 0 8 3.444 8 7.692 0 .098-.003.196-.01.295.007.14.01.282.01.424C32 14.057 24.83 21 24 21c-.83 0-8-6.943-8-11.589 0-.142.003-.283.01-.424-.007-.099-.01-.197-.01-.295C16 4.444 19.582 1 24 1zm0 4c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z"/>
-        <text font-family="PTSans-Bold, PT Sans" font-size="12" font-weight="bold" letter-spacing=".1">
-            <tspan x="7.226" y="36">Mapas</tspan>
-        </text>
-    </g>
-</svg>

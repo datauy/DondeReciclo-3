@@ -3,7 +3,7 @@
   <!-- <ion-searchbar id="searchBar" type="text" debounce="500" animated placeholder="Busca materiales" color="dark"
   (click)="showSearch()" (ionChange)="searchAPI($event)" clearInput></ion-searchbar> -->
 
-  <ng-template #dondereciclo let-attrs="attrs">
+  <ng-template [ngClass]="searchResults" #dondereciclo let-attrs="attrs">
     <span [innerHTML]="attrs.data.name"></span>
   </ng-template>
 

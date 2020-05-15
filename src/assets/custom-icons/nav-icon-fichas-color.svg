@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="48" height="40" viewBox="0 0 48 40">
-    <g fill="#9CD060" fill-rule="evenodd">
-        <text font-family="PTSans-Bold, PT Sans" font-size="12" font-weight="bold" letter-spacing=".1">
-            <tspan x="1.016" y="36">Contacto</tspan>
-        </text>
-        <path stroke="#9CD060" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M31.988 2H15c-1.105 0-2 .895-2 2v10.148c0 1.104.895 2 2 2h9.886l4.852 3.851v-3.851h2.25c1.105 0 2-.896 2-2V4c0-1.105-.895-2-2-2z"/>
-    </g>
-</svg>
