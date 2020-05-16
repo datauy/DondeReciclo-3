@@ -30,15 +30,14 @@ import { MapaPage } from './mapa.page';
     // ]),
     // ComponentsModule,
     // SimpleServiceModule,
-    AutoCompleteModule,
   ],
-  exports: [
-    SearchComponent,
-  ],
-  declarations: [MapaPage, SearchComponent],
+  // exports: [
+  //   SearchComponent,
+  // ],
+  declarations: [MapaPage],
 
   // necesario para que funcionara
-  entryComponents: [SearchComponent],
+  // entryComponents: [SearchComponent],
 
 })
 export class MapaPageModule {}

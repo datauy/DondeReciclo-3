@@ -1,23 +1,25 @@
 <div id="search-app-content"
-  [ngClass]="searchVisibility ? 'expanded' : 'collapsed'">
+  [ngClass]="searchVisibility ? 'show' : 'hide'">
 
   <!-- <ion-searchbar id="searchBar" type="text" debounce="500" animated placeholder="Busca materiales" color="dark"
   (click)="showSearch()" (ionChange)="searchAPI($event)" clearInput></ion-searchbar> -->
 
+  <ion-list-header id="results-title"
+    [ngClass]="resultsVisibility ? 'show' : 'hide'">Resultados de búsqueda</ion-list-header>
   <ng-template [ngClass]="searchResults"
     #dr
     let-attrs="attrs">
-    <ion-chip [ngStyle]="{'background-color': attrs.data.color, 'border-radius': '6px'}"
-      [ngClass]="attrs.data.color">
-      <ion-icon slot="start"
-        [src]="attrs.data.icon"></ion-icon>
+    <ion-chip [ngClass]="attrs.data.color">
+      <ion-icon name="heart"></ion-icon>
       <ion-label [innerHTML]="attrs.data.name | boldprefix:attrs.keyword"></ion-label>
     </ion-chip>
   </ng-template>
 
   <ng-template [ngClass]="searchResults"
     #drempty
-    let-attrs="attrs">no result
+    let-attrs="attrs">
+
+    <ion-list-header>No hay resultados</ion-list-header>
   </ng-template>
 
   <!-- <ng-template #suggestions let-attrs="attrs">
@@ -38,20 +40,24 @@
     [disabled]="false"
     [maxResults]="6"
     [removeButtonColor]="'dark'"
-    [clearInvalidInput]="false">
+    [clearInvalidInput]="false"
+     (ionAutoInput)="resultsHidden()"
+     (itemsCleared)="resultsShown()"
+     (itemsHidden)="hideSearch()"
+     (itemSelected)="hideSearch()"
+     (itemsShown)="resultsShown()"
+    >
   </ion-auto-complete>
 
 
   <div id="suggestions"
-    [ngClass]="searchVisibility ? 'showResults' : 'hideResults'">
+    [ngClass]="resultsVisibility ? 'show' : 'hide'">
     <ion-list-header>Categorias de búsqueda</ion-list-header>
     <div class="resultsWrap">
       <ion-chip *ngFor="let predefined of predefinedOptions"
-        [ngStyle]="{'background-color': predefined.color, 'border-radius': '6px'}"
         [ngClass]="predefined.color">
         <ion-label [innerHTML]="predefined.name"></ion-label>
-        <ion-icon slot="end"
-          [src]="predefined.icon"></ion-icon>
+        <ion-icon name="heart"></ion-icon>
       </ion-chip>
     </div>
   </div>

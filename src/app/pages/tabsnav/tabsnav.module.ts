@@ -6,17 +6,26 @@ import { TabsnavPageRoutingModule } from './tabsnav-routing.module';
 import { TabsnavPage } from './tabsnav.page';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { SliderComponent } from './../../components/slider/slider.component';
+import { ComponentsModule } from 'src/app/components/components.module';
+import { SearchComponent } from 'src/app/components/search/search.component';
+import { AutoCompleteModule } from 'ionic4-auto-complete';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TabsnavPageRoutingModule
+    TabsnavPageRoutingModule,
+    ComponentsModule,
+    AutoCompleteModule,
   ],
-  declarations: [TabsnavPage, SliderComponent],
+  exports: [
+    SearchComponent,
+  ],
+  declarations: [TabsnavPage, SliderComponent, SearchComponent],
   providers: [
     Keyboard
-  ]
+  ],
+  entryComponents: [SearchComponent],
 })
 export class TabsnavPageModule {}

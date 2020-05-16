@@ -13,13 +13,13 @@ import { SearchParams, Material } from "src/app/models/basic_models.model";
 })
 export class SearchComponent implements OnInit {
   @ViewChild(IonSearchbar, { static: false }) private searchBar: IonSearchbar;
-  // @ViewChild(IonSearchbar, { static: false }) private searchBar: IonSearchbar;
 
   backdrop = document.querySelector('custom-backdrop');
   searchBarElement = document.querySelector('#searchBar');
 
   showBackdrop = false;
   searchVisibility = false;
+  resultsVisibility = false;
 
   searchString: string;
 
@@ -56,22 +56,22 @@ export class SearchComponent implements OnInit {
     );
   }
 
-  ionViewDidLoad() {
-    this.searchBarElement.addEventListener('click', (e) => {
-      console.log('Button clicked!');
-    });
-    // this.searchBar.ionFocus('click', (e: any) => {
-    //   this.searchVisibility = true;
-    //   console.log('click serarch');
-    // });
-    // console.log(this.backdrop);
-    // this.backdrop.ionBackdropTap.subscribe((data) => {
-    //     console.log('Data received', data);
-    // });
-  }
+  // ionViewDidLoad() {
+  //   this.searchBarElement.addEventListener('click', (e) => {
+  //     console.log('Button clicked!');
+  //   });
+  //   // this.searchBar.ionFocus('click', (e: any) => {
+  //   //   this.searchVisibility = true;
+  //   //   console.log('click serarch');
+  //   // });
+  //   // console.log(this.backdrop);
+  //   // this.backdrop.ionBackdropTap.subscribe((data) => {
+  //   //     console.log('Data received', data);
+  //   // });
+  // }
 
   showSearch() {
-    this.showBackdrop = true;
+    // this.showBackdrop = true;
     this.searchVisibility = true;
     console.log('click show search')
   }
@@ -79,9 +79,19 @@ export class SearchComponent implements OnInit {
   hideSearch() {
     // event.stopPropagation();
     // this.backdrop.ionBackdropTap;
-    this.showBackdrop = false;
+    // this.showBackdrop = false;
     this.searchVisibility = false;
-    console.log('click hide search')
+    // console.log('click hide search')
+  }
+
+  resultsShown(event){
+    this.resultsVisibility = true;
+    console.log("results shown")
+  }
+
+  resultsHidden(event){
+    this.resultsVisibility = false;
+    console.log("results hidden")
   }
 
   on(output, event):void {
@@ -89,4 +99,5 @@ export class SearchComponent implements OnInit {
     console.log(output);
     // console.log(event);
   }
+
 }

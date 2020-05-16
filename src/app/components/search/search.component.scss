@@ -39,13 +39,13 @@
       --color: white;
     }
 
-    &.showResults {
+    &.show {
       opacity: 1;
       display: block;
       visibility: visible;
     }
 
-    &.hideResults {
+    &.hide {
       opacity: 0;
       display: none;
       visibility: hidden;
@@ -59,10 +59,14 @@
       display: grid;
       grid-template-columns: repeat(auto-fill,minmax(170px, 1fr));
 
-      & > * {
+      & > ion-chip {
         flex: 1 1 170px;
         margin: 6px;
         height: 40px;
+        ion-icon{
+          position: absolute;
+          right: 10px;
+        }
       }
     }
   }
