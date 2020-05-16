@@ -14,13 +14,21 @@ import "leaflet-routing-machine";
 
 declare let L;
 
-const iconUrl = 'assets/marker-icon.png';
+const iconUrl = 'assets/custom-icons/dr-pin.svg';
 const shadowUrl = 'assets/marker-shadow.png';
 const iconDefault = L.icon({
   iconUrl,
   shadowUrl,
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
+  iconSize: [29, 37],
+  iconAnchor: [12, 37],
+  popupAnchor: [1, -34],
+  tooltipAnchor: [16, -28],
+  shadowSize: [41, 41]
+});
+const iconUser = L.icon({
+  iconUrl: 'assets/custom-icons/dr-user-gps.svg',
+  iconSize: [50, 50],
+  iconAnchor: [25, 50],
   popupAnchor: [1, -34],
   tooltipAnchor: [16, -28],
   shadowSize: [41, 41]
@@ -103,7 +111,6 @@ export class MapaPage implements OnInit {
     );
   }
   showPane() {
-    // this.panelData = containerID;
     this.infoPane.present({
       animate: true,
     });
@@ -115,11 +122,14 @@ export class MapaPage implements OnInit {
   loadNearbyContainers() {
     this.api.getNearbyContainers().subscribe((containers) => {
       this.containers = containers;
-      let mapBounds = []
+      let mapBounds = [this.userMarker]
+      console.log(containers);
       for (var i = 0; i < containers.length; i++) {
-        console.log(containers[i]);
         this.newMarker = new L.marker([containers[i].latitude,containers[i].longitude])
-        .bindPopup(containers[i].program)
+        .on('click', () => {
+          this.container = containers[i];
+          this.showPane();
+        })
         .addTo(this.map);
         mapBounds.push([containers[i].latitude,containers[i].longitude]);
       }
@@ -137,13 +147,13 @@ export class MapaPage implements OnInit {
       maxZoom: 16
     }).on('locationfound', (e :any) => {
       let markerGroup = L.featureGroup();
-      let marker: any = L.marker([e.latitude, e.longitude]).on('click', () => {
-        alert('Marker clicked');
-      })
+      let marker: any = L.marker( [e.latitude, e.longitude], {icon: iconUser} ).
+        on('click', () => {
+          alert('Marker clicked');
+        });
       markerGroup.addLayer(marker);
       this.map.addLayer(markerGroup);
       }).on('locationerror', (err) => {
-        // alert(err.message);
         console.log(err.message);
     })
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -155,20 +165,9 @@ export class MapaPage implements OnInit {
     this.map.on("click", <LeafletMouseEvent>(e) => {
       if (this.userMarker) { // check
         this.map.removeLayer(this.userMarker); // remove
-    }
-    this.userMarker = L.marker([e.latlng.lat, e.latlng.lng]).addTo(this.map); // add the marker onclick
-    this.panelData = e.latlng;
-    this.showPane(); // show the bottom info panel
+      }
+      this.userMarker = L.marker([e.latlng.lat, e.latlng.lng], {icon: iconUser} ).addTo(this.map); // add the marker onclick
     });
-    // setTimeout(() => {
-    //     this.map.invalidateSize();
-    // }, 1000);
-
-    // this.addControlPlaceholders(this.map);
-
-    // Change the position of the Zoom Control to a newly created placeholder.
-    // this.map.zoomControl.setPosition('verticalcenterleft');
-
   }
 
   onMapReady() {
