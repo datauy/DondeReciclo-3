@@ -1,5 +1,3 @@
-
-<app-header></app-header>
 <app-search></app-search>
 
 <ion-content no-bounce>
@@ -15,24 +13,26 @@
 </ion-content>
 
 <div #infoPane class="cupertino-pane">
-  <ion-item>
-    <ion-avatar slot="start">
-      <img src="https://ui-avatars.com/api/?background=96DD67&name=P">
-    </ion-avatar>
+  <ion-item class="header">
+    <ion-icon slot="start">
+      <img src="{{container.program_id}}">
+    </ion-icon>
+    <span>Programa</span>
     <ion-label>
-      <h2>{{panelData}}</h2>
+      <h2>{{container.program}}</h2>
     </ion-label>
+    <ion-icon slot="end">
+      <img src="{{container.icon}}">
+    </ion-icon>
   </ion-item>
 
   <ion-item>
-    <ion-avatar slot="end">
+    <ion-label>{{container.location}}</ion-label>
+    <span>{{container.address}}</span>
+    <ion-icon slot="end">
       <img src="https://ui-avatars.com/api/?background=96DD67&name=P">
-    </ion-avatar>
-    <ion-label>
-      <h3>Supermercado Disco</h3>
-      <p><b>Bvr. España esq. Bvr. Artigas</b></p>
-      <p>Click this item to launch the WEB Animation API</p>
-    </ion-label>
+    </ion-icon>
+    <ion-icon name="add-circle-outline" color="--pale-olive-green"></ion-icon>
   </ion-item>
 
   <ion-item>
@@ -41,38 +41,22 @@
       <p>9:00 - 21:00 hs (aprox.)</p>
     </ion-label>
   </ion-item>
-  <ion-item>
-    <ion-label>
-      <h4>Busquedas frecuentes</h4>
-    </ion-label>
 
+  <ion-item>
+    <ion-label color="--pale-olive-green">
+      <ion-icon name="camera-outline"></ion-icon><h4>Subir otra foto</h4>
+    </ion-label>
+  </ion-item>
+
+  <ion-item>
+    <div class="cirlce green"></div><span>Recibe:</span>
+      <ion-chip *ngFor="let material of container.materials" solid color="{{material.color}}">
+        <ion-icon src="{{material.icon}}"></ion-icon>
+        <ion-label>{{material.name}}</ion-label>
+      </ion-chip>
   </ion-item>
   <ion-item>
-    <p>
-      <ion-chip solid color="brown">
-        <ion-icon name="cube"></ion-icon>
-        <ion-label>Papel y cartón</ion-label>
-      </ion-chip>
-      <ion-chip solid color="violet">
-        <ion-icon name="wine"></ion-icon>
-        <ion-label>Metales</ion-label>
-      </ion-chip>
-      <ion-chip solid color="danger">
-        <ion-icon name="skull"></ion-icon>
-        <ion-label>Residuos peligrosos</ion-label>
-      </ion-chip>
-      <ion-chip solid color="secondary">
-        <ion-icon name="wine"></ion-icon>
-        <ion-label>Vidrio</ion-label>
-      </ion-chip>
-      <ion-chip solid color="primary">
-        <ion-icon name="pizza"></ion-icon>
-        <ion-label>Organico/humedo</ion-label>
-      </ion-chip>
-      <ion-chip solid color="mostard">
-        <ion-icon name="copy"></ion-icon>
-        <ion-label>Polilaminados</ion-label>
-      </ion-chip>
-    </p>
+    <div class="cirlce green"></div><span>No Recibe:</span>
+    <div class="recibe-text">{{container.norecibe}}</div>
   </ion-item>
 </div>
