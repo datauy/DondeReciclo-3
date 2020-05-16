@@ -1,11 +1,11 @@
 <div id="search-app-content"
-  [ngClass]="searchVisibility ? 'show' : 'hide'">
+  >
 
   <!-- <ion-searchbar id="searchBar" type="text" debounce="500" animated placeholder="Busca materiales" color="dark"
   (click)="showSearch()" (ionChange)="searchAPI($event)" clearInput></ion-searchbar> -->
 
   <ion-list-header id="results-title"
-    [ngClass]="resultsVisibility ? 'show' : 'hide'">Resultados de búsqueda</ion-list-header>
+    [ngClass]="suggestVisibility ? 'hide' : 'show'">Resultados de búsqueda</ion-list-header>
   <ng-template [ngClass]="searchResults"
     #dr
     let-attrs="attrs">
@@ -33,7 +33,7 @@
   <ion-auto-complete class="searchContent"
     [template]="dr"
     [showResultsFirst]="true"
-    (click)="showSearch()"
+    (click)="showSearch($event)"
     [(model)]="selected"
     [multi]="false"
     [dataProvider]="api"
@@ -41,17 +41,14 @@
     [maxResults]="6"
     [removeButtonColor]="'dark'"
     [clearInvalidInput]="false"
-     (ionAutoInput)="resultsHidden()"
-     (itemsCleared)="resultsShown()"
-     (itemsHidden)="hideSearch()"
-     (itemSelected)="hideSearch()"
-     (itemsShown)="resultsShown()"
+    (itemsHidden)="showSuggest($event)"
+    (itemsShown)="hideSuggest($event)"
     >
   </ion-auto-complete>
 
 
   <div id="suggestions"
-    [ngClass]="resultsVisibility ? 'show' : 'hide'">
+    [ngClass]="suggestVisibility ? 'show' : 'hide'">
     <ion-list-header>Categorias de búsqueda</ion-list-header>
     <div class="resultsWrap">
       <ion-chip *ngFor="let predefined of predefinedOptions"
@@ -61,8 +58,9 @@
       </ion-chip>
     </div>
   </div>
-
-  <div id="custom_backdrop"
-    (click)="hideSearch()"
-    [ngClass]="searchVisibility ? 'show' : 'hide'"></div>
 </div>
+
+
+<div id="custom_backdrop"
+  (click)="hideSearch()"
+  [ngClass]="searchVisibility ? 'show' : 'hide'"></div>

@@ -1,3 +1,6 @@
+:host{
+  height: 100%;
+}
 #search-app-content {
   ion-auto-complete {
     padding: 0 12px;
@@ -42,14 +45,11 @@
     &.show {
       opacity: 1;
       display: block;
-      visibility: visible;
     }
 
     &.hide {
       opacity: 0;
       display: none;
-      visibility: hidden;
-      z-index: 0;
     }
 
     .resultsWrap {
@@ -63,6 +63,7 @@
         flex: 1 1 170px;
         margin: 6px;
         height: 40px;
+        --background: red;
         ion-icon{
           position: absolute;
           right: 10px;
