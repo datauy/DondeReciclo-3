@@ -1,25 +1,27 @@
 import { CommonModule} from '@angular/common';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
-import { IonicModule, IonBackdrop } from '@ionic/angular';
+import { NgModule} from '@angular/core';
+import { IonicModule } from '@ionic/angular';
 
-import { AppRoutingModule } from '../app-routing.module';
+//import { AppRoutingModule } from '../app-routing.module';
+import { RouterModule } from '@angular/router';
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { HeaderComponent } from './header/header.component';
-import { AutoCompleteModule } from "ionic4-auto-complete";
 
 @NgModule({
   imports: [
     CommonModule,
     IonicModule,
-    AppRoutingModule
+    RouterModule
     // SimpleServiceModule
   ],
   declarations: [
-    SidemenuComponent
+    SidemenuComponent,
+    HeaderComponent
     // SimpleServiceComponent
   ],
   exports: [
-    SidemenuComponent
+    SidemenuComponent,
+    HeaderComponent
     // SimpleServiceComponent
   ],
   // entryComponents: [
@@ -29,4 +31,5 @@ import { AutoCompleteModule } from "ionic4-auto-complete";
   providers: []
 
 })
-export class ComponentsModule { }
+export class ComponentsModule {
+}

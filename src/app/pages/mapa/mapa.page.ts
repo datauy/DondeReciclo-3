@@ -1,13 +1,8 @@
-import { SearchComponent } from 'src/app/components/search/search.component';
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { ModalController } from '@ionic/angular';
-
-import { Router, NavigationExtras } from "@angular/router";
-
 import {NativeGeocoder,NativeGeocoderOptions} from "@ionic-native/native-geocoder/ngx";
-import {map} from 'rxjs/operators';
-// API
+
 import { Container } from "../../models/container.model";
 import { ContainerType } from "../../models/container_types.model";
 import { ApiService } from "../../services/api.service";
@@ -58,9 +53,8 @@ export class MapaPage implements OnInit {
 
   constructor(
     private geocoder: NativeGeocoder,
-    private router: Router,
     public modalController: ModalController,
-    private api: ApiService<any>,
+    public api: ApiService<any>,
     // private backbuttonSubscription: Subscription
     ) {
   }

@@ -21,8 +21,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NovedadesPageModule } from './pages/novedades/novedades.module';
 import { HttpClientModule } from '@angular/common/http';
 
-//import { ApiService } from './services/api.service';
-
+import { ApiService } from './services/api.service';
 
 /*
 export function initApp(backConfig: ApiService<any>) {
@@ -51,8 +50,7 @@ export function initApp(backConfig: ApiService<any>) {
     SplashScreen,
     NativeGeocoder,
     Geolocation,
-    // SearchService,
-    // Api,
+    ApiService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
 //    { provide: APP_INITIALIZER, useFactory: initApp, deps: [ApiService], multi: true }
   ],

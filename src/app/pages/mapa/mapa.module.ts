@@ -1,26 +1,16 @@
-
+import { MapaPageRoutingModule } from './mapa-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
-import { RouterModule } from '@angular/router';
-
 import { HttpClientModule } from '@angular/common/http';
-
-// import { NeighbourService } from '../../services/neighbour.service';
-
-import { MapaPageRoutingModule } from './mapa-routing.module';
-
 import { LeafletModule } from "@asymmetrik/ngx-leaflet";
 
-import { MapaPage } from './mapa.page';
-
+import { ComponentsModule } from 'src/app/components/components.module';
 import { SearchComponent } from 'src/app/components/search/search.component';
 import { AutoCompleteModule } from 'ionic4-auto-complete';
-import { ComponentsModule } from 'src/app/components/components.module';
-import { HeaderComponent } from 'src/app/components/header/header.component';
 
+import { MapaPage } from './mapa.page';
 
 @NgModule({
   imports: [
@@ -30,7 +20,7 @@ import { HeaderComponent } from 'src/app/components/header/header.component';
     HttpClientModule,
     MapaPageRoutingModule,
     LeafletModule.forRoot(),
-
+    ComponentsModule,
     // commented out by Bruno, this is redundant, right?
     // RouterModule.forChild([
     //   {
@@ -44,10 +34,8 @@ import { HeaderComponent } from 'src/app/components/header/header.component';
   ],
   exports: [
     SearchComponent,
-    HeaderComponent
   ],
-  declarations: [MapaPage, SearchComponent,
-  HeaderComponent],
+  declarations: [MapaPage, SearchComponent],
 
   // necesario para que funcionara
   entryComponents: [SearchComponent],
