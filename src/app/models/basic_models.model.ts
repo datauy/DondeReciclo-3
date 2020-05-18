@@ -5,6 +5,7 @@ export class Material extends Base {
     name: string;
     color: string;
     icon: string;
+    class: string;
 }
 
 export class Container extends Base {

@@ -14,7 +14,10 @@ export class ApiService<T> {
   containers: Container[];
   materials: Material[];
   predefinedSearch: SearchParams[];
-
+  suggestVisibility: boolean;
+  noResultMessage: boolean;
+  //Search property for non results
+  labelAttribute = 'Se podrá con HTML???';
   constructor(private request: HttpClient) {}
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -27,6 +30,7 @@ export class ApiService<T> {
       switchMap( () => this.loadPredefinedSearchs() ),
     );
   }
+  //
   loadContainerTypes(): Observable<ContainerType[]> {
     return this.request.get(environment.backend + "container_types").pipe(
       map( (result: ContainerType[]) => {
@@ -34,6 +38,7 @@ export class ApiService<T> {
       },
     ));
   }
+  //
   loadMaterials(): Observable<Material[]> {
     return this.request.get(environment.backend + "materials").pipe(
       map((result: Material[]) => {
@@ -41,31 +46,50 @@ export class ApiService<T> {
       })
     );
   }
+  //
   loadPredefinedSearchs(): Observable<SearchParams[]> {
+    this.suggestVisibility = true;
+    this.noResultMessage = false;
     return this.request.get(environment.backend + "search_predefined").pipe(
       map((result: SearchParams[]) => {
         return this.predefinedSearch = this.formatSearchOptions(result);
       })
     );
   }
+  //
   getNearbyContainers(location?: [number, number]) {
     if (typeof location == 'undefined') {
       location = [-32.657689, -55.873808];
     }
     return  this.request.get(environment.backend + "containers_nearby?lat="+location[0]+"&lon="+location[1]).pipe(map(
       (result: Container[]) => {
-        return result
+        return result;
       }
     ));
   }
+  //
   getResults(str: string){
-    if (str.length < 2) { return false; }
+    if (str.length < 2) {
+      this.suggestVisibility = true;
+      this.noResultMessage = false;
+      return false;
+    }
     return  this.request.get(environment.backend + "search?q="+str).pipe(map(
       (result: any[]) => {
-        return this.formatSearchOptions(result);
+        if (result.length) {
+          this.suggestVisibility = false;
+          this.noResultMessage = false;
+          return this.formatSearchOptions(result);
+        }
+        else {
+          this.suggestVisibility = true;
+          this.noResultMessage = true;
+          return [];
+        }
       }
     ));
   }
+  //
   formatSearchOptions(options: SearchParams[]) :any[]{
     let res = [];
     options.forEach( (option) => {
@@ -73,11 +97,20 @@ export class ApiService<T> {
         option.material_id = 5;
       }
       res.push({
-        icon: this.materials[option.material_id].icon,
-        color: this.materials[option.material_id].color,
+        class: this.materials[option.material_id].class,
         name: option.name,
       });
     });
+    return res;
+  }
+  //
+  getMaterials(ids: []) :Material[] {
+    let res = [];
+    if (!this.materials) {
+      this.loadMaterials();
+    }
+    ids.forEach(id => res.push(this.materials[id]));
+    console.log(res);
     return res;
   }
 }

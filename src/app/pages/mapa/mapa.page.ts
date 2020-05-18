@@ -49,6 +49,7 @@ export class MapaPage implements OnInit {
   map: L.Map;
   newMarker: any;
   userMarker: any;
+  userPosition: [number, number]
   newRute: any;
   address: string[];
   container = {} as Container;
@@ -71,8 +72,6 @@ export class MapaPage implements OnInit {
     console.log("ENTER IN VIEW");
   }
 
-  // SocialModal
-
   ngOnInit() {
     this.loadMap();
     this.loadNearbyContainers();
@@ -82,12 +81,10 @@ export class MapaPage implements OnInit {
   }
 
   loadInfoPane() {
-
     this.infoPane = new CupertinoPane(
       '.cupertino-pane', // Pane container selector
       {
         parentElement: 'body', // Parent container
-
         // backdrop: true,
         bottomClose: true,
         buttonClose: false,
@@ -97,7 +94,7 @@ export class MapaPage implements OnInit {
         breaks: {
           middle: {
             enabled: true,
-            offset: 300
+            offset: 500
           },
           bottom: {
             enabled: true,
@@ -110,14 +107,15 @@ export class MapaPage implements OnInit {
       }
     );
   }
-  showPane() {
-    this.infoPane.present({
-      animate: true,
-    });
-
+  showPane(pin: L.Marker) {
+    let pos = pin.target.options.container_pos;
+    console.log("SHOWING PANE");
+    //console.log(e);
+    this.container = this.containers[pos];
+    console.log(this.container);
+    this.drawRute();
+    this.infoPane.present({animate: true});
   }
-
-  // API
 
   loadNearbyContainers() {
     this.api.getNearbyContainers().subscribe((containers) => {
@@ -125,11 +123,8 @@ export class MapaPage implements OnInit {
       let mapBounds = [this.userMarker]
       console.log(containers);
       for (var i = 0; i < containers.length; i++) {
-        this.newMarker = new L.marker([containers[i].latitude,containers[i].longitude])
-        .on('click', () => {
-          this.container = containers[i];
-          this.showPane();
-        })
+        this.newMarker = new L.marker([containers[i].latitude,containers[i].longitude], {container_pos: i})
+        .on('click', this.showPane, this) //L.bind(this.showPane, null, containers[i]))
         .addTo(this.map);
         mapBounds.push([containers[i].latitude,containers[i].longitude]);
       }
@@ -137,36 +132,35 @@ export class MapaPage implements OnInit {
     });
   }
 
-  // Map
-
   loadMap() {
-    this.map = new L.Map("map", {
-    });//.setView([-34.881536, -56.147968], 13);
+    this.map = new L.Map("map", {});//.setView([-34.881536, -56.147968], 13);
     this.map.locate({
       setView: true,
       maxZoom: 16
-    }).on('locationfound', (e :any) => {
+    }).
+    on('locationfound', (e :any) => {
+      this.userPosition = [e.latitude, e.longitude];
       let markerGroup = L.featureGroup();
-      let marker: any = L.marker( [e.latitude, e.longitude], {icon: iconUser} ).
-        on('click', () => {
-          alert('Marker clicked');
-        });
+      let marker: any = L.marker( this.userPosition, {icon: iconUser} ).
+      on('click', () => {
+        alert('Marker clicked');
+      });
       markerGroup.addLayer(marker);
       this.map.addLayer(markerGroup);
-      }).on('locationerror', (err) => {
-        console.log(err.message);
-    })
+    }).
+    on('locationerror', (err) => {
+      console.log(err.message);
+    });
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution:
-        'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
     }).addTo(this.map);
-
-
+    //Create user marker upon click
     this.map.on("click", <LeafletMouseEvent>(e) => {
       if (this.userMarker) { // check
         this.map.removeLayer(this.userMarker); // remove
       }
-      this.userMarker = L.marker([e.latlng.lat, e.latlng.lng], {icon: iconUser} ).addTo(this.map); // add the marker onclick
+      this.userPosition = [e.latlng.lat, e.latlng.lng];
+      this.userMarker = L.marker(this.userPosition, {icon: iconUser} ).addTo(this.map); // add the marker onclick
     });
   }
 
@@ -177,20 +171,17 @@ export class MapaPage implements OnInit {
     }, 0);
   }
 
-  // Create additional Control placeholders, to group all control buttons
-  // addControlPlaceholders(map) {
-  //   const corners = map._controlCorners;
-  //   const l = 'leaflet-';
-  //   const toolsPanel = map._controlContainer;
-  //
-  //   function createCorner(vSide, hSide) {
-  //       const className = l + vSide + ' ' + l + hSide;
-  //
-  //       corners[vSide + hSide] = L.DomUtil.create('div', className, toolsPanel);
-  //   }
-  //
-  //   createCorner('verticalcenter', 'left');
-  // }
+//Create additional Control placeholders, to group all control buttons
+/*addControlPlaceholders(map) {
+ const corners = map._controlCorners;
+ const l = 'leaflet-';
+ const toolsPanel = map._controlContainer;
+ function createCorner(vSide, hSide) {
+     const className = l + vSide + ' ' + l + hSide;
+     corners[vSide + hSide] = L.DomUtil.create('div', className, toolsPanel);
+ }
+ createCorner('verticalcenter', 'left');
+}*/
 
   locatePosition() {
     this.map.locate({ setView: true }).on("locationfound", (e: any) => {
@@ -203,14 +194,10 @@ export class MapaPage implements OnInit {
       this.newMarker.bindPopup('Elegir esta ubicación').openPopup();
       this.getAddress(e.latitude, e.longitude);
       console.log(e.latitude, e.longitude);
-      // this.pickupLat = e.latitude;
-      // this.pickupLong = e.longitude;
       this.newMarker.on("dragend", () => {
         const position = this.newMarker.getLatLng();
         this.getAddress(position.lat, position.lng);
         console.log(position.lat, position.lng);
-        // this.pickupLat = position.lat;
-        // this.pickupLong = position.lng;
       });
     });
   }
@@ -224,12 +211,12 @@ export class MapaPage implements OnInit {
       this.address = Object.values(results[0]).reverse();
       console.log(this.address);
     });
-    this.drawRute(lat, long);
+    this.drawRute();
   }
 
-  drawRute(lat: number, long: number) {
+  drawRute() {
     this.newRute = L.Routing.control({
-      waypoints: [L.latLng(lat, long), L.latLng(-34.79688926182469, -56.07833862304688)],
+      waypoints: [L.latLng(this.userPosition), L.latLng(this.container.latitude, this.container.longitude)],
       routeWhileDragging: true,
       router: L.Routing.mapbox('pk.eyJ1IjoiYm90dW0iLCJhIjoiY2s4anBoOHRzMGJ5dzNscDg1c2drMXBoNSJ9.vQ7qAGX7IMadmIfcCp7eRQ')
     }).addTo(this.map);

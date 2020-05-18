@@ -22,8 +22,7 @@
     <ion-label>
       <h2>{{container.program}}</h2>
     </ion-label>
-    <ion-icon slot="end">
-      <img src="{{container.icon}}">
+    <ion-icon slot="end" class="{{container.type_id}}">
     </ion-icon>
   </ion-item>
 
@@ -31,7 +30,7 @@
     <ion-label>{{container.location}}</ion-label>
     <span>{{container.address}}</span>
     <ion-icon slot="end">
-      <img src="https://ui-avatars.com/api/?background=96DD67&name=P">
+      <img *ngIf="container.photos?.length" src="container.photos[0]">
     </ion-icon>
     <ion-icon name="add-circle-outline" color="--pale-olive-green"></ion-icon>
   </ion-item>
@@ -51,13 +50,13 @@
 
   <ion-item>
     <div class="cirlce green"></div><span>Recibe:</span>
-      <ion-chip *ngFor="let material of container.materials" solid color="{{material.color}}">
-        <ion-icon src="{{material.icon}}"></ion-icon>
+      <ion-chip *ngFor="let material of container.materials" class="{{material.class}}">
+        <ion-icon src="{{material.class}}.svg"></ion-icon>
         <ion-label>{{material.name}}</ion-label>
       </ion-chip>
   </ion-item>
   <ion-item>
     <div class="cirlce green"></div><span>No Recibe:</span>
-    <div class="recibe-text">{{container.norecibe}}</div>
+    <div class="recibe-text">{{container.receives_no}}</div>
   </ion-item>
 </div>

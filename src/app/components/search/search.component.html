@@ -5,10 +5,11 @@
   (click)="showSearch()" (ionChange)="searchAPI($event)" clearInput></ion-searchbar> -->
 
   <ion-list-header id="results-title"
-    [ngClass]="suggestVisibility ? 'hide' : 'show'">Resultados de búsqueda</ion-list-header>
+    [ngClass]="api.suggestVisibility ? 'hide' : 'show'">Resultados de búsqueda</ion-list-header>
   <ng-template [ngClass]="searchResults"
     #dr
-    let-attrs="attrs">
+    let-attrs="attrs"
+    [ngClass]="searchVisibility ? 'show' : 'hide'">
     <ion-chip [ngClass]="attrs.data.color">
       <ion-icon name="heart"></ion-icon>
       <ion-label [innerHTML]="attrs.data.name | boldprefix:attrs.keyword"></ion-label>
@@ -38,17 +39,14 @@
     [multi]="false"
     [dataProvider]="api"
     [disabled]="false"
-    [maxResults]="6"
     [removeButtonColor]="'dark'"
     [clearInvalidInput]="false"
-    (itemsHidden)="showSuggest($event)"
-    (itemsShown)="hideSuggest($event)"
     >
   </ion-auto-complete>
 
 
   <div id="suggestions"
-    [ngClass]="suggestVisibility ? 'show' : 'hide'">
+    [ngClass]="(api.suggestVisibility && searchVisibility) ? 'show' : 'hide'">
     <ion-list-header>Categorias de búsqueda</ion-list-header>
     <div class="resultsWrap">
       <ion-chip *ngFor="let predefined of predefinedOptions"

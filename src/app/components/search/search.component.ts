@@ -19,7 +19,6 @@ export class SearchComponent implements OnInit {
 
   showBackdrop = false;
   searchVisibility = false;
-  suggestVisibility = false;
 
   searchString: string;
 
@@ -71,23 +70,17 @@ export class SearchComponent implements OnInit {
   // }
 
   showSearch(event) {
-    // this.showBackdrop = true;
     this.searchVisibility = true;
-    this.suggestVisibility = true;
-    console.log('click show search');
+    this.api.suggestVisibility = true;
   }
 
   hideSearch(event) {
-    // event.stopPropagation();
-    // this.backdrop.ionBackdropTap;
-    // this.showBackdrop = false;
+    this.api.suggestVisibility = false;
     this.searchVisibility = false;
-    this.suggestVisibility = false;
-    console.log('click hide search');
   }
-
+/*
   showSuggest(event){
-    this.suggestVisibility = true;
+    //this.suggestVisibility = true;
     console.log("suggest shown");
     console.log(event);
   }
@@ -96,10 +89,10 @@ export class SearchComponent implements OnInit {
     // if (this.searchVisibility){
     //   this.searchVisibility = false;
     // }
-      this.suggestVisibility = false;
+    //  this.suggestVisibility = false;
       console.log("suggest hidden");
       console.log(event);
-  }
+  }*/
 
   on(output, event):void {
     console.log("Search::OUTPUT");
