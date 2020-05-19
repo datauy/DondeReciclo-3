@@ -24,9 +24,13 @@
         width: 100%;
         .slide-top {
           height: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          overflow: hidden !important;
           img {
-            margin: 40px;
-            max-height: calc(100% - 80px);
+            max-width: none;
+            height: 100%;
           }
         }
         .slide-bottom {
@@ -36,18 +40,25 @@
           border-top-right-radius: 16px;
           background-color: #fff;
           margin-bottom: 60px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-wrap: wrap;
+          flex-direction: column;
           .title {
             font-size: 28px;
             color: var(--dark-sea-green);
             margin: 10px auto 40px;
-            max-width: 76%;
+            width: 76%;
+            max-width: 600px;
           }
           .slide-description {
             font-size: 20px;
             line-height: 1.5;
             color: var(--greyish-brown);
             margin: 0 auto;
-            max-width: 76%;
+            width: 76%;
+            max-width: 600px;
           }
         }
       }
