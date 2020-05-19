@@ -1,32 +1,5 @@
 :root {
-  --ion-color-brown: #ba2727;
-  --ion-color-brown-rgb: 186, 39, 39;
-  --ion-color-brown-contrast: #ffffff;
-  --ion-color-brown-contrast-rgb: 255, 255, 255;
-  --ion-color-brown-shade: #a42222;
-  --ion-color-brown-tint: #c13d3d;
-  --dark-grass-green: #417505;
-  --navy-green: #284407;
-  --navy-green-two: #284407;
-  --dark-blue: #4a90e2;
-  --bright-blue: #4acee2;
-  --light-gray: #f4f4f4;
-  --grey: #737373;
-  --charcoal-grey: #383a48;
-  --dark-sea-green: #0d744e;
-  --sun-yellow: #fed434;
-  --sunflower-yellow: #ffcd00;
-  --orange-yellow: #ff9f00;
-  --black: #000000;
-  --lightblue: #75aaf1;
-  --dusty-orange: #f46539;
-  --greyish-brown: #4a4a4a;
-  --squash: #f5a624;
-  --marigold: #ffcb02;
-  --white: #d8d8d8;
-  --dark-seafoam: #1eac86;
-  --pale-olive-green: #9cd060;
-  --warm-grey: #9b9b9b;
+
   --ion-text-color: var(--greyish-brown);
   --ion-tab-bar-background: var(--dark-sea-green);
   --ion-tab-bar-background-focused: none;
@@ -44,39 +17,95 @@
   // --ion-item-border-color	Border color of the Item
   // --ion-item-color	Color of the components in the Item
   // --ion-placeholder-color	Color of the placeholder in Inputs
+
+  // Size and spacing variables
+
+  --dr-header-height: 105px;
+  --dr-margin: 12px;
+
+  // Font
+  --dr-font-size: 20px;
+  // --ion-font-family: "SourceSansPro"; // don't work don't know why.
+
   // components
   ion-header {}
 
+    ion-title {
+      width: 100%;
+      text-align: center;
+
+      h1 {
+        font-size: 24px;
+        color: var(--dark-sea-green);
+
+        .negative {
+          color: #ffffff;
+        }
+      }
+
+      h2 {
+        font-size: 32px;
+        color: var(--greyish-brown);
+      }
+    }
   ion-toolbar {
     height: 138px;
   }
 
-  ion-button {}
-
   ion-button {
-    --background: white;
-    --background-activated: var(--pale-olive-green);
-    // --background-activated-opacity	Opacity of the button when pressed
-    // --background-focused	Background of the button when focused with the tab key
-    // --background-focused-opacity	Opacity of the button when focused with the tab key
-    --background-hover: var(--pale-olive-green);
-    // --background-hover-opacity	Opacity of the background on hover
-    --border-color: none;
-    --border-radius: 38.5px;
-    --border-style: none;
-    --border-width: none;
-    --box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2);
-    --color: var(--pale-olive-green);
-    --color-activated: white;
-    --color-focused: white;
-    --color-hover: white;
-    // --opacity	Opacity of the button
-    --padding-bottom: 16px;
-    --padding-end: 16px;
-    --padding-start: 16px;
-    --padding-top: 16px;
-    // --ripple-color	Color of the button ripple effect
-    // --transition	Transition of the button
+      --border-radius: 6px;
+      --box-shadow: none;
+      text-transform: capitalize;
+      // padding: 10px;
+      // margin: 6px;
+      font-size: 16px;
+
+      &.big{
+
+          --background: white;
+          --background-activated: var(--pale-olive-green);
+          // --background-activated-opacity	Opacity of the button when pressed
+          // --background-focused	Background of the button when focused with the tab key
+          // --background-focused-opacity	Opacity of the button when focused with the tab key
+          --background-hover: var(--pale-olive-green);
+          // --background-hover-opacity	Opacity of the background on hover
+          --border-color: none;
+          --border-radius: 38.5px;
+          --border-style: none;
+          --border-width: none;
+          --box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2);
+          --color: var(--pale-olive-green);
+          --color-activated: white;
+          --color-focused: white;
+          --color-hover: white;
+          // --opacity	Opacity of the button
+          --padding-bottom: 16px;
+          --padding-end: 16px;
+          --padding-start: 16px;
+          --padding-top: 16px;
+          // --ripple-color	Color of the button ripple effect
+          // --transition	Transition of the button
+
+      }
+  }
+
+
+  // slider
+
+  ion-slides .swiper-pagination-bullet {
+    width: 9px;
+    height: 9px;
+    opacity: 0.5;
+  }
+
+  // botones y chips
+  ion-chip {
+    padding: 10px;
+    // margin: 6px;
+
+    ion-label {
+      font-size: 16px;
+    }
   }
 }
 // Fonts
@@ -109,7 +138,6 @@
   font-stretch: normal;
 }
 // Estilos html elements
-
 // * {
 //   font-family: "SourceSansPro";
 // }
@@ -136,48 +164,7 @@ p {
     color: --warm-grey;
   }
 }
-// Componentes Ionic
-
-ion-title {
-  width: 100%;
-  text-align: center;
-
-  h1 {
-    font-size: 24px;
-    color: var(--dark-sea-green);
-
-    .negative {
-      color: #ffffff;
-    }
-  }
-
-  h2 {
-    font-size: 32px;
-    color: var(--greyish-brown);
-  }
-}
-// menu
-// slider
-
-ion-slides .swiper-pagination-bullet {
-  width: 9px;
-  height: 9px;
-  opacity: 0.5;
-}
-
-// botones y chips
-
-
-ion-chip {
-    padding: 10px;
-    margin: 6px;
-    ion-label{
-      font-size: 16px;
-    }
-}
-
 // Leaflet
-
 .leaflet-verticalcenter {
   position: absolute;
   z-index: 1000;
@@ -208,6 +195,12 @@ ion-chip {
   margin-bottom: 10px;
 }
 
+.leaflet-control-container {
+  .leaflet-top {
+    top: 160px;
+  }
+}
+// Modals
 .modal-fullscreen {
   .modal-wrapper {
     position: absolute;
@@ -331,53 +324,66 @@ ion-chip {
     height: auto !important;
   }
 
-  #results-title{
+  #results-title {
     position: absolute;
     top: 102px;
     color: white;
     z-index: 1002;
-    &.hide{
+
+    &.hide {
       opacity: 0;
     }
-    &.show{
+
+    &.show {
       opacity: 1;
     }
   }
-  ion-auto-complete {
-      ul {
-        width: 100%;
-        position: relative !important;
-        left:0;
-        right: 0;
-        z-index: 1002;
-        background: none;
-        box-shadow: none;
 
-        margin: 102px 0 0 0;
-        padding: 0;
-        li{
-          background: none;
-          border: none;
-          margin: 0 0 6px 0;
-          padding: 0;
-          height: 50px;
-          ion-chip{
-            width: 100%;
-            height: 100%;
-            margin: 0;
-            padding: 13px 20px;
-            border-radius: 6px;
-            ion-label{
-              font-size: 18px;
-            }
-            ion-icon{
-              position: absolute;
-              right: 20px;
-            }
+  ion-auto-complete {
+    ul {
+      position: absolute;
+      height: calc(100vh - 33px - var(--dr-header-height));
+      width: 100%;
+      left: 0;
+      right: 0;
+      top: 33px;
+      bottom: 0;
+      margin: 0;
+      padding: var(--dr-header-height) 0 0 0;
+      overflow: auto !important;
+      display: block;
+      background: none;
+      box-shadow: none;
+      z-index: 1002;
+      padding: --dr-margin;
+
+      li {
+        background: none;
+        border: none;
+        margin: 0 0 6px;
+        padding: 0 12px;
+        height: 50px;
+
+        ion-chip {
+          width: 100%;
+          height: 100%;
+          margin: 0;
+          padding: 13px 20px;
+          border-radius: 6px;
+
+          ion-label {
+            font-size: 18px;
+          }
+
+          ion-icon {
+            position: absolute;
+            right: 20px;
           }
         }
       }
+    }
   }
+
   ion-content,
   ion-list {
     --background: none;
@@ -386,10 +392,12 @@ ion-chip {
   .item .item-content {
     background-color: transparent !important;
   }
+
   ion-searchbar {
+
+    z-index: 1010;
     .searchbar-input.sc-ion-searchbar-md {
       // position: absolute;
-      z-index: 22000;
       padding: 16px 36px 16px 16px;
       border-radius: 36px;
     }
@@ -400,5 +408,4 @@ ion-chip {
       right: 24px;
     }
   }
-
 }

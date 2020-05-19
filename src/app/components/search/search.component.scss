@@ -1,72 +1,72 @@
 :host{
   height: 100%;
-}
-#search-app-content {
-  ion-auto-complete {
-    padding: 0 12px;
-    overflow: visible !important;
-    width: 100%;
-    max-width: 100% !important;
-    position: relative;
-    z-index: 30000;
-    //
-    // ul {
-    //   // z-index: 30000 !important;
-    //   width: auto;
-    //   position: relative !important;
-    //   z-index: 40000;
-    //   color: red !important;
-    //   background: blue;
-    //   li{
-    //     background: red;
-    //   }
-    // }
+
+  ion-button{
+    text-align: left;
+    ion-label{
+      position: absolute;
+      left: 0px;
+    }
+    ion-icon{
+      // background: red;
+      &.right{
+        position: absolute;
+        right: 0px;
+      }
+      &.left{
+        position: absolute;
+        left: 0px;
+      }
+    }
   }
+  #search-app-content {
+    ion-auto-complete {
+      padding: 0 12px;
+      overflow: visible !important;
+      width: 100%;
+      max-width: 100% !important;
+      position: relative;
+      z-index: 30000;
 
-
-  #suggestions {
-    // for two rows display
-    // display: flex;
-    // flex-direction: row;
-    // flex-wrap: wrap;
-    z-index: 30000;
-    position: relative;
-    // padding: 12px 20px;
-    // ion-chip {
-    //   &.suggestion {
-    //     width: 50%;
-    //   }
-    // }
-
-    ion-list-header {
-      --color: white;
-    }
-
-    &.show {
-      opacity: 1;
-      display: block;
-    }
-
-    &.hide {
-      opacity: 0;
-      display: none;
-    }
-
-    .resultsWrap {
-      margin: -6px;
-      padding: 12px;
-      flex-wrap: wrap;
-      display: grid;
-      grid-template-columns: repeat(auto-fill,minmax(170px, 1fr));
-
-      & > ion-chip {
-        flex: 1 1 170px;
-        margin: 6px;
-        height: 40px;
-        --background: red;
-        ion-icon{
+      ion-button{
+        width: 100%;
+        ion-label{
           position: absolute;
-          right: 10px;
+          left: 57px;
+        }
+      }
+    }
+
+    #suggestions {
+      z-index: 30000;
+      position: relative;
+
+      ion-list-header {
+        --color: white;
+      }
+
+      &.show {
+        opacity: 1;
+        display: block;
+      }
+
+      &.hide {
+        opacity: 0;
+        display: none;
+      }
+
+      .resultsWrap {
+        margin: -6px;
+        padding: 12px;
+        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(auto-fill,minmax(170px, 1fr));
+
+        & > ion-button {
+          opacity: 1;
+          flex: 1 1 170px;
+          margin: 6px;
+          height: 40px;
         }
       }
     }

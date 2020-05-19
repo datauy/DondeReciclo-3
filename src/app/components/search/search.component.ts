@@ -36,7 +36,6 @@ export class SearchComponent implements OnInit {
       this.options.autocomplete = 'on';
       this.options.debounce = 750;
       this.options.placeholder = 'Buscá objetos o materiales.';
-      this.options.type = 'add-friend.svg';
 
     // createAnimation()
     // .addElement(document.querySelector('ion-searchbar'))
@@ -51,7 +50,9 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {
     this.api.loadInitialData().subscribe(
-      () =>  { this.predefinedOptions = this.api.predefinedSearch; }
+      () =>  { this.predefinedOptions = this.api.predefinedSearch;
+        // console.log(this.predefinedOptions)
+      }
     );
   }
 

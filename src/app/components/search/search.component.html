@@ -1,5 +1,5 @@
 <div id="search-app-content"
-  >
+  [ngClass]="searchVisibility ? 'show' : 'hide'">
 
   <!-- <ion-searchbar id="searchBar" type="text" debounce="500" animated placeholder="Busca materiales" color="dark"
   (click)="showSearch()" (ionChange)="searchAPI($event)" clearInput></ion-searchbar> -->
@@ -10,10 +10,17 @@
     #dr
     let-attrs="attrs"
     [ngClass]="searchVisibility ? 'show' : 'hide'">
-    <ion-chip [ngClass]="attrs.data.color">
-      <ion-icon name="heart"></ion-icon>
-      <ion-label [innerHTML]="attrs.data.name | boldprefix:attrs.keyword"></ion-label>
-    </ion-chip>
+    <ion-button [color]="attrs.data.class"
+      [ngClass]="attrs.data.class">
+      <ion-icon
+        class="left"
+        [name]="'dr-' + attrs.data.class"></ion-icon>
+      <ion-label
+        [innerHTML]="attrs.data.name | boldprefix:attrs.keyword"></ion-label>
+      <ion-icon
+        class="right"
+        [name]="'dr-' + attrs.data.class"></ion-icon>
+    </ion-button>
   </ng-template>
 
   <ng-template [ngClass]="searchResults"
@@ -40,8 +47,7 @@
     [dataProvider]="api"
     [disabled]="false"
     [removeButtonColor]="'dark'"
-    [clearInvalidInput]="false"
-    >
+    [clearInvalidInput]="false">
   </ion-auto-complete>
 
 
@@ -49,11 +55,15 @@
     [ngClass]="(api.suggestVisibility && searchVisibility) ? 'show' : 'hide'">
     <ion-list-header>Categorias de búsqueda</ion-list-header>
     <div class="resultsWrap">
-      <ion-chip *ngFor="let predefined of predefinedOptions"
-        [ngClass]="predefined.color">
-        <ion-label [innerHTML]="predefined.name"></ion-label>
-        <ion-icon name="heart"></ion-icon>
-      </ion-chip>
+      <ion-button [color]="predefined.class"
+        *ngFor="let predefined of predefinedOptions"
+        [ngClass]="predefined.class">
+        <ion-label
+          [innerHTML]="predefined.name"></ion-label>
+        <ion-icon
+          class="right"
+          [name]="'dr-'+predefined.class"></ion-icon>
+      </ion-button>
     </div>
   </div>
 </div>
