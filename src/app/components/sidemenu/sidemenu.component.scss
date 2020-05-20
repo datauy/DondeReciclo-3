@@ -1,65 +1,88 @@
-ion-menu {
-  --background: none;
-  --minheight: 300px;
-  --max-height: 100%;
-  --width: 100%;
-}
-
-ion-split-pane{
-    --border: none !important;
-    ion-menu{
-      --background:rgba(0, 0, 0, 0.8)
-    }
-}
-
-ion-header {
-  // width: 80%;
-  // left: 10%;
-}
-
-ion-content {
-  --background: var(--dark-sea-green);
-  --offset-bottom: 200px;
-}
-
-ion-list {
-  --background: none;
-  background: var(--dark-sea-green);
-  // --width: 80%;
-  // left: 10%;
-  --font-size: 20px;
-
-  ion-item {
+:host{
+  ion-menu {
     --background: none;
-    --color: white;
-    background: none;
+    --minheight: 300px;
+    --max-height: 100%;
+    --width: 100%;
+  }
 
-    &.active-item {
-      border-left: none;
-    }
-    ion-label{
-      font-size: 20px;
-      p{
-      size: 14px;
-      color: white;
+  ion-split-pane{
+      --border: none !important;
+      ion-menu{
+        --background:rgba(0, 0, 0, 0.8)
+      }
+  }
+
+  ion-header {
+    // width: 80%;
+    // left: 10%;
+  }
+
+  ion-content {
+    --background: var(--dark-sea-green);
+    --offset-bottom: 200px;
+  }
+
+  ion-list {
+    --background: none;
+    background: var(--dark-sea-green);
+    // --width: 80%;
+    // left: 10%;
+    --font-size: 20px;
+
+    ion-item {
+      --background: none;
+      --color: white;
+      background: none;
+
+      &.active-item {
+        border-left: none;
+      }
+      ion-label{
+        font-size: 20px;
+        p{
+        size: 14px;
+        color: white;
+        }
+      }
+      ion-avatar{
+        color: white;
+      }
+      ion-icon{
+        color: white;
       }
     }
-    ion-avatar{
-      color: white;
-    }
-    ion-icon{
-      color: white;
+  }
+  .menu-rounded-bottom{
+    position: relative;
+    background:var(--dark-sea-green);
+    border-bottom-left-radius: 44px;
+    border-bottom-right-radius: 44px;
+    height: 46px;
+  }
+  .menu-social-links{
+    height: 130px;
+    background: none;
+    ion-toolbar{
+      --background: none;
+      ion-buttons{
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        height: 130px;
+        & > * {
+          // width: auto;  /* Or whatever */
+          // height: auto; /* Or whatever */
+          // margin: auto;  /* Magic! */
+        }
+        ion-button{
+          ion-icon{
+            font-size: 32px;
+            --font-size: 50px;
+          }
+        }
+      }
     }
   }
-}
-.menu-rounded-bottom{
-  position: relative;
-  background:var(--dark-sea-green);
-  border-bottom-left-radius: 44px;
-  border-bottom-right-radius: 44px;
-  height: 46px;
-}
-.menu-social-links{
-  height: 150px;
-  background: none;
 }
