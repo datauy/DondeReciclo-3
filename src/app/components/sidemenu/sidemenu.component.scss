@@ -10,13 +10,16 @@
   ion-split-pane{
       --border: none !important;
       ion-menu{
+        margin-top: 103px;
         --background:rgba(0, 0, 0, 0.8)
       }
   }
 
   ion-header {
+    height: 0;
     // width: 80%;
     // left: 10%;
+    --background: none;
   }
 
   ion-content {

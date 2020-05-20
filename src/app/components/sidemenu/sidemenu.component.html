@@ -1,23 +1,16 @@
 <ion-split-pane contentId="menu-content">
-  <ion-menu contentId="menu-content"
+  <ion-menu #sidemenu
+    contentId="menu-content"
     menuId="main-menu"
     type="overlay"
     side="start"
-    class="ion-no-shadow">
+    class="ion-no-shadow"
+    (ionWillOpen)="menuWillOpen()">
     <ion-header class="ion-no-border">
-      <ion-toolbar>
-        <ion-title>Menú</ion-title>
-        <ion-menu-toggle slot="end"
-          auto-hide="true">
-          <ion-buttons slot="end">
-            <ion-menu-button></ion-menu-button>
-          </ion-buttons>
-        </ion-menu-toggle>
-      </ion-toolbar>
     </ion-header>
     <ion-content class="menu-list">
       <ion-list>
-        <ion-item *ngFor="let p of appPages"
+        <ion-item (click)="toggleMenu()" *ngFor="let p of appPages"
           lines="none"
           [routerDirection]="'root'"
           [routerLink]="[p.url]"

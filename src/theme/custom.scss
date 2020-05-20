@@ -107,7 +107,16 @@
       font-size: 16px;
     }
   }
+
 }
+
+  // app
+  ion-split-pane.split-pane-visible{
+    ion-img.logo{
+      // @extend .hide;
+      opacity: 0;
+    }
+  }
 // Fonts
 // @font-face {
 //   font-family: "PTSerif";
@@ -147,6 +156,13 @@
 //   font-family: "SourceSansPro";
 // }
 
+.show{
+  opacity: 1;
+}
+.hide{
+  opacity: 0;
+}
+
 .h2 {
   height: 40px;
   font-size: 32px;
@@ -178,6 +194,7 @@ p {
 //     --font-size: 50px;
 //   }
 // }
+
 
 // Leaflet
 .leaflet-verticalcenter {
