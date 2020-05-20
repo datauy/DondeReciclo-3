@@ -109,34 +109,39 @@
   }
 }
 // Fonts
-@font-face {
-  font-family: "PTSerif";
-  src: local(PTSerif-Regular), url("src/assets/fonts/PTSerif-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-}
-@font-face {
-  font-family: "Roboto";
-  src: local(Roboto-Medium), url("src/assets/fonts/Roboto-Medium.ttf") format("truetype");
-  font-weight: 500;
-}
-@font-face {
-  font-family: "SourceSansPro";
-  src: local(SourceSansPro-Regular), url("/path/to/SourceSansPro-Regular.woff2") format("woff2"), url("/path/to/SourceSansPro-Regular.woff") format("woff"), url("/path/to/SourceSansPro-Regular.ttf") format("truetype");
-}
-@font-face {
-  font-family: "SourceSansPro";
-  src: local(SourceSansPro-Semibold), url("/path/to/SourceSansPro-Semibold.woff2") format("woff2"), url("/path/to/SourceSansPro-Semibold.woff") format("woff"), url("/path/to/SourceSansPro-Semibold.ttf") format("truetype");
-  font-weight: 600;
-}
+// @font-face {
+//   font-family: "PTSerif";
+//   src: local(PTSerif-Regular), url("src/assets/fonts/PTSerif-Regular.ttf") format("truetype");
+//   font-weight: normal;
+//   font-style: normal;
+//   font-stretch: normal;
+// }
+// @font-face {
+//   font-family: "Roboto";
+//   src: local(Roboto-Medium), url("src/assets/fonts/Roboto-Medium.ttf") format("truetype");
+//   font-weight: 500;
+// }
+// @font-face {
+//   font-family: "SourceSansPro";
+//   src: local(SourceSansPro-Regular), url("/path/to/SourceSansPro-Regular.woff2") format("woff2"), url("/path/to/SourceSansPro-Regular.woff") format("woff"), url("/path/to/SourceSansPro-Regular.ttf") format("truetype");
+// }
+// @font-face {
+//   font-family: "SourceSansPro";
+//   src: local(SourceSansPro-Semibold), url("/path/to/SourceSansPro-Semibold.woff2") format("woff2"), url("/path/to/SourceSansPro-Semibold.woff") format("woff"), url("/path/to/SourceSansPro-Semibold.ttf") format("truetype");
+//   font-weight: 600;
+// }
+
 @font-face {
   font-family: "SourceSansPro";
   src: local(SourceSansPro-Regular), url("src/assets/fonts/SourceSansPro-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
 }
+
+@font-face {
+  font-family: "SourceSansPro-Semibold";
+  src: local(SourceSansPro-Semibold), url("src/assets/fonts/SourceSansPro-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+}
+
 // Estilos html elements
 // * {
 //   font-family: "SourceSansPro";
@@ -164,6 +169,16 @@ p {
     color: --warm-grey;
   }
 }
+
+// Sidemenu
+
+// ion-menu{
+//   ion-icon{
+//     font-size: 32px;
+//     --font-size: 50px;
+//   }
+// }
+
 // Leaflet
 .leaflet-verticalcenter {
   position: absolute;
@@ -375,10 +390,10 @@ p {
             font-size: 18px;
           }
 
-          ion-icon {
-            position: absolute;
-            right: 20px;
-          }
+          // ion-icon {
+          //   position: absolute;
+          //   right: 20px;
+          // }
         }
       }
     }
