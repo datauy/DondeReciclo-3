@@ -1,6 +1,119 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-    <g fill="none" fill-rule="evenodd" stroke="#FFF" stroke-width="1.167">
-        <path stroke-linejoin="round" d="M8.384 5.093c1.165-2.523 3.021-2.128 3.5-1.976.083-.008.166.02.247.091 0 0 1.731.456.525 2.857-1.207 2.4-1.828 2.934-1.682 4.534.036.392.102.79.206 1.172.56.291 1.092.298 1.455.191 1.503-.442.837-1.762.738-1.942l-.011-.02c1.13.687 1.936 1.555 1.533 2.71-.249.71-1.415 1.035-2.275 1.18.227.126.482.213.767.253 1.054.15 2.148.228 2.76.032.151-.048.258.153.144.268-1.642 1.658-3.766 1.912-5.338 1.131C10 15.1 9.508 14.068 9.257 13.2l-.058.213c-.78 2.177-2.907 3.07-6.062 2.332C-.02 15.007-.125 13.18.052 13.102c3.83 1.749 5.673-.273 6.275-1.244.603-.972.71-3.849 2.057-6.765z" transform="translate(1 1)"/>
-        <path d="M13.771.916c-.87.31-1.443 2.004-1.443 2.004H11S12.881-.749 13.771.138c0 0 .871.468 0 .778z" transform="translate(1 1)"/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="512"
+   height="512"
+   viewBox="0 0 512 512"
+   version="1.1"
+   id="svg275"
+   sodipodi:docname="dr-residuos-compostables.svg"
+   inkscape:version="1.0 (6e3e5246a0, 2020-05-07)">
+  <metadata
+     id="metadata281">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs279">
+    <path
+       id="prefix__a"
+       d="M0 0.125L22.894 0.125 22.894 18.095 0 18.095z" />
+    <path
+       id="prefix__a-3"
+       d="M0 0.005L11.387 0.005 11.387 18.346 0 18.346z" />
+    <path
+       id="prefix__a-7"
+       d="M0 0.072L7.267 0.072 7.267 8.05 0 8.05z" />
+    <path
+       id="prefix__c"
+       d="M0.072 0.001L7.993 0.001 7.993 8.87 0.072 8.87z" />
+    <path
+       id="prefix__e"
+       d="M0.04 0.073L8.507 0.073 8.507 5.86 0.04 5.86z" />
+    <path
+       id="prefix__a-35"
+       d="M0 0.125L22.894 0.125 22.894 18.095 0 18.095z" />
+  </defs>
+  <sodipodi:namedview
+     inkscape:document-rotation="0"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1533"
+     inkscape:window-height="845"
+     id="namedview277"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:object-paths="true"
+     inkscape:snap-bbox="true"
+     inkscape:snap-smooth-nodes="true"
+     inkscape:snap-bbox-edge-midpoints="true"
+     inkscape:zoom="0.90885417"
+     inkscape:cx="178.45861"
+     inkscape:cy="239.31434"
+     inkscape:window-x="67"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <sodipodi:guide
+       position="48,175.67752"
+       orientation="-1,0"
+       id="guide285"
+       inkscape:label=""
+       inkscape:locked="false"
+       inkscape:color="rgb(0,0,255)" />
+    <sodipodi:guide
+       position="337.78796,464"
+       orientation="0,1"
+       id="guide568"
+       inkscape:label=""
+       inkscape:locked="false"
+       inkscape:color="rgb(0,0,255)" />
+  </sodipodi:namedview>
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="Layer 1"
+     style="display:inline">
+    <g
+       transform="matrix(24.23347,0,0,24.23347,33.86604,37.878411)"
+       fill="none"
+       fill-rule="evenodd"
+       stroke="#ffffff"
+       stroke-width="1.167"
+       id="g1122">
+      <path
+         stroke-linejoin="round"
+         d="m 8.384,5.093 c 1.165,-2.523 3.021,-2.128 3.5,-1.976 0.083,-0.008 0.166,0.02 0.247,0.091 0,0 1.731,0.456 0.525,2.857 -1.207,2.4 -1.828,2.934 -1.682,4.534 0.036,0.392 0.102,0.79 0.206,1.172 0.56,0.291 1.092,0.298 1.455,0.191 1.503,-0.442 0.837,-1.762 0.738,-1.942 L 13.362,10 c 1.13,0.687 1.936,1.555 1.533,2.71 -0.249,0.71 -1.415,1.035 -2.275,1.18 0.227,0.126 0.482,0.213 0.767,0.253 1.054,0.15 2.148,0.228 2.76,0.032 0.151,-0.048 0.258,0.153 0.144,0.268 -1.642,1.658 -3.766,1.912 -5.338,1.131 C 10,15.1 9.508,14.068 9.257,13.2 L 9.199,13.413 C 8.419,15.59 6.292,16.483 3.137,15.745 -0.02,15.007 -0.125,13.18 0.052,13.102 3.882,14.851 5.725,12.829 6.327,11.858 6.93,10.886 7.037,8.009 8.384,5.093 Z"
+         transform="translate(1,1)"
+         id="path1118" />
+      <path
+         d="M 13.771,0.916 C 12.901,1.226 12.328,2.92 12.328,2.92 H 11 c 0,0 1.881,-3.669 2.771,-2.782 0,0 0.871,0.468 0,0.778 z"
+         transform="translate(1,1)"
+         id="path1120" />
     </g>
+  </g>
+  <inkscape:templateinfo>
+    <inkscape:name>icon</inkscape:name>
+    <inkscape:date>2020-05-20</inkscape:date>
+  </inkscape:templateinfo>
 </svg>

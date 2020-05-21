@@ -1,10 +1,142 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-    <g fill="none" stroke="#FFF" transform="translate(0 4)">
-        <path d="M11.863.5H6c-.69 0-1.315.28-1.768.732C3.78 1.685 3.5 2.31 3.5 3L4 5.5l10.421.035-.058-2.592c-.016-.679-.3-1.29-.752-1.73C13.16.77 12.543.5 11.863.5z"/>
-        <path d="M16 2.5c-.414 0-.79.168-1.06.44-.272.27-.44.646-.44 1.06v1.5h-11V4c0-.414-.168-.79-.44-1.06-.27-.272-.646-.44-1.06-.44-.414 0-.79.168-1.06.44C.667 3.21.5 3.585.5 4v4c0 .414.168.79.44 1.06.27.272.646.44 1.06.44l14.13-.005c.382-.033.723-.21.97-.475.248-.268.4-.626.4-1.02V4c0-.414-.168-.79-.44-1.06-.27-.272-.646-.44-1.06-.44z"/>
-        <rect width="3" height="7" x=".5" y="2.5" rx="1.5"/>
-        <rect width="3" height="7" x="14.5" y="2.5" rx="1.5"/>
-        <rect width="1" height="1" x="3.5" y="10.5" rx=".5"/>
-        <rect width="1" height="1" x="13.5" y="10.5" rx=".5"/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="512"
+   height="512"
+   viewBox="0 0 512 512"
+   version="1.1"
+   id="svg275"
+   sodipodi:docname="dr-residuos-voluminosos.svg"
+   inkscape:version="1.0 (6e3e5246a0, 2020-05-07)">
+  <metadata
+     id="metadata281">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs279">
+    <path
+       id="prefix__a"
+       d="M0 0.125L22.894 0.125 22.894 18.095 0 18.095z" />
+    <path
+       id="prefix__a-3"
+       d="M0 0.005L11.387 0.005 11.387 18.346 0 18.346z" />
+    <path
+       id="prefix__a-7"
+       d="M0 0.072L7.267 0.072 7.267 8.05 0 8.05z" />
+    <path
+       id="prefix__c"
+       d="M0.072 0.001L7.993 0.001 7.993 8.87 0.072 8.87z" />
+    <path
+       id="prefix__e"
+       d="M0.04 0.073L8.507 0.073 8.507 5.86 0.04 5.86z" />
+    <path
+       id="prefix__a-35"
+       d="M0 0.125L22.894 0.125 22.894 18.095 0 18.095z" />
+  </defs>
+  <sodipodi:namedview
+     inkscape:document-rotation="0"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1533"
+     inkscape:window-height="845"
+     id="namedview277"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:object-paths="true"
+     inkscape:snap-bbox="true"
+     inkscape:snap-smooth-nodes="true"
+     inkscape:snap-bbox-edge-midpoints="true"
+     inkscape:zoom="0.90885417"
+     inkscape:cx="178.45861"
+     inkscape:cy="239.31434"
+     inkscape:window-x="67"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <sodipodi:guide
+       position="48,175.67752"
+       orientation="-1,0"
+       id="guide285"
+       inkscape:label=""
+       inkscape:locked="false"
+       inkscape:color="rgb(0,0,255)" />
+    <sodipodi:guide
+       position="337.78796,464"
+       orientation="0,1"
+       id="guide568"
+       inkscape:label=""
+       inkscape:locked="false"
+       inkscape:color="rgb(0,0,255)" />
+  </sodipodi:namedview>
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="Layer 1"
+     style="display:inline">
+    <g
+       fill="none"
+       stroke="#ffffff"
+       transform="matrix(23.111111,0,0,23.111111,48,117.33333)"
+       id="g871">
+      <path
+         d="M 11.863,0.5 H 6 C 5.31,0.5 4.685,0.78 4.232,1.232 3.78,1.685 3.5,2.31 3.5,3 L 4,5.5 14.421,5.535 14.363,2.943 C 14.347,2.264 14.063,1.653 13.611,1.213 13.16,0.77 12.543,0.5 11.863,0.5 Z"
+         id="path859" />
+      <path
+         d="M 16,2.5 C 15.586,2.5 15.21,2.668 14.94,2.94 14.668,3.21 14.5,3.586 14.5,4 V 5.5 H 3.5 V 4 C 3.5,3.586 3.332,3.21 3.06,2.94 2.79,2.668 2.414,2.5 2,2.5 1.586,2.5 1.21,2.668 0.94,2.94 0.667,3.21 0.5,3.585 0.5,4 V 8 C 0.5,8.414 0.668,8.79 0.94,9.06 1.21,9.332 1.586,9.5 2,9.5 L 16.13,9.495 C 16.512,9.462 16.853,9.285 17.1,9.02 17.348,8.752 17.5,8.394 17.5,8 V 4 C 17.5,3.586 17.332,3.21 17.06,2.94 16.79,2.668 16.414,2.5 16,2.5 Z"
+         id="path861" />
+      <rect
+         width="3"
+         height="7"
+         x="0.5"
+         y="2.5"
+         rx="1.5"
+         id="rect863" />
+      <rect
+         width="3"
+         height="7"
+         x="14.5"
+         y="2.5"
+         rx="1.5"
+         id="rect865" />
+      <rect
+         width="1"
+         height="1"
+         x="3.5"
+         y="10.5"
+         rx="0.5"
+         id="rect867" />
+      <rect
+         width="1"
+         height="1"
+         x="13.5"
+         y="10.5"
+         rx="0.5"
+         id="rect869" />
     </g>
+  </g>
+  <inkscape:templateinfo>
+    <inkscape:name>icon</inkscape:name>
+    <inkscape:date>2020-05-20</inkscape:date>
+  </inkscape:templateinfo>
 </svg>

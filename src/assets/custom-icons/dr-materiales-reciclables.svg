@@ -1,27 +1,181 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" height="18" viewBox="0 0 18 18">
-    <defs>
-        <path id="prefix__a" d="M0 0.072L7.267 0.072 7.267 8.05 0 8.05z"/>
-        <path id="prefix__c" d="M0.072 0.001L7.993 0.001 7.993 8.87 0.072 8.87z"/>
-        <path id="prefix__e" d="M0.04 0.073L8.507 0.073 8.507 5.86 0.04 5.86z"/>
-    </defs>
-    <g fill="none" fill-rule="evenodd">
-        <g transform="translate(1 1) translate(0 7)">
-            <mask id="prefix__b" fill="#fff">
-                <use xlink:href="#prefix__a"/>
-            </mask>
-            <path fill="#FFF" d="M6.15 5.905H3.14c-.533 0-.808-.364-.894-.52-.085-.155-.275-.57 0-1.037l.894-1.575c.052-.103.19-.138.293-.086l.464.26c.172.086.36-.052.309-.243L3.537.231C3.502.109 3.382.058 3.279.075L.82.749c-.19.052-.206.295-.052.398l.464.26c.103.052.138.19.086.294L.425 3.275c-.567 1.003-.567 2.18 0 3.183C.993 7.461 2.024 8.05 3.158 8.05h3.043c.602 0 1.083-.502 1.066-1.125-.052-.588-.533-1.02-1.118-1.02" mask="url(#prefix__b)"/>
-        </g>
-        <g transform="translate(1 1) translate(8 7)">
-            <mask id="prefix__d" fill="#fff">
-                <use xlink:href="#prefix__c"/>
-            </mask>
-            <path fill="#FFF" d="M7.548 3.101L6.03.545c-.307-.522-.994-.696-1.518-.4-.542.295-.722.956-.415 1.46l1.536 2.557c.289.47.09.887 0 1.044-.09.156-.38.521-.94.521H2.651c-.126 0-.216-.104-.216-.208v-.54c0-.19-.235-.295-.38-.156L.14 6.683c-.09.088-.09.227 0 .297l1.897 1.826c.145.139.38.034.38-.157V8.11c0-.122.108-.209.216-.209h2.024c1.192 0 2.276-.591 2.873-1.6.614-.991.614-2.191.018-3.2" mask="url(#prefix__d)"/>
-        </g>
-        <g transform="translate(1 1) translate(4)">
-            <mask id="prefix__f" fill="#fff">
-                <use xlink:href="#prefix__e"/>
-            </mask>
-            <path fill="#FFF" d="M4.928 2.675l.865 1.588c.048.101.016.22-.064.287l-.432.27c-.16.102-.128.338.048.389l2.306.642c.112.034.208-.034.24-.152l.609-2.45c.048-.186-.144-.32-.289-.236l-.432.27c-.096.05-.208.017-.272-.068l-.865-1.588C6.114.664 5.152.073 4.096.073c-1.057 0-2.018.574-2.547 1.554L.172 4.162C-.1 4.668.06 5.293.54 5.58c.16.101.32.135.497.135.336 0 .673-.186.865-.524l1.377-2.534c.256-.456.673-.507.833-.507.16 0 .576.068.816.524" mask="url(#prefix__f)"/>
-        </g>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="512"
+   height="512"
+   viewBox="0 0 512 512"
+   version="1.1"
+   id="svg275"
+   sodipodi:docname="dr-materiales-reciclables.svg"
+   inkscape:version="1.0 (6e3e5246a0, 2020-05-07)">
+  <metadata
+     id="metadata281">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs279">
+    <path
+       id="prefix__a"
+       d="M0 0.125L22.894 0.125 22.894 18.095 0 18.095z" />
+    <path
+       id="prefix__a-3"
+       d="M0 0.005L11.387 0.005 11.387 18.346 0 18.346z" />
+    <path
+       id="prefix__a-7"
+       d="M0 0.072L7.267 0.072 7.267 8.05 0 8.05z" />
+    <path
+       id="prefix__c"
+       d="M0.072 0.001L7.993 0.001 7.993 8.87 0.072 8.87z" />
+    <path
+       id="prefix__e"
+       d="M0.04 0.073L8.507 0.073 8.507 5.86 0.04 5.86z" />
+    <path
+       id="prefix__a-35"
+       d="M0 0.125L22.894 0.125 22.894 18.095 0 18.095z" />
+    <path
+       id="prefix__a-6"
+       d="M0 0.005L11.387 0.005 11.387 18.346 0 18.346z" />
+    <path
+       id="prefix__a-2"
+       d="M0 0.072L7.267 0.072 7.267 8.05 0 8.05z" />
+    <path
+       id="prefix__c-9"
+       d="M0.072 0.001L7.993 0.001 7.993 8.87 0.072 8.87z" />
+    <path
+       id="prefix__e-1"
+       d="M0.04 0.073L8.507 0.073 8.507 5.86 0.04 5.86z" />
+  </defs>
+  <sodipodi:namedview
+     inkscape:document-rotation="0"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1533"
+     inkscape:window-height="845"
+     id="namedview277"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:object-paths="true"
+     inkscape:snap-bbox="true"
+     inkscape:snap-smooth-nodes="true"
+     inkscape:snap-bbox-edge-midpoints="true"
+     inkscape:zoom="0.90885417"
+     inkscape:cx="233.63604"
+     inkscape:cy="251.3413"
+     inkscape:window-x="67"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <sodipodi:guide
+       position="48,175.67752"
+       orientation="-1,0"
+       id="guide285"
+       inkscape:label=""
+       inkscape:locked="false"
+       inkscape:color="rgb(0,0,255)" />
+    <sodipodi:guide
+       position="337.78796,464"
+       orientation="0,1"
+       id="guide568"
+       inkscape:label=""
+       inkscape:locked="false"
+       inkscape:color="rgb(0,0,255)" />
+  </sodipodi:namedview>
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="Layer 1"
+     style="display:inline">
+    <g
+       transform="matrix(26.334674,0,0,26.334674,19.083064,19.742895)"
+       fill="none"
+       fill-rule="evenodd"
+       id="g1663">
+      <g
+         transform="translate(1,8)"
+         id="g1647">
+        <mask
+           id="prefix__b"
+           fill="#ffffff">
+          <use
+             height="100%"
+             width="100%"
+             y="0"
+             x="0"
+             xlink:href="#prefix__a-2"
+             id="use1642" />
+        </mask>
+        <path
+           fill="#ffffff"
+           d="M 6.15,5.905 H 3.14 C 2.607,5.905 2.332,5.541 2.246,5.385 2.161,5.23 1.971,4.815 2.246,4.348 L 3.14,2.773 C 3.192,2.67 3.33,2.635 3.433,2.687 l 0.464,0.26 C 4.069,3.033 4.257,2.895 4.206,2.704 L 3.537,0.231 C 3.502,0.109 3.382,0.058 3.279,0.075 L 0.82,0.749 C 0.63,0.801 0.614,1.044 0.768,1.147 l 0.464,0.26 C 1.335,1.459 1.37,1.597 1.318,1.701 L 0.425,3.275 c -0.567,1.003 -0.567,2.18 0,3.183 C 0.993,7.461 2.024,8.05 3.158,8.05 H 6.201 C 6.803,8.05 7.284,7.548 7.267,6.925 7.215,6.337 6.734,5.905 6.149,5.905"
+           mask="url(#prefix__b)"
+           id="path1645" />
+      </g>
+      <g
+         transform="translate(9,8)"
+         id="g1654">
+        <mask
+           id="prefix__d"
+           fill="#ffffff">
+          <use
+             height="100%"
+             width="100%"
+             y="0"
+             x="0"
+             xlink:href="#prefix__c-9"
+             id="use1649" />
+        </mask>
+        <path
+           fill="#ffffff"
+           d="M 7.548,3.101 6.03,0.545 C 5.723,0.023 5.036,-0.151 4.512,0.145 3.97,0.44 3.79,1.101 4.097,1.605 l 1.536,2.557 c 0.289,0.47 0.09,0.887 0,1.044 -0.09,0.156 -0.38,0.521 -0.94,0.521 H 2.651 C 2.525,5.727 2.435,5.623 2.435,5.519 V 4.979 C 2.435,4.789 2.2,4.684 2.055,4.823 L 0.14,6.683 C 0.05,6.771 0.05,6.91 0.14,6.98 L 2.037,8.806 C 2.182,8.945 2.417,8.84 2.417,8.649 V 8.11 c 0,-0.122 0.108,-0.209 0.216,-0.209 H 4.657 C 5.849,7.901 6.933,7.31 7.53,6.301 8.144,5.31 8.144,4.11 7.548,3.101"
+           mask="url(#prefix__d)"
+           id="path1652" />
+      </g>
+      <g
+         transform="translate(5,1)"
+         id="g1661">
+        <mask
+           id="prefix__f"
+           fill="#ffffff">
+          <use
+             height="100%"
+             width="100%"
+             y="0"
+             x="0"
+             xlink:href="#prefix__e-1"
+             id="use1656" />
+        </mask>
+        <path
+           fill="#ffffff"
+           d="M 4.928,2.675 5.793,4.263 C 5.841,4.364 5.809,4.483 5.729,4.55 L 5.297,4.82 C 5.137,4.922 5.169,5.158 5.345,5.209 L 7.651,5.851 C 7.763,5.885 7.859,5.817 7.891,5.699 L 8.5,3.249 C 8.548,3.063 8.356,2.929 8.211,3.013 L 7.779,3.283 C 7.683,3.333 7.571,3.3 7.507,3.215 L 6.642,1.627 C 6.114,0.664 5.152,0.073 4.096,0.073 3.039,0.073 2.078,0.647 1.549,1.627 L 0.172,4.162 C -0.1,4.668 0.06,5.293 0.54,5.58 0.7,5.681 0.86,5.715 1.037,5.715 1.373,5.715 1.71,5.529 1.902,5.191 L 3.279,2.657 C 3.535,2.201 3.952,2.15 4.112,2.15 c 0.16,0 0.576,0.068 0.816,0.524"
+           mask="url(#prefix__f)"
+           id="path1659" />
+      </g>
     </g>
+  </g>
+  <inkscape:templateinfo>
+    <inkscape:name>icon</inkscape:name>
+    <inkscape:date>2020-05-20</inkscape:date>
+  </inkscape:templateinfo>
 </svg>
