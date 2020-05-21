@@ -6,13 +6,19 @@
       src="assets/img/donde_reciclo.png"
       alt="Donde Reciclo">
     </ion-img>
-    <ion-button color="--pale-olive-green"
-      (click)="openSocialModal()"
-      slot="end">
-      <ion-icon name="share-social-outline"></ion-icon>
-    </ion-button>
     <ion-buttons slot="end">
-      <ion-menu-button></ion-menu-button>
+      <ion-button color="pale-olive-green"
+        (click)="openSocialModal()"
+        slot="end">
+        <ion-icon name="dr-share"
+        slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-button color="pale-olive-green"
+        (click)="toggleMenu()"
+        slot="end">
+        <ion-icon name="dr-menu"
+        slot="icon-only"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

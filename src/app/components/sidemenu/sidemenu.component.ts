@@ -17,19 +17,19 @@ export class SidemenuComponent implements OnInit {
       title: 'Novedades',
       desc: 'Ulitmas noticias relacionadas',
       url: '/novedades',
-      icon: 'newspaper-outline'
+      icon: 'dr-newspaper'
     },
     {
       title: 'Programas',
       desc: 'Y ciclo de vida de los residuos',
       url: '/programas',
-      icon: 'leaf-outline'
+      icon: 'dr-recycle'
     },
     {
       title: 'Empresas',
       desc: 'Marcas que hacen posible esta app',
       url: '/empresas',
-      icon: 'handshake-outline'
+      icon: 'dr-empresas'
     }
   ];
 
@@ -44,10 +44,6 @@ export class SidemenuComponent implements OnInit {
  }
 
   ngOnInit() { }
-
-  menuWillOpen(){
-    console.log('menu will open')
-  }
 
   toggleMenu(){
     this.menuCtrl.toggle(); //Add this method to your button click function
