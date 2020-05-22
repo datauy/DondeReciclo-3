@@ -26,7 +26,7 @@
       width: 100%;
       max-width: 100% !important;
       position: relative;
-      z-index: 30000;
+      z-index: 1020;
 
       ion-button{
         width: 100%;
@@ -38,7 +38,7 @@
     }
 
     #suggestions {
-      z-index: 30000;
+      z-index: 1020;
       position: relative;
 
       ion-list-header {
@@ -60,11 +60,11 @@
         padding: 12px;
         flex-wrap: wrap;
         display: grid;
-        grid-template-columns: repeat(auto-fill,minmax(170px, 1fr));
+        grid-template-columns: repeat(auto-fill,minmax(220px, 1fr));
 
         & > ion-button {
           opacity: 1;
-          flex: 1 1 170px;
+          flex: 1 1 220px;
           margin: 6px;
           height: 40px;
         }

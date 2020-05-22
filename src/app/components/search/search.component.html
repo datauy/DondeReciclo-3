@@ -1,25 +1,24 @@
-<div id="search-app-content"
-  [ngClass]="searchVisibility ? 'show' : 'hide'">
+<div id="search-app-content">
 
   <!-- <ion-searchbar id="searchBar" type="text" debounce="500" animated placeholder="Busca materiales" color="dark"
   (click)="showSearch()" (ionChange)="searchAPI($event)" clearInput></ion-searchbar> -->
 
-  <ion-list-header id="results-title"
-    [ngClass]="api.suggestVisibility ? 'hide' : 'show'">Resultados de búsqueda</ion-list-header>
   <ng-template [ngClass]="searchResults"
     #dr
     let-attrs="attrs"
     [ngClass]="searchVisibility ? 'show' : 'hide'">
     <ion-button [color]="attrs.data.class"
+      expand="block"
       [ngClass]="attrs.data.class">
       <ion-icon
         class="left"
         [name]="'dr-' + attrs.data.class"></ion-icon>
       <ion-label
         [innerHTML]="attrs.data.name | boldprefix:attrs.keyword"></ion-label>
-      <ion-icon
-        class="right"
-        [name]="'dr-' + attrs.data.class"></ion-icon>
+
+        <!-- <ion-icon
+          class="right"
+          name="close-outline"></ion-icon> -->
     </ion-button>
   </ng-template>
 

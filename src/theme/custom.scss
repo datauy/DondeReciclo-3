@@ -20,7 +20,7 @@
 
   // Size and spacing variables
 
-  --dr-header-height: 105px;
+  --dr-header-height: 138px;
   --dr-margin: 12px;
 
   // Font
@@ -49,15 +49,17 @@
       }
     }
   ion-toolbar {
-    height: 138px;
+    height: var(--dr-header-height);
   }
 
   ion-button {
       --border-radius: 6px;
       --box-shadow: none;
-      text-transform: capitalize;
+
+      text-transform: none;
       // padding: 10px;
       // margin: 6px;
+      font-family: "SourceSansPro-Semibold";
       font-size: 16px;
 
       &.big{
@@ -91,7 +93,7 @@
 
 
   // slider
-
+  app-slider{z-index:0 !important;} //hide for now!
   ion-slides .swiper-pagination-bullet {
     width: 9px;
     height: 9px;
@@ -107,40 +109,61 @@
       font-size: 16px;
     }
   }
+
 }
+
+  // app
+  ion-split-pane.split-pane-visible{
+    ion-img.logo{
+      // @extend .hide;
+      opacity: 0;
+    }
+  }
 // Fonts
-@font-face {
-  font-family: "PTSerif";
-  src: local(PTSerif-Regular), url("src/assets/fonts/PTSerif-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-}
-@font-face {
-  font-family: "Roboto";
-  src: local(Roboto-Medium), url("src/assets/fonts/Roboto-Medium.ttf") format("truetype");
-  font-weight: 500;
-}
-@font-face {
-  font-family: "SourceSansPro";
-  src: local(SourceSansPro-Regular), url("/path/to/SourceSansPro-Regular.woff2") format("woff2"), url("/path/to/SourceSansPro-Regular.woff") format("woff"), url("/path/to/SourceSansPro-Regular.ttf") format("truetype");
-}
-@font-face {
-  font-family: "SourceSansPro";
-  src: local(SourceSansPro-Semibold), url("/path/to/SourceSansPro-Semibold.woff2") format("woff2"), url("/path/to/SourceSansPro-Semibold.woff") format("woff"), url("/path/to/SourceSansPro-Semibold.ttf") format("truetype");
-  font-weight: 600;
-}
+// @font-face {
+//   font-family: "PTSerif";
+//   src: local(PTSerif-Regular), url("src/assets/fonts/PTSerif-Regular.ttf") format("truetype");
+//   font-weight: normal;
+//   font-style: normal;
+//   font-stretch: normal;
+// }
+// @font-face {
+//   font-family: "Roboto";
+//   src: local(Roboto-Medium), url("src/assets/fonts/Roboto-Medium.ttf") format("truetype");
+//   font-weight: 500;
+// }
+// @font-face {
+//   font-family: "SourceSansPro";
+//   src: local(SourceSansPro-Regular), url("/path/to/SourceSansPro-Regular.woff2") format("woff2"), url("/path/to/SourceSansPro-Regular.woff") format("woff"), url("/path/to/SourceSansPro-Regular.ttf") format("truetype");
+// }
+// @font-face {
+//   font-family: "SourceSansPro";
+//   src: local(SourceSansPro-Semibold), url("/path/to/SourceSansPro-Semibold.woff2") format("woff2"), url("/path/to/SourceSansPro-Semibold.woff") format("woff"), url("/path/to/SourceSansPro-Semibold.ttf") format("truetype");
+//   font-weight: 600;
+// }
+
 @font-face {
   font-family: "SourceSansPro";
   src: local(SourceSansPro-Regular), url("src/assets/fonts/SourceSansPro-Regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
 }
+
+@font-face {
+  font-family: "SourceSansPro-Semibold";
+  src: local(SourceSansPro-Semibold), url("src/assets/fonts/SourceSansPro-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+}
+
 // Estilos html elements
 // * {
 //   font-family: "SourceSansPro";
 // }
+
+.show{
+  opacity: 1;
+}
+.hide{
+  opacity: 0;
+}
 
 .h2 {
   height: 40px;
@@ -164,6 +187,17 @@ p {
     color: --warm-grey;
   }
 }
+
+// Sidemenu
+
+// ion-menu{
+//   ion-icon{
+//     font-size: 32px;
+//     --font-size: 50px;
+//   }
+// }
+
+
 // Leaflet
 .leaflet-verticalcenter {
   position: absolute;
@@ -243,6 +277,7 @@ p {
   opacity: 0;
   transition: visibility 0s 0.3s, opacity 0.3s linear;
 }
+
 // ion-loading.custom-loading {
 //   ion-backdrop {
 //     background: white;
@@ -307,6 +342,12 @@ p {
     visibility: hidden;
   }
 }
+
+// body.backdrop-no-scroll {
+//   app-search #search-app-content{
+//     left: 100%;
+//   }
+// }
 
 #search-app-content {
   top: 105px;
@@ -375,10 +416,10 @@ p {
             font-size: 18px;
           }
 
-          ion-icon {
-            position: absolute;
-            right: 20px;
-          }
+          // ion-icon {
+          //   position: absolute;
+          //   right: 20px;
+          // }
         }
       }
     }
