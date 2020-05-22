@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonMenu, MenuController } from '@ionic/angular';
+import { IonMenu, MenuController, IonSearchbar } from '@ionic/angular';
+import { ApiService } from "src/app/services/api.service";
+import { createAnimation, Animation } from '@ionic/core';
 
 @Component({
   selector: 'app-sidemenu',
@@ -9,8 +11,6 @@ import { IonMenu, MenuController } from '@ionic/angular';
 export class SidemenuComponent implements OnInit {
 
   @ViewChild(IonMenu, { static: false }) public sidemenu: IonMenu;
-
-  menuState: any;
 
   public appPages = [
     {
@@ -35,7 +35,8 @@ export class SidemenuComponent implements OnInit {
 
 
   constructor(
-    private menuCtrl: MenuController
+    private menuCtrl: MenuController,
+    public api: ApiService<any>
   ) {
     // this.sidemenu.ionWillOpen.subscribe(data => {
     //     console.log('menu open');
@@ -43,11 +44,42 @@ export class SidemenuComponent implements OnInit {
 
  }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.api.loadInitialData().subscribe(
+      () =>  { this.menuState = this.api.menuState;
+        // console.log(this.predefinedOptions)
+      }
+    );
+ }
 
   toggleMenu(){
     this.menuCtrl.toggle(); //Add this method to your button click function
   }
 
+  menuWillOpen(){
+    console.log('menu will open');
+    createAnimation()
+    .addElement(document.querySelector('#search-app-content'))
+    .duration(100)
+    .iterations(1)
+    .easing('ease-out')
+    .keyframes([
+      { offset: 0, opacity: 1 },
+      { offset: 1, opacity: 0 }
+    ],).play();
+  }
+
+  menuWillClose(){
+    console.log('menu will close');
+    createAnimation()
+    .addElement(document.querySelector('#search-app-content'))
+    .duration(200)
+    .iterations(1)
+    .easing('ease-in')
+    .keyframes([
+      { offset: 0, opacity: 0 },
+      { offset: 1, opacity: 1 }
+    ]).play();
+  }
 
 }

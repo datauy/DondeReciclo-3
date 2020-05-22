@@ -20,7 +20,7 @@
 
   // Size and spacing variables
 
-  --dr-header-height: 105px;
+  --dr-header-height: 138px;
   --dr-margin: 12px;
 
   // Font
@@ -49,7 +49,7 @@
       }
     }
   ion-toolbar {
-    height: 138px;
+    height: var(--dr-header-height);
   }
 
   ion-button {
@@ -93,7 +93,7 @@
 
 
   // slider
-
+  app-slider{z-index:0 !important;} //hide for now!
   ion-slides .swiper-pagination-bullet {
     width: 9px;
     height: 9px;
@@ -277,6 +277,7 @@ p {
   opacity: 0;
   transition: visibility 0s 0.3s, opacity 0.3s linear;
 }
+
 // ion-loading.custom-loading {
 //   ion-backdrop {
 //     background: white;
@@ -341,6 +342,12 @@ p {
     visibility: hidden;
   }
 }
+
+// body.backdrop-no-scroll {
+//   app-search #search-app-content{
+//     left: 100%;
+//   }
+// }
 
 #search-app-content {
   top: 105px;

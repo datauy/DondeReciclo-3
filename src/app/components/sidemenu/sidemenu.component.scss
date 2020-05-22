@@ -5,12 +5,20 @@
     --minheight: 300px;
     --max-height: 100%;
     --width: 100%;
+
   }
 
+  ion-backdrop {
+    display: none !important;
+    opacity: none !important;
+    --backdrop-opacity: 1;
+    --background: red !important;
+  }
+  
   ion-split-pane{
       --border: none !important;
       ion-menu{
-        margin-top: 103px;
+        margin-top: var(--dr-header-height);
         --background:rgba(0, 0, 0, 0.8)
       }
   }

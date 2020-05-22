@@ -4,8 +4,9 @@
     menuId="main-menu"
     type="overlay"
     side="start"
-    class="ion-no-shadow"
-    (ionWillOpen)="menuWillOpen()">
+    class="mainMenu ion-no-shadow"
+    (ionWillOpen)="menuWillOpen()"
+    (ionDidClose)="menuWillClose()">
     <ion-header class="ion-no-border">
     </ion-header>
     <ion-content class="menu-list">
