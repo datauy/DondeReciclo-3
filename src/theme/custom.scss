@@ -55,9 +55,11 @@
   ion-button {
       --border-radius: 6px;
       --box-shadow: none;
-      text-transform: capitalize;
+
+      text-transform: none;
       // padding: 10px;
       // margin: 6px;
+      font-family: "SourceSansPro-Semibold";
       font-size: 16px;
 
       &.big{
