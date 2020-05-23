@@ -59,7 +59,7 @@
       text-transform: none;
       // padding: 10px;
       // margin: 6px;
-      font-family: "SourceSansPro-Semibold";
+      font-family: "SourceSansPro";
       font-size: 16px;
 
       &.big{
@@ -141,52 +141,71 @@
 //   src: local(SourceSansPro-Semibold), url("/path/to/SourceSansPro-Semibold.woff2") format("woff2"), url("/path/to/SourceSansPro-Semibold.woff") format("woff"), url("/path/to/SourceSansPro-Semibold.ttf") format("truetype");
 //   font-weight: 600;
 // }
-
-@font-face {
-  font-family: "SourceSansPro";
-  src: local(SourceSansPro-Regular), url("src/assets/fonts/SourceSansPro-Regular.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "SourceSansPro-Semibold";
-  src: local(SourceSansPro-Semibold), url("src/assets/fonts/SourceSansPro-SemiBold.ttf") format("truetype");
-  font-weight: 600;
-}
+//
+// @font-face {
+//   font-family: "SourceSansPro";
+//   src: local(SourceSansPro-Regular), url("src/assets/fonts/SourceSansPro-Regular.ttf") format("truetype");
+// }
+//
+// @font-face {
+//   font-family: "SourceSansPro-Semibold";
+//   src: local(SourceSansPro-Semibold), url("src/assets/fonts/SourceSansPro-SemiBold.ttf") format("truetype");
+//   font-weight: 600;
+// }
 
 // Estilos html elements
 // * {
 //   font-family: "SourceSansPro";
 // }
 
+
+
+// utils
+
 .show{
   opacity: 1;
+  transition: opacity 1s linear;
 }
 .hide{
+  transition: opacity 1s linear;
   opacity: 0;
 }
-
-.h2 {
-  height: 40px;
-  font-size: 32px;
-  color: var(--greyish-brown);
-}
-
-.subtitulos {
-  font-size: 14px;
-  font-weight: bold;
-  color: var(--greyish-brown);
-}
-
-p {
-  font-size: 16px;
-  line-height: 1.5;
-  color: var(--greyish-brown);
-
-  .enphasize {
-    line-height: 1.44;
-    color: --warm-grey;
+.circle {
+  width: 12px;
+  height: 12px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  &.green{
+    background: var(--bluish-green);
+  }
+  &.red{
+    background: var(--vermillion);
   }
 }
+//
+// .h2 {
+//   height: 40px;
+//   font-size: 32px;
+//   color: var(--greyish-brown);
+// }
+//
+// .subtitulos {
+//   font-size: 14px;
+//   font-weight: bold;
+//   color: var(--greyish-brown);
+// }
+//
+// p {
+//   font-size: 16px;
+//   line-height: 1.5;
+//   color: var(--greyish-brown);
+//
+//   .enphasize {
+//     line-height: 1.44;
+//     color: --warm-grey;
+//   }
+// }
 
 // Sidemenu
 

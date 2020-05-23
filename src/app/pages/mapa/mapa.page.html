@@ -18,45 +18,53 @@
     <ion-icon slot="start">
       <img src="{{container.program_id}}">
     </ion-icon>
-    <span>Programa</span>
-    <ion-label>
-      <h2>{{container.program}}</h2>
-    </ion-label>
+    <div>
+      <p size="small">Programa</p>
+      <h5>{{container.program}}</h5>
+    </div>
     <ion-icon slot="end" class="{{container.type_id}}">
     </ion-icon>
   </ion-item>
 
   <ion-item>
-    <ion-label>{{container.location}}</ion-label>
-    <span>{{container.address}}</span>
-    <ion-icon slot="end">
-      <img *ngIf="container.photos?.length" src="container.photos[0]">
-    </ion-icon>
-    <ion-icon name="add-circle-outline" color="--pale-olive-green"></ion-icon>
+    <div>
+      <h5>{{container.location}}</h5>
+      <p>{{container.address}}</p>
+      <ion-icon slot="end">
+        <img *ngIf="container.photos?.length" src="container.photos[0]">
+      </ion-icon>
+      <ion-icon name="add-circle-outline" color="--pale-olive-green"></ion-icon>
+    </div>
   </ion-item>
 
   <ion-item>
     <ion-label>
-      <h4>Horario</h4>
+      <h5>Horario</h5>
       <p>9:00 - 21:00 hs (aprox.)</p>
     </ion-label>
   </ion-item>
 
   <ion-item>
-    <ion-label color="--pale-olive-green">
-      <ion-icon name="camera-outline"></ion-icon><h4>Subir otra foto</h4>
+    <ion-label>
+      <h4><ion-icon name="camera-outline"></ion-icon> Subir otra foto</h4>
     </ion-label>
   </ion-item>
 
   <ion-item>
-    <div class="cirlce green"></div><span>Recibe:</span>
-      <ion-chip *ngFor="let material of container.materials" class="{{material.class}}">
-        <ion-icon src="{{material.class}}.svg"></ion-icon>
+    <ion-label>
+      <h6><div class="circle green"></div> Recibe:</h6>
+      {{container.receives_no}}
+      <div class="recibe-text">{{container.materials}}</div>
+      <ion-button *ngFor="let material of container.materials" class="{{material.class}}">
+        <ion-icon class="left" src="{{material.class}}.svg"></ion-icon>
         <ion-label>{{material.name}}</ion-label>
-      </ion-chip>
+      </ion-button>
+    </ion-label>
   </ion-item>
   <ion-item>
-    <div class="cirlce green"></div><span>No Recibe:</span>
-    <div class="recibe-text">{{container.receives_no}}</div>
+    <ion-label>
+      <h6><div class="circle green"></div>No Recibe:</h6>
+      <div class="recibe-text">{{container.receives_no}}</div>
+    </ion-label>
   </ion-item>
 </div>

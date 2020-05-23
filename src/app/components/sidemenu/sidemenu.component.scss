@@ -14,7 +14,7 @@
     --backdrop-opacity: 1;
     --background: red !important;
   }
-  
+
   ion-split-pane{
       --border: none !important;
       ion-menu{
@@ -45,17 +45,21 @@
     ion-item {
       --background: none;
       --color: white;
+      --padding-top: 16px;
+      --padding-bottom: 16px;
       background: none;
+      margin: 0;
 
       &.active-item {
         border-left: none;
       }
-      ion-label{
-        font-size: 20px;
-        p{
-        size: 14px;
+      h4{
+        margin: 0;
         color: white;
-        }
+      }
+      p{
+        margin: 0;
+        color: white;
       }
       ion-avatar{
         color: white;
@@ -63,6 +67,10 @@
       ion-icon{
         color: white;
         font-size: 35px;
+        margin: 0 27px 0 0;
+        &[slot="end"]{
+          margin: 0;
+        }
       }
     }
   }
