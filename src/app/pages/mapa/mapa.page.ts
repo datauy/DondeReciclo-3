@@ -24,7 +24,6 @@ export class MapaPage implements OnInit {
   userPosition: [number, number]
   address: string[];
   container = {} as Container;
-  containers: Container[];
   containerType = {} as ContainerType
   containerTypes: ContainerType[];
   dataReturned:any;
@@ -88,18 +87,14 @@ export class MapaPage implements OnInit {
     );
   }
   showPane() {
-    let pos = this.map.currentPos;
-    console.log("SHOWING PANE");
-    console.log(pos);
-    //console.log(e);
-    this.container = this.containers[pos];
+    this.container = this.map.currentContainer;
+    //console.log(this.container);
     this.map.drawRute(this.userPosition, [this.container.latitude, this.container.longitude]);
     this.infoPane.present({animate: true});
   }
 
   loadNearbyContainers() {
     this.api.getNearbyContainers().subscribe((containers) => {
-      this.containers = containers;
       this.map.loadMarkers(containers);
     });
   }

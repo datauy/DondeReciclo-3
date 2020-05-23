@@ -35,9 +35,10 @@ L.Marker.prototype.options.icon = iconDefault;
 export class MapService {
   map: L.Map;
   newRute: any;
-  userPosition: [number, number];
+  userPosition: number[];
   userMarker: L.Marker;
-  currentPos: number;
+  currentContainer: Container;
+  containers: Container[];
 
   constructor() {
   }
@@ -75,6 +76,7 @@ export class MapService {
   }
 
   loadMarkers( markers: Container[], center?:[number,number] ){
+    this.containers = markers;
     let mapBounds = [];
     if (this.userPosition) {
       mapBounds.push(this.userPosition);
@@ -101,7 +103,8 @@ export class MapService {
       //this.getAddress(e.latitude, e.longitude);
       console.log(e.latitude, e.longitude);
       this.userMarker.on("dragend", () => {
-        this.userPosition = this.userMarker.getLatLng();
+        let userPos = this.userMarker.getLatLng();
+        this.userPosition = [ userPos[0],userPos[1] ] ;
         //this.getAddress(position.lat, position.lng);
         //console.log(position.lat, position.lng);
       });
@@ -116,7 +119,8 @@ export class MapService {
 	}
   clickPin(pin: any) {
     console.log("Executed by Service aaaahhhhhhhhh");
-    this.currentPos = pin.target.options.container_pos;
+    let pos = pin.target.options.container_pos;
+    this.currentContainer = this.containers[pos];
     this._pinClick.next(true);
   }
   //Experimental Observable

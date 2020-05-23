@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { environment } from 'src/environments/environment';
 import { map, switchMap, mergeMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { File } from '@ionic-native/file/ngx';
@@ -103,9 +103,9 @@ export class ApiService {
     return res;
   }
   //
-  getContainersByMaterials(ids: [], location?: [number, number]) {
-  if (typeof location == 'undefined') {
-    location = [-32.657689, -55.873808];
+  getContainersByMaterials(ids: number[], location?: number[]) {
+  if ( typeof location == 'undefined' || location == null ) {
+    location = environment.ucenter;
   }
   return  this.request.get(environment.backend + "containers4materials?materials="+ids.join(',')+"&lat="+location[0]+"&lon="+location[1]).pipe(map(
     (result: Container[]) => {
