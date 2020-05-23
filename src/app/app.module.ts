@@ -23,6 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { ApiService } from './services/api.service';
 
+import { File } from '@ionic-native/file/ngx';
+
 /*
 export function initApp(backConfig: ApiService<any>) {
   console.log("Loading initial data");
@@ -51,6 +53,7 @@ export function initApp(backConfig: ApiService<any>) {
     NativeGeocoder,
     Geolocation,
     ApiService,
+    File,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
 //    { provide: APP_INITIALIZER, useFactory: initApp, deps: [ApiService], multi: true }
   ],
