@@ -1,6 +1,8 @@
 {
   "name": "Donde Reciclo",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
   "proxies": [
     {

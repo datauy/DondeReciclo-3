@@ -26,6 +26,7 @@
     "@capacitor/android": "^1.5.2",
     "@capacitor/core": "1.5.2",
     "@ionic-native/core": "^5.0.0",
+    "@ionic-native/file": "^5.26.0",
     "@ionic-native/geolocation": "^5.22.0",
     "@ionic-native/keyboard": "^5.23.0",
     "@ionic-native/native-geocoder": "^5.23.0",

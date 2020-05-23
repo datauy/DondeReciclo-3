@@ -107,7 +107,7 @@ export class MapaPage implements OnInit {
       }
     );
   }
-  showPane(pin: L.Marker) {
+  showPane(pin: any) {
     let pos = pin.target.options.container_pos;
     console.log("SHOWING PANE");
     //console.log(e);
