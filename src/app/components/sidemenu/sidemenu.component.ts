@@ -41,16 +41,12 @@ export class SidemenuComponent implements OnInit {
     // this.sidemenu.ionWillOpen.subscribe(data => {
     //     console.log('menu open');
     // });
-
- }
+  }
 
   ngOnInit() {
-    this.api.loadInitialData().subscribe(
-      () =>  { this.menuState = this.api.menuState;
-        // console.log(this.predefinedOptions)
-      }
-    );
- }
+    this.api.loadInitialData().subscribe( () =>  { // console.log(this.predefinedOptions)
+    });
+  }
 
   toggleMenu(){
     this.menuCtrl.toggle(); //Add this method to your button click function

@@ -10,7 +10,7 @@ import { ContainerType, Container, Material, SearchParams } from "src/app/models
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService<T> {
+export class ApiService {
   container_types: ContainerType[];
   containers: Container[];
   materials: Material[];
