@@ -11,7 +11,8 @@
     </ion-header>
     <ion-content class="menu-list">
       <ion-list>
-        <ion-item (click)="toggleMenu()" *ngFor="let p of appPages"
+        <ion-item (click)="toggleMenu()"
+          *ngFor="let p of appPages"
           lines="none"
           [routerDirection]="'root'"
           [routerLink]="[p.url]"
@@ -33,9 +34,9 @@
           <ion-avatar slot="start">
             <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
           </ion-avatar>
-          <ion-label>
-            <h2>Mi Perfil</h2>
-          </ion-label>
+          <div>
+            <h4>Mi Perfil</h4>
+          </div>
           <ion-icon slot="end"
             name="chevron-forward-outline"></ion-icon>
 
@@ -46,9 +47,9 @@
           routerLinkActive="active-item">
           <ion-icon slot="start"
             name="open-outline"></ion-icon>
-          <ion-label>
-            <h2>Cerrar Sesión</h2>
-          </ion-label>
+          <div>
+            <h4>Cerrar Sesión</h4>
+          </div>
           <ion-icon slot="end"
             name="chevron-forward-outline"></ion-icon>
 

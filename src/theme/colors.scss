@@ -38,6 +38,9 @@
   --residuos-compostables: #827b61;
   --vermillion: #df0e0e;
 
+}
+
+:root {
   // Metales
   --ion-color-metales: #464646;
   --ion-color-metales-rgb: 70,70,70;
@@ -45,16 +48,7 @@
   --ion-color-metales-contrast-rgb: 255,255,255;
   --ion-color-metales-shade: #3e3e3e;
   --ion-color-metales-tint: #595959;
-
-  // Vidrios
-  --ion-color-vidrios: #ffffff;
-  --ion-color-vidrios-rgb: 255,255,255;
-  --ion-color-vidrios-contrast: #000000;
-  --ion-color-vidrios-contrast-rgb: 0,0,0;
-  --ion-color-vidrios-shade: #e0e0e0;
-  --ion-color-vidrios-tint: #ffffff;
 }
-
 .ion-color-metales {
   --ion-color-base: var(--ion-color-metales);
   --ion-color-base-rgb: var(--ion-color-metales-rgb);
@@ -62,6 +56,16 @@
   --ion-color-contrast-rgb: var(--ion-color-metales-contrast-rgb);
   --ion-color-shade: var(--ion-color-metales-shade);
   --ion-color-tint: var(--ion-color-metales-tint);
+}
+
+:root {
+  // Vidrios
+  --ion-color-vidrios: #ffffff;
+  --ion-color-vidrios-rgb: 255,255,255;
+  --ion-color-vidrios-contrast: #000000;
+  --ion-color-vidrios-contrast-rgb: 0,0,0;
+  --ion-color-vidrios-shade: #e0e0e0;
+  --ion-color-vidrios-tint: #ffffff;
 }
 
 .ion-color-vidrios {

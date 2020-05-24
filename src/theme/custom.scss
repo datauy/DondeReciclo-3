@@ -1,5 +1,4 @@
 :root {
-
   --ion-text-color: var(--greyish-brown);
   --ion-tab-bar-background: var(--dark-sea-green);
   --ion-tab-bar-background-focused: none;
@@ -17,108 +16,113 @@
   // --ion-item-border-color	Border color of the Item
   // --ion-item-color	Color of the components in the Item
   // --ion-placeholder-color	Color of the placeholder in Inputs
-
   // Size and spacing variables
-
   --dr-header-height: 138px;
   --dr-margin: 12px;
-
   // Font
   --dr-font-size: 20px;
   // --ion-font-family: "SourceSansPro"; // don't work don't know why.
-
   // components
   ion-header {}
 
-    ion-title {
-      width: 100%;
-      text-align: center;
+  ion-title {
+    width: 100%;
+    text-align: center;
 
-      h1 {
-        font-size: 24px;
-        color: var(--dark-sea-green);
+    h1 {
+      font-size: 24px;
+      color: var(--dark-sea-green);
 
-        .negative {
-          color: #ffffff;
-        }
-      }
-
-      h2 {
-        font-size: 32px;
-        color: var(--greyish-brown);
+      .negative {
+        color: #ffffff;
       }
     }
+
+    h2 {
+      font-size: 32px;
+      color: var(--greyish-brown);
+    }
+  }
+
   ion-toolbar {
     height: var(--dr-header-height);
   }
 
   ion-button {
-      --border-radius: 6px;
-      --box-shadow: none;
+    --border-radius: 6px;
+    --box-shadow: none;
+    text-transform: none;
+    // padding: 10px;
+    // margin: 6px;
+    font-family: "SourceSansPro";
+    font-size: 16px;
 
-      text-transform: none;
-      // padding: 10px;
-      // margin: 6px;
-      font-family: "SourceSansPro";
-      font-size: 16px;
-
-      &.big{
-
-          --background: white;
-          --background-activated: var(--pale-olive-green);
-          // --background-activated-opacity	Opacity of the button when pressed
-          // --background-focused	Background of the button when focused with the tab key
-          // --background-focused-opacity	Opacity of the button when focused with the tab key
-          --background-hover: var(--pale-olive-green);
-          // --background-hover-opacity	Opacity of the background on hover
-          --border-color: none;
-          --border-radius: 38.5px;
-          --border-style: none;
-          --border-width: none;
-          --box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2);
-          --color: var(--pale-olive-green);
-          --color-activated: white;
-          --color-focused: white;
-          --color-hover: white;
-          // --opacity	Opacity of the button
-          --padding-bottom: 16px;
-          --padding-end: 16px;
-          --padding-start: 16px;
-          --padding-top: 16px;
-          // --ripple-color	Color of the button ripple effect
-          // --transition	Transition of the button
-
-      }
+    &.big {
+      --background: white;
+      --background-activated: var(--pale-olive-green);
+      // --background-activated-opacity	Opacity of the button when pressed
+      // --background-focused	Background of the button when focused with the tab key
+      // --background-focused-opacity	Opacity of the button when focused with the tab key
+      --background-hover: var(--pale-olive-green);
+      // --background-hover-opacity	Opacity of the background on hover
+      --border-color: none;
+      --border-radius: 38.5px;
+      --border-style: none;
+      --border-width: none;
+      --box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2);
+      --color: var(--pale-olive-green);
+      --color-activated: white;
+      --color-focused: white;
+      --color-hover: white;
+      // --opacity	Opacity of the button
+      --padding-bottom: 16px;
+      --padding-end: 16px;
+      --padding-start: 16px;
+      --padding-top: 16px;
+      // --ripple-color	Color of the button ripple effect
+      // --transition	Transition of the button
+    }
   }
-
-
   // slider
-  app-slider{z-index:0 !important;} //hide for now!
+  app-slider {
+    z-index: 0 !important;
+  }
+  //hide for now!
+
   ion-slides .swiper-pagination-bullet {
     width: 9px;
     height: 9px;
     opacity: 0.5;
   }
-
   // botones y chips
   ion-chip {
     padding: 10px;
     // margin: 6px;
-
     ion-label {
       font-size: 16px;
     }
   }
-
 }
 
-  // app
-  ion-split-pane.split-pane-visible{
-    ion-img.logo{
-      // @extend .hide;
-      opacity: 0;
-    }
+ion-icon{
+  // background: red;
+  &.right{
+    position: absolute;
+    right: 0px;
   }
+  &.left{
+    position: absolute;
+    left: 0px;
+  }
+}
+
+// app
+ion-split-pane.split-pane-visible {
+  ion-img.logo {
+    // @extend .hide;
+    opacity: 0;
+  }
+}
 // Fonts
 // @font-face {
 //   font-family: "PTSerif";
@@ -152,34 +156,33 @@
 //   src: local(SourceSansPro-Semibold), url("src/assets/fonts/SourceSansPro-SemiBold.ttf") format("truetype");
 //   font-weight: 600;
 // }
-
 // Estilos html elements
 // * {
 //   font-family: "SourceSansPro";
 // }
-
-
-
 // utils
-
-.show{
+.show {
   opacity: 1;
   transition: opacity 1s linear;
 }
-.hide{
+
+.hide {
   transition: opacity 1s linear;
   opacity: 0;
 }
+
 .circle {
   width: 12px;
   height: 12px;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
-  &.green{
+  margin-right: 12px;
+  &.green {
     background: var(--bluish-green);
   }
-  &.red{
+
+  &.red {
     background: var(--vermillion);
   }
 }
@@ -206,17 +209,13 @@
 //     color: --warm-grey;
 //   }
 // }
-
 // Sidemenu
-
 // ion-menu{
 //   ion-icon{
 //     font-size: 32px;
 //     --font-size: 50px;
 //   }
 // }
-
-
 // Leaflet
 .leaflet-verticalcenter {
   position: absolute;
@@ -254,6 +253,7 @@
   }
 }
 // Modals
+
 .modal-fullscreen {
   .modal-wrapper {
     position: absolute;
@@ -296,7 +296,6 @@
   opacity: 0;
   transition: visibility 0s 0.3s, opacity 0.3s linear;
 }
-
 // ion-loading.custom-loading {
 //   ion-backdrop {
 //     background: white;
@@ -361,7 +360,6 @@
     visibility: hidden;
   }
 }
-
 // body.backdrop-no-scroll {
 //   app-search #search-app-content{
 //     left: 100%;
@@ -409,7 +407,7 @@
       top: 33px;
       bottom: 0;
       margin: 0;
-      padding: var(--dr-header-height) 0 0 0;
+      padding: var(--dr-header-height) 0 0;
       overflow: auto !important;
       display: block;
       background: none;
@@ -434,7 +432,6 @@
           ion-label {
             font-size: 18px;
           }
-
           // ion-icon {
           //   position: absolute;
           //   right: 20px;
@@ -454,8 +451,8 @@
   }
 
   ion-searchbar {
-
     z-index: 1010;
+
     .searchbar-input.sc-ion-searchbar-md {
       // position: absolute;
       padding: 16px 36px 16px 16px;

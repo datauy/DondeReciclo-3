@@ -7,17 +7,6 @@
       position: absolute;
       left: 0px;
     }
-    ion-icon{
-      // background: red;
-      &.right{
-        position: absolute;
-        right: 0px;
-      }
-      &.left{
-        position: absolute;
-        left: 0px;
-      }
-    }
   }
   #search-app-content {
     ion-auto-complete {

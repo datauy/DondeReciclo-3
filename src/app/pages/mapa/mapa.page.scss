@@ -1,0 +1,31 @@
+:host{
+}
+
+.cupertino-pane{
+  ion-item{
+    --padding-start: 14px;
+    // margin-bottom: 12px;
+    margin: 0 0 16px 0;
+    &.header{
+      ion-avatar{
+        margin: 0 14px 20px 0px;
+      }
+      div{
+      }
+    }
+  }
+  ion-button.material{
+    // border-radius: 3px;
+    ion-label{
+      margin-left: 12px;
+    }
+  }
+
+  h5{
+    margin:0;
+  }
+
+  p{
+    margin:0;
+  }
+}
