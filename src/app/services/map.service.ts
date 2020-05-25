@@ -32,10 +32,11 @@ L.Marker.prototype.options.icon = iconDefault;
 @Injectable({
   providedIn: 'root'
 })
+
 export class MapService {
   map: L.Map;
-  newRute: any;
-  userPosition: number[];
+  route: any;
+  userPosition: [number, number];
   userMarker: L.Marker;
   currentContainer: Container;
   containers: Container[];
@@ -72,6 +73,9 @@ export class MapService {
       }
       this.userPosition = [e.latlng.lat, e.latlng.lng];
       this.userMarker = L.marker(this.userPosition, {icon: iconUser} ).addTo(this.map); // add the marker onclick
+      if (this.route) {
+        this.route.spliceWaypoints(0, 1, e.latlng);
+      }
     });
   }
 
@@ -104,16 +108,18 @@ export class MapService {
       console.log(e.latitude, e.longitude);
       this.userMarker.on("dragend", () => {
         let userPos = this.userMarker.getLatLng();
-        this.userPosition = [ userPos[0],userPos[1] ] ;
+        this.userPosition = [ userPos[0], userPos[1] ] ;
         //this.getAddress(position.lat, position.lng);
         //console.log(position.lat, position.lng);
       });
     });
   }
-  drawRute( start:[number, number], end:[number, number]) {
-    this.newRute = L.Routing.control({
+  drawRoute( start:[number, number], end:[number, number]) {
+    return this.route = L.Routing.control({
       waypoints: [L.latLng(start), L.latLng(end)],
-      routeWhileDragging: true,
+      createMarker: function(i: number, dStart: L.LatLng, n: number){ return null },
+      routeWhileDragging: false,
+      Instruction: 'text',
       router: L.Routing.mapbox('pk.eyJ1IjoiYm90dW0iLCJhIjoiY2s4anBoOHRzMGJ5dzNscDg1c2drMXBoNSJ9.vQ7qAGX7IMadmIfcCp7eRQ')
     }).addTo(this.map);
 	}
