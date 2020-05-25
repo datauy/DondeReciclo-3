@@ -38,6 +38,13 @@
   --residuos-compostables: #827b61;
   --vermillion: #df0e0e;
 
+}
+
+.pale-olive-green{
+  color: var(--pale-olive-green);
+}
+
+:root {
   // Metales
   --ion-color-metales: #464646;
   --ion-color-metales-rgb: 70,70,70;
@@ -45,16 +52,7 @@
   --ion-color-metales-contrast-rgb: 255,255,255;
   --ion-color-metales-shade: #3e3e3e;
   --ion-color-metales-tint: #595959;
-
-  // Vidrios
-  --ion-color-vidrios: #ffffff;
-  --ion-color-vidrios-rgb: 255,255,255;
-  --ion-color-vidrios-contrast: #000000;
-  --ion-color-vidrios-contrast-rgb: 0,0,0;
-  --ion-color-vidrios-shade: #e0e0e0;
-  --ion-color-vidrios-tint: #ffffff;
 }
-
 .ion-color-metales {
   --ion-color-base: var(--ion-color-metales);
   --ion-color-base-rgb: var(--ion-color-metales-rgb);
@@ -62,6 +60,16 @@
   --ion-color-contrast-rgb: var(--ion-color-metales-contrast-rgb);
   --ion-color-shade: var(--ion-color-metales-shade);
   --ion-color-tint: var(--ion-color-metales-tint);
+}
+
+:root {
+  // Vidrios
+  --ion-color-vidrios: #ffffff;
+  --ion-color-vidrios-rgb: 255,255,255;
+  --ion-color-vidrios-contrast: #000000;
+  --ion-color-vidrios-contrast-rgb: 0,0,0;
+  --ion-color-vidrios-shade: #e0e0e0;
+  --ion-color-vidrios-tint: #ffffff;
 }
 
 .ion-color-vidrios {
@@ -74,21 +82,21 @@
 }
 
 :root {
-  --ion-color-plastico: #ffcb02;
-  --ion-color-plastico-rgb: 255,203,2;
-  --ion-color-plastico-contrast: #000000;
-  --ion-color-plastico-contrast-rgb: 0,0,0;
-  --ion-color-plastico-shade: #e0b302;
-  --ion-color-plastico-tint: #ffd01b;
+  --ion-color-plasticos: #ffcb02;
+  --ion-color-plasticos-rgb: 255,203,2;
+  --ion-color-plasticos-contrast: #000000;
+  --ion-color-plasticos-contrast-rgb: 0,0,0;
+  --ion-color-plasticos-shade: #e0b302;
+  --ion-color-plasticos-tint: #ffd01b;
 }
 
-.ion-color-plastico {
-  --ion-color-base: var(--ion-color-plastico);
-  --ion-color-base-rgb: var(--ion-color-plastico-rgb);
-  --ion-color-contrast: var(--ion-color-plastico-contrast);
-  --ion-color-contrast-rgb: var(--ion-color-plastico-contrast-rgb);
-  --ion-color-shade: var(--ion-color-plastico-shade);
-  --ion-color-tint: var(--ion-color-plastico-tint);
+.ion-color-plasticos {
+  --ion-color-base: var(--ion-color-plasticos);
+  --ion-color-base-rgb: var(--ion-color-plasticos-rgb);
+  --ion-color-contrast: var(--ion-color-plasticos-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-plasticos-contrast-rgb);
+  --ion-color-shade: var(--ion-color-plasticos-shade);
+  --ion-color-tint: var(--ion-color-plasticos-tint);
 }
 
 :root {

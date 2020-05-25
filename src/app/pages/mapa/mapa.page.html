@@ -1,70 +1,141 @@
-
 <app-header></app-header>
 
 <ion-content no-bounce>
-  <ion-fab vertical="top" horizontal="end" slot="fixed">
+  <ion-fab vertical="top"
+    horizontal="end"
+    slot="fixed">
     <ion-fab-button color="transparent">
-      <ion-icon name="locate-outline" (click)="locatePosition()"></ion-icon>
+      <ion-icon name="locate-outline"
+        (click)="locatePosition()"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  <h5 *ngIf="dataFromModal">Data from Modal : {{ dataFromModal.data.ionic }}</h5>
-  <div id="map" style="height:100%; width: 100%;" center='Montevideo, Uruguay'
-  (leafletMapReady)="onMapReady($event)"></div>
+
+  <div id="map"
+    style="height:100%; width: 100%;"
+    center='Montevideo, Uruguay'
+    (leafletMapReady)="onMapReady($event)"></div>
 
 </ion-content>
 
-<div #infoPane class="cupertino-pane">
-  <ion-item class="header">
-    <ion-icon slot="start">
-      <img src="{{container.program_id}}">
-    </ion-icon>
-    <div>
+<div #infoPane
+  class="cupertino-pane">
+  <div class="cupertino-outofbox-image">
+    <img src="https://via.placeholder.com/92x80/9cd060">
+  </div>
+  <ion-item class="header"
+    lines="full">
+    <ion-avatar slot="start">
+      <img src="https://via.placeholder.com/47/9cd060">
+    </ion-avatar>
+    <div class="title-wrapper">
       <p size="small">Programa</p>
       <h5>{{container.program}}</h5>
     </div>
-    <ion-icon slot="end" class="{{container.type_id}}">
-    </ion-icon>
   </ion-item>
 
-  <ion-item>
+  <ion-item lines="none">
     <div>
       <h5>{{container.location}}</h5>
       <p>{{container.address}}</p>
-      <ion-icon slot="end">
-        <img *ngIf="container.photos?.length" src="container.photos[0]">
-      </ion-icon>
-      <ion-icon name="add-circle-outline" color="--pale-olive-green"></ion-icon>
+    </div>
+
+    <ion-thumbnail *ngIf="container.photos?.length">
+      <img src="container.photos[0]">
+    </ion-thumbnail>
+
+    <ion-icon slot="end" name="dr-close-green"
+      color="--pale-olive-green"
+      class="badge">
+    </ion-icon>
+    <ion-avatar slot="end">
+      <img src="https://via.placeholder.com/54/75aaf1">
+    </ion-avatar>
+  </ion-item>
+
+  <ion-item lines="none">
+    <div>
+      <h5>Horario</h5>
+      <p>9:00 - 21:00 hs (aprox.)</p>
     </div>
   </ion-item>
 
-  <ion-item>
-    <ion-label>
-      <h5>Horario</h5>
-      <p>9:00 - 21:00 hs (aprox.)</p>
-    </ion-label>
+  <ion-item lines="none">
+    <ion-button color="pale-olive-green">
+      <ion-icon slot="start" name="camera-outline"
+        class="pale-olive-green"></ion-icon>
+      <h5 class="pale-olive-green">Subir otra foto</h5>
+    </ion-button>
   </ion-item>
 
-  <ion-item>
-    <ion-label>
-      <h4><ion-icon name="camera-outline"></ion-icon> Subir otra foto</h4>
-    </ion-label>
+  <ion-item lines="none">
+    <div class="circle green"
+      slot="start"></div>
+    <h5>Recibe:</h5>
   </ion-item>
+  <div class="tags-wrapper">
+    <!-- <div class="recibe-text">{{container.materials}}</div> -->
 
-  <ion-item>
-    <ion-label>
-      <h6><div class="circle green"></div> Recibe:</h6>
-      {{container.receives_no}}
-      <div class="recibe-text">{{container.materials}}</div>
-      <ion-button *ngFor="let material of container.materials" class="{{material.class}}">
-        <ion-icon class="left" src="{{material.class}}.svg"></ion-icon>
-        <ion-label>{{material.name}}</ion-label>
-      </ion-button>
-    </ion-label>
+    <!-- Ejemplo -->
+    <ion-button class="material"
+      color="plasticos">
+      <ion-icon class="left"
+        name="dr-plastico"></ion-icon>
+      <ion-label>Botellas de Plástico</ion-label>
+    </ion-button>
+
+    <ion-button class="material"
+      color="metales">
+      <ion-icon class="left"
+        name="dr-metales"></ion-icon>
+      <ion-label>Latas</ion-label>
+    </ion-button>
+
+    <ion-button class="material"
+      color="papel-y-carton">
+      <ion-icon class="left"
+        name="dr-papel-y-carton"></ion-icon>
+      <ion-label>Caja de cartón</ion-label>
+    </ion-button>
+
+
+    <!-- Loop
+
+    <ion-button *ngFor="let material of container.materials" class="material {{material.class}}">
+      <ion-icon class="left" name="dr-{{material.class}}"></ion-icon>
+      <ion-label>{{material.name}}</ion-label>
+    </ion-button> -->
+  </div>
+  <ion-item lines="none">
+    <div class="circle red"
+      slot="start"></div>
+    <h5>No Recibe:</h5>
   </ion-item>
-  <ion-item>
-    <ion-label>
-      <h6><div class="circle green"></div>No Recibe:</h6>
-      <div class="recibe-text">{{container.receives_no}}</div>
-    </ion-label>
+  <div class="tags-wrapper">
+    <!-- <div class="recibe-text">{{container.materials}}</div> -->
+
+    <!-- Ejemplo -->
+    <ion-button class="material metales">
+      <ion-icon class="left"
+        name="dr-metales"></ion-icon>
+      <ion-label>Metales</ion-label>
+    </ion-button>
+
+    <ion-button class="material metales">
+      <ion-icon class="left"
+        name="dr-metales"></ion-icon>
+      <ion-label>Metales</ion-label>
+    </ion-button>
+
+
+    <!-- Loop
+
+    <ion-button *ngFor="let material of container.materials" class="material {{material.class}}">
+      <ion-icon class="left" name="dr-{{material.class}}"></ion-icon>
+      <ion-label>{{material.name}}</ion-label>
+    </ion-button> -->
+  </div>
+  <ion-item lines="none">
+    <p>¿Algún inconveniente?</p>
+    <a href="#">Reportar aquí <ion-icon name=""></ion-icon></a>
   </ion-item>
 </div>
