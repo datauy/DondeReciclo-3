@@ -156,7 +156,8 @@ export class ApiService<T=any> {
       class: this.materials[option.material_id].class,
       name: option.name,
       icon: this.materials[option.material_id].icon,
-      material_id: option.material_id
+      material_id: option.material_id,
+      deposition: option.deposition
     });
   });
   return res;
