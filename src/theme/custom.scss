@@ -23,6 +23,13 @@
   --dr-font-size: 20px;
   // --ion-font-family: "SourceSansPro"; // don't work don't know why.
   // components
+  ion-modal{
+    --max-width: 300px;
+    --max-height: 230px;
+    --border-radius: 16px;
+    --border-style: solid 1px #979797;
+  }
+
   ion-header {}
 
   ion-title {
@@ -127,6 +134,8 @@ ion-split-pane.split-pane-visible {
     opacity: 0;
   }
 }
+
+
 // Fonts
 // @font-face {
 //   font-family: "PTSerif";
@@ -258,16 +267,16 @@ ion-split-pane.split-pane-visible {
 }
 // Modals
 
-.modal-fullscreen {
-  .modal-wrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-}
+// .modal-fullscreen {
+//   .modal-wrapper {
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     display: block;
+//     width: 100%;
+//     height: 100%;
+//   }
+// }
 
 .loadingOverlay {
   opacity: 0;
@@ -529,5 +538,46 @@ ion-icon.badge{
 
   p{
     margin:0;
+  }
+}
+
+// social share icons
+
+.social-links{
+  height: 130px;
+  background: none;
+  ion-toolbar{
+    --background: none;
+    max-width: 375px;
+    margin: 0 auto;
+
+    ion-buttons{
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: center;
+      height: 130px;
+      & > * {
+        // width: auto;  /* Or whatever */
+        // height: auto; /* Or whatever */
+        margin: auto;  /* Magic! */
+      }
+      span{
+        color: white;
+        font-weight: normal;
+        font-size: 14px;
+      }
+      ion-button{
+        --border-radius: 11px;
+        --padding-end: 0;
+        --padding-top: 0;
+        --padding-start: 0;
+        --padding-bottom: 0;
+        ion-icon{
+          font-size: 38px;
+          // --font-size: 50px;
+        }
+      }
+    }
   }
 }

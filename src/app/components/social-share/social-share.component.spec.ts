@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { ModalSearchPage } from './modal-search.page';
+import { SocialShareComponent } from './social-share.component';
 
-describe('ModalSearchPage', () => {
-  let component: ModalSearchPage;
-  let fixture: ComponentFixture<ModalSearchPage>;
+describe('SocialShareComponent', () => {
+  let component: SocialShareComponent;
+  let fixture: ComponentFixture<SocialShareComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModalSearchPage ],
+      declarations: [ SocialShareComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ModalSearchPage);
+    fixture = TestBed.createComponent(SocialShareComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

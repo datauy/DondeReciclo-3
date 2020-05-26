@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { HeaderComponent } from './header/header.component';
+import { SocialShareComponent } from './social-share/social-share.component';
 
 @NgModule({
   imports: [
@@ -16,17 +17,20 @@ import { HeaderComponent } from './header/header.component';
   ],
   declarations: [
     SidemenuComponent,
-    HeaderComponent
+    HeaderComponent,
+    SocialShareComponent
     // SimpleServiceComponent
   ],
   exports: [
     SidemenuComponent,
-    HeaderComponent
+    HeaderComponent,
+    SocialShareComponent
     // SimpleServiceComponent
   ],
-  // entryComponents: [
-  //   // SimpleServiceComponent
-  // ],
+  entryComponents: [
+    SocialShareComponent,
+    // SimpleServiceComponent
+  ],
   // schemas : [CUSTOM_ELEMENTS_SCHEMA],
   providers: []
 

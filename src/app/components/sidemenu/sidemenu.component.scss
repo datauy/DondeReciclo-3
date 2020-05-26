@@ -90,10 +90,6 @@
       margin: 0 auto;
 
       ion-buttons{
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: center;
-        align-items: center;
         height: 130px;
         & > * {
           // width: auto;  /* Or whatever */
