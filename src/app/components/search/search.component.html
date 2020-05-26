@@ -13,12 +13,11 @@
       <ion-icon
         class="left"
         [name]="'dr-' + attrs.data.class"></ion-icon>
-      <ion-label
-        [innerHTML]="attrs.data.name | boldprefix:attrs.keyword"></ion-label>
-
-        <!-- <ion-icon
+      <ion-label [innerHTML]="attrs.data.name | boldprefix:attrs.keyword"></ion-label>
+        <ion-icon
           class="right"
-          name="close-outline"></ion-icon> -->
+          [name]="'dr-'+attrs.data.class" >
+        </ion-icon>
     </ion-button>
   </ng-template>
 
@@ -43,6 +42,7 @@
     [template]="dr"
     [showResultsFirst]="true"
     (click)="showSearch($event)"
+    (itemSelected)="itemSelected($event)"
     [(model)]="selected"
     [multi]="false"
     [dataProvider]="api"

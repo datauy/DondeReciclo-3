@@ -3,6 +3,7 @@ import { IonSearchbar, IonButton, IonBackdrop} from '@ionic/angular';
 import { createAnimation } from '@ionic/core';
 import { AutoCompleteOptions } from 'ionic4-auto-complete';
 import { ApiService } from "src/app/services/api.service";
+import { MapService } from "src/app/services/map.service";
 
 import { SearchParams, Material } from "src/app/models/basic_models.model";
 
@@ -28,7 +29,8 @@ export class SearchComponent implements OnInit {
   public selected:string = '';
 
   constructor(
-    public api: ApiService<any>
+    public api: ApiService,
+    public map: MapService
     ) {
       // this.options = new AutoCompleteOptions();
       // this.labelAttribute = 'name';
@@ -78,26 +80,16 @@ export class SearchComponent implements OnInit {
     this.api.suggestVisibility = false;
     this.searchVisibility = false;
   }
-/*
-  showSuggest(event){
-    //this.suggestVisibility = true;
-    console.log("suggest shown");
-    console.log(event);
+  itemSelected(item) {
+    let pos = null;
+    if (this.map.userPosition) {
+      pos = this.api.getContainersByMaterials([item.material_id], this.map.userPosition);
+    }
+    this.api.getContainersByMaterials([item.material_id], pos).subscribe((containers) => {
+      this.map.loadMarkers(containers);
+    });
+    console.log(item);
   }
 
-  hideSuggest(event){
-    // if (this.searchVisibility){
-    //   this.searchVisibility = false;
-    // }
-    //  this.suggestVisibility = false;
-      console.log("suggest hidden");
-      console.log(event);
-  }*/
-
-  on(output, event):void {
-    console.log("Search::OUTPUT");
-    console.log(output);
-    console.log(event);
-  }
 
 }
