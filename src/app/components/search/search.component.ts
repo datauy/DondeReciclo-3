@@ -23,19 +23,18 @@ export class SearchComponent implements OnInit {
   searchString: string;
 
   predefinedOptions: any[];
-  // autocomplete component
-  public options:AutoCompleteOptions;
+
 
   public selected:string = '';
 
   constructor(
     public api: ApiService<any>
     ) {
-      this.options = new AutoCompleteOptions();
-
-      this.options.autocomplete = 'on';
-      this.options.debounce = 750;
-      this.options.placeholder = 'Buscá objetos o materiales.';
+      // this.options = new AutoCompleteOptions();
+      // this.labelAttribute = 'name';
+      // this.options.autocomplete = 'on';
+      // this.options.debounce = 750;
+      // this.options.placeholder = 'Buscá objetos o materiales';
 
     // createAnimation()
     // .addElement(document.querySelector('ion-searchbar'))

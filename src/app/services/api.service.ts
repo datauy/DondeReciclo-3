@@ -18,6 +18,11 @@ export class ApiService<T=any> {
   suggestVisibility: boolean;
   noResultMessage: boolean;
   remoteFile: any;
+
+  // Search
+  labelAttribute = 'material_id';
+  formValueAttribute = 'name';
+
   //Search property for non results
   constructor(
     private request: HttpClient,
@@ -99,7 +104,7 @@ export class ApiService<T=any> {
       this.loadMaterials();
     }
     ids.forEach(id => res.push(this.materials[id]));
-    console.log(res);
+    // console.log(res);
     return res;
   }
   //
@@ -143,6 +148,7 @@ export class ApiService<T=any> {
   formatSearchOptions(options: SearchParams[]) :any[]{
   let res = [];
   options.forEach( (option) => {
+    // console.log(option);
     if (!option.material_id){
       option.material_id = 5;
     }

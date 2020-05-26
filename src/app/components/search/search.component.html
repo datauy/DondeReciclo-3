@@ -37,7 +37,9 @@
     </div>
   </ng-template> -->
 
-  <ion-auto-complete class="searchContent"
+  <ion-auto-complete
+    class="searchContent"
+    [options]="{ placeholder : 'Buscá objetos o materiales' }"
     [template]="dr"
     [showResultsFirst]="true"
     (click)="showSearch($event)"
