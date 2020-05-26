@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import {NativeGeocoder,NativeGeocoderOptions} from "@ionic-native/native-geocoder/ngx";
 
 import { Container } from "src/app/models/container.model";
-import { ContainerType } from "src/app/models/container_types.model";
 import { CupertinoPane } from 'cupertino-pane';
 
 import { ApiService } from "src/app/services/api.service";
@@ -19,13 +18,8 @@ export class MapaPage implements OnInit {
   // @ViewChild("infoPane", {
   //   read: ElementRef
   // }) private infoPane: ElementRef;
-  userPosition: [number, number]
   address: string[];
   container = {} as Container;
-  containerType = {} as ContainerType
-  containerTypes: ContainerType[];
-  dataReturned:any;
-  panelData: any;
   infoPane: CupertinoPane;
 
   constructor(
@@ -86,7 +80,16 @@ export class MapaPage implements OnInit {
   showPane() {
     this.container = this.map.currentContainer;
     //console.log(this.container);
-    this.map.drawRute(this.userPosition, [this.container.latitude, this.container.longitude]);
+    if ( this.map.userPosition ) {
+      if ( this.map.route != null ) {
+        console.log('Changing route');
+        this.map.route.spliceWaypoints(1, 1, [this.container.latitude, this.container.longitude]);
+      }
+      else {
+        console.log("Drawing route");
+        this.map.drawRoute(this.map.userPosition, [this.container.latitude, this.container.longitude]);
+      }
+    }
     this.infoPane.present({animate: true});
   }
 

@@ -478,6 +478,11 @@ ion-split-pane.split-pane-visible {
       right: 24px;
     }
   }
+  /***   MAP PAGE   ***/
+  .leaflet-control-container .leaflet-routing-container,
+  .leaflet-control-container .leaflet-routing-container-hide {
+    display: none;
+  }
 }
 
 ion-icon.badge{
