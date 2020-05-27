@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Injectable } from '@angular/core';
 import { IonSearchbar, IonButton, IonBackdrop} from '@ionic/angular';
 import { createAnimation } from '@ionic/core';
-import { AutoCompleteOptions } from 'ionic4-auto-complete';
+import { AutoCompleteOptions, AutoCompleteComponent } from 'ionic4-auto-complete';
 import { ApiService } from "src/app/services/api.service";
 import { MapService } from "src/app/services/map.service";
 
@@ -14,10 +14,11 @@ import { SessionService } from 'src/app/services/session.service';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  @ViewChild(IonSearchbar, { static: false }) private searchBar: IonSearchbar;
+  @ViewChild("searchbar", { static: false }) private searchBarAuto: AutoCompleteComponent;
+  // @ViewChild(".searchbar-input", { static: false }) private searchBarIonic: IonSearchbar;
 
   backdrop = document.querySelector('custom-backdrop');
-  searchBarElement = document.querySelector('#searchBar');
+  searchBarIonic = document.querySelector('.searchbar-input') ;
 
   showBackdrop = false;
   searchVisibility = false;
@@ -42,11 +43,16 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
     this.api.loadInitialData().subscribe(
       () =>  { this.predefinedOptions = this.api.predefinedSearch;
-      console.log(this.predefinedOptions);
+      // console.log(this.predefinedOptions);
       }
     );
+    console.log('Auto: ', this.searchBarAuto);
+    console.log('element: ', this.searchBarIonic);
   }
-
+  ionViewDidEnter(){
+    console.log('element: ', this.searchBarAuto);
+    console.log('element: ', this.searchBarIonic);
+  }
 
   showSearch(event) {
     this.searchVisibility = true;
@@ -57,13 +63,15 @@ export class SearchComponent implements OnInit {
     this.searchVisibility = false;
   }
 
-  searchSuggestion(id){
-
-    console.log(this.predefinedOptions);
+  searchSuggestion(predefined){
+    this.searchBarIonic = document.querySelector('.searchbar-input') as HTMLInputElement;
+    this.searchBarAuto.setFocus();
+    this.itemSelected(predefined);
+    this.searchBarIonic.value = predefined.name;
   }
 
   itemSelected(item) {
-    console.log('item: ', item);
+    // console.log('item: ', item);
     let pos = null;
     this.session.isLoading = true;
     if (this.map.userPosition) {

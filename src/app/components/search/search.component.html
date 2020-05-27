@@ -37,6 +37,7 @@
   </ng-template> -->
 
   <ion-auto-complete
+    #searchbar
     class="searchContent"
     [options]="{ placeholder : 'Buscá objetos o materiales' }"
     [template]="dr"
@@ -51,16 +52,14 @@
     [clearInvalidInput]="false">
   </ion-auto-complete>
 
-
-  {{isLoading}}
-  
   <div id="suggestions"
     [ngClass]="(api.suggestVisibility && searchVisibility) ? 'show' : 'hide'">
     <ion-list-header>Categorias de búsqueda</ion-list-header>
     <div class="resultsWrap">
       <ion-button [color]="predefined.class"
-        *ngFor="let predefined of predefinedOptions"
-        [ngClass]="predefined.class">
+        *ngFor="let predefined of predefinedOptions;"
+        [ngClass]="predefined.class"
+        (click)="searchSuggestion(predefined)">
         <ion-label
           [innerHTML]="predefined.name"></ion-label>
         <ion-icon
