@@ -47,6 +47,6 @@ export class AppComponent {
       // this.isLoading = false;
       this.session.isLoading = false;
       console.log("isloading app: ", this.session.isLoading);
-    }, 1000);
+    }, 2000);
   }
 }

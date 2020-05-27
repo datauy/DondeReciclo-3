@@ -279,22 +279,21 @@ ion-split-pane.split-pane-visible {
 // }
 
 .loadingOverlay {
+  display: flex;
   opacity: 0;
   position: absolute;
   top: 0;
   left: 0;
-  display: block;
   width: 100%;
   height: 100%;
-  background: green;
-  z-index: 10000;
+  background: var(--dark-sea-green);
+  z-index: 1050;
   box-sizing: content-box;
   text-align: center;
 
   img {
-    max-height: 100vh;
-    margin-top: auto;
-    margin-bottom: auto;
+    max-height: 84px;
+    margin: auto;
   }
 }
 
