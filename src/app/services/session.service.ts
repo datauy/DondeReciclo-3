@@ -5,6 +5,10 @@ import { Injectable } from '@angular/core';
 })
 export class SessionService {
 
+  // isloading for splashScreen
+  isLoading: boolean = true;
+  connectionProblem: boolean = false;
+
   constructor() { }
 
   get( key: string ) {

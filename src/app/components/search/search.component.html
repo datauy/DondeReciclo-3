@@ -52,6 +52,8 @@
   </ion-auto-complete>
 
 
+  {{isLoading}}
+  
   <div id="suggestions"
     [ngClass]="(api.suggestVisibility && searchVisibility) ? 'show' : 'hide'">
     <ion-list-header>Categorias de búsqueda</ion-list-header>

@@ -20,6 +20,7 @@ export class TabsnavPage implements OnInit {
     if (!this.session.get('showSlider')) {
       this.session.set('showSlider', 'visible');
     }
+    
     if (environment.production) {
       this.showingKeyboard = this.keyboard.isVisible;
       console.log('production');
@@ -44,11 +45,12 @@ export class TabsnavPage implements OnInit {
     // });
   }
 
-  ionViewDidEnter() {
-    setTimeout(() => {
-      this.isLoading = false;
-
-    }, 500);
-  }
+  // ionViewDidEnter() {
+  //   setTimeout(() => {
+  //     this.session.set('isLoading', 'false');
+  //     this.isLoading = false;
+  //     console.log("isloading: ", this.isLoading);
+  //   }, 1000);
+  // }
 
 }

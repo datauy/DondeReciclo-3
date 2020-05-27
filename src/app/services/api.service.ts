@@ -109,14 +109,14 @@ export class ApiService<T=any> {
   }
   //
   getContainersByMaterials(ids: number[], location?: number[]) {
-  if ( typeof location == 'undefined' || location == null ) {
-    location = environment.ucenter;
-  }
-  return  this.request.get(environment.backend + "containers4materials?materials="+ids.join(',')+"&lat="+location[0]+"&lon="+location[1]).pipe(map(
-    (result: Container[]) => {
-      return result;
+    if ( typeof location == 'undefined' || location == null ) {
+      location = environment.ucenter;
     }
-  ));
+    return  this.request.get(environment.backend + "containers4materials?materials="+ids.join(',')+"&lat="+location[0]+"&lon="+location[1]).pipe(map(
+      (result: Container[]) => {
+        return result;
+      }
+    ));
   }
   //
     /***********************/
@@ -128,6 +128,8 @@ export class ApiService<T=any> {
       this.suggestVisibility = true;
       this.noResultMessage = false;
       return false;
+    }else{
+      this.suggestVisibility = false;
     }
     return  this.request.get(environment.backend + "search?q="+str).pipe(map(
       (result: any[]) => {

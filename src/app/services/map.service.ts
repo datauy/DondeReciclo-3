@@ -92,7 +92,12 @@ export class MapService {
       .addTo(this.map);
       mapBounds.push([markers[i].latitude, markers[i].longitude]);
     }
-    this.map.fitBounds(mapBounds);
+    if (markers.length > 0){
+      this.map.fitBounds(mapBounds);
+      return 1;
+    }else{
+      return 0;
+    }
   }
 
   locatePosition() {

@@ -413,14 +413,14 @@ ion-split-pane.split-pane-visible {
   ion-auto-complete {
     ul {
       position: absolute;
-      height: calc(100vh - 33px - var(--dr-header-height));
+      height: calc(100vh - var(--dr-header-height));
       width: 100%;
       left: 0;
       right: 0;
-      top: 33px;
+      top: 0px;
       bottom: 0;
       margin: 0;
-      padding: var(--dr-header-height) 0 0;
+      padding: 84px 0 0;
       overflow: auto !important;
       display: block;
       background: none;
@@ -470,6 +470,7 @@ ion-split-pane.split-pane-visible {
       // position: absolute;
       padding: 16px 36px 16px 16px;
       border-radius: 36px;
+      box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2);
     }
 
     .searchbar-search-icon.sc-ion-searchbar-md {

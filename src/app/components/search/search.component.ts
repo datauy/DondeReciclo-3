@@ -6,6 +6,7 @@ import { ApiService } from "src/app/services/api.service";
 import { MapService } from "src/app/services/map.service";
 
 import { SearchParams, Material } from "src/app/models/basic_models.model";
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
   selector: 'app-search',
@@ -25,70 +26,60 @@ export class SearchComponent implements OnInit {
 
   predefinedOptions: any[];
 
+  // loading
+  // isLoading: boolean;
 
   public selected:string = '';
 
   constructor(
     public api: ApiService,
-    public map: MapService
+    public map: MapService,
+    public session: SessionService
     ) {
-      // this.options = new AutoCompleteOptions();
-      // this.labelAttribute = 'name';
-      // this.options.autocomplete = 'on';
-      // this.options.debounce = 750;
-      // this.options.placeholder = 'Buscá objetos o materiales';
-
-    // createAnimation()
-    // .addElement(document.querySelector('ion-searchbar'))
-    // .duration(3000)
-    // .iterations(Infinity)
-    // .keyframes([
-    //   { offset: 0, background: 'red' },
-    //   { offset: 0.72, background: 'var(--background)' },
-    //   { offset: 1, background: 'green' }
-    // ]);
+      this.session = session;
   }
 
   ngOnInit() {
     this.api.loadInitialData().subscribe(
       () =>  { this.predefinedOptions = this.api.predefinedSearch;
-        // console.log(this.predefinedOptions)
+      console.log(this.predefinedOptions);
       }
     );
   }
 
-  // ionViewDidLoad() {
-  //   this.searchBarElement.addEventListener('click', (e) => {
-  //     console.log('Button clicked!');
-  //   });
-  //   // this.searchBar.ionFocus('click', (e: any) => {
-  //   //   this.searchVisibility = true;
-  //   //   console.log('click serarch');
-  //   // });
-  //   // console.log(this.backdrop);
-  //   // this.backdrop.ionBackdropTap.subscribe((data) => {
-  //   //     console.log('Data received', data);
-  //   // });
-  // }
 
   showSearch(event) {
     this.searchVisibility = true;
-    this.api.suggestVisibility = true;
   }
 
   hideSearch(event) {
     this.api.suggestVisibility = false;
     this.searchVisibility = false;
   }
+
+  searchSuggestion(id){
+
+    console.log(this.predefinedOptions);
+  }
+
   itemSelected(item) {
+    console.log('item: ', item);
     let pos = null;
+    this.session.isLoading = true;
     if (this.map.userPosition) {
       pos = this.api.getContainersByMaterials([item.material_id], this.map.userPosition);
     }
-    this.api.getContainersByMaterials([item.material_id], pos).subscribe((containers) => {
-      this.map.loadMarkers(containers);
-    });
-    console.log(item);
+    this.api.getContainersByMaterials([item.material_id], pos).subscribe(
+        (containers) => {
+          if (this.map.loadMarkers(containers) == 0){
+            console.log('no markers!');
+          }
+          this.hideSearch('item selected');
+          setTimeout( () => {
+            this.session.isLoading = false;
+          }, 500);
+        }
+    );
   }
 
 
