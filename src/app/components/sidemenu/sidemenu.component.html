@@ -14,7 +14,7 @@
         <ion-item (click)="toggleMenu()"
           *ngFor="let p of appPages"
           lines="none"
-          [routerDirection]="'root'"
+          routerDirection="forward"
           [routerLink]="[p.url]"
           routerLinkActive="active-item">
           <ion-icon slot="start"
@@ -28,7 +28,7 @@
 
         </ion-item>
         <ion-item lines="none"
-          routerDirection="root"
+          routerDirection="forward"
           routerLink="/perfil"
           routerLinkActive="active-item">
           <ion-avatar slot="start">
@@ -42,7 +42,7 @@
 
         </ion-item>
         <ion-item lines="none"
-          routerDirection="root"
+          routerDirection="forward"
           routerLink="/salir"
           routerLinkActive="active-item">
           <ion-icon slot="start"

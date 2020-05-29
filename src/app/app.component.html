@@ -1,9 +1,7 @@
-<ion-app>
+<ion-app [ngClass]="session.breakPoint">
   <app-header></app-header>
   <div class="loadingOverlay" [ngClass]="session.isLoading ? 'loadingShow' : 'loadingHide'">
     <img src="assets/img/donde_reciclo.png" alt="">
   </div>
-
   <app-sidemenu></app-sidemenu>
-
 </ion-app>

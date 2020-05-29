@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { HeaderComponent } from './header/header.component';
 import { SocialShareComponent } from './social-share/social-share.component';
+import { AutoCompleteModule } from 'ionic4-auto-complete';
 //import { TestDirective } from './test.directive';
 
 @NgModule({
@@ -14,6 +15,7 @@ import { SocialShareComponent } from './social-share/social-share.component';
     CommonModule,
     IonicModule,
     RouterModule,
+    AutoCompleteModule,
     // SimpleServiceModule
   ],
   declarations: [

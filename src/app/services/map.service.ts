@@ -124,7 +124,10 @@ export class MapService {
       waypoints: [L.latLng(start), L.latLng(end)],
       createMarker: function(i: number, dStart: L.LatLng, n: number){ return null },
       routeWhileDragging: false,
+      addWaypoints: false,
+      draggableWaypoints : false,
       Instruction: 'text',
+      show: false, //for hidding routing itinerary
       router: L.Routing.mapbox('pk.eyJ1IjoiYm90dW0iLCJhIjoiY2s4anBoOHRzMGJ5dzNscDg1c2drMXBoNSJ9.vQ7qAGX7IMadmIfcCp7eRQ')
     }).addTo(this.map);
 	}

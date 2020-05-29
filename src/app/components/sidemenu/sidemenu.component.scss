@@ -18,8 +18,8 @@
   ion-split-pane{
       --border: none !important;
       ion-menu{
-        margin-top: var(--dr-header-height);
-        --background:rgba(0, 0, 0, 0.8)
+        margin-top: var(--dr-header-height-large);
+        --background:rgba(0, 0, 0, 0.8);
       }
   }
 

@@ -15,11 +15,11 @@ import { SessionService } from 'src/app/services/session.service';
 })
 export class SearchComponent implements OnInit {
   @ViewChild("searchbar", { static: false }) private searchBarAuto: AutoCompleteComponent;
-  // @ViewChild(".searchbar-input", { static: false }) private searchBarIonic: IonSearchbar;
+  // @ViewChild(".searchbar-input", { static: false }) private searchBarIonic: HTMLInputElement;
 
   backdrop = document.querySelector('custom-backdrop');
-  searchBarIonic = document.querySelector('.searchbar-input') ;
-
+  searchBarIonic = document.querySelector('.searchbar-input') as HTMLInputElement;
+  // searchBarIonic: unknown;
   showBackdrop = false;
   searchVisibility = false;
 
@@ -61,6 +61,10 @@ export class SearchComponent implements OnInit {
   hideSearch(event) {
     this.api.suggestVisibility = false;
     this.searchVisibility = false;
+  }
+
+  showSuggestions(event) {
+    this.api.suggestVisibility = true;
   }
 
   searchSuggestion(predefined){

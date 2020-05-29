@@ -6,3 +6,22 @@ body.keyboard-is-open {
     margin-bottom: 0 !important;
   }
 }
+
+// function to generate breakpoint classes based on ionic current breakpoints
+// (
+//   xs: 0,
+//   sm: 576px,
+//   md: 768px,
+//   lg: 992px,
+//   xl: 1200px
+// )
+
+// @each $size, $size-value in $screen-breakpoints {
+//   .hide-#{$size} {
+//     @media (min-width: $size-value) {
+//       transition: opacity 1s linear;
+//       opacity: 0;
+//       display: none;
+//     }
+//   }
+// }

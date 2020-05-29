@@ -31,7 +31,6 @@ export class AppComponent {
     //   this.session.set('isLoading', 'true');
     // }
     // this.isLoading = this.session.get('isLoading');
-    console.log("isloading 1: ", this.session.isLoading);
   }
 
   initializeApp() {

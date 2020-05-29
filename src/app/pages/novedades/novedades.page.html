@@ -1,5 +1,7 @@
+<app-header></app-header>
 
 <ion-content>
+  <ion-back-button></ion-back-button>
   <ion-card *ngFor="let item of novedades">
 
     <ion-item>
@@ -14,18 +16,23 @@
 
     <ion-row>
       <ion-col>
-        <ion-button color="primary" size="small">
-            <ion-icon slot="start" name='thumbs-up'></ion-icon>
-            12 Likes
-          </ion-button>
+        <ion-button color="primary"
+          size="small">
+          <ion-icon slot="start"
+            name='thumbs-up'></ion-icon>
+          12 Likes
+        </ion-button>
       </ion-col>
       <ion-col>
-        <ion-button color="primary" size="small">
-            <ion-icon slot="start" name='chatbox'></ion-icon>
-            4 Commentarios
-          </ion-button >
+        <ion-button color="primary"
+          size="small">
+          <ion-icon slot="start"
+            name='chatbox'></ion-icon>
+          4 Commentarios
+        </ion-button>
       </ion-col>
-      <ion-col center text-center>
+      <ion-col center
+        text-center>
         <ion-note>
           11h ago
         </ion-note>

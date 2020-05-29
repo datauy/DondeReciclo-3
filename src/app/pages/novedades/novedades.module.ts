@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { NovedadesPageRoutingModule } from './novedades-routing.module';
 
 import { NovedadesPage } from './novedades.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    NovedadesPageRoutingModule
+    NovedadesPageRoutingModule,
+    ComponentsModule,
   ],
   declarations: [NovedadesPage]
 })

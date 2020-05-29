@@ -20,7 +20,7 @@ export class TabsnavPage implements OnInit {
     if (!this.session.get('showSlider')) {
       this.session.set('showSlider', 'visible');
     }
-    
+
     if (environment.production) {
       this.showingKeyboard = this.keyboard.isVisible;
       console.log('production');
@@ -37,6 +37,9 @@ export class TabsnavPage implements OnInit {
   ngOnInit() {
   }
 
+  ionViewWillEnter(){
+    // this.session.breakPoint = "header-none";
+  }
   ngAfterViewChecked() {
     // this.skipSlides.addEventListener('click', (e: any) => {
     //   console.log("skip clicked");

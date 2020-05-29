@@ -134,8 +134,10 @@ export class ApiService<T=any> {
     return  this.request.get(environment.backend + "search?q="+str).pipe(map(
       (result: any[]) => {
         if (result.length) {
-          this.suggestVisibility = false;
           this.noResultMessage = false;
+          // if (result.length > 1) {
+          //   this.suggestVisibility = false;
+          // }
           return this.formatSearchOptions(result);
         }
         else {

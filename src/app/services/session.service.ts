@@ -9,6 +9,9 @@ export class SessionService {
   isLoading: boolean = true;
   connectionProblem: boolean = false;
 
+  // header headerState
+  breakPoint: string = "large";
+
   constructor() { }
 
   get( key: string ) {

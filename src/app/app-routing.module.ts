@@ -14,10 +14,6 @@ const routes: Routes = [
   {
     path: 'novedades',
     loadChildren: () => import('./pages/novedades/novedades.module').then( m => m.NovedadesPageModule)
-  },
-  {
-    path: 'buscar',
-    loadChildren: () => import('./pages/buscar/buscar.module').then( m => m.BuscarPageModule)
   }
 ];
 

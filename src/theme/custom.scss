@@ -17,8 +17,10 @@
   // --ion-item-color	Color of the components in the Item
   // --ion-placeholder-color	Color of the placeholder in Inputs
   // Size and spacing variables
-  --dr-header-height: 138px;
+  --dr-header-height-large: 122px;
+  --dr-header-height-small: 60px;
   --dr-margin: 12px;
+  --dr-searchbox-top: calc(var(--dr-header-height-large) - 34px);
   // Font
   --dr-font-size: 20px;
   // --ion-font-family: "SourceSansPro"; // don't work don't know why.
@@ -51,17 +53,14 @@
     }
   }
 
-  ion-toolbar {
-    height: var(--dr-header-height);
-  }
 
   ion-button {
     --border-radius: 6px;
     --box-shadow: none;
     --padding-top: 0;
     --padding-bottom: 0;
-    --padding-start: 0.8em;
-    --padding-end: 0.8em;
+    --padding-start: 0.7em;
+    --padding-end: 0.7em;
     text-transform: none;
     // padding: 10px;
     // margin: 6px;
@@ -230,39 +229,42 @@ ion-split-pane.split-pane-visible {
 //   }
 // }
 // Leaflet
-.leaflet-verticalcenter {
-  position: absolute;
-  z-index: 1000;
-  pointer-events: none;
-  top: 80px;
-  left: 20px;
-  right: auto;
-  // transform: translateY(-50%); /* using the CSS3 Transform technique */
-  padding-top: 10px;
-}
+// .leaflet-verticalcenter {
+//   position: absolute;
+//   z-index: 1000;
+//   pointer-events: none;
+//   top: 80px;
+//   left: 20px;
+//   right: auto;
+//   // transform: translateY(-50%); /* using the CSS3 Transform technique */
+//   padding-top: 10px;
+// }
 
-.leaflet-verticalcenter .leaflet-control {
-  margin-bottom: 10px;
-}
+// .leaflet-verticalcenter .leaflet-control {
+//   margin-bottom: 10px;
+// }
 
-.leaflet-verticalcenter {
-  position: absolute;
-  z-index: 1000;
-  pointer-events: none;
-  top: 80px;
-  left: 20px;
-  right: auto;
-  // transform: translateY(-50%); /* using the CSS3 Transform technique */
-  padding-top: 10px;
-}
+// .leaflet-verticalcenter {
+//   position: absolute;
+//   z-index: 1000;
+//   pointer-events: none;
+//   top: 80px;
+//   left: 20px;
+//   right: auto;
+//   // transform: translateY(-50%); /* using the CSS3 Transform technique */
+//   padding-top: 10px;
+// }
 
-.leaflet-verticalcenter .leaflet-control {
-  margin-bottom: 10px;
-}
+// .leaflet-verticalcenter .leaflet-control {
+//   margin-bottom: 10px;
+// }
 
 .leaflet-control-container {
   .leaflet-top {
-    top: 160px;
+    top: 30px;
+    &.expanded{
+      top: 160px;
+    }
   }
 }
 // Modals
@@ -353,13 +355,15 @@ ion-split-pane.split-pane-visible {
 
 #custom_backdrop {
   width: 100%;
-  top: 138px;
+  top: var(--dr-header-height-large);
   position: absolute;
   background: black;
   opacity: 0.75;
   bottom: 0;
   z-index: 1001;
-
+  &.header-large{
+    top: var(--dr-header-height-large);
+  }
   &.show {
     opacity: 0.75;
     display: block;
@@ -379,7 +383,7 @@ ion-split-pane.split-pane-visible {
 // }
 
 #search-app-content {
-  top: 105px;
+  top: var(--dr-searchbox-top);
   z-index: 1002;
   position: absolute;
   left: 0;
@@ -396,7 +400,7 @@ ion-split-pane.split-pane-visible {
 
   #results-title {
     position: absolute;
-    top: 102px;
+    top: 100px;
     color: white;
     z-index: 1002;
 
@@ -412,14 +416,14 @@ ion-split-pane.split-pane-visible {
   ion-auto-complete {
     ul {
       position: absolute;
-      height: calc(100vh - var(--dr-header-height));
+      height: calc(100vh - var(--dr-header-height-large));
       width: 100%;
       left: 0;
       right: 0;
       top: 0px;
       bottom: 0;
       margin: 0;
-      padding: 84px 0 0;
+      padding: var(--dr-searchbox-top) 0 0;
       overflow: auto !important;
       display: block;
       background: none;
@@ -533,7 +537,7 @@ ion-icon.badge{
   ion-button.material{
     // border-radius: 3px;
     ion-label{
-      margin-left: 32px;
+      margin-left: 12px;
     }
   }
 

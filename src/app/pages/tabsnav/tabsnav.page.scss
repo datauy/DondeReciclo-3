@@ -1,16 +1,16 @@
-
-
-ion-tab-button:focus {
-ion-icon {
-color: var(–ion-color-tertiary) !important;
-–ion-color-base: var(–ion-color-tertiary) !important;
-}
+ion-tab-button{
+	:focus {
+		ion-icon {
+			// color: var(–ion-color-tertiary) !important;
+			// –ion-color-base: var(–ion-color-tertiary) !important;
+		}
+	}
 }
 
 ion-tab-bar {
 	&.hide {
 		transform: translateY(56px);
-		height: 0px;
+		height: 0;
 	}
 	-webkit-transition: transform 0.3s linear, height 0.3s linear;
 	-o-transition: transform 0.3s linear, height 0.3s linear;
@@ -19,47 +19,43 @@ ion-tab-bar {
 	border-top-left-radius: 16px;
 	border-top-right-radius: 16px;
 
-	ion-tab-button{
+	ion-tab-button {
 		height: 66px;
+		// hover tab state
+		&:hover {
+			color: white !important;
 
-    // hover tab state
+			ion-icon {
+				color: white !important;
+			}
+		}
 
-    &:hover{
-      color: white !important;
-    	ion-icon{
-        color: white !important;
-    	}
-    }
+		ion-icon {
+			font-size: 30px;
+		}
 
-  	ion-icon{
-			font-size:30px;
-  	}
-  	ion-label{
-  		height: 0;
-      display: none;
-  	}
-    // selected tab state
+		ion-label {
+			height: 0;
+			display: none;
+		}
+		// selected tab state
+		&.tab-selected {
+			height: 66px;
+			// hover tab state
+			&:hover {
+				color: white;
+			}
 
-    &.tab-selected{
-  		height: 66px;
+			ion-icon {
+				// margin: 0;
+				// height: 100%;
+				//
+			}
 
-      // hover tab state
-
-      &:hover{
-        color: white;
-      }
-
-    	ion-icon{
-    		// margin: 0;
-    		// height: 100%;
-    		//
-    	}
-    	ion-label{
-        height: auto;
-        display: block;
-    	}
-    }
+			ion-label {
+				height: auto;
+				display: block;
+			}
+		}
 	}
-
-
 }

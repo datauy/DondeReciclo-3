@@ -7,6 +7,7 @@ import { CupertinoPane } from 'cupertino-pane';
 
 import { ApiService } from "src/app/services/api.service";
 import { MapService } from "src/app/services/map.service";
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
   selector: 'app-mapa',
@@ -26,6 +27,7 @@ export class MapaPage implements OnInit {
     private geocoder: NativeGeocoder,
     public api: ApiService,
     public map: MapService,
+    public session: SessionService
     // private backbuttonSubscription: Subscription
     ) {
       this.map.pinClicked.subscribe(
@@ -37,6 +39,10 @@ export class MapaPage implements OnInit {
         }
       );
     }
+
+  ionViewWillEnter(){
+    this.session.breakPoint = "header-full";
+  }
 
   ionViewDidEnter() {
     console.log("ENTER IN VIEW");
@@ -59,7 +65,7 @@ export class MapaPage implements OnInit {
         bottomClose: true,
         buttonClose: false,
         topperOverflow: true,
-        showDraggable: false,
+        showDraggable: true,
         simulateTouch: true,
         breaks: {
           middle: {
@@ -68,7 +74,7 @@ export class MapaPage implements OnInit {
           },
           bottom: {
             enabled: true,
-            offset: 60
+            offset: 40
           }
         },
         onDrag: () => console.log('Drag event'),

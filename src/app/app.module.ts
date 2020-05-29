@@ -1,4 +1,3 @@
-import { BuscarPageModule } from './pages/buscar/buscar.module';
 //import { NgModule, APP_INITIALIZER} from '@angular/core';
 import { NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -44,7 +43,6 @@ export function initApp(backConfig: ApiService<any>) {
     AppRoutingModule,
     ComponentsModule,
     NovedadesPageModule,
-    BuscarPageModule,
     HttpClientModule,
   ],
   providers: [
