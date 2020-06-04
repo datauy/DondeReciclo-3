@@ -1,12 +1,22 @@
-<ion-header>
+<ion-header id="header-main">
   <ion-toolbar>
-    <ion-img class="logo"
-      routerLink="/"
-      slot="start"
-      src="assets/img/donde_reciclo.png"
-      alt="Donde Reciclo">
-    </ion-img>
-    <ion-buttons slot="end">
+    <ion-buttons *ngIf="backButton" slot="start">
+      <ion-button routerLink="{{backLink}}"
+      routerDirection="back">
+        <ion-icon slot="icon-only" name="star"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+      <ion-buttons *ngIf="['map', 'full'].includes(display)" slot="start">
+        <ion-img class="logo"
+          routerLink="/"
+          routerDirection="root"
+          slot="start"
+          src="assets/img/donde_reciclo.png"
+          alt="Donde Reciclo">
+        </ion-img>
+      </ion-buttons>
+    <ion-title>{{ title }}</ion-title>
+    <ion-buttons *ngIf="['map', 'full'].includes(display)" slot="end">
       <ion-button color="pale-olive-green"
         (click)="showShareModal()"
         slot="end">

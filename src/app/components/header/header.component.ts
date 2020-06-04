@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MenuController, ModalController } from '@ionic/angular';
+import { Component, OnInit, Input } from '@angular/core';
+import { MenuController, ModalController, NavController } from '@ionic/angular';
 import { SocialShareComponent } from '../social-share/social-share.component';
 import { SessionService } from 'src/app/services/session.service';
 
@@ -9,16 +9,23 @@ import { SessionService } from 'src/app/services/session.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  @Input('title') title:any;
+  @Input('display') display:any;
+  @Input('backButton') backButton:any;
+  @Input('backLink') backLink:any;
 
   constructor(
     public menuCtrl: MenuController,
     public modalController: ModalController,
     public session: SessionService,
+    public navCtrl: NavController
   ) {
     this.session = session;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+  }
 
   toggleMenu() {
     this.menuCtrl.toggle(); //Add this method to your button click function

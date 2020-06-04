@@ -23,6 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './services/api.service';
 
 import { File } from '@ionic-native/file/ngx';
+import { toPage } from './components/animations/page-transitions';
+import { navPage } from './components/animations/';
 
 /*
 export function initApp(backConfig: ApiService<any>) {
@@ -37,8 +39,8 @@ export function initApp(backConfig: ApiService<any>) {
   imports: [
     BrowserModule,
     IonicModule.forRoot({
-      // navAnimation: SearchbarAnimation,
-        animated: true
+      navAnimation: navPage,
+        // animated: true
     }),
     AppRoutingModule,
     ComponentsModule,

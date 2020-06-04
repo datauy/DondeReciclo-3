@@ -1,7 +1,7 @@
 
 import { Component, OnInit } from "@angular/core";
 
-import { ModalController, NavController } from "@ionic/angular";
+import { IonRouterOutlet, NavController} from "@ionic/angular";
 
 import { Novedad } from "../../models/novedad.model";
 import { SessionService } from 'src/app/services/session.service';
@@ -25,10 +25,7 @@ export class NovedadesPage implements OnInit {
   ngOnInit() {
     this.getAll();
   }
-
-  ionViewWillEnter(){
-    this.session.breakPoint = "subpage";
-  }
+  //
 
   getAll() {
     /*this.novedadesService.get().subscribe((novedades: Novedad[]) => {

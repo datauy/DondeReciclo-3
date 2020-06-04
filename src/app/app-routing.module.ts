@@ -8,12 +8,25 @@ const routes: Routes = [
     loadChildren: () => import('./pages/tabsnav/tabsnav.module').then( m => m.TabsnavPageModule)
   },
   {
-    path: 'marcas',
-    loadChildren: () => import('./pages/marcas/marcas.module').then( m => m.MarcasPageModule)
+    path: 'novedades',
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./pages/novedades/novedades.module').then( m => m.NovedadesPageModule)
+      },
+      {
+        path: 'novedades-detail/:novedadID',
+        loadChildren: () => import('./pages/novedades-detail/novedades-detail.module').then(m => m.NovedadesDetailPageModule)
+      }
+    ]
   },
   {
-    path: 'novedades',
-    loadChildren: () => import('./pages/novedades/novedades.module').then( m => m.NovedadesPageModule)
+    path: 'empresas',
+    loadChildren: () => import('./pages/empresas/empresas.module').then( m => m.EmpresasPageModule)
+  },
+  {
+    path: 'novedades-detail',
+    loadChildren: () => import('./pages/novedades-detail/novedades-detail.module').then( m => m.NovedadesDetailPageModule)
   }
 ];
 

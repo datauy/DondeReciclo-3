@@ -9,8 +9,12 @@ export class SessionService {
   isLoading: boolean = true;
   connectionProblem: boolean = false;
 
+  // can go back
+  showBackButton: boolean = false;
+  urlBackButton: string = '/';
+
   // header headerState
-  breakPoint: string = "large";
+  // breakPoint: string = "large";
 
   constructor() { }
 

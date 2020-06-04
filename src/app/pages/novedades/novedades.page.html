@@ -1,7 +1,10 @@
-<app-header></app-header>
+<app-header title="Novedades"
+  display="full"
+  ></app-header>
 
 <ion-content>
-  <ion-back-button></ion-back-button>
+  <ion-button routerLink="/novedades-detail"
+  routerDirection="forward"></ion-button>
   <ion-card *ngFor="let item of novedades">
 
     <ion-item>

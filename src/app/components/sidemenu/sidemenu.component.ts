@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonMenu, MenuController, IonSearchbar } from '@ionic/angular';
+import { IonMenu, MenuController, IonSearchbar, NavController } from '@ionic/angular';
 import { ApiService } from "src/app/services/api.service";
 import { createAnimation, Animation } from '@ionic/core';
 
@@ -16,19 +16,19 @@ export class SidemenuComponent implements OnInit {
     {
       title: 'Novedades',
       desc: 'Ulitmas noticias relacionadas',
-      url: '/novedades',
+      url: 'novedades',
       icon: 'dr-newspaper'
     },
     {
       title: 'Programas',
       desc: 'Y ciclo de vida de los residuos',
-      url: '/programas',
+      url: 'programas',
       icon: 'dr-recycle'
     },
     {
       title: 'Empresas',
       desc: 'Marcas que hacen posible esta app',
-      url: '/empresas',
+      url: 'empresas',
       icon: 'dr-empresas'
     }
   ];
@@ -36,7 +36,8 @@ export class SidemenuComponent implements OnInit {
 
   constructor(
     private menuCtrl: MenuController,
-    public api: ApiService<any>
+    public api: ApiService<any>,
+    // private router: Router
   ) {
     // this.sidemenu.ionWillOpen.subscribe(data => {
     //     console.log('menu open');
@@ -51,6 +52,7 @@ export class SidemenuComponent implements OnInit {
   toggleMenu(){
     this.menuCtrl.toggle(); //Add this method to your button click function
   }
+
 
   menuWillOpen(){
     console.log('menu will open');

@@ -8,6 +8,7 @@ import { CupertinoPane } from 'cupertino-pane';
 import { ApiService } from "src/app/services/api.service";
 import { MapService } from "src/app/services/map.service";
 import { SessionService } from 'src/app/services/session.service';
+import { IonRouterOutlet } from '@ionic/angular';
 
 @Component({
   selector: 'app-mapa',
@@ -30,6 +31,7 @@ export class MapaPage implements OnInit {
     public session: SessionService
     // private backbuttonSubscription: Subscription
     ) {
+      this.session = session;
       this.map.pinClicked.subscribe(
         pinData => {
           console.log(pinData);
@@ -40,20 +42,19 @@ export class MapaPage implements OnInit {
       );
     }
 
-  ionViewWillEnter(){
-    this.session.breakPoint = "header-full";
-  }
-
-  ionViewDidEnter() {
-    console.log("ENTER IN VIEW");
-  }
+  // ionViewWillEnter(){
+  //   this.session.breakPoint = "header-full";
+  // }
+  //
+  // ionViewDidEnter() {
+  //   console.log("ENTER IN VIEW");
+  // }
 
   ngOnInit() {
     this.map.loadMap();
     this.loadNearbyContainers();
     // this.openSearchModal();
     this.loadInfoPane();
-
   }
 
   loadInfoPane() {

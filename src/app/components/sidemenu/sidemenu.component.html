@@ -14,8 +14,7 @@
         <ion-item (click)="toggleMenu()"
           *ngFor="let p of appPages"
           lines="none"
-          routerDirection="forward"
-          [routerLink]="[p.url]"
+          [routerLink]="p.url"
           routerLinkActive="active-item">
           <ion-icon slot="start"
             [name]="p.icon"></ion-icon>
