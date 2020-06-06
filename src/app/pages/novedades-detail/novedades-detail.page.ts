@@ -16,8 +16,13 @@ export class NovedadesDetailPage implements OnInit {
   }
 
   ngOnInit() {
-    this.session.showBackButton = true;
-    this.session.urlBackButton = "/novedades";
+    // this.session.showBackButton = true;
   }
 
+  ionViewDidEnter(){
+  }
+  ionViewWillEnter(){
+  }
+  ionViewWillLeave(){
+  }
 }

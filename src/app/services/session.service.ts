@@ -13,6 +13,8 @@ export class SessionService {
   showBackButton: boolean = false;
   urlBackButton: string = '/';
 
+  mapPage: boolean = false;
+
   // header headerState
   // breakPoint: string = "large";
 

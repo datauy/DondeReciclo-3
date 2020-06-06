@@ -1,17 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { SessionService } from './../../services/session.service';
 import { environment } from '../../../environments/environment';
+import { IonNav, IonTabs } from '@ionic/angular';
 
 @Component({
   selector: 'app-tabsnav',
   templateUrl: './tabsnav.page.html',
   styleUrls: ['./tabsnav.page.scss'],
 })
-export class TabsnavPage implements OnInit {
+export class TabsnavPage implements AfterViewInit {
+
 
   isLoading = true;
   showingKeyboard = false;
+
+  tabsPage: any = false;
+
+  @ViewChild("tabsNav", {
+    static: false
+  }) tabsNav: IonTabs;
 
   constructor(
     private keyboard: Keyboard,
@@ -34,12 +42,17 @@ export class TabsnavPage implements OnInit {
   //   this.searchbar.setFocus();
   // }
 
-  ngOnInit() {
+  ngAfterViewInit(){
+    console.log(this.tabsNav);
+    this.tabsNav.ionTabsDidChange.subscribe(async ev => {
+      console.log("cambio tab: ", ev);
+      this.tabsPage = await this.tabsNav.getSelected();
+    })
   }
 
-  ionViewWillEnter(){
-    // this.session.breakPoint = "header-none";
-  }
+  // ionViewWillEnter(){
+  //   this.session.breakPoint = "header-none";
+  // }
   ngAfterViewChecked() {
     // this.skipSlides.addEventListener('click', (e: any) => {
     //   console.log("skip clicked");

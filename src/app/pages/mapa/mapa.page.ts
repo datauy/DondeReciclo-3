@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import {NativeGeocoder,NativeGeocoderOptions} from "@ionic-native/native-geocoder/ngx";
 
@@ -9,6 +9,7 @@ import { ApiService } from "src/app/services/api.service";
 import { MapService } from "src/app/services/map.service";
 import { SessionService } from 'src/app/services/session.service';
 import { IonRouterOutlet } from '@ionic/angular';
+import { createAnimation } from '@ionic/core';
 
 @Component({
   selector: 'app-mapa',
@@ -17,9 +18,10 @@ import { IonRouterOutlet } from '@ionic/angular';
 })
 export class MapaPage implements OnInit {
 
-  // @ViewChild("infoPane", {
-  //   read: ElementRef
-  // }) private infoPane: ElementRef;
+  @ViewChild("#map", {
+    static: false
+  }) mapEl: any;
+
   address: string[];
   container = {} as Container;
   infoPane: CupertinoPane;
@@ -42,20 +44,51 @@ export class MapaPage implements OnInit {
       );
     }
 
-  // ionViewWillEnter(){
-  //   this.session.breakPoint = "header-full";
-  // }
+  ionViewWillEnter(){
+    this.session.mapPage = true;
+  }
   //
   // ionViewDidEnter() {
   //   console.log("ENTER IN VIEW");
   // }
 
+  ionViewWillLeave(){
+    this.session.mapPage = false;
+  }
   ngOnInit() {
     this.map.loadMap();
     this.loadNearbyContainers();
     // this.openSearchModal();
     this.loadInfoPane();
   }
+
+  hideHeader(){
+
+    console.log('cupertino will open: ',document.querySelector('app-header ion-toolbar'));
+
+    createAnimation()
+    .addElement(document.querySelector('app-header ion-toolbar'))
+    .duration(300)
+    .iterations(1)
+    .easing('ease-out')
+    .keyframes([
+      { offset: 0, opacity: 1, height: '100%'},
+      { offset: 1, opacity: 0, height: 0}
+    ],).play();
+  }
+  showHeader(){
+    console.log('cupertino will close: ', document.querySelector('app-header ion-toolbar'));
+    createAnimation()
+    .addElement(document.querySelector('app-header ion-toolbar'))
+    .duration(300)
+    .iterations(1)
+    .easing('ease-out')
+    .keyframes([
+      { offset: 0, opacity: 0, height: 0},
+      { offset: 1, opacity: 1, height: '100%'}
+    ],).play();
+  }
+
 
   loadInfoPane() {
     this.infoPane = new CupertinoPane(
@@ -79,8 +112,9 @@ export class MapaPage implements OnInit {
           }
         },
         onDrag: () => console.log('Drag event'),
-        // onDidPresent: () => ;
-        // onBackdropTap: () => this.infoPanel.hide(),
+        onWillPresent: () => this.hideHeader(),
+        onBackdropTap: () => this.infoPane.hide(),
+        onWillDismiss: () => this.showHeader(),
       }
     );
   }

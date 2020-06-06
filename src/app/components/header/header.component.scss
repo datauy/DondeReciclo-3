@@ -1,8 +1,11 @@
 :host {
   z-index: 0;
 
-  ion-img {
-    height: 56px;
-    margin: 12px 12px 20px 24px;
+  ion-buttons{
+    margin: 0;
+    ion-img {
+      height: 56px;
+      margin: 12px 12px 20px 0;
+    }
   }
 }

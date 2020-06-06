@@ -4,7 +4,7 @@
 
   <app-search></app-search>
 
-  <ion-tabs *ngIf="!showKeyboard" selectedIndex="3">
+  <ion-tabs *ngIf="!showKeyboard" selectedIndex="3" #tabsNav>
     <ion-tab-bar #tab slot="bottom">
       <ion-tab-button tab="sobre-el-proyecto" tabsHideOnSubPages="true">
         <ion-icon name="information-circle-outline"></ion-icon>

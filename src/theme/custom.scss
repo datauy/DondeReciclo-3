@@ -20,11 +20,19 @@
   --dr-header-height-large: 122px;
   --dr-header-height-small: 60px;
   --dr-margin: 12px;
-  --dr-searchbox-top: calc(var(--dr-header-height-large) - 34px);
+  --dr-searchbox-top: calc(var(--dr-header-height-large) - 32px);
   // Font
   --dr-font-size: 20px;
   // --ion-font-family: "SourceSansPro"; // don't work don't know why.
   // components
+
+
+  ion-page{
+    --background: red;
+  }
+  ion-app{
+    --background: red;
+  }
   ion-modal{
     --max-width: 300px;
     --max-height: 230px;
@@ -32,7 +40,15 @@
     --border-style: solid 1px #979797;
   }
 
-  ion-header {}
+  ion-header {
+    &.map{
+      ion-toolbar{
+        height: var(--dr-header-height-large);
+      }
+    }
+  }
+
+
 
   ion-title {
     width: 100%;
@@ -133,11 +149,13 @@ ion-icon{
 ion-split-pane.split-pane-visible {
   ion-img.logo {
     // @extend .hide;
-    opacity: 0;
+    // opacity: 0;
   }
 }
 
-
+body{
+    background: var(--dark-sea-green);
+}
 // Fonts
 // @font-face {
 //   font-family: "PTSerif";
@@ -459,7 +477,6 @@ ion-split-pane.split-pane-visible {
       }
     }
   }
-
   ion-content,
   ion-list {
     --background: none;

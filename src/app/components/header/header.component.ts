@@ -9,10 +9,10 @@ import { SessionService } from 'src/app/services/session.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  @Input('title') title:any;
-  @Input('display') display:any;
-  @Input('backButton') backButton:any;
-  @Input('backLink') backLink:any;
+  @Input('title') title: any;
+  @Input('display') display: any;
+  @Input('backButton') backButton: boolean;
+  @Input('backLink') backLink: any;
 
   constructor(
     public menuCtrl: MenuController,
@@ -25,6 +25,15 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  goBack(){
+    console.log('backlink: ', this.backLink)
+    if (this.backLink){
+      this.navCtrl.navigateBack(this.backLink);
+    }else{
+      this.navCtrl.back();
+    }
   }
 
   toggleMenu() {

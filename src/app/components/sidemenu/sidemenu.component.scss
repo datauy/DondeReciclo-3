@@ -15,19 +15,38 @@
     --background: red !important;
   }
 
+    #desktop-logo{
+      // height: var(--dr-header-height-large);
+      width: 100%;
+      background: var(--dark-sea-green);
+      text-align: left;
+      z-index: 0;
+      ion-img{
+        display: inline-block;
+        height: 56px;
+        margin: 12px;
+      }
+    }
+
   ion-split-pane{
       --border: none !important;
       ion-menu{
-        margin-top: var(--dr-header-height-large);
+        @media (max-width: 991px) {
+          margin-top: var(--dr-header-height-large);
+          ion-header {
+            height: 0;
+            display: none !important;
+          }
+        }
         --background:rgba(0, 0, 0, 0.8);
       }
   }
 
   ion-header {
-    height: 0;
     // width: 80%;
     // left: 10%;
     --background: none;
+    /* Using plain CSS */
   }
 
   ion-content {
