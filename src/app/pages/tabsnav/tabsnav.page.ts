@@ -3,6 +3,7 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { SessionService } from './../../services/session.service';
 import { environment } from '../../../environments/environment';
 import { IonNav, IonTabs } from '@ionic/angular';
+import { AutoCompleteComponent } from 'ionic4-auto-complete';
 
 @Component({
   selector: 'app-tabsnav',
@@ -20,6 +21,8 @@ export class TabsnavPage implements AfterViewInit {
   @ViewChild("tabsNav", {
     static: false
   }) tabsNav: IonTabs;
+
+
 
   constructor(
     private keyboard: Keyboard,
@@ -43,11 +46,14 @@ export class TabsnavPage implements AfterViewInit {
   // }
 
   ngAfterViewInit(){
-    console.log(this.tabsNav);
-    this.tabsNav.ionTabsDidChange.subscribe(async ev => {
-      console.log("cambio tab: ", ev);
-      this.tabsPage = await this.tabsNav.getSelected();
-    })
+    // console.log(this.tabsNav);
+    // this.tabsNav.ionTabsDidChange.subscribe(async ev => {
+    //   console.log("cambio tab: ", ev);
+    //   this.tabsPage = await this.tabsNav.getSelected();
+    //   if (this.tabsPage == "mapa"){
+    //     this.searchBar.classList.add('show');
+    //   }
+    // })
   }
 
   // ionViewWillEnter(){

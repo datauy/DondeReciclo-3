@@ -1,6 +1,5 @@
 :host{
   height: 100%;
-
   ion-button{
     text-align: left;
     ion-label{
@@ -34,15 +33,13 @@
         --color: white;
       }
 
-      &.show {
-        opacity: 1;
-        display: block;
-      }
-
-      &.hide {
-        opacity: 0;
-        display: none;
-      }
+      // &.show{
+      //   visibility: visible;
+      // }
+      //
+      // &.hide{
+      //   visibility: hidden;
+      // }
 
       .resultsWrap {
         margin: -6px;

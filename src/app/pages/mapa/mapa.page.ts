@@ -26,6 +26,9 @@ export class MapaPage implements OnInit {
   container = {} as Container;
   infoPane: CupertinoPane;
 
+  headerMain: HTMLDivElement;
+  searchbar: HTMLDivElement;
+
   constructor(
     private geocoder: NativeGeocoder,
     public api: ApiService,
@@ -45,7 +48,7 @@ export class MapaPage implements OnInit {
     }
 
   ionViewWillEnter(){
-    this.session.mapPage = true;
+    // this.session.mapPage = true;
   }
   //
   // ionViewDidEnter() {
@@ -53,40 +56,50 @@ export class MapaPage implements OnInit {
   // }
 
   ionViewWillLeave(){
-    this.session.mapPage = false;
+    // this.session.mapPage = false;
   }
   ngOnInit() {
     this.map.loadMap();
     this.loadNearbyContainers();
     // this.openSearchModal();
     this.loadInfoPane();
+    this.headerMain = document.querySelector('app-mapa app-header');
+    this.searchbar = document.querySelector('app-search');
+    // this.app = document.querySelector('app-search');
   }
 
   hideHeader(){
-
-    console.log('cupertino will open: ',document.querySelector('app-header ion-toolbar'));
-
-    createAnimation()
-    .addElement(document.querySelector('app-header ion-toolbar'))
-    .duration(300)
-    .iterations(1)
-    .easing('ease-out')
-    .keyframes([
-      { offset: 0, opacity: 1, height: '100%'},
-      { offset: 1, opacity: 0, height: 0}
-    ],).play();
+    this.session.cupertinoState = 'cupertinoOpen'
+    // console.log('cupertino will open: ',this.headerMain);
+    // this.headerMain.classList.add('headerShrink');
+    // this.headerMain.classList.remove('headerExpand');
+    // this.searchbar.classList.add('hide');
+  //   createAnimation()
+  //   .addElement(this.headerMain)
+  //   .duration(300)
+  //   .iterations(1)
+  //   .easing('ease-out')
+  //   .keyframes([
+  //     { offset: 0, opacity: 1, height: this.headerMain.offsetHeight},
+  //     { offset: 1, opacity: 0, height: 0}
+  //   ],).play();
   }
   showHeader(){
-    console.log('cupertino will close: ', document.querySelector('app-header ion-toolbar'));
-    createAnimation()
-    .addElement(document.querySelector('app-header ion-toolbar'))
-    .duration(300)
-    .iterations(1)
-    .easing('ease-out')
-    .keyframes([
-      { offset: 0, opacity: 0, height: 0},
-      { offset: 1, opacity: 1, height: '100%'}
-    ],).play();
+    this.session.cupertinoState = 'cupertinoClosed'
+    // console.log('cupertino will close: ',this.headerMain);
+    // this.headerMain.classList.remove('headerShrink');
+    // this.headerMain.classList.add('headerExpand');
+    // this.searchbar.classList.remove('hide');
+    // console.log('cupertino will close: ', this.headerMain);
+    // createAnimation()
+    // .addElement(this.headerMain)
+    // .duration(300)
+    // .iterations(1)
+    // .easing('ease-out')
+    // .keyframes([
+    //   { offset: 0, opacity: 0, height: 0},
+    //   { offset: 1, opacity: 1, height: this.headerMain.offsetHeight}
+    // ],).play();
   }
 
 

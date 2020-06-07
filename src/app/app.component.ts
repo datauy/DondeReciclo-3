@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -22,10 +22,15 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    public session: SessionService
+    public session: SessionService,
+    private route: ActivatedRoute,
   ) {
     this.initializeApp();
     this.session = session;
+
+    // this.route.queryParams.subscribe(params => {
+    //   this.name = params['name'];
+    // });
     // this.isLoading = session.isLoading;
     // if (!this.session.get('isLoading')) {
     //   this.session.set('isLoading', 'true');

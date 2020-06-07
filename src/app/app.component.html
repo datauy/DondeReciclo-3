@@ -1,4 +1,4 @@
-<ion-app>
+<ion-app [ngClass]="session.currentPage + ' ' + session.cupertinoState">
   <!-- <app-header display="full"></app-header> -->
 
   <div class="loadingOverlay" [ngClass]="session.isLoading ? 'loadingShow' : 'loadingHide'">

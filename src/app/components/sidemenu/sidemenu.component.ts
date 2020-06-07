@@ -11,6 +11,7 @@ import { createAnimation, Animation } from '@ionic/core';
 export class SidemenuComponent implements OnInit {
 
   @ViewChild(IonMenu, { static: false }) public sidemenu: IonMenu;
+  @ViewChild("#search-app-component", { static: false }) private searchBar: HTMLElement;
 
   public appPages = [
     {
@@ -55,29 +56,11 @@ export class SidemenuComponent implements OnInit {
 
 
   menuWillOpen(){
-    console.log('menu will open');
-    createAnimation()
-    .addElement(document.querySelector('#search-app-content'))
-    .duration(100)
-    .iterations(1)
-    .easing('ease-out')
-    .keyframes([
-      { offset: 0, opacity: 1 },
-      { offset: 1, opacity: 0 }
-    ],).play();
+    // this.searchBar.classList.add('hide');
   }
 
   menuWillClose(){
-    console.log('menu will close');
-    createAnimation()
-    .addElement(document.querySelector('#search-app-content'))
-    .duration(200)
-    .iterations(1)
-    .easing('ease-in')
-    .keyframes([
-      { offset: 0, opacity: 0 },
-      { offset: 1, opacity: 1 }
-    ]).play();
+    // this.searchBar.classList.remove('hide');
   }
 
 }

@@ -36,7 +36,7 @@ function getIonHeaderElement(element: HTMLElement) {
 }
 
 export const navPage = (_: HTMLElement, opts: any) => {
-  const duration = 1000;
+  const duration = 300;
   const backDirection = opts.direction === 'back';
   const enteringEl = opts.enteringEl;
   const leavingEl = opts.leavingEl;
@@ -98,11 +98,11 @@ export const navPage = (_: HTMLElement, opts: any) => {
     .addElement(enteringHeaderEl)
     .duration(duration)
     .easing('ease-out')
-    .keyframes([
-        { offset: 0, opacity: 0 },
-        // { offset: 0.8, opacity: 0 },
-        { offset: 1, opacity: 1 }
-      ])
+    // .keyframes([
+    //     { offset: 0, opacity: 0 },
+    //     // { offset: 0.8, opacity: 0 },
+    //     { offset: 1, opacity: 1 }
+    //   ])
 
   leavingHeaderTransition
     .addElement(leavingHeaderEl)
@@ -113,7 +113,7 @@ export const navPage = (_: HTMLElement, opts: any) => {
       // { offset: 0.5, opacity: 1, transform: 'translateY(-120px)'},
       // { offset: 1, opacity: 0}
       { offset: 0, opacity: 1, height: `${leavingHeaderElHeight}px`},
-      // { offset: 0.8, opacity: 1},
+      { offset: 0.8, opacity: 1},
       { offset: 1, opacity: 0, height:  `${enteringHeaderElHeight}px`}
     ]);
 

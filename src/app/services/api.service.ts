@@ -36,7 +36,7 @@ export class ApiService<T=any> {
  /***************************/
  //
   loadInitialData(): Observable<any> {
-    console.log("API loading initial");
+    // console.log("API loading initial");
     return this.loadContainerTypes().pipe(
       switchMap( () => this.loadMaterials() ),
       switchMap( () => this.loadPredefinedSearchs() ),
@@ -76,7 +76,7 @@ export class ApiService<T=any> {
     );
   }
   downloadFile(url:string, fileName: string, type: string): Observable<any> {
-    console.log('Writting file assets/'+type+'/'+fileName);
+    // console.log('Writting file assets/'+type+'/'+fileName);
     return this.request.get(url, {responseType: 'blob'}).pipe(
       mergeMap((data: Blob) => {
         return this.file.writeFile('assets/'+type, fileName, data, {replace: false});

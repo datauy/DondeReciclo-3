@@ -32,7 +32,7 @@
       --border: none !important;
       ion-menu{
         @media (max-width: 991px) {
-          margin-top: var(--dr-header-height-large);
+          margin-top: var(--dr-header-height-full);
           ion-header {
             height: 0;
             display: none !important;

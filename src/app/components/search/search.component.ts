@@ -46,12 +46,12 @@ export class SearchComponent implements OnInit {
       // console.log(this.predefinedOptions);
       }
     );
-    console.log('Auto: ', this.searchBarAuto);
-    console.log('element: ', this.searchBarIonic);
+    // console.log('Auto: ', this.searchBarAuto);
+    // console.log('element: ', this.searchBarIonic);
   }
   ionViewDidEnter(){
-    console.log('element: ', this.searchBarAuto);
-    console.log('element: ', this.searchBarIonic);
+    // console.log('element: ', this.searchBarAuto);
+    // console.log('element: ', this.searchBarIonic);
   }
 
   showSearch(event) {
