@@ -75,38 +75,9 @@ export class MapaPage implements OnInit {
 
   cupertinoShow(){
     this.session.cupertinoState = 'cupertinoOpen'
-
-    // console.log('cupertino will open: ',this.headerMain);
-    // this.headerMain.classList.add('headerShrink');
-    // this.headerMain.classList.remove('headerExpand');
-    // this.searchbar.classList.add('hide');
-  //   createAnimation()
-  //   .addElement(this.headerMain)
-  //   .duration(300)
-  //   .iterations(1)
-  //   .easing('ease-out')
-  //   .keyframes([
-  //     { offset: 0, opacity: 1, height: this.headerMain.offsetHeight},
-  //     { offset: 1, opacity: 0, height: 0}
-  //   ],).play();
   }
   cupertinoHide(){
     this.session.cupertinoState = 'cupertinoClosed';
-
-    // console.log('cupertino will close: ',this.headerMain);
-    // this.headerMain.classList.remove('headerShrink');
-    // this.headerMain.classList.add('headerExpand');
-    // this.searchbar.classList.remove('hide');
-    // console.log('cupertino will close: ', this.headerMain);
-    // createAnimation()
-    // .addElement(this.headerMain)
-    // .duration(300)
-    // .iterations(1)
-    // .easing('ease-out')
-    // .keyframes([
-    //   { offset: 0, opacity: 0, height: 0},
-    //   { offset: 1, opacity: 1, height: this.headerMain.offsetHeight}
-    // ],).play();
   }
 
   dragMapCupertino(){
@@ -118,8 +89,6 @@ export class MapaPage implements OnInit {
   }
 
   breakMapCupertino(){
-    // this.infoPaneEl = document.querySelector('.cupertino-pane > .pane');
-    // const paneHeight = this.infoPaneEl.getBoundingClientRect().top;
     const currentBreak = this.infoPane.currentBreak();
     switch (true) {
         case currentBreak == "middle":

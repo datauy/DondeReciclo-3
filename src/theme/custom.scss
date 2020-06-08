@@ -4,6 +4,7 @@
   --ion-tab-bar-background-focused: none;
   // --ion-tab-bar-border-color:
   --ion-tab-bar-color: white;
+  // --ion-tab-bar-color-focused: var(--pale-olive-green);
   --ion-tab-bar-color-selected: var(--pale-olive-green);
   --ion-toolbar-background: var(--dark-sea-green);
   --ion-toolbar-color: var(--pale-olive-green);
@@ -106,6 +107,17 @@
       // --transition	Transition of the button
     }
   }
+
+  // Tab
+
+  ion-tab-bar {
+  	ion-tab-button {
+      @extend .dr-transition-buttons;
+      ion-icon, ion-label{
+      }
+    }
+  }
+
   // slider
   app-slider {
     z-index: 0 !important;
@@ -126,6 +138,7 @@
   }
 }
 
+
 ion-icon {
   // background: red;
   &.right {
@@ -143,6 +156,9 @@ ion-icon {
 // utils
 
 .dr-transition{
+  transition: var(--animation-time) ease-in-out;
+}
+.dr-transition-buttons{
   transition: var(--animation-time) ease-in-out;
 }
 .show {

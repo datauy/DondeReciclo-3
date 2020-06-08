@@ -7,13 +7,13 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   inkscape:version="1.0 (6e3e5246a0, 2020-05-07)"
-   sodipodi:docname="dr-info.svg"
-   id="svg275"
-   version="1.1"
-   viewBox="0 0 512 512"
+   width="512"
    height="512"
-   width="512">
+   viewBox="0 0 512 512"
+   version="1.1"
+   id="svg275"
+   sodipodi:docname="dr-info.svg"
+   inkscape:version="1.0 (6e3e5246a0, 2020-05-07)">
   <metadata
      id="metadata281">
     <rdf:RDF>
@@ -22,66 +22,54 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <defs
      id="defs279" />
   <sodipodi:namedview
-     inkscape:current-layer="svg275"
-     inkscape:window-maximized="1"
-     inkscape:window-y="27"
-     inkscape:window-x="67"
-     inkscape:cy="189.04558"
-     inkscape:cx="237.87408"
-     inkscape:zoom="0.90885417"
-     inkscape:snap-bbox-edge-midpoints="true"
-     inkscape:snap-smooth-nodes="true"
-     inkscape:snap-bbox="true"
-     inkscape:object-paths="true"
-     inkscape:guide-bbox="true"
-     showguides="true"
-     showgrid="false"
-     id="namedview277"
-     inkscape:window-height="845"
-     inkscape:window-width="1533"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0"
-     guidetolerance="10"
-     gridtolerance="10"
-     objecttolerance="10"
-     borderopacity="1"
+     inkscape:document-rotation="0"
+     pagecolor="#ffffff"
      bordercolor="#666666"
-     pagecolor="#ffffff">
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1533"
+     inkscape:window-height="845"
+     id="namedview277"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:object-paths="true"
+     inkscape:snap-bbox="true"
+     inkscape:snap-smooth-nodes="true"
+     inkscape:snap-bbox-edge-midpoints="true"
+     inkscape:zoom="0.90885417"
+     inkscape:cx="711.65892"
+     inkscape:cy="200.27076"
+     inkscape:window-x="67"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg275">
     <sodipodi:guide
-       inkscape:color="rgb(0,0,255)"
-       inkscape:locked="false"
-       inkscape:label=""
-       id="guide285"
+       position="48,175.67752"
        orientation="-1,0"
-       position="48,175.67752" />
+       id="guide285"
+       inkscape:label=""
+       inkscape:locked="false"
+       inkscape:color="rgb(0,0,255)" />
   </sodipodi:namedview>
   <g
-     transform="matrix(20.00577,0,0,20.00577,-239.84302,-229.84012)"
      id="g273"
-     stroke-linejoin="round"
-     stroke-linecap="round"
-     fill-rule="evenodd"
-     fill="none">
+     transform="matrix(20.00577,0,0,20.00577,-239.84302,-229.84012)">
     <path
-       style="stroke:none"
-       id="path269"
-       transform="translate(13.5,13)"
-       d="m 0.888,11.285 c 0,5.742 4.655,10.397 10.397,10.397 5.742,0 10.397,-4.655 10.397,-10.397 0,-5.742 -4.655,-10.397 -10.397,-10.397 -5.742,0 -10.397,4.655 -10.397,10.397 z"
-       stroke-width="1.776"
-       stroke="#9cd060"
-       fill="#9cd060" />
-    <path
-       id="path271"
-       transform="translate(13.5,13)"
-       d="m 11.285,11.285 v 5.449 m 0,-10.811 v 0.359"
-       stroke-width="3"
-       stroke="#08573a" />
+       transform="matrix(0.04998558,0,0,0.04998558,11.988692,11.488692)"
+       d="M 256 48 C 141.12687 48 48 141.12687 48 256 C 48 370.87313 141.12687 464 256 464 C 370.87313 464 464 370.87313 464 256 C 464 141.12687 370.87313 48 256 48 z M 256.00391 118.73633 A 30.008655 30.008655 0 0 1 286.01172 148.74609 L 286.01172 155.89648 A 30.008655 30.008655 0 0 1 256.00391 185.9043 A 30.008655 30.008655 0 0 1 225.99414 155.89648 L 225.99414 148.74609 A 30.008655 30.008655 0 0 1 256.00391 118.73633 z M 256.00391 225.99414 A 30.008655 30.008655 0 0 1 286.01172 256.00391 L 286.01172 365.01953 A 30.008655 30.008655 0 0 1 256.00391 395.02734 A 30.008655 30.008655 0 0 1 225.99414 365.01953 L 225.99414 256.00391 A 30.008655 30.008655 0 0 1 256.00391 225.99414 z "
+       style="stroke:none;stroke-width:20.0058;"
+       id="path269" />
   </g>
 </svg>

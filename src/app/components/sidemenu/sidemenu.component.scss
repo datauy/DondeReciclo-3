@@ -70,7 +70,20 @@
       margin: 0;
 
       &.active-item {
+        background: white;
         border-left: none;
+        h4{
+          color:  var(--pale-olive-green);
+        }
+        p{
+          color:  var(--pale-olive-green);
+        }
+        ion-avatar{
+          color:  var(--pale-olive-green);
+        }
+        ion-icon{
+          color: var(--pale-olive-green);
+        }
       }
       h4{
         margin: 0;

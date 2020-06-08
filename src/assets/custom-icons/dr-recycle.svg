@@ -23,7 +23,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -50,6 +50,17 @@
     <path
        id="prefix__a-6"
        d="M0 0.005L11.387 0.005 11.387 18.346 0 18.346z" />
+    <mask
+       fill="#ffffff"
+       id="prefix__b">
+      <use
+         id="use1410"
+         xlink:href="#prefix__a-6"
+         x="0"
+         y="0"
+         width="100%"
+         height="100%" />
+    </mask>
   </defs>
   <sodipodi:namedview
      inkscape:document-rotation="0"
@@ -72,12 +83,12 @@
      inkscape:snap-smooth-nodes="true"
      inkscape:snap-bbox-edge-midpoints="true"
      inkscape:zoom="0.90885417"
-     inkscape:cx="233.63604"
-     inkscape:cy="251.3413"
+     inkscape:cx="79.139221"
+     inkscape:cy="149.11217"
      inkscape:window-x="67"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1">
+     inkscape:current-layer="g1419">
     <sodipodi:guide
        position="48,175.67752"
        orientation="-1,0"
@@ -100,36 +111,9 @@
      style="display:inline">
     <g
        transform="matrix(13.868516,0,0,13.868516,47.972263,34.131484)"
-       fill="none"
-       fill-rule="evenodd"
        id="g1419">
       <path
-         fill="#ffffff"
-         d="m 30,15.998 -3.447,3.623 -1.04,1.096 -1.864,-1.951 -2.648,-2.768 h 3 c 0,-5.271 -3.543,-9.678 -8.247,-10.766 l 2.4,-2.52 C 23.329,4.68 27,9.887 27,15.998 Z"
-         id="path1408" />
-      <g
-         transform="translate(0,0.995)"
-         id="g1415">
-        <mask
-           id="prefix__b"
-           fill="#ffffff">
-          <use
-             height="100%"
-             width="100%"
-             y="0"
-             x="0"
-             xlink:href="#prefix__a-6"
-             id="use1410" />
-        </mask>
-        <path
-           fill="#ffffff"
-           d="m 5.252,0.005 4.71,1.328 1.425,0.392 -0.68,2.663 -0.96,3.8 L 8.244,5.46 C 3.892,8.1 2.029,13.523 3.484,18.346 l -3.28,-0.92 C -0.755,11.739 1.702,5.796 6.74,2.74 Z"
-           mask="url(#prefix__b)"
-           id="path1413" />
-      </g>
-      <path
-         fill="#ffffff"
-         d="M 5.252,30.995 3.988,26.052 3.596,24.564 6.14,23.852 9.755,22.82 8.252,25.548 c 4.35,2.64 9.758,1.624 13.013,-2.112 l 0.88,3.44 c -4.207,3.72 -10.35,4.455 -15.39,1.4 l -1.503,2.72 z"
+         d="M 5.252,30.995 3.988,26.052 3.596,24.564 6.14,23.852 9.755,22.82 8.252,25.548 c 4.35,2.64 9.758,1.624 13.013,-2.112 l 0.88,3.44 c -4.207,3.72 -10.35,4.455 -15.39,1.4 l -1.503,2.72 z m 0,-29.995 4.71,1.328 1.425,0.392 -0.68,2.663 -0.96,3.8 -1.503,-2.728 c -4.352,2.64 -6.215,8.063 -4.76,12.886 l -3.28,-0.92 C -0.755,12.734 1.702,6.791 6.74,3.735 Z M 30,15.998 l -3.447,3.623 -1.04,1.096 -1.864,-1.951 -2.648,-2.768 h 3 c 0,-5.271 -3.543,-9.678 -8.247,-10.766 l 2.4,-2.52 C 23.329,4.68 27,9.887 27,15.998 Z"
          id="path1417" />
     </g>
   </g>

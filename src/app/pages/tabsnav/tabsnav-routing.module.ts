@@ -19,6 +19,10 @@ const routes: Routes = [
         loadChildren: () => import('../sobre-el-proyecto/sobre-el-proyecto.module').then( m => m.SobreElProyectoPageModule)
       },
       {
+        path: 'consejos',
+        loadChildren: () => import('../consejos/consejos.module').then( m => m.ConsejosPageModule)
+      },
+      {
         path: 'mapa',
         loadChildren: () => import('../mapa/mapa.module').then( m => m.MapaPageModule)
       },

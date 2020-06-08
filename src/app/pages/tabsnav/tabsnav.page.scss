@@ -1,4 +1,6 @@
-ion-tab-button{
+ion-tab-button {
+	--color-focused: var(--pale-olive-green);
+
 	:focus {
 		ion-icon {
 			// color: var(–ion-color-tertiary) !important;
@@ -22,40 +24,35 @@ ion-tab-bar {
 	ion-tab-button {
 		height: 66px;
 		// hover tab state
-		&:hover {
-			color: white !important;
-
-			ion-icon {
-				color: white !important;
-			}
+		* {
+			transition: 100ms ease-in-out;
 		}
 
 		ion-icon {
 			font-size: 30px;
+			color: white;
 		}
 
 		ion-label {
+			opacity: 0;
 			height: 0;
-			display: none;
+			visibility: hidden;
+			color: white;
 		}
 		// selected tab state
-		&.tab-selected {
-			height: 66px;
-			// hover tab state
-			&:hover {
-				color: white;
-			}
-
+		&:hover, &.tab-selected {
 			ion-icon {
-				// margin: 0;
-				// height: 100%;
-				//
+				color: var(--pale-olive-green);
+				font-size: 34px;
 			}
 
 			ion-label {
-				height: auto;
-				display: block;
+				color: var(--pale-olive-green);
+				visibility: visible;
+				height: 15px;
+				opacity: 1;
 			}
 		}
+
 	}
 }

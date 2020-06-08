@@ -7,13 +7,13 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="512"
-   height="512"
-   viewBox="0 0 512 512"
-   version="1.1"
-   id="svg275"
+   inkscape:version="1.0 (6e3e5246a0, 2020-05-07)"
    sodipodi:docname="dr-newspaper.svg"
-   inkscape:version="1.0 (6e3e5246a0, 2020-05-07)">
+   id="svg275"
+   version="1.1"
+   viewBox="0 0 512 512"
+   height="512"
+   width="512">
   <metadata
      id="metadata281">
     <rdf:RDF>
@@ -22,99 +22,81 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <defs
      id="defs279">
     <path
-       id="prefix__a"
-       d="M0 0.125L22.894 0.125 22.894 18.095 0 18.095z" />
+       d="M0 0.125L22.894 0.125 22.894 18.095 0 18.095z"
+       id="prefix__a" />
     <path
-       id="prefix__a-3"
-       d="M0 0.005L11.387 0.005 11.387 18.346 0 18.346z" />
+       d="M0 0.005L11.387 0.005 11.387 18.346 0 18.346z"
+       id="prefix__a-3" />
     <path
-       id="prefix__a-7"
-       d="M0 0.072L7.267 0.072 7.267 8.05 0 8.05z" />
+       d="M0 0.072L7.267 0.072 7.267 8.05 0 8.05z"
+       id="prefix__a-7" />
     <path
-       id="prefix__c"
-       d="M0.072 0.001L7.993 0.001 7.993 8.87 0.072 8.87z" />
+       d="M0.072 0.001L7.993 0.001 7.993 8.87 0.072 8.87z"
+       id="prefix__c" />
     <path
-       id="prefix__e"
-       d="M0.04 0.073L8.507 0.073 8.507 5.86 0.04 5.86z" />
+       d="M0.04 0.073L8.507 0.073 8.507 5.86 0.04 5.86z"
+       id="prefix__e" />
     <path
-       id="prefix__a-35"
-       d="M0 0.125L22.894 0.125 22.894 18.095 0 18.095z" />
+       d="M0 0.125L22.894 0.125 22.894 18.095 0 18.095z"
+       id="prefix__a-35" />
   </defs>
   <sodipodi:namedview
-     inkscape:document-rotation="0"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="1533"
-     inkscape:window-height="845"
-     id="namedview277"
-     showgrid="false"
-     showguides="true"
-     inkscape:guide-bbox="true"
-     inkscape:object-paths="true"
-     inkscape:snap-bbox="true"
-     inkscape:snap-smooth-nodes="true"
-     inkscape:snap-bbox-edge-midpoints="true"
-     inkscape:zoom="0.90885417"
-     inkscape:cx="178.45861"
-     inkscape:cy="239.31434"
-     inkscape:window-x="67"
-     inkscape:window-y="27"
+     inkscape:current-layer="layer1"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1">
+     inkscape:window-y="27"
+     inkscape:window-x="67"
+     inkscape:cy="239.31434"
+     inkscape:cx="178.45861"
+     inkscape:zoom="0.90885417"
+     inkscape:snap-bbox-edge-midpoints="true"
+     inkscape:snap-smooth-nodes="true"
+     inkscape:snap-bbox="true"
+     inkscape:object-paths="true"
+     inkscape:guide-bbox="true"
+     showguides="true"
+     showgrid="false"
+     id="namedview277"
+     inkscape:window-height="845"
+     inkscape:window-width="1533"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0"
+     guidetolerance="10"
+     gridtolerance="10"
+     objecttolerance="10"
+     borderopacity="1"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     inkscape:document-rotation="0">
     <sodipodi:guide
-       position="48,175.67752"
-       orientation="-1,0"
+       inkscape:color="rgb(0,0,255)"
+       inkscape:locked="false"
+       inkscape:label=""
        id="guide285"
-       inkscape:label=""
-       inkscape:locked="false"
-       inkscape:color="rgb(0,0,255)" />
+       orientation="-1,0"
+       position="48,175.67752" />
     <sodipodi:guide
-       position="337.78796,464"
-       orientation="0,1"
-       id="guide568"
-       inkscape:label=""
+       inkscape:color="rgb(0,0,255)"
        inkscape:locked="false"
-       inkscape:color="rgb(0,0,255)" />
+       inkscape:label=""
+       id="guide568"
+       orientation="0,1"
+       position="337.78796,464" />
   </sodipodi:namedview>
   <g
-     inkscape:groupmode="layer"
-     id="layer1"
+     style="display:inline"
      inkscape:label="Layer 1"
-     style="display:inline">
-    <g
-       transform="matrix(13,0,0,13,61,48)"
-       fill="none"
-       stroke="#ffffff"
-       id="g1278">
-      <path
-         stroke-width="2"
-         d="M 26,6 H 1 v 22 c 0,0.828 0.336,1.578 0.879,2.121 C 2.422,30.664 3.172,31 4,31 h 22 c 0.828,0 1.578,-0.336 2.121,-0.879 C 28.664,29.578 29,28.828 29,28 V 9 C 29,8.172 28.664,7.422 28.121,6.879 27.578,6.336 26.828,6 26,6 Z M 19,1 H 3.5 C 2.81,1 2.185,1.28 1.732,1.732 1.28,2.185 1,2.81 1,3.5 1,4.19 1.28,4.815 1.732,5.268 2.185,5.72 2.81,6 3.5,6 H 19 Z"
-         id="path1272" />
-      <rect
-         width="8"
-         height="7"
-         x="15.5"
-         y="11.5"
-         rx="1"
-         id="rect1274" />
-      <path
-         stroke-linecap="round"
-         d="M 23,21.5 H 7 m 5.634,-3 H 7 m 5.634,-4 H 7 M 12.634,12 H 7 M 23,24.5 H 7"
-         id="path1276" />
-    </g>
+     id="layer1"
+     inkscape:groupmode="layer">
+    <path
+       d="m 152,197.5 a 6.5,6.5 0 0 0 -6.5,6.5 6.5,6.5 0 0 0 6.5,6.5 h 73.25196 a 6.5,6.5 0 0 0 6.5,-6.5 6.5,6.5 0 0 0 -6.5,-6.5 z m 0,32.5 a 6.5,6.5 0 0 0 -6.5,6.5 6.5,6.5 0 0 0 6.5,6.5 h 73.25196 a 6.5,6.5 0 0 0 6.5,-6.5 6.5,6.5 0 0 0 -6.5,-6.5 z m 0,52 a 6.5,6.5 0 0 0 -6.5,6.5 6.5,6.5 0 0 0 6.5,6.5 h 73.25196 a 6.5,6.5 0 0 0 6.5,-6.5 6.5,6.5 0 0 0 -6.5,-6.5 z m 0,39 a 6.5,6.5 0 0 0 -6.5,6.5 6.5,6.5 0 0 0 6.5,6.5 h 208 a 6.5,6.5 0 0 0 6.5,-6.5 6.5,6.5 0 0 0 -6.5,-6.5 z m 0,39 a 6.5,6.5 0 0 0 -6.5,6.5 6.5,6.5 0 0 0 6.5,6.5 h 208 a 6.5,6.5 0 0 0 6.5,-6.5 A 6.5,6.5 0 0 0 360,360 Z M 275.5,191 c -10.69056,0 -19.5,8.80944 -19.5,19.5 v 65 c 0,10.69056 8.80944,19.5 19.5,19.5 h 78 c 10.69056,0 19.5,-8.80944 19.5,-19.5 v -65 C 373,199.80944 364.19056,191 353.5,191 Z m 0,13 h 78 c 3.71344,0 6.5,2.78656 6.5,6.5 v 65 c 0,3.71344 -2.78656,6.5 -6.5,6.5 h -78 c -3.71344,0 -6.5,-2.78656 -6.5,-6.5 v -65 c 0,-3.71344 2.78656,-6.5 6.5,-6.5 z M 106.5,48 C 94.013092,48 82.551063,53.10185 74.330078,61.304687 v 0.02535 h -0.02535 C 66.10185,69.551063 61,81.013092 61,93.5 c 0,7.02923 1.919892,13.51667 4.798828,19.5 H 61 v 299 c 0,14.2809 5.839188,27.37043 15.234375,36.76562 C 85.629562,458.16082 98.719092,464 113,464 h 286 c 14.2809,0 27.37043,-5.83918 36.76562,-15.23438 C 445.16082,439.37043 451,426.2809 451,412 V 165 c 0,-14.28091 -5.83918,-27.37044 -15.23438,-36.76563 C 426.37043,118.83919 413.2809,113 399,113 H 321 V 48 h -13 z m 0,26 H 295 v 39 H 106.5 c -5.44099,0 -10.232524,-2.15233 -13.78711,-5.6875 L 92.6875,107.2871 C 89.152327,103.73252 87,98.940991 87,93.5 87,88.046908 89.163728,83.244515 92.71289,79.6875 96.267476,76.152327 101.05901,74 106.5,74 Z M 87,139 h 19.5 214.5 78 c 7.2471,0 13.66,2.89437 18.38281,7.61719 C 422.10563,151.34 425,157.75291 425,165 v 247 c 0,7.2471 -2.89437,13.66 -7.61719,18.38281 C 412.66,435.10563 406.2471,438 399,438 H 113 c -7.24709,0 -13.66,-2.89437 -18.382813,-7.61719 C 89.894375,425.66 87,419.2471 87,412 Z"
+       id="path2018" />
   </g>
   <inkscape:templateinfo>
     <inkscape:name>icon</inkscape:name>
