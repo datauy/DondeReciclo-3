@@ -123,10 +123,16 @@
     z-index: 0 !important;
   }
   //hide for now!
-  ion-slides .swiper-pagination-bullet {
+  app-sidemenu ion-slides .swiper-pagination-bullet {
     width: 9px;
     height: 9px;
     opacity: 0.5;
+  }
+
+  app-consejos .swiper-pagination{
+    top: 300px !important;
+    text-align: left;
+    left: 0;
   }
   // botones y chips
   ion-chip {
