@@ -3,7 +3,7 @@
   <!-- <ion-searchbar id="searchBar" type="text" debounce="500" animated placeholder="Busca materiales" color="dark"
   (click)="showSearch()" (ionChange)="searchAPI($event)" clearInput></ion-searchbar> -->
 
-  <ng-template [ngClass]="searchResults"
+  <ng-template [ngClass]=""
     #dr
     let-attrs="attrs"
     [ngClass]="searchVisibility ? 'show' : 'hide'">
@@ -21,7 +21,7 @@
     </ion-button>
   </ng-template>
 
-  <ng-template [ngClass]="searchResults"
+  <ng-template [ngClass]=""
     #drempty
     let-attrs="attrs">
 
@@ -72,5 +72,5 @@
 
 
 <div id="custom_backdrop"
-  (click)="hideSearch()"
+  (click)="hideSearch('backdrop')"
   [ngClass]="searchVisibility ? 'show' : 'hide'"></div>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { Container } from "src/app/models/container.model";
+import { Container } from "src/app/models/basic_models.model";
 
 import "leaflet";
 import "leaflet-routing-machine";

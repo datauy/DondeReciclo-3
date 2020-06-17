@@ -7,7 +7,6 @@ export class Material extends Base {
     icon: string;
     class: string;
 }
-
 export class Container extends Base {
     //id is inherited from Resource
     program: string;
@@ -18,6 +17,8 @@ export class Container extends Base {
     type_id: number;
     public: boolean;
     materials: number[];
+    photos: string[];
+    address: string;
 }
 
 export class ContainerType extends Base {

@@ -35,7 +35,7 @@ function getIonHeaderElement(element: HTMLElement) {
   return element;
 }
 
-export const navPage = (_: HTMLElement, opts: any) => {
+export function navPage(_: HTMLElement, opts: any) {
   const duration = 300;
   const backDirection = opts.direction === 'back';
   const enteringEl = opts.enteringEl;
