@@ -1,12 +1,12 @@
-# Ionic-base v1.0 
-Esta app es una versión base para diversos proyectos de Data. Basada en Ionic5, Angular y usando varias otras tecnologías para resolver las necesidades habituales en nuestras apps.
+# Donde Reciclo v3.0.0 
+Basada en Ionic5, Angular 6 y usando las últimas tecnologías de CSS4 y HTML5 para generar una mejor experiencia de usuario y contenidos exportables a Android e IOS así como las nuevas Web Apps.
 
 ## Incluye
 
 * Menú lateral como componente
-* Progresive Web App
+* Progresive Web App component.
 * Leaflet OSM, Leaflet Routing Machine, Geolocation
-* Busqueda
+* Busqueda de Materiales reciclebles
 * Compartir en redes sociales
 
 ## Instalación
@@ -15,17 +15,15 @@ Esta app es una versión base para diversos proyectos de Data. Basada en Ionic5,
 
     npm install -g @ionic/cli
 
-### Instalar servidor json de prueba
-
-    npm install json-server
-    
 ### Instalar app
 
-    git clone git@github.com:datauy/ionic-base.git
-    cd ionic-base
+    git clone git@github.com:datauy/DondeReciclo-3.git
+    cd DondeReciclo-3
     npm i
-
+ 
 ## Usar
-
-    json-server --watch src/assets/db.json &
-    ionic serve &
+### Servidor de desarrollo
+    ionic serve
+### Webserver
+    ionic build 
+  
