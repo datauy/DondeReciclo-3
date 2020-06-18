@@ -25,7 +25,7 @@ export class MapaPage implements OnInit {
   address: string[];
   container = {} as Container;
   infoPane: CupertinoPane;
-  offsetMiddle = 500;
+  offsetMiddle = 300;
   offsetBottom = 40;
 
   mapEl: HTMLDivElement;
@@ -74,31 +74,34 @@ export class MapaPage implements OnInit {
   }
 
   cupertinoShow(){
-    this.session.cupertinoState = 'cupertinoOpen'
+    this.session.cupertinoState = 'cupertinoOpen';
+    this.map.flytomarker();
   }
   cupertinoHide(){
     this.session.cupertinoState = 'cupertinoClosed';
+    this.loadNearbyContainers();
   }
 
-  dragMapCupertino(){
-    this.infoPaneEl = document.querySelector('.cupertino-pane > .pane');
-    const paneHeight = this.infoPaneEl.getBoundingClientRect().top;
-    this.mapEl.style.height = paneHeight.toString() + 'px';
-    console.log(this.infoPaneEl.getBoundingClientRect().top);
-    console.log(this.mapEl.clientHeight);
-  }
-
-  breakMapCupertino(){
-    const currentBreak = this.infoPane.currentBreak();
-    switch (true) {
-        case currentBreak == "middle":
-          this.mapEl.style.height = this.offsetMiddle.toString();
-          break;
-        case currentBreak == "bottom":
-          this.mapEl.style.height = this.offsetBottom.toString();
-          break;
-    }
-  }
+  // dragMapCupertino(){
+  //   this.infoPaneEl = document.querySelector('.cupertino-pane > .pane');
+  //   const paneHeight = this.infoPaneEl.getBoundingClientRect().top;
+  //   this.mapEl.style.height = paneHeight.toString() + 'px';
+  //   console.log(this.infoPaneEl.getBoundingClientRect().top);
+  //   console.log(this.mapEl.clientHeight);
+  // }
+  //
+  // breakPointMapCupertino(){
+  //   console.log('wtf');
+  //   const currentBreak = this.infoPane.currentBreak();
+  //   console.log('break: ', currentBreak);
+  //   switch (true) {
+  //       case currentBreak == "middle":
+  //         console.log('break: ', currentBreak);
+  //         this.map.flytomarker(200);
+  //       // case currentBreak == "bottom":
+  //       //   this.map.recenter(400);
+  //   }
+  // }
   loadInfoPane() {
     this.infoPane = new CupertinoPane(
       '.cupertino-pane', // Pane container selector
@@ -120,8 +123,7 @@ export class MapaPage implements OnInit {
             offset: this.offsetBottom
           }
         },
-        onDragEng: () => this.breakMapCupertino(),
-        onDrag: () => this.dragMapCupertino(),
+        // onDidPresent: () => this.breakPointMapCupertino(),
         onWillPresent: () => this.cupertinoShow(),
         // onBackdropTap: () => this.infoPane.hide(),
         onWillDismiss: () => this.cupertinoHide(),
