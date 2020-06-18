@@ -1,10 +1,10 @@
 
-<app-slider *ngIf="session.showSlider == 'visible'"></app-slider>
+<app-slider *ngIf="session.get('showSlider')"></app-slider>
 <ion-content>
 
   <app-search class="dr-transition"></app-search>
 
-  <ion-tabs *ngIf="!showKeyboard" selectedIndex="3" #tabsNav>
+  <ion-tabs *ngIf="!showingKeyboard" selectedIndex="3" #tabsNav>
     <ion-tab-bar #tab slot="bottom">
       <ion-tab-button tab="sobre-el-proyecto" tabsHideOnSubPages="true">
         <ion-icon name="dr-info"></ion-icon>

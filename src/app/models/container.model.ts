@@ -10,4 +10,6 @@ export class Container extends Base {
     type_id: number;
     public: boolean;
     materials: number[];
+    photos: string[];
+    address: string;
 }

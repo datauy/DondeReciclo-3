@@ -2,14 +2,14 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 
 import {NativeGeocoder,NativeGeocoderOptions} from "@ionic-native/native-geocoder/ngx";
 
-import { Container } from "src/app/models/container.model";
+import { Container } from "src/app/models/basic_models.model";
 import { CupertinoPane } from 'cupertino-pane';
 
 import { ApiService } from "src/app/services/api.service";
 import { MapService } from "src/app/services/map.service";
 import { SessionService } from 'src/app/services/session.service';
-import { IonRouterOutlet } from '@ionic/angular';
-import { createAnimation } from '@ionic/core';
+//import { IonRouterOutlet } from '@ionic/angular';
+//import { createAnimation } from '@ionic/core';
 
 @Component({
   selector: 'app-mapa',
