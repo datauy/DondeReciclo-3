@@ -1,18 +1,12 @@
-
+import { MapaPageRoutingModule } from './mapa-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
-import { RouterModule } from '@angular/router';
-
 import { HttpClientModule } from '@angular/common/http';
-
-// import { NeighbourService } from '../../services/neighbour.service';
-
-import { MapaPageRoutingModule } from './mapa-routing.module';
-
 import { LeafletModule } from "@asymmetrik/ngx-leaflet";
+
+import { ComponentsModule } from 'src/app/components/components.module';
 
 import { MapaPage } from './mapa.page';
 
@@ -22,18 +16,26 @@ import { MapaPage } from './mapa.page';
     FormsModule,
     IonicModule,
     HttpClientModule,
-    MapaPageRoutingModule, 
+    MapaPageRoutingModule,
     LeafletModule.forRoot(),
-    RouterModule.forChild([
-      {
-        path: '',
-        component: MapaPage
-      }
-    ])
+    ComponentsModule,
+    // commented out by Bruno, this is redundant, right?
+    // RouterModule.forChild([
+    //   {
+    //     path: '',
+    //     component: MapaPage
+    //   }
+    // ]),
+    // ComponentsModule,
+    // SimpleServiceModule,
   ],
-  // providers: [
-  //   // NeighbourService
+  // exports: [
+  //   SearchComponent,
   // ],
-  declarations: [MapaPage]
+  declarations: [MapaPage],
+
+  // necesario para que funcionara
+  // entryComponents: [SearchComponent],
+
 })
 export class MapaPageModule {}

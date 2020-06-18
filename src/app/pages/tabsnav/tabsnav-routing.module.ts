@@ -1,7 +1,3 @@
-import { ContactoPageModule } from './../contacto/contacto.module';
-import { MapaPageModule } from './../mapa/mapa.module';
-import { SobreElProyectoPageModule } from './../sobre-el-proyecto/sobre-el-proyecto.module';
-
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -21,6 +17,10 @@ const routes: Routes = [
       {
         path: 'sobre-el-proyecto',
         loadChildren: () => import('../sobre-el-proyecto/sobre-el-proyecto.module').then( m => m.SobreElProyectoPageModule)
+      },
+      {
+        path: 'consejos',
+        loadChildren: () => import('../consejos/consejos.module').then( m => m.ConsejosPageModule)
       },
       {
         path: 'mapa',

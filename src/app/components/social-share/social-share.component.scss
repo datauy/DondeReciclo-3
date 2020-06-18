@@ -1,0 +1,43 @@
+:host{
+  p{
+    // width: 230px;
+    margin: 18px 20px;
+    text-align: center;
+  }
+  .social-links{
+
+      height: auto;
+  }
+  ion-toolbar{
+    width: 230px;
+    height: auto;
+    ion-buttons{
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: center;
+      height: auto;
+      & > * {
+        // width: auto;  /* Or whatever */
+        // height: auto; /* Or whatever */
+        margin: auto;  /* Magic! */
+      }
+      span{
+        color: white;
+        font-weight: normal;
+        font-size: 14px;
+      }
+      ion-button{
+        --border-radius: 11px;
+        --padding-end: 0;
+        --padding-top: 0;
+        --padding-start: 0;
+        --padding-bottom: 0;
+        ion-icon{
+          font-size: 38px;
+          // --font-size: 50px;
+        }
+      }
+    }
+  }
+}

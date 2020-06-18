@@ -1,19 +1,27 @@
-# Donde Reciclo v3.0
-Nueva APP de Dónde Reciclo, esta vez internacional, con nuevos frameworks, funcionalidades y más.
+# Donde Reciclo v3.0.0
+Basada en Ionic5, Angular 6 y usando las últimas tecnologías de CSS4 y HTML5 para generar una mejor experiencia de usuario y contenidos exportables a Android e IOS así como las nuevas Web Apps.
+
+## Incluye
+
+* Menú lateral como componente
+* Progresive Web App component.
+* Leaflet OSM, Leaflet Routing Machine, Geolocation
+* Busqueda de Materiales reciclebles
+* Compartir en redes sociales
 
 ## Instalación
 
 ### Instalar Ionic  
     npm install -g @ionic/cli
 
-### Instalar servidor json de prueba
-    npm install json-server
-
 ### Instalar app
-    git clone git@github.com:datauy/ionic-base.git
-    cd ionic-base
+
+    git clone git@github.com:datauy/DondeReciclo-3.git
+    cd DondeReciclo-3
     npm i
 
 ## Usar
-    json-server --watch src/assets/db.json &
-    ionic serve &
+### Servidor de desarrollo
+    ionic serve
+### Webserver
+    ionic build

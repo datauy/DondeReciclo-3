@@ -1,0 +1,106 @@
+@font-face {
+  font-family: SourceSansPro;
+  src: local(SourceSansPro-Regular), url("src/assets/fonts/SourceSansPro-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: SourceSansPro;
+  src: local(SourceSansPro-Bold), url("src/assets/fonts/SourceSansPro-Bold.ttf") format("truetype");
+  font-weight: bold;
+}
+@font-face {
+  font-family: SourceSansPro;
+  src: local(SourceSansPro-SemiBold), url("src/assets/fonts/SourceSansPro-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+}
+
+h2 {
+  font-family: SourceSansPro;
+  font-size: 32px;
+  color: var(--greyish-brown);
+}
+
+h3 {
+  font-family: SourceSansPro;
+  font-size: 28px;
+  text-align: center;
+  color: var(--dark-sea-green);
+}
+
+h1 {
+  font-family: SourceSansPro;
+  font-size: 24px;
+  text-align: center;
+  color: var(--dark-sea-green);
+}
+
+h4 {
+  font-family: SourceSansPro;
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--greyish-brown);
+}
+
+.h4-white {
+  font-family: SourceSansPro;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--vidrio);
+}
+
+.p-big {
+  font-family: SourceSansPro;
+  font-size: 20px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--greyish-brown);
+}
+
+h5 {
+  font-family: SourceSansPro;
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--greyish-brown);
+}
+
+h6 {
+  font-family: SourceSansPro;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.38;
+  color: var(--greyish-brown);
+}
+
+button {
+  font-family: SourceSansPro;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--vidrio);
+}
+
+p {
+  font-family: SourceSansPro;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--greyish-brown);
+}
+
+.subtitle {
+  font-family: SourceSansPro;
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--greyish-brown);
+}
+
+.description {
+  font-family: SourceSansPro;
+  font-size: 14px;
+  color: var(--vidrio);
+}
+
+.p-small {
+  font-family: SourceSansPro;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.67;
+  color: var(--warm-grey);
+}

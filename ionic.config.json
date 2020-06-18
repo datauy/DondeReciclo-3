@@ -1,8 +1,13 @@
 {
-  "name": "ionic-base",
+  "name": "Donde Reciclo",
   "integrations": {
-    "cordova": {},
-    "capacitor": {}
+    "cordova": {}
   },
-  "type": "angular"
+  "type": "angular",
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "http://dr3b.dev.data.org.uy/api"
+    }
+  ]
 }

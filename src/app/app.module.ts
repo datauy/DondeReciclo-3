@@ -1,7 +1,5 @@
-import { BuscarPageModule } from './pages/buscar/buscar.module';
-import { ModalCompartirPageModule } from './pages/modal-compartir/modal-compartir.module';
-import { ModalCompartirPage } from './pages/modal-compartir/modal-compartir.page';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+//import { NgModule, APP_INITIALIZER} from '@angular/core';
+import { NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -21,28 +19,31 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 // API
 import { NovedadesPageModule } from './pages/novedades/novedades.module';
 import { HttpClientModule } from '@angular/common/http';
-import { ModalSearchPage } from './pages/modal-search/modal-search.page';
 
-// import { Api } from './providers';
+import { ApiService } from './services/api.service';
 
-// animations
-// import { SearchbarAnimation } from './pages/searchbar-animation';
+import { File } from '@ionic-native/file/ngx';
+import { navPage } from './components/animations/';
 
+/*
+export function initApp(backConfig: ApiService<any>) {
+  console.log("Loading initial data");
+   return () => backConfig.loadInitialData();
+}
+*/
 @NgModule({
   declarations: [
-    AppComponent,
-    ModalCompartirPage,
-    ModalSearchPage
+    AppComponent
   ],
   imports: [
-    BrowserModule, 
+    BrowserModule,
     IonicModule.forRoot({
-      // navAnimation: SearchbarAnimation
-    }),    
+      navAnimation: navPage,
+        // animated: true
+    }),
     AppRoutingModule,
     ComponentsModule,
     NovedadesPageModule,
-    BuscarPageModule,
     HttpClientModule,
   ],
   providers: [
@@ -50,14 +51,12 @@ import { ModalSearchPage } from './pages/modal-search/modal-search.page';
     SplashScreen,
     NativeGeocoder,
     Geolocation,
-    // Api,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    ApiService,
+    File,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+//    { provide: APP_INITIALIZER, useFactory: initApp, deps: [ApiService], multi: true }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [
-    ModalCompartirPage,
-    ModalSearchPage
-  ],
-  schemas : [CUSTOM_ELEMENTS_SCHEMA]
+  // schemas : [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}

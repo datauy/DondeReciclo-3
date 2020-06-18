@@ -26,4 +26,9 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 /* Custom DATAUY styles */
-@import "./theme/data.scss";
+@import "./theme/fonts.scss";
+@import "./theme/colors.scss";
+@import "./theme/custom.scss";
+@import "./theme/breakpoints.scss";
+
+@import "~ionic4-auto-complete/auto-complete";

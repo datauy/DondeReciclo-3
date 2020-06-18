@@ -1,29 +1,99 @@
-
 <ion-split-pane contentId="menu-content">
-  <ion-menu contentId="menu-content" side="start">
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Menú</ion-title>
-        <ion-menu-toggle slot="end" auto-hide="true">
-          <ion-button fill="clear" size="small">
-            <ion-icon name="close"></ion-icon>
-          </ion-button>
-        </ion-menu-toggle>
-      </ion-toolbar>
+  <ion-menu #sidemenu
+    contentId="menu-content"
+    menuId="main-menu"
+    type="overlay"
+    side="start"
+    class="mainMenu ion-no-shadow"
+    (ionWillOpen)="menuWillOpen()"
+    (ionDidClose)="menuWillClose()">
+    <ion-header class="ion-no-border">
+      <ion-buttons id="desktop-logo">
+        <ion-img class="logo"
+          routerLink="/"
+          routerDirection="root"
+          src="assets/img/donde_reciclo.png"
+          alt="Donde Reciclo">
+        </ion-img>
+      </ion-buttons>
     </ion-header>
-    <ion-content>
+    <ion-content class="menu-list">
       <ion-list>
-        <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
-          <ion-item [routerDirection]="'root'" [routerLink]="[p.url]" routerLinkActive="active-item">
-            <ion-icon slot="start" [name]="p.icon"></ion-icon>
-            <ion-label>
-              {{p.title}}
-            </ion-label>
-          </ion-item>
-        </ion-menu-toggle>
+        <ion-item (click)="toggleMenu()"
+          *ngFor="let p of appPages"
+          lines="none"
+          [routerLink]="p.url"
+          routerLinkActive="active-item">
+          <ion-icon slot="start"
+            [name]="p.icon"></ion-icon>
+          <div>
+            <h4>{{p.title}}</h4>
+            <p>{{p.desc}}</p>
+          </div>
+          <ion-icon slot="end"
+            name="chevron-forward-outline"></ion-icon>
+
+        </ion-item>
+        <ion-item lines="none"
+          routerDirection="forward"
+          routerLink="/perfil"
+          routerLinkActive="active-item">
+          <ion-avatar slot="start">
+            <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+          </ion-avatar>
+          <div>
+            <h4>Mi Perfil</h4>
+          </div>
+          <ion-icon slot="end"
+            name="chevron-forward-outline"></ion-icon>
+
+        </ion-item>
+        <ion-item lines="none"
+          routerDirection="forward"
+          routerLink="/salir"
+          routerLinkActive="active-item">
+          <ion-icon slot="start"
+            name="open-outline"></ion-icon>
+          <div>
+            <h4>Cerrar Sesión</h4>
+          </div>
+          <ion-icon slot="end"
+            name="chevron-forward-outline"></ion-icon>
+
+        </ion-item>
       </ion-list>
     </ion-content>
-    
+    <div class="menu-rounded-bottom">
+    </div>
+
+    <ion-footer class="menu-social-links">
+      <!-- <ul >
+        <li><ion-text slot="start">Seguinos en:</ion-text></li>
+      </ul> -->
+      <ion-toolbar>
+        <ion-buttons>
+          <span>Seguinos en:</span>
+          <ion-button fill="clear">
+            <ion-icon slot="icon-only"
+              name="dr-twitter"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear">
+            <ion-icon slot="icon-only"
+              name="dr-instagram"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear">
+            <ion-icon slot="icon-only"
+              name="dr-linked-in"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear">
+            <ion-icon slot="icon-only"
+              name="dr-facebook"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+      <ion-title>cempree.com</ion-title>
+    </ion-footer>
   </ion-menu>
-  <ion-router-outlet id="menu-content"></ion-router-outlet>
+  <ion-router-outlet id="menu-content">
+  </ion-router-outlet>
 </ion-split-pane>

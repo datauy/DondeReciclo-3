@@ -1,38 +1,78 @@
-import { Component, OnInit, AfterViewInit, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
+import { SessionService } from './../../services/session.service';
+import { environment } from '../../../environments/environment';
+import { IonNav, IonTabs } from '@ionic/angular';
+import { AutoCompleteComponent } from 'ionic4-auto-complete';
 
 @Component({
   selector: 'app-tabsnav',
   templateUrl: './tabsnav.page.html',
   styleUrls: ['./tabsnav.page.scss'],
 })
-export class TabsnavPage implements OnInit{
- 
+export class TabsnavPage implements AfterViewInit {
+
+
+  isLoading = true;
+  showingKeyboard = false;
+
+  tabsPage: any = false;
+
+  @ViewChild("tabsNav", {
+    static: false
+  }) tabsNav: IonTabs;
+
+
+
   constructor(
-    private keyboard: Keyboard
+    private keyboard: Keyboard,
+    public session: SessionService
   ) {
-    window.addEventListener('keyboardWillShow', () => {
-      console.log("Keyboard will Show");
-    });
-    window.addEventListener('keyboardDidShow', () => {
-      console.log("Keyboard is Shown");
-    });
-    window.addEventListener('keyboardWillHide', () => {
-      console.log("Keyboard will Hide");
-    });
-    window.addEventListener('keyboardDidHide', () => {
-      console.log("Keyboard is Hidden");
-    });
+    if (!this.session.get('showSlider')) {
+      this.session.set('showSlider', 'visible');
+    }
+
+    if (environment.production) {
+      this.showingKeyboard = this.keyboard.isVisible;
+      console.log('production');
+    }else{
+      console.log('develop');
+      this.showingKeyboard = false;
+    }
   }
- 
- 
-  showKeyboard() {
-    this.keyboard.isVisible;
+
+  // setFocusSearch() {
+  //   this.searchbar.setFocus();
+  // }
+
+  ngAfterViewInit(){
+    // console.log(this.tabsNav);
+    // this.tabsNav.ionTabsDidChange.subscribe(async ev => {
+    //   console.log("cambio tab: ", ev);
+    //   this.tabsPage = await this.tabsNav.getSelected();
+    //   if (this.tabsPage == "mapa"){
+    //     this.searchBar.classList.add('show');
+    //   }
+    // })
   }
-  hideKeyboard() {
-    this.keyboard.hide();
+
+  // ionViewWillEnter(){
+  //   this.session.breakPoint = "header-none";
+  // }
+  ngAfterViewChecked() {
+    // this.skipSlides.addEventListener('click', (e: any) => {
+    //   console.log("skip clicked");
+    //   console.log(e);
+    //   console.log(e.target);
+    // });
   }
-	ngOnInit() {
-	}
+
+  // ionViewDidEnter() {
+  //   setTimeout(() => {
+  //     this.session.set('isLoading', 'false');
+  //     this.isLoading = false;
+  //     console.log("isloading: ", this.isLoading);
+  //   }, 1000);
+  // }
 
 }

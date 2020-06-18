@@ -1,18 +1,33 @@
+
+<app-slider *ngIf="session.get('showSlider')"></app-slider>
 <ion-content>
-  <ion-tabs *ngIf="!keyboard.isVisible" selectedIndex="2">
+
+  <app-search class="dr-transition"></app-search>
+
+  <ion-tabs *ngIf="!showingKeyboard" selectedIndex="3" #tabsNav>
     <ion-tab-bar #tab slot="bottom">
       <ion-tab-button tab="sobre-el-proyecto" tabsHideOnSubPages="true">
-        <ion-icon name="information-outline"></ion-icon>
+        <ion-icon name="dr-info"></ion-icon>
         <ion-label>Sobre el proyecto</ion-label>
       </ion-tab-button>
 
+      <ion-tab-button tab="consejos" tabsHideOnSubPages="true">
+        <ion-icon name="dr-idea"></ion-icon>
+        <ion-label>Consejos</ion-label>
+      </ion-tab-button>
+
       <ion-tab-button tab="mapa" tabsHideOnSubPages="true">
-        <ion-icon name="map"></ion-icon>
+        <ion-icon name="dr-marker"></ion-icon>
         <ion-label>Mapa</ion-label>
       </ion-tab-button>
 
+      <ion-tab-button tab="fichas" tabsHideOnSubPages="true">
+        <ion-icon name="dr-cards"></ion-icon>
+        <ion-label>Fichas</ion-label>
+      </ion-tab-button>
+
       <ion-tab-button tab="contacto" tabsHideOnSubPages="true">
-        <ion-icon name="mail-outline"></ion-icon>
+        <ion-icon name="dr-contact"></ion-icon>
         <ion-label>Contacto</ion-label>
       </ion-tab-button>
     </ion-tab-bar>

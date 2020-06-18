@@ -1,10 +1,10 @@
 
 import { Component, OnInit } from "@angular/core";
 
-import { ModalController, NavController } from "@ionic/angular";
+import { IonRouterOutlet, NavController} from "@ionic/angular";
 
 import { Novedad } from "../../models/novedad.model";
-import { NovedadService } from "../../services/novedad.service";
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
   selector: "app-novedades",
@@ -16,17 +16,22 @@ export class NovedadesPage implements OnInit {
   novedad = {} as Novedad;
   novedades: Novedad[];
 
-  constructor(private novedadesService: NovedadService) { }
+  constructor(
+    public session: SessionService
+  ) {
+    this.session = session;
+  }
 
   ngOnInit() {
     this.getAll();
   }
+  //
 
   getAll() {
-    this.novedadesService.get().subscribe((novedades: Novedad[]) => {
+    /*this.novedadesService.get().subscribe((novedades: Novedad[]) => {
       this.novedades = novedades;
       console.log(novedades)
-    });
-  }  
+    });*/
+  }
 
 }

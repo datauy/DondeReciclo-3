@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonMenu, MenuController, IonSearchbar, NavController } from '@ionic/angular';
+import { ApiService } from "src/app/services/api.service";
+import { createAnimation, Animation } from '@ionic/core';
 
 @Component({
   selector: 'app-sidemenu',
@@ -7,29 +10,57 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidemenuComponent implements OnInit {
 
+  @ViewChild(IonMenu, { static: false }) public sidemenu: IonMenu;
+  @ViewChild("#search-app-component", { static: false }) private searchBar: HTMLElement;
+
   public appPages = [
     {
-      title: 'Inicio',
-      url: '/tabsnav',
-      icon: 'home-outline'
-    },
-    {
       title: 'Novedades',
-      url: '/novedades',
-      icon: 'newspaper-outline'
+      desc: 'Ulitmas noticias relacionadas',
+      url: 'novedades',
+      icon: 'dr-newspaper'
     },
     {
-      title: 'Marcas',
-      url: '/marcas',
-      icon: 'briefcase-outline'
+      title: 'Programas',
+      desc: 'Y ciclo de vida de los residuos',
+      url: 'programas',
+      icon: 'dr-recycle'
+    },
+    {
+      title: 'Empresas',
+      desc: 'Marcas que hacen posible esta app',
+      url: 'empresas',
+      icon: 'dr-empresas'
     }
   ];
 
 
   constructor(
+    private menuCtrl: MenuController,
+    public api: ApiService<any>,
+    // private router: Router
+  ) {
+    // this.sidemenu.ionWillOpen.subscribe(data => {
+    //     console.log('menu open');
+    // });
+  }
 
-  ) { }
+  ngOnInit() {
+    this.api.loadInitialData().subscribe( () =>  { // console.log(this.predefinedOptions)
+    });
+  }
 
-  ngOnInit() { }
+  toggleMenu(){
+    this.menuCtrl.toggle(); //Add this method to your button click function
+  }
+
+
+  menuWillOpen(){
+    // this.searchBar.classList.add('hide');
+  }
+
+  menuWillClose(){
+    // this.searchBar.classList.remove('hide');
+  }
 
 }
