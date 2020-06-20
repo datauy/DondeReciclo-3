@@ -7,13 +7,13 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   inkscape:version="1.0 (6e3e5246a0, 2020-05-07)"
-   sodipodi:docname="dr-pin.svg"
-   id="svg130"
-   version="1.1"
-   viewBox="0 0 29 37"
+   width="29"
    height="37"
-   width="29">
+   viewBox="0 0 29 37"
+   version="1.1"
+   id="svg130"
+   sodipodi:docname="dr-pin.svg"
+   inkscape:version="1.0 (6e3e5246a0, 2020-05-07)">
   <metadata
      id="metadata134">
     <rdf:RDF>
@@ -26,56 +26,53 @@
     </rdf:RDF>
   </metadata>
   <sodipodi:namedview
-     inkscape:current-layer="g128"
-     inkscape:window-maximized="0"
-     inkscape:window-y="27"
-     inkscape:window-x="67"
-     inkscape:cy="29.830952"
-     inkscape:cx="19.883033"
-     inkscape:zoom="18.864865"
-     showgrid="false"
-     id="namedview132"
-     inkscape:window-height="795"
-     inkscape:window-width="1491"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0"
-     guidetolerance="10"
-     gridtolerance="10"
+     inkscape:document-rotation="0"
      objecttolerance="10"
-     borderopacity="1"
-     bordercolor="#666666"
-     pagecolor="#ffffff" />
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1533"
+     inkscape:window-height="845"
+     id="namedview132"
+     showgrid="false"
+     inkscape:zoom="3.7034184"
+     inkscape:cx="-43.024615"
+     inkscape:cy="31.659743"
+     inkscape:window-x="67"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g128" />
   <defs
      id="defs122">
     <linearGradient
-       y2="100%"
-       y1="-174.902%"
-       x2="50%"
+       id="prefix__a"
        x1="50%"
-       id="prefix__a">
+       x2="50%"
+       y1="-174.902%"
+       y2="100%">
       <stop
-         id="stop117"
-         stop-color="#FFCD00"
-         offset="0%" />
+         offset="0%"
+         id="stop117" />
       <stop
-         id="stop119"
-         stop-color="#FF9F00"
-         offset="100%" />
+         offset="100%"
+         id="stop119" />
     </linearGradient>
   </defs>
   <g
-     id="g128"
-     fill="none">
+     fill="none"
+     id="g128">
     <ellipse
-       id="ellipse124"
-       ry="1"
-       rx="3.5"
-       fill-opacity=".5"
-       fill="#000"
-       cy="36"
-       cx="14.5" />
+       style="stroke-width:1.52062"
+       cx="14.5"
+       cy="35.479382"
+       fill="#000000"
+       fill-opacity="0.5"
+       rx="5.3221622"
+       ry="1.5206178"
+       id="ellipse124" />
     <path
-       id="path126"
-       d="M14.464 0c7.988 0 14.464 6.215 14.464 13.882 0 .179-.006.36-.018.542.012.25.018.502.018.755 0 8.383-12.964 20.913-14.464 20.913S0 23.562 0 15.179c0-.253.006-.505.018-.755-.012-.182-.018-.363-.018-.542C0 6.215 6.476 0 14.464 0zm0 9.625c-2.967 0-5.372 2.334-5.372 5.213 0 2.88 2.405 5.213 5.372 5.213s5.372-2.334 5.372-5.213c0-2.88-2.405-5.213-5.372-5.213z" />
+       d="M14.464 0c7.988 0 14.464 6.215 14.464 13.882 0 .179-.006.36-.018.542.012.25.018.502.018.755 0 8.383-12.964 20.913-14.464 20.913S0 23.562 0 15.179c0-.253.006-.505.018-.755-.012-.182-.018-.363-.018-.542C0 6.215 6.476 0 14.464 0zm0 9.625c-2.967 0-5.372 2.334-5.372 5.213 0 2.88 2.405 5.213 5.372 5.213s5.372-2.334 5.372-5.213c0-2.88-2.405-5.213-5.372-5.213z"
+       id="path126" />
   </g>
 </svg>

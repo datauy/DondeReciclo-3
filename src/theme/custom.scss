@@ -251,6 +251,10 @@ ion-app {
         @extend .dr-transition;
         // @extend .hide;
       }
+      ion-tab-bar {
+        @extend .dr-transition;
+        display: none;
+      }
     }
     &.cupertinoClosed{
       #header-main ion-toolbar {
@@ -261,6 +265,10 @@ ion-app {
         top: var(--dr-searchbox-top);
         @extend .dr-transition;
         // @extend .show;
+      }
+      ion-tab-bar {
+        @extend .dr-transition;
+        display: inherit;
       }
     }
   }
@@ -288,6 +296,30 @@ body {
     &.expanded {
       top: 160px;
     }
+  }
+}
+
+#map{
+  // svg#dr-marker{
+  //   fill: blue;
+  // }
+  .dr-marker{
+    // filter: invert(27%) sepia(51%) saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%);
+    // background-color: red;
+    // -webkit-mask: url('assets/custom-icons/dr-pin.svg') no-repeat center;
+    // mask: url('assets/custom-icons/dr-pin.svg') no-repeat center;
+
+    fill: var(--orange-yellow);
+    > svg{
+      position: absolute;
+    }
+    > img{
+      position: absolute;
+      left: 6px;
+    }
+    // -webkit-filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .5));
+    // filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .5));
+    /* Similar syntax to box-shadow */
   }
 }
 // Modals
@@ -532,6 +564,7 @@ ion-icon.badge {
 }
 
 .cupertino-pane {
+  z-index: 400;
   .pane {
     overflow: visible !important;
   }
