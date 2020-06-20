@@ -251,6 +251,10 @@ ion-app {
         @extend .dr-transition;
         // @extend .hide;
       }
+      ion-tab-bar {
+        @extend .dr-transition;
+        display: none;
+      }
     }
     &.cupertinoClosed{
       #header-main ion-toolbar {
@@ -261,6 +265,10 @@ ion-app {
         top: var(--dr-searchbox-top);
         @extend .dr-transition;
         // @extend .show;
+      }
+      ion-tab-bar {
+        @extend .dr-transition;
+        display: inherit;
       }
     }
   }
@@ -556,6 +564,7 @@ ion-icon.badge {
 }
 
 .cupertino-pane {
+  z-index: 400;
   .pane {
     overflow: visible !important;
   }

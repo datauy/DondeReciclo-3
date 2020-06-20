@@ -116,7 +116,7 @@ export class MapService {
   constructor() {
   }
 
-  loadMap() {
+  async loadMap() {
     this.map = new L.Map("map", {});//.setView([-34.881536, -56.147968], 13);
     this.map.locate({
       setView: true,
@@ -124,13 +124,7 @@ export class MapService {
     }).
     on('locationfound', (e :any) => {
       this.userPosition = [e.latitude, e.longitude];
-      let markerGroup = L.featureGroup();
-      let marker: any = L.marker( this.userPosition, {icon: iconUser} ).
-      on('click', () => {
-        alert('Marker clicked');
-      });
-      markerGroup.addLayer(marker);
-      this.map.addLayer(markerGroup);
+      this.userMarker = L.marker(this.userPosition, {icon: iconUser} ).addTo(this.map);
     }).
     on('locationerror', (err) => {
       console.log(err.message);
@@ -149,6 +143,13 @@ export class MapService {
         this.route.spliceWaypoints(0, 1, e.latlng);
       }
     });
+    this.map.on('zoomend', function() {
+      this.mapChanges;
+    });
+    this.map.on('dragend', function() {
+      this.mapChanges;
+    });
+    return true;
   }
 
   loadMarkers( markers: Container[], center?:[number,number] ){
@@ -214,10 +215,8 @@ export class MapService {
 
   }
   clickPin(pin: any) {
-    console.log("Executed by Service aaaahhhhhhhhh");
     let pos = pin.target.options.container_pos;
     this.currentContainer = this.containers[pos];
-    console.log(this.currentContainer.latitude, this.currentContainer.longitude);
     this._pinClick.next(true);
   }
   //Experimental Observable
@@ -225,4 +224,12 @@ export class MapService {
     return this._pinClick.asObservable();
   }
   private _pinClick = new BehaviorSubject<boolean>(false)
+  mapChanges(){
+    console.log('Map changes...');
+    this._mapChange.next(true);
+  }
+  get mapChanged() {
+    return this._mapChange.asObservable();
+  }
+  private _mapChange = new BehaviorSubject<boolean>(false)
 }
