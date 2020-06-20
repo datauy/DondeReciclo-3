@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import {NativeGeocoder,NativeGeocoderOptions} from "@ionic-native/native-geocoder/ngx";
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 import { Container } from "src/app/models/basic_models.model";
 import { CupertinoPane } from 'cupertino-pane';
@@ -37,7 +38,8 @@ export class MapaPage implements OnInit {
     private geocoder: NativeGeocoder,
     public api: ApiService,
     public map: MapService,
-    public session: SessionService
+    public session: SessionService,
+    private geo: Geolocation
     // private backbuttonSubscription: Subscription
     ) {
       this.session = session;
@@ -68,8 +70,16 @@ export class MapaPage implements OnInit {
     // this.session.mapPage = false;
   }
   ngOnInit() {
-    this.map.loadMap().then( () => {
-      console.log('Map Loaded');
+    this.map.loadMap();
+    this.geo.getCurrentPosition().then( (resp) => {
+      console.log('LOCATION!!!');
+      console.log(resp);
+      this.map.userPosition = [resp.coords.latitude, resp.coords.longitude];
+      this.loadNearbyContainers();
+     // resp.coords.latitude
+     // resp.coords.longitude
+    }).catch((error) => {
+      console.log('Error getting location', error);
       this.loadNearbyContainers();
     });
     // this.openSearchModal();
@@ -154,7 +164,9 @@ export class MapaPage implements OnInit {
   }
 
   loadNearbyContainers() {
-    this.api.getNearbyContainers().subscribe((containers) => {
+    console.log('Load Nearby');
+    this.api.getNearbyContainers(this.map.userPosition).subscribe((containers) => {
+      console.log('Nearby comes back');
       this.map.loadMarkers(containers);
     });
   }

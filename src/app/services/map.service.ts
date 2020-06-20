@@ -116,22 +116,27 @@ export class MapService {
   constructor() {
   }
 
-  async loadMap() {
+  loadMap() {
     this.map = new L.Map("map", {});//.setView([-34.881536, -56.147968], 13);
     this.map.locate({
       setView: true,
       maxZoom: 16
-    }).
+    });/*.
     on('locationfound', (e :any) => {
+      console.log('GOT LOCATION');
       this.userPosition = [e.latitude, e.longitude];
       this.userMarker = L.marker(this.userPosition, {icon: iconUser} ).addTo(this.map);
     }).
     on('locationerror', (err) => {
+      console.log('GOT NO LOCATION');
       console.log(err.message);
-    });
+    });*/
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
     }).addTo(this.map);
+    if ( this.userPosition ) {
+      this.userMarker = L.marker(this.userPosition, {icon: iconUser} ).addTo(this.map);
+    }
     //Create user marker upon click
     this.map.on("click", <LeafletMouseEvent>(e) => {
       if (this.userMarker) { // check
@@ -144,11 +149,14 @@ export class MapService {
       }
     });
     this.map.on('zoomend', function() {
+      console.log('ZOOMEND');
       this.mapChanges;
     });
     this.map.on('dragend', function() {
+      console.log('DRAGEND');
       this.mapChanges;
     });
+    console.log('End load map');
     return true;
   }
 
@@ -156,6 +164,10 @@ export class MapService {
     this.containers = markers;
     let mapBounds = [];
     if (this.userPosition) {
+      if (this.userMarker) { // check
+        this.map.removeLayer(this.userMarker); // remove
+      }
+      this.userMarker = L.marker(this.userPosition, {icon: iconUser} ).addTo(this.map);
       mapBounds.push(this.userPosition);
     }
     for (var i = 0; i < markers.length; i++) {
