@@ -124,15 +124,21 @@
   }
   //hide for now!
   app-sidemenu ion-slides .swiper-pagination-bullet {
-    width: 9px;
-    height: 9px;
-    opacity: 0.5;
+    width: 10px;
+    height: 10px;
   }
 
   app-consejos .swiper-pagination{
     top: 300px !important;
     text-align: left;
     left: 0;
+    height: 18px;
+  }
+  app-cards .swiper-pagination{
+    top: calc(46vw * 0.8 + 52px);
+    text-align: left;
+    left: 0;
+    height: 18px;
   }
   // botones y chips
   ion-chip {
@@ -158,9 +164,12 @@ ion-icon {
   }
 }
 
-
 // utils
-
+.section {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(155,155,155,0.3);
+}
 .dr-transition{
   transition: var(--animation-time) ease-in-out;
 }

@@ -1,0 +1,61 @@
+<app-header display="full"></app-header>
+<ion-content *ngIf="session.country == 'Uruguay'">
+  <ion-slides pager="tr ue">
+    <ion-slide class="plastic ion-color-plasticos">
+      <div class="slide-head">
+        <img src="assets/img/plastic-demo-head.jpg" alt="botellas plásticas encabezado">
+        <div class="under-image"></div>
+      </div>
+      <div class="slide-content">
+        <h2>Plásticos</h2>
+        <span class="subtitle">Ficha subtítulo</span>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquUt enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+          irure dolor in reprehenderit in voluptate.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquUt enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+          irure dolor in reprehenderit in voluptate.
+
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquUt enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+          irure dolor in reprehenderit in voluptate.
+        </p>
+        <div class="section">
+          <div class="card-thumbs">
+            <img src="assets/img/plastic-demo1.jpg" alt="botellas plásticas">
+            <img src="assets/img/plastic-demo2.jpg" alt="botellas plásticas">
+            <img src="assets/img/plastic-demo3.jpg" class="last" alt="botellas plásticas">
+          </div>
+        </div>
+      </div>
+    </ion-slide>
+    <ion-slide class="metal ion-color-metales">
+      <div class="slide-head">
+        <img src="assets/img/metal-demo-head.jpg" alt="metales para reciclaje">
+        <div class="under-image"></div>
+      </div>
+      <div class="slide-content">
+        <h2>Metales</h2>
+        <span class="subtitle">Ficha subtítulo</span>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquUt enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+          irure dolor in reprehenderit in voluptate.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquUt enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+          irure dolor in reprehenderit in voluptate.
+
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquUt enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+          irure dolor in reprehenderit in voluptate.
+        </p>
+        <div class="card-thumbs"></div>
+        <div class="card-video">
+          <iframe
+            width="100%"
+            height="315"
+            [src]="videos[0].url"
+            frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
