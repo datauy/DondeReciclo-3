@@ -126,8 +126,11 @@
   app-sidemenu ion-slides .swiper-pagination-bullet {
     width: 10px;
     height: 10px;
+    opacity: 1;
   }
-
+  app-sidemenu ion-slides .swiper-pagination-bullet-active {
+    background: #ffcb02;
+  }
   app-consejos .swiper-pagination{
     top: 300px !important;
     text-align: left;
@@ -135,7 +138,7 @@
     height: 18px;
   }
   app-cards .swiper-pagination{
-    top: calc(46vw * 0.8 + 52px);
+    top: calc(12vw + 16vh + 56px);
     text-align: left;
     left: 0;
     height: 18px;

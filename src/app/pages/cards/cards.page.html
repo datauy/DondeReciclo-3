@@ -1,6 +1,6 @@
 <app-header display="full"></app-header>
 <ion-content *ngIf="session.country == 'Uruguay'">
-  <ion-slides pager="tr ue">
+  <ion-slides #cards (ionSlideWillChange)="slideChanging()" pager>
     <ion-slide class="plastic ion-color-plasticos">
       <div class="slide-head">
         <img src="assets/img/plastic-demo-head.jpg" alt="botellas plásticas encabezado">
@@ -51,7 +51,6 @@
             height="315"
             [src]="videos[0].url"
             frameborder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen>
           </iframe>
         </div>
