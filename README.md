@@ -1,13 +1,15 @@
-# Donde Reciclo v3.0.0
-Basada en Ionic5, Angular 6 y usando las últimas tecnologías de CSS4 y HTML5 para generar una mejor experiencia de usuario y contenidos exportables a Android e IOS así como las nuevas Web Apps.
+# Donde Reciclo v3.0.1
+Basada en Ionic5, Angular 8 y usando las últimas tecnologías de CSS4 y HTML5 para generar una mejor experiencia de usuario y contenidos exportables a Android e IOS así como las nuevas Web Apps.
 
 ## Incluye
 
-* Menú lateral como componente
-* Progresive Web App component.
-* Leaflet OSM, Leaflet Routing Machine, Geolocation
-* Busqueda de Materiales reciclebles
+* Menú principal y secundario con navegación móvil y desktop
+* Mapa con geolocaliazción y centros de reciclaje
+* Rutas a los contenedores próximos
+* Busqueda de Materiales reciclables y localización de contenedores
 * Compartir en redes sociales
+* Fichas de materiales
+* Consejos para deposición de materiales
 
 ## Instalación
 
