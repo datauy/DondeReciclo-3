@@ -27,6 +27,10 @@ const routes: Routes = [
         loadChildren: () => import('../mapa/mapa.module').then( m => m.MapaPageModule)
       },
       {
+        path: 'fichas',
+        loadChildren: () => import('../cards/cards.module').then( m => m.CardsPageModule)
+      },
+      {
         path: 'contacto',
         loadChildren: () => import('../contacto/contacto.module').then( m => m.ContactoPageModule)
       },

@@ -21,6 +21,8 @@ export class SessionService {
   currentPage: string;
   cupertinoState: string = "cupertinoClosed";
 
+  country: string = "Uruguay";
+
   @ViewChild("tabsNav", {
     static: false
   }) tabsNav: IonTabs;
