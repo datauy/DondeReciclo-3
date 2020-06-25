@@ -18,10 +18,8 @@ export class NewsDetailPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.nid = params['novedadID'];
-    });
-    console.log('EN DETAILS ->'+ this.nid);
+    this.nid = this.route.snapshot.params['novedadID'];
+    console.log('EN DETAILS -> ' + this.nid);
   }
 
 }

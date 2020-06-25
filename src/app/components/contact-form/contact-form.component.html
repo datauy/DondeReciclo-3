@@ -1,0 +1,46 @@
+<app-header display="full"></app-header>
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col  size-md="9" size-lg="8" size-xs="12">
+        <div class="section-header">
+          <h1>Dejanos tu comentario</h1>
+          <h2 class="sub-light">Tu opinión nos importa, por favor dejanos tu comentario y nos estaremos comunicando a la brevedad. Por cuestiones técnicas podrás contactar al equipo de DATA, por temas relacionados a los programas o contenedores de reciclaje contactá a CEMPRE.</h2>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col  size-md="9" size-lg="8" size-xs="12">
+        <form (ngSubmit)="contact(form)">
+          <ion-item>
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input  name="name" type="text" placeholder="Juan Pérez" ngModel required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input name="email" type="email" placeholder="ejemplo@email.org" ngModel required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Asunto</ion-label>
+            <ion-input name="subject" type="list" placeholder="A quien va dirigido" ngModel required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Mensaje</ion-label>
+            <ion-input name="body" type="textarea" placeholder="Que nos quieres contar" ngModel required></ion-input>
+          </ion-item>
+          <ion-button  size="large" type="submit" class="submit">Enviar</ion-button>
+        </form>
+        <div *ngIf="success">
+          <h3>Se ha enviado exitosamente</h3>
+          <p>Tu mensaje ha sido ingresado en nuestro sistema de manejo de solicitudes, en breves te estará llegando un correo indicando el número de solicitud y otros datos relevantes para mantenernos en contacto. A la brevedad nuestro equipo se estará comunicando contigo respecto a tu comentario. Muchas gracias</p>
+          <ion-button>Volver al inicio</ion-button>
+        </div>
+        <div *ngIf="fail">
+          <h3>No hemos podido enviar tu mensaje</h3>
+          <p>Por favor escríbenos a devops@data.org.uy y explícanos lo que pasa, valoramos mucho tu esfuerzo y te pedimos disculpas por las molestias ocasionadas. Muchas gracias</p>
+          <ion-button>Volver al inicio</ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

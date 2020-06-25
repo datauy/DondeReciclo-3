@@ -1,6 +1,5 @@
 import { NgModule} from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AboutPage } from './components/static-pages/about.page';
 import { NotFoundPage } from './components/static-pages/notfound.page';
 
 const routes: Routes = [
@@ -24,10 +23,6 @@ const routes: Routes = [
   {
     path: 'novedades',
     loadChildren: () => import('./pages/news/news.module').then( m => m.NewsPageModule)
-  },
-  {
-    path: 'sobre-el-proyecto',
-    component: AboutPage
   },
   {
     path: '**',
