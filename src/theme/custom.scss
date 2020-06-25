@@ -67,7 +67,6 @@
     padding-left: 12px;
     padding-right: 12px;
   }
-
   ion-button {
     --border-radius: 6px;
     --box-shadow: none;
@@ -80,21 +79,17 @@
     // margin: 6px;
     font-family: "SourceSansPro";
     font-size: 16px;
-
-    &.big {
-      --background: white;
+    &[type="submit"] {
+      //height: 60px;
+      --background: var(--pale-olive-green);
       --background-activated: var(--pale-olive-green);
       // --background-activated-opacity	Opacity of the button when pressed
       // --background-focused	Background of the button when focused with the tab key
       // --background-focused-opacity	Opacity of the button when focused with the tab key
       --background-hover: var(--pale-olive-green);
       // --background-hover-opacity	Opacity of the background on hover
-      --border-color: none;
       --border-radius: 38.5px;
-      --border-style: none;
-      --border-width: none;
-      --box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2);
-      --color: var(--pale-olive-green);
+      --box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
       --color-activated: white;
       --color-focused: white;
       --color-hover: white;
@@ -103,6 +98,12 @@
       --padding-end: 16px;
       --padding-start: 16px;
       --padding-top: 16px;
+      font-size: 18px;
+      font-weight: 600;
+      --color: var(--vidrio);
+      width: 100%;
+      height: 60px;
+      margin-top: 38px;
       // --ripple-color	Color of the button ripple effect
       // --transition	Transition of the button
     }
@@ -172,6 +173,12 @@ ion-icon {
   margin-top: 24px;
   padding-top: 24px;
   border-top: 1px solid rgba(155,155,155,0.3);
+}
+.sub-light {
+  font-size: 16px;
+  line-height: 1.44;
+  text-align: center;
+  color: var(--warm-grey);
 }
 .dr-transition{
   transition: var(--animation-time) ease-in-out;

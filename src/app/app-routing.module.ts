@@ -1,5 +1,6 @@
 import { NgModule} from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { NotFoundPage } from './components/static-pages/notfound.page';
 
 const routes: Routes = [
   { path: '', redirectTo: 'intro', pathMatch: 'full' },
@@ -8,25 +9,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/tabsnav/tabsnav.module').then( m => m.TabsnavPageModule)
   },
   {
-    path: 'novedades',
-    children: [
-      {
-        path: '',
-        loadChildren: () => import('./pages/novedades/novedades.module').then( m => m.NovedadesPageModule)
-      },
-      {
-        path: 'novedades-detail/:novedadID',
-        loadChildren: () => import('./pages/novedades-detail/novedades-detail.module').then(m => m.NovedadesDetailPageModule)
-      }
-    ]
-  },
-  {
     path: 'empresas',
     loadChildren: () => import('./pages/empresas/empresas.module').then( m => m.EmpresasPageModule)
-  },
-  {
-    path: 'novedades-detail',
-    loadChildren: () => import('./pages/novedades-detail/novedades-detail.module').then( m => m.NovedadesDetailPageModule)
   },
   {
     path: 'consejos',
@@ -35,17 +19,23 @@ const routes: Routes = [
   {
     path: 'programas',
     loadChildren: () => import('./pages/programas/programas.module').then( m => m.ProgramasPageModule)
+  },
+  {
+    path: 'novedades',
+    loadChildren: () => import('./pages/news/news.module').then( m => m.NewsPageModule)
+  },
+  {
+    path: '**',
+    component: NotFoundPage
   }
 ];
 
 @NgModule({
   imports: [
     RouterModule.forRoot(
-      routes,
-      {
+      routes //{
         // enableTracing: true,
-        preloadingStrategy: PreloadAllModules},
-
+        //preloadingStrategy: PreloadAllModules},
       )
   ],
   exports: [RouterModule]

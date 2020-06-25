@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { TabsnavPage } from './tabsnav.page';
-
+import { ContactFormComponent } from 'src/app/components/contact-form/contact-form.component';
+import { AboutPage } from 'src/app/components/static-pages/about.page';
 
 const routes: Routes = [
   {
@@ -16,7 +17,7 @@ const routes: Routes = [
       },
       {
         path: 'sobre-el-proyecto',
-        loadChildren: () => import('../sobre-el-proyecto/sobre-el-proyecto.module').then( m => m.SobreElProyectoPageModule)
+        component: AboutPage
       },
       {
         path: 'consejos',
@@ -32,7 +33,7 @@ const routes: Routes = [
       },
       {
         path: 'contacto',
-        loadChildren: () => import('../contacto/contacto.module').then( m => m.ContactoPageModule)
+        component: ContactFormComponent
       },
     ]
   },

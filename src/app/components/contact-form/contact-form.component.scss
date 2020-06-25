@@ -1,0 +1,16 @@
+:host {
+  form {
+    ion-item {
+      margin-top: 38px;
+      --border-color: var(--warm-grey);
+      ion-input{
+        --color: var(--greyish-brown);
+        --placeholder-color: var(--greyish-brown);
+        --placeholder-font-weight: normal;
+        --placeholder-opacity: 1;
+        font-size: 16px;
+        font-weight: 600;
+      }
+    }
+  }
+}

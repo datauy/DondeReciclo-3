@@ -17,7 +17,6 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 // API
-import { NovedadesPageModule } from './pages/novedades/novedades.module';
 import { HttpClientModule } from '@angular/common/http';
 
 import { ApiService } from './services/api.service';
@@ -43,7 +42,6 @@ export function initApp(backConfig: ApiService<any>) {
     }),
     AppRoutingModule,
     ComponentsModule,
-    NovedadesPageModule,
     HttpClientModule,
   ],
   providers: [

@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { NovedadesDetailPage } from './novedades-detail.page';
+import { NotFoundPage } from './notfound.page';
 
-describe('NovedadesDetailPage', () => {
-  let component: NovedadesDetailPage;
-  let fixture: ComponentFixture<NovedadesDetailPage>;
+describe('StaticsComponent', () => {
+  let component: NotFoundPage;
+  let fixture: ComponentFixture<NotFoundPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NovedadesDetailPage ],
+      declarations: [ NotFoundPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(NovedadesDetailPage);
+    fixture = TestBed.createComponent(NotFoundPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

@@ -1,0 +1,25 @@
+<div class="container margin-top">
+  <div class="row justify-content-center">
+      <div class="col-6">
+          <div class="error-template">
+              <h1>
+                  <%=image_tag "DATA.svg", :class=>"max-parent", :alt=>"paloma DATA"%>
+              </h1>
+              <div class="jumbotron margin-top-small">
+                <h2>
+                  Oops!
+                </h2>
+                <div class="error-details">
+                    <%= t('.page_not_found') %>
+                </div>
+                <hr>
+                <div class="error-actions right">
+                    <a href="/"><span class="glyphicon glyphicon-home"></span>
+                      <%= t('.return') %>
+                    </a>
+                </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
