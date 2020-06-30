@@ -11,6 +11,7 @@ import { AutoCompleteModule } from 'ionic4-auto-complete';
 import { NotFoundPage } from './static-pages/notfound.page';
 import { AboutPage } from './static-pages/about.page';
 import { ContactFormComponent } from './contact-form/contact-form.component';
+import { AccordionComponent } from './accordion/accordion.component';
 //import { TestDirective } from './test.directive';
 
 @NgModule({
@@ -27,12 +28,14 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
     SocialShareComponent,
     NotFoundPage,
     AboutPage,
-    ContactFormComponent
+    ContactFormComponent,
+    AccordionComponent
   ],
   exports: [
     SidemenuComponent,
     HeaderComponent,
     SocialShareComponent,
+    AccordionComponent,
     //TestDirective
     // SimpleServiceComponent
   ],
