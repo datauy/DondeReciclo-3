@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="333px" height="333px" viewBox="0 0 333 333" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 64 (93537) - https://sketch.com -->
+    <title>flujo_papel</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="49.6344603%" y1="15.7035764%" x2="51.0707912%" y2="55.9537812%" id="linearGradient-1">
+            <stop stop-color="#9BA498" offset="0%"></stop>
+            <stop stop-color="#0D744E" offset="100%"></stop>
+        </linearGradient>
+        <polygon id="path-2" points="66.5 89 91 116 42 116"></polygon>
+        <filter x="-1.0%" y="-3.7%" width="102.0%" height="105.6%" filterUnits="objectBoundingBox" id="filter-3">
+            <feMorphology radius="0.5" operator="erode" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="-1" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="0.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="flujo_papel" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M167,155 C147.117749,155 131,171.117749 131,191 C131,210.882251 147.117749,227 167,227 C186.882251,227 203,210.882251 203,191 C203,171.117749 186.882251,155 167,155 Z" id="Path-Copy" fill="#75AAF1" fill-rule="nonzero" transform="translate(167.000000, 191.000000) rotate(-90.000000) translate(-167.000000, -191.000000) "></path>
+        <g id="Papel-y-cartón" transform="translate(149.000000, 173.000000)" stroke="#FFFFFF">
+            <g id="Group-4-Copy-5" transform="translate(6.000000, 2.000000)">
+                <g id="Group-4-Copy-4" fill-rule="nonzero" stroke-width="2">
+                    <rect id="Rectangle" x="1" y="1" width="22" height="30" rx="2"></rect>
+                    <line x1="17.5384615" y1="7" x2="6.46153846" y2="7" id="Line" stroke-linecap="round"></line>
+                    <line x1="13" y1="11" x2="6.57692308" y2="11" id="Line-Copy" stroke-linecap="round"></line>
+                    <line x1="17.7494871" y1="17" x2="6.42857143" y2="17" id="Line-Copy-2" stroke-linecap="round"></line>
+                    <line x1="17.7494871" y1="21" x2="6.42857143" y2="21" id="Line-Copy-3" stroke-linecap="round"></line>
+                    <line x1="17.7494871" y1="25" x2="6.42857143" y2="25" id="Line-Copy-4" stroke-linecap="round"></line>
+                </g>
+            </g>
+        </g>
+        <path d="M77.6243569,187.577907 C77.6243569,161.863274 79.7205571,151.421839 72.822221,138.49358 C65.9238849,125.565321 65.9238849,119.740842 65.9238849,105.577907" id="Path-3" stroke="url(#linearGradient-1)" stroke-width="15"></path>
+        <path d="M166.5,98 C113.204522,98 70,141.204522 70,194.5 C70,247.795478 113.204522,291 166.5,291 C219.795478,291 263,247.795478 263,194.5 C263,141.204522 219.795478,98 166.5,98 Z M166.5,113 C211.511207,113 248,149.488793 248,194.5 C248,239.511207 211.511207,276 166.5,276 C121.488793,276 85,239.511207 85,194.5 C85,149.488793 121.488793,113 166.5,113 Z" id="Oval" fill="" fill-rule="nonzero" transform="translate(166.500000, 194.500000) rotate(-90.000000) translate(-166.500000, -194.500000) "></path>
+        <rect id="Rectangle-Copy-8" fill="#75AAF1" fill-rule="nonzero" x="139" y="66" width="116" height="40" rx="6"></rect>
+        <rect id="Rectangle-Copy-9" fill="#75AAF1" fill-rule="nonzero" x="209" y="148" width="116" height="40" rx="6"></rect>
+        <rect id="Rectangle-Copy-12" fill="#75AAF1" fill-rule="nonzero" x="8" y="212" width="126" height="27" rx="6"></rect>
+        <rect id="Rectangle-Copy-10" fill="#75AAF1" fill-rule="nonzero" x="209" y="212" width="116" height="72" rx="6"></rect>
+        <rect id="Rectangle-Copy-14" fill="#9BA498" fill-rule="nonzero" x="9" y="21" width="116" height="75" rx="6"></rect>
+        <rect id="Rectangle-Copy-13" fill="#75AAF1" fill-rule="nonzero" x="9" y="147" width="116" height="43" rx="6"></rect>
+        <rect id="Rectangle-Copy-11" fill="#75AAF1" fill-rule="nonzero" x="53" y="254" width="134" height="60" rx="6"></rect>
+        <text id="Consumidor-Copy" font-family="SourceSansPro-SemiBold, Source Sans Pro" font-size="16" font-weight="500" fill="#FFFFFF">
+            <tspan x="154.896" y="92">Consumidor</tspan>
+        </text>
+        <text id="Separación-de-residu" font-family="SourceSansPro-SemiBold, Source Sans Pro" font-size="12" font-weight="500" fill="#FFFFFF">
+            <tspan x="230.25" y="165">Separación de </tspan>
+            <tspan x="215.196" y="180">residuos en el hogar</tspan>
+        </text>
+        <text id="Industria-de-recicla" font-family="SourceSansPro-SemiBold, Source Sans Pro" font-size="12" font-weight="500" fill="#FFFFFF">
+            <tspan x="17.006" y="229">Industria de reciclaje</tspan>
+        </text>
+        <text id="Sistemas-de-recupera" font-family="SourceSansPro-SemiBold, Source Sans Pro" font-size="12" font-weight="500" fill="#FFFFFF">
+            <tspan x="235.998" y="237">Sistemas de </tspan>
+            <tspan x="225.228" y="252">recuperación de </tspan>
+            <tspan x="239.478" y="267">materiales</tspan>
+        </text>
+        <text id="Salida-del-sistema-d" font-family="SourceSansPro-SemiBold, Source Sans Pro" font-size="12" font-weight="500" fill="#FFFFFF">
+            <tspan x="20.398" y="39">Salida del sistema </tspan>
+            <tspan x="25.228" y="54">de recuperación </tspan>
+            <tspan x="17.392" y="69">(vertederos, cursos </tspan>
+            <tspan x="16.948" y="84">de agua basurales).</tspan>
+        </text>
+        <text id="Fabricación-de-nuevo" font-family="SourceSansPro-SemiBold, Source Sans Pro" font-size="12" font-weight="500" fill="#FFFFFF">
+            <tspan x="27.964" y="164">Fabricación  de </tspan>
+            <tspan x="20.758" y="179">nuevos productos</tspan>
+        </text>
+        <text id="Reclasificación-y-ac" font-family="SourceSansPro-SemiBold, Source Sans Pro" font-size="12" font-weight="500" fill="#FFFFFF">
+            <tspan x="77.744" y="271">Reclasificación y </tspan>
+            <tspan x="62.834" y="286">acondicionamiento en </tspan>
+            <tspan x="62.954" y="301">planta de clasificación</tspan>
+        </text>
+        <polygon id="Triangle" fill="#0D744E" transform="translate(220.500000, 125.500000) rotate(-240.000000) translate(-220.500000, -125.500000) " points="220.5 112 245 139 196 139"></polygon>
+        <g id="Triangle-Copy">
+            <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-2"></use>
+            <use fill="#9BA498" fill-rule="evenodd" xlink:href="#path-2"></use>
+        </g>
+    </g>
+</svg>

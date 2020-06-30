@@ -1,60 +1,272 @@
 <app-header display="full"></app-header>
 <ion-content *ngIf="session.country == 'Uruguay'">
   <ion-slides #cards (ionSlideWillChange)="slideChanging()" pager>
+
+    <!-- Plásticos -->
+
     <ion-slide class="plastic ion-color-plasticos">
       <div class="slide-head">
-        <img src="assets/img/plastic-demo-head.jpg" alt="botellas plásticas encabezado">
+        <img src="assets/img/plastic-demo-head.jpg" alt="Encabezado imagen de plásticos">
         <div class="under-image"></div>
       </div>
       <div class="slide-content">
         <h2>Plásticos</h2>
-        <span class="subtitle">Ficha subtítulo</span>
+        <span class="subtitle">¿De dónde se obtiene el material?</span>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquUt enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-          irure dolor in reprehenderit in voluptate.
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquUt enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-          irure dolor in reprehenderit in voluptate.
-
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquUt enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-          irure dolor in reprehenderit in voluptate.
+          Los materiales plásticos pueden ser de origen sintético no renovable (petróleo) o de origen natural fabricados a partir de materiales renovables (celulosa, caucho, bagazo, maíz).
+          Además cada uno de estos tipos pueden ser biodegradables (bioplásticos) o no biodegradables (polímeros convencionales).
         </p>
-        <div class="section">
-          <div class="card-thumbs">
-            <img src="assets/img/plastic-demo1.jpg" alt="botellas plásticas">
-            <img src="assets/img/plastic-demo2.jpg" alt="botellas plásticas">
-            <img src="assets/img/plastic-demo3.jpg" class="last" alt="botellas plásticas">
-          </div>
-        </div>
+        <p>
+          Los plásticos son materiales que mediante la aplicación de una compresión más o menos prolongada son capaces de cambiar de forma y conservar ésta de modo permanente
+          (a diferencia de los materiales elásticos, que retoman su forma original luego que desaparece la compresión).
+        </p>
+        <p>
+          Los polímeros convencionales tienen ciertas propiedades que hacen que sean materiales universalmente utilizados y preferidos por su bajo costo de producción, resistentes a la
+          corrosión y al deterioro por agentes químicos, son impermeables, livianos, pueden ser coloreados y adaptados a diferentes formas.</p>
+        <p>
+          Los plásticos recuperados o reciclados son materiales que surgen de un reprocesamiento, en varias etapas, de materiales post consumo o post industriales.</p>
+        <div class="section"></div>
+        <span class="subtitle">¿Cuáles son los productos de este material que se reciclan y cuáles no?</span>
+        <p>
+          Los plásticos se clasifican en distintos tipos según su material. Cabe destacar que todos son potencialmente reciclables dependiendo de la demanda de las empresas del reciclaje.</p>
+        <p>
+          ACÁ VAN ACORDEONES VERDE/AMARILLO/ROJO SEGÚN RECICLABILIDAD</p>
+        <div class="section"></div>
+        <span class="subtitle">¿Cuáles son sus certificaciones y/o sellos?</span>
+        <p>
+          ACÁ VA ACORDEÓN DE SELLOS
+        </p>
+        <div class="section"></div>
+        <span class="subtitle">Recomendaciones a tener en cuenta en la clasificación/reciclaje</span>
+        <p>
+          Estos materiales se clasifican dentro de la categoría “Plásticos” identificada con color amarillo o en “Reciclables” en color verde según la norma Unit 1239.
+        </p>
+        <p>
+          Los que sean envases se deben escurrir y aplastar antes de separarlos para reciclar. Los que sean bandejas u otro tipo de contenedores, deben estar limpios (sin necesidad de
+          lavarlos con jabón), sin restos de comida, secos y lo más compactos posibles.
+        </p>
+        <p>
+          Realizando esto, se hace más eficiente toda la cadena de reciclaje. Se disminuye el volumen que van a ocupar los materiales en los contenedores, luego en los camiones de
+          recolección de reciclables que aprovechan mejor su capacidad, haciendo menos cantidad de viajes, con menos gasto de combustible y disminución de las emisiones contaminantes al aire.
+        </p>
+        <div class="section"></div>
+        <span class="subtitle">¿Qué beneficios brinda el reciclaje?</span>
+        <p>
+          El reciclaje de plástico tiene como principal beneficio la valorización de un material útil, y no renovable, que de otra manera iría a disposición final en vertederos (tardando
+          varios cientos de años en degradarse) o podría terminar en cursos de agua generando obstrucciones, drenajes deficientes e incluso contaminación y mortandad en el ecosistema marino.
+          La cadena de reciclaje brinda mano de obra a hombres y mujeres del Uruguay.
+        </p>
+        <p>
+          Los precios pagados por estos materiales suelen ser muy variables dependiendo del precio del petróleo. La cadena de reciclaje de plásticos se enfrenta constantemente al desafío
+          de lograr negocios sostenibles, ya que la materia prima virgen en muchos momentos es más conveniente que la materia prima reciclada.
+        </p>
+        <div class="section"></div>
+        <span class="subtitle">¿Qué se produce en Uruguay a partir de materiales recuperados?</span>
+        <p>
+          En Uruguay la industria de productos plásticos representa un sector importante con 30 empresas y X puestos de trabajo. La capacidad de generar localmente productos con plásticos
+          recuperados de calidad, depende de la obtención en volúmen, y de su procesamiento que no siempre es rentable en todas sus etapas localmente. Cada día surgen más proyectos locales y
+          empresas que buscan dar valor a esa cadena de producción y el aporte de buen material clasificado es fundamental para su viabilidad.
+        </p>
+        <p>
+          El PET reciclado (RPET) post consumo es clasificado por color, triturado y lavado para la generación de escamas. Dichas escamas se exportan para su reciclaje. En Uruguay se importan
+          las escamas de RPET para fabricar botellas.
+        </p>
+        <p>
+          El PEBD recuperado post consumo se utiliza principalmente para la fabricación de bolsas de residuos.
+        </p>
+        <p>
+          El PEAD recuperado post consumo se utiliza para la fabricación de baldes, cañerías de desagües, cisternas y otros productos sanitarios, cajones, entre otros.
+        </p>
+        <p>
+          Otros productos fabricados con plásticos reciclados son las maderas plásticas, postes y piques para el campo, pallets, cartonplast, entre otros.
+        </p>
+        <div class="section"></div>
+        <span class="subtitle">Flujo de materiales y composición</span>
+        <p>
+          <img src="assets/img/flujo-plastico.svg" alt="Flujo de materiales plásticos">
+          <img src="assets/img/composicion-plastico.svg" alt="Composición de plástico en residuos domicilarios: 16%"></p>
+        <div class="section"></div>
       </div>
     </ion-slide>
-    <ion-slide class="metal ion-color-metales">
+
+    <!-- Papel -->
+
+    <ion-slide class="paper ion-color-plasticos">
       <div class="slide-head">
-        <img src="assets/img/metal-demo-head.jpg" alt="metales para reciclaje">
+        <img src="assets/img/paper-head.jpg" alt="Encabezado imagen de papel y cartón">
         <div class="under-image"></div>
       </div>
       <div class="slide-content">
-        <h2>Metales</h2>
-        <span class="subtitle">Ficha subtítulo</span>
+        <h2>Papel y cartón</h2>
+        <span class="subtitle">¿De dónde se obtiene el material?</span>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquUt enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-          irure dolor in reprehenderit in voluptate.
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquUt enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-          irure dolor in reprehenderit in voluptate.
-
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquUt enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-          irure dolor in reprehenderit in voluptate.
+          El papel se fabrica a partir de procesos químicos que tratan la pulpa de celulosa obtenida, generalmente, de las fibras provenientes de árboles o alguna otra materia prima fibrosa
+          como caña de azúcar. Es un material renovable, pero es importante conocer y certificar su origen de para asegurar que no haya tala ilegal o insostenible en su producción.</p>
+        <p>
+          El papel recuperado (residuos de papel), es utilizado en gran medida para fabricar papel de menor calidad presentando ventajas tanto de costos como en eficiencia. Sin embargo, existen
+          limitaciones para su reciclabilidad tanto por la cantidad de veces que puede reciclarse o bien por el tratamiento que tuvieron (impresión con tintas, barnices, plastificados).
+          La calidad de fibra o rigidez que se puede lograr para su impresión o armado dependerá también de la calidad de pasta lograda.</p>
+        <div class="section"></div>
+        <span class="subtitle">¿Cuáles son los productos de este material que se reciclan y cuáles no?</span>
+        <p>
+          ACÁ VAN ACORDEONES VERDE/AMARILLO/ROJO SEGÚN RECICLABILIDAD</p>
+        <div class="section"></div>
+        <span class="subtitle">¿Cuáles son sus certificaciones y/o sellos?</span>
+        <p>
+          ACÁ VA ACORDEÓN DE SELLOS
         </p>
-        <div class="card-thumbs"></div>
-        <div class="card-video">
-          <iframe
-            width="100%"
-            height="315"
-            [src]="videos[0].url"
-            frameborder="0"
-            allowfullscreen>
-          </iframe>
-        </div>
+        <div class="section"></div>
+        <span class="subtitle">Recomendaciones a tener en cuenta en la clasificación/reciclaje</span>
+        <p>
+          Estos materiales se clasifican dentro de la categoría “Papel y cartón” identificada con color azul o en “Reciclables” en color verde según la norma Unit 1239.
+        </p>
+        <p>
+          Los consumidores tiene un rol fundamental para lograr buenos niveles de clasificación y reciclaje. Ser un consumidor responsable en el momento de hacer una compra, eligiendo papeles
+          y cartones sin plastificados o exceso de barnices y otros materiales, es una práctica fundamental para aportar mejores niveles de material potencialmente reciclable.
+        </p>
+        <p>
+          A las cajas de cartón se las debe desarmar y retirar cintas y grapas antes de separarlas para reciclar. A los cuadernos, cuadernolas, carpetas, se les deben retirar espirales,
+          ganchos, grapas y todo tipo de partes metálicas.
+        </p>
+        <div class="section"></div>
+        <span class="subtitle">¿Qué beneficios brinda el reciclaje?</span>
+        <p>
+          El reciclaje de papel es una muy buena práctica para concientizar respecto a los residuos que se generan diariamente y la importancia de su correcta separación.
+        </p>
+        <p>
+          Se trata de un material fácilmente reciclable, y clasificarlo es una buena práctica para implementar en oficinas, instituciones educativas, entre otros espacios con gran consumo de papel.
+        </p>
+        <p>
+          El reciclaje de papel logra optimizar el ciclo de vida de un recurso valioso y alcanza ahorros significativos en el uso de agua y energía en comparación a lo que se utilizaría
+          normalmente para producirlo de madera virgen.
+        </p>
+        <div class="section"></div>
+        <span class="subtitle">¿Qué se produce en Uruguay a partir de materiales recuperados?</span>
+        <p>
+          En Uruguay se fabrica cartón corrugado, a partir de bobinas de papel reciclado, para la elaboración de envases y cajas para uso industrial, comercial y doméstico.
+        </p>
+        <p>
+          También se producen varios productos de higiene personal con descartes de origen industrial como: Toallas de papel, papeles higiénicos, servilletas, entre otros.
+        </p>
+        <p>
+          Además, principalmente a partir de diarios, se producen maples para huevos, frutas, macetas.
+        </p>
+        <div class="section"></div>
+        <span class="subtitle">Flujo de materiales y composición</span>
+        <p>
+          <img src="assets/img/flujo-papel.svg" alt="Flujo de materiales plásticos">
+          <img src="assets/img/composicion-papel.svg" alt="Composición de plástico en residuos domicilarios: 23%"></p>
+        <div class="section"></div>s
       </div>
     </ion-slide>
+
+    <!-- Compostables -->
+
+    <ion-slide class="compostables ion-color-compostables">
+      <div class="slide-head">
+        <img src="assets/img/compostables-head.jpg" alt="Encabezado imagen de papel y cartón">
+        <div class="under-image"></div>
+      </div>
+      <div class="slide-content">
+        <h2>Compostables</h2>
+        <span class="subtitle">¿De dónde se obtienen los residuos compostables?</span>
+        <p>
+          Los residuos compostables a nivel doméstico son parte de lo que generamos diariamente en nuestras casas: restos de comida, cáscaras, yerba, té, podas. Representan más de un 40% de nuestros residuos.
+        </p>
+        <div class="section"></div>
+        <span class="subtitle">¿De dónde se obtienen los materiales compostables?</span>
+        <p>
+          Los materiales compostables utilizados comunmente para fabricar envases, bolsas y utensillos descartables, están compuestos por cadenas de polímeros obtenidos del procesamiento de vegetales como
+          la caña de azúcar, bagazo, papa u otros producidos directamente con hojas o partes de plantas como el plátano, cáscara de arroz entre otros.</p>
+        <p>
+          Los llamados Bioplásticos, como el PLA y CPLA, con características muy similares a otros plásticos, pueden ser compostables y pueden biodegradarse en tiempos más reducidos.</p>
+        <div class="section"></div>
+        <span class="subtitle">¿Cuáles son los productos de este material que se reciclan y cuáles no?</span>
+        <p>
+          ACÁ VAN ACORDEONES VERDE/AMARILLO/ROJO SEGÚN RECICLABILIDAD</p>
+        <div class="section"></div>
+        <span class="subtitle">¿Cuáles son sus certificaciones y/o sellos?</span>
+        <p>
+          ACÁ VA ACORDEÓN DE SELLOS
+        </p>
+        <div class="section"></div>
+        <span class="subtitle">Recomendaciones a tener en cuenta en la separación/compostaje</span>
+        <p>
+          A la hora de clasificar los residuos orgánicos en nuestro hogar, si haremos con ellos compostaje doméstico, es recomendable solamente separar los residuos orgánicos crudos.
+        </p>
+        <p>
+          En el caso del compostaje industrial, además de poder compostar los orgánicos crudos, vamos a poder sumar cualquier resto de alimento, incluyendo también los materiales compostables
+          tales como vasos, platos o bolsas de PLA, bagazo, entre otros. Es importante asegurar que sean productos certificados y autorizados por LATU y/o empresas reconocidas.
+        </p>
+        <div class="section"></div>
+        <span class="subtitle">¿Qué beneficios brinda el reciclaje?</span>
+        <p>
+          El hacer compost nos trae el principal beneficio de la reducción de residuos que van a ser destinados en el relleno sanitario o vertedero, ya que entre el 40 y 50% de los residuos
+          que generamos diariamente, son residuos orgánicos. Además se evita la generación de gases de efecto invernadero (dióxido de carbono o metano) que se producen por la descomposición
+          de estos residuos en el relleno sanitario.
+        </p>
+        <p>
+          Otro beneficio importante del compost es que es un fertilizante natural rico en nutrientes para el suelo y las plantas.
+        </p>
+        <div class="section"></div>
+        <span class="subtitle">¿Qué se produce en Uruguay a partir de materiales recuperados?</span>
+        <p>
+          El compost es un abono orgánico producido a partir de la degradación de la materia orgánica, mediante oxígeno, humedad y microorganismos, que genera nutrientes recomendados para
+          mejorar el cultivo de plantas, hortalizas y la salud del suelo en general.
+        </p>
+        <p>
+          A nivel industrial se realiza en plantas de compostaje con residuos orgánicos de distintos sectores industriales y algunos comerciales.
+        </p>
+        <p>
+          A nivel doméstico el vermicompostaje (compostaje con lombrices) es el más eficiente. Ésta es una técnica sencilla para degradar los residuos orgánicos crudos que generamos en el hogar.
+        </p>
+        <div class="section"></div>
+        <span class="subtitle">Flujo de materiales y composición</span>
+        <p>
+          <img src="assets/img/flujo-compostables.svg" alt="Flujo de materiales compostables">
+          <img src="assets/img/composicion-compostables.svg" alt="Composición de compostables en residuos domicilarios: 46%"></p>
+        <div class="section"></div>
+      </div>
+    </ion-slide>
+
+    <!-- Genérico -->
+
+    <ion-slide class=“MATERIAL ion-color-MATERIAL”>
+      <div class="slide-head">
+        <img src="assets/img/IMAGEN-MATERIAL.jpg" alt="Encabezado imagen de MATERIAL”>
+      <div class=" under-image"></div>
+      <div class="slide-content">
+        <ion-slide class="metal ion-color-metales">
+          <div class="slide-head">
+            <img src="assets/img/metal-demo-head.jpg" alt="Encabezado imagen de metales">
+            <div class="under-image"></div>
+          </div>
+          <div class="slide-content">
+            <h2>Genérico para dejar código</h2>
+            <span class="subtitle">Ficha subtítulo</span>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquUt enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+              aute
+              irure dolor in reprehenderit in voluptate.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquUt enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+              aute
+              irure dolor in reprehenderit in voluptate.
+
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquUt enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+              aute
+              irure dolor in reprehenderit in voluptate.
+            </p>
+            <div class="card-thumbs">
+              <img src="assets/img/flujo-plastico.svg" alt="Flujo de materiales plásticos">
+              <img src="assets/img/composicion-plastico.svg" alt="Composición de plástico en residuos domicilarios: 16%">
+              <img src="assets/img/plastic-demo3.jpg" class="last" alt="botellas plásticas">
+            </div>
+            <div class="card-video">
+              <iframe width="100%" height="315" [src]="videos[0].url" frameborder="0" allowfullscreen>
+              </iframe>
+            </div>
+          </div>
+        </ion-slide>
+
   </ion-slides>
 </ion-content>
