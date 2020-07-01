@@ -1,0 +1,17 @@
+:host {
+  .main-background {
+    --background: var(--dark-sea-green);
+    text-align: center;
+    font-size: 20px;
+    line-height: 1.5;
+    color: var(--vidrio);
+    ion-grid {
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+    .error-actions {
+      color: var(--vidrio);
+    }
+  }
+}

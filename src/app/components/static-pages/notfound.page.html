@@ -1,25 +1,18 @@
-<div class="container margin-top">
-  <div class="row justify-content-center">
-      <div class="col-6">
-          <div class="error-template">
-              <h1>
-                  <%=image_tag "DATA.svg", :class=>"max-parent", :alt=>"paloma DATA"%>
-              </h1>
-              <div class="jumbotron margin-top-small">
-                <h2>
-                  Oops!
-                </h2>
-                <div class="error-details">
-                    <%= t('.page_not_found') %>
-                </div>
-                <hr>
-                <div class="error-actions right">
-                    <a href="/"><span class="glyphicon glyphicon-home"></span>
-                      <%= t('.return') %>
-                    </a>
-                </div>
-              </div>
-          </div>
-      </div>
-  </div>
-</div>
+<ion-content class="main-background">
+  <ion-grid class="ion-align-items-center">
+    <ion-row class="ion-justify-content-center">
+      <ion-col  size-md="6" size-lg="8" size-xs="12">
+        <img src="assets/img/404-icono.svg"/>
+      </ion-col>
+      <ion-col  size-md="6" size-lg="8" size-xs="12">
+        <img class="logo" src="assets/img/donde_reciclo.png" alt="Donde Reciclo"/>
+      </ion-col>
+      <ion-col  size-md="6" size-lg="8" size-xs="12">
+        <span class="error-actions">
+          No encontramos la página que estás buscando.<br>
+          ¿Querrías ir a la <a href="/">página de inicio</a>?
+        </span>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

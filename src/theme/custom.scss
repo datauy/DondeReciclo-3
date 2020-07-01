@@ -109,6 +109,9 @@
     }
   }
 
+  a {
+    color: var(--vidrio, #FFF);
+  }
   // Tab
 
   ion-tab-bar {
@@ -405,7 +408,9 @@ body {
     background-color: green;
     opacity: 0 !important;
   }
-
+  .main-background {
+    --background: var(--dark-sea-green);
+  }
   .loading-wrapper {
     -webkit-animation: ld-vortex-out 2s ease-out infinite;
     animation: ld-vortex-out 2s ease-out infinite;
