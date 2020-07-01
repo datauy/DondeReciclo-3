@@ -19,8 +19,8 @@ export class ContactFormComponent implements OnInit {
 
   }
 
-  register(form) {
-    this.utils.openTicket(form.value).then((res) => {
+  register() {
+    this.utils.openTicket('lala').then((res) => {
       if (res) {
         this.success = true;
       }

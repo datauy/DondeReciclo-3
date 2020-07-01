@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'empresas',
-    loadChildren: () => import('./pages/empresas/empresas.module').then( m => m.EmpresasPageModule)
+    loadChildren: () => import('./pages/partners/partners.module').then( m => m.PartnersPageModule)
   },
   {
     path: 'consejos',
@@ -27,6 +27,10 @@ const routes: Routes = [
   {
     path: '**',
     component: NotFoundPage
+  },
+  {
+    path: 'partners',
+    loadChildren: () => import('./pages/partners/partners.module').then( m => m.PartnersPageModule)
   }
 ];
 
