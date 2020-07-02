@@ -29,13 +29,66 @@
         <span class="subtitle">¿Cuáles son los productos de este material que se reciclan y cuáles no?</span>
         <p>
           Los plásticos se clasifican en distintos tipos según su material. Cabe destacar que todos son potencialmente reciclables dependiendo de la demanda de las empresas del reciclaje.</p>
-        <p>
-          ACÁ VAN ACORDEONES VERDE/AMARILLO/ROJO SEGÚN RECICLABILIDAD</p>
-        <div class="section"></div>
-        <span class="subtitle">¿Cuáles son sus certificaciones y/o sellos?</span>
-        <p>
-          ACÁ VA ACORDEÓN DE SELLOS
-        </p>
+          <accordion title="Los que se reciclan" class="ion-color-materiales-reciclables">
+            <ion-list>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">Botellas o botellones de agua o refresco. Bandejas.</ion-note>
+                </div>
+                <img src="/assets/img/PET.svg">
+              </ion-item>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">Bolsas de súper, residuos, leche, film, envoltorio burbuja.</ion-note>
+                </div>
+                <img src="/assets/img/LDPE.svg">
+              </ion-item>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">Botellas o botellones de agua o refresco. Bandejas,</ion-note>
+                </div>
+                <img src="/assets/img/HDPE.svg">
+              </ion-item>
+            </ion-list>
+            <ion-item lines="none">
+            </ion-item>
+          </accordion>
+          <accordion title="Los que se reciclan poco" class="ion-color-plasticos">
+            <ion-list>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">Bandejas, vasos, envases de helado.</ion-note>
+                </div>
+                <img src="/assets/img/PS.svg">
+              </ion-item>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">Envoltorios fideos, arroz, galletitas, tapas de botellas.</ion-note>
+                </div>
+                <img src="/assets/img/PP.svg">
+              </ion-item>
+            </ion-list>
+            <ion-item lines="none">
+            </ion-item>
+          </accordion>
+          <accordion title="Los que no se reciclan" class="ion-color-residuos-peligrosos">
+            <ion-list>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">Cañerías.</ion-note>
+                </div>
+                <img src="/assets/img/PVC.svg">
+              </ion-item>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">Otros tipos de plásticos.</ion-note>
+                </div>
+                <img src="/assets/img/Otros.svg">
+              </ion-item>
+            </ion-list>
+            <ion-item lines="none">
+            </ion-item>
+          </accordion>
         <div class="section"></div>
         <span class="subtitle">Recomendaciones a tener en cuenta en la clasificación/reciclaje</span>
         <p>
@@ -49,6 +102,55 @@
           Realizando esto, se hace más eficiente toda la cadena de reciclaje. Se disminuye el volumen que van a ocupar los materiales en los contenedores, luego en los camiones de
           recolección de reciclables que aprovechan mejor su capacidad, haciendo menos cantidad de viajes, con menos gasto de combustible y disminución de las emisiones contaminantes al aire.
         </p>
+        <div class="section"></div>
+        <accordion title="Certificaciones y sellos">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Polietileno tereftalato</ion-label>
+              </div>
+              <img src="/assets/img/PET.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Polietileno de  alta densidad</ion-label>
+              </div>
+              <img src="/assets/img/HDPE.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Cloruro de polivinilo</ion-label>
+              </div>
+              <img src="/assets/img/PVC.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Polietileno de baja densidad</ion-label>
+              </div>
+              <img src="/assets/img/LDPE.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Polipropileno</ion-label>
+              </div>
+              <img src="/assets/img/PP.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Poliestireno</ion-label>
+              </div>
+              <img src="/assets/img/PP.svg">
+            </ion-item>
+            <ion-item>
+              <div class="item-text">
+                <ion-label>Otros</ion-label>
+              </div>
+              <img src="/assets/img/Otros.svg">
+            </ion-item>
+          </ion-list>
+          <ion-item lines="none">
+          </ion-item>
+        </accordion>
         <div class="section"></div>
         <span class="subtitle">¿Qué beneficios brinda el reciclaje?</span>
         <p>
@@ -83,15 +185,16 @@
         <div class="section"></div>
         <span class="subtitle">Flujo de materiales y composición</span>
         <p>
-          <img src="assets/img/flujo-plastico.svg" alt="Flujo de materiales plásticos">
-          <img src="assets/img/composicion-plastico.svg" alt="Composición de plástico en residuos domicilarios: 16%"></p>
+          <img src="assets/img/flujo_plastico.png" alt="Flujo de materiales plásticos"></p>
+        <p>
+          <img src="assets/img/composicion_plastico.png" alt="Composición de plástico en residuos domicilarios: 16%"></p>
         <div class="section"></div>
       </div>
     </ion-slide>
 
     <!-- Papel -->
 
-    <ion-slide class="paper ion-color-plasticos">
+    <ion-slide class="paper ion-color-papel-y-carton">
       <div class="slide-head">
         <img src="assets/img/paper-head.jpg" alt="Encabezado imagen de papel y cartón">
         <div class="under-image"></div>
@@ -108,14 +211,125 @@
           La calidad de fibra o rigidez que se puede lograr para su impresión o armado dependerá también de la calidad de pasta lograda.</p>
         <div class="section"></div>
         <span class="subtitle">¿Cuáles son los productos de este material que se reciclan y cuáles no?</span>
-        <p>
-          ACÁ VAN ACORDEONES VERDE/AMARILLO/ROJO SEGÚN RECICLABILIDAD</p>
-        <div class="section"></div>
-        <span class="subtitle">¿Cuáles son sus certificaciones y/o sellos?</span>
-        <p>
-          ACÁ VA ACORDEÓN DE SELLOS
-        </p>
-        <div class="section"></div>
+        <accordion title="Los que se reciclan" class="ion-color-materiales-reciclables">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Cuadernos (sin tapa dura ni espirarles). Bandejas.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Hojas de impresora.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Guías telefónicas.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Recortes de imprenta.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Cartulinas.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Envases de papel.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Bolsas de papel.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Cajas de cartón.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Sobres.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Fotocopias.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Diarios/Periódicos.</ion-note>
+              </div>
+            </ion-item>
+          </ion-list>
+          <ion-item lines="none">
+          </ion-item>
+        </accordion>
+        <accordion title="Los que se reciclan poco" class="ion-color-plasticos">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Revistas/Libros (sin tapa dura).</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Catálogos.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Folletos.</ion-note>
+              </div>
+            </ion-item>
+          </ion-list>
+          <ion-item lines="none">
+          </ion-item>
+        </accordion>
+        <accordion title="Los que no se reciclan" class="ion-color-residuos-peligrosos">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Papeles con adhesivos.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Papel vegetal: papel cebolla/manteca/calco.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">papel sanitario: papel higiénico, toalla, serrvilletas y pañuelos usados.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Papel plastificado.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Papel sucio, engrasado o contaminado con productos químicos.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Boletas y boletos (papeles térmicos).</ion-note>
+              </div>
+            </ion-item>
+          </ion-list>
+          <ion-item lines="none">
+          </ion-item>
+        </accordion>
+      <div class="section"></div>
         <span class="subtitle">Recomendaciones a tener en cuenta en la clasificación/reciclaje</span>
         <p>
           Estos materiales se clasifican dentro de la categoría “Papel y cartón” identificada con color azul o en “Reciclables” en color verde según la norma Unit 1239.
@@ -129,6 +343,27 @@
           ganchos, grapas y todo tipo de partes metálicas.
         </p>
         <div class="section"></div>
+        <accordion title="Certificaciones y sellos">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>A través de procesos consultivos, la Forest Stewardship Council (FSC) desarrolla estándares y políticas para el manejo sostenible de los bosques, además de
+                  acreditar certificaciones y entidades certificadoras para evaluar.</ion-label>
+              </div>
+              <img src="/assets/img/FSC.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>El sello Rainforest Alliance asegura a los consumidores que el producto que están comprando ha sido cultivado y cosechado usando prácticas ambiental y socialmente
+                  responsables, particularmente protegiendo la deforestación de selvas y bosques lluviosos.</ion-label>
+              </div>
+              <img src="/assets/img/RA.svg">
+            </ion-item>
+          </ion-list>
+          <ion-item lines="none">
+          </ion-item>
+        </accordion>
+          <div class="section"></div>
         <span class="subtitle">¿Qué beneficios brinda el reciclaje?</span>
         <p>
           El reciclaje de papel es una muy buena práctica para concientizar respecto a los residuos que se generan diariamente y la importancia de su correcta separación.
@@ -154,15 +389,16 @@
         <div class="section"></div>
         <span class="subtitle">Flujo de materiales y composición</span>
         <p>
-          <img src="assets/img/flujo-papel.svg" alt="Flujo de materiales plásticos">
-          <img src="assets/img/composicion-papel.svg" alt="Composición de plástico en residuos domicilarios: 23%"></p>
+          <img src="assets/img/flujo_papel.png" alt="Flujo de materiales plásticos"></p>
+        <p>
+          <img src="assets/img/composicion_papel.png" alt="Composición de plástico en residuos domicilarios: 23%"></p>
         <div class="section"></div>s
       </div>
     </ion-slide>
 
     <!-- Compostables -->
 
-    <ion-slide class="compostables ion-color-compostables">
+    <ion-slide class="compostables ion-color-residuos-compostables">
       <div class="slide-head">
         <img src="assets/img/compostables-head.jpg" alt="Encabezado imagen de papel y cartón">
         <div class="under-image"></div>
@@ -182,14 +418,125 @@
           Los llamados Bioplásticos, como el PLA y CPLA, con características muy similares a otros plásticos, pueden ser compostables y pueden biodegradarse en tiempos más reducidos.</p>
         <div class="section"></div>
         <span class="subtitle">¿Cuáles son los productos de este material que se reciclan y cuáles no?</span>
-        <p>
-          ACÁ VAN ACORDEONES VERDE/AMARILLO/ROJO SEGÚN RECICLABILIDAD</p>
-        <div class="section"></div>
-        <span class="subtitle">¿Cuáles son sus certificaciones y/o sellos?</span>
-        <p>
-          ACÁ VA ACORDEÓN DE SELLOS
-        </p>
-        <div class="section"></div>
+        <span class="subtitle">¿Cuáles son los productos de este material que se reciclan y cuáles no?</span>
+        <accordion title="Los que se compostan" class="ion-color-materiales-reciclables">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>En el hogar:</ion-label>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Restos de frutas.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Restos de verduras.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Cáscaras de frutas y verduras.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Cáscaras de huevos.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Restos ded yerba.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Restos de café.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Saquitos de té.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Hojas secas.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>En plantas de ccompostaje industrial se suman:</ion-label>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Restos de alimentos cocidos.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Residuos orgánicos industriales.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Podas.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Servilletas, vvasos, platos y cubiertos "compostables" de PLA, CPLA, bagazo y celulosa, entre otros.</ion-note>
+              </div>
+            </ion-item>
+          </ion-list>
+          <ion-item lines="none">
+          </ion-item>
+        </accordion>
+        <accordion title="Los que no se compostan" class="ion-color-residuos-peligrosos">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>En el hogar:</ion-label>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Restos de comidas procesadas.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Huesos.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Aceites.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Salsas.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>En plantas de ccompostaje industrial se suman:</ion-label>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">No en todas las plantas de compostaje se acepta el procesamiento de envases compostables dado a su a veces dudosa procedencia o clasificación. Usar productos certificados es determinante.</ion-note>
+              </div>
+            </ion-item>
+          </ion-list>
+          <ion-item lines="none">
+          </ion-item>
+        </accordion>
+      <div class="section"></div>
         <span class="subtitle">Recomendaciones a tener en cuenta en la separación/compostaje</span>
         <p>
           A la hora de clasificar los residuos orgánicos en nuestro hogar, si haremos con ellos compostaje doméstico, es recomendable solamente separar los residuos orgánicos crudos.
@@ -198,6 +545,31 @@
           En el caso del compostaje industrial, además de poder compostar los orgánicos crudos, vamos a poder sumar cualquier resto de alimento, incluyendo también los materiales compostables
           tales como vasos, platos o bolsas de PLA, bagazo, entre otros. Es importante asegurar que sean productos certificados y autorizados por LATU y/o empresas reconocidas.
         </p>
+        <div class="section"></div>
+        <accordion title="Certificaciones y sellos">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Ácido poliláctico</ion-label>
+              </div>
+              <img src="/assets/img/PLA.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Biodegradable</ion-label>
+              </div>
+              <img src="/assets/img/biodegradable.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Compostable</ion-label>
+              </div>
+              <img src="/assets/img/compostable.svg">
+            </ion-item>
+          </ion-list>
+          <ion-item lines="none">
+          </ion-item>
+        </accordion>
         <div class="section"></div>
         <span class="subtitle">¿Qué beneficios brinda el reciclaje?</span>
         <p>
@@ -223,8 +595,9 @@
         <div class="section"></div>
         <span class="subtitle">Flujo de materiales y composición</span>
         <p>
-          <img src="assets/img/flujo-compostables.svg" alt="Flujo de materiales compostables">
-          <img src="assets/img/composicion-compostables.svg" alt="Composición de compostables en residuos domicilarios: 46%"></p>
+          <img src="assets/img/flujo_compostables.png" alt="Flujo de materiales compostables"></p>
+        <p>
+          <img src="assets/img/composicion_compostables.png" alt="Composición de compostables en residuos domicilarios: 46%"></p>
         <div class="section"></div>
       </div>
     </ion-slide>
@@ -251,8 +624,8 @@
           irure dolor in reprehenderit in voluptate.
         </p>
         <div class="card-thumbs">
-          <img src="assets/img/flujo-plastico.svg" alt="Flujo de materiales plásticos">
-          <img src="assets/img/composicion-plastico.svg" alt="Composición de plástico en residuos domicilarios: 16%">
+          <img src="assets/img/flujo_plastico.png" alt="Flujo de materiales plásticos"><br>s
+          <img src="assets/img/composicion_plastico.png" alt="Composición de plástico en residuos domicilarios: 16%">
           <img src="assets/img/plastic-demo3.jpg" class="last" alt="botellas plásticas">
         </div>
         <div class="card-video">

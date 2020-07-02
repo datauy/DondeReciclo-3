@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="130px" height="85px" viewBox="0 0 130 85" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 64 (93537) - https://sketch.com -->
+    <title>Ilustración Pañales y paños húmedos</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="3.33333333e-05 0.179610677 63.707 0.179610677 63.707 43.9999762 3.33333333e-05 43.9999762"></polygon>
+    </defs>
+    <g id="Ilustración-Pañales-y-paños-húmedos" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle-Copy-15" fill="#8E968B" fill-rule="nonzero" x="26" y="0" width="85" height="85" rx="8"></rect>
+        <g id="Group-24" transform="translate(37.000000, 21.000000)">
+            <path d="M62.7977,9.7287 C62.7977,9.7287 67.4227,-0.5213 34.7977,0.1037 C25.1727,0.1037 -2.7023,-1.6463 1.4227,9.2287 C28.9227,9.2287 62.7977,9.7287 62.7977,9.7287" id="Fill-1" fill="#FEFBED"></path>
+            <path d="M17.7461,28.3934 C17.7461,39.5944 27.6491,48.6744 39.8641,48.6744 C52.0801,48.6744 61.9821,39.5944 61.9821,28.3934 C61.9821,17.1924 52.0801,8.1124 39.8641,8.1124 C27.6491,8.1124 17.7461,17.1924 17.7461,28.3934" id="Fill-3" fill="#E2DAB7"></path>
+            <path d="M1.2381,28.3934 C1.2381,39.5944 11.1411,48.6744 23.3561,48.6744 C35.5721,48.6744 45.4741,39.5944 45.4741,28.3934 C45.4741,17.1924 35.5721,8.1124 23.3561,8.1124 C11.1411,8.1124 1.2381,17.1924 1.2381,28.3934" id="Fill-5" fill="#E2DAB7"></path>
+            <g id="Group-9" transform="translate(0.000000, 5.478700)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="Clip-8"></g>
+                <path d="M62.7977,4.362 C62.7977,4.362 65.1107,12.839 62.3607,19.839 C54.8607,19.518 49.7977,19.389 43.1727,36.343 C40.6727,43.022 39.5477,43.921 34.0477,43.921 C28.5477,43.921 25.0477,45.462 21.6727,34.93 C18.2977,24.398 16.2977,17.591 1.4227,20.031 C-1.7783,10.071 1.4227,3.848 1.4227,3.848 C8.5477,2.307 41.1107,-3.858 62.7977,4.362" id="Fill-7" fill="#FEFBED" mask="url(#mask-2)"></path>
+            </g>
+            <path d="M62.7977,9.7287 C62.7977,9.7287 31.7977,2.9077 1.4227,9.3497" id="Stroke-10" stroke="#736357" stroke-width="0.871"></path>
+            <path d="M45.3291,6.6116 C45.3291,6.6116 38.2101,18.8016 50.6901,27.2866" id="Stroke-12" stroke="#736357" stroke-width="0.782"></path>
+            <path d="M21.3629,7.7188 C21.3629,7.7188 28.4819,19.9088 16.0019,28.3938" id="Stroke-14" stroke="#736357" stroke-width="0.782"></path>
+            <polygon id="Fill-16" fill="#F9BDA7" points="39.9251 18.7164 47.8131 21.2214 48.9471 17.6524 41.0581 15.1474"></polygon>
+            <polygon id="Fill-18" fill="#F9BDA7" points="25.8672 18.7164 17.9792 21.2214 16.8452 17.6524 24.7342 15.1474"></polygon>
+            <path d="M63.0234,22.7549 C63.0234,22.7549 44.7194,16.2969 39.9254,46.8049" id="Stroke-20" stroke="#998675" stroke-width="0.871"></path>
+            <path d="M1.9251,22.7549 C1.9251,22.7549 20.2291,16.2969 25.0231,46.8049" id="Stroke-22" stroke="#998675" stroke-width="0.871"></path>
+        </g>
+    </g>
+</svg>
