@@ -16,18 +16,18 @@ export class SidemenuComponent implements OnInit {
   public appPages = [
     {
       title: 'Novedades',
-      desc: 'Ulitmas noticias relacionadas',
+      desc: 'Clasificación y reciclaje en Uruguay',
       url: 'novedades',
       icon: 'dr-newspaper'
     },
     {
       title: 'Programas',
-      desc: 'Y ciclo de vida de los residuos',
+      desc: 'Ciclo de vida de los residuos',
       url: 'programas',
       icon: 'dr-recycle'
     },
     {
-      title: 'Empresas',
+      title: 'Auspiciantes',
       desc: 'Marcas que hacen posible esta app',
       url: 'empresas',
       icon: 'dr-empresas'
