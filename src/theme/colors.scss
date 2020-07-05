@@ -13,16 +13,15 @@
   --orange-yellow: #ff9f00;
   --black: #000000;
   --papel-y-carton: #75aaf1;
-  --residuos-peligrosos: #f46539;
   --greyish-brown: #4a4a4a;
-  --materiales-reciclables: #f5a624;
+  --materiales-reciclables: #63b563;
   --plasticos: #ffcb02;
   --white: #d8d8d8;
   --dark-seafoam: #1eac86;
   --pale-olive-green: #9cd060;
   --spruce: #08573a;
   --dark-sea-green: #0d744e;
-  --warm-grey: #9b9b9b;
+  --vidrio-secundario: #9b9b9b;
   --metales: #464646;
   --vidrio: #ffffff;
   --dark-mint: #3ccc79;
@@ -37,6 +36,7 @@
   --brand-red: #bf1e2c;
   --residuos-compostables: #827b61;
   --vermillion: #df0e0e;
+  --residuos-peligrosos: #f64b4b;
 
 }
 
@@ -188,19 +188,19 @@
 }
 
 :root {
-  --ion-color-residuoos-mezclados: #9ba498;
-  --ion-color-residuoos-mezclados-rgb: 155,164,152;
-  --ion-color-residuoos-mezclados-contrast: #fff;
-  --ion-color-residuoos-mezclados-contrast-rgb: 0,0,0;
-  --ion-color-residuoos-mezclados-shade: #889086;
-  --ion-color-residuoos-mezclados-tint: #a5ada2;
+  --ion-color-residuos-mezclados: #9ba498;
+  --ion-color-residuos-mezclados-rgb: 155,164,152;
+  --ion-color-residuos-mezclados-contrast: #fff;
+  --ion-color-residuos-mezclados-contrast-rgb: 0,0,0;
+  --ion-color-residuos-mezclados-shade: #889086;
+  --ion-color-residuos-mezclados-tint: #a5ada2;
 }
 
-.ion-color-residuoos-mezclados {
-  --ion-color-base: var(--ion-color-residuoos-mezclados);
-  --ion-color-base-rgb: var(--ion-color-residuoos-mezclados-rgb);
-  --ion-color-contrast: var(--ion-color-residuoos-mezclados-contrast);
-  --ion-color-contrast-rgb: var(--ion-color-residuoos-mezclados-contrast-rgb);
-  --ion-color-shade: var(--ion-color-residuoos-mezclados-shade);
-  --ion-color-tint: var(--ion-color-residuoos-mezclados-tint);
+.ion-color-residuos-mezclados {
+  --ion-color-base: var(--ion-color-residuos-mezclados);
+  --ion-color-base-rgb: var(--ion-color-residuos-mezclados-rgb);
+  --ion-color-contrast: var(--ion-color-residuos-mezclados-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-residuos-mezclados-contrast-rgb);
+  --ion-color-shade: var(--ion-color-residuos-mezclados-shade);
+  --ion-color-tint: var(--ion-color-residuos-mezclados-tint);
 }
