@@ -39,7 +39,7 @@
   <ion-auto-complete
     #searchbar
     class="searchContent"
-    [options]="{ placeholder : 'Buscá objetos o materiales' }"
+    [options]="{ placeholder : '¿Qué querés reciclar?' }"
     [template]="dr"
     [showResultsFirst]="true"
     (click)="showSearch($event)"
@@ -54,7 +54,7 @@
 
   <div id="suggestions"
     [ngClass]="(api.suggestVisibility && searchVisibility) ? 'show expand' : 'hide shrink'">
-    <ion-list-header>Categorias de búsqueda</ion-list-header>
+    <ion-list-header>Búsquedas sugeridas</ion-list-header>
     <div class="resultsWrap">
       <ion-button [color]="predefined.class"
         *ngFor="let predefined of predefinedOptions;"

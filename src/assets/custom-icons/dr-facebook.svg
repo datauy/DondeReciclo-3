@@ -1,105 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   inkscape:version="1.0 (6e3e5246a0, 2020-05-07)"
-   sodipodi:docname="dr-facebook.svg"
-   id="svg275"
-   version="1.1"
-   viewBox="0 0 512 512"
-   height="512"
-   width="512">
-  <metadata
-     id="metadata281">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <defs
-     id="defs279">
-    <path
-       d="M0 0.125L22.894 0.125 22.894 18.095 0 18.095z"
-       id="prefix__a" />
-    <path
-       d="M0 0.005L11.387 0.005 11.387 18.346 0 18.346z"
-       id="prefix__a-3" />
-    <path
-       d="M0 0.072L7.267 0.072 7.267 8.05 0 8.05z"
-       id="prefix__a-7" />
-    <path
-       d="M0.072 0.001L7.993 0.001 7.993 8.87 0.072 8.87z"
-       id="prefix__c" />
-    <path
-       d="M0.04 0.073L8.507 0.073 8.507 5.86 0.04 5.86z"
-       id="prefix__e" />
-    <path
-       d="M0 0.125L22.894 0.125 22.894 18.095 0 18.095z"
-       id="prefix__a-35" />
-  </defs>
-  <sodipodi:namedview
-     inkscape:current-layer="layer1"
-     inkscape:window-maximized="1"
-     inkscape:window-y="27"
-     inkscape:window-x="67"
-     inkscape:cy="239.31434"
-     inkscape:cx="178.45861"
-     inkscape:zoom="0.90885417"
-     inkscape:snap-bbox-edge-midpoints="true"
-     inkscape:snap-smooth-nodes="true"
-     inkscape:snap-bbox="true"
-     inkscape:object-paths="true"
-     inkscape:guide-bbox="true"
-     showguides="true"
-     showgrid="false"
-     id="namedview277"
-     inkscape:window-height="845"
-     inkscape:window-width="1533"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0"
-     guidetolerance="10"
-     gridtolerance="10"
-     objecttolerance="10"
-     borderopacity="1"
-     bordercolor="#666666"
-     pagecolor="#ffffff"
-     inkscape:document-rotation="0">
-    <sodipodi:guide
-       inkscape:color="rgb(0,0,255)"
-       inkscape:locked="false"
-       inkscape:label=""
-       id="guide285"
-       orientation="-1,0"
-       position="48,175.67752" />
-    <sodipodi:guide
-       inkscape:color="rgb(0,0,255)"
-       inkscape:locked="false"
-       inkscape:label=""
-       id="guide568"
-       orientation="0,1"
-       position="337.78796,464" />
-  </sodipodi:namedview>
-  <g
-     style="display:inline"
-     inkscape:label="Layer 1"
-     id="layer1"
-     inkscape:groupmode="layer">
-    <path
-       id="path760"
-       d="m 351.20272,48 c 65.69015,0 119.1686,54.76627 119.1686,122.08315 v 171.8224 C 470.37132,409.23373 416.89287,464 351.19142,464 l -22.45779,-0.0113 V 323.09659 h 44.06833 l 6.59725,-56.67541 h -50.65428 v -36.18324 c 0,-16.40277 4.11199,-27.58648 25.34973,-27.58648 h 27.08943 v -50.69947 c -4.68812,-0.6778 -20.76329,-2.22545 -39.47058,-2.22545 -39.0639,0 -65.80312,26.41163 -65.80312,74.89695 v 41.79769 h -44.17 v 56.67541 h 44.17 v 140.86952 l -115.09051,0.0226 C 96.146422,464 43.357067,410.97341 41.673863,345.159 l -0.04519,-3.24215 V 170.08315 C 41.628676,102.76627 95.107128,48 160.80858,48 Z" />
-  </g>
-  <inkscape:templateinfo>
-    <inkscape:name>icon</inkscape:name>
-    <inkscape:date>2020-05-20</inkscape:date>
-  </inkscape:templateinfo>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="38px" height="37px" viewBox="0 0 38 37" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 64 (93537) - https://sketch.com -->
+    <title>dr-facebook</title>
+    <desc>Created with Sketch.</desc>
+    <g id="dr-facebook" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-3" fill="#9CD060">
+            <path d="M27.4178714,0.0877071429 C33.2334981,0.0877071429 37.9666596,4.93595714 37.9666596,10.8945286 L37.9666596,10.8945286 L37.9666596,26.1057786 C37.9666596,32.06435 33.2334981,36.9126 27.4178714,36.9126 L27.4178714,36.9126 L25.4294107,36.9117071 L25.4298031,24.4405609 L29.3300176,24.4405609 L29.9140193,19.4241379 L25.4298031,19.4241379 L25.4298031,16.2214687 C25.4298031,14.7690985 25.7938728,13.7793561 27.6739487,13.7793561 L30.0718954,13.7781953 L30.0718954,9.29146633 C29.6571796,9.2303329 28.2337335,9.09375 26.5776646,9.09375 C23.1203415,9.09375 20.7533645,11.4315231 20.7533645,15.7246629 L20.7533645,19.4241379 L16.8431373,19.4241379 L16.8431373,24.4405609 L20.7533645,24.4405609 L20.7524107,36.9117071 L10.5646981,36.9126 C4.84139676,36.9126 0.167375284,32.2194839 0.0180892896,26.3932143 L0.0144106667,26.1057786 L0.0144106667,10.8945286 C0.0144106667,4.93595714 4.74757215,0.0877071429 10.5646981,0.0877071429 L10.5646981,0.0877071429 Z" id="Combined-Shape"></path>
+        </g>
+    </g>
 </svg>
