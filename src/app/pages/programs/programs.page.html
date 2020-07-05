@@ -1,0 +1,60 @@
+<app-header display="full"></app-header>
+<ion-content>
+  <div class="section-header">
+    <h1>Programas</h1>
+    <h2 class="sub-light">Proyecto realizado por DATA y CEMPRE en pro del cuidado del medio ambiente</h2>
+  </div>
+  <ion-slides #programSlider (ionSlideWillChange)="slideChanging()" pager>
+    <ion-slide *ngFor="let slide of programs">
+      <div class="slide-container">
+        <div class="slide-head">
+          <img [src]="slide.logo_url" class="slide-image" alt="slide.shortname"/>
+        </div>
+        <div class="slide-content">
+          <div class="slide-header">
+            <h2 class="title" [innerHTML]="slide.shortname"></h2>
+            <a href="slide.responsable_url" [innerHTML]="slide.responsable"></a>
+            <div class="slide-description" [innerHTML]="slide.information"></div>
+            <a class="more" href="slide.more_info">Más información</a>
+          </div>
+          <div class="slide-cobertura section">
+            <div class="slide-title">Cobertura</div>
+            <div class="slide-body" *ngFor="let location of slide.locations_arr">
+              <span class="location-tag" [innerHTML]="location"></span>
+            </div>
+          </div>
+          <div class="slide-supporters section">
+            <div class="slide-title">Apoyan</div>
+            <div class="slide-body" *ngFor="let supporter of slide.supporters_arr">
+              <a href="{{supporter.url}}" [innerHTML]="supporter.name"></a>
+            </div>
+          </div>
+          <div class="receives section">
+            <div class="slide-title">Recibe</div>
+            <div class="slide-body" [innerHTML]="slide.receives"></div>
+          </div>
+          <div class="receives-no section">
+            <div class="slide-title">No recibe</div>
+            <div class="slide-body" [innerHTML]="slide.receives_no"></div>
+          </div>
+          <div class="reception-conditions section">
+            <div class="slide-title">Condiciones de recepción</div>
+            <div class="slide-body" [innerHTML]="slide.reception_conditions"></div>
+          </div>
+          <div class="lifecycle section">
+            <div class="slide-title">Ciclo de vida</div>
+            <div class="slide-body" [innerHTML]="slide.lifecycle"></div>
+          </div>
+          <div class="benefits section">
+            <div class="slide-title">Beneficios</div>
+            <div class="slide-body" [innerHTML]="slide.benefits"></div>
+          </div>
+          <div class="slide-contact section">
+            <div class="slide-title">Contacto</div>
+            <div class="slide-body" [innerHTML]="slide.contact"></div>
+          </div>
+        </div>
+      </div>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

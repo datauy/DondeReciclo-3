@@ -18,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: 'programas',
-    loadChildren: () => import('./pages/programas/programas.module').then( m => m.ProgramasPageModule)
+    loadChildren: () => import('./pages/programs/programs.module').then( m => m.ProgramsPageModule)
   },
   {
     path: 'novedades',
