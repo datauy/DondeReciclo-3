@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="333" height="333" viewBox="0 0 333 333">
+    <defs>
+        <linearGradient id="prefix__a" x1="49.634%" x2="51.071%" y1="15.704%" y2="55.954%">
+            <stop offset="0%" stop-color="#9BA498"/>
+            <stop offset="100%" stop-color="#0D744E"/>
+        </linearGradient>
+        <filter id="prefix__b" width="102%" height="105.6%" x="-1%" y="-3.7%" filterUnits="objectBoundingBox">
+            <feMorphology in="SourceAlpha" radius=".5" result="shadowSpreadOuter1"/>
+            <feOffset dy="-1" in="shadowSpreadOuter1" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation=".5"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0"/>
+        </filter>
+        <path id="prefix__c" d="M66.5 89L91 116 42 116z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <path fill="#FFCB02" fill-rule="nonzero" d="M131 191c0 19.882 16.118 36 36 36s36-16.118 36-36-16.118-36-36-36-36 16.118-36 36z"/>
+        <path stroke="url(#prefix__a)" stroke-width="15" d="M77.624 187.578c0-25.715 2.097-36.156-4.802-49.084-6.898-12.929-6.898-18.753-6.898-32.916"/>
+        <path fill-rule="nonzero" d="M70 194.5c0 53.295 43.205 96.5 96.5 96.5s96.5-43.205 96.5-96.5S219.795 98 166.5 98 70 141.205 70 194.5zm15 0c0-45.011 36.489-81.5 81.5-81.5s81.5 36.489 81.5 81.5-36.489 81.5-81.5 81.5S85 239.511 85 194.5z"/>
+        <rect width="116" height="40" x="139" y="66" fill="#FFCB02" fill-rule="nonzero" rx="6"/>
+        <rect width="116" height="40" x="209" y="148" fill="#FFCB02" fill-rule="nonzero" rx="6"/>
+        <rect width="126" height="27" x="8" y="212" fill="#FFCB02" fill-rule="nonzero" rx="6"/>
+        <rect width="116" height="72" x="209" y="212" fill="#FFCB02" fill-rule="nonzero" rx="6"/>
+        <rect width="116" height="75" x="9" y="21" fill="#9BA498" fill-rule="nonzero" rx="6"/>
+        <rect width="116" height="43" x="9" y="147" fill="#FFCB02" fill-rule="nonzero" rx="6"/>
+        <rect width="134" height="60" x="53" y="254" fill="#FFCB02" fill-rule="nonzero" rx="6"/>
+        <text fill="#FFF" font-family="SourceSansPro-SemiBold, Source Sans Pro" font-size="16" font-weight="500">
+            <tspan x="154.896" y="92">Consumidor</tspan>
+        </text>
+        <text fill="#FFF" font-family="SourceSansPro-SemiBold, Source Sans Pro" font-size="12" font-weight="500">
+            <tspan x="230.25" y="165">Separación de </tspan> <tspan x="215.196" y="180">residuos en el hogar</tspan>
+        </text>
+        <text fill="#FFF" font-family="SourceSansPro-SemiBold, Source Sans Pro" font-size="12" font-weight="500">
+            <tspan x="17.006" y="229">Industria de reciclaje</tspan>
+        </text>
+        <text fill="#FFF" font-family="SourceSansPro-SemiBold, Source Sans Pro" font-size="12" font-weight="500">
+            <tspan x="235.998" y="229">Sistemas de </tspan> <tspan x="231.588" y="244">segregación y </tspan> <tspan x="225.228" y="259">recuperación de </tspan> <tspan x="244.962" y="274">residuos</tspan>
+        </text>
+        <text fill="#FFF" font-family="SourceSansPro-SemiBold, Source Sans Pro" font-size="12" font-weight="500">
+            <tspan x="20.398" y="39">Salida del sistema </tspan> <tspan x="25.228" y="54">de recuperación </tspan> <tspan x="17.392" y="69">(vertederos, cursos </tspan> <tspan x="16.948" y="84">de agua basurales).</tspan>
+        </text>
+        <text fill="#FFF" font-family="SourceSansPro-SemiBold, Source Sans Pro" font-size="12" font-weight="500">
+            <tspan x="27.964" y="164">Fabricación de </tspan> <tspan x="20.758" y="179">nuevos productos</tspan>
+        </text>
+        <text fill="#FFF" font-family="SourceSansPro-SemiBold, Source Sans Pro" font-size="12" font-weight="500">
+            <tspan x="77.744" y="271">Reclasificación y </tspan> <tspan x="62.834" y="286">acondicionamiento en </tspan> <tspan x="62.954" y="301">planta de clasificación</tspan>
+        </text>
+        <path fill="#0D744E" d="M220.5 112L245 139 196 139z" transform="rotate(120 220.5 125.5)"/>
+        <use fill="#000" filter="url(#prefix__b)" xlink:href="#prefix__c"/>
+        <use fill="#9BA498" xlink:href="#prefix__c"/>
+        <g fill-rule="nonzero" stroke="#FFF" stroke-width="2" transform="translate(155 173)">
+            <rect width="9.2" height="1" x="6.4" y="1" rx=".5"/>
+            <rect width="18.8" height="8.5" x="1.6" y="26.5" rx="4"/>
+            <rect width="18.8" height="4" x="1.6" y="22" rx="2"/>
+            <rect width="18.8" height="4" x="1.6" y="17.5" rx="2"/>
+            <path d="M15.54 5.5l-8.69.006c-.938.06-1.797.558-2.316 1.35L1.498 11.5c-.505.902-.495 1.969.016 3.923V18.5c0 .828.336 1.578.879 2.121.543.543 1.293.879 2.121.879H17.62c.829 0 1.579-.336 2.121-.879.543-.543.88-1.293.88-2.121l.082-4.108c.232-.425.363-.912.363-1.43 0-.518-.135-1.027-.39-1.478L18.05 6.855C17.497 6.013 16.556 5.5 15.54 5.5z"/>
+        </g>
+    </g>
+</svg>
