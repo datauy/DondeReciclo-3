@@ -5,7 +5,7 @@ import { map, switchMap, mergeMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { File } from '@ionic-native/file/ngx';
 
-import { ContainerType, Container, Material, SearchParams } from "src/app/models/basic_models.model";
+import { ContainerType, Container, Material, SearchParams, Program } from "src/app/models/basic_models.model";
 
 @Injectable({
   providedIn: 'root'
@@ -82,6 +82,13 @@ export class ApiService<T=any> {
         return this.file.writeFile('assets/'+type, fileName, data, {replace: false});
       })
     );
+  }
+  loadPrograms() {
+    return  this.request.get(environment.backend + "programs").pipe(map(
+      (result: Program[]) => {
+        return result;
+      }
+    ));
   }
     /**********************/
    /*        Map         */

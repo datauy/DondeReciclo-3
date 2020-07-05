@@ -1,0 +1,38 @@
+:host {
+  color: var(--ion-color-contrast);
+  --ion-item-background: var(--ion-color-base);
+  --ion-item-color: var(--ion-color-contrast);
+  --ion-color-step-600: var(--ion-color-contrast);
+  ion-card {
+    background: var(--ion-color-base);
+    padding-left: 15px;
+    ion-card-header{
+      padding: 5px;
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--ion-color-contrast);
+      height: 80px;
+      display: flex;
+      span {
+        max-width: calc(100% - 146px);
+        display: flex;
+        align-items: center;
+      }
+      img {
+        position: absolute;
+        max-height: 72px;
+        right: 0;
+      }
+      .plus-icon {
+        position: absolute;
+        right: 34px;
+        font-size: 26px;
+        top: 24px;
+        z-index: 1;
+      }
+    }
+    ion-card-content {
+
+    }
+  }
+}

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="130px" height="85px" viewBox="0 0 130 85" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 64 (93537) - https://sketch.com -->
+    <title>ihojas</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0 0.378 5.72681447 0.378 5.72681447 9.9406 0 9.9406"></polygon>
+        <polygon id="path-3" points="0.148772657 0.515999781 16.063 0.515999781 16.063 12.9476469 0.148772657 12.9476469"></polygon>
+    </defs>
+    <g id="ihojas" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle-Copy-15" fill="#78725C" fill-rule="nonzero" x="26" y="0" width="85" height="85" rx="8"></rect>
+        <g id="Group-19" transform="translate(20.000000, 14.000000)">
+            <path d="M45.6543,35.5499 C45.6543,35.5499 50.0303,22.8869 30.1493,23.1419 C30.0443,36.6149 45.6543,35.5499 45.6543,35.5499" id="Fill-1" fill="#F9D53D"></path>
+            <g id="Group-5" transform="translate(0.000000, 0.622100)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="Clip-4"></g>
+                <path d="M3.9198,9.9406 C3.9198,9.9406 9.3988,6.0956 1.2758,0.3776 C-2.7112,5.8006 3.9198,9.9406 3.9198,9.9406" id="Fill-3" fill="#FBB03B" mask="url(#mask-2)"></path>
+            </g>
+            <path d="M29.9967,13.7153 C29.9967,13.7153 30.8177,3.8683 16.6557,7.6723 C19.0347,17.3203 29.9967,13.7153 29.9967,13.7153" id="Fill-6" fill="#F7931E"></path>
+            <path d="M67.1034,11.9886 C67.1034,11.9886 73.6614,13.3276 72.2344,3.4966 C65.5544,4.3266 67.1034,11.9886 67.1034,11.9886" id="Fill-8" fill="#C6A958"></path>
+            <path d="M76.4061,18.7095 C76.4061,18.7095 70.5921,10.7205 62.3591,22.8555 C70.4651,28.6025 76.4061,18.7095 76.4061,18.7095" id="Fill-10" fill="#F7931E"></path>
+            <g id="Group-14" transform="translate(67.000000, 35.622100)">
+                <mask id="mask-4" fill="white">
+                    <use xlink:href="#path-3"></use>
+                </mask>
+                <g id="Clip-13"></g>
+                <path d="M15.6543,12.9278 C15.6543,12.9278 20.0303,0.2648 0.1493,0.5198 C0.0443,13.9928 15.6543,12.9278 15.6543,12.9278" id="Fill-12" fill="#FBB03B" mask="url(#mask-4)"></path>
+            </g>
+            <path d="M26.9198,47.5627 C26.9198,47.5627 32.3988,43.7177 24.2758,37.9997 C20.2888,43.4227 26.9198,47.5627 26.9198,47.5627" id="Fill-15" fill="#C6A958"></path>
+            <path d="M50.3265,58.6221 C50.3265,58.6221 58.3985,52.9231 46.3835,44.5171 C40.5195,52.5401 50.3265,58.6221 50.3265,58.6221" id="Fill-17" fill="#F7931E"></path>
+        </g>
+    </g>
+</svg>

@@ -4,29 +4,30 @@
     <ion-row class="ion-justify-content-center">
       <ion-col  size-md="9" size-lg="8" size-xs="12">
         <div class="section-header">
-          <h1>Dejanos tu comentario</h1>
-          <h2 class="sub-light">Tu opinión nos importa, por favor dejanos tu comentario y nos estaremos comunicando a la brevedad. Por cuestiones técnicas podrás contactar al equipo de DATA, por temas relacionados a los programas o contenedores de reciclaje contactá a CEMPRE.</h2>
+          <h1>Envianos un mensaje</h1>
+          <h2 class="sub-light">¿Dudas o sugerencias? ¡Escribinos!<br>
+          También recomendamos ver la <a href="http://soporte.data.org.uy/es/folder/5" target="_blank">ayuda</a> del proyecto.</h2>
         </div>
       </ion-col>
     </ion-row>
     <ion-row class="ion-justify-content-center">
-      <ion-col  size-md="9" size-lg="8" size-xs="12">
+      <ion-col  size-md="9" size-lg="6" size-xs="12">
         <form (ngSubmit)="contact(form)">
           <ion-item>
             <ion-label position="floating">Nombre</ion-label>
-            <ion-input  name="name" type="text" placeholder="Juan Pérez" ngModel required></ion-input>
+            <ion-input  name="name" type="text" ngModel required></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label position="floating">Email</ion-label>
-            <ion-input name="email" type="email" placeholder="ejemplo@email.org" ngModel required></ion-input>
+            <ion-label position="floating">Correo electrónico</ion-label>
+            <ion-input name="email" type="email" ngModel required></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position="floating">Asunto</ion-label>
-            <ion-input name="subject" type="list" placeholder="A quien va dirigido" ngModel required></ion-input>
+            <ion-input name="subject" type="list" ngModel required></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position="floating">Mensaje</ion-label>
-            <ion-input name="body" type="textarea" placeholder="Que nos quieres contar" ngModel required></ion-input>
+            <ion-input name="body" type="textarea" ngModel required></ion-input>
           </ion-item>
           <ion-button  size="large" type="submit" class="submit">Enviar</ion-button>
         </form>

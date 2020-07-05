@@ -1,0 +1,94 @@
+:host {
+  ion-content{
+      --padding-start: 5vw;
+      --padding-end: 5vw;
+      font-size: 16px;
+      line-height: 1.5;
+  }
+  h1, p {
+    width: 100%;
+  }
+  h2 {
+    margin-bottom: 3px;
+  }
+  a {
+    font-weight: bold;
+    line-height: 0.94;
+    color: var(--pale-olive-green);
+    text-decoration: none;
+  }
+  ion-slides{
+    overflow: visible;
+    ion-slide{
+		  transition: 100ms ease-in-out;
+      display: block;
+      text-align: left;
+      .slide-head img{
+        height: calc(12vw + 16vh);
+        width: calc(100% - 6vw);
+        margin-top: 30px;
+        border-radius: 16px;
+      }
+      .slide-content{
+        opacity: 1;
+        .slide-title {
+          font-size: 20px;
+          font-weight: bold;
+        }
+        .receives::before,
+        .receives-no::before {
+          float: left;
+          content: "";
+          width: 9px;
+          height: 9px;
+          border-radius: 6px;
+          margin: 10px 11px 0 0;
+        }
+        .receives::before {
+          background-color: var(--bluish-green);
+        }
+        .receives-no::before {
+          background-color: var(--vermillion);
+        }
+        .slide-body {
+          margin: 10px 0 20px 0;
+        }
+        .slide-description {
+          margin: 10px 0;
+        }
+      }
+      .card-thumbs img {
+        border-radius: 16px;
+        float: left;
+        width: calc(33.3% - 3px);
+        margin-right: 4px;
+        &.last {
+          margin-right: 0px;
+        }
+      }
+      &.swiper-slide-next{
+        .under-image,
+        img{
+          margin-left: -4vw;
+        }
+        .slide-content{
+          opacity: 0;
+        }
+      }
+      // &.swiper-slide-active{
+      //   img{
+      //     margin-left: -5%;
+      //   }
+      // }
+      &.swiper-slide-prev{
+        .under-image,
+        img{
+          margin-left: 4vw;
+        }
+        .slide-content{
+          opacity: 0;
+        }
+      }
+    }
+  }
+}

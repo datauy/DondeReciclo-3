@@ -1,0 +1,10 @@
+<ion-card>
+  <ion-card-header (click)="toggleAccordion()">
+      <span>{{ title }}</span>
+      <ion-icon color="light" [name]="icon" class="plus-icon"></ion-icon>
+      <img *ngIf="img != ''" src="{{img}}"/>
+  </ion-card-header>
+  <ion-card-content #cc>
+    <ng-content></ng-content>
+  </ion-card-content>
+</ion-card>
