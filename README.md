@@ -1,4 +1,4 @@
-# Donde Reciclo v3.0.1
+# Donde Reciclo v3.0.2
 Basada en Ionic5, Angular 8 y usando las últimas tecnologías de CSS4 y HTML5 para generar una mejor experiencia de usuario y contenidos exportables a Android e IOS así como las nuevas Web Apps.
 
 ## Incluye
@@ -10,6 +10,7 @@ Basada en Ionic5, Angular 8 y usando las últimas tecnologías de CSS4 y HTML5 p
 * Compartir en redes sociales
 * Fichas de materiales
 * Consejos para deposición de materiales
+* Programas de reciclaje
 
 ## Instalación
 
