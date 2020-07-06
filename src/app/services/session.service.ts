@@ -54,7 +54,7 @@ export class SessionService {
   get( key: string ) {
     return this[key];
   }
-  set( key: string, value: string ) {
+  set( key: string, value: any ) {
     this[key] = value;
     return 1;
   }

@@ -28,10 +28,16 @@ export class CardsPage implements OnInit {
       i.url = this.domSanitizer.bypassSecurityTrustResourceUrl(i.vid_link);
     }
   }*/
+  // TODO: Usar renderer2
   ngOnInit() {
     for(let i of this.videos){
       i.url = this.domSanitizer.bypassSecurityTrustResourceUrl(i.vid_link);
     }
+  }
+  ionViewDidEnter() {
+    let slide = this.slides.first.nativeElement.children[0].children[0];
+    let bulletActive = this.element.nativeElement.querySelector('.swiper-pagination-bullet-active');
+    bulletActive.style.backgroundColor = getComputedStyle(slide).getPropertyValue('--ion-color-base');
   }
   slideChanging() {
     this.slider.getActiveIndex().then(

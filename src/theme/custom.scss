@@ -145,11 +145,6 @@
       }
     }
   }
-
-  // slider
-  app-slider {
-    z-index: 0 !important;
-  }
   //hide for now!
   app-sidemenu ion-slides .swiper-pagination-bullet {
     width: 10px;
@@ -157,7 +152,7 @@
     opacity: 1;
   }
   app-sidemenu ion-slides .swiper-pagination-bullet-active {
-    background: #ffcb02;
+    background: var(--pale-olive-green);
   }
   app-consejos .swiper-pagination{
     top: 300px !important;

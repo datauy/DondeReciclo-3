@@ -63,7 +63,7 @@
         }
       }
     }
-    --bullet-background: var(--warm-grey);
+    --bullet-background: var(--vidrio-secundario);
     --bullet-background-active: var(--pale-olive-green);
   }
   .footer-md::before {
@@ -74,7 +74,7 @@
     cursor: pointer;
     font-size: 16px;
     font-weight: bold;
-    color: var(--warm-grey);
+    color: var(--vidrio-secundario);
     letter-spacing: 0.2px;
     text-align: center;
     margin: 34px 28px;

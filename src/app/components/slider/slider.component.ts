@@ -49,16 +49,27 @@ export class SliderComponent implements OnInit {
       }
     ];
     if ( !this.session.get('showSlider') ) {
-      this.session.set('showSlider', 'visible');
+      this.session.set('showSlider', 1);
     }
   }
 
-  goApp(){
-    this.session.set('showSlider', '0');
+  goApp(permanent: boolean){
+    if (permanent) {
+      //store data
+    }
+    this.session.set('showSlider', false);
   }
   nextSlide() {
-    // console.log("GOING NEXT");
-    this.slides.slideNext();
+    this.slides.getActiveIndex().then(
+      index => {
+        if ( index == 3 ) {
+          this.goApp(false);
+        }
+        else {
+          this.slides.slideNext();
+        }
+      }
+    );
   }
   prevSlide() {
     // console.log('GOING BACK');
