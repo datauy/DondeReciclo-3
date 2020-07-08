@@ -37,7 +37,9 @@ export class CardsPage implements OnInit {
   ionViewDidEnter() {
     let slide = this.slides.first.nativeElement.children[0].children[0];
     let bulletActive = this.element.nativeElement.querySelector('.swiper-pagination-bullet-active');
-    bulletActive.style.backgroundColor = getComputedStyle(slide).getPropertyValue('--ion-color-base');
+    if ( bulletActive ) {
+      bulletActive.style.backgroundColor = getComputedStyle(slide).getPropertyValue('--ion-color-base');
+    }
   }
   slideChanging() {
     this.slider.getActiveIndex().then(

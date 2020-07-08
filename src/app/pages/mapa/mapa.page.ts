@@ -53,7 +53,9 @@ export class MapaPage implements OnInit {
       );
       this.map.mapChanged.subscribe(
         change => {
-          console.log('changed: '+change);
+          if (change) {
+            this.loadNearbyContainers(false);
+          }
         }
       );
     }
@@ -70,18 +72,6 @@ export class MapaPage implements OnInit {
     // this.session.mapPage = false;
   }
   ngOnInit() {
-    this.map.loadMap();
-    this.geo.getCurrentPosition().then( (resp) => {
-      console.log('LOCATION!!!');
-      console.log(resp);
-      this.map.userPosition = [resp.coords.latitude, resp.coords.longitude];
-      this.loadNearbyContainers();
-     // resp.coords.latitude
-     // resp.coords.longitude
-    }).catch((error) => {
-      console.log('Error getting location', error);
-      this.loadNearbyContainers();
-    });
     // this.openSearchModal();
     this.loadInfoPane();
     this.mapEl = document.querySelector('app-mapa');
@@ -90,13 +80,31 @@ export class MapaPage implements OnInit {
     // this.app = document.querySelector('app-search');
   }
 
+  ionViewDidEnter() {
+    this.map.loadMap();
+    this.geo.getCurrentPosition().then( (resp) => {
+      console.log('LOCATION!!!');
+      console.log(resp);
+      this.map.userPosition = [resp.coords.latitude, resp.coords.longitude];
+      this.loadNearbyContainers(true);
+     // resp.coords.latitude
+     // resp.coords.longitude
+    }).catch((error) => {
+      console.log('Error getting location', error);
+      this.loadNearbyContainers(true);
+    });
+  }
+
   cupertinoShow(){
     this.session.cupertinoState = 'cupertinoOpen';
-    this.map.flytomarker();
+    this.map.flyToBounds([
+      [this.map.currentContainer.latitude, this.map.currentContainer.longitude],
+      this.map.userPosition
+    ]);
   }
   cupertinoHide(){
     this.session.cupertinoState = 'cupertinoClosed';
-    this.loadNearbyContainers();
+    this.map.flyToBounds(this.map.currentBounds);
   }
 
   // dragMapCupertino(){
@@ -163,11 +171,11 @@ export class MapaPage implements OnInit {
     }
   }
 
-  loadNearbyContainers() {
-    console.log('Load Nearby');
-    this.api.getNearbyContainers(this.map.userPosition).subscribe((containers) => {
+  loadNearbyContainers(fly: boolean) {
+    console.log(this.map.getBoundingCoords());
+    this.api.getContainers(this.map.getBoundingCoords()).subscribe((containers) => {
       console.log('Nearby comes back');
-      this.map.loadMarkers(containers);
+      this.map.loadMarkers(containers, fly);
     });
   }
 

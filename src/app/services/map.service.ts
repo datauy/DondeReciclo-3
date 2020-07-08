@@ -112,25 +112,17 @@ export class MapService {
   userMarker: L.Marker;
   currentContainer: Container;
   containers: Container[];
+  currentBounds: [number, number][];
+  animating: boolean;
+  private _pinClick = new BehaviorSubject<boolean>(false);
+  private _mapChangeSub = new BehaviorSubject<boolean>(false);
 
   constructor() {
   }
 
   loadMap() {
-    this.map = new L.Map("map", {});//.setView([-34.881536, -56.147968], 13);
-    this.map.locate({
-      setView: true,
-      maxZoom: 16
-    });/*.
-    on('locationfound', (e :any) => {
-      console.log('GOT LOCATION');
-      this.userPosition = [e.latitude, e.longitude];
-      this.userMarker = L.marker(this.userPosition, {icon: iconUser} ).addTo(this.map);
-    }).
-    on('locationerror', (err) => {
-      console.log('GOT NO LOCATION');
-      console.log(err.message);
-    });*/
+    this.animating = true;
+    this.map = new L.Map("map", {}).setView([-34.881536, -56.147968], 13);
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
     }).addTo(this.map);
@@ -148,19 +140,14 @@ export class MapService {
         this.route.spliceWaypoints(0, 1, e.latlng);
       }
     });
-    this.map.on('zoomend', function() {
-      console.log('ZOOMEND');
-      this.mapChanges;
-    });
-    this.map.on('dragend', function() {
-      console.log('DRAGEND');
-      this.mapChanges;
-    });
+    this.map.on('zoomend', this.mapChanges, this);
+    this.map.on('dragend', this.mapChanges, this);
     console.log('End load map');
+    this.map.once('moveend', this.toggleAnimation, this);
     return true;
   }
 
-  loadMarkers( markers: Container[], center?:[number,number] ){
+  loadMarkers( markers: Container[], fly:boolean ){
     this.containers = markers;
     let mapBounds = [];
     if (this.userPosition) {
@@ -176,11 +163,10 @@ export class MapService {
       .addTo(this.map);
       mapBounds.push([markers[i].latitude, markers[i].longitude]);
     }
-    if (markers.length > 0){
-      this.map.flyToBounds(mapBounds);
-      return 1;
-    }else{
-      return 0;
+    this.currentBounds = mapBounds;
+    if ( markers.length > 0 && fly ) {
+      console.log('flying to bounds');
+      this.flyToBounds(mapBounds);
     }
   }
 
@@ -193,7 +179,7 @@ export class MapService {
         draggable: true
       }).addTo(this.map);
       this.userMarker.bindPopup('Elegir esta ubicación').openPopup();
-      //this.getAddress(e.latitude, e.longitude);
+        //this.getAddress(e.latitude, e.longitude);
       console.log(e.latitude, e.longitude);
       this.userMarker.on("dragend", () => {
         let userPos = this.userMarker.getLatLng();
@@ -216,8 +202,20 @@ export class MapService {
     }).addTo(this.map);
 	}
 
-  flytomarker(){
-    this.map.flyTo([this.currentContainer.latitude, this.currentContainer.longitude], 15);
+  toggleAnimation() {
+    this.animating = !this.animating;
+  }
+  getBoundingCoords() {
+    let bounds = this.map.getBounds();
+    let sw = bounds.getSouthWest();
+    let ne = bounds.getNorthEast();
+    return [sw.lat+','+sw.lng, ne.lat+','+ne.lng];
+  }
+  flytomarker(latlong: [number, number], zoom: number){
+    this.animating = true;
+    console.log('Animation starts');
+    this.map.flyTo(latlong, zoom);
+    this.map.once('moveend', this.toggleAnimation, this);
     // Coding for set bounds in pixel from top instead of center of map for cuppertino open.
     // var neLatLng = this.map.containerPointToLatLng([150, 200]);
     // console.log(neLatLng);
@@ -226,6 +224,14 @@ export class MapService {
     // this.map.fitBounds(newViewCenter);
 
   }
+  flyToBounds(mapBounds) {
+    this.animating = true;
+    console.log('Animation boundsstarts');
+    this.map.flyToBounds(mapBounds);
+    this.map.once('moveend', this.toggleAnimation, this);
+  }
+
+  //PIN behavior
   clickPin(pin: any) {
     let pos = pin.target.options.container_pos;
     this.currentContainer = this.containers[pos];
@@ -235,13 +241,17 @@ export class MapService {
   get pinClicked() {
     return this._pinClick.asObservable();
   }
-  private _pinClick = new BehaviorSubject<boolean>(false)
+
+  //MAP behavior
   mapChanges(){
-    console.log('Map changes...');
-    this._mapChange.next(true);
+    //Si no es una animación auto
+    console.log('Map animation...'+this.animating);
+    if ( !this.animating && this.animating != undefined ) {
+      console.log('Map changes...');
+      this._mapChangeSub.next(true);
+    }
   }
   get mapChanged() {
-    return this._mapChange.asObservable();
+    return this._mapChangeSub.asObservable();
   }
-  private _mapChange = new BehaviorSubject<boolean>(false)
 }

@@ -104,6 +104,13 @@ export class ApiService<T=any> {
       }
     ));
   }
+  getContainers(bbox: string[]) {
+    return  this.request.get(environment.backend + "containers_bbox?sw="+bbox[0]+"&ne="+bbox[1]).pipe(map(
+      (result: Container[]) => {
+        return result;
+      }
+    ));
+  }
   //
   getMaterials(ids: []) :Material[] {
     let res = [];

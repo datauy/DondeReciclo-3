@@ -23,17 +23,29 @@
 		  transition: 100ms ease-in-out;
       display: block;
       text-align: left;
-      .slide-head img{
-        height: calc(12vw + 16vh);
-        width: calc(100% - 6vw);
+      .slide-head {
+        min-height: calc(12vw + 16vh);
         margin-top: 30px;
-        border-radius: 16px;
+        img {
+          height: calc(12vw + 16vh);
+          width: calc(100% - 6vw);
+          border-radius: 16px;
+        }
       }
       .slide-content{
         opacity: 1;
+        .slide-header {
+          margin-top: 60px;
+        }
         .slide-title {
           font-size: 20px;
           font-weight: bold;
+        }
+        .slide-body {
+          margin: 10px 0 20px 0;
+        }
+        .slide-description {
+          margin: 10px 0;
         }
         .receives::before,
         .receives-no::before {
@@ -49,12 +61,6 @@
         }
         .receives-no::before {
           background-color: var(--vermillion);
-        }
-        .slide-body {
-          margin: 10px 0 20px 0;
-        }
-        .slide-description {
-          margin: 10px 0;
         }
       }
       .card-thumbs img {
