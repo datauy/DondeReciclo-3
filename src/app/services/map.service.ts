@@ -114,6 +114,7 @@ export class MapService {
   containers: Container[];
   currentBounds: [number, number][];
   animating: boolean;
+  markers: L.LayerGroup;
   private _pinClick = new BehaviorSubject<boolean>(false);
   private _mapChangeSub = new BehaviorSubject<boolean>(false);
 
@@ -122,7 +123,7 @@ export class MapService {
 
   loadMap() {
     this.animating = true;
-    this.map = new L.Map("map", {}).setView([-34.881536, -56.147968], 13);
+    this.map = new L.Map("map", {minZoom: 12}).setView([-32.657689, -55.873808], 15);
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
     }).addTo(this.map);
@@ -150,6 +151,10 @@ export class MapService {
   loadMarkers( markers: Container[], fly:boolean ){
     this.containers = markers;
     let mapBounds = [];
+    //remove all markers and reload
+    if ( this.markers != undefined ) {
+      this.markers.clearLayers();
+    }
     if (this.userPosition) {
       if (this.userMarker) { // check
         this.map.removeLayer(this.userMarker); // remove
@@ -157,16 +162,23 @@ export class MapService {
       this.userMarker = L.marker(this.userPosition, {icon: iconUser} ).addTo(this.map);
       mapBounds.push(this.userPosition);
     }
+    var markersLayer = []
     for (var i = 0; i < markers.length; i++) {
-      new L.marker([markers[i].latitude,markers[i].longitude], {container_pos: i})
-      .on('click', this.clickPin, this) //L.bind(this.showPane, null, markers[i]))
-      .addTo(this.map);
+      var newMarker = new L.marker([markers[i].latitude,markers[i].longitude], {container_pos: i})
+      .on('click', this.clickPin, this); //L.bind(this.showPane, null, markers[i]))
       mapBounds.push([markers[i].latitude, markers[i].longitude]);
+      markersLayer.push(newMarker);
     }
+    this.markers = L.layerGroup(markersLayer).addTo(this.map);
     this.currentBounds = mapBounds;
-    if ( markers.length > 0 && fly ) {
-      console.log('flying to bounds');
-      this.flyToBounds(mapBounds);
+    if ( markers.length > 0 ) {
+      if ( fly ) {
+        this.flyToBounds(mapBounds);
+      }
+      return 1;
+    }
+    else {
+      return 0;
     }
   }
 
@@ -224,10 +236,10 @@ export class MapService {
     // this.map.fitBounds(newViewCenter);
 
   }
-  flyToBounds(mapBounds) {
+  flyToBounds(mapBounds: [number, number][], options?: {}) {
     this.animating = true;
     console.log('Animation boundsstarts');
-    this.map.flyToBounds(mapBounds);
+    this.map.flyToBounds(mapBounds, options);
     this.map.once('moveend', this.toggleAnimation, this);
   }
 

@@ -83,7 +83,7 @@ export class SearchComponent implements OnInit {
     }
     this.api.getContainersByMaterials([item.material_id], pos).subscribe(
         (containers) => {
-          if (this.map.loadMarkers(containers) == 0){
+          if (this.map.loadMarkers(containers, true) == 0){
             console.log('no markers!');
           }
           this.hideSearch('item selected');

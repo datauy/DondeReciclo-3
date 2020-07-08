@@ -97,10 +97,11 @@ export class MapaPage implements OnInit {
 
   cupertinoShow(){
     this.session.cupertinoState = 'cupertinoOpen';
-    this.map.flyToBounds([
-      [this.map.currentContainer.latitude, this.map.currentContainer.longitude],
-      this.map.userPosition
-    ]);
+    this.map.flyToBounds(
+      [[this.map.currentContainer.latitude, this.map.currentContainer.longitude],
+      this.map.userPosition],
+      {paddingBottomRight: [0,400]}
+    );
   }
   cupertinoHide(){
     this.session.cupertinoState = 'cupertinoClosed';
