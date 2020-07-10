@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { File } from '@ionic-native/file/ngx';
 
 import { ContainerType, Container, Material, SearchParams, Program } from "src/app/models/basic_models.model";
+import { News } from "src/app/models/news.model";
 
 @Injectable({
   providedIn: 'root'
@@ -86,6 +87,30 @@ export class ApiService<T=any> {
   loadPrograms() {
     return  this.request.get(environment.backend + "programs").pipe(map(
       (result: Program[]) => {
+        return result;
+      }
+    ));
+  }
+    /**********************/
+   /*        News         */
+  /**********************/
+  //
+  getNewsList(page: number) {
+    return  this.request.get(environment.backend + "news?page="+page).pipe(map(
+      (result: News[]) => {
+        return result;
+      }
+    ));
+  }
+  //
+  getNew(id: number, full: boolean) {
+    var url = environment.backend + "new/"+id;
+    if (full) {
+      url += "?full=1"
+    }
+    console.log(url);
+    return  this.request.get(url).pipe(map(
+      (result: News) => {
         return result;
       }
     ));

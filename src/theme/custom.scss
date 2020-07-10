@@ -113,6 +113,9 @@
     color: var(--pale-olive-green);
     text-decoration: none;
   }
+  img {
+    max-width: none;
+  }
   .more {
     display: inherit;
     text-align: right;
@@ -126,7 +129,7 @@
     content: "";
     border-width: 3px 3px 0 0;
     float: right;
-    margin: 4px;
+    margin: 6px;
   }
   .location-tag {
     font-size: 14px;
@@ -202,7 +205,7 @@ ion-icon {
   font-size: 16px;
   line-height: 1.44;
   text-align: center;
-  color: var(--warm-grey);
+  color: var(--vidrio-secundario);
 }
 .dr-transition{
   transition: var(--animation-time) ease-in-out;

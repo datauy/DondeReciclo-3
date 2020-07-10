@@ -52,8 +52,14 @@ export class SessionService {
   }
 
   get( key: string ) {
-    return this[key];
+    if ( this.hasOwnProperty(key) ) {
+      return this[key];
+    }
+    else {
+      return 0;
+    }
   }
+  
   set( key: string, value: any ) {
     this[key] = value;
     return 1;

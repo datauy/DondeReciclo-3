@@ -1,9 +1,16 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>new</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header title="Novedades"
+  display="small"
+  backButton="true">
+</app-header>
+<ion-back-button text="back button" icon="star"></ion-back-button>
+<ion-content class="news-detail">
+  <div class="section-header image-wrapper">
+    <img *ngIf="article.images" src="{{article.images[0]}}" alt="Novedad imagen"/>
+  </div>
+  <div class="section-body">
+    <h1 [innerHTML]="article.title"></h1>
+    <span class="sub-light" *ngIf="article.created_at" [innerHTML]="article.created_at.split('T')[0]"></span>
+    <div class="description" [innerHTML]="article.information"></div>
+  </div>
 
-<ion-content>
-Lugar para detalle de novedades
 </ion-content>

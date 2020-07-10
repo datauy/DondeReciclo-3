@@ -1,0 +1,64 @@
+:host {
+  ion-item {
+    margin-top: 20px;
+    --inner-padding-bottom: 20px;
+  }
+  .image-wrapper {
+    overflow: hidden;
+    height: 115px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin-right: 12px;
+    border-radius: 16px;
+    padding: 0;
+  }
+  img {
+    max-width: none;
+    object-fit: contain;
+    border-radius: 16px;
+    background: black;
+  }
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--greyish-brown);
+    margin-top: 0;
+  }
+  span,
+  span.sub-light {
+    font-size: 14px;
+    line-height: 1.29;
+  }
+  .news-detail {
+    .image-wrapper {
+      height: 220px;
+      margin-right: 0;
+      border-radius: 0;
+      img {
+        border-radius: 0;
+      }
+    }
+    .section-body {
+      top: -20px;
+      border-radius: 24px;
+      background-color: var(--vidrio);
+      position: relative;
+      padding: 22px;
+      h1 {
+        line-height: 1;
+        color: var(--greyish-brown);
+        font-weight: 600;
+        margin-bottom: 5px;
+        text-align: left;
+      }
+      .description {
+        margin-top: 24px;
+        font-size: 16px;
+        line-height: 1.5;
+        color: var(--vidrio-secundario);
+      }
+    }
+  }
+}
