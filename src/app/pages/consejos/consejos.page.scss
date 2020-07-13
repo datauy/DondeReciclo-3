@@ -19,10 +19,28 @@
       .slide-content{
         opacity: 1;
       }
-
+      h2 {
+        margin: 10px auto 20px;
+      }
       // padding: 0 10%;
-      img{
-        height: 300px;
+      .image-wrapper {
+        height: 200px;
+        width: 99%;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        padding: 0;
+        background-color: #000;
+        border-radius: 16px;
+        margin: 16px auto 48px;
+        img{
+          border-radius: 16px;
+          height: 200px;
+          max-width: none;
+          object-fit: contain;
+          background: #FFF;
+        }
       }
       &.swiper-slide-next{
         img{

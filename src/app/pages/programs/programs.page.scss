@@ -24,13 +24,32 @@
       display: block;
       text-align: left;
       .slide-head {
-        min-height: calc(12vw + 16vh);
+        //min-height: calc(12vw + 16vh);
+        min-height: 200px;
         margin-top: 30px;
+        .image-wrapper {
+          height: 200px;
+          width: 99%;
+          overflow: hidden;
+          display: flex;
+          justify-content: center;
+          text-align: center;
+          border-radius: 16px;
+          padding: 0;
+          background-color: #000;
+        }
         img {
+          height: 200px;
+          max-width: none;
+          object-fit: contain;
+          border-radius: 16px;
+          background: black;
+        }
+        /*img {
           height: calc(12vw + 16vh);
           width: calc(100% - 6vw);
           border-radius: 16px;
-        }
+        }*/
       }
       .slide-content{
         opacity: 1;

@@ -8,7 +8,9 @@
     <ion-slide *ngFor="let slide of programs">
       <div class="slide-container">
         <div class="slide-head">
-          <img [src]="slide.logo_url" class="slide-image" alt="slide.shortname"/>
+          <div class="image-wrapper">
+            <img [src]="slide.logo_url" class="slide-image" alt="slide.shortname"/>
+          </div>
         </div>
         <div class="slide-content">
           <div class="slide-header">

@@ -159,14 +159,15 @@
     background: var(--pale-olive-green);
   }
   app-consejos .swiper-pagination{
-    top: 300px !important;
+    top: 224px;
     text-align: left;
     left: 0;
     height: 18px;
   }
   app-programs .swiper-pagination,
   app-cards .swiper-pagination{
-    top: calc(12vw + 16vh + 56px);
+    //top: calc(12vw + 16vh + 56px);
+    top: 246px;
     text-align: left;
     left: 0;
     height: 18px;

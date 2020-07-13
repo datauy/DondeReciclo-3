@@ -1,12 +1,17 @@
 <app-header display="full"></app-header>
 <ion-content *ngIf="session.country == 'Uruguay'">
+  <ion-grid>
+    <ion-row>
+  <ion-col size="6">
   <ion-slides #cards (ionSlideWillChange)="slideChanging()" pager>
 
     <!-- Plásticos -->
 
     <ion-slide class="plastic ion-color-plasticos">
       <div class="slide-head">
-        <img src="assets/img/plastic-demo-head.jpg" alt="Encabezado imagen de plásticos">
+        <div class="image-wrapper">
+          <img src="assets/img/plastic-demo-head.jpg" alt="Encabezado imagen de plásticos" />
+        </div>
         <div class="under-image"></div>
       </div>
       <div class="slide-content">
@@ -196,7 +201,9 @@
 
     <ion-slide class="paper ion-color-papel-y-carton">
       <div class="slide-head">
-        <img src="assets/img/paper-head.jpg" alt="Encabezado imagen de papel y cartón">
+        <div class="image-wrapper">
+          <img src="assets/img/paper-head.jpg" alt="Encabezado imagen de papel y cartón">
+        </div>
         <div class="under-image"></div>
       </div>
       <div class="slide-content">
@@ -400,7 +407,9 @@
 
     <ion-slide class="compostables ion-color-residuos-compostables">
       <div class="slide-head">
-        <img src="assets/img/compostables-head.jpg" alt="Encabezado imagen de papel y cartón">
+        <div class="image-wrapper">
+          <img src="assets/img/compostables-head.jpg" alt="Encabezado imagen de papel y cartón">
+        </div>
         <div class="under-image"></div>
       </div>
       <div class="slide-content">
@@ -605,7 +614,9 @@
 
     <ion-slide class="metal ion-color-metales">
       <div class="slide-head">
-        <img src="assets/img/metal-demo-head.jpg" alt="Encabezado imagen de metales">
+        <div class="image-wrapper">
+          <img src="assets/img/metal-demo-head.jpg" alt="Encabezado imagen de metales">
+        </div>
         <div class="under-image"></div>
       </div>
       <div class="slide-content">
@@ -636,4 +647,7 @@
     </ion-slide>
 
   </ion-slides>
+</ion-col>
+</ion-row>
+</ion-grid>
 </ion-content>
