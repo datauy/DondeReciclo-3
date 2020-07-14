@@ -6,6 +6,9 @@
   h1, p{
     width: 100%;
   }
+  ion-note {
+    font-size: 16px;
+  }
   .consejos-top{
     // height: 30%;
     width: 100%;
@@ -24,19 +27,18 @@
       }
       // padding: 0 10%;
       .image-wrapper {
-        height: 200px;
+        height: calc(160px + 10vw);
         width: 99%;
         overflow: hidden;
         display: flex;
         justify-content: center;
         text-align: center;
         padding: 0;
-        background-color: #000;
         border-radius: 16px;
         margin: 16px auto 48px;
         img{
           border-radius: 16px;
-          height: 200px;
+          height: 100%;
           max-width: none;
           object-fit: contain;
           background: #FFF;
@@ -89,6 +91,11 @@
           img {
             position: absolute;
             right: 0;
+          }
+          &.accordion-text {
+            text-align: center;
+            font-size: 16px;
+            height: inherit;
           }
         }
       }

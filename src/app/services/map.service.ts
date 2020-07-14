@@ -123,7 +123,7 @@ export class MapService {
 
   loadMap() {
     this.animating = true;
-    this.map = new L.Map("map", {minZoom: 12}).setView([-32.657689, -55.873808], 15);
+    this.map = new L.Map("map", {minZoom:7}).setView([-32.657689, -55.873808], 15);
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
     }).addTo(this.map);

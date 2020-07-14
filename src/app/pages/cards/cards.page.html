@@ -1,8 +1,5 @@
 <app-header display="full"></app-header>
 <ion-content *ngIf="session.country == 'Uruguay'">
-  <ion-grid>
-    <ion-row>
-  <ion-col size="6">
   <ion-slides #cards (ionSlideWillChange)="slideChanging()" pager>
 
     <!-- Plásticos -->
@@ -647,7 +644,4 @@
     </ion-slide>
 
   </ion-slides>
-</ion-col>
-</ion-row>
-</ion-grid>
 </ion-content>

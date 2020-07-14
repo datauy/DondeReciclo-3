@@ -24,19 +24,18 @@
       .slide-head {
         margin-top: 30px;
         .image-wrapper {
-          height: 187px;
+          height: calc(160px + 10vw);
           width: 99%;
           overflow: hidden;
           display: flex;
           justify-content: center;
           text-align: center;
           padding: 0;
-          background-color: #000;
           border-top-left-radius: 16px;
           border-top-right-radius: 16px;
         }
         img{
-          height: 187px;
+          height: 100%;
           max-width: none;
           object-fit: contain;
           background: black;

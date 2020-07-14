@@ -19,22 +19,23 @@
     </ion-header>
     <ion-content class="menu-list">
       <ion-list>
-        <ion-item (click)="toggleMenu()"
+        <ion-item
           *ngFor="let p of appPages"
+          (click)="toggleMenu()"
           lines="none"
           [routerLink]="p.url"
-          routerLinkActive="active-item">
+          routerLinkActive="active-item"
+          detail-icon="none">
           <ion-icon slot="start"
             [name]="p.icon"></ion-icon>
           <div>
             <h4>{{p.title}}</h4>
             <p>{{p.desc}}</p>
           </div>
-          <ion-icon slot="end"
-            name="chevron-forward-outline"></ion-icon>
-
+          <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
         </ion-item>
         <ion-item lines="none"
+          detail-icon="none"
           routerDirection="forward"
           routerLink="/perfil"
           routerLinkActive="active-item">
@@ -49,6 +50,7 @@
 
         </ion-item>
         <ion-item lines="none"
+          detail-icon="none"
           routerDirection="forward"
           routerLink="/salir"
           routerLinkActive="active-item">
