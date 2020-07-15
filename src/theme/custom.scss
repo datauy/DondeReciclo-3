@@ -195,8 +195,22 @@
       font-size: 16px;
     }
   }
+  ::-webkit-scrollbar,
+  *::-webkit-scrollbar {
+    display: none;
+  }
 }
-
+/************ END ROOT *************/
+/**********************************/
+.alert-radio-label.sc-ion-alert-md,
+.alert-radio-label.sc-ion-alert-ios,
+.alert-radio-label.sc-ion-alert-wp {
+  white-space: normal;
+}
+.alert-tappable.alert-radio {
+    height: auto;
+    contain: content;
+}
 
 ion-icon {
   // background: red;

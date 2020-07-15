@@ -1,7 +1,7 @@
 import { CommonModule} from '@angular/common';
 import { NgModule} from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //import { AppRoutingModule } from '../app-routing.module';
 import { RouterModule } from '@angular/router';
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
@@ -20,6 +20,8 @@ import { AccordionComponent } from './accordion/accordion.component';
     IonicModule,
     RouterModule,
     AutoCompleteModule,
+    FormsModule,
+    ReactiveFormsModule 
     // SimpleServiceModule
   ],
   declarations: [

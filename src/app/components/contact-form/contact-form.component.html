@@ -12,34 +12,38 @@
     </ion-row>
     <ion-row class="ion-justify-content-center">
       <ion-col  size-md="9" size-lg="6" size-xs="12">
-        <form (ngSubmit)="register()">
+        <form [formGroup]="user_data" (ngSubmit)="register()" *ngIf="!( success || fail )">
           <ion-item>
             <ion-label position="floating">Nombre</ion-label>
-            <ion-input  name="name" type="text" ngModel required></ion-input>
+            <ion-input  formControlName="name" type="text"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position="floating">Correo electrónico</ion-label>
-            <ion-input name="email" type="email" ngModel required></ion-input>
+            <ion-input formControlName="email" type="email"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position="floating">Asunto</ion-label>
-            <ion-input name="subject" type="list" ngModel required></ion-input>
+            <ion-select formControlName="subject">
+              <ion-select-option text-wrap value="CEMPRE">Comentarios o dudas sobre reciclaje (CEMPRE)</ion-select-option>
+              <ion-select-option text-wrap value="DATA">Comentarios o dudas sobre esta aplicación (DATA)</ion-select-option>
+            </ion-select>
           </ion-item>
           <ion-item>
             <ion-label position="floating">Mensaje</ion-label>
-            <ion-input name="body" type="textarea" ngModel required></ion-input>
+            <ion-input formControlName="body" type="textarea"></ion-input>
           </ion-item>
           <ion-button  size="large" type="submit" class="submit">Enviar</ion-button>
         </form>
         <div *ngIf="success">
           <h3>Se ha enviado exitosamente</h3>
           <p>Tu mensaje ha sido ingresado en nuestro sistema de manejo de solicitudes, en breves te estará llegando un correo indicando el número de solicitud y otros datos relevantes para mantenernos en contacto. A la brevedad nuestro equipo se estará comunicando contigo respecto a tu comentario. Muchas gracias</p>
-          <ion-button>Volver al inicio</ion-button>
+          <ion-button class="submit" [routerLink]='["/intro/mapa"]'>Volver al inicio</ion-button>
         </div>
         <div *ngIf="fail">
           <h3>No hemos podido enviar tu mensaje</h3>
           <p>Por favor escríbenos a devops@data.org.uy y explícanos lo que pasa, valoramos mucho tu esfuerzo y te pedimos disculpas por las molestias ocasionadas. Muchas gracias</p>
-          <ion-button>Volver al inicio</ion-button>
+          <ion-button class="submit error" [routerLink]='["/intro/contacto"]'>Volver a intentarlo</ion-button>
+          <ion-button class="submit" [routerLink]='["/intro/mapa"]'>Ir al inicio</ion-button>
         </div>
       </ion-col>
     </ion-row>
