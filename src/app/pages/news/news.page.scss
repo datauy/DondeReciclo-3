@@ -14,10 +14,9 @@
     padding: 0;
   }
   img {
-    max-width: none;
-    object-fit: contain;
+    width: 100%;
+    object-fit: cover;
     border-radius: 16px;
-    background: black;
   }
   h3 {
     font-size: 20px;

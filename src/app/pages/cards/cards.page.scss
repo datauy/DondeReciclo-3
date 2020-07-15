@@ -35,10 +35,8 @@
           border-top-right-radius: 16px;
         }
         img{
-          height: 100%;
-          max-width: none;
-          object-fit: contain;
-          background: black;
+          width: 100%;
+          object-fit: cover;
           //height: calc(12vw + 16vh);
           //width: calc(100% - 6vw);
         }

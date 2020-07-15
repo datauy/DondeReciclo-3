@@ -28,7 +28,7 @@
         min-height: 200px;
         margin-top: 30px;
         .image-wrapper {
-          height: 200px;
+          height: calc(160px + 10vw);
           width: 99%;
           overflow: hidden;
           display: flex;
@@ -39,11 +39,9 @@
           background-color: #000;
         }
         img {
-          height: 200px;
-          max-width: none;
-          object-fit: contain;
+          object-fit: cover;
           border-radius: 16px;
-          background: black;
+          width: 100%;
         }
         /*img {
           height: calc(12vw + 16vh);

@@ -1,7 +1,7 @@
 <ion-header id="header-main" [class]="display">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button *ngIf="session.showBackButton || backButton" (click)="goBack()">
+      <ion-button class="back-button" *ngIf="session.showBackButton || backButton" (click)="goBack()">
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
       <ion-img class="logo ion-hide-lg-up" *ngIf="['map', 'full'].includes(display)"

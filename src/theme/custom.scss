@@ -182,7 +182,7 @@
   app-programs .swiper-pagination,
   app-cards .swiper-pagination{
     //top: calc(12vw + 16vh + 56px);
-    top: calc(160px + 10vw);
+    top: calc(206px + 10vw);
     text-align: left;
     left: 0;
     height: 18px;
@@ -359,6 +359,41 @@ body {
 
     &.expanded {
       top: 160px;
+    }
+  }
+}
+/*** Acordion ***/
+accordion ion-list {
+  background: var(--ion-color-base);
+  padding-left: 5px;
+  ion-item {
+    --padding-start: 0;
+    --border-style: none;
+    background: var(--ion-color-base);
+    display: inline-flex;
+    height: 85px;
+    width: 100%;
+    margin: 5px 0;
+    .item-text {
+      max-width: calc(100% - 98px);
+      align-items: center;
+      ion-label {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--ion-color-contrast);
+      }
+      span {
+
+      }
+    }
+    img {
+      position: absolute;
+      right: 0;
+    }
+    &.accordion-text {
+      text-align: center;
+      font-size: 16px;
+      height: inherit;
     }
   }
 }
