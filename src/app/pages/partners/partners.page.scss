@@ -2,6 +2,7 @@
   --ion-grid-padding-xs: 21px;
   --ion-grid-padding-md: 42px;
   --ion-grid-padding-lg: 84px;
+  --ion-grid-width-lg: 10px;
   .section-header {
     margin-bottom: 16px;
   }
@@ -11,7 +12,8 @@
     border-top: solid 1px #efefef;
     img {
       min-height: 40px;
-      max-height: 100px
+      max-height: 100px;
+      max-width: 100%;
     }
     a {
       font-size: 20px;
