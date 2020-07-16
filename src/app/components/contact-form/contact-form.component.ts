@@ -38,7 +38,6 @@ export class ContactFormComponent implements OnInit {
   }
 
   register() {
-    console.log(this);
     this.utils.openTicket(this.user_data.value).subscribe((res) => {
       console.log(res);
       if (res) {
@@ -47,6 +46,10 @@ export class ContactFormComponent implements OnInit {
       else {
         this.fail = true;
       }
+      setTimeout(() => {
+        delete this.success;
+        delete this.fail;
+      }, 10000);
     });
   }
 }

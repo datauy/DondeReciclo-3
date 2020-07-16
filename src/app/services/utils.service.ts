@@ -14,20 +14,15 @@ export class UtilsService {
   ) { }
 
   openTicket(form: any) {
-    try{
-      return this.request.post(environment.backend + "contact", form).pipe(
-        map( (result: any) => {
-          console.log('VUELVE DEL POST:');
-          console.log(result);
-          if (!result.error) {
-            return true;
-          }
-          return false;
-        },
-      ));
-    }
-    catch (error) {
-      return false;
-    }
+    return this.request.post(environment.backend + "contact", form).pipe(
+      map( (result: any) => {
+        console.log('VUELVE DEL POST:');
+        console.log(result);
+        if (!result.error) {
+          return true;
+        }
+        return false;
+      },
+    ));
   }
 }
