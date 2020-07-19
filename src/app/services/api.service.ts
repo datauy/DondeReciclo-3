@@ -136,6 +136,13 @@ export class ApiService<T=any> {
       }
     ));
   }
+  getContainers4Materials(bbox: string[], ids: number[]) {
+    return  this.request.get(environment.backend + "containers_bbox4materials?sw="+bbox[0]+"&ne="+bbox[1]+"materials="+ids.join(',')).pipe(map(
+      (result: Container[]) => {
+        return result;
+      }
+    ));
+  }
   //
   getMaterials(ids: []) :Material[] {
     let res = [];
