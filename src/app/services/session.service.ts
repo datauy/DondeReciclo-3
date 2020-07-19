@@ -23,6 +23,8 @@ export class SessionService {
 
   country: string = "Uruguay";
 
+  searchItem: any;
+
   @ViewChild("tabsNav", {
     static: false
   }) tabsNav: IonTabs;
@@ -59,7 +61,7 @@ export class SessionService {
       return 0;
     }
   }
-  
+
   set( key: string, value: any ) {
     this[key] = value;
     return 1;

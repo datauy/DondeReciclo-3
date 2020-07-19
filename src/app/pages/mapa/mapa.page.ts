@@ -162,22 +162,25 @@ export class MapaPage implements OnInit {
     //console.log(this.container);
     if ( this.map.userPosition ) {
       if ( this.map.route != null ) {
-        console.log('Changing route');
         this.map.route.spliceWaypoints(1, 1, [this.container.latitude, this.container.longitude]);
       }
       else {
-        console.log("Drawing route");
         this.map.drawRoute(this.map.userPosition, [this.container.latitude, this.container.longitude]);
       }
     }
   }
 
   loadNearbyContainers(fly: boolean) {
-    console.log(this.map.getBoundingCoords());
-    this.api.getContainers(this.map.getBoundingCoords()).subscribe((containers) => {
-      console.log('Nearby comes back');
-      this.map.loadMarkers(containers, fly);
-    });
+    if ( this.session.searchItem != undefined){
+      this.api.getContainers4Materials(this.map.getBoundingCoords(), [this.session.searchItem.material_id]).subscribe((containers) => {
+        this.map.loadMarkers(containers, fly);
+      });
+    }
+    else {
+      this.api.getContainers(this.map.getBoundingCoords()).subscribe((containers) => {
+        this.map.loadMarkers(containers, fly);
+      });
+    }
   }
 
   //Create additional Control placeholders, to group all control buttons

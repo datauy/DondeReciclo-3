@@ -199,6 +199,9 @@
   *::-webkit-scrollbar {
     display: none;
   }
+  .leaflet-control-container .leaflet-top {
+    top: 156px;
+  }
 }
 /************ END ROOT *************/
 /**********************************/
@@ -634,6 +637,9 @@ accordion ion-list {
         }
       }
     }
+    .loading input.searchbar-input {
+      background: #FFF;
+    }
   }
 
   ion-content,
@@ -647,7 +653,7 @@ accordion ion-list {
 
   ion-searchbar {
     z-index: 1010;
-
+    --clear-button-color: var(--pale-olive-green);
     .searchbar-input.sc-ion-searchbar-md {
       // position: absolute;
       padding: 16px 36px 16px 16px;
@@ -656,9 +662,25 @@ accordion ion-list {
     }
 
     .searchbar-search-icon.sc-ion-searchbar-md {
-      top: 20px;
+      top: 8px;
       left: auto;
-      right: 24px;
+      right: 11px;
+      background-color: var(--pale-olive-green);
+      width: 20px;
+      height: 20px;
+      border-radius: 40px;
+      padding: 12px;
+    }
+    .searchbar-clear-button.sc-ion-searchbar-md {
+      background-color: #fff;
+      width: 50px;
+      height: 50px;
+      right: 6px;
+      top: 6px;
+      border-radius: 10px;
+    }
+    .searchbar-clear-icon.sc-ion-searchbar-md {
+      width: 50px;
     }
   }
   /***   MAP PAGE   ***/

@@ -22,13 +22,8 @@ export class SearchComponent implements OnInit {
   // searchBarIonic: unknown;
   showBackdrop = false;
   searchVisibility = false;
-
   searchString: string;
-
   predefinedOptions: any[];
-
-  // loading
-  // isLoading: boolean;
 
   public selected:string = '';
 
@@ -42,18 +37,11 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {
     this.api.loadInitialData().subscribe(
-      () =>  { this.predefinedOptions = this.api.predefinedSearch;
-      // console.log(this.predefinedOptions);
+      () =>  {
+        this.predefinedOptions = this.api.predefinedSearch;
       }
     );
-    // console.log('Auto: ', this.searchBarAuto);
-    // console.log('element: ', this.searchBarIonic);
   }
-  ionViewDidEnter(){
-    // console.log('element: ', this.searchBarAuto);
-    // console.log('element: ', this.searchBarIonic);
-  }
-
   showSearch(event) {
     this.searchVisibility = true;
   }
@@ -75,24 +63,30 @@ export class SearchComponent implements OnInit {
   }
 
   itemSelected(item) {
-    // console.log('item: ', item);
+    this.session.searchItem = item;
     let pos = null;
     this.session.isLoading = true;
     if (this.map.userPosition) {
       pos = this.api.getContainersByMaterials([item.material_id], this.map.userPosition);
     }
     this.api.getContainersByMaterials([item.material_id], pos).subscribe(
-        (containers) => {
-          if (this.map.loadMarkers(containers, true) == 0){
-            console.log('no markers!');
-          }
-          this.hideSearch('item selected');
-          setTimeout( () => {
-            this.session.isLoading = false;
-          }, 500);
+      (containers) => {
+        if (this.map.loadMarkers(containers, true) == 0){
+          console.log('no markers!');
         }
+        this.hideSearch('item selected');
+        setTimeout( () => {
+          this.session.isLoading = false;
+        }, 500);
+        //Show search
+      }
     );
   }
-
+  closeSelection() {
+    delete this.session.searchItem;
+    //reload pins
+    this.map.mapChanges();
+  }
+//getSelection()
 
 }
