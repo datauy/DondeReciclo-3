@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   assets: "assets",
-  url: 'http://localhost:3000',
-  backend: "https://dr3b.dev.data.org.uy/api/",
+  url: 'http://localhost:8100',
+  backend: "https://backend.dondereciclo.uy/api/",
   ucenter: [-32.657689, -55.873808]
 };
 
