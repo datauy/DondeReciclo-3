@@ -19,6 +19,7 @@ export class Container extends Base {
     materials: number[];
     photos: string[];
     address: string;
+    class: string;
 }
 
 export class ContainerType extends Base {

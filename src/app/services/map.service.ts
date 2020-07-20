@@ -22,7 +22,6 @@ const iconSVG = `
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    sodipodi:docname="dr-pin.svg"
    inkscape:version="1.0 (6e3e5246a0, 2020-05-07)"
-   id="dr-marker"
    version="1.1"
    viewBox="0 0 10.583333 10.583333"
    height="40"
@@ -100,7 +99,21 @@ const iconUser = L.icon({
 });
 
 L.Marker.prototype.options.icon = iconDefault;
-
+L.CustomMarker = L.Marker.extend({
+  // Overwrite onAdd function
+  onAdd: function (map: L.Map) {
+    // Run original onAdd function
+    L.Marker.prototype.onAdd.call(this, map);
+    // Check if there's a class set in options
+    if (this.options.className) {
+      // Apply className to icon and shadow
+      L.DomUtil.addClass(this._icon, this.options.className);
+      //L.DomUtil.addClass(this._shadow, this.options.className);
+    }
+    // return instance
+    return this;
+  }
+});
 @Injectable({
   providedIn: 'root'
 })
@@ -164,7 +177,7 @@ export class MapService {
     }
     var markersLayer = []
     for (var i = 0; i < markers.length; i++) {
-      var newMarker = new L.marker([markers[i].latitude,markers[i].longitude], {container_pos: i})
+      var newMarker = new L.CustomMarker([markers[i].latitude,markers[i].longitude], {container_pos: i, className: "ion-color-"+markers[i].class })
       .on('click', this.clickPin, this); //L.bind(this.showPane, null, markers[i]))
       mapBounds.push([markers[i].latitude, markers[i].longitude]);
       markersLayer.push(newMarker);
