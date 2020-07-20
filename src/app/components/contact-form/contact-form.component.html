@@ -32,7 +32,11 @@
             <ion-label position="floating">Mensaje</ion-label>
             <ion-input formControlName="body" type="textarea"></ion-input>
           </ion-item>
-          <ion-button  size="large" type="submit" class="submit">Enviar</ion-button>
+          <ion-row class="ion-justify-content-center section-header">
+            <ion-col  size-md="7" size-lg="7" size-xs="12">
+              <ion-button  size="large" type="submit" class="submit">Enviar</ion-button>
+            </ion-col>
+          </ion-row>
         </form>
         <div *ngIf="success">
           <h3>Se ha enviado exitosamente</h3>

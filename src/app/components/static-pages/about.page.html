@@ -2,7 +2,7 @@
 <ion-content class="inner-scroll">
   <ion-grid>
     <ion-row class="ion-justify-content-center section-header">
-      <ion-col  size-md="9" size-lg="8" size-xs="12">
+      <ion-col  size-md="11" size-lg="10" size-xs="12">
         <div class="section-header">
           <h1>Sobre el proyecto</h1>
         </div>
@@ -28,9 +28,11 @@
         <h2>Contacto</h2>
         <p>Dependiendo del tema de tu consulta, es conveniente contactar a las distintas organizaciones que forman parte de este proyecto.</p>
         <p>Consultas sobre el proyecto en general o reciclaje:</p>
-        <ion-button size="default" [routerLink]='["/intro/contacto?subject=CEMPRE"]' target="_blank" class="submit">Contacto CEMPRE Uruguay</ion-button>
+        <ion-row class="ion-justify-content-center section-header">
+          <ion-col  size-md="7" size-lg="7" size-xs="12">
+            <ion-button size="large" [routerLink]='["/intro/contacto?subject=CEMPRE"]' target="_blank" class="submit">Contacto CEMPRE Uruguay</ion-button>
         <ion-buttons>
-            <span>Redes sociales CEMPRE Uruguay:</span>
+            <span>Redes sociales:</span>
             <ion-button href="https://twitter.com/CempreUy" target=_blank fill="clear">
               <ion-icon slot="icon-only"
                   name="dr-twitter"></ion-icon>
@@ -48,14 +50,14 @@
                   name="dr-linked-in"></ion-icon>
               </ion-button>
             </ion-buttons>
-        <p>Consultas sobre la herramienta:</p>
-        <ion-row class="ion-justify-content-center section-header">
-          <ion-col  size-md="6" size-lg="5" size-xs="12">
-            <ion-button  size="large" [routerLink]='["/intro/contacto?subject=DATA"]' target="_blank" class="submit">Contacto DATA Uruguay</ion-button>
           </ion-col>
         </ion-row>
+        <p>Consultas sobre la herramienta:</p>
+        <ion-row class="ion-justify-content-center section-header">
+          <ion-col  size-md="7" size-lg="7" size-xs="12">
+            <ion-button  size="large" [routerLink]='["/intro/contacto?subject=DATA"]' target="_blank" class="submit">Contacto DATA Uruguay</ion-button>
         <ion-buttons>
-            <span>Redes sociales DATA Uruguay:</span>
+            <span>Redes sociales:</span>
             <ion-button href="https://twitter.com/DATAuy" target=_blank fill="clear">
               <ion-icon slot="icon-only"
                 name="dr-twitter"></ion-icon>
@@ -72,12 +74,18 @@
               <ion-icon slot="icon-only"
                 name="dr-linked-in"></ion-icon>
             </ion-button>
-          </ion-buttons>
+        </ion-buttons>
+          </ion-col>
+       </ion-row>
         <h2>Logo y materiales para difusión</h2>
         <p>El logo del proyecto en sus versiones para fondos claros y oscuros y materiales de difusión para publicación en redes sociales u otros medios está disponible para descargar. La descarga incluye
           formato vectorial (SVG), así como en PNGs en alta definición.
         </p>
-        <ion-button  size="large" href="https://drive.google.com/open?id=1O5wmrN1P0rF6aytNaVi_OUr1zMOs1pj2" target="_blank" class="submit">Descargar materiales</ion-button>
+        <ion-row class="ion-justify-content-center section-header">
+          <ion-col  size-md="7" size-lg="7" size-xs="12">
+            <ion-button  size="large" href="https://drive.google.com/open?id=1O5wmrN1P0rF6aytNaVi_OUr1zMOs1pj2" target="_blank" class="submit">Descargar materiales</ion-button>
+          </ion-col>
+       </ion-row>
         <h2>Antecedentes</h2>
         <p>
           Una primera versión de esta herramienta, disponible en la web fue desarrollada y diseñada por <a href="https://twitter.com/agustinkry">Agustín Kryger</a> y <a href="https://twitter.com/hiroagustin">Agustín Díaz</a>,
@@ -157,12 +165,20 @@
         <p>
         Las imágenes en el siguiente enlace corresponden a eventos relacionados con este proyecto y están bajo una <a href="https://creativecommons.org/licenses/by/4.0/deed.es">Licencia Creative Commons Atribución 4.0 Internacional</a>. Las licencias CC aclaran expresamente que sus términos no cubren los derechos relacionados con la "privacidad ni otros derechos personales similares." Las "libertades" que se otorgan mediante el uso de licencias CC, no incluyen la potestad de publicar la imagen propia de terceros sin su autorización. Sin embargo, se entiende que éstas imágenes de eventos públicos están incluídas dentro de la excepción planteada en el último inciso del artículo 21 de la Ley 9.739 (Derechos de Autor): "<em>Es libre la publicación del retrato cuando se relacione con fines científicos, didácticos y, en general, culturales o con hechos o acontecimientos de interés público, o que se hubieren realizado en público"</em>. Por más información consultar: <a href="http://www.creativecommons.uy/uso-de-licencias-cc-en-obras-que-contengan-la-imagen-de-personas/?preview=true">Uso de licencias CC en obras que contengan imágenes de personas</a> (Creative Commons Uruguay).
         </p>
-        <ion-button  size="large" href="https://www.flickr.com/photos/datauy/collections/72157656766249026/" target="_blank" class="submit">Colección en Flickr</ion-button>
+        <ion-row class="ion-justify-content-center section-header">
+          <ion-col  size-md="7" size-lg="7" size-xs="12">
+            <ion-button  size="large" href="https://www.flickr.com/photos/datauy/collections/72157656766249026/" target="_blank" class="submit">Colección en Flickr</ion-button>
+          </ion-col>
+        </ion-row>
         <h2>Notas de prensa</h2>
         <p>
         Los siguientes son enlaces a notas de prensa, medios y fuentes en línea donde se menciona el proyecto. Sus contenidos no necesariamente reflejan correctamente nuestras ideas, principios u opiniones.
         </p>
-        <ion-button  size="large" href="https://raindrop.io/collection/10558883" target="_blank" class="submit">Ver notas de prensa</ion-button>
+        <ion-row class="ion-justify-content-center section-header">
+          <ion-col  size-md="7" size-lg="7" size-xs="12">
+            <ion-button  size="large" href="https://raindrop.io/collection/10558883" target="_blank" class="submit">Ver notas de prensa</ion-button>
+          </ion-col>
+        </ion-row>
       </ion-col>
     </ion-row>
   </ion-grid>
