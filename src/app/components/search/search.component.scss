@@ -39,18 +39,18 @@
         padding: 12px;
         flex-wrap: wrap;
         display: grid;
-        grid-template-columns: repeat(auto-fill,minmax(200px, 1fr));
-
+        grid-template-columns: repeat(auto-fill,minmax(230px, 1fr));
         & > ion-button {
           opacity: 1;
           margin: 6px;
           height: 40px;
+          min-width: 220px;
         }
       }
     }
   }
   #search-item {
-    margin: 20px 12px;
+    margin: 167px 12px;
     ion-item {
       --min-height: 55px;
       --background: var(--ion-color-base);
@@ -83,6 +83,9 @@
         height: inherit;
         --background: none;
         --border-left: 1px solid gray;
+        ion-icon {
+          color: var(--ion-color-contrast);
+        }
       }
       ion-button::before {
         content: "";

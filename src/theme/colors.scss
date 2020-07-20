@@ -198,6 +198,8 @@
   --ion-color-residuos-mezclados-tint: #a5ada2;
 }
 
+.ion-color-residuos-electronicos,
+.ion-color-residuos-voluminosos,
 .ion-color-residuos-mezclados {
   --ion-color-base: var(--ion-color-residuos-mezclados);
   --ion-color-base-rgb: var(--ion-color-residuos-mezclados-rgb);
