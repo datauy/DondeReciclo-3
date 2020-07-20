@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="156px" height="164px" viewBox="0 0 156 164" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 64 (93537) - https://sketch.com -->
+    <title>contenedor_carton_plesem</title>
+    <desc>Created with Sketch.</desc>
+    <g id="contenedor_carton_plesem" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(34.000000, 6.000000)">
+            <path d="M42,0 L83,0 C85.7614237,-5.07265313e-16 88,2.23857625 88,5 L88,36 L88,36 L37,36 L37,5 C37,2.23857625 39.2385763,5.07265313e-16 42,0 Z" id="Rectangle" fill="#DDB287"></path>
+            <polygon id="Fill-159" fill="#69B482" points="37 30 88 30 49 59.8212805 0.240106667 59"></polygon>
+            <polygon id="Rectangle-Copy" fill="#08492C" points="23.3762855 47 56.1011324 47 47 54 14.1011324 54"></polygon>
+            <polygon id="Rectangle-Copy" fill="#0D633E" points="23.3762855 47 56.1011324 47 52.3661315 50 19.4382685 50"></polygon>
+            <path d="M47,30 L88,30 L88,123.051911 C88,126.335256 86.6525559,129 86,129 L47,158 C47,158 47,129 47,123.051911 L47,30 Z" id="Fill-154" fill="#C69C6D" transform="translate(67.500000, 94.000000) rotate(-180.000000) translate(-67.500000, -94.000000) "></path>
+            <path d="M47.389747,59 C48.9603965,59 49,59 49,62.2713495 L49,154.725633 C49,157.996983 48.9603965,157.996983 47.389747,157.996983 L2.91602187,157.996983 C0,157.996983 0,158.327397 0,152.072866 L0,62.2713495 C0,59 0,59 1.61025304,59 L47.389747,59 Z" id="Fill-155" fill="#DDB287"></path>
+        </g>
+    </g>
+</svg>
