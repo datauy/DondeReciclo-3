@@ -52,6 +52,16 @@ export class ApiService<T=any> {
     ));
   }
   //
+  getMaterials(ids: []) :Material[] {
+    let res = [];
+    if (!this.materials) {
+      this.loadMaterials();
+    }
+    ids.forEach(id => res.push(this.materials[id]));
+    // console.log(res);
+    return res;
+  }
+  //
   loadMaterials(): Observable<Material[]> {
     return this.request.get(environment.backend + "materials").pipe(
       map((result: Material[]) => {
@@ -142,16 +152,6 @@ export class ApiService<T=any> {
         return result;
       }
     ));
-  }
-  //
-  getMaterials(ids: []) :Material[] {
-    let res = [];
-    if (!this.materials) {
-      this.loadMaterials();
-    }
-    ids.forEach(id => res.push(this.materials[id]));
-    // console.log(res);
-    return res;
   }
   //
   getContainersByMaterials(ids: number[], location?: number[]) {

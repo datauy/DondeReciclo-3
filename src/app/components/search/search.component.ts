@@ -63,11 +63,12 @@ export class SearchComponent implements OnInit {
   }
 
   itemSelected(item) {
+    this.session.isLoading = true;
     this.session.searchItem = item;
     let pos = null;
-    this.session.isLoading = true;
+    console.log(item);
     if (this.map.userPosition) {
-      pos = this.api.getContainersByMaterials([item.material_id], this.map.userPosition);
+      pos = this.map.userPosition;
     }
     this.api.getContainersByMaterials([item.material_id], pos).subscribe(
       (containers) => {
