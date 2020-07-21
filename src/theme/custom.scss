@@ -359,11 +359,12 @@ ion-app {
 }
 // app
 
-ion-split-pane.split-pane-visible {
-  ion-img.logo {
-    // @extend .hide;
-    // opacity: 0;
-  }
+
+ion-img.logo {
+  object-position: left;
+  width: inherit;
+  // @extend .hide;
+  // opacity:s 0;
 }
 
 body {

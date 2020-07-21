@@ -2,6 +2,7 @@
   ion-item {
     margin-top: 20px;
     --inner-padding-bottom: 20px;
+    width: 100%;
   }
   .image-wrapper {
     overflow: hidden;
@@ -32,7 +33,7 @@
   }
   .news-detail {
     .image-wrapper {
-      height: 220px;
+      height: 300px;
       margin-right: 0;
       border-radius: 0;
       img {
