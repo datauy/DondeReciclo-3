@@ -361,6 +361,8 @@ ion-app {
 
 ion-split-pane.split-pane-visible {
   ion-img.logo {
+    object-position: left;
+    width: inherit;
     // @extend .hide;
     // opacity: 0;
   }

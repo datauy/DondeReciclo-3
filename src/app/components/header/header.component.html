@@ -4,12 +4,12 @@
       <ion-button class="back-button" *ngIf="session.showBackButton || backButton" (click)="goBack()">
         <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
       </ion-button>
-      <ion-img class="logo ion-hide-lg-up" *ngIf="['map', 'full'].includes(display)"
+      <ion-img class="logo ion-hide-lg-up" style="object-position: left" *ngIf="['map', 'full'].includes(display)"
         routerLink="/"
         routerDirection="root"
         slot="start"
         src="assets/img/donde_reciclo.png"
-        alt="Donde Reciclo">
+        alt="Logo ¿Dónde Reciclo?">
       </ion-img>
     </ion-buttons>
     <ion-title>{{ title }}</ion-title>
