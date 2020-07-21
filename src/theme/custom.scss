@@ -447,6 +447,18 @@ accordion ion-list {
 
   img {
     margin: auto;
+    float: left;
+    width: 100%;
+    object-position: center;
+
+    &.loading {
+      height: 60vh;
+      margin-top: 5vh;
+    }
+    &.auspiciantes {
+      height: 25vh;
+      margin-bottom: 10vh;
+    }
   }
 }
 
