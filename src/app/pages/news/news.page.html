@@ -2,16 +2,16 @@
 <ion-content>
   <div class="section-header">
     <h1>Novedades</h1>
-    <h2 class="sub-light">A la hora de darle un correcto destino a los residuos que generamos existen varias alternativas en el Uruguay:</h2>
+    <h2 class="sub-light">Noticias e información relevante sobre clasificación y reciclaje.</h2>
   </div>
   <ion-list>
     <ion-grid>
       <ion-row class="ion-justify-content-center" *ngFor="let article of news">
         <ion-item>
-          <ion-col class="image-wrapper" size-md="3" size-lg="3" size-xs="4">
+          <ion-col class="image-wrapper" size-md="4" size-lg="4" size-xs="4">
             <img src="{{article.images[0]}}" />
           </ion-col>
-          <ion-col size-md="7" size-lg="7" size-xs="8">
+          <ion-col size-md="8" size-lg="8" size-xs="8">
             <ion-row>
               <h3 [innerHTML]="article.title"></h3>
             </ion-row>
