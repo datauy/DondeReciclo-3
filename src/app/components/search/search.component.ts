@@ -14,11 +14,11 @@ import { SessionService } from 'src/app/services/session.service';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  @ViewChild("searchbar", { static: false }) private searchBarAuto: AutoCompleteComponent;
+//@ViewChild("searchbar", { static: false }) private searchBarAuto: AutoCompleteComponent;
   // @ViewChild(".searchbar-input", { static: false }) private searchBarIonic: HTMLInputElement;
 
   backdrop = document.querySelector('custom-backdrop');
-  searchBarIonic = document.querySelector('.searchbar-input') as HTMLInputElement;
+  searchBarIonic: HTMLInputElement;
   // searchBarIonic: unknown;
   showBackdrop = false;
   searchVisibility = false;
@@ -56,10 +56,8 @@ export class SearchComponent implements OnInit {
   }
 
   searchSuggestion(predefined){
-    this.searchBarIonic = document.querySelector('.searchbar-input') as HTMLInputElement;
-    this.searchBarAuto.setFocus();
+    //this.searchBarIonic = document.querySelector('.searchbar-input') as HTMLInputElement;
     this.itemSelected(predefined);
-    this.searchBarIonic.value = predefined.name;
   }
 
   itemSelected(item) {
@@ -70,12 +68,14 @@ export class SearchComponent implements OnInit {
     if (this.map.userPosition) {
       pos = this.map.userPosition;
     }
+    this.searchBarIonic = document.querySelector('.searchbar-input');
     this.api.getContainersByMaterials(item.type+"="+item.id, pos).subscribe(
       (containers) => {
         if (this.map.loadMarkers(containers, true) == 0){
           console.log('no markers!');
         }
         this.hideSearch('item selected');
+        this.searchBarIonic.value = '';
         setTimeout( () => {
           this.session.isLoading = false;
         }, 500);
