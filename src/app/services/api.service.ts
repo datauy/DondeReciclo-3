@@ -7,6 +7,7 @@ import { File } from '@ionic-native/file/ngx';
 
 import { ContainerType, Container, Material, SearchParams, Program } from "src/app/models/basic_models.model";
 import { News } from "src/app/models/news.model";
+import { SessionService } from 'src/app/services/session.service';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,7 @@ export class ApiService<T=any> {
   //Search property for non results
   constructor(
     private request: HttpClient,
+    public session: SessionService,
     private file: File
   ) {}
   httpOptions = {
@@ -175,12 +177,13 @@ export class ApiService<T=any> {
   /***********************/
   //
   getResults(str: string){
-    if (str.length < 2) {
+    if ( str != undefined && str.length >= 3 && ( this.session.searchItem == undefined || str != this.session.searchItem.name ) ) {
+      this.suggestVisibility = false;
+    }
+    else {
       this.suggestVisibility = true;
       this.noResultMessage = false;
-      return false;
-    }else{
-      this.suggestVisibility = false;
+      return [];
     }
     return  this.request.get(environment.backend + "search?q="+str).pipe(map(
       (result: any[]) => {
