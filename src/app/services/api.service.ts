@@ -40,7 +40,7 @@ export class ApiService<T=any> {
     // console.log("API loading initial");
     return this.loadContainerTypes().pipe(
       switchMap( () => this.loadMaterials() ),
-      switchMap( () => this.loadPredefinedSearchs() ),
+      switchMap( () => this.loadPredefinedSearch() ),
     );
   }
   //
@@ -77,7 +77,7 @@ export class ApiService<T=any> {
     );
   }
   //
-  loadPredefinedSearchs(): Observable<SearchParams[]> {
+  loadPredefinedSearch(): Observable<SearchParams[]> {
     this.suggestVisibility = true;
     this.noResultMessage = false;
     return this.request.get(environment.backend + "search_predefined").pipe(
@@ -146,19 +146,24 @@ export class ApiService<T=any> {
       }
     ));
   }
-  getContainers4Materials(bbox: string[], ids: number[]) {
-    return  this.request.get(environment.backend + "containers_bbox4materials?sw="+bbox[0]+"&ne="+bbox[1]+"&materials="+ids.join(',')).pipe(map(
+  getContainers4Materials(bbox: string[], query: string) {
+    return  this.request.get(environment.backend + "containers_bbox4materials?sw="+bbox[0]+"&ne="+bbox[1]+"&"+query).pipe(map(
       (result: Container[]) => {
         return result;
       }
     ));
   }
   //
-  getContainersByMaterials(ids: number[], location?: number[]) {
+  getContainersByMaterials(query: string, location?: number[]) {
+    var url = environment.backend + "containers4materials?"+query;
     if ( typeof location == 'undefined' || location == null ) {
       location = environment.ucenter;
     }
-    return  this.request.get(environment.backend + "containers4materials?materials="+ids.join(',')+"&lat="+location[0]+"&lon="+location[1]).pipe(map(
+    else {
+      // TODO: Definir comportamiento en base a caso de uso ya que cambia la query del back también
+    }
+    url += "&lat="+location[0]+"&lon="+location[1];
+    return  this.request.get(url).pipe(map(
       (result: Container[]) => {
         return result;
       }
@@ -203,11 +208,13 @@ export class ApiService<T=any> {
       option.material_id = 5;
     }
     res.push({
-      class: this.materials[option.material_id].class,
+      id: option.id,
+      type: option.type,
       name: option.name,
-      icon: this.materials[option.material_id].icon,
       material_id: option.material_id,
-      deposition: option.deposition
+      class: this.materials[option.material_id].class,
+      icon: this.materials[option.material_id].icon,
+      deposition: option.deposition,
     });
   });
   return res;

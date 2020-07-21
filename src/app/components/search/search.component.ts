@@ -70,7 +70,7 @@ export class SearchComponent implements OnInit {
     if (this.map.userPosition) {
       pos = this.map.userPosition;
     }
-    this.api.getContainersByMaterials([item.material_id], pos).subscribe(
+    this.api.getContainersByMaterials(item.type+"="+item.id, pos).subscribe(
       (containers) => {
         if (this.map.loadMarkers(containers, true) == 0){
           console.log('no markers!');

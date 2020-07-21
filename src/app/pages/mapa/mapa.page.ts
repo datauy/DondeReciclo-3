@@ -172,7 +172,7 @@ export class MapaPage implements OnInit {
 
   loadNearbyContainers(fly: boolean) {
     if ( this.session.searchItem != undefined){
-      this.api.getContainers4Materials(this.map.getBoundingCoords(), [this.session.searchItem.material_id]).subscribe((containers) => {
+      this.api.getContainers4Materials(this.map.getBoundingCoords(), this.session.searchItem.type+"="+this.session.searchItem.id).subscribe((containers) => {
         this.map.loadMarkers(containers, fly);
       });
     }
