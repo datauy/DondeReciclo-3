@@ -12,18 +12,22 @@ export class Container extends Base {
     program_id: number;
     latitude: number;
     longitude: number;
+    site: string;
+    address: string;
     location: string;
+    state: string;
     type_id: number;
     public: boolean;
     materials: number[];
     wastes: number[];
     photos: string[];
-    address: string;
     class: string;
     type_icon: string;
     program_icon: string;
     program: string;
     receives: Material[];
+    reception_conditions: string;
+    receives_no: string;
 }
 
 export class ContainerType extends Base {
