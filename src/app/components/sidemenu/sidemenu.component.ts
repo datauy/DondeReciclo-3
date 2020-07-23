@@ -16,7 +16,7 @@ export class SidemenuComponent implements OnInit {
   public appPages = [
     {
       title: 'Novedades',
-      desc: 'Clasificación y reciclaje en Uruguay',
+      desc: 'Sobre clasificación y reciclaje',
       url: 'novedades',
       icon: 'dr-newspaper'
     },
