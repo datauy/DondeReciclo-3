@@ -45,6 +45,8 @@ export class AppComponent {
     });
   }
 
+    // La cifra al final de este bloque es la cantidad de milisegundos del loading, cargador o splash
+
   ngAfterViewInit() {
     setTimeout( () => {
       // this.session.set('isLoading', 'false');

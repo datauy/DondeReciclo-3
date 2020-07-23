@@ -129,7 +129,7 @@ export class MapaPage implements OnInit {
           },
           middle: {
             enabled: true,
-            offset: window.innerHeight*.8
+            offset: window.innerHeight*.7
           },
         },
         // onDidPresent: () => this.breakPointMapCupertino(),
