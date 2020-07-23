@@ -44,7 +44,7 @@
 
 </div>
 <div id="search-item" *ngIf="session.searchItem">
-  <ion-item lines="none" [ngClass]="'ion-color-' + session.searchItem.class">
+  <ion-item lines="none" [color]="session.searchItem.class">
     <ion-icon
     class="left"
     [name]="'dr-' + session.searchItem.class">

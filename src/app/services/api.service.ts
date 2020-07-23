@@ -54,7 +54,7 @@ export class ApiService<T=any> {
     ));
   }
   //
-  getMaterials(ids: []) :Material[] {
+  getMaterials(ids: number[]) :Material[] {
     let res = [];
     if (!this.materials) {
       this.loadMaterials();
@@ -63,17 +63,24 @@ export class ApiService<T=any> {
     // console.log(res);
     return res;
   }
+  getWastes(ids: number[]) :Observable<Material[]>  {
+    return this.request.get(environment.backend + "wastes?ids=" + ids.join()).pipe(
+      map( (result: Material[]) => {
+        return result;
+      })
+    );
+  }
   //
   loadMaterials(): Observable<Material[]> {
     return this.request.get(environment.backend + "materials").pipe(
       map((result: Material[]) => {
         //Check images
-        for (let key in result) {
+        /*for (let key in result) {
           // TODO: Check type
           if (result[key].icon) {
             this.downloadFile(result[key].icon, 'dr-'+result[key].class+'.svg', 'custom-icons');
           }
-        }
+        }*/
         return this.materials = result;
       })
     );
@@ -98,6 +105,13 @@ export class ApiService<T=any> {
   }
   loadPrograms() {
     return  this.request.get(environment.backend + "programs").pipe(map(
+      (result: Program[]) => {
+        return result;
+      }
+    ));
+  }
+  loadProgramSummary() {
+    return  this.request.get(environment.backend + "programs_sum").pipe(map(
       (result: Program[]) => {
         return result;
       }
@@ -130,6 +144,14 @@ export class ApiService<T=any> {
     /**********************/
    /*        Map         */
   /**********************/
+  //
+  getContainer(id: number) {
+    return  this.request.get(environment.backend + "container/"+id).pipe(map(
+      (result: Container) => {
+        return result;
+      }
+    ));
+  }
   //
   getNearbyContainers(location?: [number, number]) {
     if (typeof location == 'undefined') {

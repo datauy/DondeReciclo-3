@@ -44,6 +44,9 @@ export class SearchComponent implements OnInit {
   }
   showSearch(event) {
     this.searchVisibility = true;
+    /*let clearButton = document.querySelector('.searchbar-clear-button') as HTMLElement;
+    console.log(clearButton);
+    clearButton.addEventListener("click", (event: Event) => this.hideSearch(event) );*/
   }
 
   hideSearch(event) {
@@ -56,7 +59,6 @@ export class SearchComponent implements OnInit {
   }
 
   searchSuggestion(predefined){
-    //this.searchBarIonic = document.querySelector('.searchbar-input') as HTMLInputElement;
     this.itemSelected(predefined);
   }
 

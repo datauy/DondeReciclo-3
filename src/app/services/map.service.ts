@@ -135,29 +135,30 @@ export class MapService {
   }
 
   loadMap() {
-    this.animating = true;
-    this.map = new L.Map("map", {minZoom:7}).setView([-32.657689, -55.873808], 15);
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-    }).addTo(this.map);
-    if ( this.userPosition ) {
-      this.userMarker = L.marker(this.userPosition, {icon: iconUser} ).addTo(this.map);
+    if ( this.map == undefined ) {
+      this.animating = true;
+      this.map = new L.Map("map", {minZoom:7}).setView([-32.657689, -55.873808], 15);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+      }).addTo(this.map);
+      if ( this.userPosition ) {
+        this.userMarker = L.marker(this.userPosition, {icon: iconUser} ).addTo(this.map);
+      }
+      //Create user marker upon click
+      this.map.on("click", <LeafletMouseEvent>(e) => {
+        if (this.userMarker) { // check
+          this.map.removeLayer(this.userMarker); // remove
+        }
+        this.userPosition = [e.latlng.lat, e.latlng.lng];
+        this.userMarker = L.marker(this.userPosition, {icon: iconUser} ).addTo(this.map); // add the marker onclick
+        if (this.route) {
+          this.route.spliceWaypoints(0, 1, e.latlng);
+        }
+      });
+      this.map.on('zoomend', this.mapChanges, this);
+      this.map.on('dragend', this.mapChanges, this);
+      this.map.once('moveend', this.toggleAnimation, this);
     }
-    //Create user marker upon click
-    this.map.on("click", <LeafletMouseEvent>(e) => {
-      if (this.userMarker) { // check
-        this.map.removeLayer(this.userMarker); // remove
-      }
-      this.userPosition = [e.latlng.lat, e.latlng.lng];
-      this.userMarker = L.marker(this.userPosition, {icon: iconUser} ).addTo(this.map); // add the marker onclick
-      if (this.route) {
-        this.route.spliceWaypoints(0, 1, e.latlng);
-      }
-    });
-    this.map.on('zoomend', this.mapChanges, this);
-    this.map.on('dragend', this.mapChanges, this);
-    console.log('End load map');
-    this.map.once('moveend', this.toggleAnimation, this);
     return true;
   }
 
@@ -279,4 +280,15 @@ export class MapService {
   get mapChanged() {
     return this._mapChangeSub.asObservable();
   }
+  //Create additional Control placeholders, to group all control buttons
+  /*addControlPlaceholders(map: L.Map) {
+   const corners = map._controlCorners;
+   const l = 'leaflet-';
+   const toolsPanel = map._controlContainer;
+   function createCorner(vSide, hSide) {
+       const className = l + vSide + ' ' + l + hSide;
+       corners[vSide + hSide] = L.DomUtil.create('div', className, toolsPanel);
+   }
+   createCorner('verticalcenter', 'left');
+ }*/
 }
