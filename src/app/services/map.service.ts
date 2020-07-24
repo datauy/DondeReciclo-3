@@ -92,7 +92,7 @@ const iconDefault = L.divIcon({
 const iconUser = L.icon({
   iconUrl: 'assets/custom-icons/dr-user-gps.svg',
   iconSize: [50, 50],
-  iconAnchor: [25, 50],
+  iconAnchor: [25, 25],
   popupAnchor: [1, -34],
   tooltipAnchor: [16, -28],
   shadowSize: [41, 41]
