@@ -64,9 +64,8 @@ export class SearchComponent implements OnInit {
 
   itemSelected(item) {
     this.session.isLoading = true;
-    this.session.searchItem = item;
     let pos = null;
-    console.log(item);
+    this.session.showSearchItem = true;
     if (this.map.userPosition) {
       pos = this.map.userPosition;
     }
@@ -74,7 +73,14 @@ export class SearchComponent implements OnInit {
     this.api.getContainersByMaterials(item.type+"="+item.id, pos).subscribe(
       (containers) => {
         if (this.map.loadMarkers(containers, true) == 0){
-          console.log('no markers!');
+          this.session.searchItem = {
+            class: 'warnings',
+            name: 'No hay resultados para: '+item.name,
+            deposition: 'No hay contenedores a menos de 300 km. de su ubicación'
+          };
+        }
+        else {
+          this.session.searchItem = item;
         }
         this.hideSearch('item selected');
         this.searchBarIonic.value = '';

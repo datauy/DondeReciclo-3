@@ -93,5 +93,20 @@
         height: 29px;
       }
     }
+    .back-button {
+      --background: var(--vidrio);
+      --border-radius: 26px;
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      left: 14px;
+      top: 14px;
+      z-index: 500;
+      --box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2);
+      ion-icon {
+        color: var(--pale-olive-green);
+        height: 24px
+      }
+    }
   }
 }

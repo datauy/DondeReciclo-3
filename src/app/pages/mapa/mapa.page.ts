@@ -62,6 +62,9 @@ export class MapaPage implements OnInit {
   }
 
   ionViewDidEnter() {
+    if ( this.session.searchItem != undefined ) {
+      this.session.showSearchItem = true;
+    }
     this.map.loadMap();
     this.geo.getCurrentPosition().then( (resp) => {
       this.map.userPosition = [resp.coords.latitude, resp.coords.longitude];
@@ -70,18 +73,8 @@ export class MapaPage implements OnInit {
     });
     this.loadNearbyContainers(true);
   }
-
-  cupertinoShow(){
-    this.session.cupertinoState = 'cupertinoOpen';
-    this.map.flyToBounds(
-      [[this.map.currentContainer.latitude, this.map.currentContainer.longitude],
-      this.map.userPosition],
-      {paddingBottomRight: [0,400]}
-    );
-  }
-  cupertinoHide(){
-    this.session.cupertinoState = 'cupertinoClosed';
-    this.map.flyToBounds(this.map.currentBounds);
+  ionViewWillLeave() {
+    this.session.showSearchItem = false;
   }
 
   // dragMapCupertino(){
@@ -106,10 +99,11 @@ export class MapaPage implements OnInit {
   // }
   loadInfoPane() {
     var initPane = 'middle';
+    var topBreak = window.innerHeight*.9;
     if ( window.innerWidth >= 560 ) {
       initPane = 'top';
+      topBreak = window.innerHeight*.7;
     }
-    console.log('initialBreak: '+initPane);
     this.infoPane = new CupertinoPane(
       '.cupertino-pane', // Pane container selector
       {
@@ -125,7 +119,7 @@ export class MapaPage implements OnInit {
         breaks: {
           top: {
             enabled: true,
-            offset: window.innerHeight*.9
+            offset: topBreak
           },
           middle: {
             enabled: true,
@@ -138,6 +132,20 @@ export class MapaPage implements OnInit {
         onWillDismiss: () => this.cupertinoHide(),
       }
     );
+  }
+  cupertinoShow(){
+    this.session.showSearchItem = false;
+    this.session.cupertinoState = 'cupertinoOpen';
+    this.map.flyToBounds(
+      [[this.map.currentContainer.latitude, this.map.currentContainer.longitude],
+      this.map.userPosition],
+      {paddingBottomRight: [0,400]}
+    );
+  }
+  cupertinoHide(){
+    this.session.showSearchItem = true;
+    this.session.cupertinoState = 'cupertinoClosed';
+    this.map.flyToBounds(this.map.currentBounds);
   }
   showPane() {
     this.api.getContainer(this.map.currentContainer.id).subscribe((container) => {
@@ -154,7 +162,9 @@ export class MapaPage implements OnInit {
       }
     });
   }
-
+  hidePane() {
+    this.infoPane.destroy({animate: true});
+  }
   loadNearbyContainers(fly: boolean) {
     if ( this.session.searchItem != undefined){
       this.api.getContainers4Materials(this.map.getBoundingCoords(), this.session.searchItem.type+"="+this.session.searchItem.id).subscribe((containers) => {

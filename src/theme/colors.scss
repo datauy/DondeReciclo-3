@@ -42,8 +42,10 @@
   --ion-color-step-600: var(--vidrio);
 }
 
-.pale-olive-green{
+.ion-color-warnings,
+.pale-olive-green {
   color: var(--pale-olive-green);
+  --ion-color-base: var(--pale-olive-green);
 }
 
 :root {

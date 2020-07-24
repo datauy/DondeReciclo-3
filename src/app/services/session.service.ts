@@ -24,6 +24,7 @@ export class SessionService {
   country: string = "Uruguay";
 
   searchItem: any;
+  showSearchItem: boolean = true;
 
   @ViewChild("tabsNav", {
     static: false

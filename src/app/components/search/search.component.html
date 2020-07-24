@@ -43,7 +43,7 @@
   </ng-template>
 
 </div>
-<div id="search-item" *ngIf="session.searchItem">
+<div id="search-item" *ngIf="session.searchItem && session.showSearchItem">
   <ion-item lines="none" [color]="session.searchItem.class">
     <ion-icon
     class="left"

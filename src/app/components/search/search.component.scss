@@ -50,9 +50,12 @@
     }
   }
   #search-item {
+    transition: 500ms ease-in-out;
     margin: 167px 12px;
     ion-item {
       --min-height: 55px;
+      --max-height: inherit;
+      height: inherit;
       --background: var(--ion-color-base);
       --padding-top: 10px;
       --padding-bottom: 15px;
@@ -60,12 +63,13 @@
       --padding-end: 20px;
       --border-radius: 6px;
       .item-text {
-        position: absolute;
+        position: relative;
         left: 53px;
-        max-width: calc(100% - 90px);
+        max-width: calc(100% - 92px);
         word-wrap: break-word;
         ion-note,
         ion-label {
+          white-space: normal;
           position: relative;
           --color: var(--ion-color-contrast);
         }
