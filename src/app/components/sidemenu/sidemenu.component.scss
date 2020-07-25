@@ -69,11 +69,17 @@
       --padding-bottom: 16px;
       background: none;
       margin: 0;
+      h5{
+        color: white;
+      }
 
       &.active-item {
         background: white;
         border-left: none;
         h4{
+          color:  var(--pale-olive-green);
+        }
+        h5{
           color:  var(--pale-olive-green);
         }
         p{
@@ -84,6 +90,9 @@
         }
         ion-icon{
           color: var(--pale-olive-green);
+        }
+        &.inicio{
+          visibility: hidden;
         }
       }
       h4{
