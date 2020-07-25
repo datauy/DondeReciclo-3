@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Container } from "src/app/models/basic_models.model";
-
+import { environment } from 'src/environments/environment';
 import "leaflet";
 import "leaflet-routing-machine";
 
@@ -134,10 +134,13 @@ export class MapService {
   constructor() {
   }
 
-  loadMap() {
+  loadMap(center?: number[]) {
     if ( this.map == undefined ) {
+      if ( center == undefined ) {
+        center = environment.ucenter;
+      }
       this.animating = true;
-      this.map = new L.Map("map", {minZoom:7}).setView([-32.657689, -55.873808], 15);
+      this.map = new L.Map("map", {minZoom:7}).setView(center, 13);
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
       }).addTo(this.map);
@@ -206,7 +209,6 @@ export class MapService {
       }).addTo(this.map);
       this.userMarker.bindPopup('Elegir esta ubicación').openPopup();
         //this.getAddress(e.latitude, e.longitude);
-      console.log(e.latitude, e.longitude);
       this.userMarker.on("dragend", () => {
         let userPos = this.userMarker.getLatLng();
         this.userPosition = [ userPos[0], userPos[1] ] ;
@@ -239,7 +241,6 @@ export class MapService {
   }
   flytomarker(latlong: [number, number], zoom: number){
     this.animating = true;
-    console.log('Animation starts');
     this.map.flyTo(latlong, zoom);
     this.map.once('moveend', this.toggleAnimation, this);
     // Coding for set bounds in pixel from top instead of center of map for cuppertino open.
@@ -252,7 +253,6 @@ export class MapService {
   }
   flyToBounds(mapBounds: [number, number][], options?: {}) {
     this.animating = true;
-    console.log('Animation boundsstarts');
     this.map.flyToBounds(mapBounds, options);
     this.map.once('moveend', this.toggleAnimation, this);
   }
@@ -270,10 +270,8 @@ export class MapService {
 
   //MAP behavior
   mapChanges(){
-    //Si no es una animación auto
-    console.log('Map animation...'+this.animating);
+    //Si no es una animación auto);
     if ( !this.animating && this.animating != undefined ) {
-      console.log('Map changes...');
       this._mapChangeSub.next(true);
     }
   }

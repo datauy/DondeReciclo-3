@@ -28,9 +28,9 @@
     }
 
     #suggestions {
-      z-index: 1020;
+      z-index: 500;
       position: relative;
-
+      overflow-y: auto;
       ion-list-header {
         --color: white;
       }
@@ -54,7 +54,7 @@
     margin: 167px 12px;
     ion-item {
       --min-height: 55px;
-      --max-height: inherit;
+      max-height: 122px;
       height: inherit;
       --background: var(--ion-color-base);
       --padding-top: 10px;

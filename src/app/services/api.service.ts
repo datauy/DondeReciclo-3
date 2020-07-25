@@ -18,7 +18,6 @@ export class ApiService<T=any> {
   materials: Material[];
   predefinedSearch: SearchParams[];
   suggestVisibility: boolean;
-  noResultMessage: boolean;
   remoteFile: any;
 
   // Search
@@ -88,7 +87,6 @@ export class ApiService<T=any> {
   //
   loadPredefinedSearch(): Observable<SearchParams[]> {
     this.suggestVisibility = true;
-    this.noResultMessage = false;
     return this.request.get(environment.backend + "search_predefined").pipe(
       map((result: SearchParams[]) => {
         return this.predefinedSearch = this.formatSearchOptions(result);
@@ -204,22 +202,16 @@ export class ApiService<T=any> {
     }
     else {
       this.suggestVisibility = true;
-      this.noResultMessage = false;
-      return [];
+      return false;
     }
     return  this.request.get(environment.backend + "search?q="+str).pipe(map(
       (result: any[]) => {
         if (result.length) {
-          this.noResultMessage = false;
-          // if (result.length > 1) {
-          //   this.suggestVisibility = false;
-          // }
           return this.formatSearchOptions(result);
         }
         else {
           this.suggestVisibility = true;
-          this.noResultMessage = true;
-          return [];
+          return false;
         }
       }
     ));

@@ -9,6 +9,7 @@ import { CupertinoPane } from 'cupertino-pane';
 import { ApiService } from "src/app/services/api.service";
 import { MapService } from "src/app/services/map.service";
 import { SessionService } from 'src/app/services/session.service';
+import { environment } from 'src/environments/environment';
 //import { IonRouterOutlet } from '@ionic/angular';
 //import { createAnimation } from '@ionic/core';
 
@@ -19,11 +20,11 @@ import { SessionService } from 'src/app/services/session.service';
 })
 export class MapaPage implements OnInit {
 
-  wheight = window.innerHeight*.7;
   address: string[];
   container = {} as Container;
   infoPane: CupertinoPane;
   programs_sum: Program[];
+  uLocation = false as boolean;
 
   infoPaneEl: HTMLDivElement;
 
@@ -52,7 +53,7 @@ export class MapaPage implements OnInit {
       }
     );
   }
-
+  //
   ngOnInit() {
     // this.app = document.querySelector('app-search');
     this.api.loadProgramSummary().subscribe((programs) => {
@@ -60,19 +61,46 @@ export class MapaPage implements OnInit {
     });
     this.loadInfoPane();
   }
-
+  //
   ionViewDidEnter() {
     if ( this.session.searchItem != undefined ) {
       this.session.showSearchItem = true;
     }
-    this.map.loadMap();
-    this.geo.getCurrentPosition().then( (resp) => {
-      this.map.userPosition = [resp.coords.latitude, resp.coords.longitude];
-    }).catch((error) => {
-      console.log('Error getting location', error);
-    });
-    this.loadNearbyContainers(true);
+    if ( this.map.userPosition == undefined ) {
+      this.geo.getCurrentPosition().then( (resp) => {
+        this.uLocation = true;
+        this.map.userPosition = [resp.coords.latitude, resp.coords.longitude];
+        //this.map.loadMap([resp.coords.latitude, resp.coords.longitude]);
+        this.loadNearbyContainers(false);
+        /*this.api.getNearbyContainers([resp.coords.latitude, resp.coords.longitude]).subscribe(
+          (containers) => {
+            this.map.loadMarkers(containers, true);
+          }
+        );*/
+        this.map.flytomarker(this.map.userPosition, 14);
+      }).catch((error) => {
+        console.log('Error getting location', error);
+        this.map.loadMap();
+        this.loadNearbyContainers(false);
+        this.map.flytomarker([environment.ucenter[0],environment.ucenter[1]] , 14);
+      });
+    }
+    else {
+      this.uLocation = true;
+      this.map.loadMap(this.map.userPosition);
+      this.loadNearbyContainers(false);
+      this.map.flytomarker(this.map.userPosition, 14);
+    }
+    //Wait 3 seconds for user location and start loading LOad nearbymap
+    setTimeout( async () => {
+      if ( !this.uLocation ) {
+        this.map.loadMap();
+        this.loadNearbyContainers(false);
+        this.map.flytomarker([environment.ucenter[0],environment.ucenter[1]] , 14);
+      }
+    }, 3000);
   }
+  //
   ionViewWillLeave() {
     this.session.showSearchItem = false;
   }
