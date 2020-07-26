@@ -4,14 +4,9 @@
   <ion-button class="back-button" *ngIf="session.cupertinoState == 'cupertinoOpen'" (click)="hidePane()">
     <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
   </ion-button>
-  <!-- <ion-fab vertical="top"
-    horizontal="end"
-    slot="fixed">
-    <ion-fab-button color="transparent">
-      <ion-icon name="locate-outline"
-        (click)="locatePosition()"></ion-icon>
-    </ion-fab-button>
-  </ion-fab> -->
+  <ion-button color="transparent" class="map-locate" (click)="geolocate()">
+    <ion-icon name="locate"></ion-icon>
+  </ion-button>
 
   <div id="map"
     style="height:100%; width: 100%;"

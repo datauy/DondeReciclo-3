@@ -209,6 +209,31 @@
   .leaflet-control-container .leaflet-bottom {
     z-index: 400;
   }
+  .leaflet-left .leaflet-control {
+    margin-left: 12px;
+  }
+  .leaflet-touch .leaflet-bar,
+  .leaflet-bar {
+    box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2);
+    border: none;
+    border-radius: 8px;
+    margin-left: 12px;
+    a, a:hover {
+      width: 39px;
+      height: 39px;
+      line-height: 39px;
+      font-size: 30px;
+      color: var(--greyish-brown);
+    }
+    a:first-child {
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+    a:last-child {
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+    }
+  }
 }
 /************ END ROOT *************/
 /**********************************/
@@ -547,8 +572,6 @@ ion-app {
   &.contacto{}
   &.sobre-el-proyecto{}
 }
-// app
-
 
 ion-img.logo {
   object-position: left;
@@ -556,21 +579,6 @@ ion-img.logo {
   // @extend .hide;
   // opacity:s 0;
 }
-
-body {
-  // background: var(--dark-sea-green);
-}
-
-.leaflet-control-container {
-  .leaflet-top {
-    top: 30px;
-
-    &.expanded {
-      top: 160px;
-    }
-  }
-}
-
 
 /**********************************/
 /*        SEARCH COMPONENT       */

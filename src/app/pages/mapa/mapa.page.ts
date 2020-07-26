@@ -67,23 +67,7 @@ export class MapaPage implements OnInit {
       this.session.showSearchItem = true;
     }
     if ( this.map.userPosition == undefined ) {
-      this.geo.getCurrentPosition().then( (resp) => {
-        this.uLocation = true;
-        this.map.userPosition = [resp.coords.latitude, resp.coords.longitude];
-        //this.map.loadMap([resp.coords.latitude, resp.coords.longitude]);
-        this.loadNearbyContainers(false);
-        /*this.api.getNearbyContainers([resp.coords.latitude, resp.coords.longitude]).subscribe(
-          (containers) => {
-            this.map.loadMarkers(containers, true);
-          }
-        );*/
-        this.map.flytomarker(this.map.userPosition, 14);
-      }).catch((error) => {
-        console.log('Error getting location', error);
-        this.map.loadMap();
-        this.loadNearbyContainers(false);
-        this.map.flytomarker([environment.ucenter[0],environment.ucenter[1]] , 14);
-      });
+      this.gotoLocation();
     }
     else {
       this.uLocation = true;
@@ -193,6 +177,7 @@ export class MapaPage implements OnInit {
   hidePane() {
     this.infoPane.destroy({animate: true});
   }
+  //
   loadNearbyContainers(fly: boolean) {
     if ( this.session.searchItem != undefined){
       this.api.getContainers4Materials(this.map.getBoundingCoords(), this.session.searchItem.type+"="+this.session.searchItem.id).subscribe((containers) => {
@@ -205,7 +190,27 @@ export class MapaPage implements OnInit {
       });
     }
   }
-
+  //
+  gotoLocation() {
+    this.geo.getCurrentPosition().then( (resp) => {
+      this.uLocation = true;
+      this.map.userPosition = [resp.coords.latitude, resp.coords.longitude];
+      //this.map.loadMap([resp.coords.latitude, resp.coords.longitude]);
+      //this.loadNearbyContainers(false);
+      this.api.getNearbyContainers(5, [resp.coords.latitude, resp.coords.longitude]).subscribe(
+        (containers) => {
+          this.map.loadMarkers(containers, false);
+        }
+      );
+      this.map.flytomarker(this.map.userPosition, 15);
+    }).catch((error) => {
+      console.log('Error getting location', error);
+      this.map.loadMap();
+      this.loadNearbyContainers(true);
+      //this.map.flytomarker([environment.ucenter[0],environment.ucenter[1]] , 14);
+    });
+  }
+  //
   formatContainer(container: Container) {
     container.type_icon = this.api.container_types[container.type_id].icon;
     container.program_icon = this.programs_sum[container.program_id].icon;
@@ -219,6 +224,10 @@ export class MapaPage implements OnInit {
     else {
       this.container.receives = this.api.getMaterials(container.materials);
     }
+  }
+  geolocate() {
+    console.log('GEOLOCATION');
+    this.gotoLocation();
   }
   getAddress(lat: number, long: number) {
     let options: NativeGeocoderOptions = {

@@ -151,11 +151,11 @@ export class ApiService<T=any> {
     ));
   }
   //
-  getNearbyContainers(location?: [number, number]) {
+  getNearbyContainers(radius: number, location?: [number, number]) {
     if (typeof location == 'undefined') {
       location = [-32.657689, -55.873808];
     }
-    return  this.request.get(environment.backend + "containers_nearby?lat="+location[0]+"&lon="+location[1]).pipe(map(
+    return  this.request.get(environment.backend + "containers_nearby?lat="+location[0]+"&lon="+location[1]+"radius="+radius).pipe(map(
       (result: Container[]) => {
         return result;
       }
