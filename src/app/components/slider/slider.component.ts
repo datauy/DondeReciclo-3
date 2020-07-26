@@ -55,9 +55,9 @@ export class SliderComponent implements OnInit {
 
   goApp(permanent: boolean){
     if (permanent) {
-      //store data
+      //Ahora todas van a permanente
     }
-    this.session.set('showSlider', false);
+    this.session.watchSlider(false);
   }
   nextSlide() {
     this.slides.getActiveIndex().then(
