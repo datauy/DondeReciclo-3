@@ -164,7 +164,32 @@
       }
     }
   }
-  //hide for now!
+  /***********************************/
+  /*           SLIDERS              */
+  /*********************************/
+  .swiper-prev,
+  .swiper-next {
+    position: absolute;
+    top: 25px;
+    width: calc(3vw + 36px);
+    height: calc(10vw + 174px);
+    --background: rgba(0,0,0,0.01);
+    z-index: 10;
+  }
+  .swiper-prev {
+    left: calc((98vw - 100%)/2);
+  }
+  .swiper-next {
+    right: calc((98vw - 100%)/2);
+  }
+  @media (min-width: 992px) {
+    .swiper-prev {
+      left: calc((71vw - 100%)/2);
+    }
+    .swiper-next {
+      right: calc((71vw - 100%)/2);
+    }
+  }
   app-sidemenu ion-slides .swiper-pagination-bullet {
     width: 10px;
     height: 10px;

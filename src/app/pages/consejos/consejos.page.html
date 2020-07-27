@@ -7,7 +7,9 @@
     <p>Proponemos 3 niveles para que clasifiques tus residuos en casa, en función del compromiso que puedas asumir y las soluciones que tengas a tu alcance.
       Esta clasificación se basa en la <a href="http://www.unit.org.uy/normalizacion/norma/100000838/">norma técnica UNIT de Identificación y Clasificación de Residuos nro. 1239:2017 de Uruguay.</a></p>
   </div>
-  <ion-slides pager="true">
+  <ion-button class="swiper-prev" (click)="prevSlide()"></ion-button>
+  <ion-button class="swiper-next" (click)="nextSlide()"></ion-button>
+  <ion-slides #advise pager="true" [options]="slideOpts">
     <ion-slide>
       <div class="image-wrapper">
         <img src="assets/img/ilustraciones-clasificaci-n-b-sica.svg" alt="">

@@ -4,7 +4,9 @@
     <h1>Programas</h1>
     <h2 class="sub-light">Información sobre los distintos programas disponibles de recepción de residuos reciclables.</h2>
   </div>
-  <ion-slides #programSlider pager>
+  <ion-button class="swiper-prev" (click)="prevSlide()"></ion-button>
+  <ion-button class="swiper-next" (click)="nextSlide()"></ion-button>
+  <ion-slides #programSlider pager="true" [options]="slideOpts">
     <ion-slide *ngFor="let slide of programs">
       <div class="slide-container">
         <div class="slide-head">

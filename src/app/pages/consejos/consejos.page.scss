@@ -1,7 +1,10 @@
 :host {
   ion-content{
-      --padding-start: 5vw;
-      --padding-end: 5vw;
+    --padding-start: 5vw;
+    --padding-end: 5vw;
+    .swiper-prev, .swiper-next {
+      top: calc(236px - 6vw);
+    }
   }
   h1, p{
     width: 100%;

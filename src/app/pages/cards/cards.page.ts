@@ -16,7 +16,12 @@ export class CardsPage implements OnInit {
   @ViewChildren('cards', { read: ElementRef }) slides: QueryList<any>;
   trustedVideoUrl: SafeResourceUrl;
   videos = [{vid_link:"https://www.youtube-nocookie.com/embed/rGlIn4bM9DQ", url:null}];
-
+  slideOpts = {
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+  };
   constructor(
     private domSanitizer: DomSanitizer,
     public session: SessionService,
@@ -58,5 +63,11 @@ export class CardsPage implements OnInit {
     let slide = this.slides.first.nativeElement.children[0].children[index];
     let bulletActive = this.element.nativeElement.querySelector('.swiper-pagination-bullet-active');
     bulletActive.style.backgroundColor = getComputedStyle(slide).getPropertyValue('--ion-color-base');
+  }
+  nextSlide() {
+    this.slider.slideNext();
+  }
+  prevSlide() {
+    this.slider.slidePrev();
   }
 }

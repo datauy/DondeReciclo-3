@@ -1,9 +1,9 @@
 <app-header display="full"></app-header>
 <ion-content *ngIf="session.country == 'Uruguay'">
-  <ion-slides #cards (ionSlideWillChange)="slideChanging()" pager>
-
+  <ion-button class="swiper-prev" (click)="prevSlide()"></ion-button>
+  <ion-button class="swiper-next" (click)="nextSlide()"></ion-button>
+  <ion-slides #cards (ionSlideWillChange)="slideChanging()" pager="true" [options]="slideOpts">
     <!-- Plásticos -->
-
     <ion-slide class="plastic ion-color-plasticos">
       <div class="slide-head">
         <div class="image-wrapper">
@@ -1157,6 +1157,5 @@
         </ion-row>
       </div>
     </ion-slide>
-
   </ion-slides>
 </ion-content>
