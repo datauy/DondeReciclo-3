@@ -14,22 +14,18 @@
   </ion-slides>
 </ion-content>
 <ion-footer>
-  <ion-toolbar>
-    <ion-buttons >
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <div class="ion-text-left">
-              <a id="skipSlides" (click)="goApp(true);" color="primary">Saltar</a>
-            </div>
-          </ion-col>
-          <ion-col>
-            <div class="ion-text-right">
-              <a class="next"(click)="nextSlide()">Siguiente</a>
-            </div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-buttons>
-  </ion-toolbar>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div class="ion-text-left">
+          <a id="skipSlides" (click)="goApp(true);" color="primary">Saltar</a>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="ion-text-right">
+          <a class="next"(click)="nextSlide()">Siguiente</a>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-footer>
