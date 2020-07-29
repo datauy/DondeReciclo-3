@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonMenu, MenuController, IonSearchbar, NavController } from '@ionic/angular';
 import { ApiService } from "src/app/services/api.service";
 import { SessionService } from "src/app/services/session.service";
+import { AuthService } from "src/app/services/auth.service";
 //import { createAnimation, Animation } from '@ionic/core';
 @Component({
   selector: 'app-sidemenu',
@@ -44,7 +45,8 @@ export class SidemenuComponent implements OnInit {
   constructor(
     private menuCtrl: MenuController,
     public api: ApiService,
-    public session: SessionService
+    public session: SessionService,
+    private auth: AuthService,
   ) {
   }
 
@@ -62,12 +64,16 @@ export class SidemenuComponent implements OnInit {
     this.session.watchSlider(true);
   }
   //
-  menuWillOpen(){
+  menuWillOpen() {
     // this.searchBar.classList.add('hide');
   }
   //
-  menuWillClose(){
+  menuWillClose() {
     // this.searchBar.classList.remove('hide');
+  }
+  closeSession() {
+    this.auth.logout();
+    this.toggleMenu();
   }
 
 }

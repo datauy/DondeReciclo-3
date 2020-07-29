@@ -25,4 +25,17 @@ export class UtilsService {
       },
     ));
   }
+
+  createUser(form: any) {
+    return this.request.post(environment.backend + "user/new", form).pipe(
+      map( (result: any) => {
+        console.log('VUELVE DEL POST:');
+        console.log(result);
+        if (!result.error) {
+          return true;
+        }
+        return false;
+      },
+    ));
+  }
 }

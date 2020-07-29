@@ -38,8 +38,9 @@
           (click)="toggleMenu()"
           detail-icon="none"
           routerDirection="forward"
-          routerLink="/perfil"
-          routerLinkActive="active-item">
+          routerLink="/usuario"
+          routerLinkActive="active-item"
+          *ngIf="auth.isLogged">
           <ion-avatar slot="start">
             <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
           </ion-avatar>
@@ -52,9 +53,24 @@
           (click)="toggleMenu()"
           detail-icon="none"
           routerDirection="forward"
-          routerLink="/salir"
-          routerLinkActive="active-item">
-          <ion-icon slot="start" name="open-outline"></ion-icon>
+          routerLink="usuario/ingresar"
+          routerLinkActive="active-item"
+          *ngIf="!auth.isLogged">
+          <ion-icon slot="start" name="log-in-outline"></ion-icon>
+          <div>
+            <h4>Iniciar Sesión</h4>
+          </div>
+          <ion-icon slot="end"
+            name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+        <ion-item lines="none"
+          (click)="closeSession()"
+          detail-icon="none"
+          routerDirection="forward"
+          routerLink="#"
+          routerLinkActive="active-item"
+          *ngIf="auth.isLogged">
+          <ion-icon slot="start" name="log-out-outline"></ion-icon>
           <div>
             <h4>Cerrar Sesión</h4>
           </div>
@@ -75,6 +91,10 @@
           </div>
           <ion-icon slot="end"
             name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+        <ion-item class= "register"
+          *ngIf="!auth.isLogged">
+          <ion-button routerLink="usuario/nuevo" size="large" type="submit" class="submit">Registrarme</ion-button>
         </ion-item>
         <ion-item lines="none"
           (click)="introSlide()"
