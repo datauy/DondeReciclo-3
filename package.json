@@ -34,9 +34,10 @@
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^5.0.0",
     "@ionic/storage": "^2.2.0",
-    "com.telerik.plugins.nativepagetransitions": "^0.6.5",
+    "com.telerik.plugins.nativepagetransitions": "^0.7.0",
     "cordova-android": "^8.1.0",
     "cordova-ios": "^5.1.1",
+    "cordova-plugin-geolocation": "^4.0.2",
     "cordova-plugin-ionic-keyboard": "2.2.0",
     "core-js": "^2.5.4",
     "cupertino-pane": "^1.1.33",
@@ -92,7 +93,8 @@
       "cordova-plugin-ionic-webview": {
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
-      "com.telerik.plugins.nativepagetransitions": {}
+      "com.telerik.plugins.nativepagetransitions": {},
+      "cordova-plugin-geolocation": {}
     },
     "platforms": [
       "android",

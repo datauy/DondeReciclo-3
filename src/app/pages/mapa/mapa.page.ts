@@ -192,7 +192,7 @@ export class MapaPage implements OnInit {
   }
   //
   gotoLocation() {
-    this.geo.getCurrentPosition().then( (resp) => {
+    this.geo.getCurrentPosition({timeout: 5000, enableHighAccuracy: true}).then( (resp) => {
       this.uLocation = true;
       this.map.userPosition = [resp.coords.latitude, resp.coords.longitude];
       //this.map.loadMap([resp.coords.latitude, resp.coords.longitude]);
