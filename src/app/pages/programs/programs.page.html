@@ -17,9 +17,9 @@
         <div class="slide-content">
           <div class="slide-header">
             <h2 class="title" [innerHTML]="slide.shortname"></h2>
-            <a href="slide.responsable_url" [innerHTML]="slide.responsable"></a>
+            <a href="{{slide.responsable_url}}" target="_blank" [innerHTML]="slide.responsable"></a>
             <div class="slide-description" [innerHTML]="slide.information"></div>
-            <a class="more" href="slide.more_info">Más información</a>
+            <a class="more" href="{{slide.more_info}}" target="_blank">Más información</a>
           </div>
           <div class="slide-cobertura section">
             <div class="slide-title">Cobertura</div>
