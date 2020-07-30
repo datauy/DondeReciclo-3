@@ -68,14 +68,14 @@
           <ion-item>
             <ion-label position="floating">Password</ion-label>
             <ion-input formControlName="password" type="password"></ion-input>
-            <div *ngIf="f.password.errors.required">Password is required</div>
-            <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+            <div *ngIf="user_data.password.errors.required">Password is required</div>
+            <div *ngIf="user_data.password.errors.minlength">Password must be at least 6 characters</div>
           </ion-item>
           <ion-item>
             <ion-label position="floating">Confirm Password</ion-label>
             <ion-input formControlName="confirmPassword" type="password"></ion-input>
-            <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
-            <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+            <div *ngIf="user_data.confirmPassword.errors.required">Confirm Password is required</div>
+            <div *ngIf="user_data.confirmPassword.errors.mustMatch">Passwords must match</div>
           </ion-item>
           <ion-item>
             <ion-label>Términos y condiciones</ion-label>

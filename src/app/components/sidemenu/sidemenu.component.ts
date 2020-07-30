@@ -46,7 +46,7 @@ export class SidemenuComponent implements OnInit {
     private menuCtrl: MenuController,
     public api: ApiService,
     public session: SessionService,
-    private auth: AuthService,
+    public auth: AuthService,
   ) {
   }
 
