@@ -137,10 +137,10 @@ export class MapService {
   loadMap(center?: number[]) {
     if ( this.map == undefined ) {
       if ( center == undefined ) {
-        center = environment.ucenter;
+        center = [-11.336196, -63.605775];
       }
       this.animating = true;
-      this.map = new L.Map("map", {minZoom:7}).setView(center, 13);
+      this.map = new L.Map("map", {minZoom:4}).setView(center, 4);
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
       }).addTo(this.map);

@@ -63,6 +63,7 @@ export class MapaPage implements OnInit {
   }
   //
   ionViewDidEnter() {
+    this.map.loadMap();
     if ( this.session.searchItem != undefined ) {
       this.session.showSearchItem = true;
     }
@@ -71,16 +72,22 @@ export class MapaPage implements OnInit {
     }
     else {
       this.uLocation = true;
-      this.map.loadMap(this.map.userPosition);
-      this.loadNearbyContainers(false);
-      this.map.flytomarker(this.map.userPosition, 14);
+      this.api.getNearbyContainers(2, this.map.userPosition).subscribe(
+        (containers) => {
+          this.map.loadMarkers(containers, false);
+        }
+      );
+      this.map.flytomarker(this.map.userPosition, 15);
     }
     //Wait 3 seconds for user location and start loading LOad nearbymap
     setTimeout( async () => {
       if ( !this.uLocation ) {
-        this.map.loadMap();
-        this.loadNearbyContainers(false);
-        this.map.flytomarker([environment.ucenter[0],environment.ucenter[1]] , 14);
+        this.api.getNearbyContainers(0.5, [environment.ucenter[0], environment.ucenter[1]]).subscribe(
+          (containers) => {
+            this.map.loadMarkers(containers, false);
+          }
+        );
+        this.map.flytomarker([environment.ucenter[0],environment.ucenter[1]] , 17);
       }
     }, 3000);
   }
@@ -192,12 +199,10 @@ export class MapaPage implements OnInit {
   }
   //
   gotoLocation() {
-    this.geo.getCurrentPosition({timeout: 5000, enableHighAccuracy: true}).then( (resp) => {
+    this.geo.getCurrentPosition({ enableHighAccuracy: false }).then( (resp) => {
       this.uLocation = true;
       this.map.userPosition = [resp.coords.latitude, resp.coords.longitude];
-      //this.map.loadMap([resp.coords.latitude, resp.coords.longitude]);
-      //this.loadNearbyContainers(false);
-      this.api.getNearbyContainers(5, [resp.coords.latitude, resp.coords.longitude]).subscribe(
+      this.api.getNearbyContainers(2, [resp.coords.latitude, resp.coords.longitude]).subscribe(
         (containers) => {
           this.map.loadMarkers(containers, false);
         }
@@ -205,9 +210,13 @@ export class MapaPage implements OnInit {
       this.map.flytomarker(this.map.userPosition, 15);
     }).catch((error) => {
       console.log('Error getting location', error);
-      this.map.loadMap();
-      this.loadNearbyContainers(true);
-      //this.map.flytomarker([environment.ucenter[0],environment.ucenter[1]] , 14);
+      this.uLocation = true;
+      this.api.getNearbyContainers(0.5, [environment.ucenter[0], environment.ucenter[1]]).subscribe(
+        (containers) => {
+          this.map.loadMarkers(containers, false);
+        }
+      );
+      this.map.flytomarker([environment.ucenter[0],environment.ucenter[1]] , 17);
     });
   }
   //
@@ -226,7 +235,6 @@ export class MapaPage implements OnInit {
     }
   }
   geolocate() {
-    console.log('GEOLOCATION');
     this.gotoLocation();
   }
   getAddress(lat: number, long: number) {
