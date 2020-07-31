@@ -37,7 +37,7 @@
     "com.telerik.plugins.nativepagetransitions": "^0.7.0",
     "cordova-android": "^8.1.0",
     "cordova-ios": "^5.1.1",
-    "cordova-plugin-geolocation": "^4.0.2",
+    "cordova-plugin-geolocation": "4.0.2",
     "cordova-plugin-ionic-keyboard": "2.2.0",
     "core-js": "^2.5.4",
     "cupertino-pane": "^1.1.33",
