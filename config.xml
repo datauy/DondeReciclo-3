@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="org.datauy.dondereciclo" version="2.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.datauy.dondereciclo.app" version="2.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>¿Dónde Reciclo?</name>
     <description>Información sobre dónde y cómo clasificar y reciclar.</description>
     <author email="contacto@data.org.uy" href="http://data.org.uy/">DATA Uruguay</author>
@@ -121,4 +121,5 @@
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
     <plugin name="cordova-plugin-geolocation" spec="4.0.2" />
     <engine name="android" spec="^8.1.0" />
+    <engine name="ios" spec="^6.1.0" />
 </widget>
