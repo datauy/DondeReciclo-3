@@ -22,6 +22,7 @@
     <preference name="Hostname" value="localhost" />
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#0D744E" />
+    <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
     <platform name="android">
         <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
             <application android:networkSecurityConfig="@xml/network_security_config" />
@@ -104,8 +105,15 @@
         <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
             <string>We use your location for full functionality of certain app features.</string>
         </edit-config>
+        <allow-navigation href="http://localhost:8080/*" />
+        <allow-navigation href="https://localhost:8080/*" />
+        <allow-navigation href="https://dondereciclo.uy/*" />
+        <access origin="https://dondereciclo.uy/*" />
         <allow-navigation href="https://*youtube-nocookie.com/*" />
     </platform>
+    <feature name="CDVWKWebViewEngine">
+        <param name="ios-package" value="CDVWKWebViewEngine" />
+    </feature>
     <plugin name="cordova-plugin-whitelist" spec="1.3.3" />
     <plugin name="cordova-plugin-statusbar" spec="2.4.2" />
     <plugin name="cordova-plugin-device" spec="2.0.2" />
