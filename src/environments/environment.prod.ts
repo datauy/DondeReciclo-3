@@ -3,5 +3,5 @@ export const environment = {
   assets: "assets",
   url: 'https://dondereciclo.uy',
   backend: "https://backend.dondereciclo.uy/api/",
-  ucenter: [-32.657689, -55.873808]
+  ucenter: [-34.905897, -56.191406]
 };
