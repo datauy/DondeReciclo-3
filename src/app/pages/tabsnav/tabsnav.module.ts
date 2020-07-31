@@ -25,6 +25,7 @@ import { navPage } from 'src/app/components/animations';
   ],
   exports: [
     SearchComponent,
+    TabsnavPage
   ],
   declarations: [TabsnavPage, SliderComponent, SearchComponent],
   providers: [

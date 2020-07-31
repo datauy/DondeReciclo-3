@@ -3,12 +3,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {NativeGeocoder,NativeGeocoderOptions} from "@ionic-native/native-geocoder/ngx";
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
-import { Container } from "src/app/models/basic_models.model";
+import { Container, Program } from "src/app/models/basic_models.model";
 import { CupertinoPane } from 'cupertino-pane';
 
 import { ApiService } from "src/app/services/api.service";
 import { MapService } from "src/app/services/map.service";
 import { SessionService } from 'src/app/services/session.service';
+import { environment } from 'src/environments/environment';
 //import { IonRouterOutlet } from '@ionic/angular';
 //import { createAnimation } from '@ionic/core';
 
@@ -19,19 +20,12 @@ import { SessionService } from 'src/app/services/session.service';
 })
 export class MapaPage implements OnInit {
 
-  // @ViewChild("#map", {
-  //   static: false
-  // }) mapEl: HTMLDivElement;
-
   address: string[];
   container = {} as Container;
   infoPane: CupertinoPane;
-  offsetMiddle = window.innerHeight*.8;
-  offsetBottom = 200;
+  programs_sum: Program[];
+  uLocation = false as boolean;
 
-  mapEl: HTMLDivElement;
-  headerMain: HTMLDivElement;
-  searchbar: HTMLDivElement;
   infoPaneEl: HTMLDivElement;
 
   constructor(
@@ -41,62 +35,65 @@ export class MapaPage implements OnInit {
     public session: SessionService,
     private geo: Geolocation
     // private backbuttonSubscription: Subscription
-    ) {
-      this.session = session;
-      this.map.pinClicked.subscribe(
-        pinData => {
-          console.log(pinData);
-          if ( pinData ) {
-            this.showPane();
-          }
+  ) {
+    this.session = session;
+    this.map.pinClicked.subscribe(
+      pinData => {
+        console.log(pinData);
+        if ( pinData ) {
+          this.showPane();
         }
-      );
-      this.map.mapChanged.subscribe(
-        change => {
-          console.log('changed: '+change);
+      }
+    );
+    this.map.mapChanged.subscribe(
+      change => {
+        if (change) {
+          this.loadNearbyContainers(false);
         }
-      );
-    }
-
-  ionViewWillEnter(){
-    // this.session.mapPage = true;
+      }
+    );
   }
   //
-  // ionViewDidEnter() {
-  //   console.log("ENTER IN VIEW");
-  // }
-
-  ionViewWillLeave(){
-    // this.session.mapPage = false;
-  }
   ngOnInit() {
-    this.map.loadMap();
-    this.geo.getCurrentPosition().then( (resp) => {
-      console.log('LOCATION!!!');
-      console.log(resp);
-      this.map.userPosition = [resp.coords.latitude, resp.coords.longitude];
-      this.loadNearbyContainers();
-     // resp.coords.latitude
-     // resp.coords.longitude
-    }).catch((error) => {
-      console.log('Error getting location', error);
-      this.loadNearbyContainers();
-    });
-    // this.openSearchModal();
-    this.loadInfoPane();
-    this.mapEl = document.querySelector('app-mapa');
-    this.headerMain = document.querySelector('app-mapa app-header');
-    this.searchbar = document.querySelector('app-search');
     // this.app = document.querySelector('app-search');
+    this.api.loadProgramSummary().subscribe((programs) => {
+      this.programs_sum = programs;
+    });
+    this.loadInfoPane();
   }
-
-  cupertinoShow(){
-    this.session.cupertinoState = 'cupertinoOpen';
-    this.map.flytomarker();
+  //
+  ionViewDidEnter() {
+    this.map.loadMap();
+    if ( this.session.searchItem != undefined ) {
+      this.session.showSearchItem = true;
+    }
+    if ( this.map.userPosition == undefined ) {
+      this.gotoLocation();
+    }
+    else {
+      this.uLocation = true;
+      this.api.getNearbyContainers(2, this.map.userPosition).subscribe(
+        (containers) => {
+          this.map.loadMarkers(containers, false);
+        }
+      );
+      this.map.flytomarker(this.map.userPosition, 15);
+    }
+    //Wait 3 seconds for user location and start loading LOad nearbymap
+    setTimeout( async () => {
+      if ( !this.uLocation ) {
+        this.api.getNearbyContainers(0.5, [environment.ucenter[0], environment.ucenter[1]]).subscribe(
+          (containers) => {
+            this.map.loadMarkers(containers, false);
+          }
+        );
+        this.map.flytomarker([environment.ucenter[0],environment.ucenter[1]] , 17);
+      }
+    }, 3000);
   }
-  cupertinoHide(){
-    this.session.cupertinoState = 'cupertinoClosed';
-    this.loadNearbyContainers();
+  //
+  ionViewWillLeave() {
+    this.session.showSearchItem = false;
   }
 
   // dragMapCupertino(){
@@ -120,25 +117,33 @@ export class MapaPage implements OnInit {
   //   }
   // }
   loadInfoPane() {
+    var initPane = 'middle';
+    var topBreak = window.innerHeight*.9;
+    if ( window.innerWidth >= 560 ) {
+      initPane = 'top';
+      topBreak = window.innerHeight*.7;
+    }
     this.infoPane = new CupertinoPane(
       '.cupertino-pane', // Pane container selector
       {
         parentElement: '.map-section', // Parent container
         // backdrop: true,
         bottomClose: true,
-        buttonClose: true,
-        topperOverflow: true,
+        //topperOverflow: true,
         showDraggable: true,
-        simulateTouch: true,
+        simulateTouch: false,
+        draggableOver: true,
+        topperOverflowOffset: 200,
+        initialBreak: initPane,
         breaks: {
+          top: {
+            enabled: true,
+            offset: topBreak
+          },
           middle: {
             enabled: true,
-            offset: this.offsetMiddle
+            offset: window.innerHeight*.7
           },
-          bottom: {
-            enabled: true,
-            offset: this.offsetBottom
-          }
         },
         // onDidPresent: () => this.breakPointMapCupertino(),
         onWillPresent: () => this.cupertinoShow(),
@@ -147,42 +152,91 @@ export class MapaPage implements OnInit {
       }
     );
   }
-  showPane() {
-    this.container = this.map.currentContainer;
-    this.infoPane.present({animate: true});
-    //console.log(this.container);
-    if ( this.map.userPosition ) {
-      if ( this.map.route != null ) {
-        console.log('Changing route');
-        this.map.route.spliceWaypoints(1, 1, [this.container.latitude, this.container.longitude]);
-      }
-      else {
-        console.log("Drawing route");
-        this.map.drawRoute(this.map.userPosition, [this.container.latitude, this.container.longitude]);
-      }
-    }
+  cupertinoShow(){
+    this.session.showSearchItem = false;
+    this.session.cupertinoState = 'cupertinoOpen';
+    this.map.flyToBounds(
+      [[this.map.currentContainer.latitude, this.map.currentContainer.longitude],
+      this.map.userPosition],
+      {paddingBottomRight: [0,400]}
+    );
   }
-
-  loadNearbyContainers() {
-    console.log('Load Nearby');
-    this.api.getNearbyContainers(this.map.userPosition).subscribe((containers) => {
-      console.log('Nearby comes back');
-      this.map.loadMarkers(containers);
+  cupertinoHide(){
+    this.session.showSearchItem = true;
+    this.session.cupertinoState = 'cupertinoClosed';
+    this.map.flyToBounds(this.map.currentBounds);
+  }
+  showPane() {
+    this.api.getContainer(this.map.currentContainer.id).subscribe((container) => {
+      this.formatContainer(container);
+      this.infoPane.present({animate: true});
+      console.log(this.container);
+      if ( this.map.userPosition ) {
+        if ( this.map.route != null ) {
+          this.map.route.spliceWaypoints(1, 1, [this.container.latitude, this.container.longitude]);
+        }
+        else {
+          this.map.drawRoute(this.map.userPosition, [this.container.latitude, this.container.longitude]);
+        }
+      }
     });
   }
-
-  //Create additional Control placeholders, to group all control buttons
-  /*addControlPlaceholders(map) {
-   const corners = map._controlCorners;
-   const l = 'leaflet-';
-   const toolsPanel = map._controlContainer;
-   function createCorner(vSide, hSide) {
-       const className = l + vSide + ' ' + l + hSide;
-       corners[vSide + hSide] = L.DomUtil.create('div', className, toolsPanel);
-   }
-   createCorner('verticalcenter', 'left');
-  }*/
-
+  hidePane() {
+    this.infoPane.destroy({animate: true});
+  }
+  //
+  loadNearbyContainers(fly: boolean) {
+    if ( this.session.searchItem != undefined){
+      this.api.getContainers4Materials(this.map.getBoundingCoords(), this.session.searchItem.type+"="+this.session.searchItem.id).subscribe((containers) => {
+        this.map.loadMarkers(containers, fly);
+      });
+    }
+    else {
+      this.api.getContainers(this.map.getBoundingCoords()).subscribe((containers) => {
+        this.map.loadMarkers(containers, fly);
+      });
+    }
+  }
+  //
+  gotoLocation() {
+    this.geo.getCurrentPosition({ enableHighAccuracy: false }).then( (resp) => {
+      this.uLocation = true;
+      this.map.userPosition = [resp.coords.latitude, resp.coords.longitude];
+      this.api.getNearbyContainers(2, [resp.coords.latitude, resp.coords.longitude]).subscribe(
+        (containers) => {
+          this.map.loadMarkers(containers, false);
+        }
+      );
+      this.map.flytomarker(this.map.userPosition, 15);
+    }).catch((error) => {
+      console.log('Error getting location', error);
+      this.uLocation = true;
+      this.api.getNearbyContainers(0.5, [environment.ucenter[0], environment.ucenter[1]]).subscribe(
+        (containers) => {
+          this.map.loadMarkers(containers, false);
+        }
+      );
+      this.map.flytomarker([environment.ucenter[0],environment.ucenter[1]] , 17);
+    });
+  }
+  //
+  formatContainer(container: Container) {
+    container.type_icon = this.api.container_types[container.type_id].icon;
+    container.program_icon = this.programs_sum[container.program_id].icon;
+    container.program = this.programs_sum[container.program_id].name;
+    this.container = container;
+    if ( container.materials.length == 0 ) {
+      this.api.getWastes(container.wastes).subscribe((wastes) => {
+        this.container.receives = wastes;
+      });
+    }
+    else {
+      this.container.receives = this.api.getMaterials(container.materials);
+    }
+  }
+  geolocate() {
+    this.gotoLocation();
+  }
   getAddress(lat: number, long: number) {
     let options: NativeGeocoderOptions = {
       useLocale: true,

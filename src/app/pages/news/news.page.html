@@ -1,9 +1,34 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>news</ion-title>
-  </ion-toolbar>
-</ion-header>
-
+<app-header display="full"></app-header>
 <ion-content>
-
+  <div class="section-header">
+    <h1>Novedades</h1>
+    <h2 class="sub-light">Noticias e información relevante sobre clasificación y reciclaje.</h2>
+  </div>
+  <ion-list>
+    <ion-grid>
+      <ion-row class="ion-justify-content-center" *ngFor="let article of news">
+        <ion-item>
+          <ion-col class="image-wrapper" size-md="4" size-lg="3" size-xs="4">
+            <img src="{{article.images[0]}}" />
+          </ion-col>
+          <ion-col size-md="8" size-lg="9" size-xs="8">
+            <ion-row>
+              <h3 [innerHTML]="article.title"></h3>
+            </ion-row>
+            <ion-row>
+              <span [innerHTML]="article.summary"></span>
+            </ion-row>
+            <ion-row>
+              <ion-col size="6">
+                <span class="sub-light" [innerHTML]="article.created_at.split('T')[0]"></span>
+              </ion-col>
+              <ion-col class="ion-text-right" size="6">
+                <a class="more" [routerLink]="[ '/novedades', article.id ]">Ampliar</a>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-item>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
 </ion-content>

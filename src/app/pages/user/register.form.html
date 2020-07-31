@@ -1,0 +1,100 @@
+<app-header title="Crear cuenta"
+  display="small"
+  backButton="true">
+</app-header>
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col  size-md="9" size-lg="8" size-xs="12">
+        <div class="section-header">
+          <h1>Envianos un mensaje</h1>
+          <h2 class="sub-light">¿Dudas o sugerencias? ¡Escribinos!<br>
+          También recomendamos ver la <a href="http://soporte.data.org.uy/es/folder/5" target="_blank">ayuda</a> del proyecto.</h2>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col  size-md="9" size-lg="6" size-xs="12">
+        <form [formGroup]="user_data" (ngSubmit)="register()" *ngIf="!( success || fail )">
+          <ion-item>
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input  formControlName="name" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Correo electrónico</ion-label>
+            <ion-input formControlName="email" type="email"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Sexo</ion-label>
+            <ion-select formControlName="sex">
+              <ion-select-option text-wrap value="femenino">Femenino</ion-select-option>
+              <ion-select-option text-wrap value="masculino">Masculino</ion-select-option>
+              <ion-select-option text-wrap value="otre">No binario</ion-select-option>
+              <ion-select-option text-wrap value="nc">Prefiero no decirlo</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Departamento</ion-label>
+            <ion-select formControlName="state">
+              <ion-select-option text-wrap value="Artigas">Artigas</ion-select-option>
+              <ion-select-option text-wrap value="Canelones">Canelones</ion-select-option>
+              <ion-select-option text-wrap value="Cerro Largo">Cerro Largo</ion-select-option>
+              <ion-select-option text-wrap value="Colonia">Colonia</ion-select-option>
+              <ion-select-option text-wrap value="Durazno">Durazno</ion-select-option>
+              <ion-select-option text-wrap value="Flores">Flores</ion-select-option>
+              <ion-select-option text-wrap value="Florida">Florida</ion-select-option>
+              <ion-select-option text-wrap value="Lavalleja">Lavalleja</ion-select-option>
+              <ion-select-option text-wrap value="Maldonado">Maldonado</ion-select-option>
+              <ion-select-option text-wrap value="Montevideo">Montevideo</ion-select-option>
+              <ion-select-option text-wrap value="Paysandú">Paysandú</ion-select-option>
+              <ion-select-option text-wrap value="Río Negro">Río Negro</ion-select-option>
+              <ion-select-option text-wrap value="Rivera">Rivera</ion-select-option>
+              <ion-select-option text-wrap value="Rocha">Rocha</ion-select-option>
+              <ion-select-option text-wrap value="Salto">Salto</ion-select-option>
+              <ion-select-option text-wrap value="San José">San José</ion-select-option>
+              <ion-select-option text-wrap value="Soriano">Soriano</ion-select-option>
+              <ion-select-option text-wrap value="Tacuarembó">Tacuarembó</ion-select-option>
+              <ion-select-option text-wrap value="Treinta y Tres">Treinta y Tres</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Barrio</ion-label>
+            <ion-input formControlName="neighbor" type="text"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Edad</ion-label>
+            <ion-input formControlName="age" type="number"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Password</ion-label>
+            <ion-input formControlName="password" type="password"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Confirm Password</ion-label>
+            <ion-input formControlName="confirmPassword" type="password"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Términos y condiciones</ion-label>
+            <ion-input formControlName="tc" type="checkbox"></ion-input>
+          </ion-item>
+          <ion-row class="ion-justify-content-center section-header">
+            <ion-col  size-md="7" size-lg="7" size-xs="12">
+              <ion-button  size="large" type="submit" class="submit">Enviar</ion-button>
+            </ion-col>
+          </ion-row>
+        </form>
+        <div *ngIf="success">
+          <h3>Se ha enviado exitosamente</h3>
+          <p>Tu mensaje ha sido ingresado en nuestro sistema de manejo de solicitudes, en breves te estará llegando un correo indicando el número de solicitud y otros datos relevantes para mantenernos en contacto. A la brevedad nuestro equipo se estará comunicando contigo respecto a tu comentario. Muchas gracias</p>
+          <ion-button class="submit" [routerLink]='["/intro/mapa"]'>Volver al inicio</ion-button>
+        </div>
+        <div *ngIf="fail">
+          <h3>No hemos podido enviar tu mensaje</h3>
+          <p>Por favor escríbenos a devops@data.org.uy y explícanos lo que pasa, valoramos mucho tu esfuerzo y te pedimos disculpas por las molestias ocasionadas. Muchas gracias</p>
+          <ion-button class="submit error" [routerLink]='["/intro/contacto"]'>Volver a intentarlo</ion-button>
+          <ion-button class="submit" [routerLink]='["/intro/mapa"]'>Ir al inicio</ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -2,7 +2,14 @@
   <!-- <app-header display="full"></app-header> -->
 
   <div class="loadingOverlay" [ngClass]="session.isLoading ? 'loadingShow' : 'loadingHide'">
-    <img src="assets/img/dondereciclo-loading.svg" alt="Donde Reciclo cargando">
+<ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size-md="8" size-lg="6" size-xs="12">
+        <img src="assets/img/dondereciclo-loading.svg" alt="Donde Reciclo cargando" class="loading">
+        <img src="assets/img/dondereciclo-auspiciantes.svg" alt="Donde Reciclo auspiciantes" class="auspiciantes">
+      </ion-col>
+    </ion-row>
+    </ion-grid>
   </div>
   <app-sidemenu></app-sidemenu>
 </ion-app>

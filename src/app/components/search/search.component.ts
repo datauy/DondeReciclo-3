@@ -14,21 +14,16 @@ import { SessionService } from 'src/app/services/session.service';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  @ViewChild("searchbar", { static: false }) private searchBarAuto: AutoCompleteComponent;
+//@ViewChild("searchbar", { static: false }) private searchBarAuto: AutoCompleteComponent;
   // @ViewChild(".searchbar-input", { static: false }) private searchBarIonic: HTMLInputElement;
 
   backdrop = document.querySelector('custom-backdrop');
-  searchBarIonic = document.querySelector('.searchbar-input') as HTMLInputElement;
+  searchBarIonic: HTMLInputElement;
   // searchBarIonic: unknown;
   showBackdrop = false;
   searchVisibility = false;
-
   searchString: string;
-
   predefinedOptions: any[];
-
-  // loading
-  // isLoading: boolean;
 
   public selected:string = '';
 
@@ -42,20 +37,16 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {
     this.api.loadInitialData().subscribe(
-      () =>  { this.predefinedOptions = this.api.predefinedSearch;
-      // console.log(this.predefinedOptions);
+      () =>  {
+        this.predefinedOptions = this.api.predefinedSearch;
       }
     );
-    // console.log('Auto: ', this.searchBarAuto);
-    // console.log('element: ', this.searchBarIonic);
   }
-  ionViewDidEnter(){
-    // console.log('element: ', this.searchBarAuto);
-    // console.log('element: ', this.searchBarIonic);
-  }
-
   showSearch(event) {
     this.searchVisibility = true;
+    /*let clearButton = document.querySelector('.searchbar-clear-button') as HTMLElement;
+    console.log(clearButton);
+    clearButton.addEventListener("click", (event: Event) => this.hideSearch(event) );*/
   }
 
   hideSearch(event) {
@@ -68,31 +59,43 @@ export class SearchComponent implements OnInit {
   }
 
   searchSuggestion(predefined){
-    this.searchBarIonic = document.querySelector('.searchbar-input') as HTMLInputElement;
-    this.searchBarAuto.setFocus();
     this.itemSelected(predefined);
-    this.searchBarIonic.value = predefined.name;
   }
 
   itemSelected(item) {
-    // console.log('item: ', item);
-    let pos = null;
     this.session.isLoading = true;
+    let pos = null;
+    this.session.showSearchItem = true;
     if (this.map.userPosition) {
-      pos = this.api.getContainersByMaterials([item.material_id], this.map.userPosition);
+      pos = this.map.userPosition;
     }
-    this.api.getContainersByMaterials([item.material_id], pos).subscribe(
-        (containers) => {
-          if (this.map.loadMarkers(containers) == 0){
-            console.log('no markers!');
-          }
-          this.hideSearch('item selected');
-          setTimeout( () => {
-            this.session.isLoading = false;
-          }, 500);
+    this.searchBarIonic = document.querySelector('.searchbar-input');
+    this.api.getContainersByMaterials(item.type+"="+item.id, pos).subscribe(
+      (containers) => {
+        if (this.map.loadMarkers(containers, true) == 0){
+          this.session.searchItem = {
+            class: 'warnings',
+            name: 'No hay resultados para: '+item.name,
+            deposition: 'No hay contenedores a menos de 300 km. de su ubicación'
+          };
         }
+        else {
+          this.session.searchItem = item;
+        }
+        this.hideSearch('item selected');
+        this.searchBarIonic.value = '';
+        setTimeout( () => {
+          this.session.isLoading = false;
+        }, 500);
+        //Show search
+      }
     );
   }
-
+  closeSelection() {
+    delete this.session.searchItem;
+    //reload pins
+    this.map.mapChanges();
+  }
+//getSelection()
 
 }

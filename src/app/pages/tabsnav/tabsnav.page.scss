@@ -1,3 +1,6 @@
+ion-tabs {
+	overflow: hidden;
+}
 ion-tab-button {
 	--color-focused: var(--pale-olive-green);
 
@@ -8,7 +11,6 @@ ion-tab-button {
 		}
 	}
 }
-
 ion-tab-bar {
 	&.hide {
 		transform: translateY(56px);
@@ -17,8 +19,6 @@ ion-tab-bar {
 	-webkit-transition: transform 0.3s linear, height 0.3s linear;
 	-o-transition: transform 0.3s linear, height 0.3s linear;
 	transition: transform 0.3s linear, height 0.3s linear;
-	border-top-left-radius: 16px;
-	border-top-right-radius: 16px;
 	height: 66px;
 
 	ion-tab-button {

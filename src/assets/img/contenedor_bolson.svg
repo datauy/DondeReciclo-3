@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="156px" height="164px" viewBox="0 0 156 164" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 64 (93537) - https://sketch.com -->
+    <title>contenedor_bolson</title>
+    <desc>Created with Sketch.</desc>
+    <g id="contenedor_bolson" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M20,67 L136,67 L136,132 C136,149.673112 121.673112,164 104,164 L52,164 C34.326888,164 20,149.673112 20,132 L20,67 L20,67 Z" id="Rectangle" fill="#DDB287"></path>
+        <path d="M125,67 L125,132 C125,149.673112 110.673112,164 93,164 C93,164 93,164 93,164" id="Rectangle" stroke="#C89E70"></path>
+        <polygon id="Rectangle" fill="#08492C" points="26.4003327 77 31.4003327 77 19 164 14 164"></polygon>
+        <polygon id="Rectangle-Copy" fill="#08492C" transform="translate(133.700166, 120.500000) scale(-1, 1) translate(-133.700166, -120.500000) " points="137.400333 77 142.400333 77 130 164 125 164"></polygon>
+        <rect id="Rectangle" fill="#08492C" x="20" y="77" width="116" height="5"></rect>
+        <rect id="Rectangle" fill="#C69C6D" transform="translate(78.000000, 72.500000) rotate(-360.000000) translate(-78.000000, -72.500000) " x="19" y="67" width="118" height="11" rx="1"></rect>
+    </g>
+</svg>

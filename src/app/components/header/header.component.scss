@@ -1,11 +1,29 @@
 :host {
   z-index: 0;
-
-  ion-buttons{
+  ion-toolbar {
+    --min-height: 80px;
+  }
+  ion-buttons {
     margin: 0;
     ion-img {
       height: 56px;
       margin: 12px 12px 20px 0;
+      width: initial;
+      image {
+        width: initial;
+      }
+    }
+    ion-button {
+      color: var(--pale-olive-green);
+    }
+    .back-button {
+      position: absolute;
+      top: 17;
+      background: var(--vidrio);
+      padding: 0;
+      left: 20px;
+      border-radius: 24px;
+      z-index: 10;
     }
   }
 }

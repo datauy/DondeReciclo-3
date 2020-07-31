@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { File } from '@ionic-native/file/ngx';
+import { environment } from 'src/environments/environment';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +13,29 @@ export class UtilsService {
     private request: HttpClient,
   ) { }
 
-  async openTicket(form: any) {
-    try{
-      return true;
-    }
-    catch (error) {
-      return false;
-    }
+  openTicket(form: any) {
+    return this.request.post(environment.backend + "contact", form).pipe(
+      map( (result: any) => {
+        console.log('VUELVE DEL POST:');
+        console.log(result);
+        if (!result.error) {
+          return true;
+        }
+        return false;
+      },
+    ));
+  }
+
+  createUser(form: any) {
+    return this.request.post(environment.backend + "user/new", form).pipe(
+      map( (result: any) => {
+        console.log('VUELVE DEL POST:');
+        console.log(result);
+        if (!result.error) {
+          return true;
+        }
+        return false;
+      },
+    ));
   }
 }

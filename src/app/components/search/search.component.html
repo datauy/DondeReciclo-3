@@ -1,8 +1,32 @@
+<div id="custom_backdrop" (click)="hideSearch('backdrop')" [ngClass]="searchVisibility ? 'show' : 'hide'"></div>
 <div id="search-app-content">
+  <ion-auto-complete
+    #searchbar
+    class="searchContent"
+    [options]="{ placeholder : '¿Qué querés reciclar?' }"
+    [template]="dr"
+    [showResultsFirst]="true"
+    (click)="showSearch($event)"
+    (itemSelected)="itemSelected($event)"
+    [dataProvider]="api"
+    [clearInvalidInput]="false"
+    >
+  </ion-auto-complete>
 
+  <div id="suggestions" [ngClass]="(api.suggestVisibility && searchVisibility) ? 'show expand' : 'hide shrink'">
+    <ion-list-header>Búsquedas sugeridas</ion-list-header>
+    <div class="resultsWrap">
+      <ion-button [color]="predefined.class"
+        *ngFor="let predefined of predefinedOptions;"
+        [ngClass]="predefined.class"
+        (click)="searchSuggestion(predefined)">
+        <ion-label [innerHTML]="predefined.name"></ion-label>
+        <ion-icon class="right" [name]="'dr-'+predefined.class"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
   <!-- <ion-searchbar id="searchBar" type="text" debounce="500" animated placeholder="Busca materiales" color="dark"
   (click)="showSearch()" (ionChange)="searchAPI($event)" clearInput></ion-searchbar> -->
-
   <ng-template [ngClass]=""
     #dr
     let-attrs="attrs"
@@ -12,65 +36,25 @@
       [ngClass]="attrs.data.class">
       <ion-icon
         class="left"
-        [name]="'dr-' + attrs.data.class"></ion-icon>
-      <ion-label [innerHTML]="attrs.data.name | boldprefix:attrs.keyword"></ion-label>
-        <ion-icon
-          class="right"
-          [name]="'dr-'+attrs.data.class" >
-        </ion-icon>
+        [name]="'dr-' + attrs.data.class">
+      </ion-icon>
+      <ion-label [innerHTML]="attrs.data.name"></ion-label>
     </ion-button>
   </ng-template>
 
-  <ng-template [ngClass]=""
-    #drempty
-    let-attrs="attrs">
-
-    <ion-list-header>No hay resultados</ion-list-header>
-  </ng-template>
-
-  <!-- <ng-template #suggestions let-attrs="attrs">
-    <div>
-      <ion-list-header>Categorias de búsqueda NIDEA</ion-list-header>
-      <ion-chip *ngFor="let predefined of predefinedOptions" [color]="predefined.color" [ngClass]="'suggestion'">
-      </ion-chip>
-    </div>
-  </ng-template> -->
-
-  <ion-auto-complete
-    #searchbar
-    class="searchContent"
-    [options]="{ placeholder : '¿Qué querés reciclar?' }"
-    [template]="dr"
-    [showResultsFirst]="true"
-    (click)="showSearch($event)"
-    (itemSelected)="itemSelected($event)"
-    [(model)]="selected"
-    [multi]="false"
-    [dataProvider]="api"
-    [disabled]="false"
-    [removeButtonColor]="'dark'"
-    [clearInvalidInput]="false">
-  </ion-auto-complete>
-
-  <div id="suggestions"
-    [ngClass]="(api.suggestVisibility && searchVisibility) ? 'show expand' : 'hide shrink'">
-    <ion-list-header>Búsquedas sugeridas</ion-list-header>
-    <div class="resultsWrap">
-      <ion-button [color]="predefined.class"
-        *ngFor="let predefined of predefinedOptions;"
-        [ngClass]="predefined.class"
-        (click)="searchSuggestion(predefined)">
-        <ion-label
-          [innerHTML]="predefined.name"></ion-label>
-        <ion-icon
-          class="right"
-          [name]="'dr-'+predefined.class"></ion-icon>
-      </ion-button>
-    </div>
-  </div>
 </div>
-
-
-<div id="custom_backdrop"
-  (click)="hideSearch('backdrop')"
-  [ngClass]="searchVisibility ? 'show' : 'hide'"></div>
+<div id="search-item" *ngIf="session.searchItem && session.showSearchItem">
+  <ion-item lines="none" [color]="session.searchItem.class">
+    <ion-icon
+    class="left"
+    [name]="'dr-' + session.searchItem.class">
+  </ion-icon>
+  <div class="item-text">
+    <ion-label [innerHTML]="session.searchItem.name"></ion-label>
+    <ion-note slot="start" [innerHTML]="session.searchItem.deposition" *ngIf="session.searchItem.deposition"></ion-note>
+  </div>
+  <ion-button (click)="closeSelection()">
+    <ion-icon name="close-outline"></ion-icon>
+  </ion-button>
+</ion-item>
+</div>

@@ -4,6 +4,9 @@
       --padding-end: 5vw;
       font-size: 16px;
       line-height: 1.5;
+      .swiper-prev, .swiper-next {
+        top: calc(120px + -1vw);
+      }
   }
   h1, p {
     width: 100%;
@@ -23,17 +26,46 @@
 		  transition: 100ms ease-in-out;
       display: block;
       text-align: left;
-      .slide-head img{
-        height: calc(12vw + 16vh);
-        width: calc(100% - 6vw);
+      .slide-head {
+        //min-height: calc(12vw + 16vh);
+        min-height: 200px;
         margin-top: 30px;
-        border-radius: 16px;
+        .image-wrapper {
+          height: calc(160px + 10vw);
+          width: 99%;
+          overflow: hidden;
+          display: flex;
+          justify-content: center;
+          text-align: center;
+          border-radius: 16px;
+          padding: 0;
+          background-color: #000;
+        }
+        img {
+          object-fit: cover;
+          border-radius: 16px;
+          width: 100%;
+        }
+        /*img {
+          height: calc(12vw + 16vh);
+          width: calc(100% - 6vw);
+          border-radius: 16px;
+        }*/
       }
       .slide-content{
         opacity: 1;
+        .slide-header {
+          margin-top: 60px;
+        }
         .slide-title {
           font-size: 20px;
           font-weight: bold;
+        }
+        .slide-body {
+          margin: 10px 0 20px 0;
+        }
+        .slide-description {
+          margin: 10px 0;
         }
         .receives::before,
         .receives-no::before {
@@ -49,12 +81,6 @@
         }
         .receives-no::before {
           background-color: var(--vermillion);
-        }
-        .slide-body {
-          margin: 10px 0 20px 0;
-        }
-        .slide-description {
-          margin: 10px 0;
         }
       }
       .card-thumbs img {

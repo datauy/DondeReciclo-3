@@ -24,6 +24,7 @@ import { ApiService } from './services/api.service';
 import { File } from '@ionic-native/file/ngx';
 import { navPage } from './components/animations/';
 
+import { IonicStorageModule } from '@ionic/storage';
 /*
 export function initApp(backConfig: ApiService<any>) {
   console.log("Loading initial data");
@@ -43,6 +44,7 @@ export function initApp(backConfig: ApiService<any>) {
     AppRoutingModule,
     ComponentsModule,
     HttpClientModule,
+    IonicStorageModule.forRoot()
   ],
   providers: [
     StatusBar,

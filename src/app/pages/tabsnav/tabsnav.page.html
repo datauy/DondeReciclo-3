@@ -1,6 +1,6 @@
 
-<app-slider *ngIf="session.get('showSlider')"></app-slider>
-<ion-content>
+<app-slider *ngIf="session.showSlider"></app-slider>
+<ion-content scroll-y="false">
 
   <app-search class="dr-transition"></app-search>
 
@@ -8,7 +8,7 @@
     <ion-tab-bar #tab slot="bottom">
       <ion-tab-button tab="sobre-el-proyecto" tabsHideOnSubPages="true">
         <ion-icon name="dr-info"></ion-icon>
-        <ion-label>Sobre el proyecto</ion-label>
+        <ion-label>El proyecto</ion-label>
       </ion-tab-button>
 
       <ion-tab-button tab="consejos" tabsHideOnSubPages="true">

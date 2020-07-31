@@ -25,13 +25,13 @@ const routes: Routes = [
     loadChildren: () => import('./pages/news/news.module').then( m => m.NewsPageModule)
   },
   {
+    path: 'usuario',
+    loadChildren: () => import('./pages/user/user.module').then( m => m.UserPageModule)
+  },
+  {
     path: '**',
     component: NotFoundPage
   },
-  {
-    path: 'partners',
-    loadChildren: () => import('./pages/partners/partners.module').then( m => m.PartnersPageModule)
-  }
 ];
 
 @NgModule({

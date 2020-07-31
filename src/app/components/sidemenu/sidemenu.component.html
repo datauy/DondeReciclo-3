@@ -13,54 +13,99 @@
           routerLink="/"
           routerDirection="root"
           src="assets/img/donde_reciclo.png"
-          alt="Donde Reciclo">
+          alt="Logo ¿Dónde Reciclo?">
         </ion-img>
       </ion-buttons>
     </ion-header>
     <ion-content class="menu-list">
       <ion-list>
-        <ion-item (click)="toggleMenu()"
+        <ion-item
           *ngFor="let p of appPages"
+          (click)="toggleMenu()"
           lines="none"
           [routerLink]="p.url"
-          routerLinkActive="active-item">
+          routerLinkActive="active-item"
+          detail-icon="none">
           <ion-icon slot="start"
             [name]="p.icon"></ion-icon>
           <div>
             <h4>{{p.title}}</h4>
             <p>{{p.desc}}</p>
           </div>
-          <ion-icon slot="end"
-            name="chevron-forward-outline"></ion-icon>
-
+          <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
         </ion-item>
         <ion-item lines="none"
+          (click)="toggleMenu()"
+          detail-icon="none"
           routerDirection="forward"
-          routerLink="/perfil"
-          routerLinkActive="active-item">
+          routerLink="/usuario"
+          routerLinkActive="active-item"
+          *ngIf="auth.isLogged">
           <ion-avatar slot="start">
             <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
           </ion-avatar>
           <div>
             <h4>Mi Perfil</h4>
           </div>
-          <ion-icon slot="end"
-            name="chevron-forward-outline"></ion-icon>
-
+          <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
         </ion-item>
         <ion-item lines="none"
+          (click)="toggleMenu()"
+          detail-icon="none"
           routerDirection="forward"
-          routerLink="/salir"
-          routerLinkActive="active-item">
-          <ion-icon slot="start"
-            name="open-outline"></ion-icon>
+          routerLink="usuario/ingresar"
+          routerLinkActive="active-item"
+          *ngIf="!auth.isLogged">
+          <ion-icon slot="start" name="log-in-outline"></ion-icon>
+          <div>
+            <h4>Iniciar Sesión</h4>
+          </div>
+          <ion-icon slot="end"
+            name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+        <ion-item lines="none"
+          (click)="closeSession()"
+          detail-icon="none"
+          routerDirection="forward"
+          routerLink="#"
+          routerLinkActive="active-item"
+          *ngIf="auth.isLogged">
+          <ion-icon slot="start" name="log-out-outline"></ion-icon>
           <div>
             <h4>Cerrar Sesión</h4>
           </div>
           <ion-icon slot="end"
             name="chevron-forward-outline"></ion-icon>
-
         </ion-item>
+        <ion-item class= "inicio"
+          lines="none"
+          (click)="toggleMenu()"
+          detail-icon="none"
+          routerDirection="forward"
+          routerLink="intro"
+          routerLinkActive="active-item">
+          <ion-icon slot="start"
+            name="dr-inicio"></ion-icon>
+          <div>
+            <h4>Volver al mapa</h4>
+          </div>
+          <ion-icon slot="end"
+            name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+        <ion-item class= "register"
+          *ngIf="!auth.isLogged">
+          <ion-button routerLink="usuario/nuevo" size="large" type="submit" class="submit">Registrarme</ion-button>
+        </ion-item>
+        <ion-item lines="none"
+          (click)="introSlide()"
+          detail-icon="none"
+          routerDirection="forward"
+          routerLink="intro">
+          <div>
+            <h5>Repetir introducción</h5>
+          </div>
+        </ion-item>
+
       </ion-list>
     </ion-content>
     <div class="menu-rounded-bottom">
@@ -91,7 +136,6 @@
           </ion-button>
         </ion-buttons>
       </ion-toolbar>
-      <ion-title>cempre.org.uy</ion-title>
     </ion-footer>
   </ion-menu>
   <ion-router-outlet id="menu-content">

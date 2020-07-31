@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="156px" height="164px" viewBox="0 0 156 164" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 64 (93537) - https://sketch.com -->
+    <title>contenedor_mupi</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0 0.9273 103.838 0.9273 103.838 148 0 148"></polygon>
+        <polygon id="path-3" points="0.1407 0.3231 1.1407 0.3231 1.1407 24 0.1407 24"></polygon>
+        <polygon id="path-5" points="0.1407 0.3231 1.1407 0.3231 1.1407 24 0.1407 24"></polygon>
+        <polygon id="path-7" points="0.8379 0.9273 29.1129 0.9273 29.1129 148 0.8379 148"></polygon>
+        <polygon id="path-9" points="0 148.073 132.504 148.073 132.504 1 0 1"></polygon>
+    </defs>
+    <g id="contenedor_mupi" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="MUPI-Copy" transform="translate(11.000000, 15.000000)">
+            <g id="Group-3" transform="translate(0.000000, 0.073000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="Clip-2"></g>
+                <path d="M3.876,0.9273 L103.838,0.9273 L103.838,148.0003 L3.876,148.0003 C1.735,148.0003 0,146.2643 0,144.1243 L0,4.8033 C0,2.6623 1.735,0.9273 3.876,0.9273" id="Fill-1" fill="#08492C" mask="url(#mask-2)"></path>
+            </g>
+            <path d="M0.4069,131.573 L104.2529,131.573 L0.4069,131.573 Z" id="Stroke-4" stroke="#0D633E"></path>
+            <g id="Group-8" transform="translate(11.000000, 124.073000)">
+                <mask id="mask-4" fill="white">
+                    <use xlink:href="#path-3"></use>
+                </mask>
+                <g id="Clip-7"></g>
+                <path d="M0.6407,0.3231 L0.6407,24.0001 L0.6407,0.3231 Z" id="Stroke-6" stroke="#0D633E" mask="url(#mask-4)"></path>
+            </g>
+            <g id="Group-11" transform="translate(90.000000, 124.073000)">
+                <mask id="mask-6" fill="white">
+                    <use xlink:href="#path-5"></use>
+                </mask>
+                <g id="Clip-10"></g>
+                <path d="M0.6407,0.3231 L0.6407,24.0001 L0.6407,0.3231 Z" id="Stroke-9" stroke="#0D633E" mask="url(#mask-6)"></path>
+            </g>
+            <path d="M0.4069,107.5731 L104.2529,107.5731 L0.4069,107.5731 Z" id="Stroke-12" stroke="#0D633E"></path>
+            <path d="M0.4069,83.573 L104.2529,83.573 L0.4069,83.573 Z" id="Stroke-14" stroke="#0D633E"></path>
+            <path d="M0.4069,58.573 L104.2529,58.573 L0.4069,58.573 Z" id="Stroke-16" stroke="#0D633E"></path>
+            <path d="M0.4069,35.573 L104.2529,35.573 L0.4069,35.573 Z" id="Stroke-18" stroke="#0D633E"></path>
+            <path d="M0.4069,11.573 L104.2529,11.573 L0.4069,11.573 Z" id="Stroke-20" stroke="#0D633E"></path>
+            <g id="Group-24" transform="translate(103.000000, 0.073000)">
+                <mask id="mask-8" fill="white">
+                    <use xlink:href="#path-7"></use>
+                </mask>
+                <g id="Clip-23"></g>
+                <path d="M27.2749,3.3423 L0.8379,0.9273 L0.8379,148.0003 L27.0909,148.0003 C28.2079,148.0003 29.1129,147.0943 29.1129,145.9783 L29.1129,5.3563 C29.1129,4.3103 28.3159,3.4373 27.2749,3.3423" id="Fill-22" fill="#69B482" mask="url(#mask-8)"></path>
+            </g>
+            <polygon id="Stroke-25" stroke="#0D633E" points="128.7901 13.8001 109.2371 12.2431 109.2371 131.4121 128.7901 131.4121"></polygon>
+            <mask id="mask-10" fill="white">
+                <use xlink:href="#path-9"></use>
+            </mask>
+            <g id="Clip-28"></g>
+            <polygon id="Fill-27" fill="#69B482" mask="url(#mask-10)" points="11.987 132.122 91.851 132.122 91.851 12.555 11.987 12.555"></polygon>
+            <polygon id="Fill-29" fill="#0D744E" mask="url(#mask-10)" points="15.219 129.04 88.618 129.04 88.618 15.637 15.219 15.637"></polygon>
+            <path d="M115.431,47.0309 C115.431,51.5619 117.686,55.2349 120.468,55.2349 C123.249,55.2349 125.504,51.5619 125.504,47.0309 C125.504,42.4999 123.249,38.8269 120.468,38.8269 C117.686,38.8269 115.431,42.4999 115.431,47.0309" id="Fill-30" fill="#0D633E" mask="url(#mask-10)"></path>
+            <path d="M119.2215,39.0904 C117.0435,39.9954 115.4315,43.2014 115.4315,47.0304 C115.4315,50.8594 117.0435,54.0664 119.2215,54.9714 C121.3995,54.0664 123.0115,50.8594 123.0115,47.0304 C123.0115,43.2014 121.3995,39.9954 119.2215,39.0904" id="Fill-31" fill="#08492C" mask="url(#mask-10)"></path>
+            <path d="M132.3432,14.1117 L103.7852,11.6197 L132.3432,14.1117 Z" id="Stroke-32" stroke="#0D633E" mask="url(#mask-10)"></path>
+            <path d="M132.499,35.2963 L103.838,35.2443 L132.499,35.2963 Z" id="Stroke-33" stroke="#0D633E" mask="url(#mask-10)"></path>
+            <path d="M132.1096,58.573 L103.8376,58.573 L132.1096,58.573 Z" id="Stroke-34" stroke="#0D633E" mask="url(#mask-10)"></path>
+            <path d="M132.499,83.573 L103.63,83.573 L132.499,83.573 Z" id="Stroke-35" stroke="#0D633E" mask="url(#mask-10)"></path>
+            <path d="M132.499,107.8846 L103.838,107.5726 L132.499,107.8846 Z" id="Stroke-36" stroke="#0D633E" mask="url(#mask-10)"></path>
+            <path d="M132.499,131.4576 L103.63,131.2496 L132.499,131.4576 Z" id="Stroke-37" stroke="#0D633E" mask="url(#mask-10)"></path>
+        </g>
+    </g>
+</svg>

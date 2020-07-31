@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Container } from "src/app/models/basic_models.model";
-
+import { environment } from 'src/environments/environment';
 import "leaflet";
 import "leaflet-routing-machine";
 
@@ -22,7 +22,6 @@ const iconSVG = `
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    sodipodi:docname="dr-pin.svg"
    inkscape:version="1.0 (6e3e5246a0, 2020-05-07)"
-   id="dr-marker"
    version="1.1"
    viewBox="0 0 10.583333 10.583333"
    height="40"
@@ -93,14 +92,28 @@ const iconDefault = L.divIcon({
 const iconUser = L.icon({
   iconUrl: 'assets/custom-icons/dr-user-gps.svg',
   iconSize: [50, 50],
-  iconAnchor: [25, 50],
+  iconAnchor: [25, 25],
   popupAnchor: [1, -34],
   tooltipAnchor: [16, -28],
   shadowSize: [41, 41]
 });
 
 L.Marker.prototype.options.icon = iconDefault;
-
+L.CustomMarker = L.Marker.extend({
+  // Overwrite onAdd function
+  onAdd: function (map: L.Map) {
+    // Run original onAdd function
+    L.Marker.prototype.onAdd.call(this, map);
+    // Check if there's a class set in options
+    if (this.options.className) {
+      // Apply className to icon and shadow
+      L.DomUtil.addClass(this._icon, this.options.className);
+      //L.DomUtil.addClass(this._shadow, this.options.className);
+    }
+    // return instance
+    return this;
+  }
+});
 @Injectable({
   providedIn: 'root'
 })
@@ -112,57 +125,53 @@ export class MapService {
   userMarker: L.Marker;
   currentContainer: Container;
   containers: Container[];
+  currentBounds: [number, number][];
+  animating: boolean;
+  markers: L.LayerGroup;
+  private _pinClick = new BehaviorSubject<boolean>(false);
+  private _mapChangeSub = new BehaviorSubject<boolean>(false);
 
   constructor() {
   }
 
-  loadMap() {
-    this.map = new L.Map("map", {});//.setView([-34.881536, -56.147968], 13);
-    this.map.locate({
-      setView: true,
-      maxZoom: 16
-    });/*.
-    on('locationfound', (e :any) => {
-      console.log('GOT LOCATION');
-      this.userPosition = [e.latitude, e.longitude];
-      this.userMarker = L.marker(this.userPosition, {icon: iconUser} ).addTo(this.map);
-    }).
-    on('locationerror', (err) => {
-      console.log('GOT NO LOCATION');
-      console.log(err.message);
-    });*/
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-    }).addTo(this.map);
-    if ( this.userPosition ) {
-      this.userMarker = L.marker(this.userPosition, {icon: iconUser} ).addTo(this.map);
+  loadMap(center?: number[]) {
+    if ( this.map == undefined ) {
+      if ( center == undefined ) {
+        center = [-11.336196, -63.605775];
+      }
+      this.animating = true;
+      this.map = new L.Map("map", {minZoom:4}).setView(center, 4);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+      }).addTo(this.map);
+      if ( this.userPosition ) {
+        this.userMarker = L.marker(this.userPosition, {icon: iconUser} ).addTo(this.map);
+      }
+      //Create user marker upon click
+      this.map.on("click", <LeafletMouseEvent>(e) => {
+        if (this.userMarker) { // check
+          this.map.removeLayer(this.userMarker); // remove
+        }
+        this.userPosition = [e.latlng.lat, e.latlng.lng];
+        this.userMarker = L.marker(this.userPosition, {icon: iconUser} ).addTo(this.map); // add the marker onclick
+        if (this.route) {
+          this.route.spliceWaypoints(0, 1, e.latlng);
+        }
+      });
+      this.map.on('zoomend', this.mapChanges, this);
+      this.map.on('dragend', this.mapChanges, this);
+      this.map.once('moveend', this.toggleAnimation, this);
     }
-    //Create user marker upon click
-    this.map.on("click", <LeafletMouseEvent>(e) => {
-      if (this.userMarker) { // check
-        this.map.removeLayer(this.userMarker); // remove
-      }
-      this.userPosition = [e.latlng.lat, e.latlng.lng];
-      this.userMarker = L.marker(this.userPosition, {icon: iconUser} ).addTo(this.map); // add the marker onclick
-      if (this.route) {
-        this.route.spliceWaypoints(0, 1, e.latlng);
-      }
-    });
-    this.map.on('zoomend', function() {
-      console.log('ZOOMEND');
-      this.mapChanges;
-    });
-    this.map.on('dragend', function() {
-      console.log('DRAGEND');
-      this.mapChanges;
-    });
-    console.log('End load map');
     return true;
   }
 
-  loadMarkers( markers: Container[], center?:[number,number] ){
+  loadMarkers( markers: Container[], fly:boolean ){
     this.containers = markers;
     let mapBounds = [];
+    //remove all markers and reload
+    if ( this.markers != undefined ) {
+      this.markers.clearLayers();
+    }
     if (this.userPosition) {
       if (this.userMarker) { // check
         this.map.removeLayer(this.userMarker); // remove
@@ -170,16 +179,22 @@ export class MapService {
       this.userMarker = L.marker(this.userPosition, {icon: iconUser} ).addTo(this.map);
       mapBounds.push(this.userPosition);
     }
+    var markersLayer = []
     for (var i = 0; i < markers.length; i++) {
-      new L.marker([markers[i].latitude,markers[i].longitude], {container_pos: i})
-      .on('click', this.clickPin, this) //L.bind(this.showPane, null, markers[i]))
-      .addTo(this.map);
+      var newMarker = new L.CustomMarker([markers[i].latitude,markers[i].longitude], {container_pos: i, className: "ion-color-"+markers[i].class })
+      .on('click', this.clickPin, this); //L.bind(this.showPane, null, markers[i]))
       mapBounds.push([markers[i].latitude, markers[i].longitude]);
+      markersLayer.push(newMarker);
     }
-    if (markers.length > 0){
-      this.map.flyToBounds(mapBounds);
+    this.markers = L.layerGroup(markersLayer).addTo(this.map);
+    this.currentBounds = mapBounds;
+    if ( markers.length > 0 ) {
+      if ( fly ) {
+        this.flyToBounds(mapBounds);
+      }
       return 1;
-    }else{
+    }
+    else {
       return 0;
     }
   }
@@ -193,8 +208,7 @@ export class MapService {
         draggable: true
       }).addTo(this.map);
       this.userMarker.bindPopup('Elegir esta ubicación').openPopup();
-      //this.getAddress(e.latitude, e.longitude);
-      console.log(e.latitude, e.longitude);
+        //this.getAddress(e.latitude, e.longitude);
       this.userMarker.on("dragend", () => {
         let userPos = this.userMarker.getLatLng();
         this.userPosition = [ userPos[0], userPos[1] ] ;
@@ -216,8 +230,19 @@ export class MapService {
     }).addTo(this.map);
 	}
 
-  flytomarker(){
-    this.map.flyTo([this.currentContainer.latitude, this.currentContainer.longitude], 15);
+  toggleAnimation() {
+    this.animating = !this.animating;
+  }
+  getBoundingCoords() {
+    let bounds = this.map.getBounds();
+    let sw = bounds.getSouthWest();
+    let ne = bounds.getNorthEast();
+    return [sw.lat+','+sw.lng, ne.lat+','+ne.lng];
+  }
+  flytomarker(latlong: [number, number], zoom: number){
+    this.animating = true;
+    this.map.flyTo(latlong, zoom);
+    this.map.once('moveend', this.toggleAnimation, this);
     // Coding for set bounds in pixel from top instead of center of map for cuppertino open.
     // var neLatLng = this.map.containerPointToLatLng([150, 200]);
     // console.log(neLatLng);
@@ -226,6 +251,13 @@ export class MapService {
     // this.map.fitBounds(newViewCenter);
 
   }
+  flyToBounds(mapBounds: [number, number][], options?: {}) {
+    this.animating = true;
+    this.map.flyToBounds(mapBounds, options);
+    this.map.once('moveend', this.toggleAnimation, this);
+  }
+
+  //PIN behavior
   clickPin(pin: any) {
     let pos = pin.target.options.container_pos;
     this.currentContainer = this.containers[pos];
@@ -235,13 +267,26 @@ export class MapService {
   get pinClicked() {
     return this._pinClick.asObservable();
   }
-  private _pinClick = new BehaviorSubject<boolean>(false)
+
+  //MAP behavior
   mapChanges(){
-    console.log('Map changes...');
-    this._mapChange.next(true);
+    //Si no es una animación auto);
+    if ( !this.animating && this.animating != undefined ) {
+      this._mapChangeSub.next(true);
+    }
   }
   get mapChanged() {
-    return this._mapChange.asObservable();
+    return this._mapChangeSub.asObservable();
   }
-  private _mapChange = new BehaviorSubject<boolean>(false)
+  //Create additional Control placeholders, to group all control buttons
+  /*addControlPlaceholders(map: L.Map) {
+   const corners = map._controlCorners;
+   const l = 'leaflet-';
+   const toolsPanel = map._controlContainer;
+   function createCorner(vSide, hSide) {
+       const className = l + vSide + ' ' + l + hSide;
+       corners[vSide + hSide] = L.DomUtil.create('div', className, toolsPanel);
+   }
+   createCorner('verticalcenter', 'left');
+ }*/
 }

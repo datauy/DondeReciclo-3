@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 import { File } from '@ionic-native/file/ngx';
 
 import { ContainerType, Container, Material, SearchParams, Program } from "src/app/models/basic_models.model";
+import { News } from "src/app/models/news.model";
+import { SessionService } from 'src/app/services/session.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,6 @@ export class ApiService<T=any> {
   materials: Material[];
   predefinedSearch: SearchParams[];
   suggestVisibility: boolean;
-  noResultMessage: boolean;
   remoteFile: any;
 
   // Search
@@ -26,6 +27,7 @@ export class ApiService<T=any> {
   //Search property for non results
   constructor(
     private request: HttpClient,
+    public session: SessionService,
     private file: File
   ) {}
   httpOptions = {
@@ -39,7 +41,7 @@ export class ApiService<T=any> {
     // console.log("API loading initial");
     return this.loadContainerTypes().pipe(
       switchMap( () => this.loadMaterials() ),
-      switchMap( () => this.loadPredefinedSearchs() ),
+      switchMap( () => this.loadPredefinedSearch() ),
     );
   }
   //
@@ -51,24 +53,40 @@ export class ApiService<T=any> {
     ));
   }
   //
+  getMaterials(ids: number[]) :Material[] {
+    let res = [];
+    if (!this.materials) {
+      this.loadMaterials();
+    }
+    ids.forEach(id => res.push(this.materials[id]));
+    // console.log(res);
+    return res;
+  }
+  getWastes(ids: number[]) :Observable<Material[]>  {
+    return this.request.get(environment.backend + "wastes?ids=" + ids.join()).pipe(
+      map( (result: Material[]) => {
+        return result;
+      })
+    );
+  }
+  //
   loadMaterials(): Observable<Material[]> {
     return this.request.get(environment.backend + "materials").pipe(
       map((result: Material[]) => {
         //Check images
-        for (let key in result) {
+        /*for (let key in result) {
           // TODO: Check type
           if (result[key].icon) {
             this.downloadFile(result[key].icon, 'dr-'+result[key].class+'.svg', 'custom-icons');
           }
-        }
+        }*/
         return this.materials = result;
       })
     );
   }
   //
-  loadPredefinedSearchs(): Observable<SearchParams[]> {
+  loadPredefinedSearch(): Observable<SearchParams[]> {
     this.suggestVisibility = true;
-    this.noResultMessage = false;
     return this.request.get(environment.backend + "search_predefined").pipe(
       map((result: SearchParams[]) => {
         return this.predefinedSearch = this.formatSearchOptions(result);
@@ -90,36 +108,84 @@ export class ApiService<T=any> {
       }
     ));
   }
+  loadProgramSummary() {
+    return  this.request.get(environment.backend + "programs_sum").pipe(map(
+      (result: Program[]) => {
+        return result;
+      }
+    ));
+  }
+    /**********************/
+   /*        News         */
+  /**********************/
+  //
+  getNewsList(page: number) {
+    return  this.request.get(environment.backend + "news?page="+page).pipe(map(
+      (result: News[]) => {
+        return result;
+      }
+    ));
+  }
+  //
+  getNew(id: number, full: boolean) {
+    var url = environment.backend + "new/"+id;
+    if (full) {
+      url += "?full=1"
+    }
+    console.log(url);
+    return  this.request.get(url).pipe(map(
+      (result: News) => {
+        return result;
+      }
+    ));
+  }
     /**********************/
    /*        Map         */
   /**********************/
   //
-  getNearbyContainers(location?: [number, number]) {
+  getContainer(id: number) {
+    return  this.request.get(environment.backend + "container/"+id).pipe(map(
+      (result: Container) => {
+        return result;
+      }
+    ));
+  }
+  //
+  getNearbyContainers(radius: number, location?: [number, number]) {
     if (typeof location == 'undefined') {
       location = [-32.657689, -55.873808];
     }
-    return  this.request.get(environment.backend + "containers_nearby?lat="+location[0]+"&lon="+location[1]).pipe(map(
+    return  this.request.get(environment.backend + "containers_nearby?lat="+location[0]+"&lon="+location[1]+"radius="+radius).pipe(map(
+      (result: Container[]) => {
+        return result;
+      }
+    ));
+  }
+  getContainers(bbox: string[]) {
+    return  this.request.get(environment.backend + "containers_bbox?sw="+bbox[0]+"&ne="+bbox[1]).pipe(map(
+      (result: Container[]) => {
+        return result;
+      }
+    ));
+  }
+  getContainers4Materials(bbox: string[], query: string) {
+    return  this.request.get(environment.backend + "containers_bbox4materials?sw="+bbox[0]+"&ne="+bbox[1]+"&"+query).pipe(map(
       (result: Container[]) => {
         return result;
       }
     ));
   }
   //
-  getMaterials(ids: []) :Material[] {
-    let res = [];
-    if (!this.materials) {
-      this.loadMaterials();
-    }
-    ids.forEach(id => res.push(this.materials[id]));
-    // console.log(res);
-    return res;
-  }
-  //
-  getContainersByMaterials(ids: number[], location?: number[]) {
+  getContainersByMaterials(query: string, location?: number[]) {
+    var url = environment.backend + "containers4materials?"+query;
     if ( typeof location == 'undefined' || location == null ) {
       location = environment.ucenter;
     }
-    return  this.request.get(environment.backend + "containers4materials?materials="+ids.join(',')+"&lat="+location[0]+"&lon="+location[1]).pipe(map(
+    else {
+      // TODO: Definir comportamiento en base a caso de uso ya que cambia la query del back también
+    }
+    url += "&lat="+location[0]+"&lon="+location[1];
+    return  this.request.get(url).pipe(map(
       (result: Container[]) => {
         return result;
       }
@@ -131,26 +197,21 @@ export class ApiService<T=any> {
   /***********************/
   //
   getResults(str: string){
-    if (str.length < 2) {
-      this.suggestVisibility = true;
-      this.noResultMessage = false;
-      return false;
-    }else{
+    if ( str != undefined && str.length >= 3 && ( this.session.searchItem == undefined || str != this.session.searchItem.name ) ) {
       this.suggestVisibility = false;
+    }
+    else {
+      this.suggestVisibility = true;
+      return false;
     }
     return  this.request.get(environment.backend + "search?q="+str).pipe(map(
       (result: any[]) => {
         if (result.length) {
-          this.noResultMessage = false;
-          // if (result.length > 1) {
-          //   this.suggestVisibility = false;
-          // }
           return this.formatSearchOptions(result);
         }
         else {
           this.suggestVisibility = true;
-          this.noResultMessage = true;
-          return [];
+          return false;
         }
       }
     ));
@@ -164,11 +225,13 @@ export class ApiService<T=any> {
       option.material_id = 5;
     }
     res.push({
-      class: this.materials[option.material_id].class,
+      id: option.id,
+      type: option.type,
       name: option.name,
-      icon: this.materials[option.material_id].icon,
       material_id: option.material_id,
-      deposition: option.deposition
+      class: this.materials[option.material_id].class,
+      icon: this.materials[option.material_id].icon,
+      deposition: option.deposition,
     });
   });
   return res;

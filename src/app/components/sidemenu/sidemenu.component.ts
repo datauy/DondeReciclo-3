@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonMenu, MenuController, IonSearchbar, NavController } from '@ionic/angular';
 import { ApiService } from "src/app/services/api.service";
-import { createAnimation, Animation } from '@ionic/core';
-
+import { SessionService } from "src/app/services/session.service";
+import { AuthService } from "src/app/services/auth.service";
+//import { createAnimation, Animation } from '@ionic/core';
 @Component({
   selector: 'app-sidemenu',
   templateUrl: './sidemenu.component.html',
@@ -11,12 +12,11 @@ import { createAnimation, Animation } from '@ionic/core';
 export class SidemenuComponent implements OnInit {
 
   @ViewChild(IonMenu, { static: false }) public sidemenu: IonMenu;
-  @ViewChild("#search-app-component", { static: false }) private searchBar: HTMLElement;
-
+  //@ViewChild("#search-app-component", { static: false }) private searchBar: HTMLElement;
   public appPages = [
     {
       title: 'Novedades',
-      desc: 'Clasificación y reciclaje en Uruguay',
+      desc: 'Sobre clasificación y reciclaje',
       url: 'novedades',
       icon: 'dr-newspaper'
     },
@@ -32,17 +32,22 @@ export class SidemenuComponent implements OnInit {
       url: 'empresas',
       icon: 'dr-empresas'
     }
+    //,
+    //{
+      //title: 'Inicio',
+      //desc: 'Volver al mapa',
+      //url: 'intro',
+      //icon: 'dr-inicio'
+    //}
   ];
 
 
   constructor(
     private menuCtrl: MenuController,
-    public api: ApiService<any>,
-    // private router: Router
+    public api: ApiService,
+    public session: SessionService,
+    public auth: AuthService,
   ) {
-    // this.sidemenu.ionWillOpen.subscribe(data => {
-    //     console.log('menu open');
-    // });
   }
 
   ngOnInit() {
@@ -53,14 +58,22 @@ export class SidemenuComponent implements OnInit {
   toggleMenu(){
     this.menuCtrl.toggle(); //Add this method to your button click function
   }
-
-
-  menuWillOpen(){
+  //
+  introSlide() {
+    this.menuCtrl.toggle();
+    this.session.watchSlider(true);
+  }
+  //
+  menuWillOpen() {
     // this.searchBar.classList.add('hide');
   }
-
-  menuWillClose(){
+  //
+  menuWillClose() {
     // this.searchBar.classList.remove('hide');
+  }
+  closeSession() {
+    this.auth.logout();
+    this.toggleMenu();
   }
 
 }

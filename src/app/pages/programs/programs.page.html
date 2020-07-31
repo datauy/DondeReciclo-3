@@ -2,20 +2,24 @@
 <ion-content>
   <div class="section-header">
     <h1>Programas</h1>
-    <h2 class="sub-light">Proyecto realizado por DATA y CEMPRE en pro del cuidado del medio ambiente</h2>
+    <h2 class="sub-light">Información sobre los distintos programas disponibles de recepción de residuos reciclables.</h2>
   </div>
-  <ion-slides #programSlider (ionSlideWillChange)="slideChanging()" pager>
+  <ion-button class="swiper-prev" (click)="prevSlide()"></ion-button>
+  <ion-button class="swiper-next" (click)="nextSlide()"></ion-button>
+  <ion-slides #programSlider pager="true" [options]="slideOpts">
     <ion-slide *ngFor="let slide of programs">
       <div class="slide-container">
         <div class="slide-head">
-          <img [src]="slide.logo_url" class="slide-image" alt="slide.shortname"/>
+          <div class="image-wrapper">
+            <img [src]="slide.logo_url" class="slide-image" alt="slide.shortname"/>
+          </div>
         </div>
         <div class="slide-content">
           <div class="slide-header">
             <h2 class="title" [innerHTML]="slide.shortname"></h2>
-            <a href="slide.responsable_url" [innerHTML]="slide.responsable"></a>
+            <a href="{{slide.responsable_url}}" target="_blank" [innerHTML]="slide.responsable"></a>
             <div class="slide-description" [innerHTML]="slide.information"></div>
-            <a class="more" href="slide.more_info">Más información</a>
+            <a class="more" href="{{slide.more_info}}" target="_blank">Más información</a>
           </div>
           <div class="slide-cobertura section">
             <div class="slide-title">Cobertura</div>

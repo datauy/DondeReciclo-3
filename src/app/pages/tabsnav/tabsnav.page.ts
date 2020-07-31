@@ -28,10 +28,6 @@ export class TabsnavPage implements AfterViewInit {
     private keyboard: Keyboard,
     public session: SessionService
   ) {
-    if (!this.session.get('showSlider')) {
-      this.session.set('showSlider', 'visible');
-    }
-
     if (environment.production) {
       this.showingKeyboard = this.keyboard.isVisible;
       console.log('production');

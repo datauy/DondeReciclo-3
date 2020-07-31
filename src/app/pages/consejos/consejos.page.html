@@ -1,7 +1,4 @@
-<app-header display="full"
-  title="Consejos"></app-header>
-
-
+<app-header display="full"></app-header>
 <ion-content>
 
   <div class="consejos-top">
@@ -10,11 +7,13 @@
     <p>Proponemos 3 niveles para que clasifiques tus residuos en casa, en función del compromiso que puedas asumir y las soluciones que tengas a tu alcance.
       Esta clasificación se basa en la <a href="http://www.unit.org.uy/normalizacion/norma/100000838/">norma técnica UNIT de Identificación y Clasificación de Residuos nro. 1239:2017 de Uruguay.</a></p>
   </div>
-  <ion-slides pager="true">
+  <ion-button class="swiper-prev" (click)="prevSlide()"></ion-button>
+  <ion-button class="swiper-next" (click)="nextSlide()"></ion-button>
+  <ion-slides #advise pager="true" [options]="slideOpts">
     <ion-slide>
-      <p>
+      <div class="image-wrapper">
         <img src="assets/img/ilustraciones-clasificaci-n-b-sica.svg" alt="">
-      </p>
+      </div>
       <div class="slide-content">
         <span class="subtitle">Tipos de clasificación</span>
         <h2>Clasificación básica</h2>
@@ -29,28 +28,28 @@
             <ion-item lines="none">
               <div class="item-text">
                 <ion-label>Plásticos</ion-label>
-                <ion-note slot="start">Botellas, Bolsas, Tapas y Envases</ion-note>
+                <ion-note slot="start">Botellas, bolsas, tapas y envases</ion-note>
               </div>
               <img src="/assets/img/iplasticos.svg">
             </ion-item>
             <ion-item lines="none">
               <div class="item-text">
                 <ion-label>Papel y Cartón</ion-label>
-                <ion-note slot="start">Botellas y Frascos</ion-note>
+                <ion-note slot="start">Cajas, papel limpio, hojas usadas</ion-note>
               </div>
               <img src="/assets/img/ipapel-y-carton.svg">
             </ion-item>
             <ion-item lines="none">
               <div class="item-text">
                 <ion-label>Vidrios</ion-label>
-                <ion-note slot="start">Botellas y Frascos</ion-note>
+                <ion-note slot="start">Botellas y frascos</ion-note>
               </div>
               <img src="/assets/img/ividrios.svg">
             </ion-item>
             <ion-item lines="none">
               <div class="item-text">
                 <ion-label>Metales</ion-label>
-                <ion-note slot="start">Latas, Conservas y Tapas</ion-note>
+                <ion-note slot="start">Latas, conservas y tapas</ion-note>
               </div>
               <img src="/assets/img/imetales.svg">
             </ion-item>
@@ -77,7 +76,7 @@
             </ion-item>
           </ion-list>
           <ion-item lines="none">
-            Todos los materiales que pueden ser valorizados
+            Todos los materiales que pueden ser valorizados.
           </ion-item>
         </accordion>
 
@@ -135,15 +134,15 @@
             </ion-item>
           </ion-list>
           <ion-item lines="none">
-            Todos los residuos sin alternativa ded valorización o de manejo específico.
+            Todos los residuos sin alternativa de valorización o de manejo específico.
           </ion-item>
         </accordion>
       </div>
     </ion-slide>
     <ion-slide>
-      <p>
+      <div class="image-wrapper">
         <img src="assets/img/ilustraciones-clasificaci-n-intermedia.svg" alt="">
-      </p>
+      </div>
       <div class="slide-content">
         <span class="subtitle">Tipos de clasificación</span>
         <h2>Clasificación intermedia</h2>
@@ -156,28 +155,28 @@
             <ion-item lines="none">
               <div class="item-text">
                 <ion-label>Plásticos</ion-label>
-                <ion-note slot="start">Botellas, Bolsas, Tapas y Envases</ion-note>
+                <ion-note slot="start">Botellas, bolsas, tapas y envases</ion-note>
               </div>
               <img src="/assets/img/iplasticos.svg">
             </ion-item>
             <ion-item lines="none">
               <div class="item-text">
                 <ion-label>Papel y Cartón</ion-label>
-                <ion-note slot="start">Botellas y Frascos</ion-note>
+                <ion-note slot="start">Botellas y frascos</ion-note>
               </div>
               <img src="/assets/img/ipapel-y-carton.svg">
             </ion-item>
             <ion-item lines="none">
               <div class="item-text">
                 <ion-label>Vidrios</ion-label>
-                <ion-note slot="start">Botellas y Frascos</ion-note>
+                <ion-note slot="start">Cajas, papel limpio, hojas usadas</ion-note>
               </div>
               <img src="/assets/img/ividrios.svg">
             </ion-item>
             <ion-item lines="none">
               <div class="item-text">
                 <ion-label>Metales</ion-label>
-                <ion-note slot="start">Latas, Conservas y Tapas</ion-note>
+                <ion-note slot="start">Latas, conservas y tapas</ion-note>
               </div>
               <img src="/assets/img/imetales.svg">
             </ion-item>
@@ -204,7 +203,7 @@
             </ion-item>
           </ion-list>
           <ion-item lines="none">
-            Todos los materiales que pueden ser valorizados
+            Todos los materiales que pueden ser valorizados.
           </ion-item>
         </accordion>
 
@@ -256,7 +255,7 @@
             </ion-item>
           </ion-list>
           <ion-item lines="none">
-            Todos los residuos sin alternativa ded valorización o de manejo específico.
+            Todos los residuos sin alternativa de valorización o de manejo específico.
           </ion-item>
         </accordion>
 
@@ -282,19 +281,21 @@
               </div>
               <img src="/assets/img/iramas.svg">
             </ion-item>
+            <ion-item lines="none" class="accordion-text">
+              <div>
+                Todos los residuos proveniente de alimentos vegetales y jardinería.<br>
+                Cuidado: no disponer residos peligros como insecticidas.<br>
+                Más información sobre: <a href="https://cempre.org.uy/compostaje/">Compostaje en casa</a>
+              </div>
+            </ion-item>
           </ion-list>
-          <ion-item lines="none">
-            <div><p>Todos los residuos proveniente de alimentos vegetales y jardinería.</p></div>
-            <div><p>Cuidado: no disponer residos peligros como insecticidas.</p></div>
-            <div><p>Más información sobre: <a href="https://cempre.org.uy/compostaje/">Compostaje en casa</a></div>
-          </ion-item>
         </accordion>
       </div>
     </ion-slide>
     <ion-slide>
-      <p>
+      <div class="image-wrapper">
         <img src="assets/img/ilustraciones-clasificaci-n-avanzada.svg" alt="">
-      </p>
+      </div>
       <div class="slide-content">
         <span class="subtitle">Tipos de clasificación</span>
         <h2>Clasificación avanzada</h2>
@@ -307,28 +308,28 @@
             <ion-item lines="none">
               <div class="item-text">
                 <ion-label>Plásticos</ion-label>
-                <ion-note slot="start">Botellas, Bolsas, Tapas y Envases</ion-note>
+                <ion-note slot="start">Botellas, bolsas, tapas y envases</ion-note>
               </div>
               <img src="/assets/img/iplasticos.svg">
             </ion-item>
             <ion-item lines="none">
               <div class="item-text">
                 <ion-label>Papel y Cartón</ion-label>
-                <ion-note slot="start">Botellas y Frascos</ion-note>
+                <ion-note slot="start">Cajas, papel limpio, hojas usadas</ion-note>
               </div>
               <img src="/assets/img/ipapel-y-carton.svg">
             </ion-item>
             <ion-item lines="none">
               <div class="item-text">
                 <ion-label>Vidrios</ion-label>
-                <ion-note slot="start">Botellas y Frascos</ion-note>
+                <ion-note slot="start">Botellas y frascos</ion-note>
               </div>
               <img src="/assets/img/ividrios.svg">
             </ion-item>
             <ion-item lines="none">
               <div class="item-text">
                 <ion-label>Metales</ion-label>
-                <ion-note slot="start">Latas, Conservas y Tapas</ion-note>
+                <ion-note slot="start">Latas, conservas y tapas</ion-note>
               </div>
               <img src="/assets/img/imetales.svg">
             </ion-item>
@@ -355,7 +356,7 @@
             </ion-item>
           </ion-list>
           <ion-item lines="none">
-            Todos los materiales que pueden ser valorizados
+            Todos los materiales que pueden ser valorizados.
           </ion-item>
         </accordion>
 
@@ -407,7 +408,7 @@
             </ion-item>
           </ion-list>
           <ion-item lines="none">
-            Todos los residuos sin alternativa ded valorización o de manejo específico.
+            Todos los residuos sin alternativa de valorización o de manejo específico.
           </ion-item>
         </accordion>
 
@@ -463,8 +464,7 @@
         </accordion>
       </div>
     </ion-slide>
-    <span class="subtitle">Tipos de clasificación</span>
-    <p>Consultá la guía de buenas prácticas de CEMPRE</p>
   </ion-slides>
-
+  <span class="subtitle">¿Querés aprender más?</span>
+  <p>Consultá la <a href="https://cempre.org.uy/buenas-practicas/">guía de buenas prácticas de CEMPRE.</a></p>
 </ion-content>
