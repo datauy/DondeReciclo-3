@@ -60,12 +60,35 @@
         .slide-title {
           font-size: 20px;
           font-weight: bold;
+          margin-bottom: 12px;
         }
         .slide-body {
           margin: 10px 0 20px 0;
         }
         .slide-description {
           margin: 10px 0;
+        }
+        .slide-body {
+          display: inline-block;
+          margin-left: 2px;
+          margin-right: 12px;
+          margin-top: 4px;
+          margin-bottom: 4px;
+        }
+        .location-tag {
+          margin-top: 20px;
+        }
+        .slide-body-supporters {
+          display: inline-block;
+          margin-right: 12px;
+        }
+        .slide-body-supporters:after {
+          content: ", ";
+          color: var(--pale-olive-green);
+        }
+        .slide-body-supporters:nth-last-of-type(1):after {
+          content: ". ";
+          color: var(--pale-olive-green);
         }
         .receives::before,
         .receives-no::before {
