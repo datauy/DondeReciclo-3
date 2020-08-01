@@ -66,17 +66,23 @@
             <ion-input formControlName="age" type="number"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label position="floating">Password</ion-label>
+            <ion-label position="floating">Contraseña</ion-label>
             <ion-input formControlName="password" type="password"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label position="floating">Confirm Password</ion-label>
+            <ion-label position="floating">Confirmar contraseña</ion-label>
             <ion-input formControlName="confirmPassword" type="password"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label>Términos y condiciones</ion-label>
+            <ion-note class="tc">
+            <p>De conformidad con la Ley N° 18.331, de Protección de Datos Personales y Acción de Habeas Data, de 11 de agosto de 2008 (LPDP), los datos suministrados quedarán incorporados en la Base de Datos “Usuarios/as DATA”, la cual será procesada exclusivamente para la finalidad de administrar acceso a herramientas en línea y obtener estadísticas de uso. Esos datos se recogerán a través de medios legítimos y sólo serán los imprescindibles para poder prestar el servicio requerido. Los datos personales serán tratados con el grado de protección adecuado, tomándose las medidas de seguridad necesarias para evitar su alteración, pérdida, tratamiento o acceso no autorizado por parte de terceros. El responsable de la Base de Datos es Datos Abiertos, Transparencia y Acceso a la Información D.A.T.A. y la dirección donde el titular podrá ejercer los derechos de acceso, rectificación, actualización, inclusión o supresión es contacto@datauy.org.</p>
+            </ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label>Acepto términos y condiciones</ion-label>
             <ion-input formControlName="tc" type="checkbox"></ion-input>
           </ion-item>
+
           <ion-row class="ion-justify-content-center section-header">
             <ion-col  size-md="7" size-lg="7" size-xs="12">
               <ion-button  size="large" type="submit" class="submit">Enviar</ion-button>
@@ -85,7 +91,7 @@
         </form>
         <div *ngIf="success">
           <h3>Se ha enviado exitosamente</h3>
-          <p>Tu mensaje ha sido ingresado en nuestro sistema de manejo de solicitudes, en breves te estará llegando un correo indicando el número de solicitud y otros datos relevantes para mantenernos en contacto. A la brevedad nuestro equipo se estará comunicando contigo respecto a tu comentario. Muchas gracias</p>
+          <p>Tu mensaje ha sido ingresado en nuestro sistema de manejo de solicitudes, en breve te estará llegando un correo indicando el número de solicitud y otros datos relevantes para mantenernos en contacto. A la brevedad nuestro equipo se estará comunicando contigo respecto a tu comentario. Muchas gracias</p>
           <ion-button class="submit" [routerLink]='["/intro/mapa"]'>Volver al inicio</ion-button>
         </div>
         <div *ngIf="fail">
