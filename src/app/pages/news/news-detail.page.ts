@@ -23,23 +23,17 @@ export class NewsDetailPage implements OnInit {
 
   ngOnInit() {
     this.nid = this.route.snapshot.params['novedadID'];
-    console.log('EN DETAILS -> ' + this.nid);
     if ( this.session.get('news') && this.session.get('news')[this.nid]) {
       var news = this.session.get('news');
-      console.log("entra por hay news");
       this.article = news[this.nid];
-      console.log(this.article);
       this.api.getNew(this.nid, false).subscribe( (art: News) =>  {
         this.article = {...news[this.nid], ...art};
       });
     }
     else {
-      console.log("no hay news");
       this.api.getNew(this.nid, true).subscribe( (news: News) =>  {
         this.article = news;
-        console.log(this.article);
       });
     }
-    console.log(this.article);
   }
 }

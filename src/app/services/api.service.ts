@@ -132,7 +132,6 @@ export class ApiService<T=any> {
     if (full) {
       url += "?full=1"
     }
-    console.log(url);
     return  this.request.get(url).pipe(map(
       (result: News) => {
         return result;

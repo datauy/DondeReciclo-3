@@ -180,10 +180,14 @@ export class MapService {
       mapBounds.push(this.userPosition);
     }
     var markersLayer = []
+    let center_markers = 10;
     for (var i = 0; i < markers.length; i++) {
       var newMarker = new L.CustomMarker([markers[i].latitude,markers[i].longitude], {container_pos: i, className: "ion-color-"+markers[i].class })
       .on('click', this.clickPin, this); //L.bind(this.showPane, null, markers[i]))
-      mapBounds.push([markers[i].latitude, markers[i].longitude]);
+      if ( center_markers != 0 ) {
+        mapBounds.push([markers[i].latitude, markers[i].longitude]);
+        center_markers = center_markers - 1;
+      }
       markersLayer.push(newMarker);
     }
     this.markers = L.layerGroup(markersLayer).addTo(this.map);

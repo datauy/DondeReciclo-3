@@ -73,11 +73,14 @@ export class SearchComponent implements OnInit {
     this.api.getContainersByMaterials(item.type+"="+item.id, pos).subscribe(
       (containers) => {
         if (this.map.loadMarkers(containers, true) == 0){
-          this.session.searchItem = {
+          let noRes = {
+            id: null,
+            type: 'notification',
             class: 'warnings',
             name: 'No hay resultados para: '+item.name,
             deposition: 'No hay contenedores a menos de 300 km. de su ubicación'
           };
+          this.session.showNotification(noRes);
         }
         else {
           this.session.searchItem = item;
@@ -92,7 +95,7 @@ export class SearchComponent implements OnInit {
     );
   }
   closeSelection() {
-    delete this.session.searchItem;
+    this.session.notificationClose();
     //reload pins
     this.map.mapChanges();
   }
