@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Event, Router, NavigationEnd } from '@angular/router';
 import { Storage } from '@ionic/storage';
+import { Notification } from 'src/app/models/basic_models.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,8 @@ export class SessionService {
   //Country
   country: string = "Uruguay";
   //Search items
-  searchItem: any;
+  searchItem: Notification;
+  searchItemBack: Notification;
   showSearchItem: boolean = true;
   //Initial Slider
   showSlider: boolean;
@@ -67,5 +69,21 @@ export class SessionService {
   set( key: string, value: any ) {
     this[key] = value;
     return 1;
+  }
+  /*****  SEARCH NOTIFICATIONS  *******/
+  showNotification(notification: Notification) {
+    if ( this.searchItem ) {
+      this.searchItemBack = this.searchItem;
+    }
+    this.searchItem = notification;
+  }
+  notificationClose() {
+    if ( this.searchItemBack ) {
+      this.searchItem = this.searchItemBack;
+      delete this.searchItemBack;
+    }
+    else {
+      delete this.searchItem
+    }
   }
 }

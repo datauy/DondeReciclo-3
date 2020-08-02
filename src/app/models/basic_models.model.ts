@@ -67,3 +67,11 @@ export class Program extends Base {
   locations_arr: string[];
   icon: string;
 }
+
+export interface Notification {
+    id: number;
+    type: string;
+    name: string;
+    class: string;
+    deposition: string;
+}

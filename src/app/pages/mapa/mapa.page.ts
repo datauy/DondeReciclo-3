@@ -74,20 +74,20 @@ export class MapaPage implements OnInit {
       this.uLocation = true;
       this.api.getNearbyContainers(2, this.map.userPosition).subscribe(
         (containers) => {
-          this.map.loadMarkers(containers, false);
+          this.map.loadMarkers(containers, true);
         }
       );
-      this.map.flytomarker(this.map.userPosition, 15);
+      //this.map.flytomarker(this.map.userPosition, 15);
     }
     //Wait 3 seconds for user location and start loading LOad nearbymap
     setTimeout( async () => {
       if ( !this.uLocation ) {
         this.api.getNearbyContainers(0.5, [environment.ucenter[0], environment.ucenter[1]]).subscribe(
           (containers) => {
-            this.map.loadMarkers(containers, false);
+            this.map.loadMarkers(containers, true);
           }
         );
-        this.map.flytomarker([environment.ucenter[0],environment.ucenter[1]] , 17);
+        //this.map.flytomarker([environment.ucenter[0],environment.ucenter[1]] , 17);
       }
     }, 3000);
   }
@@ -117,7 +117,8 @@ export class MapaPage implements OnInit {
   //   }
   // }
   loadInfoPane() {
-    var initPane = 'middle';
+    var initPane: ('top' | 'middle' | 'bottom');
+    initPane = 'middle';
     var topBreak = window.innerHeight*.9;
     if ( window.innerWidth >= 560 ) {
       initPane = 'top';
@@ -204,19 +205,26 @@ export class MapaPage implements OnInit {
       this.map.userPosition = [resp.coords.latitude, resp.coords.longitude];
       this.api.getNearbyContainers(2, [resp.coords.latitude, resp.coords.longitude]).subscribe(
         (containers) => {
-          this.map.loadMarkers(containers, false);
+          this.map.loadMarkers(containers, true);
         }
       );
-      this.map.flytomarker(this.map.userPosition, 15);
+      //this.map.flytomarker(this.map.userPosition, 15);
     }).catch((error) => {
-      console.log('Error getting location', error);
+      let noRes = {
+        id: null,
+        type: 'notification',
+        class: 'warnings',
+        name: 'No pudimos localizarte',
+        deposition: 'Quizás no le diste permiso a la app para hacerlo o la localización está desactivada.'
+      };
+      this.session.showNotification(noRes);
       this.uLocation = true;
-      this.api.getNearbyContainers(0.5, [environment.ucenter[0], environment.ucenter[1]]).subscribe(
+      this.api.getNearbyContainers(1, [environment.ucenter[0], environment.ucenter[1]]).subscribe(
         (containers) => {
-          this.map.loadMarkers(containers, false);
+          this.map.loadMarkers(containers, true);
         }
       );
-      this.map.flytomarker([environment.ucenter[0],environment.ucenter[1]] , 17);
+      //this.map.flytomarker([environment.ucenter[0],environment.ucenter[1]] , 18);
     });
   }
   //

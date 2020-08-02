@@ -19,15 +19,11 @@ export class NewsPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.session);
     if ( this.session.get('news') ) {
-      console.log('EN NEWS : hay news');
       this.news = Object.values( this.session.get('news') );
     }
     else {
-      console.log('EN NEWS : no hay news');
       this.api.getNewsList(0).subscribe( (news: News[]) =>  {
-        console.log(news);
         this.session.set('news', news);
         this.news = Object.values(news);
         //Load news in memory so we don't have to
