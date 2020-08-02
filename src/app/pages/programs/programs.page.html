@@ -29,8 +29,8 @@
           </div>
           <div class="slide-supporters section">
             <div class="slide-title">Apoyan</div>
-            <div class="slide-body" *ngFor="let supporter of slide.supporters_arr">
-              <a href="{{supporter.url}}" [innerHTML]="supporter.name"></a>
+            <div class="slide-body-supporters" *ngFor="let supporter of slide.supporters_arr">
+                <a href="{{supporter.url}}" [innerHTML]="supporter.name"></a>
             </div>
           </div>
           <div class="receives section">
