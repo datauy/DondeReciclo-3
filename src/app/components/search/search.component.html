@@ -14,7 +14,7 @@
   </ion-auto-complete>
 
   <div id="suggestions" [ngClass]="(api.suggestVisibility && searchVisibility) ? 'show expand' : 'hide shrink'">
-    <ion-list-header>Búsquedas sugeridas</ion-list-header>
+    <ion-list-header>Materiales/residuos sugeridos:</ion-list-header>
     <div class="resultsWrap">
       <ion-button [color]="predefined.class"
         *ngFor="let predefined of predefinedOptions;"
