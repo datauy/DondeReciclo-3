@@ -49,10 +49,7 @@ export class AppComponent {
 
   ngAfterViewInit() {
     setTimeout( () => {
-      // this.session.set('isLoading', 'false');
-      // this.isLoading = false;
       this.session.isLoading = false;
-      console.log("isloading app: ", this.session.isLoading);
     }, 3000);
   }
 }

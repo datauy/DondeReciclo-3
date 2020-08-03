@@ -1,7 +1,7 @@
 # Donde Reciclo v3.1
 Basada en Ionic5, Angular 8 y usando las últimas tecnologías de CSS4 y HTML5 para generar una mejor experiencia de usuario y contenidos exportables a Android e IOS así como las nuevas Web Apps.
 
-## Incluye
+## Incluye v3.1.3
 
 * Menú principal y secundario con navegación móvil y desktop
 * Mapa con geolocaliazción y centros de reciclaje
