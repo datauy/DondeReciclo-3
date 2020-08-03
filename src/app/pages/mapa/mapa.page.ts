@@ -39,7 +39,6 @@ export class MapaPage implements OnInit {
     this.session = session;
     this.map.pinClicked.subscribe(
       pinData => {
-        console.log(pinData);
         if ( pinData ) {
           this.showPane();
         }
@@ -80,7 +79,7 @@ export class MapaPage implements OnInit {
       //this.map.flytomarker(this.map.userPosition, 15);
     }
     //Wait 3 seconds for user location and start loading LOad nearbymap
-    setTimeout( async () => {
+    setTimeout( () => {
       if ( !this.uLocation ) {
         this.api.getNearbyContainers(0.5, [environment.ucenter[0], environment.ucenter[1]]).subscribe(
           (containers) => {
@@ -89,7 +88,7 @@ export class MapaPage implements OnInit {
         );
         //this.map.flytomarker([environment.ucenter[0],environment.ucenter[1]] , 17);
       }
-    }, 3000);
+    }, 4000);
   }
   //
   ionViewWillLeave() {
@@ -171,7 +170,6 @@ export class MapaPage implements OnInit {
     this.api.getContainer(this.map.currentContainer.id).subscribe((container) => {
       this.formatContainer(container);
       this.infoPane.present({animate: true});
-      console.log(this.container);
       if ( this.map.userPosition ) {
         if ( this.map.route != null ) {
           this.map.route.spliceWaypoints(1, 1, [this.container.latitude, this.container.longitude]);
@@ -210,14 +208,7 @@ export class MapaPage implements OnInit {
       );
       //this.map.flytomarker(this.map.userPosition, 15);
     }).catch((error) => {
-      let noRes = {
-        id: null,
-        type: 'notification',
-        class: 'warnings',
-        name: 'No pudimos localizarte',
-        deposition: 'Quizás no le diste permiso a la app para hacerlo o la localización está desactivada.'
-      };
-      this.session.showNotification(noRes);
+      this.noLocation();
       this.uLocation = true;
       this.api.getNearbyContainers(1, [environment.ucenter[0], environment.ucenter[1]]).subscribe(
         (containers) => {
@@ -226,6 +217,21 @@ export class MapaPage implements OnInit {
       );
       //this.map.flytomarker([environment.ucenter[0],environment.ucenter[1]] , 18);
     });
+    setTimeout( () => {
+      if ( !this.uLocation ){
+        this.noLocation();
+      }
+    }, 5000);
+  }
+  noLocation() {
+    let noRes = {
+      id: null,
+      type: 'notification',
+      class: 'warnings',
+      name: 'No pudimos localizarte',
+      deposition: 'Quizás no le diste permiso o la localización está desactivada. Prueba iniciar la app con la localización activada.'
+    };
+    this.session.showNotification(noRes);
   }
   //
   formatContainer(container: Container) {
