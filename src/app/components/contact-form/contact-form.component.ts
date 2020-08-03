@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UtilsService } from "src/app/services/utils.service";
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
   selector: 'app-contact-form',
@@ -17,6 +18,7 @@ export class ContactFormComponent implements OnInit {
     public utils: UtilsService,
     public formBuilder: FormBuilder,
     private route: ActivatedRoute,
+    private session: SessionService,
   ) { }
 
   user_data: FormGroup;
@@ -38,8 +40,9 @@ export class ContactFormComponent implements OnInit {
   }
 
   register() {
+    this.session.isLoading = true;
     this.utils.openTicket(this.user_data.value).subscribe((res) => {
-      console.log(res);
+      this.session.isLoading = false;
       if (res) {
         this.success = true;
       }
