@@ -94,7 +94,7 @@
         </ion-item>
         <ion-item class= "register"
           *ngIf="!auth.isLogged">
-          <ion-button routerLink="usuario/nuevo" size="large" type="submit" class="submit">Registrarme</ion-button>
+          <ion-button (click)="toggleMenu()" routerLink="usuario/nuevo" size="large" type="submit" class="submit">Registrarme</ion-button>
         </ion-item>
         <ion-item lines="none"
           (click)="introSlide()"

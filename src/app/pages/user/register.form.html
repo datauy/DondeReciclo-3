@@ -5,15 +5,6 @@
 <ion-content>
   <ion-grid>
     <ion-row class="ion-justify-content-center">
-      <ion-col  size-md="9" size-lg="8" size-xs="12">
-        <div class="section-header">
-          <h1>Envianos un mensaje</h1>
-          <h2 class="sub-light">¿Dudas o sugerencias? ¡Escribinos!<br>
-          También recomendamos ver la <a href="http://soporte.data.org.uy/es/folder/5" target="_blank">ayuda</a> del proyecto.</h2>
-        </div>
-      </ion-col>
-    </ion-row>
-    <ion-row class="ion-justify-content-center">
       <ion-col  size-md="9" size-lg="6" size-xs="12">
         <form [formGroup]="user_data" (ngSubmit)="register()" *ngIf="!( success || fail )">
           <ion-item>
@@ -59,7 +50,7 @@
           </ion-item>
           <ion-item>
             <ion-label position="floating">Barrio</ion-label>
-            <ion-input formControlName="neighbor" type="text"></ion-input>
+            <ion-input formControlName="neighborhood" type="text"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position="floating">Edad</ion-label>
@@ -73,14 +64,9 @@
             <ion-label position="floating">Confirmar contraseña</ion-label>
             <ion-input formControlName="confirmPassword" type="password"></ion-input>
           </ion-item>
-          <ion-item>
-            <ion-note class="tc">
-            <p>De conformidad con la Ley N° 18.331, de Protección de Datos Personales y Acción de Habeas Data, de 11 de agosto de 2008 (LPDP), los datos suministrados quedarán incorporados en la Base de Datos “Usuarios/as DATA”, la cual será procesada exclusivamente para la finalidad de administrar acceso a herramientas en línea y obtener estadísticas de uso. Esos datos se recogerán a través de medios legítimos y sólo serán los imprescindibles para poder prestar el servicio requerido. Los datos personales serán tratados con el grado de protección adecuado, tomándose las medidas de seguridad necesarias para evitar su alteración, pérdida, tratamiento o acceso no autorizado por parte de terceros. El responsable de la Base de Datos es Datos Abiertos, Transparencia y Acceso a la Información D.A.T.A. y la dirección donde el titular podrá ejercer los derechos de acceso, rectificación, actualización, inclusión o supresión es contacto@datauy.org.</p>
-            </ion-note>
-          </ion-item>
-          <ion-item>
-            <ion-label>Acepto términos y condiciones</ion-label>
-            <ion-input formControlName="tc" type="checkbox"></ion-input>
+          <ion-item class="tc" lines="none">
+            <ion-checkbox formControlName="tc"></ion-checkbox>
+            <ion-label> Acepto los términos y condiciones *</ion-label>
           </ion-item>
 
           <ion-row class="ion-justify-content-center section-header">
@@ -88,17 +74,22 @@
               <ion-button  size="large" type="submit" class="submit">Enviar</ion-button>
             </ion-col>
           </ion-row>
+          <ion-item>
+            <ion-note class="tc">
+            <p>* De conformidad con la Ley N° 18.331, de Protección de Datos Personales y Acción de Habeas Data, de 11 de agosto de 2008 (LPDP), los datos suministrados quedarán incorporados en la Base de Datos “Usuarios/as DATA”, la cual será procesada exclusivamente para la finalidad de administrar acceso a herramientas en línea y obtener estadísticas de uso. Esos datos se recogerán a través de medios legítimos y sólo serán los imprescindibles para poder prestar el servicio requerido. Los datos personales serán tratados con el grado de protección adecuado, tomándose las medidas de seguridad necesarias para evitar su alteración, pérdida, tratamiento o acceso no autorizado por parte de terceros. El responsable de la Base de Datos es Datos Abiertos, Transparencia y Acceso a la Información D.A.T.A. y la dirección donde el titular podrá ejercer los derechos de acceso, rectificación, actualización, inclusión o supresión es contacto@datauy.org.</p>
+            </ion-note>
+          </ion-item>
         </form>
         <div *ngIf="success">
-          <h3>Se ha enviado exitosamente</h3>
-          <p>Tu mensaje ha sido ingresado en nuestro sistema de manejo de solicitudes, en breve te estará llegando un correo indicando el número de solicitud y otros datos relevantes para mantenernos en contacto. A la brevedad nuestro equipo se estará comunicando contigo respecto a tu comentario. Muchas gracias</p>
+          <h3>Se ha creado tu usuario</h3>
+          <p>En poco tiempo activaremos nuevas funcionalidades para que puedas participar activamente informando el estado de los contenedores, así como subir fotos para hacer más fácil el acceso para el resto. Muchas gracias.</p>
           <ion-button class="submit" [routerLink]='["/intro/mapa"]'>Volver al inicio</ion-button>
         </div>
         <div *ngIf="fail">
-          <h3>No hemos podido enviar tu mensaje</h3>
+          <h3>No hemos podido crear tu cuenta</h3>
           <p>Por favor escríbenos a devops@data.org.uy y explícanos lo que pasa, valoramos mucho tu esfuerzo y te pedimos disculpas por las molestias ocasionadas. Muchas gracias</p>
-          <ion-button class="submit error" [routerLink]='["/intro/contacto"]'>Volver a intentarlo</ion-button>
-          <ion-button class="submit" [routerLink]='["/intro/mapa"]'>Ir al inicio</ion-button>
+          <ion-button class="submit error" (click)="clearResults()" [routerLink]='["/usuario/nuevo"]'>Volver a intentarlo</ion-button>
+          <ion-button class="submit" (click)="clearResults()" [routerLink]='["/intro/mapa"]'>Ir al inicio</ion-button>
         </div>
       </ion-col>
     </ion-row>
