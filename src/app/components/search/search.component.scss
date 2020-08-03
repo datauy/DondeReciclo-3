@@ -62,6 +62,9 @@
       --padding-start: 20px;
       --padding-end: 20px;
       --border-radius: 6px;
+      &.ion-color-warnings {
+        --color: var(--vidrio);
+      }
       .item-text {
         position: relative;
         left: 53px;
