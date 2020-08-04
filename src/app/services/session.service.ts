@@ -26,7 +26,7 @@ export class SessionService {
   searchItemBack: Notification;
   showSearchItem: boolean = true;
   //Initial Slider
-  showSlider: boolean;
+  showSlider: boolean = true;
 
   constructor(
     private router: Router,
@@ -39,15 +39,12 @@ export class SessionService {
       }
     });
   }
-
-  ngOnInit() {
-    this.storage.get('showSlider').then( (toShow) => {
-      this.showSlider = toShow;
-    });
-  }
   //
   async isShowSlider() {
     return this.storage.get('showSlider').then( (toShow) => {
+      if ( toShow == null ) {
+        return true;
+      }
       return toShow;
     });
   }
@@ -72,6 +69,7 @@ export class SessionService {
   }
   /*****  SEARCH NOTIFICATIONS  *******/
   showNotification(notification: Notification) {
+    console.log(notification);
     if ( this.searchItem ) {
       this.searchItemBack = this.searchItem;
     }
@@ -85,5 +83,16 @@ export class SessionService {
     else {
       delete this.searchItem
     }
+  }
+  notificationCommingSoon() {
+    console.log('Comming soon');
+    let notification = {
+      id: null,
+      type: 'notification',
+      class: 'warnings',
+      name: 'Funcionalidad disponible en breve',
+      deposition: 'Registrate para enterarte apenas esté disponible.'
+    };
+    this.showNotification(notification);
   }
 }

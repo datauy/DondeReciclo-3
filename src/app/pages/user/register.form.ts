@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UtilsService } from "src/app/services/utils.service";
-import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup, FormControl, AbstractControl } from '@angular/forms';
+import { SessionService } from 'src/app/services/session.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-register-form',
@@ -15,6 +17,8 @@ export class RegisterForm implements OnInit {
   constructor(
     public utils: UtilsService,
     public formBuilder: FormBuilder,
+    private session: SessionService,
+    private auth: AuthService
   ) { }
 
   user_data: FormGroup;
@@ -28,23 +32,36 @@ export class RegisterForm implements OnInit {
       ])),
       sex: ['', Validators.required],
       state: ['', Validators.required],
-      neighbor: [''],
+      neighborhood: [''],
       age: [''],
-      tc: [false, Validators.required],
+      tc: [undefined, Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
     }, {
-      validator: this.mustMatch('password', 'confirmPassword')
+      validator: [
+        this.mustMatch('password',
+        'confirmPassword'), this.checkTC
+      ]
     });
   }
 
   register() {
-    this.utils.createUser(this.user_data.value).subscribe((res) => {
-      console.log(res);
+    this.session.isLoading = true;
+    this.auth.createUser( {user: this.user_data.value} ).subscribe((res) => {
+      this.session.isLoading = false;
       if (res) {
-        this.success = true;
+        this.auth.loginUser(this.user_data.value.email, this.user_data.value.password ).subscribe((res) => {
+          this.session.isLoading = false;
+          if (res) {
+            this.success = true;
+          }
+          else {
+            this.fail = true;
+          }
+        });
       }
       else {
+        this.session.isLoading = false;
         this.fail = true;
       }
       setTimeout(() => {
@@ -52,8 +69,15 @@ export class RegisterForm implements OnInit {
         delete this.fail;
       }, 10000);
     });
+    setTimeout(() => {
+      this.session.isLoading = false;
+      this.fail = true;
+    }, 10000);
   }
-
+  clearResults() {
+    delete this.success;
+    delete this.fail;
+  }
   mustMatch(controlName: string, matchingControlName: string) {
     return (formGroup: FormGroup) => {
         const control = formGroup.controls[controlName];
@@ -71,5 +95,11 @@ export class RegisterForm implements OnInit {
             matchingControl.setErrors(null);
         }
     }
-}
+  }
+  public checkTC(c: AbstractControl){
+    if(c.get('tc').value == false){
+      return false;
+    }
+    return true;
+  }
 }

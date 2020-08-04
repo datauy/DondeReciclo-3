@@ -48,9 +48,6 @@ export class SliderComponent implements OnInit {
         image: '/assets/img/walkthrough-4.svg',
       }
     ];
-    if ( !this.session.get('showSlider') ) {
-      this.session.set('showSlider', 1);
-    }
   }
 
   goApp(permanent: boolean){

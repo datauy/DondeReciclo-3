@@ -5,6 +5,6 @@ export interface User {
   password: string;
   sex: string,
   state: string,
-  neighbor: string,
+  neighborhood: string,
   age: number,
 }

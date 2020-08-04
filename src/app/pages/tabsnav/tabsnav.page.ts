@@ -10,7 +10,7 @@ import { AutoCompleteComponent } from 'ionic4-auto-complete';
   templateUrl: './tabsnav.page.html',
   styleUrls: ['./tabsnav.page.scss'],
 })
-export class TabsnavPage implements AfterViewInit {
+export class TabsnavPage implements OnInit {
 
 
   isLoading = true;
@@ -37,38 +37,11 @@ export class TabsnavPage implements AfterViewInit {
     }
   }
 
-  // setFocusSearch() {
-  //   this.searchbar.setFocus();
-  // }
-
-  ngAfterViewInit(){
-    // console.log(this.tabsNav);
-    // this.tabsNav.ionTabsDidChange.subscribe(async ev => {
-    //   console.log("cambio tab: ", ev);
-    //   this.tabsPage = await this.tabsNav.getSelected();
-    //   if (this.tabsPage == "mapa"){
-    //     this.searchBar.classList.add('show');
-    //   }
-    // })
+  ngOnInit() {
+    //Set slider value
+    this.session.isShowSlider().then((toShow) => {
+      this.session.watchSlider(toShow);
+    });
   }
-
-  // ionViewWillEnter(){
-  //   this.session.breakPoint = "header-none";
-  // }
-  ngAfterViewChecked() {
-    // this.skipSlides.addEventListener('click', (e: any) => {
-    //   console.log("skip clicked");
-    //   console.log(e);
-    //   console.log(e.target);
-    // });
-  }
-
-  // ionViewDidEnter() {
-  //   setTimeout(() => {
-  //     this.session.set('isLoading', 'false');
-  //     this.isLoading = false;
-  //     console.log("isloading: ", this.isLoading);
-  //   }, 1000);
-  // }
 
 }

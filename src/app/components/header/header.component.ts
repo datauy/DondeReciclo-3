@@ -28,7 +28,6 @@ export class HeaderComponent implements OnInit {
   }
 
   goBack(){
-    console.log('backlink: ', this.backLink)
     if (this.backLink){
       this.navCtrl.navigateBack(this.backLink);
     }else{
@@ -41,7 +40,6 @@ export class HeaderComponent implements OnInit {
   }
 
   async showShareModal() {
-    console.log('social share');
     const modal = await this.modalController.create({
       swipeToClose: true,
       component: SocialShareComponent,
