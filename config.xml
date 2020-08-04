@@ -103,13 +103,13 @@
         <splash height="1792" src="resources/ios/splash/Default-1792h~iphone.png" width="828" />
         <splash height="828" src="resources/ios/splash/Default-Landscape-1792h~iphone.png" width="1792" />
         <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
-            <string>We use your location for full functionality of certain app features.</string>
+            <string>Usamos tu localización para poder mostrar los contendores y zonas más cercanas a tu ubicación.</string>
         </edit-config>
         <allow-navigation href="https://*youtube-nocookie.com/*" />
-        <feature name="CDVWKWebViewEngine">
-            <param name="ios-package" value="CDVWKWebViewEngine" />
-        </feature>
     </platform>
+    <feature name="CDVWKWebViewEngine">
+        <param name="ios-package" value="CDVWKWebViewEngine" />
+    </feature>
     <plugin name="cordova-plugin-whitelist" spec="1.3.3" />
     <plugin name="cordova-plugin-statusbar" spec="2.4.2" />
     <plugin name="cordova-plugin-device" spec="2.0.2" />
