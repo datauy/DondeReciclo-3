@@ -14,6 +14,8 @@ Basada en Ionic5, Angular 8 y usando las últimas tecnologías de CSS4 y HTML5 p
 * Formulario de contacto
 * Creación de usuarios
 
+## Bitácora de cambios (changelog)
+http://soporte.data.org.uy/es/blog/dr-changelog
 
 ## Instalación
 
