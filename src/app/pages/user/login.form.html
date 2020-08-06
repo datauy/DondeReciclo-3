@@ -1,0 +1,38 @@
+<app-header title="Ingresar"
+  display="small"
+  backButton="true">
+</app-header>
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col  size-md="9" size-lg="6" size-xs="12">
+        <div class="error" *ngIf="fail">Usuario o password incorrectos</div>
+        <form [formGroup]="user_data" (ngSubmit)="login()" *ngIf="!( success || fail )">
+          <div class="top">
+            <ion-item>
+              <ion-label position="floating">Correo electrónico</ion-label>
+              <ion-input formControlName="email" type="email"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Contraseña</ion-label>
+              <ion-input formControlName="password" type="password"></ion-input>
+            </ion-item>
+          </div>
+          <div class="bottom">
+            <ion-row class="ion-justify-content-center section-header">
+              <ion-col  size-md="7" size-lg="7" size-xs="12">
+                <ion-button  size="large" type="submit" class="submit">Ingresar</ion-button>
+              </ion-col>
+            </ion-row>
+            <ion-note>Si aún no creaste tu cuenta</ion-note>
+            <ion-row class="ion-justify-content-center section-header">
+              <ion-col  size-md="7" size-lg="7" size-xs="12">
+                <ion-button  [routerLink]='["/usuario/nuevo"]' size="large" class="submit contrast">Registrarme</ion-button>
+              </ion-col>
+            </ion-row>
+          </div>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

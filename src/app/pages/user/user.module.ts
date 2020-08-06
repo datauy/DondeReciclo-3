@@ -9,6 +9,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
 
 import { UserPage } from './user.page';
 import { RegisterForm } from './register.form';
+import { LoginForm } from './login.form';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { RegisterForm } from './register.form';
   ],
   declarations: [
     UserPage,
-    RegisterForm
+    RegisterForm,
+    LoginForm
   ]
 })
 export class UserPageModule {}
