@@ -41,7 +41,7 @@ export class LoginForm implements OnInit {
     this.auth.loginUser(this.user_data.value.email, this.user_data.value.password ).subscribe((res) => {
       this.session.isLoading = false;
       if (res) {
-        this.router.navigate(['/intro/map']);
+        this.router.navigate(['/intro/mapa']);
       }
       else {
         this.fail = true;
