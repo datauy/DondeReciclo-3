@@ -49,8 +49,9 @@
           <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
         </ion-item>
         <ion-item lines="none"
-          (click)="session.notificationCommingSoon(); toggleMenu();"
+          (click)="toggleMenu()"
           detail-icon="none"
+          routerLink="/usuario/ingresar"
           routerDirection="forward"
           routerLinkActive="active-item"
           *ngIf="!auth.isLogged">
@@ -90,7 +91,8 @@
             name="chevron-forward-outline"></ion-icon>
         </ion-item>
         <ion-item class= "register"
-          *ngIf="!auth.isLogged">
+          *ngIf="!auth.isLogged"
+          lines="none">
           <ion-button (click)="toggleMenu()" routerLink="usuario/nuevo" size="large" type="submit" class="submit">Registrarme</ion-button>
         </ion-item>
         <ion-item lines="none"

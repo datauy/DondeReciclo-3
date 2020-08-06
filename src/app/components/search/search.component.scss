@@ -31,6 +31,7 @@
       z-index: 500;
       position: relative;
       overflow-y: auto;
+      max-height: calc(100vh - 224px);
       ion-list-header {
         --color: white;
       }
