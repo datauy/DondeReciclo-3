@@ -14,3 +14,47 @@ ion-checkbox {
 .tc {
   margin-top: 15px;
 }
+ion-grid {
+  height: calc(100vh - 80px);
+  &> ion-row {
+    height: 100%;
+    form {
+      height: 100%;
+      .bottom {
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        ion-button {
+          margin: 15px auto;
+          &.contrast {
+            --background: transparent;
+            --color: var(--pale-olive-green);
+            --border-style: solid;
+            --border-color: var(--pale-olive-green);
+            --border-width: 1px;
+            color: var(--pale-olive-green);
+          }
+        }
+        ion-note {
+          --color: var(--vidrio-secundario);
+          text-align: center;
+          display: block;
+          &::before,
+          &::after {
+            position: absolute;
+            content: "";
+            border-top: 1px solid;
+            width: 2rem;
+            margin-top: 9px;
+          }
+          &::before {
+            left: 7vw;
+          }
+          &::after {
+            right: 7vw;
+          }
+        }
+      }
+    }
+  }
+}
