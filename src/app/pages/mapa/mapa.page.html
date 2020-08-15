@@ -91,7 +91,7 @@
       </ion-item>
       <ion-item class="panel-footer" lines="none">
         <ion-col size="6">¿Algún inconveniente?</ion-col>
-        <ion-col size="6" class="ion-text-center"><a href="#">Reportar aquí <ion-icon name="dr-reportar"></ion-icon></a></ion-col>
+        <ion-col size="6" class="ion-text-center"><a [routerLink]="[ '/usuario/reportar', container.id ]">Reportar aquí <ion-icon name="dr-reportar"></ion-icon></a></ion-col>
       </ion-item>
     </div>
   </div>

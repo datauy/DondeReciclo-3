@@ -5,6 +5,7 @@ import { RegisterForm } from './register.form';
 import { LoginForm } from './login.form';
 import { ReportForm } from './report.form';
 import { UserPage } from './user.page';
+import { AuthGuardService } from "src/app/services/auth-guard.service";
 
 const routes: Routes = [
   {
@@ -19,8 +20,9 @@ const routes: Routes = [
         component: LoginForm
       },
       {
-        path: 'reportar',
-        component: ReportForm
+        path: 'reportar/:containerID',
+        component: ReportForm,
+        canActivate: [AuthGuardService]
       },
       {
         path: ':nuevo',

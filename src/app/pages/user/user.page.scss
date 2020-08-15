@@ -21,6 +21,9 @@ ion-button.contrast {
   --border-color: var(--pale-olive-green);
   --border-width: 1px;
   color: var(--pale-olive-green);
+  &.selected {
+    --background: var(--dark-sea-green);
+  }
 }
 app-login-form:host {
   ion-grid {
