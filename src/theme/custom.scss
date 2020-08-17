@@ -66,8 +66,18 @@
       color: var(--greyish-brown);
     }
   }
+  a {
+    color: var(--pale-olive-green);
+    text-decoration: none;
+  }
+  img {
+    max-width: none;
+  }
   ion-label {
     white-space: normal;
+  }
+  ion-tabs {
+    overflow: hidden;
   }
   ion-buttons {
     padding-left: 12px;
@@ -117,15 +127,14 @@
       // --transition	Transition of the button
     }
   }
-  ion-tabs {
-  	overflow: hidden;
-  }
-  a {
-    color: var(--pale-olive-green);
-    text-decoration: none;
-  }
-  img {
-    max-width: none;
+  .back-button {
+    position: absolute;
+    //top: 17px;
+    background: var(--vidrio);
+    padding: 0;
+    left: 20px;
+    border-radius: 24px;
+    z-index: 10;
   }
   .sc-ion-buttons-ios-s ion-button {
     height: 48px;

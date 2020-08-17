@@ -14,47 +14,89 @@ ion-checkbox {
 .tc {
   margin-top: 15px;
 }
-ion-grid {
-  height: calc(100vh - 80px);
-  &> ion-row {
-    height: 100%;
-    form {
+ion-button.contrast {
+  --background: transparent;
+  --color: var(--pale-olive-green);
+  --border-style: solid;
+  --border-color: var(--pale-olive-green);
+  --border-width: 1px;
+  color: var(--pale-olive-green);
+  &.selected {
+    --background: var(--dark-sea-green);
+  }
+}
+app-login-form:host {
+  ion-grid {
+    height: calc(100vh - 80px);
+    &> ion-row {
       height: 100%;
-      .bottom {
-        position: absolute;
-        width: 100%;
-        bottom: 0;
-        ion-button {
-          margin: 15px auto;
-          &.contrast {
-            --background: transparent;
-            --color: var(--pale-olive-green);
-            --border-style: solid;
-            --border-color: var(--pale-olive-green);
-            --border-width: 1px;
-            color: var(--pale-olive-green);
+      form {
+        height: 100%;
+        .bottom {
+          position: absolute;
+          width: 100%;
+          bottom: 0;
+          ion-button {
+            margin: 15px auto;
           }
-        }
-        ion-note {
-          --color: var(--vidrio-secundario);
-          text-align: center;
-          display: block;
-          &::before,
-          &::after {
-            position: absolute;
-            content: "";
-            border-top: 1px solid;
-            width: 2rem;
-            margin-top: 9px;
-          }
-          &::before {
-            left: 7vw;
-          }
-          &::after {
-            right: 7vw;
+          ion-note {
+            --color: var(--vidrio-secundario);
+            text-align: center;
+            display: block;
+            &::before,
+            &::after {
+              position: absolute;
+              content: "";
+              border-top: 1px solid;
+              width: 2rem;
+              margin-top: 9px;
+            }
+            &::before {
+              left: 7vw;
+            }
+            &::after {
+              right: 7vw;
+            }
           }
         }
       }
+    }
+  }
+}
+app-report-form:host {
+  ion-button.back-button {
+    position: relative;
+    color: var(--pale-olive-green);
+    box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2);
+    margin-bottom: 23px;
+    width: 48px;
+    height: 48px;
+    left: 0;
+  }
+  h2 {
+    font-size: 16px;
+    line-height: 1.25;
+    color: var(--greyish-brown);
+  }
+  .report-subject {
+    ion-icon {
+      width: 60px;
+      height: 45px;
+      position: absolute;
+      right: 0;
+    }
+  }
+  .comment-desc {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.33;
+    text-align: center;
+    color: var(--greyish-brown);
+  }
+  .add-photo {
+    margin-top: 37px;
+    h5 {
+      margin-top: 10px;
     }
   }
 }
