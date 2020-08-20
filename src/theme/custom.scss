@@ -236,7 +236,36 @@
     display: none;
   }
   /******** GENERAL USAGE *************/
-
+  .form-error {
+    color: var(--brand-red);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.67;
+    padding-left: 25px;
+    ion-icon {
+      width: 18px;
+      height: 18px;
+      position: absolute;
+      left: 0;
+      background: var(--brand-red);
+      border-radius: 11px;
+      color: var(--vidrio);
+    }
+  }
+  .add-photo {
+    margin-top: 37px;
+    display: inline-flex;
+    cursor: pointer;
+    h5 {
+      margin-top: 10px;
+    }
+    ion-icon {
+      margin: 14px;
+    }
+  }
+  #file-input, #report-photo {
+    display: none;
+  }
   /******** MAP PAGE **************/
   .leaflet-control-container .leaflet-top {
     top: 156px;

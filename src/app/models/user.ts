@@ -7,4 +7,6 @@ export interface User {
   state: string,
   neighborhood: string,
   age: number,
+  token: string;
+  token_expiration: number;
 }

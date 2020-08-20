@@ -79,6 +79,16 @@ app-report-form:host {
     color: var(--greyish-brown);
   }
   .report-subject {
+    .form-error {
+      ion-icon {
+        width: 18px;
+        height: 18px;
+        position: absolute;
+        left: 5px;
+        background: var(--brand-red);
+        border-radius: 11px;
+      }
+    }
     ion-icon {
       width: 60px;
       height: 45px;
@@ -92,11 +102,5 @@ app-report-form:host {
     line-height: 1.33;
     text-align: center;
     color: var(--greyish-brown);
-  }
-  .add-photo {
-    margin-top: 37px;
-    h5 {
-      margin-top: 10px;
-    }
   }
 }

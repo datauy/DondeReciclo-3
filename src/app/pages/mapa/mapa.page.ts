@@ -11,7 +11,8 @@ import { MapService } from "src/app/services/map.service";
 import { SessionService } from 'src/app/services/session.service';
 import { environment } from 'src/environments/environment';
 //import { IonRouterOutlet } from '@ionic/angular';
-//import { createAnimation } from '@ionic/core';
+import { AuthGuardService } from 'src/app/services/auth-guard.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
   selector: 'app-mapa',
@@ -28,12 +29,20 @@ export class MapaPage implements OnInit {
 
   infoPaneEl: HTMLDivElement;
 
+  loadingImg: boolean = false;
+  fileType: any = {
+    name: 'Subir otra foto',
+    class: 'camera'
+  };
+
   constructor(
     private geocoder: NativeGeocoder,
     public api: ApiService,
+    public utils: UtilsService,
     public map: MapService,
     public session: SessionService,
-    private geo: Geolocation
+    private geo: Geolocation,
+    private authGuard: AuthGuardService,
     // private backbuttonSubscription: Subscription
   ) {
     this.session = session;
@@ -260,5 +269,46 @@ export class MapaPage implements OnInit {
       this.address = Object.values(results[0]).reverse();
       console.log(this.address);
     });
+  }
+  newImage(event: any, id: number) {
+    if ( this.authGuard.isActive() ) {
+      this.fileType = { name: 'Cargando...', class: 'camera'};
+      console.log('Container' + id);
+      this.loadingImg = true;
+      let fileT = event.target.files[0];
+      const reader = new FileReader();
+      reader.readAsArrayBuffer(fileT);
+      reader.onload = () => {
+        this.loadingImg = false;
+        // get the blob of the image:
+        let file = new Blob([new Uint8Array((reader.result as ArrayBuffer))]);
+        console.log("Going for upload");
+        this.utils.uploadImage(file, fileT, id).subscribe(
+          uploaded => {
+            console.log("Uploaded");
+            if (uploaded) {
+              this.fileType = { name: 'Foto cargada', class: 'checkmark-circle'};
+            }
+            else {
+              this.fileType = { name: 'Problema al cargar', class: 'close-circle'};
+            }
+          },
+          () => {
+            this.fileType = { name: 'Problema al cargar', class: 'close-circle'};
+          }
+        );
+        // create blobURL, such that we could use it in an image element:
+        //let blobURL: string = URL.createObjectURL(this.file);
+      };
+      reader.onerror = (error) => {
+        console.log(error);
+      };
+    }
+  }
+  checkLogin(e) {
+    if ( !this.authGuard.isActive() ) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
   }
 }

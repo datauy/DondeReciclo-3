@@ -72,7 +72,6 @@ export class ReportForm implements OnInit {
       this.user_data.value.subject = this.subject_id;
     }
     if ( this.is_loading ) {
-      console.log("IMAGE STILL LOADING");
     }
     this.user_data.value.id = this.route.snapshot.params['containerID'];
     //Assign file to send along
@@ -80,12 +79,8 @@ export class ReportForm implements OnInit {
       this.user_data.value.file = this.file;
       this.user_data.value.fileType = this.fileType;
     }
-    //Contact data
-    this.user_data.value.name = 'Fernando';
-    this.user_data.value.email = 'fernando@data.org.uy';
     this.utils.createReport(this.user_data.value).subscribe(
       (res) => {
-        console.log("COME BACK");
         this.session.isLoading = false;
         if (res) {
           this.success = true;
@@ -95,7 +90,6 @@ export class ReportForm implements OnInit {
         }
       },
       () => {
-        console.log('WT???');
         this.session.isLoading = false;
         this.fail = true;
       }

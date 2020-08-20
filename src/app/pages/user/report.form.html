@@ -48,7 +48,7 @@
               </ion-col>
             </ion-row>
             <div class="form-error" *ngIf="error.subject">
-              <ion-icon name="close-outline" color="brand-red"></ion-icon>
+              <ion-icon name="close-outline" [color]="vidrio"></ion-icon>
               Por favor seleccione un tipo de problema.
             </div>
           </div>
@@ -65,22 +65,22 @@
           </ion-item>
           <ion-row class="ion-justify-content-center section-header">
             <ion-col  size-md="7" size-lg="7" size-xs="12" class="ion-text-center">
-              <ion-button color="pale-olive-green" class="add-photo">
+              <label color="pale-olive-green" class="add-photo" for="report-photo">
                 <ion-icon slot="start"
                   name="camera"
                   class="pale-olive-green">
                 </ion-icon>
                 <h5 class="pale-olive-green" [innerHTML]="fileType.name"></h5>
-              </ion-button>
+              </label>
+              <input #photo
+              id="report-photo"
+              type="file"
+              formControlName="photo"
+              (change)="loadImageFromDevice($event)"
+              accept="image/png, image/jpeg"
+              />
             </ion-col>
           </ion-row>
-          <input #photo
-            id="file-input"
-            type="file"
-            formControlName="photo"
-            (change)="loadImageFromDevice($event)"
-            accept="image/png, image/jpeg"
-            />
           <ion-row class="ion-justify-content-center section-header">
             <ion-col  size-md="7" size-lg="7" size-xs="12">
               <ion-button  size="large" type="submit" class="submit">Reportar</ion-button>
