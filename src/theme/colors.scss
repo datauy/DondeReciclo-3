@@ -210,3 +210,21 @@
   --ion-color-shade: var(--ion-color-residuos-mezclados-shade);
   --ion-color-tint: var(--ion-color-residuos-mezclados-tint);
 }
+
+:root {
+  --ion-color-aceite-de-cocina: #7cbf1b;
+  --ion-color-aceite-de-cocina-rgb: 122,192,0;
+  --ion-color-aceite-de-cocina-contrast: #fff;
+  --ion-color-aceite-de-cocina-rgb: 0,0,0;
+  --ion-color-aceite-de-cocina-shade: #e0b302;
+  --ion-color-aceite-de-cocina-tint: #ffd01b;
+}
+
+.ion-color-plasticos {
+  --ion-color-base: var(--ion-color-aceite-de-cocina);
+  --ion-color-base-rgb: var(--ion-color-aceite-de-cocina-rgb);
+  --ion-color-contrast: var(--ion-color-aceite-de-cocina-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-aceite-de-cocina-contrast-rgb);
+  --ion-color-shade: var(--ion-color-aceite-de-cocina-shade);
+  --ion-color-tint: var(--ion-color-aceite-de-cocina-tint);
+}
