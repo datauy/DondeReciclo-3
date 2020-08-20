@@ -117,6 +117,17 @@
       <ion-toolbar>
         <ion-buttons>
           <span>Seguinos en:</span>
+          <ion-button (click)="selectCountry('Uruguay')">
+            <ion-icon slot="icon-only"
+              name="dr-uy"></ion-icon>
+          </ion-button>
+          <ion-button (click)="selectCountry('Colombia')">
+            <ion-icon slot="icon-only"
+              name="dr-col"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <ion-buttons>
+          <span>Seguinos en:</span>
           <ion-button href="https://twitter.com/CempreUy" target=_blank fill="clear">
             <ion-icon slot="icon-only"
               name="dr-twitter"></ion-icon>

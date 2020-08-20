@@ -53,7 +53,7 @@ export class SidemenuComponent implements OnInit {
   ngOnInit() {
     this.api.loadInitialData().subscribe( () =>  { // console.log(this.predefinedOptions)
     });
-    this.auth.isLoggedIn();
+    this.auth.loadUserData();
   }
 
   toggleMenu(){
@@ -76,5 +76,9 @@ export class SidemenuComponent implements OnInit {
     this.auth.logout();
     this.toggleMenu();
   }
-
+  //Country selection
+  selectCountry(country: string) {
+    this.session.country = country;
+    this.toggleMenu();
+  }
 }
