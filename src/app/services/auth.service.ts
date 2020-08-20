@@ -84,6 +84,9 @@ export class AuthService {
         }
         return false;
       },
+      () => {
+        return false;
+      }
     ));
   }
   async loadUserData(): Promise<User> {

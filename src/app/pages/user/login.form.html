@@ -6,8 +6,11 @@
   <ion-grid>
     <ion-row class="ion-justify-content-center">
       <ion-col  size-md="9" size-lg="6" size-xs="12">
-        <div class="error" *ngIf="fail">Usuario o password incorrectos</div>
-        <form [formGroup]="user_data" (ngSubmit)="login()" *ngIf="!( success || fail )">
+        <div class="form-error" *ngIf="fail">
+          <ion-icon name="close-outline"></ion-icon>
+          Usuario o password incorrectos
+        </div>
+        <form [formGroup]="user_data" (ngSubmit)="login()">
           <div class="top">
             <ion-item>
               <ion-label position="floating">Correo electrónico</ion-label>

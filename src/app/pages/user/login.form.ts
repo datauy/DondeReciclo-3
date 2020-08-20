@@ -38,14 +38,20 @@ export class LoginForm implements OnInit {
       return false;
     }
     this.session.isLoading = true;
-    this.auth.loginUser(this.user_data.value.email, this.user_data.value.password ).subscribe((res) => {
-      this.session.isLoading = false;
-      if (res) {
-        this.router.navigate(['/intro/mapa']);
-      }
-      else {
+    this.auth.loginUser(this.user_data.value.email, this.user_data.value.password ).subscribe(
+      (res) => {
+        this.session.isLoading = false;
+        if (res) {
+          this.router.navigate(['/intro/mapa']);
+        }
+        else {
+          this.fail = true;
+        }
+      },
+      () => {
+        this.session.isLoading = false;
         this.fail = true;
       }
-    });
+    );
   }
 }
