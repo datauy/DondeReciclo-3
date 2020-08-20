@@ -1,5 +1,1171 @@
 <app-header display="full"></app-header>
+
+//Uruguay
+
 <ion-content *ngIf="session.country == 'Uruguay'">
+  <ion-button class="swiper-prev" (click)="prevSlide()"></ion-button>
+  <ion-button class="swiper-next" (click)="nextSlide()"></ion-button>
+  <ion-slides #cards (ionSlideWillChange)="slideChanging()" pager="true" [options]="slideOpts">
+    <!-- Plásticos -->
+    <ion-slide class="plastic ion-color-plasticos">
+      <div class="slide-head">
+        <div class="image-wrapper">
+          <img src="assets/img/plastic-demo-head.jpg" alt="Encabezado imagen de plásticos" />
+        </div>
+        <div class="under-image"></div>
+      </div>
+      <div class="slide-content">
+        <h2>Plásticos</h2>
+        <span class="subtitle">¿De dónde se obtiene el material?</span>
+        <p>
+          Los materiales plásticos pueden ser de origen no renovable (petróleo) o de origen natural fabricados a partir de materiales renovables (celulosa, caucho, bagazo, maíz).
+          Además cada uno de estos tipos pueden ser biodegradables (bioplásticos) o no biodegradables (polímeros convencionales).
+        </p>
+        <p>
+          Los plásticos son materiales que mediante la aplicación de una compresión más o menos prolongada son capaces de cambiar de forma y conservar ésta de modo permanente
+          (a diferencia de los materiales elásticos, que retoman su forma original luego que desaparece la compresión).
+        </p>
+        <p>
+          Los polímeros convencionales tienen ciertas propiedades que hacen que sean materiales universalmente utilizados y preferidos por su bajo costo de producción, resistentes a la corrosión
+          y al deterioro por agentes químicos, son impermeables, livianos, pueden ser coloreados y adaptados a diferentes formas.</p>
+        <p>
+          Los plásticos recuperados o reciclados son materiales que surgen de un reprocesamiento, en varias etapas, de materiales post consumo o post industriales.</p>
+        <div class="section"></div>
+        <span class="subtitle">¿Cuáles son los productos de este material que se reciclan y cuáles no?</span>
+        <p>
+          Los plásticos se clasifican en distintos tipos según su material. Cabe destacar que todos son potencialmente reciclables dependiendo de la demanda de las empresas del reciclaje.</p>
+          <accordion title="Los que se reciclan" class="ion-color-materiales-reciclables">
+            <ion-list>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">Botellas y botellones de agua o refresco. Bandejas.</ion-note>
+                </div>
+                <img src="/assets/img/PET.svg">
+              </ion-item>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">Bolsas de residuos, film stretch, envoltorio burbuja, bolsas de leche.</ion-note>
+                </div>
+                <img src="/assets/img/LDPE.svg">
+              </ion-item>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">Plástico rígido, envases de limpieza, cosmética, cajones, tapas de botellas.</ion-note>
+                </div>
+                <img src="/assets/img/HDPE.svg">
+              </ion-item>
+            </ion-list>
+            <ion-item lines="none">
+            </ion-item>
+          </accordion>
+          <accordion title="Los que se reciclan poco" class="ion-color-plasticos">
+            <ion-list>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">Envases de fideos, arroz, galletitas, helado, pintura y plastillera.</ion-note>
+                </div>
+                <img src="/assets/img/PP.svg">
+              </ion-item>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">Bandejas, vasos y revolvedores de café, vasitos de postres y yogures, envases térmicos de helado.</ion-note>
+                </div>
+                <img src="/assets/img/PS.svg">
+              </ion-item>
+            </ion-list>
+            <ion-item lines="none">
+            </ion-item>
+          </accordion>
+          <accordion title="Los que no se reciclan" class="ion-color-residuos-peligrosos">
+            <ion-list>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">Cañerías, bandejas.</ion-note>
+                </div>
+                <img src="/assets/img/PVC.svg">
+              </ion-item>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">Varios.</ion-note>
+                </div>
+                <img src="/assets/img/Otros.svg">
+              </ion-item>
+            </ion-list>
+            <ion-item lines="none">
+            </ion-item>
+          </accordion>
+        <div class="section"></div>
+        <span class="subtitle">Recomendaciones a tener en cuenta en la clasificación/reciclaje</span>
+        <p>
+          Estos materiales se clasifican dentro de la categoría “Plásticos” identificada con color amarillo o en “Reciclables” en color verde según la norma Unit 1239.
+        </p>
+        <p>
+          Los que sean envases se deben escurrir y aplastar antes de separarlos para reciclar. Los que sean bandejas u otro tipo de contenedores, deben estar limpios (sin necesidad de
+          lavarlos con jabón), sin restos de comida, secos y lo más compactos posibles.
+        </p>
+        <p>
+          Realizando esto, se hace más eficiente toda la cadena de reciclaje. Se disminuye el volumen que van a ocupar los materiales en los contenedores, luego en los camiones de
+          recolección de reciclables que aprovechan mejor su capacidad, haciendo menos cantidad de viajes, con menos gasto de combustible y disminución de las emisiones contaminantes al aire.
+        </p>
+        <div class="section"></div>
+        <accordion title="Certificaciones y sellos">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Polietileno tereftalato</ion-label>
+              </div>
+              <img src="/assets/img/PET.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Polietileno de  alta densidad</ion-label>
+              </div>
+              <img src="/assets/img/HDPE.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Cloruro de polivinilo</ion-label>
+              </div>
+              <img src="/assets/img/PVC.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Polietileno de baja densidad</ion-label>
+              </div>
+              <img src="/assets/img/LDPE.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Polipropileno</ion-label>
+              </div>
+              <img src="/assets/img/PP.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Poliestireno</ion-label>
+              </div>
+              <img src="/assets/img/PS.svg">
+            </ion-item>
+            <ion-item>
+              <div class="item-text">
+                <ion-label>Otros</ion-label>
+              </div>
+              <img src="/assets/img/Otros.svg">
+            </ion-item>
+          </ion-list>
+          <ion-item lines="none">
+          </ion-item>
+        </accordion>
+        <div class="section"></div>
+        <span class="subtitle">¿Qué beneficios brinda el reciclaje?</span>
+        <p>
+          El reciclaje de plástico tiene como principal beneficio la valorización de un material útil, y no renovable, que de otra manera iría a disposición final en vertederos (tardando
+          varios cientos de años en degradarse) o podría terminar en cursos de agua generando obstrucciones, drenajes deficientes e incluso contaminación y mortandad en el ecosistema marino.
+          La cadena de reciclaje brinda mano de obra a hombres y mujeres del Uruguay.
+        </p>
+        <p>
+          Los precios pagados por estos materiales suelen ser muy variables dependiendo del precio del petróleo. La cadena de reciclaje de plásticos se enfrenta constantemente al desafío
+          de lograr negocios sostenibles, ya que la materia prima virgen en muchos momentos es más conveniente que la materia prima reciclada.
+        </p>
+        <div class="section"></div>
+        <span class="subtitle">¿Qué se produce en Uruguay a partir de materiales recuperados?</span>
+        <p>
+          En Uruguay la industria de productos plásticos se emplean más de 4.000 personas (según AUIP). La capacidad de generar localmente productos con plásticos recuperados de calidad,
+          depende de la obtención en volúmen, y de su procesamiento que no siempre es rentable en todas sus etapas localmente. Cada día surgen más proyectos locales y empresas que buscan dar
+          valor a esa cadena de producción y el aporte de buen material clasificado es fundamental para su viabilidad.
+        </p>
+        <p>
+          El PET reciclado (RPET) post consumo es clasificado por color, triturado y lavado para la generación de escamas. Dichas escamas se exportan para su reciclaje. En Uruguay se importan
+          las escamas de RPET para fabricar botellas.
+        </p>
+        <p>
+          El PEBD recuperado post consumo se utiliza principalmente para la fabricación de bolsas de residuos.
+        </p>
+        <p>
+          El PEAD recuperado post consumo se utiliza para la fabricación de baldes, cañerías de desagües, cisternas y otros productos sanitarios, cajones, entre otros.
+        </p>
+        <p>
+          Otros productos fabricados con plásticos reciclados son las maderas plásticas, postes y piques para el campo, pallets, cartonplast, entre otros.
+        </p>
+        <div class="section"></div>
+        <span class="subtitle">Flujo de materiales y composición</span>
+        <ion-row class="ion-justify-content-center section-header">
+          <ion-col class="ion-text-center">
+          <img src="assets/img/flujo_plastico.png" alt="Flujo de materiales plásticos">
+          </ion-col>
+          <ion-col class="ion-text-center">
+          <img src="assets/img/composicion_plastico.png" alt="Composición de plástico en residuos domicilarios: 16%">
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-slide>
+
+    <!-- Papel -->
+
+    <ion-slide class="paper ion-color-papel-y-carton">
+      <div class="slide-head">
+        <div class="image-wrapper">
+          <img src="assets/img/paper-head.jpg" alt="Encabezado imagen de papel y cartón">
+        </div>
+        <div class="under-image"></div>
+      </div>
+      <div class="slide-content">
+        <h2>Papel y cartón</h2>
+        <span class="subtitle">¿De dónde se obtiene el material?</span>
+        <p>
+          El papel se fabrica a partir de procesos químicos que tratan la pulpa de celulosa obtenida, generalmente, de las fibras provenientes de árboles o alguna otra materia prima fibrosa
+          como caña de azúcar. Es un material renovable, pero es importante conocer y certificar su origen de para asegurar que no haya tala ilegal o insostenible en su producción.</p>
+        <p>
+          El papel recuperado (residuos de papel), es utilizado en gran medida para fabricar papel de menor calidad presentando ventajas tanto de costos como en eficiencia. Sin embargo, existen
+          limitaciones para su reciclabilidad tanto por la cantidad de veces que puede reciclarse o bien por el tratamiento que tuvieron (impresión con tintas, barnices, plastificados).
+          La calidad de fibra o rigidez que se puede lograr para su impresión o armado dependerá también de la calidad de pasta lograda.</p>
+        <div class="section"></div>
+        <span class="subtitle">¿Cuáles son los productos de este material que se reciclan y cuáles no?</span>
+        <accordion title="Los que se reciclan" class="ion-color-materiales-reciclables">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Cuadernos (sin tapa dura ni espirarles). Bandejas.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Hojas de impresora.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Guías telefónicas.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Recortes de imprenta.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Cartulinas.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Envases de papel.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Bolsas de papel.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Cajas de cartón.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Sobres.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Fotocopias.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Diarios/Periódicos.</ion-note>
+              </div>
+            </ion-item>
+          </ion-list>
+          <ion-item lines="none">
+          </ion-item>
+        </accordion>
+        <accordion title="Los que se reciclan poco" class="ion-color-plasticos">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Revistas/Libros (sin tapa dura).</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Catálogos.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Folletos.</ion-note>
+              </div>
+            </ion-item>
+          </ion-list>
+          <ion-item lines="none">
+          </ion-item>
+        </accordion>
+        <accordion title="Los que no se reciclan" class="ion-color-residuos-peligrosos">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Papeles con adhesivos.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Papel vegetal: papel cebolla/manteca/calco.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Papel sanitario: papel higiénico, toalla, serrvilletas y pañuelos usados.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Papel plastificado.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Papel sucio, engrasado o contaminado con productos químicos.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Boletas y boletos (papeles térmicos).</ion-note>
+              </div>
+            </ion-item>
+          </ion-list>
+          <ion-item lines="none">
+          </ion-item>
+        </accordion>
+      <div class="section"></div>
+        <span class="subtitle">Recomendaciones a tener en cuenta en la clasificación/reciclaje</span>
+        <p>
+          Estos materiales se clasifican dentro de la categoría “Papel y cartón” identificada con color azul o en “Reciclables” en color verde según la norma Unit 1239.
+        </p>
+        <p>
+          Los consumidores tienen un rol fundamental para lograr buenos niveles de clasificación y reciclaje. Ser un consumidor responsable en el momento de hacer una compra, eligiendo papeles
+          y cartones sin plastificados o exceso de barnices y otros materiales, es una práctica fundamental para aportar mejores niveles de material potencialmente reciclable.
+        </p>
+        <p>
+          A las cajas de cartón se las debe desarmar y retirar cintas y grapas antes de separarlas para reciclar. A los cuadernos, cuadernolas, carpetas, se les deben retirar espirales,
+          ganchos, grapas y todo tipo de partes metálicas.
+        </p>
+        <div class="section"></div>
+        <accordion title="Certificaciones y sellos">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note>Forest Stewardship Council desarrolla estándares para manejo sostenible de bosques.</ion-note>
+              </div>
+              <img src="/assets/img/FSC.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note>Rainforest Alliance asegura prácticas ambiental y socialmente responsables.</ion-note>
+              </div>
+              <img src="/assets/img/RA.svg">
+            </ion-item>
+          </ion-list>
+          <ion-item lines="none">
+          </ion-item>
+        </accordion>
+          <div class="section"></div>
+        <span class="subtitle">¿Qué beneficios brinda el reciclaje?</span>
+        <p>
+          El reciclaje de papel es una muy buena práctica para concientizar respecto a los residuos que se generan diariamente y la importancia de su correcta separación.
+        </p>
+        <p>
+          Se trata de un material fácilmente reciclable, y clasificarlo es una buena práctica para implementar en oficinas, instituciones educativas, entre otros espacios con gran consumo de papel.
+        </p>
+        <p>
+          El reciclaje de papel logra optimizar el ciclo de vida de un recurso valioso y alcanza ahorros significativos en el uso de agua y energía en comparación a lo que se utilizaría
+          normalmente para producirlo de madera virgen.
+        </p>
+        <div class="section"></div>
+        <span class="subtitle">¿Qué se produce en Uruguay a partir de materiales recuperados?</span>
+        <p>
+          En Uruguay se fabrica cartón corrugado, a partir de bobinas de papel reciclado, para la elaboración de envases y cajas para uso industrial, comercial y doméstico.
+        </p>
+        <p>
+          También se producen varios productos de higiene personal con descartes de origen industrial como: Toallas de papel, papeles higiénicos, servilletas, entre otros.
+        </p>
+        <p>
+          Además, principalmente a partir de diarios, se producen maples para huevos, frutas, macetas.
+        </p>
+        <div class="section"></div>
+        <span class="subtitle">Flujo de materiales y composición</span>
+
+        <ion-row class="ion-justify-content-center section-header">
+          <ion-col class="ion-text-center">
+          <img src="assets/img/flujo_papel.png" alt="Flujo de materiales de papel">
+          </ion-col>
+          <ion-col class="ion-text-center">
+          <img src="assets/img/composicion_papel.png" alt="Composición de papel en residuos domicilarios: 23%">
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-slide>
+
+    <!-- Compostables -->
+
+    <ion-slide class="compostables ion-color-residuos-compostables">
+      <div class="slide-head">
+        <div class="image-wrapper">
+          <img src="assets/img/compostables-head.jpg" alt="Encabezado imagen de papel y cartón">
+        </div>
+        <div class="under-image"></div>
+      </div>
+      <div class="slide-content">
+        <h2>Compostables</h2>
+        <span class="subtitle">¿De dónde se obtienen los residuos compostables?</span>
+        <p>
+          Los residuos compostables a nivel doméstico son parte de lo que generamos diariamente en nuestras casas: restos de comida, cáscaras, yerba, té, podas. Representan más de un 40% de nuestros residuos.
+        </p>
+        <div class="section"></div>
+        <span class="subtitle">¿De dónde se obtienen los materiales compostables?</span>
+        <p>
+          Los materiales compostables utilizados comunmente para fabricar envases, bolsas y utensillos descartables, están compuestos por cadenas de polímeros obtenidos del procesamiento de vegetales como
+          la caña de azúcar, bagazo, papa u otros producidos directamente con hojas o partes de plantas como el plátano, cáscara de arroz entre otros.</p>
+        <p>
+          Los llamados Bioplásticos, como el PLA y CPLA, con características muy similares a otros plásticos, pueden ser compostables y pueden biodegradarse en tiempos más reducidos.</p>
+        <div class="section"></div>
+        <span class="subtitle">¿Cuáles son los productos de este material que se compostan y cuáles no?</span>
+        <accordion title="Los que se compostan" class="ion-color-materiales-reciclables">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>En el hogar:</ion-label>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Restos de frutas.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Restos de verduras.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Cáscaras de frutas y verduras.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Cáscaras de huevos.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Restos de yerba.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Restos de café.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Saquitos de té.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Hojas secas.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>En plantas de compostaje industrial se suman:</ion-label>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Restos de alimentos cocidos.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Residuos orgánicos industriales.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Podas.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Servilletas, vasos, platos y cubiertos "compostables" de PLA, CPLA, bagazo y celulosa, entre otros.</ion-note>
+              </div>
+            </ion-item>
+          </ion-list>
+          <ion-item lines="none">
+          </ion-item>
+        </accordion>
+        <accordion title="Los que no se compostan" class="ion-color-residuos-peligrosos">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>En el hogar:</ion-label>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Restos de comidas procesadas.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Huesos.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Aceites.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">Salsas.</ion-note>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>En plantas de ccompostaje industrial se suman:</ion-label>
+              </div>
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">No en todas las plantas de compostaje se acepta el procesamiento de envases compostables dado a su a veces dudosa procedencia o clasificación. Usar productos certificados es determinante.</ion-note>
+              </div>
+            </ion-item>
+          </ion-list>
+          <ion-item lines="none">
+          </ion-item>
+        </accordion>
+      <div class="section"></div>
+        <span class="subtitle">Recomendaciones a tener en cuenta en la separación/compostaje</span>
+        <p>
+          A la hora de clasificar los residuos orgánicos en nuestro hogar, si haremos con ellos compostaje doméstico, es recomendable solamente separar los residuos orgánicos crudos.
+        </p>
+        <p>
+          En el caso del compostaje industrial, además de poder compostar los orgánicos crudos, vamos a poder sumar cualquier resto de alimento, incluyendo también los materiales compostables
+          tales como vasos, platos o bolsas de PLA, bagazo, entre otros. Es importante asegurar que sean productos certificados y autorizados por LATU y/o empresas reconocidas.
+        </p>
+        <div class="section"></div>
+        <accordion title="Certificaciones y sellos">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Ácido poliláctico</ion-label>
+              </div>
+              <img src="/assets/img/PLA.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Biodegradable</ion-label>
+              </div>
+              <img src="/assets/img/biodegradable.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Compostable</ion-label>
+              </div>
+              <img src="/assets/img/compostable.svg">
+            </ion-item>
+          </ion-list>
+          <ion-item lines="none">
+          </ion-item>
+        </accordion>
+        <div class="section"></div>
+        <span class="subtitle">¿Qué beneficios brinda el compostaje?</span>
+        <p>
+          El hacer compost nos trae el principal beneficio de la reducción de residuos que van a ser destinados en el relleno sanitario o vertedero, ya que entre el 40 y 50% de los residuos
+          que generamos diariamente, son residuos orgánicos. Además se evita la generación de gases de efecto invernadero (dióxido de carbono o metano) que se producen por la descomposición
+          de estos residuos en el relleno sanitario.
+        </p>
+        <p>
+          Otro beneficio importante del compost es que es un fertilizante natural rico en nutrientes para el suelo y las plantas.
+        </p>
+        <div class="section"></div>
+        <span class="subtitle">¿Qué se produce en Uruguay a partir de materiales recuperados?</span>
+        <p>
+          El compost es un abono orgánico producido a partir de la degradación de la materia orgánica, mediante oxígeno, humedad y microorganismos, que genera nutrientes recomendados para
+          mejorar el cultivo de plantas, hortalizas y la salud del suelo en general.
+        </p>
+        <p>
+          A nivel industrial se realiza en plantas de compostaje con residuos orgánicos de distintos sectores industriales y algunos comerciales.
+        </p>
+        <p>
+          A nivel doméstico el vermicompostaje (compostaje con lombrices) es el más eficiente. Ésta es una técnica sencilla para degradar los residuos orgánicos crudos que generamos en el hogar.
+        </p>
+        <div class="section"></div>
+        <span class="subtitle">Flujo de materiales y composición</span>
+        <ion-row class="ion-justify-content-center section-header">
+          <ion-col class="ion-text-center">
+          <img src="assets/img/flujo_compostables.png" alt="Flujo de materiales compostables">
+          </ion-col>
+          <ion-col class="ion-text-center">
+          <img src="assets/img/composicion_compostables.png" alt="Composición de compostables en residuos domicilarios: 46%">
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-slide>
+
+    <!-- Metales ferrosos -->
+
+    <ion-slide class="metales ion-color-metales">
+      <div class="slide-head">
+        <div class="image-wrapper">
+          <img src="assets/img/metales-ferrosos-head.jpg" alt="Encabezado imagen de metales ferrosos" />
+        </div>
+        <div class="under-image"></div>
+      </div>
+      <div class="slide-content">
+        <h2>Metales ferrosos</h2>
+
+        <!-- ¿De dónde se obtiene el material? -->
+
+        <span class="subtitle">¿De dónde se obtiene el material?</span>
+        <p>
+          El acero, metal ferroso por excelencia, presenta características particulares que lo hacen muy utilizado en diversas áreas. Se trata de un material maleable, resistente, lustroso así como conductor de calor y electricidad.
+        </p>
+        <p>
+          Los minerales de hierro (elemento principal del acero) constituyen el cuarto elemento más común en la corteza terrestre. La abundancia de las materias primas para la fabricación de acero como los bajos costos de producción han llevado a su extendido uso a todo nivel.
+        </p>
+        <p>
+          El acero es principalmente una aleación de hierro y carbón, contiene muy bajos porcentajes de manganeso, sílice, fósforo, azufre y oxígeno.
+        </p>
+        <div class="section"></div>
+
+        <!-- ¿Cuáles son los productos de este material que se reciclan y cuáles no? -->
+
+        <span class="subtitle">¿Cuáles son los productos de este material que se reciclan y cuáles no?</span>
+        <p>
+          El material puede ser reciclado infinitas veces, sin causar grandes pérdidas o perjudicar la calidad del mismo.
+        </p>
+
+        <!-- Acordeón Los que se reciclan -->
+
+          <accordion title="Los que se reciclan" class="ion-color-materiales-reciclables">
+            <ion-list>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">Carcazas de electrodomésticos de gran tamaño (como heladeras, cocinas, lavarropas).</ion-note>
+                </div>
+
+              </ion-item>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">Autos chatarra.</ion-note>
+                </div>
+
+              </ion-item>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">Envases de latas de conserva.</ion-note>
+                </div>
+
+              </ion-item>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">Aberturas.</ion-note>
+                </div>
+
+              </ion-item>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">Varillas.</ion-note>
+                </div>
+              </ion-item>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">Llaves.</ion-note>
+                </div>
+              </ion-item>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">Latas.</ion-note>
+                </div>
+              </ion-item>
+            </ion-list>
+            <ion-item lines="none">
+            </ion-item>
+          </accordion>
+
+        <!-- Acordeón Los que no se reciclan -->
+
+          <accordion title="Los que no se reciclan" class="ion-color-residuos-peligrosos">
+            <ion-list>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">Mezclas con otros materiales.</ion-note>
+                </div>
+              </ion-item>
+
+            </ion-list>
+            <ion-item lines="none">
+            </ion-item>
+          </accordion>
+        <div class="section"></div>
+
+        <!-- Recomendaciones a tener en cuenta en la clasificación/reciclaje -->
+
+        <span class="subtitle">Recomendaciones a tener en cuenta en la clasificación/reciclaje</span>
+        <p>
+          Al igual que todos los materiales reciclables deben separarse limpios y secos, para no contaminar al resto de los materiales.
+        </p>
+        <p>
+          Se debe tener la precaución de no dejar puntas afiladas en las latas, para protección en la manipulación de las mismas, también es conveniente quitar las etiquetas.
+        </p>
+        <div class="section"></div>
+
+        <!-- Certificaciones y sellos -->
+
+        <accordion title="Certificaciones y sellos">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note>Este sello hace referencia a que el material del que está hecho el producto es de acero.</ion-note>
+              </div>
+              <img src="/assets/img/CEN.svg">
+            </ion-item>
+          </ion-list>
+          <ion-item lines="none">
+          </ion-item>
+        </accordion>
+        <div class="section"></div>
+
+        <!-- ¿Qué beneficios brinda el reciclaje? -->
+
+        <span class="subtitle">¿Qué beneficios brinda el reciclaje?</span>
+        <p>
+          Utilizando acero reciclado en vez de minerales vírgenes, se logran grandes ventajas ambientales tales como reducción de la contaminación del aire y agua, menor generación de residuos y menor uso de energía.
+        </p>
+        <p>
+          Asimismo, se conservan los recursos naturales, ecosistemas, y se prolonga la vida útil de los sitios de disposición final de residuos.
+        </p>
+        <p>
+          Hoy en día, el acero es el principal material reciclado, por lo tanto existe todo un mercado desarrollado en torno al reciclaje de acero, con su consecuente generación de empleo. Son tan altos los ahorros generados por el reciclaje de acero que a nivel mundial esta actividad es considerada rentable.
+        </p>
+        <div class="section"></div>
+
+        <!-- ¿Qué se produce en Uruguay a partir de materiales recuperados? -->
+
+        <span class="subtitle">¿Qué se produce en Uruguay a partir de materiales recuperados?</span>
+        <p>
+          Es uno de los materiales que más se recicla en Uruguay, la totalidad del acero fabricado para la industria de la construcción es realizado a partir de la chatarra ferrosa.
+        </p>
+        <p>
+          Al utilizar chatarra ferrosa en el proceso productivo, se reduce el uso de energía necesaria en el proceso de producción de acero.
+        </p>
+        <div class="section"></div>
+
+        <!-- Flujo de materiales y composición -->
+
+        <span class="subtitle">Flujo de materiales y composición</span>
+        <ion-row class="ion-justify-content-center section-header">
+          <ion-col class="ion-text-center">
+          <img src="assets/img/flujo_metales_ferrosos.png" alt="Flujo de materiales metales ferrosos">
+          </ion-col>
+          <ion-col class="ion-text-center">
+          <img src="assets/img/composicion_metales_ferrosos.png" alt="Composición de metales ferrosos en residuos domicilarios: 2%">
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-slide>
+
+    <!-- Metales no ferrosos -->
+
+    <ion-slide class="metales ion-color-metales">
+      <div class="slide-head">
+        <div class="image-wrapper">
+          <img src="assets/img/metales-no-ferrosos-head.jpg" alt="Encabezado imagen de metales no ferrosos" />
+        </div>
+        <div class="under-image"></div>
+      </div>
+      <div class="slide-content">
+        <h2>Metales no ferrosos</h2>
+
+        <!-- ¿De dónde se obtiene el material? -->
+
+        <span class="subtitle">¿De dónde se obtiene el material?</span>
+        <p>
+          El aluminio es el tercer elemento más abundante en la corteza terrestre (después del oxígeno y sílice) y el metal más abundante en la tierra (8% en peso).
+        </p>
+        <p>
+          Es importante saber que el aluminio es un material que es infinitamente reciclable, por ello es muy importante una vez utilizado, volverlo al ciclo para poder reciclarlo y así disminuir la explotación de recursos para obtener el material virgen.
+        </p>
+        <div class="section"></div>
+
+        <!-- ¿Cuáles son los productos de este material que se reciclan y cuáles no? -->
+
+        <span class="subtitle">¿Cuáles son los productos de este material que se reciclan y cuáles no?</span>
+
+        <!-- Acordeón Los que se reciclan -->
+
+          <accordion title="Los que se reciclan" class="ion-color-materiales-reciclables">
+            <ion-list>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">Latas de refrescos y bebidas.</ion-note>
+                </div>
+              </ion-item>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">Latas de aerosoles (pinturas, aromatizantes, desinfectantes, desodorantes, etc.).</ion-note>
+                </div>
+              </ion-item>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">Perfiles de aberturas.</ion-note>
+                </div>
+              </ion-item>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">Cables.</ion-note>
+                </div>
+              </ion-item>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">Motores.</ion-note>
+                </div>
+              </ion-item>
+            </ion-list>
+            <ion-item lines="none">
+            </ion-item>
+          </accordion>
+
+          <!-- Acordeón Los que no se reciclan -->
+
+          <accordion title="Los que no se reciclan" class="ion-color-residuos-peligrosos">
+            <ion-list>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">Mezclas con otros materiales.</ion-note>
+                </div>
+              </ion-item>
+            </ion-list>
+            <ion-item lines="none">
+            </ion-item>
+          </accordion>
+        <div class="section"></div>
+
+        <!-- Recomendaciones a tener en cuenta en la clasificación/reciclaje -->
+
+        <span class="subtitle">Recomendaciones a tener en cuenta en la clasificación/reciclaje</span>
+        <p>
+          Si el envase de aluminio tiene una parte plástica (como la tapa) es una buena práctica separar los materiales, facilitando así el trabajo posterior en la planta de clasificación.
+        </p>
+        <p>
+          Es importante además que los envases estén vacíos.
+        </p>
+        <div class="section"></div>
+
+        <!-- Certificaciones y sellos -->
+
+        <accordion title="Certificaciones y sellos">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Aluminio.</ion-label>
+              </div>
+              <img src="/assets/img/alu.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Aluminio.</ion-label>
+              </div>
+              <img src="/assets/img/ALU-41.svg">
+            </ion-item>
+          </ion-list>
+          <ion-item lines="none">
+          </ion-item>
+        </accordion>
+        <div class="section"></div>
+
+        <!-- ¿Qué beneficios brinda el reciclaje? -->
+
+        <span class="subtitle">¿Qué beneficios brinda el reciclaje?</span>
+        <p>
+          El reciclaje de aluminio es una industria con una alta generación de empleo, además se logra un ahorro del 95% de la energía necesaria para generar aluminio desde material virgen.
+        </p>
+        <p>
+          Las tasas de reciclaje alcanzadas para latas de aluminio suelen ser mucho mayores que las obtenidas para otros materiales. En general, los niveles de reciclaje de estas latas superan el 50% en diversos países del mundo.
+        </p>
+        <div class="section"></div>
+
+        <!-- ¿Qué se produce en Uruguay a partir de materiales recuperados? -->
+
+        <span class="subtitle">¿Qué se produce en Uruguay a partir de materiales recuperados?</span>
+        <p>
+          Hoy las empresas de recuperación de aluminio en Uruguay lo exportan para su reciclaje.
+        </p>
+        <div class="section"></div>
+
+        <!-- Flujo de materiales y composición -->
+
+        <span class="subtitle">Flujo de materiales y composición</span>
+        <ion-row class="ion-justify-content-center section-header">
+          <ion-col class="ion-text-center">
+          <img src="assets/img/flujo_metales_no_ferrosos.png" alt="Flujo de materiales metales no ferrosos">
+          </ion-col>
+          <ion-col class="ion-text-center">
+          <img src="assets/img/composicion_metales_no_ferrosos.png" alt="Composición de metales no ferrosos en residuos domicilarios: 2%">
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-slide>
+
+    <!-- Vidrio -->
+
+    <ion-slide class="vidrio ion-color-vidrios">
+      <div class="slide-head-vidrio">
+        <div class="image-wrapper">
+          <img src="assets/img/vidrio-head.jpg" alt="Encabezado imagen de vidrio" />
+        </div>
+        <div class="under-image"></div>
+      </div>
+      <div class="slide-content">
+        <h2>Vidrio</h2>
+
+        <!-- ¿De dónde se obtiene el material? -->
+
+        <span class="subtitle">¿De dónde se obtiene el material?</span>
+        <p>
+          El vidrio es el resultado de fundir una serie de materias primas, abundantes en la tierra, como ser la carbonato de sodio, caliza, dolomita, sílice, alúmina principalmente.
+        </p>
+        <p>
+          Es un material muy utilizado desde hace varios siglos. Hasta la aparición del plástico, fue el material utilizado por excelencia para el envasado, por sus características de firmeza, inocuidad y transparencia..
+        </p>
+        <p>
+          Se trata de un material altamente reciclable, en el mundo hace cientos de años que se recicla para fabricar nuevos objetos de vidrio.
+        </p>
+        <div class="section"></div>
+
+        <!-- ¿Cuáles son los productos de este material que se reciclan y cuáles no? -->
+
+        <span class="subtitle">¿Cuáles son los productos de este material que se reciclan y cuáles no?</span>
+
+        <!-- Acordeón Los que se reciclan -->
+
+          <accordion title="Los que se reciclan" class="ion-color-materiales-reciclables">
+            <ion-list>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">A nivel post consumo el reciclaje de vidrio hoy no se realiza en cantidades significativas.</ion-note>
+                </div>
+              </ion-item>
+            </ion-list>
+            <ion-item lines="none">
+            </ion-item>
+          </accordion>
+
+          <!-- Acordeón Los que no se reciclan -->
+
+          <accordion title="Los que no se reciclan" class="ion-color-residuos-peligrosos">
+            <ion-list>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">Vidrios potencialmente reciclables (botellas, bollones, envases en general, vidrio plano).</ion-note>
+                </div>
+              </ion-item>
+            </ion-list>
+            <ion-item lines="none">
+            </ion-item>
+          </accordion>
+        <div class="section"></div>
+
+        <!-- ¿Qué beneficios brinda el reciclaje? -->
+
+        <span class="subtitle">¿Qué beneficios brinda el reciclaje?</span>
+        <p>
+          Al incorporar residuos de vidrio al proceso de fabricación de nuevos productos de vidrio, se logra disminuir considerablemente la temperatura que se requiere para fundir la materia prima, resultando en ahorros considerables de energía y disminución de emisiones de polvo que surgen de la fabricación con 100% material virgen.
+        </p>
+        <div class="section"></div>
+
+        <!-- ¿Qué se produce en Uruguay a partir de materiales recuperados? -->
+
+        <span class="subtitle">¿Qué se produce en Uruguay a partir de materiales recuperados?</span>
+        <p>
+          Hoy en Uruguay prácticamente la totalidad de los envases de vidrio se importan.
+        </p>
+        <p>
+          El vidrio es un material fácilmente reutilizable por sus características físicas y químicas, por lo tanto es recomendable reutilizarlo cuantas veces sea posible antes de descartarlo. Por ejemplo, reutilizar frascos suele ser una práctica muy común, ya que con un buen lavado puede almacenar cualquier otro elemento.
+        </p>
+        <p>
+          En la producción artesanal a partir de envases de vidrio usado, hay varios emprendedores que se dedican a la transformación de los envases en otros productos.
+        </p>
+        <p>
+          Hay una parte del vidrio de origen industrial que se exporta para su reciclaje en otros países.
+        </p>
+        <div class="section"></div>
+
+        <!-- Flujo de materiales y composición -->
+
+        <span class="subtitle">Flujo de materiales y composición</span>
+        <ion-row class="ion-justify-content-center section-header">
+          <ion-col class="ion-text-center">
+          <img src="assets/img/flujo_vidrio.png" alt="Flujo de materiales vidrio">
+          </ion-col>
+          <ion-col class="ion-text-center">
+          <img src="assets/img/composicion_vidrio.png" alt="Composición de vidrio en residuos domicilarios: 6%">
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-slide>
+
+    <!-- Polilaminados -->
+
+    <ion-slide class="plastic ion-color-materiales-reciclables">
+      <div class="slide-head">
+        <div class="image-wrapper">
+          <img src="assets/img/polilaminados-head.jpg" alt="Encabezado imagen de polilaminados" />
+        </div>
+        <div class="under-image"></div>
+      </div>
+      <div class="slide-content">
+        <h2>Polilaminados</h2>
+
+        <!-- ¿De dónde se obtiene el material? -->
+
+        <span class="subtitle">¿De dónde se obtiene el material?</span>
+        <p>
+          Los materiales polilaminados están compuestos por varios capas de distintos materiales, los más comunes en el mercado tienen la siguiente composición:
+        </p>
+        <p>
+          <strong>Capa de papel:</strong> el envase está conformado por 75% de papel, garantizando su estabilidad y resistencia.
+        </p>
+        <p>
+          <strong>Capa de aluminio:</strong> evita la entrada de oxígeno, luz y la pérdida de aromas, y es una barrera contra el deterioro de los alimentos.
+        </p>
+        <p>
+          <strong>Capa de polietileno:</strong> evita que el alimento esté en contacto con el aluminio, ofrece adherencia y garantiza la protección del alimento.
+        </p>
+        <div class="section"></div>
+
+        <!-- ¿Cuáles son los productos de este material que se reciclan y cuáles no? -->
+
+        <span class="subtitle">¿Cuáles son los productos de este material que se reciclan y cuáles no?</span>
+
+        <!-- Acordeón Los que se reciclan -->
+
+          <accordion title="Los que se reciclan" class="ion-color-materiales-reciclables">
+            <ion-list>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">Cajas de jugos.</ion-note>
+                </div>
+              </ion-item>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">Cajas de leches.</ion-note>
+                </div>
+              </ion-item>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">Cajas de vinos.</ion-note>
+                </div>
+              </ion-item>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">Cajas de chips.</ion-note>
+                </div>
+              </ion-item>
+            </ion-list>
+            <ion-item lines="none">
+            </ion-item>
+          </accordion>
+
+          <!-- Acordeón Los que no se reciclan -->
+
+          <accordion title="Los que no se reciclan" class="ion-color-residuos-peligrosos">
+            <ion-list>
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-note slot="start">Materiales multilaminados plásticos post consumo.</ion-note>
+                </div>
+              </ion-item>
+            </ion-list>
+            <ion-item lines="none">
+            </ion-item>
+          </accordion>
+        <div class="section"></div>
+
+        <!-- Recomendaciones a tener en cuenta en la clasificación/reciclaje -->
+
+        <span class="subtitle">Recomendaciones a tener en cuenta en la clasificación/reciclaje</span>
+        <p>
+          Los envases se deben escurrir, vaciar y aplastar antes de separarlos para reciclar.
+        </p>
+        <div class="section"></div>
+
+        <!-- Certificaciones y sellos -->
+
+        <accordion title="Certificaciones y sellos">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note>Tetra Pak</ion-note>
+              </div>
+              <img src="/assets/img/tetra-pak.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note>Forest Stewardship Council</ion-note>
+              </div>
+              <img src="/assets/img/FSC.svg">
+            </ion-item>
+          </ion-list>
+          <ion-item lines="none">
+          </ion-item>
+        </accordion>
+        <div class="section"></div>
+
+        <!-- ¿Qué beneficios brinda el reciclaje? -->
+
+        <span class="subtitle">¿Qué beneficios brinda el reciclaje?</span>
+        <p>
+          El reciclar envases de este material disminuye la cantidad de residuos enviados a relleno sanitario.
+        </p>
+        <div class="section"></div>
+
+        <!-- ¿Qué se produce en Uruguay a partir de materiales recuperados? -->
+
+        <span class="subtitle">¿Qué se produce en Uruguay a partir de materiales recuperados?</span>
+        <p>
+          El reciclado de los polilaminados consiste en la fabricación de chapas de compensado, utilizadas luego para fabricar techos, mobiliario de distintos tipos y tamaños, composteras, recipientes para residuos, entre otros.
+        </p>
+        <p>
+          También se puede formular maderas plásticas con productos polilaminados plásticos (BioPP).
+        </p>
+        <div class="section"></div>
+
+        <!-- Flujo de materiales y composición -->
+
+        <span class="subtitle">Flujo de materiales y composición</span>
+        <ion-row class="ion-justify-content-center section-header">
+          <ion-col class="ion-text-center">
+          <img src="assets/img/flujo_polilaminados.png" alt="Flujo de materiales polilaminados">
+          </ion-col>
+          <ion-col class="ion-text-center">
+          <img src="assets/img/composicion_polilaminados.png" alt="Composición de polilaminados en residuos domicilarios: 16%">
+          </ion-col>
+        </ion-row>
+      </div>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
+
+//Colombia
+
+<ion-content *ngIf="session.country == 'Colombia'">
   <ion-button class="swiper-prev" (click)="prevSlide()"></ion-button>
   <ion-button class="swiper-next" (click)="nextSlide()"></ion-button>
   <ion-slides #cards (ionSlideWillChange)="slideChanging()" pager="true" [options]="slideOpts">
