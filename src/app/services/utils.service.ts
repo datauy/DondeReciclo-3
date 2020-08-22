@@ -33,7 +33,6 @@ export class UtilsService {
     if ( this.auth.isLogged ) {
       let body = form;
       let options = {};
-      console.log("REPORTE");
       if ( form.file ) {
         body = form.file;
         form.MimeType = form.fileType.type;
@@ -49,7 +48,6 @@ export class UtilsService {
           params: form
         };
       }
-      console.log(options);
       return this.request.post(
         environment.backend + "report", body, options
       ).pipe(
@@ -71,7 +69,6 @@ export class UtilsService {
         MimeType: imageData.type,
         ClientFilename: imageData.name,
       }
-      console.log(params);
       let options = {
         headers: {
           "Content-Type": imageData.type,
@@ -79,7 +76,6 @@ export class UtilsService {
        },
         params: params
       };
-      console.log(options);
       return this.request.post(
         environment.backend + "report", image, options
       ).pipe(

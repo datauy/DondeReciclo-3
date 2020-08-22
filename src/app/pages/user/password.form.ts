@@ -39,7 +39,6 @@ export class PasswordForm implements OnInit {
   //
   newpass() {
     this.session.isLoading = true;
-    console.log(this.user_data.value.password);
     let token = this.route.snapshot.params['token'];
     this.auth.sendPass( {password: this.user_data.value.password, token: token} ).subscribe((res) => {
       this.session.isLoading = false;

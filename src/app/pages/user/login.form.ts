@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl} from '@angular/forms';
 import { NavController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
 import { SessionService } from 'src/app/services/session.service';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -19,7 +20,8 @@ export class LoginForm implements OnInit {
     public formBuilder: FormBuilder,
     private session: SessionService,
     private auth: AuthService,
-    private navCtl: NavController
+    private navCtl: NavController,
+    private route: ActivatedRoute,
   ) { }
 
   user_data: FormGroup;
@@ -43,7 +45,12 @@ export class LoginForm implements OnInit {
       (res) => {
         this.session.isLoading = false;
         if (res) {
-          this.navCtl.back();
+          if (this.route.snapshot.queryParams['intro']) {
+            this.navCtl.navigateBack('/intro/mapa');
+          }
+          else {
+            this.navCtl.back();
+          }
         }
         else {
           this.fail = true;
