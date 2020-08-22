@@ -37,6 +37,7 @@
         <ion-item lines="none"
           (click)="session.notificationCommingSoon(); toggleMenu();"
           detail-icon="none"
+          class = "ion-activatable"
           routerDirection="forward"
           routerLinkActive="active-item"
           *ngIf="auth.isLogged">
@@ -67,6 +68,7 @@
           detail-icon="none"
           routerDirection="forward"
           routerLinkActive="active-item"
+          class = "ion-activatable"
           *ngIf="auth.isLogged">
           <ion-icon slot="start" name="log-out-outline"></ion-icon>
           <div>

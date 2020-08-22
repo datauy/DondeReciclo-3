@@ -60,6 +60,20 @@
         &.label-item {
           margin-bottom: 12px;
         }
+        .add-photo {
+          ion-icon {
+            margin: 2px 10px 0 0;
+            width: 20px;
+            height: 20px;
+            &[ng-reflect-name="close-circle"] {
+              color: var(--brand-red);
+              margin-top: 1px;
+            }
+          }
+          h5.close-circle {
+            color: var(--brand-red);
+          }
+        }
       }
       ion-button {
         &.vidrios {

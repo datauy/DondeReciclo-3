@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { SessionService } from 'src/app/services/session.service';
+
 @Component({
   selector: 'app-partners',
   templateUrl: './partners.page.html',
@@ -7,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PartnersPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    public session: SessionService
+  ) { }
 
   ngOnInit() {
   }

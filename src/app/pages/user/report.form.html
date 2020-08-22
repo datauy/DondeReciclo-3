@@ -1,0 +1,104 @@
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" class="ion-text-center">
+        <ion-button class="back-button" color="pale-olive-green" (click)="goBack()">
+          <ion-icon slot="icon-only" name="close"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col  size-md="9" size-lg="8" size-xs="12">
+        <div class="section-header">
+          <h1>Reportar inconveniente</h1>
+          <h2 class="sub-light">¿Qué inconveniente tenés?<br>
+          También recomendamos ver la <a href="http://soporte.data.org.uy/es/folder/5" target="_blank">ayuda</a> del proyecto.</h2>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col  size-md="9" size-lg="6" size-xs="12">
+        <form [formGroup]="user_data" (ngSubmit)="report()" *ngIf="!( success || fail )">
+          <div class="report-subject">
+            <ion-row class="ion-justify-content-center section-header">
+              <ion-col  size-md="7" size-lg="7" size-xs="12">
+                <ion-button  (click)="selectSubject('mapa')" id="mapa" size="large" class="submit contrast selectable">
+                  Ajustar mapa
+                  <ion-icon class="ion-float-left"
+                  name="dr-mapa"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-center section-header">
+              <ion-col  size-md="7" size-lg="7" size-xs="12">
+                <ion-button  (click)="selectSubject('vandalismo')" id="vandalismo" size="large" class="submit contrast selectable">
+                  Vandalismo
+                  <ion-icon class="ion-float-left"
+                  name="dr-vandalismo"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-center section-header">
+              <ion-col  size-md="7" size-lg="7" size-xs="12">
+                <ion-button  (click)="selectSubject('otro')" id="otro" size="large" class="submit contrast selectable">
+                  Otro
+                  <ion-icon class="ion-float-left"
+                  name="dr-otro"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+            <div class="form-error" *ngIf="error.subject">
+              <ion-icon name="close-outline"></ion-icon>
+              Por favor seleccione un tipo de problema.
+            </div>
+          </div>
+          <ion-row class="ion-justify-content-center section-header">
+            <ion-col  size-md="4" size-lg="4" size-xs="7">
+              <p class="comment-desc">
+                Agrega un comentario con lugar y descripción del problema.
+              </p>
+            </ion-col>
+          </ion-row>
+          <ion-item>
+            <ion-label position="floating">Comentarios</ion-label>
+            <ion-input formControlName="comment" type="textarea"></ion-input>
+          </ion-item>
+          <ion-row class="ion-justify-content-center section-header">
+            <ion-col  size-md="7" size-lg="7" size-xs="12" class="ion-text-center">
+              <label color="pale-olive-green" class="add-photo" for="report-photo">
+                <ion-icon slot="start"
+                  name="camera"
+                  class="pale-olive-green">
+                </ion-icon>
+                <h5 class="pale-olive-green" [innerHTML]="fileType.name"></h5>
+              </label>
+              <input #photo
+              id="report-photo"
+              type="file"
+              formControlName="photo"
+              (change)="loadImageFromDevice($event)"
+              accept="image/png, image/jpeg"
+              />
+            </ion-col>
+          </ion-row>
+          <ion-row class="ion-justify-content-center section-header">
+            <ion-col  size-md="7" size-lg="7" size-xs="12">
+              <ion-button  size="large" type="submit" class="submit">Reportar</ion-button>
+            </ion-col>
+          </ion-row>
+        </form>
+        <div *ngIf="success">
+          <h3>Se ha enviado exitosamente</h3>
+          <p>Tu mensaje ha sido ingresado en nuestro sistema de manejo de solicitudes, en breves te estará llegando un correo indicando el número de solicitud y otros datos relevantes para mantenernos en contacto. A la brevedad nuestro equipo se estará comunicando contigo respecto a tu reporte. Muchas gracias</p>
+          <ion-button class="submit" [routerLink]='["/intro/mapa"]'>Volver al inicio</ion-button>
+        </div>
+        <div *ngIf="fail">
+          <h3>No hemos podido enviar tu mensaje</h3>
+          <p>Por favor escríbenos a <a href="mailto:devops@data.org.uy">devops@data.org.uy</a> y explícanos lo que pasa, valoramos mucho tu esfuerzo y te pedimos disculpas por las molestias ocasionadas. Muchas gracias</p>
+          <ion-button class="submit error" (click)="reload()" [routerLink]='["#"]'>Volver a intentarlo</ion-button>
+          <ion-button class="submit" [routerLink]='["/intro/mapa"]'>Ir al inicio</ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

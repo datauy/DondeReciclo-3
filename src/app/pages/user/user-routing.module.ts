@@ -3,7 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { RegisterForm } from './register.form';
 import { LoginForm } from './login.form';
+import { ReportForm } from './report.form';
+import { ForgotForm } from './forgot.form';
+import { PasswordForm } from './password.form';
 import { UserPage } from './user.page';
+import { AuthGuardService } from "src/app/services/auth-guard.service";
 
 const routes: Routes = [
   {
@@ -16,6 +20,19 @@ const routes: Routes = [
       {
         path: 'ingresar',
         component: LoginForm
+      },
+      {
+        path: 'no-pass',
+        component: ForgotForm
+      },
+      {
+        path: 'password/:token',
+        component: PasswordForm
+      },
+      {
+        path: 'reportar/:containerID',
+        component: ReportForm,
+        canActivate: [AuthGuardService]
       },
       {
         path: ':nuevo',

@@ -14,7 +14,6 @@ function getIonContentElement(element: HTMLElement) {
   const ionPage = element.querySelector(
     '.ion-page ion-content'
   );
-  console.log(ionPage);
 
   if (ionPage) {
     return ionPage;
@@ -27,7 +26,6 @@ function getIonHeaderElement(element: HTMLElement) {
   const ionPage = element.querySelector(
     '.ion-page #header-main ion-toolbar ion-buttons'
   );
-  console.log(ionPage);
   if (ionPage) {
     return ionPage;
   }
@@ -46,9 +44,6 @@ export function navPage(_: HTMLElement, opts: any) {
   const enteringHeaderElHeight = enteringHeaderEl.clientHeight;
   const leavingHeaderEl = getIonHeaderElement(leavingEl);
   const leavingHeaderElHeight = leavingHeaderEl.clientHeight;
-
-  // console.log(enteringHeaderEl, leavingHeaderEl);
-  console.log(enteringHeaderElHeight, leavingHeaderElHeight);
 
   // get the content to animate
   const enteringContentEl = getIonContentElement(enteringEl);

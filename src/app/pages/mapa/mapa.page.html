@@ -51,13 +51,20 @@
       </ion-item>
 
       <ion-item lines="none">
-        <ion-button color="pale-olive-green">
+        <label class="add-photo" for="file-input">
           <ion-icon slot="start"
-            name="camera"
+            name="{{fileType.class}}"
             class="pale-olive-green">
           </ion-icon>
-          <h5 class="pale-olive-green">Subir otra foto</h5>
-        </ion-button>
+          <h5 class="pale-olive-green {{fileType.class}}" [innerHTML]="fileType.name"></h5>
+        </label>
+        <input #photo
+        id="file-input"
+        type="file"
+        (change)="newImage($event, container.id)"
+        (click)="checkLogin($event)"
+        accept="image/png, image/jpeg"
+        />
       </ion-item>
       <ion-item class="label-item" lines="none">
         <div class="circle green"
@@ -91,7 +98,7 @@
       </ion-item>
       <ion-item class="panel-footer" lines="none">
         <ion-col size="6">¿Algún inconveniente?</ion-col>
-        <ion-col size="6" class="ion-text-center"><a href="#">Reportar aquí <ion-icon name="dr-reportar"></ion-icon></a></ion-col>
+        <ion-col size="6" class="ion-text-center"><a [routerLink]="[ '/usuario/reportar', container.id ]">Reportar aquí <ion-icon name="dr-reportar"></ion-icon></a></ion-col>
       </ion-item>
     </div>
   </div>

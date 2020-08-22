@@ -6,8 +6,11 @@
   <ion-grid>
     <ion-row class="ion-justify-content-center">
       <ion-col  size-md="9" size-lg="6" size-xs="12">
-        <div class="error" *ngIf="fail">Usuario o password incorrectos</div>
-        <form [formGroup]="user_data" (ngSubmit)="login()" *ngIf="!( success || fail )">
+        <div class="form-error" *ngIf="fail">
+          <ion-icon name="close-outline"></ion-icon>
+          Usuario o password incorrectos
+        </div>
+        <form [formGroup]="user_data" (ngSubmit)="login()">
           <div class="top">
             <ion-item>
               <ion-label position="floating">Correo electrónico</ion-label>
@@ -15,8 +18,15 @@
             </ion-item>
             <ion-item>
               <ion-label position="floating">Contraseña</ion-label>
-              <ion-input formControlName="password" type="password"></ion-input>
+              <ion-icon
+                name="{{ showPass ? 'dr-password-hide': 'dr-password-show' }}"
+                slot="end"
+                class="ion-align-self-end"
+                (click)="togglePass()">
+              </ion-icon>
+              <ion-input formControlName="password" type="{{ showPass ? 'text': 'password' }}"></ion-input>
             </ion-item>
+            <a [routerLink]='["/usuario/no-pass"]'>Olvidé mi contraseña 🤦</a>
           </div>
           <div class="bottom">
             <ion-row class="ion-justify-content-center section-header">
