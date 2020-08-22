@@ -1,7 +1,7 @@
-# Donde Reciclo v3.2
+# Donde Reciclo v3.3
 Basada en Ionic5, Angular 8 y usando las últimas tecnologías de CSS4 y HTML5 para generar una mejor experiencia de usuario y contenidos exportables a Android e IOS así como las nuevas Web Apps.
 
-## Incluye v3.2.0
+## Incluye v3.3.0
 
 * Menú principal y secundario con navegación móvil y desktop
 * Mapa con geolocaliazción y centros de reciclaje
@@ -14,6 +14,9 @@ Basada en Ionic5, Angular 8 y usando las últimas tecnologías de CSS4 y HTML5 p
 * Formulario de contacto
 * Creación de usuarios
 * Login de usuarios
+* Reseteo de contraseña
+* Función de reporte de contenedores
+* Subir fotos de contenedores
 
 ## Bitácora de cambios (changelog)
 http://soporte.data.org.uy/es/blog/dr-changelog
