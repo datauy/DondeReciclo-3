@@ -149,8 +149,10 @@ export class ApiService<T=any> {
       }
     ));
   }
-  //
-  getNearbyContainers(radius: number, location?: [number, number]) {
+
+  // Definición de centro por defecto por país (KM 0) No logré poner el de Colombia que es 4.666338, -74.060665
+
+  getNearbyContainers (radius: number, location?: [number, number]) {
     if (typeof location == 'undefined') {
       location = [-32.657689, -55.873808];
     }
@@ -160,6 +162,7 @@ export class ApiService<T=any> {
       }
     ));
   }
+
   getContainers(bbox: string[]) {
     return  this.request.get(environment.backend + "containers_bbox?sw="+bbox[0]+"&ne="+bbox[1]).pipe(map(
       (result: Container[]) => {
