@@ -18,8 +18,15 @@
             </ion-item>
             <ion-item>
               <ion-label position="floating">Contraseña</ion-label>
-              <ion-input formControlName="password" type="password"></ion-input>
+              <ion-icon
+                name="{{ showPass ? 'dr-password-hide': 'dr-password-show' }}"
+                slot="end"
+                class="ion-align-self-end"
+                (click)="togglePass()">
+              </ion-icon>
+              <ion-input formControlName="password" type="{{ showPass ? 'text': 'password' }}"></ion-input>
             </ion-item>
+            <a [routerLink]='["/usuario/no-pass"]'>Olvidé mi contraseña 🤦</a>
           </div>
           <div class="bottom">
             <ion-row class="ion-justify-content-center section-header">

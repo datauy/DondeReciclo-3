@@ -11,6 +11,8 @@ import { UserPage } from './user.page';
 import { RegisterForm } from './register.form';
 import { LoginForm } from './login.form';
 import { ReportForm } from './report.form';
+import { ForgotForm } from './forgot.form';
+import { PasswordForm } from './password.form';
 
 @NgModule({
   imports: [
@@ -25,7 +27,9 @@ import { ReportForm } from './report.form';
     UserPage,
     RegisterForm,
     LoginForm,
-    ReportForm
+    ReportForm,
+    ForgotForm,
+    PasswordForm
   ]
 })
 export class UserPageModule {}

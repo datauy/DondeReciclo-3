@@ -1,72 +1,52 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormControl, AbstractControl } from '@angular/forms';
-import { NavController } from '@ionic/angular';
 import { SessionService } from 'src/app/services/session.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { ActivatedRoute } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-register-form',
-  templateUrl: './register.form.html',
+  selector: 'app-password-form',
+  templateUrl: './password.form.html',
   styleUrls: ['./user.page.scss'],
 })
-export class RegisterForm implements OnInit {
+export class PasswordForm implements OnInit {
 
-  success: boolean;
-  fail: boolean;
-  showPass: boolean;
+  public success: boolean;
+  public fail: boolean;
+  showPass = false;
 
   constructor(
     public formBuilder: FormBuilder,
     private session: SessionService,
     private auth: AuthService,
-    public navCtrl: NavController
+    private route: ActivatedRoute,
+    private navCtrl: NavController
   ) { }
 
   user_data: FormGroup;
-
+  //
   ngOnInit() {
     this.user_data = this.formBuilder.group({
-      name: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$')
-      ])),
-      sex: ['', Validators.required],
-      state: ['', Validators.required],
-      neighborhood: [''],
-      age: [''],
-      tc: [undefined, Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required],
+      password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      confirmPassword: new FormControl('', Validators.required),
     }, {
       validator: [
-        this.mustMatch('password',
-        'confirmPassword'), this.checkTC
+        this.mustMatch('password', 'confirmPassword')
       ]
     });
   }
   //
-  togglePass() {
-   this.showPass = !this.showPass;
-  }
-  //
-  register() {
+  newpass() {
     this.session.isLoading = true;
-    this.auth.createUser( {user: this.user_data.value} ).subscribe((res) => {
+    console.log(this.user_data.value.password);
+    let token = this.route.snapshot.params['token'];
+    this.auth.sendPass( {password: this.user_data.value.password, token: token} ).subscribe((res) => {
       this.session.isLoading = false;
       if (res) {
-        this.auth.loginUser(this.user_data.value.email, this.user_data.value.password ).subscribe((res) => {
-          this.session.isLoading = false;
-          if (res) {
-            this.success = true;
-          }
-          else {
-            this.fail = true;
-          }
-        });
+        this.success = true;
       }
       else {
-        this.session.isLoading = false;
         this.fail = true;
       }
     });
@@ -77,10 +57,12 @@ export class RegisterForm implements OnInit {
       }
     }, 10000);
   }
+  //
   clearResults() {
     delete this.success;
     delete this.fail;
   }
+  //
   mustMatch(controlName: string, matchingControlName: string) {
     return (formGroup: FormGroup) => {
         const control = formGroup.controls[controlName];
@@ -99,10 +81,8 @@ export class RegisterForm implements OnInit {
         }
     }
   }
-  public checkTC(c: AbstractControl){
-    if(c.get('tc').value == false){
-      return false;
-    }
-    return true;
+  //
+  togglePass() {
+   this.showPass = !this.showPass;
   }
 }

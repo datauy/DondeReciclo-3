@@ -22,7 +22,29 @@ export class AuthService {
     private  request:  HttpClient,
     private  storage:  Storage
   ) { }
-
+  //
+  requestToken(email: any) {
+    return this.request.post( environment.backend + "../password/forgot", email ).pipe(
+      map( (result: any) => {
+        if (!result.error) {
+          return true;
+        }
+        return false;
+      },
+    ));
+  }
+  //
+  sendPass(data: any) {
+    return this.request.post( environment.backend + "../password/reset", data ).pipe(
+      map( (result: any) => {
+        if (!result.error) {
+          return true;
+        }
+        return false;
+      },
+    ));
+  }
+  //
   async logout() {
     Promise.all([
       this.storage.remove("ACCESS_TOKEN"),
@@ -36,7 +58,7 @@ export class AuthService {
       this.authSubject.next(false);
     });
   }
-
+  //
   async isLoggedIn(): Promise<boolean> {
     let token = this.storage.get('ACCESS_TOKEN');
     let token_expires = this.storage.get("EXPIRES_IN");
@@ -53,7 +75,7 @@ export class AuthService {
       return false;
     });
   }
-
+  //
   createUser(form: any) {
     return this.request.post(environment.backend + "../users", form).pipe(
       map( (result: any) => {
@@ -65,7 +87,7 @@ export class AuthService {
       },
     ));
   }
-
+  //
   loginUser( email: string, password: string) {
     return this.request.post(environment.backend + "../oauth/token", {email: email, password: password, grant_type: 'password'}).pipe(
       map( (result: any) => {

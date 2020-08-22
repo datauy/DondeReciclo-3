@@ -32,6 +32,18 @@ app-login-form:host {
       height: 100%;
       form {
         height: 100%;
+        .top {
+          ion-item {
+            margin-bottom: 30px;
+          }
+          a {
+            width: 100%;
+            text-align: center;
+            display: block;
+            font-size: 16px;
+            font-weight: bold;
+          }
+        }
         .bottom {
           position: absolute;
           width: 100%;

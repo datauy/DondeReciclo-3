@@ -58,11 +58,23 @@
           </ion-item>
           <ion-item>
             <ion-label position="floating">Contraseña</ion-label>
-            <ion-input formControlName="password" type="password"></ion-input>
+            <ion-icon
+              name="{{ showPass ? 'dr-password-hide': 'dr-password-show' }}"
+              slot="end"
+              class="ion-align-self-end"
+              (click)="togglePass()">
+            </ion-icon>
+            <ion-input formControlName="password" type="{{ showPass ? 'text': 'password' }}"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position="floating">Confirmar contraseña</ion-label>
-            <ion-input formControlName="confirmPassword" type="password"></ion-input>
+            <ion-icon
+              name="{{ showPass ? 'dr-password-hide': 'dr-password-show' }}"
+              slot="end"
+              class="ion-align-self-end"
+              (click)="togglePass()">
+            </ion-icon>
+            <ion-input formControlName="confirmPassword" type="{{ showPass ? 'text': 'password' }}"></ion-input>
           </ion-item>
           <ion-item class="tc" lines="none">
             <ion-checkbox formControlName="tc"></ion-checkbox>
@@ -82,8 +94,8 @@
         </form>
         <div *ngIf="success">
           <h3>Se ha creado tu usuario</h3>
-          <p>En poco tiempo activaremos nuevas funcionalidades para que puedas participar activamente informando el estado de los contenedores, así como subir fotos para hacer más fácil el acceso para el resto. Muchas gracias.</p>
-          <ion-button class="submit" [routerLink]='["/intro/mapa"]'>Volver al inicio</ion-button>
+          <p>Ya puedes realizar reportes de problemas con los contenedores o aportar fotos para contribuir a majorar el ecosistema de reciclaje en nuestro país. Muchas gracias.</p>
+          <ion-button class="submit" [routerLink]='["/intro/mapa"]'>Comenzar</ion-button>
         </div>
         <div *ngIf="fail">
           <h3>No hemos podido crear tu cuenta</h3>
