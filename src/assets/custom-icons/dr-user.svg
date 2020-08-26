@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>dr-user</title>
+    <g id="dr-user" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle id="Oval" stroke="#FFFFFF" stroke-width="2" cx="15" cy="15" r="15"></circle>
+        <path d="M15,19 C19.6503121,19 23.6266389,21.8856743 25.2360059,25.9640484 C22.5559676,28.467867 18.9569082,30 15,30 C11.0427306,30 7.44337537,28.4675872 4.76297429,25.9638017 C6.37401031,21.8852031 10.3500675,19 15,19 Z" id="Combined-Shape" stroke="#FFFFFF"></path>
+        <circle id="Oval" stroke="#FFFFFF" cx="15" cy="11" r="5"></circle>
+    </g>
+</svg>
