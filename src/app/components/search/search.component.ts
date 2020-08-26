@@ -7,6 +7,7 @@ import { MapService } from "src/app/services/map.service";
 
 import { SearchParams, Material } from "src/app/models/basic_models.model";
 import { SessionService } from 'src/app/services/session.service';
+import { NotificationsService } from 'src/app/services/notifications.service';
 
 @Component({
   selector: 'app-search',
@@ -30,7 +31,8 @@ export class SearchComponent implements OnInit {
   constructor(
     public api: ApiService,
     public map: MapService,
-    public session: SessionService
+    public session: SessionService,
+    public notification: NotificationsService
     ) {
       this.session = session;
   }
@@ -77,14 +79,12 @@ export class SearchComponent implements OnInit {
             id: null,
             type: 'notification',
             class: 'warnings',
-            name: 'No hay resultados para: '+item.name,
-            deposition: 'No hay contenedores a menos de 300 km. de su ubicación'
+            title: 'No hay resultados para: '+item.name,
+            note: 'No hay contenedores a menos de 300 km. de su ubicación'
           };
-          this.session.showNotification(noRes);
+          this.notification.showNotification(noRes);
         }
-        else {
-          this.session.searchItem = item;
-        }
+        this.session.searchItem = item;
         this.hideSearch('item selected');
         this.searchBarIonic.value = '';
         setTimeout( () => {
@@ -95,7 +95,7 @@ export class SearchComponent implements OnInit {
     );
   }
   closeSelection() {
-    this.session.notificationClose();
+    delete this.session.searchItem;
     //reload pins
     this.map.mapChanges();
   }

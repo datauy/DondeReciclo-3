@@ -4,6 +4,7 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { SessionService } from './services/session.service';
+import { NotificationsService } from './services/notifications.service';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +24,7 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     public session: SessionService,
+    public notification: NotificationsService,
     private route: ActivatedRoute,
   ) {
     this.initializeApp();
@@ -51,5 +53,9 @@ export class AppComponent {
     setTimeout( () => {
       this.session.isLoading = false;
     }, 3000);
+  }
+
+  closeNotification() {
+    delete this.notification.message;
   }
 }

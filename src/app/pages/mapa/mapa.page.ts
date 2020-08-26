@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 //import { IonRouterOutlet } from '@ionic/angular';
 import { AuthGuardService } from 'src/app/services/auth-guard.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import { NotificationsService } from 'src/app/services/notifications.service';
 
 @Component({
   selector: 'app-mapa',
@@ -43,6 +44,7 @@ export class MapaPage implements OnInit {
     public session: SessionService,
     private geo: Geolocation,
     private authGuard: AuthGuardService,
+    private notification: NotificationsService,
     // private backbuttonSubscription: Subscription
   ) {
     this.session = session;
@@ -237,10 +239,10 @@ export class MapaPage implements OnInit {
       id: null,
       type: 'notification',
       class: 'warnings',
-      name: 'No pudimos localizarte',
-      deposition: 'Quizás no le diste permiso o la localización está desactivada. Prueba iniciar la app con la localización activada.'
+      title: 'No pudimos localizarte',
+      note: 'Quizás no le diste permiso o la localización está desactivada. Prueba iniciar la app con la localización activada.'
     };
-    this.session.showNotification(noRes);
+    this.notification.showNotification(noRes);
   }
   //
   formatContainer(container: Container) {

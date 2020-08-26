@@ -641,6 +641,7 @@ ion-app {
 ion-img.logo {
   object-position: left;
   width: inherit;
+  cursor: pointer;
   // @extend .hide;
   // opacity:s 0;
 }
