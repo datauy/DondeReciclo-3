@@ -33,11 +33,17 @@ body.keyboard-is-open {
 
 #notification-item {
   transition: 500ms ease-in-out;
-  margin: 12px;
   position: fixed;
+  display: inline-grid;
   z-index: 1000;
+  width: 100%;
   bottom: 0;
+  ion-grid {
+    padding: 12px;
+    width: 100%;
+  }
   ion-item {
+    //max-width: 600px;
     --min-height: 55px;
     max-height: 122px;
     height: inherit;
