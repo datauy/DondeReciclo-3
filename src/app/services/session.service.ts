@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Event, Router, NavigationEnd } from '@angular/router';
 import { Storage } from '@ionic/storage';
-import { Message, SearchMessage } from 'src/app/models/basic_models.model';
+import { SearchMessage } from 'src/app/models/basic_models.model';
 
 @Injectable({
   providedIn: 'root'
