@@ -117,3 +117,20 @@ app-report-form:host {
     color: var(--greyish-brown);
   }
 }
+app-register-form:host {
+  #profile {
+    margin: 30px auto;
+    text-align: center;
+    ion-button {
+      --background: none;
+      ion-icon {
+        width: 16px;
+      }
+    }
+  }
+  ion-button.submit {
+    &[type="submit"] {
+      margin-top: 0;
+    }
+  }
+}

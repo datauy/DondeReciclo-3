@@ -35,6 +35,11 @@ const routes: Routes = [
         canActivate: [AuthGuardService]
       },
       {
+        path: 'perfil',
+        component: RegisterForm,
+        canActivate: [AuthGuardService]
+      },
+      {
         path: ':nuevo',
         component: RegisterForm
       },

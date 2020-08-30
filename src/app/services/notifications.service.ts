@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Message } from 'src/app/models/basic_models.model';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -39,4 +39,11 @@ export class NotificationsService {
     };
     this.showNotification(notification);
   }
+}
+export interface Message {
+  id: number;
+  type: string;
+  title: string;
+  class: string;
+  note: string;
 }

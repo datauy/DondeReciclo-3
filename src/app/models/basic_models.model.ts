@@ -75,10 +75,3 @@ export interface SearchMessage {
     class: string;
     deposition: string;
 }
-export interface Message {
-    id: number;
-    type: string;
-    title: string;
-    class: string;
-    note: string;
-}

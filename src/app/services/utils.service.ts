@@ -32,7 +32,11 @@ export class UtilsService {
   createReport(form: any): Observable<boolean> {
     if ( this.auth.isLogged ) {
       let body = form;
-      let options = {};
+      let options = {
+        headers: {
+          'Authorization': "Bearer "+ this.auth.user_token
+        }
+      };
       if ( form.file ) {
         body = form.file;
         form.MimeType = form.fileType.type;
@@ -40,13 +44,8 @@ export class UtilsService {
         let type = form.fileType.type;
         delete  form.file;
         delete  form.fileType;
-        options = {
-          headers: {
-            "Content-Type": type,
-            'Authorization': "Bearer "+ this.auth.user_token
-          },
-          params: form
-        };
+        options.headers["Content-Type"] = type;
+        options['params'] = form;
       }
       return this.request.post(
         environment.backend + "report", body, options
