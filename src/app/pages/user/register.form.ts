@@ -187,14 +187,14 @@ export class RegisterForm implements OnInit {
       type: 'notification',
       class: 'info-outline',
       title: this.full ? 'Se ha creado tu usuario' : 'Se ha modificado tu usuario',
-      note: "Ya puedes realizar reportes de problemas con los contenedores o aportar fotos para contribuir a majorar el ecosistema de reciclaje en nuestro país. Muchas gracias."
+      note: "Ya es posible realizar reportes de problemas con los contenedores o aportar fotos para contribuir a majorar el ecosistema de reciclaje. Muchas gracias."
     };
     this.errorMessage = {
       id: null,
       type: 'notification',
       class: 'warnings-error',
       title: this.full ? 'No hemos podido crear tu cuenta' : 'No hemos podido modificar tu cuenta',
-      note: "Por favor escríbenos a devops@data.org.uy y explícanos lo que pasa, valoramos mucho tu esfuerzo y te pedimos disculpas por las molestias ocasionadas. Muchas gracias"
+      note: "Por favor escribir a devops@data.org.uy y explicar el problema, agradecemos tu esfuerzo y pedimos disculpas por las molestias ocasionadas. Muchas gracias."
     }
   }
   //Mail for pass change
@@ -204,8 +204,8 @@ export class RegisterForm implements OnInit {
       id: null,
       type: 'notification',
       class: 'warnings',
-      title: 'Hemos enviado un correo a tu cuenta',
-      note: "Por favor revisa tu correo y sigue los pasos que se indican en el email para cambiar tu contraseña. Muchas gracias"
+      title: 'Hemos enviado un correo a tu cuenta.',
+      note: "Por favor revisa tu correo y sigue los pasos que se indican en el mensaje para cambiar tu contraseña. Muchas gracias."
     }
     this.auth.requestToken( {email: this.auth.user.email} ).subscribe(
       (res) => {
@@ -213,14 +213,14 @@ export class RegisterForm implements OnInit {
         if (!res) {
           message.class = 'warnings-error';
           message.title = 'No hemos podido iniciar el cambio';
-          message.note = "Por favor escríbenos a devops@data.org.uy y explícanos lo que pasa, valoramos mucho tu esfuerzo y te pedimos disculpas por las molestias ocasionadas. Muchas gracias"
+          message.note = "Por favor escribir a devops@data.org.uy y explicar el problema, agradecemos tu esfuerzo y pedimos disculpas por las molestias ocasionadas. Muchas gracias."
         }
       },
       () => {
         this.session.isLoading = false;
         message.class = 'warnings-error';
         message.title = 'No hemos podido iniciar el cambio';
-        message.note = "Por favor escríbenos a devops@data.org.uy y explícanos lo que pasa, valoramos mucho tu esfuerzo y te pedimos disculpas por las molestias ocasionadas. Muchas gracias"
+        message.note = "Por favor escribir a devops@data.org.uy y explicar el problema, agradecemos tu esfuerzo y pedimos disculpas por las molestias ocasionadas. Muchas gracias."
       }
     );
     this.notify.showNotification(message);

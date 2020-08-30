@@ -44,14 +44,15 @@ body.keyboard-is-open {
   }
   ion-item {
     //max-width: 600px;
+    --border-radius: 6px !important;
     --min-height: 55px;
     height: inherit;
     background: var(--pale-olive-green);
+    background-clip: border-box;
     --padding-top: 10px;
     --padding-bottom: 15px;
     --padding-start: 20px;
     --padding-end: 20px;
-    --border-radius: 6px;
     --color: var(--vidrio);
     &.ion-color-warnings-error {
       background: var(--residuos-peligrosos);
