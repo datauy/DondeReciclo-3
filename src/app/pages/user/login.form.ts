@@ -27,13 +27,18 @@ export class LoginForm implements OnInit {
   user_data: FormGroup;
 
   ngOnInit() {
-    this.user_data = this.formBuilder.group({
-      email: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$')
-      ])),
-      password: ['', [Validators.required, Validators.minLength(6)]],
-    });
+    if ( this.auth.isLogged ) {
+      this.navCtl.navigateBack('/usuario/perfil');
+    }
+    else {
+      this.user_data = this.formBuilder.group({
+        email: new FormControl('', Validators.compose([
+          Validators.required,
+          Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$')
+        ])),
+        password: ['', [Validators.required, Validators.minLength(6)]],
+      });
+    }
   }
 
   login() {

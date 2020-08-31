@@ -127,6 +127,9 @@
       // --transition	Transition of the button
     }
   }
+  .no-margin {
+    margin: 0;
+  }
   .back-button {
     position: absolute;
     //top: 17px;
@@ -641,6 +644,7 @@ ion-app {
 ion-img.logo {
   object-position: left;
   width: inherit;
+  cursor: pointer;
   // @extend .hide;
   // opacity:s 0;
 }

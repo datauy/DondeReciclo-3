@@ -25,3 +25,76 @@ body.keyboard-is-open {
 //     }
 //   }
 // }
+.mapa, .fichas, .contacto, .consejos, .sobre-el-proyecto {
+  #notification-item {
+    bottom: 67px;
+  }
+}
+
+#notification-item {
+  transition: 500ms ease-in-out;
+  position: fixed;
+  display: inline-grid;
+  z-index: 1000;
+  width: 100%;
+  bottom: 0;
+  ion-grid {
+    padding: 12px;
+    width: 100%;
+  }
+  ion-item {
+    //max-width: 600px;
+    --border-radius: 6px !important;
+    --min-height: 55px;
+    height: inherit;
+    //background: var(--pale-olive-green);
+    background-clip: border-box;
+    --padding-top: 10px;
+    --padding-bottom: 15px;
+    --padding-start: 20px;
+    --padding-end: 20px;
+    --color: var(--vidrio);
+    &.ion-color-warnings-error {
+      background: var(--residuos-peligrosos);
+    }
+    .item-text {
+      position: relative;
+      left: 53px;
+      max-width: calc(100% - 92px);
+      word-wrap: break-word;
+      ion-note,
+      ion-label {
+        white-space: normal;
+        position: relative;
+        --color: var(--ion-color-contrast);
+      }
+      ion-label {
+        font-size: 18px;
+        font-weight: bold;
+      }
+      ion-note {
+        font-size: 12px;
+      }
+    }
+    ion-button {
+      position: absolute;
+      right: 0;
+      height: inherit;
+      --background: none;
+      --border-left: 1px solid gray;
+      ion-icon {
+        color: var(--ion-color-contrast);
+      }
+    }
+    ion-button::before {
+      content: "";
+      width: 1px;
+      height: 15px;
+      display: block;
+      border-left: 1px solid var(--ion-color-contrast);
+      position: absolute;
+      top: 5px;
+      opacity: 0.3;
+    }
+  }
+}

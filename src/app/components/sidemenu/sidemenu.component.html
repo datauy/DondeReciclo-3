@@ -35,15 +35,14 @@
           <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
         </ion-item>
         <ion-item lines="none"
-          (click)="session.notificationCommingSoon(); toggleMenu();"
+          (click)="toggleMenu()"
           detail-icon="none"
           class = "ion-activatable"
+          routerLink="/usuario/perfil"
           routerDirection="forward"
           routerLinkActive="active-item"
           *ngIf="auth.isLogged">
-          <ion-avatar slot="start">
-            <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-          </ion-avatar>
+          <ion-icon slot="start" name="dr-user"></ion-icon>
           <div>
             <h4>Mi Perfil</h4>
           </div>

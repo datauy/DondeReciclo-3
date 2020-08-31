@@ -68,7 +68,7 @@ export class Program extends Base {
   icon: string;
 }
 
-export interface Notification {
+export interface SearchMessage {
     id: number;
     type: string;
     name: string;

@@ -44,6 +44,7 @@ export class PasswordForm implements OnInit {
       this.session.isLoading = false;
       if (res) {
         this.success = true;
+        this.auth.logout();
       }
       else {
         this.fail = true;
