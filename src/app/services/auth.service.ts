@@ -137,9 +137,9 @@ export class AuthService {
           ])
           .then( (values) => {
             this.loadUserData();
-            this.isLogged = true;
             this.user_token = result.access_token;
           });
+          this.isLogged = true;
           return true;
         }
         return false;
