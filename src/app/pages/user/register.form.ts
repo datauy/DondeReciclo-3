@@ -155,12 +155,15 @@ export class RegisterForm implements OnInit {
       );
     }
     else {
+      //save pass for later login
+      let pass = this.user_data.value.password;
       this.auth.createUser( {user: this.user_data.value} ).subscribe((res) => {
         if (res) {
-          this.auth.loginUser(this.user_data.value.email, this.user_data.value.password ).subscribe((res) => {
+          this.auth.loginUser(this.user_data.value.email, pass ).subscribe((res) => {
             this.session.isLoading = false;
             if (res) {
               this.notify.showNotification(this.infoMessage);
+              this.navCtrl.navigateBack('/usuario/perfil');
             }
             else {
               this.notify.showNotification(this.errorMessage);
