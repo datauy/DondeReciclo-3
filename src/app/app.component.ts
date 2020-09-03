@@ -39,11 +39,27 @@ export class AppComponent {
     // }
     // this.isLoading = this.session.get('isLoading');
   }
+  private notificationSetup() {
+    console.log('Notification Setup');
+    this.notification.getToken();
+    this.notification.onNotifications().subscribe(
+      (msg) => {
+        console.log(msg);
+        if (this.platform.is('ios')) {
+          this.notification.showNotificationMessage(msg.aps.alert);
+        }
+        else {
+          this.notification.showNotificationMessage(msg.body);
+        }
+      }
+    );
+  }
 
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.notificationSetup();
     });
   }
 
@@ -56,6 +72,6 @@ export class AppComponent {
   }
 
   closeNotification() {
-    delete this.notification.message;
+    this.notification.notificationClose();
   }
 }
