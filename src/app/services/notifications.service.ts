@@ -25,7 +25,6 @@ export class NotificationsService {
     //this.getToken();
     this.onNotifications().subscribe(
       (msg) => {
-        console.log(msg);
         let url, message;
         if ( msg.type != undefined ) {
           url = '/' + msg.type;
@@ -37,10 +36,8 @@ export class NotificationsService {
         else {
           message = msg;
         }
-        console.log(message);
         if ( msg.tap == undefined ) {
           //La aplicación está funcionando
-          console.log('ACTIVE APP');
           if ( url != '' ) {
             message.link = url;
             message.link_title = msg.link_title != undefined ? msg.link_title : 'Vamos!';
@@ -48,7 +45,6 @@ export class NotificationsService {
           this.showNotificationMessage(message);
         }
         else {
-          console.log('INACTIVE ROUTING');
           this.navCtl.navigateBack(url);
         }
       }
@@ -61,8 +57,11 @@ export class NotificationsService {
       type: 'notification',
       class: 'warnings',
       title: message.title ? message.title : 'Mensaje importante!',
-      note: message.body
+      note: message.body,
+      link: message.link ? message.link : null,
+      link_title: message.link_title ? message.link_title : null,
     };
+    console.log(notification);
     this.showNotification(notification);
   }
   //
