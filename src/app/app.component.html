@@ -32,7 +32,7 @@
             [routerLink]="notification.message.link"
             (click)="closeNotification()"
             [innerHTML]="notification.message.link_title"
-            *ngIf="notification.message.link">
+            *ngIf="notification.message.link != null">
           </ion-button>
         </ion-col>
       </ion-row>

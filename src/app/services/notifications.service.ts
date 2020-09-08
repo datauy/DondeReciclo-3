@@ -26,15 +26,15 @@ export class NotificationsService {
     this.onNotifications().subscribe(
       (msg) => {
         let url, message;
-        if ( msg.type != undefined ) {
-          url = '/' + msg.type;
-          url += msg.type_id != undefined ? '/' + msg.type_id : '';
-        }
         if (this.platform.is('ios')) {
           message = msg.aps.alert;
         }
         else {
           message = msg;
+        }
+        if ( msg.type != undefined ) {
+          url = '/' + msg.type;
+          url += msg.type_id != undefined ? '/' + msg.type_id : '';
         }
         if ( msg.tap == undefined ) {
           //La aplicación está funcionando
@@ -45,7 +45,10 @@ export class NotificationsService {
           this.showNotificationMessage(message);
         }
         else {
-          this.navCtl.navigateBack(url);
+          //Tiene link
+          if ( msg.type != undefined ) {
+            this.navCtl.navigateBack(url);
+          }
         }
       }
     );
@@ -61,7 +64,6 @@ export class NotificationsService {
       link: message.link ? message.link : null,
       link_title: message.link_title ? message.link_title : null,
     };
-    console.log(notification);
     this.showNotification(notification);
   }
   //
@@ -80,7 +82,6 @@ export class NotificationsService {
     else {
       delete this.message
     }
-    console.log(this.message);
   }
   //
   notificationCommingSoon() {
