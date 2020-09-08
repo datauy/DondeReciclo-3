@@ -28,6 +28,12 @@
               <ion-icon name="close-outline"></ion-icon>
             </ion-button>
           </ion-item>
+          <ion-button class="submit contrast"
+            [routerLink]="notification.message.link"
+            (click)="closeNotification()"
+            [innerHTML]="notification.message.link_title"
+            *ngIf="notification.message.link">
+          </ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { Platform, NavController } from '@ionic/angular';
 
 import { FirebaseX } from "@ionic-native/firebase-x/ngx";
+import { Message } from "src/app/models/message.model";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class NotificationsService {
   constructor(
     private firebase: FirebaseX,
     private platform: Platform,
-
+    private navCtl: NavController,
   ) { }
 
   //Search items
@@ -19,24 +20,59 @@ export class NotificationsService {
   messageBack: Message;
   showMessage: boolean = true;
 
-  showNotificationMessage(message: string) {
+  public notificationSetup() {
+    //Por ahora no guardamos el token
+    //this.getToken();
+    this.onNotifications().subscribe(
+      (msg) => {
+        console.log(msg);
+        let url, message;
+        if ( msg.type != undefined ) {
+          url = '/' + msg.type;
+          url += msg.type_id != undefined ? '/' + msg.type_id : '';
+        }
+        if (this.platform.is('ios')) {
+          message = msg.aps.alert;
+        }
+        else {
+          message = msg;
+        }
+        console.log(message);
+        if ( msg.tap == undefined ) {
+          //La aplicación está funcionando
+          console.log('ACTIVE APP');
+          if ( url != '' ) {
+            message.link = url;
+            message.link_title = msg.link_title != undefined ? msg.link_title : 'Vamos!';
+          }
+          this.showNotificationMessage(message);
+        }
+        else {
+          console.log('INACTIVE ROUTING');
+          this.navCtl.navigateBack(url);
+        }
+      }
+    );
+  }
+  //
+  showNotificationMessage(message: any) {
     let notification = {
       id: null,
       type: 'notification',
       class: 'warnings',
-      title: 'Mensaje importante!',
-      note: message
+      title: message.title ? message.title : 'Mensaje importante!',
+      note: message.body
     };
     this.showNotification(notification);
   }
-
+  //
   showNotification(notification: Message) {
-    console.log(notification);
     if ( this.message ) {
       this.messageBack = this.message;
     }
     this.message = notification;
   }
+  //
   notificationClose() {
     if ( this.messageBack ) {
       this.message = this.messageBack;
@@ -47,6 +83,7 @@ export class NotificationsService {
     }
     console.log(this.message);
   }
+  //
   notificationCommingSoon() {
     console.log('Comming soon');
     let notification = {
@@ -58,26 +95,23 @@ export class NotificationsService {
     };
     this.showNotification(notification);
   }
+  //
   async getToken() {
     let token: string;
-    console.log('Get token');
+
     if (this.platform.is('android')) {
       token = await this.firebase.getToken();
     }
-
     if (this.platform.is('ios')) {
       token = await this.firebase.getToken();
       await this.firebase.grantPermission();
     }
-    console.log(token);
     this.saveToken(token);
   }
-
+  //
   private saveToken(token: string) {
     if (!token) return;
-
     //const devicesRef = this.afs.collection('devices');
-
     const data = {
       token,
       userId: 'testUserId'
@@ -85,15 +119,8 @@ export class NotificationsService {
     console.log(data);
     //return devicesRef.doc(token).set(data);
   }
-
+  //
   onNotifications() {
     return this.firebase.onMessageReceived();
   }
-}
-export interface Message {
-  id: string;
-  type: string;
-  title: string;
-  class: string;
-  note: string;
 }

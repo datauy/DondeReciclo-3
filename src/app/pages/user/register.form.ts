@@ -5,7 +5,8 @@ import { Observable, BehaviorSubject } from 'rxjs';
 
 import { SessionService } from 'src/app/services/session.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { NotificationsService, Message } from 'src/app/services/notifications.service';
+import { NotificationsService } from 'src/app/services/notifications.service';
+import { Message } from "src/app/models/message.model";
 
 @Component({
   selector: 'app-register-form',
