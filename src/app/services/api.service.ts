@@ -178,7 +178,7 @@ export class ApiService<T=any> {
   getContainersByMaterials(query: string, location?: number[]) {
     var url = environment.backend + "containers4materials?"+query;
     if ( typeof location == 'undefined' || location == null ) {
-      location = environment.ucenter;
+      location = environment[this.session.country].center;
     }
     else {
       // TODO: Definir comportamiento en base a caso de uso ya que cambia la query del back también

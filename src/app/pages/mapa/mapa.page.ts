@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import {NativeGeocoder,NativeGeocoderOptions} from "@ionic-native/native-geocoder/ngx";
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -29,7 +29,6 @@ export class MapaPage implements OnInit {
   uLocation = false as boolean;
 
   infoPaneEl: HTMLDivElement;
-
   loadingImg: boolean = false;
   fileType: any = {
     name: 'Subir otra foto',
@@ -74,6 +73,7 @@ export class MapaPage implements OnInit {
   //
   ionViewDidEnter() {
     this.map.loadMap();
+    this.map.resizeMap(0);
     if ( this.session.searchItem != undefined ) {
       this.session.showSearchItem = true;
     }
@@ -92,12 +92,11 @@ export class MapaPage implements OnInit {
     //Wait 3 seconds for user location and start loading LOad nearbymap
     setTimeout( () => {
       if ( !this.uLocation ) {
-        this.api.getNearbyContainers(0.5, [environment.ucenter[0], environment.ucenter[1]]).subscribe(
+        this.api.getNearbyContainers(0.5, [this.map.center.lat, this.map.center.lng]).subscribe(
           (containers) => {
             this.map.loadMarkers(containers, true);
           }
         );
-        //this.map.flytomarker([environment.ucenter[0],environment.ucenter[1]] , 17);
       }
     }, 4000);
   }
@@ -197,7 +196,8 @@ export class MapaPage implements OnInit {
   //
   loadNearbyContainers(fly: boolean) {
     if ( this.session.searchItem != undefined){
-      this.api.getContainers4Materials(this.map.getBoundingCoords(), this.session.searchItem.type+"="+this.session.searchItem.id).subscribe((containers) => {
+      this.api.getContainers4Materials(this.map.getBoundingCoords(), this.session.searchItem.type+"="+this.session.searchItem.id)
+      .subscribe((containers) => {
         this.map.loadMarkers(containers, fly);
       });
     }
@@ -212,21 +212,18 @@ export class MapaPage implements OnInit {
     this.geo.getCurrentPosition({ enableHighAccuracy: false }).then( (resp) => {
       this.uLocation = true;
       this.map.userPosition = [resp.coords.latitude, resp.coords.longitude];
-      this.api.getNearbyContainers(2, [resp.coords.latitude, resp.coords.longitude]).subscribe(
-        (containers) => {
+      this.api.getNearbyContainers(2, [resp.coords.latitude, resp.coords.longitude])
+      .subscribe((containers) => {
           this.map.loadMarkers(containers, true);
-        }
-      );
+      });
       //this.map.flytomarker(this.map.userPosition, 15);
     }).catch((error) => {
       this.noLocation();
       this.uLocation = true;
-      this.api.getNearbyContainers(1, [environment.ucenter[0], environment.ucenter[1]]).subscribe(
-        (containers) => {
-          this.map.loadMarkers(containers, true);
-        }
-      );
-      //this.map.flytomarker([environment.ucenter[0],environment.ucenter[1]] , 18);
+      this.api.getNearbyContainers(1, [this.map.center.lat, this.map.center.lng])
+      .subscribe((containers) => {
+        this.map.loadMarkers(containers, true);
+      });
     });
     setTimeout( () => {
       if ( !this.uLocation ){
@@ -275,7 +272,6 @@ export class MapaPage implements OnInit {
   newImage(event: any, id: number) {
     if ( this.authGuard.isActive() ) {
       this.fileType = { name: 'Cargando...', class: 'camera'};
-      console.log('Container' + id);
       this.loadingImg = true;
       let fileT = event.target.files[0];
       const reader = new FileReader();
@@ -284,10 +280,8 @@ export class MapaPage implements OnInit {
         this.loadingImg = false;
         // get the blob of the image:
         let file = new Blob([new Uint8Array((reader.result as ArrayBuffer))]);
-        console.log("Going for upload");
         this.utils.uploadImage(file, fileT, id).subscribe(
           uploaded => {
-            console.log("Uploaded");
             if (uploaded) {
               this.fileType = { name: 'Foto cargada', class: 'checkmark-circle'};
             }

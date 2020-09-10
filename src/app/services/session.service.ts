@@ -26,6 +26,7 @@ export class SessionService {
   showSearchItem: boolean = true;
   //Initial Slider
   showSlider: boolean = true;
+  reloadMap: boolean = false;
 
   constructor(
     private router: Router,
