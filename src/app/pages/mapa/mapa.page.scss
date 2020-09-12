@@ -138,5 +138,19 @@
       color: var(--greyish-brown);
       margin: 0;
     }
+    .scheds {
+      padding: 0 14px;
+      h5 {
+        cursor: pointer;
+        ion-icon {
+          height: 21px;
+          width: 24px;
+          margin-bottom: -8px;
+        }
+      }
+      .today {
+        font-weight: 900;
+      }
+    }
   }
 }

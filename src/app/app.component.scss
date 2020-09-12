@@ -50,6 +50,9 @@ body.keyboard-is-open {
     background: var(--pale-olive-green);
     background-clip: border-box;
     text-align: center;
+    &.warnings-error {
+      background: var(--residuos-peligrosos);
+    }
     ion-item {
       //max-width: 600px;
       --padding-top: 10px;
@@ -57,9 +60,7 @@ body.keyboard-is-open {
       --padding-start: 20px;
       --padding-end: 20px;
       --color: var(--vidrio);
-      &.ion-color-warnings-error {
-        background: var(--residuos-peligrosos);
-      }
+      --background: transparent;
       .item-text {
         position: relative;
         left: 53px;

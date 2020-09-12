@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import {NativeGeocoder,NativeGeocoderOptions} from "@ionic-native/native-geocoder/ngx";
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
-import { Container, Program } from "src/app/models/basic_models.model";
+import { Container, Program, Weekdays } from "src/app/models/basic_models.model";
 import { CupertinoPane } from 'cupertino-pane';
 
 import { ApiService } from "src/app/services/api.service";
@@ -34,6 +34,8 @@ export class MapaPage implements OnInit {
     name: 'Subir otra foto',
     class: 'camera'
   };
+  weekday = new Weekdays;
+  showSched = false;
 
   constructor(
     private geocoder: NativeGeocoder,
@@ -188,6 +190,7 @@ export class MapaPage implements OnInit {
           this.map.drawRoute(this.map.userPosition, [this.container.latitude, this.container.longitude]);
         }
       }
+      console.log(this.container);
     });
   }
   hidePane() {
@@ -255,6 +258,38 @@ export class MapaPage implements OnInit {
     else {
       this.container.receives = this.api.getMaterials(container.materials);
     }
+    //Horario
+    let days = [];
+    if ( Object.keys(container.schedules).length ) {
+      let d=new Date();
+      var today = d.getDay().toString();
+      for ( let d in this.weekday ) {
+        let selected = '';
+        if ( d == today ) {
+          selected = 'today';
+        }
+        if( container.schedules.hasOwnProperty(d) ) {
+          if ( container.schedules[d].closed == true ) {
+            days.push( {class: selected, text: this.weekday[d] + ': Cerrado'} );
+          }
+          else {
+            let sched = container.schedules[d];
+            let day_text = this.weekday[d] + ': ' + sched.start + ' a ' + sched.end;
+            if ( sched.hasOwnProperty('start2') ){
+              day_text += ' y ' + sched.start2 + ' a ' + sched.end2;
+            }
+            days.push( {class: selected, text: day_text} );
+          }
+        }
+        else {
+          days.push( {class: selected, text: this.weekday[d] + ': - '} );
+        }
+      }
+    }
+    container.schedules = days;
+  }
+  toggleSched() {
+    this.showSched = !this.showSched;
   }
   geolocate() {
     this.gotoLocation();

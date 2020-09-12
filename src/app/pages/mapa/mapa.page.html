@@ -42,13 +42,22 @@
           class="badge pale-olive-green">
         </ion-icon>
       </ion-item>
-
-      <ion-item lines="none">
-        <div>
-          <h5>Horario</h5>
-          <p>9:00 - 21:00 hs (aprox.)</p>
-        </div>
-      </ion-item>
+      <div class="scheds" *ngIf="container.schedules?.length">
+          <h5 (click)="toggleSched()">
+            Horario:
+            <ion-icon
+            name="add-circle-sharp"
+            class="pale-olive-green">
+          </ion-icon>
+          </h5>
+          <div class="sched" *ngFor="let h of container.schedules">
+            <p
+            *ngIf="showSched || h.class == 'today'"
+            [class]="h.class"
+            [innerHtml]="h.text">
+            </p>
+          </div>
+      </div>
 
       <ion-item lines="none">
         <label class="add-photo" for="file-input">
