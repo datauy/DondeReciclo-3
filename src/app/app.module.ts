@@ -25,6 +25,7 @@ import { File } from '@ionic-native/file/ngx';
 import { navPage } from './components/animations/';
 
 import { IonicStorageModule } from '@ionic/storage';
+import { FirebaseX } from "@ionic-native/firebase-x/ngx";
 /*
 export function initApp(backConfig: ApiService<any>) {
   console.log("Loading initial data");
@@ -53,6 +54,7 @@ export function initApp(backConfig: ApiService<any>) {
     Geolocation,
     ApiService,
     File,
+    FirebaseX,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
 //    { provide: APP_INITIALIZER, useFactory: initApp, deps: [ApiService], multi: true }
   ],

@@ -83,9 +83,11 @@ export class AuthService {
           delete form.user.password;
           delete form.user.confirmPassword;
           this.user = form.user;
-          return true;
+          return {error:0};
         }
-        return false;
+        else {
+          return result;
+        }
       },
     ));
   }

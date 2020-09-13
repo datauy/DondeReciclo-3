@@ -42,39 +42,43 @@ body.keyboard-is-open {
     padding: 12px;
     width: 100%;
   }
-  ion-item {
-    //max-width: 600px;
+  ion-col {
     --border-radius: 6px !important;
     border-radius: 6px;
     --min-height: 55px;
     height: inherit;
     background: var(--pale-olive-green);
     background-clip: border-box;
-    --padding-top: 10px;
-    --padding-bottom: 15px;
-    --padding-start: 20px;
-    --padding-end: 20px;
-    --color: var(--vidrio);
-    &.ion-color-warnings-error {
+    text-align: center;
+    &.warnings-error {
       background: var(--residuos-peligrosos);
     }
-    .item-text {
-      position: relative;
-      left: 53px;
-      max-width: calc(100% - 92px);
-      word-wrap: break-word;
-      ion-note,
-      ion-label {
-        white-space: normal;
+    ion-item {
+      //max-width: 600px;
+      --padding-top: 10px;
+      --padding-bottom: 15px;
+      --padding-start: 20px;
+      --padding-end: 20px;
+      --color: var(--vidrio);
+      --background: transparent;
+      .item-text {
         position: relative;
-        --color: var(--ion-color-contrast);
-      }
-      ion-label {
-        font-size: 18px;
-        font-weight: bold;
-      }
-      ion-note {
-        font-size: 12px;
+        left: 53px;
+        max-width: calc(100% - 92px);
+        word-wrap: break-word;
+        ion-note,
+        ion-label {
+          white-space: normal;
+          position: relative;
+          --color: var(--ion-color-contrast);
+        }
+        ion-label {
+          font-size: 18px;
+          font-weight: bold;
+        }
+        ion-note {
+          font-size: 12px;
+        }
       }
     }
     ion-button {
@@ -82,9 +86,26 @@ body.keyboard-is-open {
       right: 0;
       height: inherit;
       --background: none;
-      --border-left: 1px solid gray;
+      border-left: 1px solid var(--ion-color-contrast, var(--ion-color-contrast));
       ion-icon {
         color: var(--ion-color-contrast);
+      }
+      &.contrast {
+        --background: var(--vidrio);
+        --color: var(--pale-olive-green);
+        --border-style: solid;
+        --border-color: var(--pale-olive-green);
+        --border-width: 1px;
+        color: var(--pale-olive-green);
+        width: calc(100% - 144px);max-width: 320px;
+        position: relative;
+        height: 40px;
+        word-wrap: unset;
+        margin: 0 auto 10px;
+        white-space: normal;
+        &.selected {
+          --background: var(--dark-sea-green);
+        }
       }
     }
     ion-button::before {
@@ -92,7 +113,7 @@ body.keyboard-is-open {
       width: 1px;
       height: 15px;
       display: block;
-      border-left: 1px solid var(--ion-color-contrast);
+      border-left: 1px solid var(--ion-color-contrast, var(--vidrio));
       position: absolute;
       top: 5px;
       opacity: 0.3;
