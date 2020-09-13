@@ -190,7 +190,6 @@ export class MapaPage implements OnInit {
           this.map.drawRoute(this.map.userPosition, [this.container.latitude, this.container.longitude]);
         }
       }
-      console.log(this.container);
     });
   }
   hidePane() {

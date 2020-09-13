@@ -157,7 +157,6 @@ export class RegisterForm implements OnInit {
       this.auth.createUser( {user: this.user_data.value} ).subscribe(
         (res) => {
           if (res) {
-            console.log(res);
             if ( res.error ) {
               this.handleNotifications(res.type);
             }
