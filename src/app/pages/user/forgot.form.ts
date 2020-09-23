@@ -31,7 +31,6 @@ export class ForgotForm implements OnInit {
   }
 
   newpass() {
-    console.log(this.user_data);
     if ( !this.user_data.value.email ) {
       return false;
     }

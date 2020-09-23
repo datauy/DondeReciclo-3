@@ -49,7 +49,6 @@ export class AuthService {
     Promise.all([
       this.storage.remove("ACCESS_TOKEN"),
       this.storage.remove("EXPIRES_IN"),
-      this.storage.remove("USER"),
       this.storage.remove("CREATED_AT")
     ]).then( () => {
       this.isLogged = false;
@@ -80,12 +79,51 @@ export class AuthService {
     return this.request.post(environment.backend + "../users", form).pipe(
       map( (result: any) => {
         if (!result.error) {
-          this.storage.set("USER", form.user);
+          //Remove sensitive data
+          delete form.user.password;
+          delete form.user.confirmPassword;
+          this.user = form.user;
           return true;
         }
         return false;
       },
     ));
+  }
+  //
+  async updateUser(user: User): Promise<boolean> {
+    return this.isLoggedIn().then(
+      (isLogged) => {
+        if (isLogged) {
+          let options = {
+            headers: {
+              'Authorization': "Bearer " + this.user_token
+            },
+          };
+          return this.request.post(environment.backend + "user/update", user, options)
+          .toPromise()
+          .then( (result: any) => {
+              if (!result.error) {
+                this.user = result;
+                return true;
+              }
+              return false;
+            })
+          .catch( (e) => {
+            console.log('ERROR');
+            console.log(e)
+            return false;
+          });
+        }
+        else {
+          return false;
+        }
+      }
+    )
+    .catch( (e) => {
+      console.log('ERROR');
+      console.log(e)
+      return false;
+    });
   }
   //
   loginUser( email: string, password: string) {
@@ -99,9 +137,9 @@ export class AuthService {
           ])
           .then( (values) => {
             this.loadUserData();
-            this.isLogged = true;
             this.user_token = result.access_token;
           });
+          this.isLogged = true;
           return true;
         }
         return false;
@@ -112,50 +150,34 @@ export class AuthService {
     ));
   }
   async loadUserData(): Promise<User> {
-    return this.storage.get('USER').then( (user) => {
-      if (user) {
-        this.storage.get('ACCESS_TOKEN').then( ( token ) => {
-          if (token) {
-            this.isLogged = true;
-            this.user_token = token;
+    return this.isLoggedIn().then(
+      (isLogged) => {
+        if (isLogged) {
+          if ( this.user ) {
+            return this.user;
           }
-          else {
-            return false;
-          }
-        });
-        this.user = user;
-        return user;
-      }
-      else {
-        return this.isLoggedIn().then(
-          (isLogged) => {
-            if (isLogged) {
-              let options = {
-                headers: {
-                  'Authorization': "Bearer " + this.user_token
-               },
-              };
-              return this.request.get(
-                environment.backend + "user", options
-              )
-              .toPromise()
-              .then( (result: any) => {
-                  if (!result.error) {
-                    this.storage.set('USER', result);
-                    this.user = result;
-                    return result;
-                  }
-                  return false;
-                })
-              .catch( (e) => {console.log('ERROR');console.log(e)});
-            }
-            else {
+          let options = {
+            headers: {
+              'Authorization': "Bearer " + this.user_token
+           },
+          };
+          return this.request.get(
+            environment.backend + "user", options
+          )
+          .toPromise()
+          .then( (result: any) => {
+              if (!result.error) {
+                this.user = result;
+                return result;
+              }
               return false;
-            }
-          }
-        );
+            })
+          .catch( (e) => {console.log('ERROR');console.log(e)});
+        }
+        else {
+          return false;
+        }
       }
-    })
-    .catch( (e) => {console.log('ERROR');console.log(e)});
+    );
   }
 }

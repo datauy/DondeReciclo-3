@@ -3,7 +3,6 @@ import { Validators, FormBuilder, FormGroup, FormControl, AbstractControl } from
 import { SessionService } from 'src/app/services/session.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ActivatedRoute } from '@angular/router';
-import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-password-form',
@@ -21,7 +20,6 @@ export class PasswordForm implements OnInit {
     private session: SessionService,
     private auth: AuthService,
     private route: ActivatedRoute,
-    private navCtrl: NavController
   ) { }
 
   user_data: FormGroup;
@@ -39,12 +37,12 @@ export class PasswordForm implements OnInit {
   //
   newpass() {
     this.session.isLoading = true;
-    console.log(this.user_data.value.password);
     let token = this.route.snapshot.params['token'];
     this.auth.sendPass( {password: this.user_data.value.password, token: token} ).subscribe((res) => {
       this.session.isLoading = false;
       if (res) {
         this.success = true;
+        this.auth.logout();
       }
       else {
         this.fail = true;
