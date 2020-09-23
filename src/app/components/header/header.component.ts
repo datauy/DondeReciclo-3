@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MenuController, ModalController, NavController } from '@ionic/angular';
+import { MenuController, ModalController} from '@ionic/angular';
+import { Location } from "@angular/common";
 import { SocialShareComponent } from '../social-share/social-share.component';
 import { SessionService } from 'src/app/services/session.service';
 
@@ -18,7 +19,7 @@ export class HeaderComponent implements OnInit {
     public menuCtrl: MenuController,
     public modalController: ModalController,
     public session: SessionService,
-    public navCtrl: NavController
+    private location: Location
   ) {
     this.session = session;
   }
@@ -28,11 +29,13 @@ export class HeaderComponent implements OnInit {
   }
 
   goBack(){
-    if (this.backLink){
+    /*if (this.backLink){
       this.navCtrl.navigateBack(this.backLink);
-    }else{
-      this.navCtrl.back();
     }
+    else{
+      this.navCtrl.pop();
+    }*/
+    this.location.back();
   }
 
   toggleMenu() {
