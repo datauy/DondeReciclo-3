@@ -7,7 +7,12 @@ export const environment = {
   assets: "assets",
   url: 'http://localhost:8100',
   backend: "https://dr3b.dev.data.org.uy/api/",
-  ucenter: [-34.905897, -56.191406]
+  Uruguay: {
+    center: {lat: -34.905897, lng: -56.191406},
+  },
+  Colombia: {
+    center: {lat: 4.708435, lng: -74.071570},
+  }
 };
 
 /*

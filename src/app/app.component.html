@@ -14,8 +14,8 @@
   <div id="notification-item" *ngIf="notification.message && notification.showMessage">
     <ion-grid>
       <ion-row class="ion-justify-content-center">
-        <ion-col size-lg="6" size-xs="12" offset-lg="3.5" padding="0">
-          <ion-item lines="none" [color]="notification.message.class">
+        <ion-col class="{{notification.message.class}}" size-lg="6" size-xs="12" offset-lg="3.5" padding="0">
+          <ion-item lines="none">
             <ion-icon
               class="left"
               [name]="'dr-' + notification.message.class">
@@ -28,6 +28,12 @@
               <ion-icon name="close-outline"></ion-icon>
             </ion-button>
           </ion-item>
+          <ion-button class="submit contrast"
+            [routerLink]="notification.message.link"
+            (click)="closeNotification()"
+            [innerHTML]="notification.message.link_title"
+            *ngIf="notification.message.link != null">
+          </ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>

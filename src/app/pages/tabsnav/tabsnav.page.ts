@@ -28,6 +28,8 @@ export class TabsnavPage implements OnInit {
     private keyboard: Keyboard,
     public session: SessionService
   ) {
+    //Notifications reload views but not services...
+    this.session.reloadMap = true;
     if (environment.production) {
       this.showingKeyboard = this.keyboard.isVisible;
       console.log('production');

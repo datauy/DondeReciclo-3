@@ -3,5 +3,10 @@ export const environment = {
   assets: "assets",
   url: 'https://mobile.dondereciclo.uy',
   backend: "https://backend.dondereciclo.uy/api/",
-  ucenter: [-34.905897, -56.191406]
+  Uruguay: {
+    center: {lat: -34.905897, lng: -56.191406},
+  },
+  Colombia: {
+    center: {lat: 4.708435, lng: -74.071570},
+  }
 };

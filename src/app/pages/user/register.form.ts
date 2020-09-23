@@ -22,8 +22,6 @@ export class RegisterForm implements OnInit {
   userName: string;
   full: boolean = true;
   _formLoaded = new BehaviorSubject<boolean>(false);
-  infoMessage: Message;
-  errorMessage: Message;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -48,7 +46,6 @@ export class RegisterForm implements OnInit {
       this.title = 'Perfil';
       this.auth.loadUserData().then(
         (user) => {
-          console.log(user);
           this.disabled = true;
           predefined = {
           name: user.name,
@@ -140,16 +137,15 @@ export class RegisterForm implements OnInit {
   //
   register() {
     this.session.isLoading = true;
-    this.setNotificationMessages();
     if ( this.auth.isLogged ){
       this.auth.updateUser( this.user_data.value ).then(
         (res) => {
           this.session.isLoading = false;
           if (res) {
-            this.notify.showNotification(this.infoMessage);
+            this.handleNotifications('info');
           }
           else {
-            this.notify.showNotification(this.errorMessage);
+            this.handleNotifications('error');
           }
           this.editProfile();
         }
@@ -158,76 +154,126 @@ export class RegisterForm implements OnInit {
     else {
       //save pass for later login
       let pass = this.user_data.value.password;
-      this.auth.createUser( {user: this.user_data.value} ).subscribe((res) => {
-        if (res) {
-          this.auth.loginUser(this.user_data.value.email, pass ).subscribe((res) => {
-            this.session.isLoading = false;
-            if (res) {
-              this.notify.showNotification(this.infoMessage);
-              this.navCtrl.navigateBack('/usuario/perfil');
+      this.auth.createUser( {user: this.user_data.value} ).subscribe(
+        (res) => {
+          if (res) {
+            if ( res.error ) {
+              this.handleNotifications(res.type);
             }
             else {
-              this.notify.showNotification(this.errorMessage);
+              this.auth.loginUser(this.user_data.value.email, pass ).subscribe(
+                (res) => {
+                  if (res) {
+                    this.handleNotifications('info');
+                    this.navCtrl.navigateBack('/usuario/perfil');
+                  }
+                  else {
+                    this.handleNotifications('error');
+                  }
+                }
+              );
             }
-          });
+          }
+          else {
+            this.handleNotifications('error');
+          }
+        },
+        () => {
+          this.handleNotifications('error');
         }
-        else {
-          this.session.isLoading = false;
-          this.notify.showNotification(this.errorMessage);
-        }
-      });
+      );
     }
     setTimeout(() => {
       if ( this.session.isLoading ) {
-        this.session.isLoading = false;
-        this.notify.showNotification(this.errorMessage);
+        this.handleNotifications('error');
       }
     }, 10000);
-  }
-  // Sets messages in execution to get the right one
-  setNotificationMessages() {
-    this.infoMessage = {
-      id: null,
-      type: 'notification',
-      class: 'info-outline',
-      title: this.full ? 'Se ha creado tu usuario' : 'Se ha modificado tu usuario',
-      note: "Ya es posible realizar reportes de problemas con los contenedores o aportar fotos para contribuir a majorar el ecosistema de reciclaje. Muchas gracias."
-    };
-    this.errorMessage = {
-      id: null,
-      type: 'notification',
-      class: 'warnings-error',
-      title: this.full ? 'No hemos podido crear tu cuenta' : 'No hemos podido modificar tu cuenta',
-      note: "Por favor escribir a devops@data.org.uy y explicar el problema, agradecemos tu esfuerzo y pedimos disculpas por las molestias ocasionadas. Muchas gracias."
-    }
   }
   //Mail for pass change
   newPass() {
     this.session.isLoading = true;
-    let message = {
-      id: null,
-      type: 'notification',
-      class: 'warnings',
-      title: 'Hemos enviado un correo a tu cuenta.',
-      note: "Por favor revisa tu correo y sigue los pasos que se indican en el mensaje para cambiar tu contraseña. Muchas gracias."
-    }
+    let message = {type: 'new_pass'};
     this.auth.requestToken( {email: this.auth.user.email} ).subscribe(
       (res) => {
         this.session.isLoading = false;
         if (!res) {
-          message.class = 'warnings-error';
-          message.title = 'No hemos podido iniciar el cambio';
-          message.note = "Por favor escribir a devops@data.org.uy y explicar el problema, agradecemos tu esfuerzo y pedimos disculpas por las molestias ocasionadas. Muchas gracias."
+          this.handleNotifications('new_pass_error');
+        }
+        else {
+          this.handleNotifications('new_pass');
         }
       },
       () => {
         this.session.isLoading = false;
-        message.class = 'warnings-error';
-        message.title = 'No hemos podido iniciar el cambio';
-        message.note = "Por favor escribir a devops@data.org.uy y explicar el problema, agradecemos tu esfuerzo y pedimos disculpas por las molestias ocasionadas. Muchas gracias."
+        this.handleNotifications('new_pass_error');
       }
     );
-    this.notify.showNotification(message);
+  }
+  handleNotifications(type: any) {
+    console.log('Tipo de noty: ' + type);
+    let notification: Message = {
+      id: 'default',
+      type: 'default_error',
+      title: 'Error',
+      class: 'warnings-errors',
+      note: 'Ha ocurrido un error procesando su solicitud, por favor reintente luego o contáctenos a soporte@data.org.uy. Lamentamos los inconvenientes. Muchas gracias'
+    };
+    if ( type ) {
+      switch(type) {
+        case 'user_exists': {
+          notification = {
+            id: type,
+            type: 'error',
+            title: 'Error',
+            class: 'warnings-error',
+            note: 'Ya existe un usuario con el email seleccionado. Intente ingresar con su contraseña o solicite una nueva. Gracias'
+         }
+          break;
+        }
+        case 'info': {
+          notification = {
+            id: type,
+            type: 'info',
+            class: 'info-outline',
+            title: this.full ? 'Se ha creado tu usuario' : 'Se ha modificado tu usuario',
+            note: "Ya es posible realizar reportes de problemas con los contenedores o aportar fotos para contribuir a majorar el ecosistema de reciclaje. Muchas gracias."
+          }
+          break;
+        }
+        case 'error': {
+          notification = {
+            id: type,
+            type: 'info',
+            class: 'warnings-error',
+            title: this.full ? 'No hemos podido crear tu cuenta' : 'No hemos podido modificar tu cuenta',
+            note: "Por favor escribir a devops@data.org.uy y explicar el problema, agradecemos tu esfuerzo y pedimos disculpas por las molestias ocasionadas. Muchas gracias."
+          }
+          break;
+        }
+        case 'new_pass': {
+          notification = {
+            id: type,
+            type: 'info',
+            class: 'warnings',
+            title: 'Hemos enviado un correo a tu cuenta.',
+            note: "Por favor revisa tu correo y sigue los pasos que se indican en el mensaje para cambiar tu contraseña. Muchas gracias."
+          }
+          break;
+        }
+        case 'new_pass_error': {
+          notification = {
+            id: type,
+            type: 'info',
+            class: 'warnings-error',
+            title: 'No hemos podido iniciar el cambio',
+            note: "Por favor escribir a devops@data.org.uy y explicar el problema, agradecemos tu esfuerzo y pedimos disculpas por las molestias ocasionadas. Muchas gracias."
+          }
+          break;
+        }
+      }
+    }
+    this.session.isLoading = false;
+    this.notify.showNotification(notification);
   }
   //
   mustMatch(controlName: string, matchingControlName: string) {

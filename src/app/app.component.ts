@@ -44,6 +44,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.notification.notificationSetup();
     });
   }
 
@@ -56,6 +57,6 @@ export class AppComponent {
   }
 
   closeNotification() {
-    delete this.notification.message;
+    this.notification.notificationClose();
   }
 }

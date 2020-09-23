@@ -7,6 +7,16 @@ export class Material extends Base {
     icon: string;
     class: string;
 }
+export class Weekdays {
+    //id is inherited from Resource
+    1: string = 'Lunes';
+    2: string = 'Martes';
+    3: string = 'Miercoles';
+    4: string = 'Jueves';
+    5: string = 'Viernes';
+    6: string = 'Sábado';
+    7: string = 'Domingo';
+}
 export class Container extends Base {
     //id is inherited from Resource
     program_id: number;
@@ -28,6 +38,7 @@ export class Container extends Base {
     receives: Material[];
     reception_conditions: string;
     receives_no: string;
+    schedules: any[];
 }
 
 export class ContainerType extends Base {

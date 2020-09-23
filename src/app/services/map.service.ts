@@ -5,6 +5,8 @@ import { environment } from 'src/environments/environment';
 import "leaflet";
 import "leaflet-routing-machine";
 
+import { SessionService } from 'src/app/services/session.service';
+
 declare let L;
 
 const iconUrl = 'assets/custom-icons/dr-pin.svg';
@@ -130,12 +132,17 @@ export class MapService {
   markers: L.LayerGroup;
   private _pinClick = new BehaviorSubject<boolean>(false);
   private _mapChangeSub = new BehaviorSubject<boolean>(false);
-
-  constructor() {
+  public zoom:number = 15;
+  public center:L.LatLng;
+  //
+  constructor(
+    private session: SessionService
+  ) {
+    this.center = environment[this.session.country].center;
   }
 
   loadMap(center?: number[]) {
-    if ( this.map == undefined ) {
+    if ( this.map == undefined || this.session.reloadMap ) {
       if ( center == undefined ) {
         center = [-11.336196, -63.605775];
       }
@@ -158,9 +165,10 @@ export class MapService {
           this.route.spliceWaypoints(0, 1, e.latlng);
         }
       });
-      this.map.on('zoomend', this.mapChanges, this);
-      this.map.on('dragend', this.mapChanges, this);
+      this.map.on('zoomend', this.zoomChange, this);
+      this.map.on('dragend', this.centerChange, this);
       this.map.once('moveend', this.toggleAnimation, this);
+      this.session.reloadMap = false;
     }
     return true;
   }
@@ -245,6 +253,7 @@ export class MapService {
   }
   flytomarker(latlong: [number, number], zoom: number){
     this.animating = true;
+    this.zoom = zoom;
     this.map.flyTo(latlong, zoom);
     this.map.once('moveend', this.toggleAnimation, this);
     // Coding for set bounds in pixel from top instead of center of map for cuppertino open.
@@ -260,7 +269,15 @@ export class MapService {
     this.map.flyToBounds(mapBounds, options);
     this.map.once('moveend', this.toggleAnimation, this);
   }
-
+  //
+  resizeMap(zoom: number) {
+    if ( zoom ){
+      this.zoom = zoom;
+    }
+    this.map.invalidateSize();
+    this.map.flyTo(this.center, this.zoom);
+    //this.flyToBounds(this.currentBounds);
+  }
   //PIN behavior
   clickPin(pin: any) {
     let pos = pin.target.options.container_pos;
@@ -271,7 +288,14 @@ export class MapService {
   get pinClicked() {
     return this._pinClick.asObservable();
   }
-
+  zoomChange() {
+    this.zoom = this.map.getZoom();
+    this.mapChanges();
+  }
+  centerChange() {
+    this.center = this.map.getCenter();
+    this.mapChanges();
+  }
   //MAP behavior
   mapChanges(){
     //Si no es una animación auto);
