@@ -138,7 +138,9 @@ export class MapService {
   constructor(
     private session: SessionService
   ) {
-    this.center = environment[this.session.country].center;
+    this.session.getCountry().then( (country) => {
+      this.center = environment[country].center;
+    });
   }
 
   loadMap(center?: number[]) {
@@ -270,7 +272,7 @@ export class MapService {
     this.map.once('moveend', this.toggleAnimation, this);
   }
   //
-  resizeMap(zoom: number) {
+  resizeMap(zoom?: number) {
     if ( zoom ){
       this.zoom = zoom;
     }

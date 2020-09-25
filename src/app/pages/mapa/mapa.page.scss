@@ -106,6 +106,16 @@
         width: 29px;
         height: 29px;
       }
+      .subprogram-list {
+        .header {
+          padding-bottom: 22px;
+        }
+        .scrollable {
+          ion-item {
+            cursor: pointer;
+          }
+        }
+      }
     }
     .back-button {
       --background: var(--vidrio);
@@ -121,6 +131,14 @@
         color: var(--pale-olive-green);
         height: 24px
       }
+    }
+    .locations {
+      position: absolute;
+      top: 45px;
+      left: 0;
+      z-index: 401;
+      margin: auto 40px;
+      width: calc(100% - 80px);
     }
     .map-locate {
       border-radius: 8px;
@@ -152,5 +170,6 @@
         font-weight: 900;
       }
     }
+
   }
 }

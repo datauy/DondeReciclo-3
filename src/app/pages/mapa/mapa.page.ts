@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment';
 import { AuthGuardService } from 'src/app/services/auth-guard.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
+import { Subprogram } from "src/app/models/subprogram.model";
 
 @Component({
   selector: 'app-mapa',
@@ -27,6 +28,8 @@ export class MapaPage implements OnInit {
   infoPane: CupertinoPane;
   programs_sum: Program[];
   uLocation = false as boolean;
+  subprograms: Subprogram[];
+  subprogram: Subprogram;
 
   infoPaneEl: HTMLDivElement;
   loadingImg: boolean = false;
@@ -36,6 +39,7 @@ export class MapaPage implements OnInit {
   };
   weekday = new Weekdays;
   showSched = false;
+  list: number = 0;
 
   constructor(
     private geocoder: NativeGeocoder,
@@ -52,6 +56,7 @@ export class MapaPage implements OnInit {
     this.map.pinClicked.subscribe(
       pinData => {
         if ( pinData ) {
+          this.list = 0;
           this.showPane();
         }
       }
@@ -164,20 +169,25 @@ export class MapaPage implements OnInit {
       }
     );
   }
+  //
   cupertinoShow(){
     this.session.showSearchItem = false;
     this.session.cupertinoState = 'cupertinoOpen';
-    this.map.flyToBounds(
-      [[this.map.currentContainer.latitude, this.map.currentContainer.longitude],
-      this.map.userPosition],
-      {paddingBottomRight: [0,400]}
-    );
+    if (this.map.currentContainer != undefined) {
+      this.map.flyToBounds(
+        [[this.map.currentContainer.latitude, this.map.currentContainer.longitude],
+        this.map.userPosition],
+        {paddingBottomRight: [0,400]}
+      );
+    }
   }
+  //
   cupertinoHide(){
     this.session.showSearchItem = true;
     this.session.cupertinoState = 'cupertinoClosed';
     this.map.flyToBounds(this.map.currentBounds);
   }
+  //
   showPane() {
     this.api.getContainer(this.map.currentContainer.id).subscribe((container) => {
       this.formatContainer(container);
@@ -192,6 +202,7 @@ export class MapaPage implements OnInit {
       }
     });
   }
+  //
   hidePane() {
     this.infoPane.destroy({animate: true});
   }
@@ -340,5 +351,43 @@ export class MapaPage implements OnInit {
       e.stopPropagation();
       e.preventDefault();
     }
+  }
+  subprograms4location() {
+    var point: [number, number];
+    if ( this.map.userPosition != undefined ) {
+      point = this.map.userPosition;
+    }
+    else {
+      point = [ this.map.map.getCenter().lat, this.map.map.getCenter().lng ];
+      this.map.userPosition = point;
+      this.map.loadMarkers([], false);
+    }
+    this.api.getSubprograms4Location(point).subscribe((subprograms) => {
+      if ( subprograms.length > 0 ) {
+        this.list = 1;
+        this.subprograms = subprograms;
+        this.infoPane.present({animate: true});
+      }
+      else if ( subprograms.length == 1) {
+        this.list = 2;
+        this.subprograms = subprograms;
+        this.infoPane.present({animate: true});
+      }
+      else {
+        let noRes = {
+          id: null,
+          type: 'notification',
+          class: 'alert',
+          title: 'No hay datos para la zona',
+          note: 'No tenemos datos de organizaciones que trabajen en la zona. ¿Conoces alguna? Contáctanos'
+        };
+        this.notification.showNotification(noRes);
+      }
+      console.log(subprograms);
+    });
+  }
+  subprogramShow(index) {
+    this.subprogram = this.subprograms[index];
+    this.list = 2;
   }
 }

@@ -7,6 +7,7 @@ import { File } from '@ionic-native/file/ngx';
 
 import { ContainerType, Container, Material, SearchParams, Program } from "src/app/models/basic_models.model";
 import { News } from "src/app/models/news.model";
+import { Subprogram } from "src/app/models/subprogram.model";
 import { SessionService } from 'src/app/services/session.service';
 
 @Injectable({
@@ -189,6 +190,13 @@ export class ApiService<T=any> {
     url += "&lat="+location[0]+"&lon="+location[1];
     return  this.request.get(url).pipe(map(
       (result: Container[]) => {
+        return result;
+      }
+    ));
+  }
+  getSubprograms4Location(latlng: number[]) {
+    return  this.request.get(environment.backend + "subprograms4location?wkt=POINT("+latlng[1]+' '+latlng[0]+')').pipe(map(
+      (result: Subprogram[]) => {
         return result;
       }
     ));

@@ -150,5 +150,32 @@
     </ion-footer>
   </ion-menu>
   <ion-router-outlet id="menu-content">
+    <div id="notification-item" [ngClass]="session.currentPage" *ngIf="notification.message && notification.showMessage">
+      <ion-grid>
+        <ion-row class="ion-justify-content-center">
+          <ion-col class="{{notification.message.class}}" size-md="10" size-xl="8" size-xs="12" padding="0">
+            <ion-item lines="none">
+              <ion-icon
+                class="left"
+                [name]="'dr-' + notification.message.class">
+              </ion-icon>
+              <div class="item-text">
+                <ion-label [innerHTML]="notification.message.title"></ion-label>
+                <ion-note slot="start" [innerHTML]="notification.message.note" *ngIf="notification.message.note"></ion-note>
+              </div>
+              <ion-button (click)="closeNotification()">
+                <ion-icon name="close-outline"></ion-icon>
+              </ion-button>
+            </ion-item>
+            <ion-button class="submit contrast"
+              [routerLink]="notification.message.link"
+              (click)="closeNotification()"
+              [innerHTML]="notification.message.link_title"
+              *ngIf="notification.message.link != null">
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
   </ion-router-outlet>
 </ion-split-pane>

@@ -67,4 +67,16 @@ export class SessionService {
     this[key] = value;
     return 1;
   }
+  setCountry(country: string) {
+    this.storage.set('country', country);
+    this.country = country;
+  }
+  async getCountry() {
+    return this.storage.get('country').then( (country) => {
+      if ( country != null ) {
+        this.country = country
+      }
+      return this.country;
+    });
+  }
 }
