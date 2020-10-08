@@ -686,7 +686,7 @@ ion-img.logo {
       top: 0;
       bottom: 0;
       margin: 0;
-      padding: var(--dr-searchbox-top) 0 0;
+      padding: calc(var(--dr-searchbox-top) + 47px) 0 0;
       overflow: auto !important;
       display: block;
       background: none;

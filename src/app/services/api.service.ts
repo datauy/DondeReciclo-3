@@ -246,4 +246,36 @@ export class ApiService<T=any> {
   });
   return res;
   }
+  //Address search
+  getAddressLocation(str: string) {
+    return  this.request.get(environment.geocoder + "search?q="+str+','+this.session.country+'&countrycodes='+environment[this.session.country].code+'&format=json').pipe(map(
+      (result: any[]) => {
+        if (result.length) {
+          return this.formatAddressOptions(result);
+        }
+        else {
+          return false;
+        }
+      }
+    ));
+  }
+  //
+  formatAddressOptions(addresses: any) :any[]{
+  let res = [];
+  addresses.forEach( (option: any) => {
+    // console.log(option);
+    res.push({
+      id: option.place_id,
+      type: option.class,
+      name: option.display_name,
+      class: 'address',
+      bbox: [
+        [option.boundingbox[0], option.boundingbox[2]],
+        [option.boundingbox[0], option.boundingbox[2]]
+      ],
+      latlng: { lat: option.lat, lng: option.lon },
+    });
+  });
+  return res;
+  }
 }
