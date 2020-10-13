@@ -12,7 +12,7 @@ export const environment = {
     code: 'UY'
   },
   Colombia: {
-    center: {lat: 4.708435, lng: -74.071570},
+    center: {lat: 4.666338, lng: -74.060665},
     code: 'COL'
   },
   geocoder: 'https://nominatim.openstreetmap.org/',

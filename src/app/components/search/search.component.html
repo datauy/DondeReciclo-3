@@ -3,7 +3,7 @@
   <ion-auto-complete
     #searchbar
     class="searchContent"
-    [options]="{ placeholder : '¿Qué querés reciclar?' }"
+    [options]="{ placeholder : '¿Qué o dónde querés reciclar?' }"
     [template]="dr"
     [showResultsFirst]="true"
     (click)="showSearch($event)"
@@ -19,7 +19,7 @@
       <span [ngClass]="searchAddress ? 'active selectable' : 'selectable'" (click)="search4address(true)">direcciones</span>
     </div>
   </div>
-  <div id="suggestions" [ngClass]="(api.suggestVisibility && searchVisibility) ? 'show expand' : 'hide shrink'">
+  <div id="suggestions" [ngClass]="(suggestVisibility && searchVisibility) ? 'show expand' : 'hide shrink'">
     <ion-list-header>Materiales/residuos sugeridos:</ion-list-header>
     <div class="resultsWrap">
       <ion-button [color]="predefined.class"

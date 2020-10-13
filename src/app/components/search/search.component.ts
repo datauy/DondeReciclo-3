@@ -23,6 +23,7 @@ export class SearchComponent {
   // searchBarIonic: unknown;
   showBackdrop = false;
   searchVisibility = false;
+  suggestVisibility: boolean;
   searchString: string;
   searchAddress = false;
 
@@ -33,6 +34,9 @@ export class SearchComponent {
     public notification: NotificationsService
     ) {
       this.session = session;
+      if ( this.session.country == 'Colombia' ) {
+        this.search4address(true);
+      }
   }
 
   showSearch(event) {
@@ -43,12 +47,8 @@ export class SearchComponent {
   }
 
   hideSearch(event) {
-    this.api.suggestVisibility = false;
+    this.suggestVisibility = false;
     this.searchVisibility = false;
-  }
-
-  showSuggestions(event) {
-    this.api.suggestVisibility = true;
   }
 
   searchSuggestion(predefined){
@@ -59,7 +59,11 @@ export class SearchComponent {
     this.searchBarIonic = document.querySelector('.searchbar-input');
     if (item.class == 'address' ) {
       this.map.userPosition = [item.latlng.lat, item.latlng.lng];
-      this.map.flyToBounds(item.bbox);
+      //this.map.flyToBounds();
+      this.api.getNearbyContainers(2, this.map.userPosition)
+      .subscribe((containers) => {
+          this.map.loadMarkers(containers, true);
+      });
       setTimeout( () => {
         this.searchBarIonic.value = '';
         this.hideSearch('item selected');
@@ -71,6 +75,10 @@ export class SearchComponent {
       this.session.showSearchItem = true;
       if (this.map.userPosition) {
         pos = this.map.userPosition;
+      }
+      else {
+        let center = this.map.map.getCenter();
+        pos = [center.lat, center.lng];
       }
       this.api.getContainersByMaterials(item.type+"="+item.id, pos).subscribe(
         (containers) => {
@@ -104,7 +112,7 @@ export class SearchComponent {
   //Selector between materials and addresses
   search4address(isit: boolean) {
     this.searchAddress = isit;
-    this.api.suggestVisibility = !isit;
+    this.suggestVisibility = !isit;
   }
   //results
   getResults(str: string){
@@ -117,7 +125,20 @@ export class SearchComponent {
       }
     }
     else {
-      return this.api.getResults(str);
+      if ( str != undefined && str.length >= 3 && ( this.session.searchItem == undefined || str != this.session.searchItem.name ) ) {
+        this.suggestVisibility = false;
+      }
+      else {
+        this.suggestVisibility = true;
+        return false;
+      }
+      return this.api.getResults(str).subscribe(
+        (res) => {
+          if (!res) {
+            this.suggestVisibility = true;
+          }
+        }
+      );
     }
   }
 

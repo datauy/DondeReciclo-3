@@ -17,7 +17,6 @@ export class ApiService<T=any> {
   containers: Container[];
   materials: Material[];
   predefinedSearch: SearchParams[];
-  suggestVisibility: boolean;
   remoteFile: any;
 
   // Search
@@ -86,7 +85,6 @@ export class ApiService<T=any> {
   }
   //
   loadPredefinedSearch(): Observable<SearchParams[]> {
-    this.suggestVisibility = true;
     return this.request.get(environment.backend + "search_predefined").pipe(
       map((result: SearchParams[]) => {
         return this.predefinedSearch = this.formatSearchOptions(result);
@@ -149,10 +147,20 @@ export class ApiService<T=any> {
       }
     ));
   }
-  //
-  getNearbyContainers(radius: number, location?: [number, number]) {
+
+  // Función genrica para cargar contenedores
+  loadNearbyContainers(bounds) {
+    if ( this.session.searchItem != undefined){
+      return this.getContainers4Materials(bounds, this.session.searchItem.type+"="+this.session.searchItem.id);
+    }
+    else {
+      return this.getContainers(bounds);
+    }
+  }
+
+  getNearbyContainers (radius: number, location?: [number, number]) {
     if (typeof location == 'undefined') {
-      location = [-32.657689, -55.873808];
+      location = environment[this.session.country].center;
     }
     return  this.request.get(environment.backend + "containers_nearby?lat="+location[0]+"&lon="+location[1]+"&radius="+radius).pipe(map(
       (result: Container[]) => {
@@ -196,20 +204,12 @@ export class ApiService<T=any> {
   /***********************/
   //
   getResults(str: string){
-    if ( str != undefined && str.length >= 3 && ( this.session.searchItem == undefined || str != this.session.searchItem.name ) ) {
-      this.suggestVisibility = false;
-    }
-    else {
-      this.suggestVisibility = true;
-      return false;
-    }
     return  this.request.get(environment.backend + "search?q="+str).pipe(map(
       (result: any[]) => {
         if (result.length) {
           return this.formatSearchOptions(result);
         }
         else {
-          this.suggestVisibility = true;
           return false;
         }
       }
@@ -259,8 +259,8 @@ export class ApiService<T=any> {
       name: option.display_name,
       class: 'address',
       bbox: [
-        [option.boundingbox[0], option.boundingbox[2]],
-        [option.boundingbox[0], option.boundingbox[2]]
+        option.boundingbox[0] +','+ option.boundingbox[2],
+        option.boundingbox[1] +','+ option.boundingbox[3]
       ],
       latlng: { lat: option.lat, lng: option.lon },
     });
