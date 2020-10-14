@@ -1,5 +1,8 @@
 <app-header display="full"></app-header>
-<ion-content>
+
+<!-- Uruguay -->
+
+<ion-content *ngIf="session.country == 'Uruguay'">
   <div class="section-header">
     <h1>Programas</h1>
     <h2 class="sub-light">Información sobre los distintos programas disponibles de recepción de residuos reciclables.</h2>
@@ -61,4 +64,14 @@
       </div>
     </ion-slide>
   </ion-slides>
+</ion-content>
+
+<!-- Colombia -->
+
+<ion-content *ngIf="session.country == 'Colombia'">
+  <div class="section-header">
+    <h1>Programas</h1>
+    <h2 class="sub-light">El Ministerio de Ambiente y Desarrollo Sostenible viene adelantando una estrategia dirigida a promover la gestión ambientalmente adecuada para los residuos posconsumo.</h2>
+    <h2 class="sub-light">Para más información sobre los programas de cada tipo de residuo por favor consultar en la <a href="https://www.minambiente.gov.co/index.php/component/content/article/28-plantilla-asuntos-ambientales-y-sectorial-y-urbana">pagina del Ministerio</a>.</h2>
+  </div>
 </ion-content>
