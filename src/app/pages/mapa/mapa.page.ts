@@ -9,7 +9,6 @@ import { CupertinoPane } from 'cupertino-pane';
 import { ApiService } from "src/app/services/api.service";
 import { MapService } from "src/app/services/map.service";
 import { SessionService } from 'src/app/services/session.service';
-import { environment } from 'src/environments/environment';
 //import { IonRouterOutlet } from '@ionic/angular';
 import { AuthGuardService } from 'src/app/services/auth-guard.service';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -208,17 +207,10 @@ export class MapaPage implements OnInit {
   }
   //
   loadNearbyContainers(fly: boolean) {
-    if ( this.session.searchItem != undefined){
-      this.api.getContainers4Materials(this.map.getBoundingCoords(), this.session.searchItem.type+"="+this.session.searchItem.id)
-      .subscribe((containers) => {
-        this.map.loadMarkers(containers, fly);
-      });
-    }
-    else {
-      this.api.getContainers(this.map.getBoundingCoords()).subscribe((containers) => {
-        this.map.loadMarkers(containers, fly);
-      });
-    }
+    this.api.loadNearbyContainers(this.map.getBoundingCoords())
+    .subscribe((containers) => {
+      this.map.loadMarkers(containers, fly);
+    });
   }
   //
   gotoLocation() {
