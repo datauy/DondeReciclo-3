@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
   selector: 'app-consejos',
@@ -17,7 +18,9 @@ export class ConsejosPage implements OnInit {
     },
   };
 
-  constructor() { }
+  constructor(
+    public session: SessionService,
+  ) { }
 
   ngOnInit() {
   }

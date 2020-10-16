@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="130" height="85" viewBox="0 0 130 85">
+  <defs>
+    <polygon id="ipapel-metalizado-a" points="0 0 55 0 55 3 0 3"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <rect width="85" height="85" x="26" fill="#8E968B" fill-rule="nonzero" rx="8"/>
+    <g transform="translate(39 19)">
+      <g transform="translate(1.774 43.188)">
+        <mask id="ipapel-metalizado-b" fill="#fff">
+          <use xlink:href="#ipapel-metalizado-a"/>
+        </mask>
+        <path fill="#000" d="M0,1.5 C0,2.32817337 12.3119367,3 27.5,3 C42.6875646,3 55,2.32817337 55,1.5 C55,0.671826625 42.6875646,0 27.5,0 C12.3119367,0 0,0.671826625 0,1.5" mask="url(#ipapel-metalizado-b)"/>
+      </g>
+      <polygon fill="#B3B3B3" points="16.745 8.188 13.001 21.511 6.774 15.668"/>
+      <polygon fill="#B3B3B3" points="45.001 15.668 39.664 25.675 36.065 22.328"/>
+      <polygon fill="#B3B3B3" points="45.001 15.668 51.315 33.325 40.676 32.047"/>
+      <polygon fill="#B3B3B3" points="28.64 43.688 32.346 35.688 42.332 43.688"/>
+      <polygon fill="#B3B3B3" points="32.346 35.688 40.533 32.047 49.259 37.383"/>
+      <polygon fill="#B3B3B3" points="26.001 13.219 32.346 19.088 13.001 29.838"/>
+      <polygon fill="#B3B3B3" points="39.664 25.675 40.533 32.047 13.001 29.838"/>
+      <polygon fill="#B3B3B3" points="37.673 13.622 36.065 22.448 32.346 19.088"/>
+      <path fill="gray" d="M28.6404419,10.1410263 C28.7257591,10.5948413 24.7606128,10.0049015 16.7450032,8.37120709 L27.3132401,4.52970994e-14 L28.6404419,10.1410263 Z"/>
+      <polygon fill="gray" points="28.64 10.008 32.346 19.088 26.001 13.219"/>
+      <polygon fill="#CCC" points="37.673 13.622 36.065 22.448 45.287 15.668"/>
+      <polygon fill="#CCC" points="40.676 32.047 13.001 29.838 26.001 34.255"/>
+      <polygon fill="#CCC" points="32.346 35.688 26.001 34.255 28.64 39.188"/>
+      <polygon fill="#CCC" points="42.332 43.688 29.173 43.688 33.432 41.078"/>
+      <polygon fill="#CCC" points="32.346 8.188 27.313 0 28.64 10.008 32.346 19.088"/>
+      <polygon fill="gray" points="6.774 25.835 13.001 29.838 13.001 21.511"/>
+      <polygon fill="gray" points="26.332 34.255 32.346 35.688 40.533 32.047"/>
+      <polygon fill="gray" points="28.642 39.188 28.64 43.688 32.346 35.688"/>
+      <polygon fill="gray" points="32.346 19.088 37.673 13.622 32.346 8.188"/>
+      <polygon fill="#CCC" points="6.774 15.668 13.001 21.487 6.774 25.835"/>
+      <polygon fill="#CCC" points="45.001 15.661 40.676 32.047 39.664 25.675"/>
+      <polygon fill="#CCC" points="32.346 19.088 39.664 25.675 13.001 29.838"/>
+      <polygon fill="#B3B3B3" points="6.774 15.668 0 19.696 6.774 25.835"/>
+      <path fill="#CCC" d="M16.7450032,8.37120709 C16.6285105,8.06392178 28.6404419,10.007569 28.6404419,10.007569 L13.0006857,29.838356 L13.0006857,21.5112207 L16.7450032,8.37120709 Z"/>
+      <path fill="gray" d="M45.0006857,15.6676865 C44.884193,15.3604012 58.4136286,25.856903 58.4136286,25.856903 L51.3154984,33.3245621 L45.0006857,15.6676865 Z"/>
+      <polygon fill="#CCC" points="40.676 32.047 13.001 29.838 26.001 34.255"/>
+      <polygon fill="#CCC" points="32.346 35.688 49.259 37.383 42.332 43.688"/>
+      <polygon fill="#CCC" points="51.315 33.325 40.676 32.047 49.259 37.383"/>
+    </g>
+  </g>
+</svg>

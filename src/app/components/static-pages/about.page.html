@@ -1,5 +1,8 @@
 <app-header display="full"></app-header>
-<ion-content class="inner-scroll">
+
+<!--Uruguay-->
+
+<ion-content class="inner-scroll" *ngIf="session.country == 'Uruguay'">
   <ion-grid>
     <ion-row class="ion-justify-content-center section-header">
       <ion-col  size-md="11" size-lg="10" size-xs="12">
@@ -179,6 +182,67 @@
             <ion-button  size="large" href="https://raindrop.io/collection/10558883" target="_blank" class="submit">Ver notas de prensa</ion-button>
           </ion-col>
         </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<!--Colombia-->
+
+<ion-content class="inner-scroll" *ngIf="session.country == 'Colombia'">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center section-header">
+      <ion-col  size-md="11" size-lg="10" size-xs="12">
+        <div class="section-header">
+          <h1>Sobre el proyecto</h1>
+        </div>
+        <p>
+          ¿DÓNDE RECICLO? es una herramienta web y una app para iOS y Android donde encontrarás todo lo que necesitas saber sobre reciclaje.
+        </p>
+        <p>
+          De una manera fácil, didáctica y hasta divertida DÓNDE RECICLO  facilita el proceso de separación en el hogar, dándote recomendaciones de como clasificar correctamente, información de cobertura de rutas de recolección en tu zona, puntos de recolección de material aprovechable disponibles en tu barrio y programas de recolección de residuos especiales entre otros, conectando así tu importante acción con los otros miembros de la cadena,  para que entre todos generemos menos desechos, ayudemos a reciclar y tengamos una Colombia más sostenible.
+        </p>
+
+        <!--Objetivo-->
+
+        <h2>Objetivo</h2>
+        <p>
+          En Colombia existen muchos esfuerzos destinados a la recuperación de residuos sólidos tanto industriales como del hogar, para su revalorización, tratamiento o disposición final adecuados; sin embargo, el desconocimiento sobre como separar correctamente en casa, la sensación de ser una tarea difícil, la apatía y la falta de conciencia ambiental, redunda en que de 12 millones de Tons. anuales de residuos, solo el 11% se recupera para poder ser reciclados o recuperados en Colombia.
+        </p>
+        <p>
+          Por esto en CEMPRE nos pusimos en la tarea de ayudar a resolver este problema a través de una herramienta innovadora que facilita el proceso de separación de las personas en el hogar, da visibilidad a todos los programas de reciclaje y proporciona permanentemente información de interés sobre temas de reciclaje en Colombia. ¿DÓNDE RECICLO? es el asistente de reciclaje que nos facilitará esta labor.
+        </p>
+        <p>
+          En un proceso colaborativo entre CEMPRE COLOMBIA (Compromiso para el reciclaje), CEMPRE URUGUAY, y DATA Uruguay hemos hecho posible que con solo un click las personas puedan seguir cambiando el mundo.
+        </p>
+        <p>
+          CEMPRE Colombia es una asociación civil sin ánimo de lucro fundada en 2009 por nueve importantes empresas con presencia en Colombia. Su misión es ser el referente técnico empresarial en la generación y transferencia de conocimiento con iniciativas de economía circular para el sector público y privado, fomentando la protección de los recursos naturales, en el marco del desarrollo sostenible.
+        </p>
+
+        <!--Contacto-->
+
+        <h2>Contacto</h2>
+        <p>Consultas sobre el proyecto en general o reciclaje:</p>
+        <ion-row class="ion-justify-content-center section-header">
+          <ion-col  size-md="7" size-lg="7" size-xs="12">
+            <ion-button size="large" href="http://cempre.org.co" class="submit">CEMPRE Colombia</ion-button>
+          </ion-col>
+        </ion-row>
+
+       <!--Términos y condiciones-->
+
+        <h2>Términos y condiciones</h2>
+        <p>
+        La prestación de este servicio tiene carácter gratuito para los usuarios/as. Los usuarios se obligan a hacer buen uso del sitio web y de sus contenidos, respetando la normativa nacional vigente, las buenas costumbres y el orden público, comprometiéndose en todos los casos a no causar daños al mismo ni a ningún tercero. A tal efecto, el usuario/a se abstendrá de utilizar cualquiera de los servicios con fines o efectos ilícitos, prohibidos en los presentes términos y condiciones, lesivos de los derechos e intereses de terceros, o que de cualquier forma puedan dañar, inutilizar, sobrecargar, deteriorar o impedir la normal utilización de los servicios, documentos y toda clase de contenidos en cualquier equipo informático o de otros usuarios/as.
+        </p>
+        <p>
+        Para asegurarnos de que la aplicación esté acorde a las necesidades de nuestros usuarios, e intentar mejorarla utilizamos Google Analytics para recolectar información sobre cómo se utiliza. Google Analytics almacena información como qué páginas ha visitado, cuánto tiempo ha navegado en las mismas, cómo llegó a la página, qué elementos clikea e información sobre qué navegador utiliza. Su dirección IP es enmascarada (parcialmente almacenada) y la información personal sólo es reportada en forma no individualizada (agregada). No permitimos a Google usar o compartir nuestros datos analíticos para ningún propósito además de proveernos de información analítica y recomendamos que todo usuario de Google Analytics siga la misma política.
+        </p>
+        <h2>Procesamiento de datos</h2>
+        <p>
+        Los análisis y visualizaciones provistos por esta aplicación son realizados por DATA Uruguay. Estas operaciones están disponibles para consulta a través del <a href="https://github.com/datauy/DondeReciclo-3/">código de la aplicación disponible en GitHub</a>, así como el resto del código fuente.
+        </p>
+
       </ion-col>
     </ion-row>
   </ion-grid>

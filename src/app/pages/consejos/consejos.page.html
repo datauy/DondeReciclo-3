@@ -1,5 +1,8 @@
 <app-header display="full"></app-header>
-<ion-content>
+
+<!--Uruguay-->
+
+<ion-content *ngIf="session.country == 'Uruguay'">
 
   <div class="consejos-top">
 
@@ -56,7 +59,7 @@
             <ion-item lines="none">
               <div class="item-text">
                 <ion-label>Envases compuestos</ion-label>
-                <ion-note slot="start">Tetrapacks, cajas de jugos, leche o alimentos, envases metalizado.</ion-note>
+                <ion-note slot="start">Tetrapacks, cajas de jugos, leche o alimentos, envases metalizados.</ion-note>
               </div>
               <img src="/assets/img/ienvases-compuestos.svg">
             </ion-item>
@@ -84,12 +87,6 @@
 
         <accordion title="Residuos mezclados" class="ion-color-residuos-mezclados" img="/assets/img/imezclados.svg">
           <ion-list>
-            <ion-item lines="none">
-              <div class="item-text">
-                <ion-label>Papel higiénico</ion-label>
-              </div>
-              <img src="/assets/img/iplasticos.svg">
-            </ion-item>
             <ion-item lines="none">
               <div class="item-text">
                 <ion-label>Papel higiénico</ion-label>
@@ -183,7 +180,7 @@
             <ion-item lines="none">
               <div class="item-text">
                 <ion-label>Envases compuestos</ion-label>
-                <ion-note slot="start">Tetrapacks, cajas de jugos, leche o alimentos, envases metalizado.</ion-note>
+                <ion-note slot="start">Tetrapacks, cajas de jugos, leche o alimentos, envases metalizados.</ion-note>
               </div>
               <img src="/assets/img/ienvases-compuestos.svg">
             </ion-item>
@@ -336,7 +333,7 @@
             <ion-item lines="none">
               <div class="item-text">
                 <ion-label>Envases compuestos</ion-label>
-                <ion-note slot="start">Tetrapacks, cajas de jugos, leche o alimentos, envases metalizado.</ion-note>
+                <ion-note slot="start">Tetrapacks, cajas de jugos, leche o alimentos, envases metalizados.</ion-note>
               </div>
               <img src="/assets/img/ienvases-compuestos.svg">
             </ion-item>
@@ -480,4 +477,563 @@
   </ion-slides>
   <span class="subtitle">¿Querés aprender más?</span>
   <p>Consultá la <a href="https://cempre.org.uy/buenas-practicas/">guía de buenas prácticas de CEMPRE.</a></p>
+</ion-content>
+
+<!--Colombia-->
+
+<ion-content *ngIf="session.country == 'Colombia'">
+
+  <div class="consejos-top">
+
+    <h1>¿Cómo clasificar en casa?</h1>
+    <p>Proponemos 3 niveles para que clasifiques tus residuos en casa en función del compromiso que puedas asumir y las soluciones que tengas a tu alcance. Esta clasificación se basa en la Resolución No. 2184 de 2019.</p>
+  </div>
+  <ion-button class="swiper-prev" (click)="prevSlide()"></ion-button>
+  <ion-button class="swiper-next" (click)="nextSlide()"></ion-button>
+  <ion-slides #advise pager="true" [options]="slideOpts">
+
+<!-- Básica -->
+
+    <ion-slide>
+      <div class="image-wrapper">
+        <img src="assets/img/ilustraciones-clasificaci-n-b-sica.svg" alt="">
+      </div>
+      <div class="slide-content">
+        <span class="subtitle">Tipos de clasificación</span>
+        <h2>Clasificación básica</h2>
+        <p>
+          Separa todos los materiales reciclables de los que no lo son, para hacer una disposición de todos los reciclables juntos.
+        </p>
+
+        <!-- Básica, Materiales reciclables -->
+
+        <accordion title="Bolsa blanca: Reciclables" class="ion-color-vidrios" img="/assets/img/imateriales-reciclables.svg">
+          <ion-list>
+            <ion-item lines="none">
+              ¡Limpio, seco, separado!
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Plástico</ion-label>
+                <ion-note slot="start">Botellas y tapas, bolsas y otros envases plásticos</ion-note>
+              </div>
+              <img src="/assets/img/iplasticos.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Papel y Cartón</ion-label>
+                <ion-note slot="start">Cajas, papel limpio, hojas de papel usadas</ion-note>
+              </div>
+              <img src="/assets/img/ipapel-y-carton.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Vidrio</ion-label>
+                <ion-note slot="start">Botellas y frascos</ion-note>
+              </div>
+              <img src="/assets/img/ividrios.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Metales</ion-label>
+                <ion-note slot="start">Latas de bebidas y conserva, tapas, electrodomésticos, mat. de construcción, otros</ion-note>
+              </div>
+              <img src="/assets/img/imetales.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Envases compuestos</ion-label>
+                <ion-note slot="start">Cajas multicapa de jugos, leche o alimentos, envases metalizados</ion-note>
+              </div>
+              <img src="/assets/img/ienvases-compuestos.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Maderas</ion-label>
+                <ion-note slot="start">Palos, cajas y tablas</ion-note>
+              </div>
+              <img src="/assets/img/imaderas.svg">
+            </ion-item>
+            <ion-item>
+              <div class="item-text">
+                <ion-label>Textiles</ion-label>
+                <ion-note slot="start">Ropa y trapos</ion-note>
+              </div>
+              <img src="/assets/img/itextiles.svg">
+            </ion-item>
+          </ion-list>
+        </accordion>
+
+        <!-- Básica, Residuos mezclados -->
+
+        <accordion title="Bolsa negra: No reciclables" class="ion-color-metales" img="/assets/img/imezclados.svg">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Restos de alimentos (si separas en bolsa blanca y negra)</ion-label>
+              </div>
+              <img src="/assets/img/irestos.svg">
+            </ion-item>
+            <ion-item>
+              <div class="item-text">
+                <ion-label>Restos de polvo y barrido</ion-label>
+              </div>
+              <img src="/assets/img/ibarrido.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Huesos</ion-label>
+              </div>
+              <img src="/assets/img/ihuesos.svg">
+            </ion-item>
+            <ion-item>
+              <div class="item-text">
+                <ion-label>Colillas de cigarro</ion-label>
+              </div>
+              <img src="/assets/img/icolillas.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Papel higiénico</ion-label>
+              </div>
+              <img src="/assets/img/ipapel-higienico.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Pañales</ion-label>
+              </div>
+              <img src="/assets/img/ipanales.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Toallas higiénicas</ion-label>
+              </div>
+              <img src="/assets/img/itoallas-sanitarias.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Servilletas</ion-label>
+              </div>
+              <img src="/assets/img/iservilletas.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Papel y cartón con comida o grasas</ion-label>
+              </div>
+              <img src="/assets/img/ipapel-sucio.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Papel metalizado</ion-label>
+              </div>
+              <img src="/assets/img/ipapel-metalizado.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Cerámica o vajilla rota</ion-label>
+              </div>
+              <img src="/assets/img/iceramicas.svg">
+            </ion-item>
+          </ion-list>
+          <ion-item lines="none">
+            Todos los residuos sin alternativa de valorización o de manejo específico.
+          </ion-item>
+        </accordion>
+      </div>
+    </ion-slide>
+
+<!-- Intermedia-->
+
+    <ion-slide>
+      <div class="image-wrapper">
+        <img src="assets/img/ilustraciones-clasificaci-n-intermedia.svg" alt="">
+      </div>
+      <div class="slide-content">
+        <span class="subtitle">Tipos de clasificación</span>
+        <h2>Clasificación intermedia</h2>
+        <p>Agregar la clasificación y disposición de residuos compostables, reduciendo significativamente la cantidad de residuos mezclados volcados al sistema de disposición.</p>
+
+        <!-- Intermedia, Materiales reciclables -->
+
+        <accordion title="Bolsa blanca: Reciclables" class="ion-color-vidrios" img="/assets/img/imateriales-reciclables.svg">
+          <ion-list>
+            <ion-item lines="none">
+              ¡Limpio, seco, separado!
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Plástico</ion-label>
+                <ion-note slot="start">Botellas y tapas, bolsas y otros envases plásticos</ion-note>
+              </div>
+              <img src="/assets/img/iplasticos.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Papel y Cartón</ion-label>
+                <ion-note slot="start">Cajas, papel limpio, hojas de papel usadas</ion-note>
+              </div>
+              <img src="/assets/img/ipapel-y-carton.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Vidrio</ion-label>
+                <ion-note slot="start">Botellas y frascos</ion-note>
+              </div>
+              <img src="/assets/img/ividrios.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Metales</ion-label>
+                <ion-note slot="start">Latas de bebidas y conserva, tapas, electrodomésticos, mat. de construcción, otros</ion-note>
+              </div>
+              <img src="/assets/img/imetales.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Envases compuestos</ion-label>
+                <ion-note slot="start">Cajas multicapa de jugos, leche o alimentos, envases metalizados</ion-note>
+              </div>
+              <img src="/assets/img/ienvases-compuestos.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Maderas</ion-label>
+                <ion-note slot="start">Palos, cajas y tablas</ion-note>
+              </div>
+              <img src="/assets/img/imaderas.svg">
+            </ion-item>
+            <ion-item>
+              <div class="item-text">
+                <ion-label>Textiles</ion-label>
+                <ion-note slot="start">Ropa y trapos</ion-note>
+              </div>
+              <img src="/assets/img/itextiles.svg">
+            </ion-item>
+          </ion-list>
+        </accordion>
+
+        <!-- Intermedia, Residuos mezclados -->
+
+        <accordion title="Bolsa negra: No reciclables" class="ion-color-metales" img="/assets/img/imezclados.svg">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Restos de alimentos cocinados</ion-label>
+              </div>
+              <img src="/assets/img/irestos.svg">
+            </ion-item>
+            <ion-item>
+              <div class="item-text">
+                <ion-label>Restos de polvo y barrido</ion-label>
+              </div>
+              <img src="/assets/img/ibarrido.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Huesos</ion-label>
+              </div>
+              <img src="/assets/img/ihuesos.svg">
+            </ion-item>
+            <ion-item>
+              <div class="item-text">
+                <ion-label>Colillas de cigarro</ion-label>
+              </div>
+              <img src="/assets/img/icolillas.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Papel higiénico</ion-label>
+              </div>
+              <img src="/assets/img/ipapel-higienico.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Pañales</ion-label>
+              </div>
+              <img src="/assets/img/ipanales.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Toallas higiénicas</ion-label>
+              </div>
+              <img src="/assets/img/itoallas-sanitarias.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Servilletas</ion-label>
+              </div>
+              <img src="/assets/img/iservilletas.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Papel y cartón con comida o grasas</ion-label>
+              </div>
+              <img src="/assets/img/ipapel-sucio.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Papel metalizado</ion-label>
+              </div>
+              <img src="/assets/img/ipapel-metalizado.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Cerámica o vajilla rota</ion-label>
+              </div>
+              <img src="/assets/img/iceramicas.svg">
+            </ion-item>
+          </ion-list>
+          <ion-item lines="none">
+            Todos los residuos sin alternativa de valorización o de manejo específico.
+          </ion-item>
+        </accordion>
+
+        <!-- Intermedia, Residuos compostables -->
+
+        <accordion title="Bolsa verde: Residuos compostables" class="ion-color-residuos-compostables" img="/assets/img/icompostables.svg">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Restos de frutas y verduras</ion-label>
+              </div>
+              <img src="/assets/img/irestos-veg.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Restos de alimentos no cocinados</ion-label>
+              </div>
+              <img src="/assets/img/irestos-crudos.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Hojas seccas</ion-label>
+              </div>
+              <img src="/assets/img/ihojas.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Ramas</ion-label>
+              </div>
+              <img src="/assets/img/iramas.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Cáscaras de huevos</ion-label>
+              </div>
+              <img src="/assets/img/irestos-huevos.svg">
+            </ion-item>
+          </ion-list>
+        </accordion>
+      </div>
+    </ion-slide>
+
+<!-- Avanzada -->
+
+    <ion-slide>
+      <div class="image-wrapper">
+        <img src="assets/img/ilustraciones-clasificaci-n-avanzada.svg" alt="">
+      </div>
+      <div class="slide-content">
+        <span class="subtitle">Tipos de clasificación</span>
+        <h2>Clasificación avanzada</h2>
+        <p>Clasificación y disposición de materiales individualmente, minimizando las pérdidas en el proceso de clasificación secundaria y haciendo más eficiente el camino entre el hogar y el punto de reciclaje.</p>
+
+        <!-- Avanzada, Materiales reciclables -->
+
+        <accordion title="Bolsa blanca: Reciclables" class="ion-color-vidrios" img="/assets/img/imateriales-reciclables.svg">
+          <ion-list>
+            <ion-item lines="none">
+              ¡Limpio, seco, separado!
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Plástico</ion-label>
+                <ion-note slot="start">Botellas y tapas, bolsas y otros envases plásticos</ion-note>
+              </div>
+              <img src="/assets/img/iplasticos.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Papel y Cartón</ion-label>
+                <ion-note slot="start">Cajas, papel limpio, hojas de papel usadas</ion-note>
+              </div>
+              <img src="/assets/img/ipapel-y-carton.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Vidrio</ion-label>
+                <ion-note slot="start">Botellas y frascos</ion-note>
+              </div>
+              <img src="/assets/img/ividrios.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Metales</ion-label>
+                <ion-note slot="start">Latas de bebidas y conserva, tapas, electrodomésticos, mat. de construcción, otros</ion-note>
+              </div>
+              <img src="/assets/img/imetales.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Envases compuestos</ion-label>
+                <ion-note slot="start">Cajas multicapa de jugos, leche o alimentos, envases metalizados</ion-note>
+              </div>
+              <img src="/assets/img/ienvases-compuestos.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Maderas</ion-label>
+                <ion-note slot="start">Palos, cajas y tablas</ion-note>
+              </div>
+              <img src="/assets/img/imaderas.svg">
+            </ion-item>
+            <ion-item>
+              <div class="item-text">
+                <ion-label>Textiles</ion-label>
+                <ion-note slot="start">Ropa y trapos</ion-note>
+              </div>
+              <img src="/assets/img/itextiles.svg">
+            </ion-item>
+          </ion-list>
+        </accordion>
+
+        <!-- Avanzada, Residuos mezclados -->
+
+        <accordion title="Bolsa negra: No reciclables" class="ion-color-metales" img="/assets/img/imezclados.svg">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Restos de alimentos (si separas en bolsa blanca y negra)</ion-label>
+              </div>
+              <img src="/assets/img/irestos.svg">
+            </ion-item>
+            <ion-item>
+              <div class="item-text">
+                <ion-label>Restos de polvo y barrido</ion-label>
+              </div>
+              <img src="/assets/img/ibarrido.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Huesos</ion-label>
+              </div>
+              <img src="/assets/img/ihuesos.svg">
+            </ion-item>
+            <ion-item>
+              <div class="item-text">
+                <ion-label>Colillas de cigarro</ion-label>
+              </div>
+              <img src="/assets/img/icolillas.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Papel higiénico</ion-label>
+              </div>
+              <img src="/assets/img/ipapel-higienico.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Pañales</ion-label>
+              </div>
+              <img src="/assets/img/ipanales.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Toallas higiénicas</ion-label>
+              </div>
+              <img src="/assets/img/itoallas-sanitarias.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Servilletas</ion-label>
+              </div>
+              <img src="/assets/img/iservilletas.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Papel y cartón con comida o grasas</ion-label>
+              </div>
+              <img src="/assets/img/ipapel-sucio.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Papel metalizado</ion-label>
+              </div>
+              <img src="/assets/img/ipapel-metalizado.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Cerámica o vajilla rota</ion-label>
+              </div>
+              <img src="/assets/img/iceramicas.svg">
+            </ion-item>
+          </ion-list>
+          <ion-item lines="none">
+            Todos los residuos sin alternativa de valorización o de manejo específico.
+          </ion-item>
+        </accordion>
+
+        <!-- Avanzada, Residuos compostables -->
+
+        <accordion title="Bolsa verde: Residuos compostables" class="ion-color-residuos-compostables" img="/assets/img/icompostables.svg">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Restos de frutas y verduras</ion-label>
+              </div>
+              <img src="/assets/img/irestos-veg.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Restos de alimentos no cocinados</ion-label>
+              </div>
+              <img src="/assets/img/irestos-crudos.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Hojas seccas</ion-label>
+              </div>
+              <img src="/assets/img/ihojas.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Ramas</ion-label>
+              </div>
+              <img src="/assets/img/iramas.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Cáscaras de huevos</ion-label>
+              </div>
+              <img src="/assets/img/irestos-huevos.svg">
+            </ion-item>
+          </ion-list>
+        </accordion>
+
+        <!-- Avanzada, Residuos peligrosos -->
+
+        <accordion title="Bolsa roja: Residuos peligrosos" class="ion-color-residuos-peligrosos" img="/assets/img/ipeligrosos.svg">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Residuos hemopatológicos</ion-label>
+                <ion-note slot="start">Usualmente pacientes diabéticos o con enfermedades que requieren de uso de jeringas, agujas, para ello deben pedir el guardian a la eps.</ion-note>
+              </div>
+              <img src="/assets/img/isanitarios.svg">
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Residuos domicialiarios peligrosos</ion-label>
+                <ion-note slot="start">Pilas, aceites usado, bombillos flurescentes, electrodomésticos en desuso, electrónicos.</ion-note>
+              </div>
+              <img src="/assets/img/idomiciliarios-peligrosos.svg">
+            </ion-item>
+          </ion-list>
+          <ion-item lines="none">
+            <ion-note slot="start">Los residuos peligrosos  (independientemente del tipo de clasificación realizada),  SIEMPRE   se deben depositar  en los puntos de recolección postconsumo ubicados cerca a su lugar de residencia.</ion-note>
+          </ion-item>
+        </accordion>
+      </div>
+    </ion-slide>
+  </ion-slides>
 </ion-content>
