@@ -5,7 +5,6 @@ import { SessionService } from "src/app/services/session.service";
 import { AuthService } from "src/app/services/auth.service";
 import { MapService } from "src/app/services/map.service";
 import { environment } from 'src/environments/environment';
-import { NotificationsService } from 'src/app/services/notifications.service';
 //import { createAnimation, Animation } from '@ionic/core';
 @Component({
   selector: 'app-sidemenu',
@@ -51,7 +50,6 @@ export class SidemenuComponent implements OnInit {
     public session: SessionService,
     public auth: AuthService,
     private map: MapService,
-    public notification: NotificationsService
   ) {
   }
 
@@ -88,8 +86,5 @@ export class SidemenuComponent implements OnInit {
     //Move to new center
     this.map.resizeMap(16);
     this.toggleMenu();
-  }
-  closeNotification() {
-    this.notification.notificationClose();
   }
 }

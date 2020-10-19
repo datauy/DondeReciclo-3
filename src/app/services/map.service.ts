@@ -202,7 +202,7 @@ export class MapService {
     }
     this.markers = L.layerGroup(markersLayer).addTo(this.map);
     this.currentBounds = mapBounds;
-    if ( markers.length > 0 ) {
+    if ( mapBounds.length > 0 ) {
       if ( fly ) {
         this.flyToBounds(mapBounds);
       }

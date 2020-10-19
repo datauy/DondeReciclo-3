@@ -25,3 +25,98 @@ body.keyboard-is-open {
 //     }
 //   }
 // }
+.mapa, .fichas, .contacto, .consejos, .sobre-el-proyecto {
+  #notification-item {
+    bottom: 67px;
+  }
+}
+
+#notification-item {
+  transition: 500ms ease-in-out;
+  position: fixed;
+  display: inline-grid;
+  z-index: 1000;
+  width: 100%;
+  bottom: 0;
+  ion-grid {
+    padding: 12px;
+    width: 100%;
+  }
+  ion-col {
+    --border-radius: 6px !important;
+    border-radius: 6px;
+    --min-height: 55px;
+    height: inherit;
+    background: var(--pale-olive-green);
+    background-clip: border-box;
+    text-align: center;
+    &.warnings-error {
+      background: var(--residuos-peligrosos);
+    }
+    ion-item {
+      //max-width: 600px;
+      --padding-top: 10px;
+      --padding-bottom: 15px;
+      --padding-start: 20px;
+      --padding-end: 20px;
+      --color: var(--vidrio);
+      --background: transparent;
+      .item-text {
+        position: relative;
+        left: 53px;
+        max-width: calc(100% - 92px);
+        word-wrap: break-word;
+        ion-note,
+        ion-label {
+          white-space: normal;
+          position: relative;
+          --color: var(--ion-color-contrast);
+        }
+        ion-label {
+          font-size: 18px;
+          font-weight: bold;
+        }
+        ion-note {
+          font-size: 12px;
+        }
+      }
+    }
+    ion-button {
+      position: absolute;
+      right: 0;
+      height: inherit;
+      --background: none;
+      border-left: 1px solid var(--ion-color-contrast, var(--ion-color-contrast));
+      ion-icon {
+        color: var(--ion-color-contrast);
+      }
+      &.contrast {
+        --background: var(--vidrio);
+        --color: var(--pale-olive-green);
+        --border-style: solid;
+        --border-color: var(--pale-olive-green);
+        --border-width: 1px;
+        color: var(--pale-olive-green);
+        width: calc(100% - 144px);max-width: 320px;
+        position: relative;
+        height: 40px;
+        word-wrap: unset;
+        margin: 0 auto 10px;
+        white-space: normal;
+        &.selected {
+          --background: var(--dark-sea-green);
+        }
+      }
+    }
+    ion-button::before {
+      content: "";
+      width: 1px;
+      height: 15px;
+      display: block;
+      border-left: 1px solid var(--ion-color-contrast, var(--vidrio));
+      position: absolute;
+      top: 5px;
+      opacity: 0.3;
+    }
+  }
+}

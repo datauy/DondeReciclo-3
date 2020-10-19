@@ -238,11 +238,11 @@ export class MapaPage implements OnInit {
   }
   noLocation() {
     let noRes = {
-      id: null,
+      id: 'noLoc',
       type: 'notification',
       class: 'warnings',
       title: 'No pudimos localizarte',
-      note: 'Quizás no le diste permiso o la localización está desactivada. Prueba iniciar la app con la localización activada.'
+      note: 'Quizás no le diste permiso o la localización está desactivada. Prueba iniciar la app con la localización activada.',
     };
     this.notification.showNotification(noRes);
   }
@@ -367,11 +367,14 @@ export class MapaPage implements OnInit {
       }
       else {
         let noRes = {
-          id: null,
+          id: 'noSub',
           type: 'notification',
           class: 'alert',
           title: 'No hay datos para la zona',
-          note: 'No tenemos datos de organizaciones que trabajen en la zona. ¿Conoces alguna? Contáctanos'
+          note: 'No tenemos datos de organizaciones que trabajen en la zona. ¿Conoces alguna?',
+          link: '/intro/contacto',
+          link_title: 'Contáctanos',
+          link_params: {"subject": "CEMPRE"}
         };
         this.notification.showNotification(noRes);
       }

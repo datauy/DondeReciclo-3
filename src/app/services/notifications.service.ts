@@ -68,7 +68,7 @@ export class NotificationsService {
   }
   //
   showNotification(notification: Message) {
-    if ( this.message ) {
+    if ( this.message && this.message.id != notification.id ) {
       this.messageBack = this.message;
     }
     this.message = notification;

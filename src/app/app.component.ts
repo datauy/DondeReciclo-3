@@ -55,4 +55,8 @@ export class AppComponent {
       this.session.isLoading = false;
     }, 3000);
   }
+
+  closeNotification() {
+    this.notification.notificationClose();
+  }
 }
