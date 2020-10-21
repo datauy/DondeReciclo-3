@@ -218,7 +218,7 @@
   --ion-color-aceite-de-cocina: #7cbf1b;
   --ion-color-aceite-de-cocina-rgb: 122,192,0;
   --ion-color-aceite-de-cocina-contrast: #fff;
-  --ion-color-aceite-de-cocina-rgb: 0,0,0;
+  --ion-color-aceite-de-cocina-contrast-rgb: 0,0,0;
   --ion-color-aceite-de-cocina-shade: #e0b302;
   --ion-color-aceite-de-cocina-tint: #ffd01b;
 }
@@ -236,7 +236,7 @@
   --ion-color-donar-o-regalar: #D0021B;
   --ion-color-donar-o-regalar-rgb: 208,2,27;
   --ion-color-donar-o-regalar-contrast: #fff;
-  --ion-color-donar-o-regalar-rgb: 0,0,0;
+  --ion-color-donar-o-regalar-contrast-rgb: 0,0,0;
   --ion-color-donar-o-regalar-shade: #d75932;
   --ion-color-donar-o-regalar-tint: #f5744d;
 }
@@ -248,4 +248,22 @@
   --ion-color-contrast-rgb: var(--ion-color-donar-o-regalar-contrast-rgb);
   --ion-color-shade: var(--ion-color-donar-o-regalar-shade);
   --ion-color-tint: var(--ion-color-donar-o-regalar-tint);
+}
+
+:root {
+  --ion-color-caucho: #000000;
+  --ion-color-caucho-rgb: 0,0,0;
+  --ion-color-caucho-contrast: #fff;
+  --ion-color-caucho-contrast-rgb: 0,0,0;
+  --ion-color-caucho-shade: #d75932;
+  --ion-color-caucho-tint: #595959;
+}
+
+.ion-color-donar-o-regalar {
+  --ion-color-base: var(--ion-color-caucho);
+  --ion-color-base-rgb: var(--ion-color-caucho-rgb);
+  --ion-color-contrast: var(--ion-color-caucho-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-caucho-contrast-rgb);
+  --ion-color-shade: var(--ion-color-caucho-shade);
+  --ion-color-tint: var(--ion-color-caucho-tint);
 }
