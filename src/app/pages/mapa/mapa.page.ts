@@ -217,6 +217,12 @@ export class MapaPage implements OnInit {
     this.geo.getCurrentPosition({ enableHighAccuracy: false }).then( (resp) => {
       this.uLocation = true;
       this.map.userPosition = [resp.coords.latitude, resp.coords.longitude];
+      this.notification.closeNotificationId('noLoc');
+      this.api.getCountryByLocation(this.map.userPosition).subscribe(
+        (country) => {
+          this.session.setCountry(country);
+        }
+      );
       this.api.getNearbyContainers(2, [resp.coords.latitude, resp.coords.longitude])
       .subscribe((containers) => {
           this.map.loadMarkers(containers, true);

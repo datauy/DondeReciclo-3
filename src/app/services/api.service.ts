@@ -207,6 +207,13 @@ export class ApiService<T=any> {
       }
     ));
   }
+  getCountryByLocation(latlng: number[]) {
+    return  this.request.get(environment.backend + "country4Point?wkt=POINT("+latlng[1]+' '+latlng[0]+')').pipe(map(
+      (country: string) => {
+        return country;
+      }
+    ));
+  }
   //
     /***********************/
    /*       Search        */

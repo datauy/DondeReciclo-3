@@ -83,9 +83,16 @@ export class NotificationsService {
       delete this.message
     }
   }
+  closeNotificationId(id: string) {
+    if ( this.message.id == id ) {
+      this.notificationClose();
+    }
+    else if ( this.messageBack.id == id ) {
+      delete this.messageBack;
+    }
+  }
   //
   notificationCommingSoon() {
-    console.log('Comming soon');
     let notification = {
       id: null,
       type: 'notification',
