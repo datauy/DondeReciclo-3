@@ -132,13 +132,7 @@ export class SearchComponent {
         this.suggestVisibility = true;
         return false;
       }
-      return this.api.getResults(str).subscribe(
-        (res) => {
-          if (!res) {
-            this.suggestVisibility = true;
-          }
-        }
-      );
+      return this.api.getResults(str);
     }
   }
 
