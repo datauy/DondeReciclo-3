@@ -140,13 +140,11 @@
       margin: auto 40px;
       width: calc(100% - 80px);
     }
-    .map-locate {
+    .map-buttons {
       border-radius: 8px;
       --box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2);
       background: var(--vidrio);
       position: absolute;
-      top: 270px;
-      left: 12px;
       z-index: 500;
       width: 39px;
       height: 39px;
@@ -155,6 +153,19 @@
       font-size: 16px;
       color: var(--greyish-brown);
       margin: 0;
+      left: 12px;
+    }
+    .map-locate {
+      top: 270px;
+    }
+    .map-zones {
+      top: 335px;
+      &.active {
+        width: 220px;
+      }
+      span {
+        margin-left: 10px;
+      }
     }
     .scheds {
       padding: 0 14px;

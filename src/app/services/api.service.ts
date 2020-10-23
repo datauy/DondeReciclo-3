@@ -208,9 +208,16 @@ export class ApiService<T=any> {
     ));
   }
   getCountryByLocation(latlng: number[]) {
-    return  this.request.get(environment.backend + "country4Point?wkt=POINT("+latlng[1]+' '+latlng[0]+')').pipe(map(
+    return  this.request.get( environment.backend + "country4Point?wkt=POINT("+latlng[1]+' '+latlng[0]+')' ).pipe(map(
       (country: string) => {
         return country;
+      }
+    ));
+  }
+  getZones4Boundaries(bounds: string) {
+    return  this.request.get( environment.backend + "location4Polygon?wkt="+bounds ).pipe(map(
+      (zones: L.GeoJSON) => {
+        return zones;
       }
     ));
   }

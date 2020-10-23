@@ -130,6 +130,7 @@ export class MapService {
   currentBounds: [number, number][];
   animating: boolean;
   markers: L.LayerGroup;
+  zones: L.Layer;
   private _pinClick = new BehaviorSubject<boolean>(false);
   private _mapChangeSub = new BehaviorSubject<boolean>(false);
   public zoom:number = 15;
@@ -308,6 +309,32 @@ export class MapService {
   get mapChanged() {
     return this._mapChangeSub.asObservable();
   }
+  //
+  getBoundsWKT() {
+    let bounds = this.map.getBounds();
+    return "POLYGON(("
+    + Object.values(bounds.getNorthWest()).reverse().join(' ') +","
+    + Object.values(bounds.getSouthWest()).reverse().join(' ') +","
+    + Object.values(bounds.getSouthEast()).reverse().join(' ') +","
+    + Object.values(bounds.getNorthEast()).reverse().join(' ') +","
+    + Object.values(bounds.getNorthWest()).reverse().join(' ') +"))";
+  }
+  //
+  loadZones(layers: L.GeoJSON) {
+    this.zones = L.geoJSON(
+      layers, {
+        onEachFeature: function (feature, layer) {
+        layer.bindPopup('<p>'+feature.properties.name+'</p>');
+        }
+      }
+    ).addTo(this.map);
+  }
+  removeZones() {
+    if ( this.zones != undefined ) {
+      this.map.removeLayer(this.zones);
+    }
+  }
+
   //Create additional Control placeholders, to group all control buttons
   /*addControlPlaceholders(map: L.Map) {
    const corners = map._controlCorners;

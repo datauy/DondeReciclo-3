@@ -7,8 +7,12 @@
   <ion-button *ngIf="session.country == 'Colombia' && session.cupertinoState != 'cupertinoOpen'" class="submit locations" (click)="subprograms4location()">
     ¿Quien recoge en esta zona?
   </ion-button>
-  <ion-button color="transparent" class="map-locate" (click)="geolocate()">
+  <ion-button color="transparent" class="map-buttons map-locate" (click)="geolocate()">
     <ion-icon name="dr-locate"></ion-icon>
+  </ion-button>
+  <ion-button color="transparent" class="map-buttons map-zones" (click)="getZones()">
+    <ion-icon name="dr-zones"></ion-icon>
+    <span *ngIf="zoneVisible == 1">Zonas de recolección</span>
   </ion-button>
 
   <div id="map"
@@ -69,6 +73,10 @@
           <h5>Correo:</h5>
           <p>{{subprogram.email}}</p>
         </div>
+      </ion-item>
+      <ion-item class="panel-footer" lines="none">
+        <ion-col size="6">¿Tienes residuos?</ion-col>
+        <ion-col size="6" class="ion-text-center"><a [routerLink]="[ '/usuario/recolectar' ]">Solicita recolección <ion-icon name="dr-reportar"></ion-icon></a></ion-col>
       </ion-item>
     </div>
     <div *ngIf="list == 0">

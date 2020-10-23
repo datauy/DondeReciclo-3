@@ -26,19 +26,20 @@ export class MapaPage implements OnInit {
   container = {} as Container;
   infoPane: CupertinoPane;
   programs_sum: Program[];
-  uLocation = false as boolean;
+  uLocation = false;
   subprograms: Subprogram[];
   subprogram: Subprogram;
 
   infoPaneEl: HTMLDivElement;
-  loadingImg: boolean = false;
+  loadingImg = false;
   fileType: any = {
     name: 'Subir otra foto',
     class: 'camera'
   };
   weekday = new Weekdays;
   showSched = false;
-  list: number = 0;
+  list = 0;
+  zoneVisible = 0;
 
   constructor(
     private geocoder: NativeGeocoder,
@@ -64,6 +65,10 @@ export class MapaPage implements OnInit {
       change => {
         if (change) {
           this.loadNearbyContainers(false);
+          if ( this.zoneVisible == 3 ) {
+            this.zoneVisible = 2;
+            this.getZones();
+          }
         }
       }
     );
@@ -387,8 +392,38 @@ export class MapaPage implements OnInit {
       console.log(subprograms);
     });
   }
+  //
   subprogramShow(index) {
     this.subprogram = this.subprograms[index];
     this.list = 2;
+  }
+  //
+  getZones() {
+    let zoneBtn = document.querySelector(".map-zones");
+    if ( this.zoneVisible == 3 ) {
+      this.map.removeZones();
+      this.zoneVisible = 0;
+    }
+    else if ( this.zoneVisible == 0 ) {
+      this.zoneVisible = 1;
+      zoneBtn.classList.add('active');
+      setTimeout( () => {
+        if ( this.zoneVisible == 1 ) {
+          this.zoneVisible = 2;
+          zoneBtn.classList.remove('active');
+        }
+      }, 5000);
+    }
+    else {
+      let bounds = this.map.getBoundsWKT();
+      this.api.getZones4Boundaries(bounds).subscribe(
+        (zones) => {
+          this.map.removeZones();
+          zoneBtn.classList.remove('active');
+          this.zoneVisible = 3;
+          this.map.loadZones(zones);
+        }
+      );
+    }
   }
 }
