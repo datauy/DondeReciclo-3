@@ -1,0 +1,56 @@
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" class="ion-text-center">
+        <ion-button class="back-button" color="pale-olive-green" (click)="goBack()">
+          <ion-icon slot="icon-only" name="close"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col  size-md="9" size-lg="8" size-xs="12">
+        <div class="section-header">
+          <h1>Solicitar recolección</h1>
+          <h2 class="sub-light">Por favor completa tus datos</h2>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col  size-md="9" size-lg="6" size-xs="12">
+        <form [formGroup]="user_data" (ngSubmit)="send()" *ngIf="!( success || fail )">
+          <ion-item>
+            <ion-label position="floating">Dirección</ion-label>
+            <ion-input formControlName="address" type="textarea"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Peso aproximado</ion-label>
+            <ion-input formControlName="weight" type="textarea"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Comentarios</ion-label>
+            <ion-input formControlName="comment" type="textarea"></ion-input>
+          </ion-item>
+          <p class="comment-desc">
+            Agrega un comentario incluyendo el material y sus dimensiones aproximadas. Si tienes alguna indicación en especial recuerda enviarla, gracias.
+          </p>
+          <ion-row class="ion-justify-content-center section-header">
+            <ion-col  size-md="7" size-lg="7" size-xs="12">
+              <ion-button  size="large" type="submit" class="submit">Enviar</ion-button>
+            </ion-col>
+          </ion-row>
+        </form>
+        <div *ngIf="success">
+          <h3>Se ha enviado exitosamente</h3>
+          <p>Tu pedido ha sido ingresado en nuestro sistema de manejo de solicitudes, en breves te estará llegando un correo indicando el número de solicitud y otros datos relevantes para mantenernos en contacto. A la brevedad nuestro equipo se estará comunicando contigo respecto a tu reporte. Muchas gracias</p>
+          <ion-button class="submit" [routerLink]='["/intro/mapa"]'>Volver al inicio</ion-button>
+        </div>
+        <div *ngIf="fail">
+          <h3>No hemos podido enviar tu mensaje</h3>
+          <p>Por favor escríbenos a <a href="mailto:devops@data.org.uy">devops@data.org.uy</a> y explícanos lo que pasa, valoramos mucho tu esfuerzo y te pedimos disculpas por las molestias ocasionadas. Muchas gracias</p>
+          <ion-button class="submit error" (click)="reload()" [routerLink]='[]'>Volver a intentarlo</ion-button>
+          <ion-button class="submit" [routerLink]='["/intro/mapa"]'>Ir al inicio</ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

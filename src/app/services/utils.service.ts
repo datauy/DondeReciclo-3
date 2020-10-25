@@ -29,6 +29,25 @@ export class UtilsService {
     ));
   }
   //
+  collectRequest(form: any) {
+    if ( this.auth.isLogged ) {
+      let options = {
+        headers: {
+          'Authorization': "Bearer "+ this.auth.user_token
+        }
+      };
+      return this.request.post(environment.backend + "collect", form, options).
+      pipe(
+        map( (result: any) => {
+          if (!result.error) {
+            return true;
+          }
+          return false;
+        })
+      );
+    }
+  }
+  //
   createReport(form: any): Observable<boolean> {
     if ( this.auth.isLogged ) {
       let body = form;

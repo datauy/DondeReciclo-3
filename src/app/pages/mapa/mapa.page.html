@@ -4,9 +4,13 @@
   <ion-button class="back-button" *ngIf="session.cupertinoState == 'cupertinoOpen'" (click)="hidePane()">
     <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
   </ion-button>
-  <ion-button *ngIf="session.country == 'Colombia' && session.cupertinoState != 'cupertinoOpen'" class="submit locations" (click)="subprograms4location()">
-    ¿Quien recoge en esta zona?
-  </ion-button>
+  <ion-row class="no-height ion-justify-content-center">
+    <ion-col size-md="10" size-xl="8" size-xs="12" padding="0" >
+      <ion-button *ngIf="session.country == 'Colombia' && session.cupertinoState != 'cupertinoOpen'" class="submit locations" (click)="subprograms4location()">
+        ¿Quien recoge en esta zona?
+      </ion-button>
+    </ion-col>
+  </ion-row>
   <ion-button color="transparent" class="map-buttons map-locate" (click)="geolocate()">
     <ion-icon name="dr-locate"></ion-icon>
   </ion-button>
@@ -75,8 +79,13 @@
         </div>
       </ion-item>
       <ion-item class="panel-footer" lines="none">
-        <ion-col size="6">¿Tienes residuos?</ion-col>
-        <ion-col size="6" class="ion-text-center"><a [routerLink]="[ '/usuario/recolectar' ]">Solicita recolección <ion-icon name="dr-reportar"></ion-icon></a></ion-col>
+        <ion-row class="ion-justify-content-center">
+          <ion-col size-md="10" size-xl="8" size-xs="12" padding="0" >
+            <ion-button class="submit" [routerLink]="'/usuario/recolectar/'+subprogram.id">
+              Solicitar recolección
+            </ion-button>
+          </ion-col>
+        </ion-row>
       </ion-item>
     </div>
     <div *ngIf="list == 0">

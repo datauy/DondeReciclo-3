@@ -6,11 +6,7 @@ body.keyboard-is-open {
     margin-bottom: 0 !important;
   }
 }
-.mapa, .fichas, .contacto, .consejos, .sobre-el-proyecto {
-  app-notification {
-    bottom: 67px;
-  }
-}
+
 // function to generate breakpoint classes based on ionic current breakpoints
 // (
 //   xs: 0,

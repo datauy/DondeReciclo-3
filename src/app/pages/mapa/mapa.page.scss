@@ -4,6 +4,9 @@
     ion-item {
       overflow: visible;
     }
+    .no-height {
+      height: 0;
+    }
     .cupertino-pane {
       h5 {
         margin: 0;
@@ -55,6 +58,9 @@
             ion-icon {
               width: 33px;
             }
+          }
+          ion-row {
+            width: 100%;
           }
         }
         &.label-item {
@@ -137,8 +143,7 @@
       top: 45px;
       left: 0;
       z-index: 401;
-      margin: auto 40px;
-      width: calc(100% - 80px);
+      padding: 0 12px;
     }
     .map-buttons {
       border-radius: 8px;

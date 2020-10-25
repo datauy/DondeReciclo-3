@@ -38,7 +38,9 @@ export class MapaPage implements OnInit {
   };
   weekday = new Weekdays;
   showSched = false;
+  //Displays: 0:Es contenedor, 1:Es Lista (subprogramas), 2:Es subprograma
   list = 0;
+  //Estados: 0:Cerrado-Inactivo, 1:Abierto, 2:Cerrado-Activado, 3:Cerrado-Mostrando? O debiera ser abierto??
   zoneVisible = 0;
 
   constructor(

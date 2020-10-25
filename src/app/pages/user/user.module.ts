@@ -11,6 +11,7 @@ import { UserPage } from './user.page';
 import { RegisterForm } from './register.form';
 import { LoginForm } from './login.form';
 import { ReportForm } from './report.form';
+import { CollectForm } from './collect.form';
 import { ForgotForm } from './forgot.form';
 import { PasswordForm } from './password.form';
 
@@ -29,7 +30,8 @@ import { PasswordForm } from './password.form';
     LoginForm,
     ReportForm,
     ForgotForm,
-    PasswordForm
+    PasswordForm,
+    CollectForm
   ]
 })
 export class UserPageModule {}
