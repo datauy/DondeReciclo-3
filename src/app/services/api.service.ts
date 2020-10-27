@@ -118,8 +118,8 @@ export class ApiService<T=any> {
    /*        News         */
   /**********************/
   //
-  getNewsList(page: number) {
-    return  this.request.get(environment.backend + "news?page="+page).pipe(map(
+  getNewsList(page: number, country: string) {
+    return  this.request.get(environment.backend + "news?country="+ country +"&page="+ page).pipe(map(
       (result: News[]) => {
         return result;
       }

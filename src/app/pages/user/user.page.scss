@@ -75,16 +75,16 @@ app-login-form:host {
     }
   }
 }
+ion-button.back-button {
+  position: relative;
+  color: var(--pale-olive-green);
+  box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2);
+  margin-bottom: 23px;
+  width: 48px;
+  height: 48px;
+  left: 0;
+}
 app-report-form:host {
-  ion-button.back-button {
-    position: relative;
-    color: var(--pale-olive-green);
-    box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2);
-    margin-bottom: 23px;
-    width: 48px;
-    height: 48px;
-    left: 0;
-  }
   h2 {
     font-size: 16px;
     line-height: 1.25;
