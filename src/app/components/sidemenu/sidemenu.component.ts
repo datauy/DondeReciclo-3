@@ -79,17 +79,20 @@ export class SidemenuComponent implements OnInit {
   }
   closeSession() {
     this.auth.logout();
+    this.router.navigate(['/']);
     this.toggleMenu();
   }
   //Country selection
   selectCountry(country: string) {
     this.session.setCountry(country);
+    this.map.center = environment[country].center;
     if ( this.router.routerState.snapshot.url != '/intro/mapa' ) {
       this.router.navigate(['/']);
     }
-    this.map.center = environment[country].center;
+    else {
+      this.map.resizeMap(17);
+    }
     //Move to new center
-    this.map.resizeMap(17);
     this.toggleMenu();
   }
 }

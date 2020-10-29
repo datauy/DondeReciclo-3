@@ -26,7 +26,7 @@
           </ion-item>
           <ion-item>
             <ion-label position="floating">Departamento</ion-label>
-            <ion-select formControlName="state">
+            <ion-select formControlName="state" *ngIf="session.country == 'Uruguay'">
               <ion-select-option text-wrap value="Artigas">Artigas</ion-select-option>
               <ion-select-option text-wrap value="Canelones">Canelones</ion-select-option>
               <ion-select-option text-wrap value="Cerro Largo">Cerro Largo</ion-select-option>
@@ -46,6 +46,41 @@
               <ion-select-option text-wrap value="Soriano">Soriano</ion-select-option>
               <ion-select-option text-wrap value="Tacuarembó">Tacuarembó</ion-select-option>
               <ion-select-option text-wrap value="Treinta y Tres">Treinta y Tres</ion-select-option>
+            </ion-select>
+            <ion-select formControlName="state" *ngIf="session.country == 'Colombia'">
+              <ion-select-option text-wrap value="Amazonas">Amazonas</ion-select-option>
+              <ion-select-option text-wrap value="Antioquia">Antioquia</ion-select-option>
+              <ion-select-option text-wrap value="Arauca">Arauca</ion-select-option>
+              <ion-select-option text-wrap value="Atlántico">Atlántico</ion-select-option>
+              <ion-select-option text-wrap value="Bogotá">Bogotá</ion-select-option>
+              <ion-select-option text-wrap value="Bolívar">Bolívar</ion-select-option>
+              <ion-select-option text-wrap value="Boyacá">Boyacá</ion-select-option>
+              <ion-select-option text-wrap value="Caldas">Caldas</ion-select-option>
+              <ion-select-option text-wrap value="Caquetá">Caquetá</ion-select-option>
+              <ion-select-option text-wrap value="Casanare">Casanare</ion-select-option>
+              <ion-select-option text-wrap value="Cauca">Cauca</ion-select-option>
+              <ion-select-option text-wrap value="Cesar">Cesar</ion-select-option>
+              <ion-select-option text-wrap value="Chocó">Chocó</ion-select-option>
+              <ion-select-option text-wrap value="Córdoba">Córdoba</ion-select-option>
+              <ion-select-option text-wrap value="Cundinamarca">Cundinamarca</ion-select-option>
+              <ion-select-option text-wrap value="Guainía">Guainía</ion-select-option>
+              <ion-select-option text-wrap value="Guaviare">Guaviare</ion-select-option>
+              <ion-select-option text-wrap value="Huila">Huila</ion-select-option>
+              <ion-select-option text-wrap value="La Guajira">La Guajira</ion-select-option>
+              <ion-select-option text-wrap value="Magdalena">Magdalena</ion-select-option>
+              <ion-select-option text-wrap value="Meta">Meta</ion-select-option>
+              <ion-select-option text-wrap value="Nariño">Nariño</ion-select-option>
+              <ion-select-option text-wrap value="Norte de Santander">Norte de Santander</ion-select-option>
+              <ion-select-option text-wrap value="Putumayo">Putumayo</ion-select-option>
+              <ion-select-option text-wrap value="Quindío">Quindío</ion-select-option>
+              <ion-select-option text-wrap value="Risaralda">Risaralda</ion-select-option>
+              <ion-select-option text-wrap value="San Andrés y Providencia">San Andrés y Providencia</ion-select-option>
+              <ion-select-option text-wrap value="Santander">Santander</ion-select-option>
+              <ion-select-option text-wrap value="Sucre">Sucre</ion-select-option>
+              <ion-select-option text-wrap value="Tolima">Tolima</ion-select-option>
+              <ion-select-option text-wrap value="Valle del Cauca">Valle del Cauca</ion-select-option>
+              <ion-select-option text-wrap value="Vaupés">Vaupés</ion-select-option>
+              <ion-select-option text-wrap value="Vichad">Vichad</ion-select-option>
             </ion-select>
           </ion-item>
           <ion-item>
