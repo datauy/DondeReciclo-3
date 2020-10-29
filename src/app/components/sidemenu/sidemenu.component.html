@@ -118,13 +118,21 @@
       <ion-toolbar>
         <ion-buttons>
           <span>Cambiar país:</span>
-          <ion-button (click)="selectCountry('Uruguay')" href='/intro/mapa'>
-            <ion-icon slot="icon-only"
-              name="dr-uy"></ion-icon>
+          <ion-button (click)="selectCountry('Uruguay')">
+            <ion-icon
+              class="country-selector"
+              slot="icon-only"
+              name="dr-uy"
+              [ngClass]="session.country == 'Uruguay' ? 'active' : ''">
+            </ion-icon>
           </ion-button>
-          <ion-button (click)="selectCountry('Colombia')" href='/intro/mapa'>
-            <ion-icon slot="icon-only"
-              name="dr-col"></ion-icon>
+          <ion-button (click)="selectCountry('Colombia')">
+            <ion-icon
+              class="country-selector"
+              slot="icon-only"
+              name="dr-col"
+              [ngClass]="session.country == 'Colombia' ? 'active' : ''">
+            </ion-icon>
           </ion-button>
         </ion-buttons>
         <ion-buttons>

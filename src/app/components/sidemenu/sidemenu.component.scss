@@ -124,6 +124,13 @@
     border-bottom-right-radius: 44px;
     height: 46px;
   }
+  .country-selector {
+    border: 2px solid;
+    border-radius: 15px;
+    &.active {
+      border-color: white;
+    }
+  }
   .menu-social-links{
     height: 130px;
     background: none;

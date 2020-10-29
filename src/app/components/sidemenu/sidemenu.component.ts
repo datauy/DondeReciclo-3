@@ -3,10 +3,10 @@ import { IonMenu, MenuController} from '@ionic/angular';
 import { ApiService } from "src/app/services/api.service";
 import { SessionService } from "src/app/services/session.service";
 import { AuthService } from "src/app/services/auth.service";
-//import { environment } from 'src/environments/environment';
-//import { MapService } from "src/app/services/map.service";
-//import { Router } from "@angular/router";
-//import { createAnimation, Animation } from '@ionic/core';
+import { environment } from 'src/environments/environment';
+import { MapService } from "src/app/services/map.service";
+import { Router } from "@angular/router";
+
 @Component({
   selector: 'app-sidemenu',
   templateUrl: './sidemenu.component.html',
@@ -50,8 +50,8 @@ export class SidemenuComponent implements OnInit {
     public api: ApiService,
     public session: SessionService,
     public auth: AuthService,
-    //private router: Router,
-    //public map: MapService
+    private router: Router,
+    public map: MapService
   ) {
   }
 
@@ -84,14 +84,12 @@ export class SidemenuComponent implements OnInit {
   //Country selection
   selectCountry(country: string) {
     this.session.setCountry(country);
-  /*  if ( this.router.routerState.snapshot.url == '/intro/mapa' ) {
-      this.map.center = environment[country].center;
-      //Move to new center
-      this.map.resizeMap(16);
-    }
-    else {
+    if ( this.router.routerState.snapshot.url != '/intro/mapa' ) {
       this.router.navigate(['/']);
     }
-    this.toggleMenu();*/
+    this.map.center = environment[country].center;
+    //Move to new center
+    this.map.resizeMap(17);
+    this.toggleMenu();
   }
 }
