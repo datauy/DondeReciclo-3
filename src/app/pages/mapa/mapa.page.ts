@@ -255,7 +255,7 @@ export class MapaPage implements OnInit {
       type: 'notification',
       class: 'warnings',
       title: 'No pudimos localizarte',
-      note: 'Quizás no le diste permiso o la localización está desactivada. Prueba iniciar la app con la localización activada.',
+      note: 'Quizás no le diste permiso o la localización está desactivada. Prueba iniciar la app con la localización activada. Puedes seleccionar tu ubicación tocando el mapa.',
     };
     this.notification.showNotification(noRes);
   }

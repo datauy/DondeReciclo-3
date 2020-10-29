@@ -322,11 +322,12 @@ export class MapService {
   //
   loadZones(layers: L.GeoJSON) {
     this.zones = L.geoJSON(
-      layers, {
+      layers, /*{
         onEachFeature: function (feature, layer) {
-        layer.bindPopup('<p>'+feature.properties.name+'</p>');
-        }
+        layer.bindPopup('<p>'+feature.properties.name+'</p>')
+        //layer.on('click', this.map.click(), this)
       }
+      }*/
     ).addTo(this.map);
   }
   removeZones() {
