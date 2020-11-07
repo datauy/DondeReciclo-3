@@ -127,6 +127,9 @@
       // --transition	Transition of the button
     }
   }
+  ion-checkbox{
+    min-width: 18px;
+  }
   .error {
     color: var(--residuos-peligrosos);
   }

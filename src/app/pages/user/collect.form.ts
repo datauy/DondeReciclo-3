@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef,  } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup, FormControl, FormArray } from '@angular/forms';
 import { SessionService } from 'src/app/services/session.service';
 import { UtilsService } from "src/app/services/utils.service";
 import { ActivatedRoute } from '@angular/router';
@@ -44,13 +44,56 @@ export class CollectForm implements OnInit {
   fileType: any = {
     name: "Agregar foto del incidente"
   };
+  //wasteTypes: {key: string, value:string}
+  wasteTypes = [
+    {value: '2,materials', name: 'Papel', checked: null},
+    {value: '3,materials', name: 'Plástico', checked: null},
+    {value: '101,wastes', name: 'Latas', checked: null},
+    {value: '2,materials',name: 'Cartón', checked: null},
+    {value: '4,materials', name: 'Vidrio', checked: null},
+    {value: '123,wastes', name: 'Tetrapack', checked: null}
+  ];
 
   ngOnInit() {
     this.user_data = this.formBuilder.group({
+      name: new FormControl('', Validators.required),
+      document: new FormControl(null, Validators.required),
+      phone: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern('^[0-9]*$')
+      ])),
+      email: ['', Validators.compose([
+        Validators.required,
+        Validators.email
+      ])],
+
+      neighborhood: new FormControl(null, Validators.required),
       address: new FormControl('', Validators.required),
-      weight: new FormControl(null, Validators.required),
+      addressDetail: new FormControl('', Validators.required),
+      wasteType: this.formBuilder.array([], [Validators.required]),
+      weight: new FormControl(null, Validators.compose([
+        Validators.required,
+        Validators.pattern('^[0-9]*$')
+      ])),
+      donation: new FormControl(null, Validators.required),
       comment: new FormControl('', Validators.required),
+      terms: new FormControl(null, Validators.required),
     });
+  }
+  //
+  onSelectionChange(e, i) {
+    const checkboxArrayList: FormArray = this.user_data.get('wasteType') as FormArray;
+    if (e.detail.checked) {
+      checkboxArrayList.push(new FormControl(e.detail.value));
+    }
+    else {
+      checkboxArrayList.controls.forEach((item: FormControl, index) => {
+        if (item.value == e.detail.value) {
+          checkboxArrayList.removeAt(index);
+          return;
+        }
+      });
+    }
   }
   /*getCameraPhoto() {
     this.camera.getPicture(this.options).then((imageData) => {
@@ -66,15 +109,17 @@ export class CollectForm implements OnInit {
     this.session.isLoading = true;
     //Subprogram assign
     this.user_data.value.id = this.route.snapshot.params['subprogramID'];
-    this.user_data.value.latlng = this.map.userPosition ? this.map.userPosition.join(',') : '';
+    this.user_data.value.latlng = this.map.userPosition ? this.map.userPosition.join(' ') : '';
     //Assign file to send along
     this.utils.collectRequest(this.user_data.value).subscribe(
       (res) => {
         this.session.isLoading = false;
         if (res) {
           this.success = true;
+          this.fail = false;
         }
         else {
+          this.success = false;
           this.fail = true;
         }
       },
@@ -100,16 +145,6 @@ export class CollectForm implements OnInit {
     );
   }
   //
-  selectSubject(id) {
-    let selected = document.querySelector(".selectable.selected");
-    let selection = document.querySelector("#"+id);
-    if (selected) {
-      selected.classList.remove('selected');
-    }
-    this.subject_id = id;
-    selection.classList.add('selected');
-  }
-  //
   loadImageFromDevice(event) {
     this.is_loading = true;
     this.fileType = event.target.files[0];
@@ -131,6 +166,16 @@ export class CollectForm implements OnInit {
     this.nav.back();
   }
   reload() {
+    const checkboxArrayList: FormArray = this.user_data.get('wasteType') as FormArray;
+    checkboxArrayList.controls.forEach((item: FormControl, index) => {
+      this.wasteTypes.forEach((type, i) => {
+        if (item.value == type.value) {
+          this.wasteTypes[i].checked = true;
+        }
+      });
+    });
+    console.log(this.wasteTypes);
+    console.log(checkboxArrayList.controls);
     delete this.fail;
     delete this.success;
   }
