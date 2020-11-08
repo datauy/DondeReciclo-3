@@ -106,4 +106,19 @@ export class UtilsService {
       );
     }
   }
+  validateForm(user_data: any) {
+    let res = true;
+    if ( !user_data.valid ) {
+      let res = false;
+      Object.keys(user_data.controls).forEach(
+        control_key => {
+          if ( user_data.controls[control_key].invalid ) {
+            user_data.controls[control_key].setError();
+
+          }
+        }
+      );
+    }
+    return res;
+  }
 }

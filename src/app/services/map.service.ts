@@ -321,13 +321,18 @@ export class MapService {
   }
   //
   loadZones(layers: L.GeoJSON) {
+    const _this = this;
     this.zones = L.geoJSON(
-      layers, /*{
+      layers, {
         onEachFeature: function (feature, layer) {
-        layer.bindPopup('<p>'+feature.properties.name+'</p>')
-        //layer.on('click', this.map.click(), this)
+          layer.
+          bindPopup('<div>'+feature.properties.subprograms.join('<br>')+'</div><small>'+feature.properties.name+'</small>').
+          on('popupopen', function(e) {
+            _this.userPosition = [ e.popup._latlng.lat, e.popup._latlng.lng];
+            _this.loadMarkers([], false);
+          });
+        }
       }
-      }*/
     ).addTo(this.map);
   }
   removeZones() {
