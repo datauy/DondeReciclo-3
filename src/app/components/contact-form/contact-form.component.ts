@@ -41,18 +41,29 @@ export class ContactFormComponent implements OnInit {
 
   register() {
     this.session.isLoading = true;
-    this.utils.openTicket(this.user_data.value).subscribe((res) => {
-      this.session.isLoading = false;
-      if (res) {
-        this.success = true;
-      }
-      else {
+    this.utils.openTicket(this.user_data.value).subscribe(
+      (res) => {
+        this.session.isLoading = false;
+        if (res) {
+          this.success = true;
+        }
+        else {
+          this.fail = true;
+        }
+      },
+      () => {
+        this.session.isLoading = false;
         this.fail = true;
       }
-      setTimeout(() => {
-        delete this.success;
-        delete this.fail;
-      }, 10000);
-    });
+    );
+    setTimeout(() => {
+      if (!this.fail && !this.success) {
+        this.session.isLoading = false;
+        this.fail = true;
+      }
+    }, 10000);
+  }
+  retry() {
+    this.fail = false;
   }
 }
