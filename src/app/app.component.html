@@ -29,8 +29,7 @@
             </ion-button>
           </ion-item>
           <ion-button class="submit contrast"
-            [routerLink]="notification.message.link"
-            (click)="closeNotification()"
+            (click)="followLink(notification.message.link)"
             [innerHTML]="notification.message.link_title"
             *ngIf="notification.message.link != null">
           </ion-button>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router } from '@angular/router';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -25,19 +25,10 @@ export class AppComponent {
     private statusBar: StatusBar,
     public session: SessionService,
     public notification: NotificationsService,
-    private route: ActivatedRoute,
+    private router: Router,
   ) {
     this.initializeApp();
     this.session = session;
-
-    // this.route.queryParams.subscribe(params => {
-    //   this.name = params['name'];
-    // });
-    // this.isLoading = session.isLoading;
-    // if (!this.session.get('isLoading')) {
-    //   this.session.set('isLoading', 'true');
-    // }
-    // this.isLoading = this.session.get('isLoading');
   }
 
   initializeApp() {
@@ -58,5 +49,16 @@ export class AppComponent {
 
   closeNotification() {
     this.notification.notificationClose();
+  }
+  //
+  followLink(url: string) {
+    this.notification.notificationClose();
+    console.log(url.substring(0,3));
+    if ( url.substring(0,4) == 'http' ) {
+      window.open(url, "_blank");
+    }
+    else {
+      this.router.navigate([url]);
+    }
   }
 }
