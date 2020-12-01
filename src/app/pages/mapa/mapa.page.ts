@@ -103,9 +103,9 @@ export class MapaPage implements OnInit {
     let message = {
       id: 'questionary',
       title: 'Contanos tu experiencia con ¿Dónde Reciclo? ♻️',
-      body: 'Sabemos que nos queda mucho por mejorar y por eso necesitamos tu opinión y saber cómo has usado la herramienta para seguir creciendo.',
+      body: 'Sabemos que nos queda mucho por mejorar y tu opinión nos sirve.',
       link: 'https://docs.google.com/forms/d/e/1FAIpQLSdfgtA7SokVfbRegHq_IxV9wMRPAItsdL-AdB4iyzIh5IwxpQ/viewform?usp=pp_url&entry.1248715765=Notificaci%C3%B3n+en+la+app',
-      link_title: 'Completar encuesta (5 min.)',
+      link_title: 'Encuesta (5 min.)',
     };
     this.notification.showNotificationMessage(message);
   }
