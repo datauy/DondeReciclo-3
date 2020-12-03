@@ -51,7 +51,7 @@ export class CollectForm implements OnInit {
     {value: '101,wastes', name: 'Latas', checked: null},
     {value: '2,materials',name: 'Cartón', checked: null},
     {value: '4,materials', name: 'Vidrio', checked: null},
-    {value: '123,wastes', name: 'Tetrapack', checked: null}
+    {value: '123,wastes', name: 'Tetrapak', checked: null}
   ];
 
   ngOnInit() {
