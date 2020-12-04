@@ -24,10 +24,10 @@
               <ion-label position="floating">Nombre</ion-label>
               <ion-input formControlName="name" type="textarea"></ion-input>
             </ion-item>
-            <ion-item>
+            <!--<ion-item>
               <ion-label position="floating">Número de identificación</ion-label>
               <ion-input formControlName="document" type="textarea"></ion-input>
-            </ion-item>
+            </ion-item>-->
             <ion-item>
               <ion-label position="floating">Email</ion-label>
               <ion-input formControlName="email" type="textarea"></ion-input>
@@ -54,7 +54,7 @@
           </div>
           <h4>Datos de residuos</h4>
           <div class="section">
-            <ion-label>Tipos de residuos</ion-label>
+            <!--<ion-label>Tipos de residuos</ion-label>
             <ion-col>
               <ion-item *ngFor="let option of wasteTypes; let i=index">
                 <ion-label [innerHTML]="option.name"></ion-label>
@@ -65,17 +65,16 @@
                   (ionChange)="onSelectionChange($event, i)">
                 </ion-checkbox>
               </ion-item>
-            </ion-col>
+            </ion-col>-->
             <ion-col>
               <p>
                 <ion-item>
-                  <ion-label position="floating">Peso aproximado</ion-label>
+                  <ion-label position="floating">Cantidad de bolsas</ion-label>
                   <ion-input formControlName="weight" type="number"></ion-input>
-                  <span class="suffix" slot="end">Kg.</span>
                 </ion-item>
               </p>
             </ion-col>
-            <ion-col>
+            <!--<ion-col>
               <div class="top-space">
                 <p>¿Desea hacer algún tipo de donación en especie que entregará al momento de la recolección del material reciclado?</p>
                 <ion-radio-group formControlName="donation">
@@ -89,7 +88,7 @@
                   </ion-item>
                 </ion-radio-group>
               </div>
-            </ion-col>
+            </ion-col>-->
             <p class="comment">
               <ion-item>
                 <ion-label position="floating">Comentarios</ion-label>
@@ -103,7 +102,7 @@
           <ion-item lines="none">
             <ion-checkbox formControlName="terms" slot="start" class="terms"></ion-checkbox>
             <small>
-              Autorizo de forma libre, consciente, expresa e informada el tratamiento de mi información personal de acuerdo a la finalidades establecidas en el Aviso de Privacidad y la Política de Tratamiento de Datos Personales.
+              Autorizo de forma libre, consciente, expresa e informada el tratamiento de mi información personal de acuerdo a la finalidades establecidas en el Aviso de Privacidad y la Política de Tratamiento de Datos Personales. Acepto que esta transacción no implica remuneración de ningún tipo en dinero o especias.
               <a href="http://cempre.org.co/politica_de_proteccion_de_datos_personales_cempre_colombia.pdf" target="_blank">Ver política de tratamiento de datos</a>
             </small>
           </ion-item>

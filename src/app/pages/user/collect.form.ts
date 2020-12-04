@@ -45,19 +45,19 @@ export class CollectForm implements OnInit {
     name: "Agregar foto del incidente"
   };
   //wasteTypes: {key: string, value:string}
-  wasteTypes = [
+  /*wasteTypes = [
     {value: '2,materials', name: 'Papel', checked: null},
     {value: '3,materials', name: 'Plástico', checked: null},
     {value: '101,wastes', name: 'Latas', checked: null},
     {value: '2,materials',name: 'Cartón', checked: null},
     {value: '4,materials', name: 'Vidrio', checked: null},
     {value: '123,wastes', name: 'Tetrapak', checked: null}
-  ];
+  ];*/
 
   ngOnInit() {
     this.user_data = this.formBuilder.group({
       name: new FormControl('', Validators.required),
-      document: new FormControl(null, Validators.required),
+      //document: new FormControl(null, Validators.required),
       phone: new FormControl('', Validators.compose([
         Validators.required,
         Validators.pattern('^[0-9]*$')
@@ -70,12 +70,12 @@ export class CollectForm implements OnInit {
       neighborhood: new FormControl(null, Validators.required),
       address: new FormControl('', Validators.required),
       addressDetail: new FormControl('', Validators.required),
-      wasteType: this.formBuilder.array([], [Validators.required]),
+      //wasteType: this.formBuilder.array([], [Validators.required]),
       weight: new FormControl(null, Validators.compose([
         Validators.required,
         Validators.pattern('^[0-9]*$')
       ])),
-      donation: new FormControl(null, Validators.required),
+      //donation: new FormControl(null, Validators.required),
       comment: new FormControl('', Validators.required),
       terms: new FormControl(null, Validators.required),
     });
@@ -166,16 +166,14 @@ export class CollectForm implements OnInit {
     this.nav.back();
   }
   reload() {
-    const checkboxArrayList: FormArray = this.user_data.get('wasteType') as FormArray;
+    /*const checkboxArrayList: FormArray = this.user_data.get('wasteType') as FormArray;
     checkboxArrayList.controls.forEach((item: FormControl, index) => {
       this.wasteTypes.forEach((type, i) => {
         if (item.value == type.value) {
           this.wasteTypes[i].checked = true;
         }
       });
-    });
-    console.log(this.wasteTypes);
-    console.log(checkboxArrayList.controls);
+    });*/
     delete this.fail;
     delete this.success;
   }
