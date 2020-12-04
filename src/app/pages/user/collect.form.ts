@@ -108,7 +108,7 @@ export class CollectForm implements OnInit {
   send() {
     this.session.isLoading = true;
     //Subprogram assign
-    this.user_data.value.id = this.route.snapshot.params['subprogramID'];
+    this.user_data.value.id = this.route.snapshot.params['SubprogramID'];
     this.user_data.value.latlng = this.map.userPosition ? this.map.userPosition.join(' ') : '';
     //Assign file to send along
     this.utils.collectRequest(this.user_data.value).subscribe(
