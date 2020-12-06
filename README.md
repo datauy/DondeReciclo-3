@@ -1,3 +1,23 @@
+
+
+![Donde reciclo](src/assets/img/generico.png)
+
+[Introducción](#Introducción)
+
+## Introducción
+
+¿Dónde Reciclo? es una herramienta web y una app para iOS y Android que te ayuda a encontrar contenedores para tus residuos reciclables en todo Uruguay, a aprender cómo clasificar mejor en casa y conocer más sobre materiales y reciclaje en Uruguay.
+
+<details>
+<summary>Objetivo</summary>
+<br>
+ Unificar toda la información sobre todos los lugares, contenedores, dispositivos y programas para recibir residuos o materiales y envases reciclables.
+<br><br>
+
+</details>
+
+***
+***
 # Donde Reciclo v3.4
 Basada en Ionic5, Angular 8 y usando las últimas tecnologías de CSS4 y HTML5 para generar una mejor experiencia de usuario y contenidos exportables a Android e IOS así como las nuevas Web Apps.
 
