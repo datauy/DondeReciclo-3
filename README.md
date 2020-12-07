@@ -5,8 +5,8 @@
  # Donde Reciclo v3.4
 
 [Introducción](#Introducción)
-[Guía de instalación y uso](#Guíadeinstalaciónyuso)
-[Datos Abiertos](#DatosAbiertos)
+[Guía de instalación y uso](#Guía)
+[Datos Abiertos](#Datos)
 
 ## Introducción
 
@@ -39,14 +39,18 @@ En Uruguay existen muchos esfuerzos destinados a la recuperación de residuos s�
 
 ## Guía de instalación y uso
 
-
+.............
 
 ***
 
 
 
-## Datos abiertos
+## :chart_with_upwards_trend: Datos abiertos
 
+
+##### ¿Qué son los datos abiertos?
+Los datos abiertos como aquellos datos digitales que son puestos a disposición con las características técnicas y jurídicas necesarias para que puedan ser usados, reutilizados y redistribuidos libremente por cualquier persona, en cualquier momento y cualquier lugar.
+##### Datos abiertos que utiliza la aplicación
 Los datos utilizados en esta aplicación se encuentran disponibles para su reutilización a través del [Catálogo Nacional de Datos Abiertos ](https://catalogodatos.gub.uy/).
 
 
