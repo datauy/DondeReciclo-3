@@ -13,9 +13,10 @@
 
 ## Introducción
 
-¿Dónde Reciclo? es una herramienta web y una app para iOS y Android que para encontrar contenedores de residuos reciclables en todo Uruguay y a aprender cómo clasificar mejor en casa.
+¿Dónde Reciclo? es una herramienta web y una app para iOS y Android, sirve para encontrar contenedores de residuos reciclables en todo Uruguay y a aprender cómo clasificar mejor en casa.
 
 Esta basada en Ionic5, Angular usando las últimas tecnologías de CSS4 y HTML5 para generar una mejor experiencia de usuario y contenidos exportables a Android e IOS así como las nuevas Web Apps.
+
 
 <details>
 <summary>Origen</summary>
@@ -30,11 +31,11 @@ En Uruguay existen muchos esfuerzos destinados a la recuperación de residuos s�
 <details>
 <summary>Antecedentes</summary>
 
-*  La primera versión de esta herramienta, disponible en la web fue desarrollada y diseñada por [Agustín Kryger](https://twitter.com/agustinkry) y [Agustín Díaz](https://twitter.com/hiroagustin), en coordinación con DATA Uruguay, de forma voluntaria. La misma utilizaba datos de la Intendencia de Montevideo para mostrar en qué lugares se podían depositar pilas, latas, plástico y vidrio.
+*  La primera versión de esta herramienta, disponible en la web fue desarrollada y diseñada por [Agustín Kryger](https://twitter.com/agustinkry) y [Agustín Díaz](https://twitter.com/hiroagustin), en coordinación con DATA Uruguay, de forma voluntaria. Utilizando datos de la Intendencia de Montevideo para mostrar en qué lugares se podían depositar pilas, latas, plástico y vidrio.
 
-* En el año 2016, [CEMPRE](https://cempre.org.uy/)  (Compromiso Empresarial Para el Reciclaje)  y DATA Uruguay acordaron trabajar en conjunto para actualizar y ampliar la ambición de dicha herramienta, convirtiéndola además en una aplicación móvil y sumando información sobre clasificación en casa y formas de disposición de residuos.
+* En el año 2016, [CEMPRE](https://cempre.org.uy/)  (Compromiso Empresarial Para el Reciclaje)  y [DATA Uruguay](https://data.org.uy/) acordaron trabajar en conjunto para actualizar y ampliar la ambición de dicha herramienta, convirtiéndola además en una aplicación móvil y sumando información sobre clasificación en casa y formas de disposición de residuos.
 
-*  En 2020 se lanza una tercera versión de la herramienta, con más información sobre materiales, mejoras de diseño, interfaz y usabilidad y cambios en el sistema de gestión de la herramienta para permitir enviar reportes sobre contenedores a los distintos programas, así como permitirles a éstos gestionar y actualizar los puntos que se visualizan en la app.
+*  En 2020 se lanza una tercera versión de la herramienta v3.4.0, con más información sobre materiales, mejoras de diseño, interfaz y usabilidad y cambios en el sistema de gestión de la herramienta para permitir enviar reportes sobre contenedores a los distintos programas, así como permitirles a éstos gestionar y actualizar los puntos que se visualizan en la app.
 </details>
 
 ***
@@ -48,7 +49,7 @@ Instalar Ionic
 ```
 npm install -g @ionic/cli
 ```
-## Instalación
+### Instalación
 
 Empezaremos por clonar el repositorio:
 
@@ -61,10 +62,10 @@ npm i
 
 ```
 
-## Uso
-### Servidor de desarrollo
+### Uso
+#### Servidor de desarrollo
     ionic serve
-### Webserver
+#### Webserver
     ionic build 
 
 ***
