@@ -39,41 +39,6 @@ En Uruguay existen muchos esfuerzos destinados a la recuperación de residuos s�
 </details>
 
 ***
-
-## Guía de instalación y uso
-
-
-### Pre-requisitos: 
-
-Instalar Ionic
-```
-npm install -g @ionic/cli
-```
-### Instalación
-
-Empezaremos por clonar el repositorio:
-
-```
-git clone https://github.com/datauy/DondeReciclo-3.git
-
-cd DondeReciclo-3
-
-npm i 
-
-```
-
-### Uso
-#### Servidor de desarrollo
-    ionic serve
-#### Webserver
-    ionic build 
-
-***
-
-
-## :chart_with_upwards_trend: Datos abiertos
-
-
 ##### ¿Qué son los datos abiertos?
 Los datos abiertos como aquellos datos digitales que son puestos a disposición con las características técnicas y jurídicas necesarias para que puedan ser usados, reutilizados y redistribuidos libremente por cualquier persona, en cualquier momento y cualquier lugar.
 ##### Datos abiertos que utiliza la aplicación
@@ -91,45 +56,50 @@ Los datos utilizados en esta aplicación se encuentran disponibles para su reuti
 
 ## Bitácora de cambios (changelog)
 
+## :notebook: Guía de instalación y uso
 
+Son instrucciones que permitira tener una copia de poroyecto funcionando en un ordenador local para desarrollo y pruebas.
 
-<!-- # Donde Reciclo v3.4 -->
-<!-- Basada en Ionic5, Angular 8 y usando las últimas tecnologías de CSS4 y HTML5 para generar una mejor experiencia de usuario y contenidos exportables a Android e IOS así como las nuevas Web Apps.
+### Pre-requisitos: 
 
-## Incluye v3.4.0
+#### [Node.js](https://nodejs.org/en/)  >=10.19.0 <=12.15.0
 
-* Menú principal y secundario con navegación móvil y desktop
-* Mapa con geolocaliazción y centros de reciclaje
-* Rutas a los contenedores próximos
-* Busqueda de Materiales reciclables y localización de contenedores
-* Compartir en redes sociales
-* Fichas de materiales
-* Consejos para deposición de materiales
-* Programas de reciclaje
-* Formulario de contacto
-* Creación de usuarios
-* Login de usuarios
-* Reseteo de contraseña
-* Función de reporte de contenedores
-* Subir fotos de contenedores
-* Editar perfil
+#### [Angular] (https://angular.io/) 8.2.14
 
-## Bitácora de cambios (changelog)
-http://soporte.data.org.uy/es/blog/dr-changelog
+    npm install -g @angular/cli
 
-## Instalación
+#### [Ionic] (https://ionicframework.com/) 0.0.0
 
-### Instalar Ionic  
     npm install -g @ionic/cli
 
-### Instalar app
+### Instalación
 
+- Creación de la carperta donde se quiera guardar el proyecto en tu ordenador (Desktop, Documents,etc).
+
+-- Entrar a la carpeta a través de la  consola de comandos.
+    cd Desktop
+    cd Nombre_Carpeta
+
+- Clonar el proyecto del repositorio.
     git clone git@github.com:datauy/DondeReciclo-3.git
-    cd DondeReciclo-3
-    npm i
 
-## Usar
-### Servidor de desarrollo
+--Entrar a la carpeta del proyecto final.
+    cd DondeReciclo-3
+
+--Ejecutar comando.
+    npm init
+
+### Ejecución
+
+Para iniciar el proyecto en local es a través del siguiente comando.
     ionic serve
-### Webserver
-    ionic build -->
+
+### Tecnología utilizada
+
+- **[Node](https://nodejs.org/es/docs/)**
+
+- **[Angular](https://angular.io/guide/setup-local)**
+
+- **[Ionic](https://ionicframework.com/docs/cli)**
+
+## Ejemplo de inicio 
