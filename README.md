@@ -91,8 +91,15 @@ Los datos utilizados en esta aplicación se encuentran disponibles para su reuti
 
  Es una organización de la sociedad civil que busca el fortalecimiento de comunidades y activismo social a traves de herramientas sociales para la participación y el uso de datos abiertos. [Conoce más](https://data.org.uy/)
 
-## Bitácora de cambios (changelog)
-...............
+<!-- ## Bitácora de cambios (changelog) -->
+
+
+## Contacto
+* Consultas sobre el proyecto en general o reciclaje (CEMPRE): 
+ cempre@cempre.org.uy
+
+* Consultas sobre la herramienta (DATA Uruguay): 
+contacto@data.org.uy
 
 ## Autores 
 <table>
@@ -110,7 +117,7 @@ Los datos utilizados en esta aplicación se encuentran disponibles para su reuti
 <!-- # Donde Reciclo v3.4 -->
 <!-- Basada en Ionic5, Angular 8 y usando las últimas tecnologías de CSS4 y HTML5 para generar una mejor experiencia de usuario y contenidos exportables a Android e IOS así como las nuevas Web Apps.
 
-## Incluye v3.4.0
+<!-- ## Incluye v3.4.0
 
 * Menú principal y secundario con navegación móvil y desktop
 * Mapa con geolocaliazción y centros de reciclaje
@@ -131,9 +138,9 @@ Los datos utilizados en esta aplicación se encuentran disponibles para su reuti
 ## Bitácora de cambios (changelog)
 http://soporte.data.org.uy/es/blog/dr-changelog
 
-## Instalación
+## Instalación -->
 
-### Instalar Ionic  
+<!-- ### Instalar Ionic  
     npm install -g @ionic/cli
 
 ### Instalar app
@@ -146,4 +153,4 @@ http://soporte.data.org.uy/es/blog/dr-changelog
 ### Servidor de desarrollo
     ionic serve
 ### Webserver
-    ionic build -->
+    ionic build --> 
