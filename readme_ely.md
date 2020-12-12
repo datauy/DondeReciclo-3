@@ -76,22 +76,22 @@ Son instrucciones que permitira tener una copia de poroyecto funcionando en un o
 
 - Creación de la carperta donde se quiera guardar el proyecto en tu ordenador (Desktop, Documents,etc).
 
--Entrar a la carpeta a través de la  consola de comandos.
-    cd Desktop
-    cd Nombre_Carpeta
+- Entrar a la carpeta a través de la  consola de comandos. </br>
+    cd Desktop </br>
+    cd Nombre_Carpeta </br>
 
-- Clonar el proyecto del repositorio.
+- Clonar el proyecto del repositorio. </br>
     git clone git@github.com:datauy/DondeReciclo-3.git
 
-- Entrar a la carpeta del proyecto final.
+- Entrar a la carpeta del proyecto final. </br>
     cd DondeReciclo-3
 
-- Ejecutar comando.
+- Ejecutar comando. </br>
     npm init
 
 ### Ejecución
 
-Para iniciar el proyecto en local es a través del siguiente comando.
+Para iniciar el proyecto en local es a través del siguiente comando. </br>
     ionic serve
 
 ### Tecnología utilizada
