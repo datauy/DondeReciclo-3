@@ -103,3 +103,7 @@ Para iniciar el proyecto en local es a través del siguiente comando.
 - **[Ionic](https://ionicframework.com/docs/cli)**
 
 ## Ejemplo de inicio 
+
+![Codigo](src/assets/img/codigo.png)
+
+![Codigo](src/assets/img/codigo2.png)
