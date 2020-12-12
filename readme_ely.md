@@ -64,11 +64,11 @@ Son instrucciones que permitira tener una copia de poroyecto funcionando en un o
 
 #### [Node.js](https://nodejs.org/en/)  >=10.19.0 <=12.15.0
 
-#### [Angular] (https://angular.io/) 8.2.14
+#### [Angular](https://angular.io/) 8.2.14
 
     npm install -g @angular/cli
 
-#### [Ionic] (https://ionicframework.com/) 0.0.0
+#### [Ionic](https://ionicframework.com/) 0.0.0
 
     npm install -g @ionic/cli
 
@@ -76,17 +76,17 @@ Son instrucciones que permitira tener una copia de poroyecto funcionando en un o
 
 - Creación de la carperta donde se quiera guardar el proyecto en tu ordenador (Desktop, Documents,etc).
 
--- Entrar a la carpeta a través de la  consola de comandos.
+-Entrar a la carpeta a través de la  consola de comandos.
     cd Desktop
     cd Nombre_Carpeta
 
 - Clonar el proyecto del repositorio.
     git clone git@github.com:datauy/DondeReciclo-3.git
 
---Entrar a la carpeta del proyecto final.
+-Entrar a la carpeta del proyecto final.
     cd DondeReciclo-3
 
---Ejecutar comando.
+-Ejecutar comando.
     npm init
 
 ### Ejecución
