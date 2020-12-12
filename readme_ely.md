@@ -83,10 +83,10 @@ Son instrucciones que permitira tener una copia de poroyecto funcionando en un o
 - Clonar el proyecto del repositorio.
     git clone git@github.com:datauy/DondeReciclo-3.git
 
--Entrar a la carpeta del proyecto final.
+- Entrar a la carpeta del proyecto final.
     cd DondeReciclo-3
 
--Ejecutar comando.
+- Ejecutar comando.
     npm init
 
 ### Ejecución
