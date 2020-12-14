@@ -1,9 +1,7 @@
 
-
-
 ![Donde reciclo](src/assets/img/generico.png)
  # Donde Reciclo v3.4
-
+![](https://img.shields.io/badge/version-v3.4-blue) ![](https://img.shields.io/badge/build-ionic-blue) ![](https://img.shields.io/github/issues/datauy/DondeReciclo-3) ![](https://img.shields.io/github/license/datauy/DondeReciclo-3) ![](https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2Fdatauy%2FDondeReciclo-3)
 ## Indice
 
 * [Introducción](#Introducción)
@@ -40,38 +38,13 @@ En Uruguay existen muchos esfuerzos destinados a la recuperación de residuos s�
 
 ***
 
+![](https://im3.ezgif.com/tmp/ezgif-3-6ab062395218.gif)
+
 ## Guía de instalación y uso
 
 
-### Pre-requisitos: 
 
-Instalar Ionic
-```
-npm install -g @ionic/cli
-```
-### Instalación
-
-Empezaremos por clonar el repositorio:
-
-```
-git clone https://github.com/datauy/DondeReciclo-3.git
-
-cd DondeReciclo-3
-
-npm i 
-
-```
-
-### Uso
-#### Servidor de desarrollo
-    ionic serve
-#### Webserver
-    ionic build 
-
-***
-
-
-## :chart_with_upwards_trend: Datos abiertos
+## :chart_with_upwards_trend: Datos
 
 
 ##### ¿Qué son los datos abiertos?
@@ -89,14 +62,33 @@ Los datos utilizados en esta aplicación se encuentran disponibles para su reuti
 
  Es una organización de la sociedad civil que busca el fortalecimiento de comunidades y activismo social a traves de herramientas sociales para la participación y el uso de datos abiertos. [Conoce más](https://data.org.uy/)
 
-## Bitácora de cambios (changelog)
+<!-- ## Bitácora de cambios (changelog) -->
 
 
+## Contacto
+* Consultas sobre el proyecto en general o reciclaje (CEMPRE): 
+ cempre@cempre.org.uy
 
+* Consultas sobre la herramienta (DATA Uruguay): 
+contacto@data.org.uy
+
+## Autores 
+<table>
+<tr>
+<td>
+<a href="https://github.com/fernandouval">
+<img src="https://avatars2.githubusercontent.com/u/1556819?s=400&v=4" width="100px;" alt=""><br /><sub><b>Fernando Uval</b></sub></a><br/>
+</td>
+<td>
+<a href="https://github.com/danielcarranza">
+<img src="https://avatars0.githubusercontent.com/u/1755382?s=400&v=4" width="100px;" alt=""><br /><sub><b>Daniel Carranza</b></sub></a><br/>
+</td>
+</tr>
+</table>
 <!-- # Donde Reciclo v3.4 -->
 <!-- Basada en Ionic5, Angular 8 y usando las últimas tecnologías de CSS4 y HTML5 para generar una mejor experiencia de usuario y contenidos exportables a Android e IOS así como las nuevas Web Apps.
 
-## Incluye v3.4.0
+<!-- ## Incluye v3.4.0
 
 * Menú principal y secundario con navegación móvil y desktop
 * Mapa con geolocaliazción y centros de reciclaje
@@ -117,19 +109,4 @@ Los datos utilizados en esta aplicación se encuentran disponibles para su reuti
 ## Bitácora de cambios (changelog)
 http://soporte.data.org.uy/es/blog/dr-changelog
 
-## Instalación
 
-### Instalar Ionic  
-    npm install -g @ionic/cli
-
-### Instalar app
-
-    git clone git@github.com:datauy/DondeReciclo-3.git
-    cd DondeReciclo-3
-    npm i
-
-## Usar
-### Servidor de desarrollo
-    ionic serve
-### Webserver
-    ionic build -->
