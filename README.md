@@ -40,9 +40,59 @@ En Uruguay existen muchos esfuerzos destinados a la recuperación de residuos s�
 
 ![](https://im3.ezgif.com/tmp/ezgif-3-6ab062395218.gif)
 
-## Guía de instalación y uso
+- **[Ionic](https://ionicframework.com/docs/cli)**
 
+## :notebook: Guía de instalación y uso
 
+Son instrucciones que permitira tener una copia de poroyecto funcionando en un ordenador local para desarrollo y pruebas.
+
+### Pre-requisitos: 
+
+#### [Node.js](https://nodejs.org/en/)  >=10.19.0 <=12.15.0
+
+#### [Angular](https://angular.io/) 8.2.14
+
+    npm install -g @angular/cli
+
+#### [Ionic](https://ionicframework.com/) 0.0.0
+
+    npm install -g @ionic/cli
+
+### Instalación
+
+- Creación de la carperta donde se quiera guardar el proyecto en tu ordenador (Desktop, Documents,etc).
+
+- Entrar a la carpeta a través de la  consola de comandos. </br>
+    cd Desktop </br>
+    cd Nombre_Carpeta </br>
+
+- Clonar el proyecto del repositorio. </br>
+    git clone git@github.com:datauy/DondeReciclo-3.git
+
+- Entrar a la carpeta del proyecto final. </br>
+    cd DondeReciclo-3
+
+- Ejecutar comando. </br>
+    npm init
+
+### Ejecución
+
+Para iniciar el proyecto en local es a través del siguiente comando. </br>
+    ionic serve
+
+### Tecnología utilizada
+
+- **[Node](https://nodejs.org/es/docs/)**
+
+- **[Angular](https://angular.io/guide/setup-local)**
+
+- **[Ionic](https://ionicframework.com/docs/cli)**
+
+## Ejemplo de inicio 
+
+![Codigo](src/assets/img/codigo.png)
+
+![Codigo](src/assets/img/codigo2.png)
 
 ## :chart_with_upwards_trend: Datos
 
