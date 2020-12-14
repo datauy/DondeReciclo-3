@@ -40,6 +40,8 @@ En Uruguay existen muchos esfuerzos destinados a la recuperación de residuos s�
 
 ![](https://im3.ezgif.com/tmp/ezgif-3-6ab062395218.gif)
 
+- **[Ionic](https://ionicframework.com/docs/cli)**
+
 ## :notebook: Guía de instalación y uso
 
 Son instrucciones que permitira tener una copia de poroyecto funcionando en un ordenador local para desarrollo y pruebas.
@@ -91,8 +93,6 @@ Para iniciar el proyecto en local es a través del siguiente comando. </br>
 ![Codigo](src/assets/img/codigo.png)
 
 ![Codigo](src/assets/img/codigo2.png)
-
-
 
 ## :chart_with_upwards_trend: Datos
 
