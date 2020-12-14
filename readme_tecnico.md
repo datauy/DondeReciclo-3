@@ -1,3 +1,5 @@
+![Donde reciclo](src/assets/img/generico.png)
+ # Donde Reciclo v3.4
 
 ## Actualización de dependencias.
 
