@@ -38,9 +38,9 @@ En Uruguay existen muchos esfuerzos destinados a la recuperación de residuos s�
 
 ***
 
-![](https://im3.ezgif.com/tmp/ezgif-3-6ab062395218.gif)
+![](src/assets/img/readmeGif.gif)
 
-- **[Ionic](https://ionicframework.com/docs/cli)**
+
 
 ## :notebook: Guía de instalación y uso
 
@@ -55,6 +55,8 @@ Son instrucciones que permitira tener una copia de poroyecto funcionando en un o
     npm install -g @angular/cli
 
 #### [Ionic](https://ionicframework.com/) 0.0.0
+
+- **[Ionic](https://ionicframework.com/docs/cli)**
 
     npm install -g @ionic/cli
 
@@ -135,8 +137,7 @@ contacto@data.org.uy
 </td>
 </tr>
 </table>
-<!-- # Donde Reciclo v3.4 -->
-<!-- Basada en Ionic5, Angular 8 y usando las últimas tecnologías de CSS4 y HTML5 para generar una mejor experiencia de usuario y contenidos exportables a Android e IOS así como las nuevas Web Apps.
+
 
 <!-- ## Incluye v3.4.0
 
