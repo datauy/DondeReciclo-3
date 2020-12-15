@@ -36,7 +36,7 @@ export class SessionService {
   ) {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd ) {
-        this.currentPage = event.urlAfterRedirects.split( '/' ).pop();
+        this.currentPage = event.urlAfterRedirects.split( '/' ).pop().split('?')[0];
         // console.log('event: ', this.currentPage);
       }
     });

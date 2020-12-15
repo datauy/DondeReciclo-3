@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Event, Router, NavigationEnd } from '@angular/router';
 
 import {NativeGeocoder,NativeGeocoderOptions} from "@ionic-native/native-geocoder/ngx";
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -45,6 +46,7 @@ export class MapaPage implements OnInit {
 
   constructor(
     private geocoder: NativeGeocoder,
+    private router: Router,
     public api: ApiService,
     public utils: UtilsService,
     public map: MapService,
@@ -74,6 +76,14 @@ export class MapaPage implements OnInit {
         }
       }
     );
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationEnd ) {
+        var url_arr = event.url.split('?');
+        if ( 1 in url_arr && url_arr[1].startsWith('zones') ) {
+          this.activateZone();
+        }
+      }
+    });
   }
   //
   ngOnInit() {
@@ -385,9 +395,9 @@ export class MapaPage implements OnInit {
           class: 'alert',
           title: 'No hay datos para la zona',
           note: 'No tenemos datos de organizaciones que trabajen en la zona. ¿Conoces alguna?',
-          link: '/intro/contacto',
-          link_title: 'Contáctanos',
-          link_params: {"subject": "CEMPRE"}
+          link: '/intro/mapa',//'map.toggleZone',
+          link_title: 'Ver Zonas',
+          link_params: {"zones": 1}
         };
         this.notification.showNotification(noRes);
       }
@@ -427,5 +437,9 @@ export class MapaPage implements OnInit {
         }
       );
     }
+  }
+  activateZone(){
+    this.zoneVisible = 1;
+    this.getZones();
   }
 }
