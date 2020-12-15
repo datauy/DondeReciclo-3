@@ -114,9 +114,9 @@ Los datos utilizados en esta aplicación se encuentran disponibles para su reuti
 
  Es una organización de la sociedad civil que busca el fortalecimiento de comunidades y activismo social a traves de herramientas sociales para la participación y el uso de datos abiertos. [Conoce más](https://data.org.uy/)
 
-<!-- ## Bitácora de cambios (changelog) -->
-
-
+## Bitácora de cambios 
+ 
+- [Changelog](http://soporte.data.org.uy/es/blog/dr-changelog)
 ## Contacto
 * Consultas sobre el proyecto en general o reciclaje (CEMPRE): 
  cempre@cempre.org.uy
