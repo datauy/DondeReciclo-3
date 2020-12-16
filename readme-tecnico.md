@@ -3,13 +3,12 @@
 ![Donde reciclo](src/assets/img/generico.png)
 
 
-
  # Donde Reciclo v3.4
 
 ## Proceso SonarCloud
 
 De acuerdo con el reporte de sonarCloud hasta la fecha del readme, se genero lo siguiente
-
+ 
 ![Donde reciclo](src/assets/img/sonarcloud.jpg)
 
 ## Readme Documentación
