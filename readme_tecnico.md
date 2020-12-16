@@ -6,7 +6,16 @@
 
  # Donde Reciclo v3.4
 
+## Proceso SonarCloud
+
+De acuerdo con el reporte de sonarCloud hasta la fecha del readme, se genero lo siguiente
+
+![Donde reciclo](src/assets/img/sonarcloud.jpg)
+
+## Readme Documentación
+
 [![Readme](https://img.shields.io/badge/readme-v3.4-blue)](https://github.com/datauy/DondeReciclo-3/)
+
 
 ## Actualización de dependencias.
 

@@ -73,7 +73,7 @@ Son instrucciones que permitira tener una copia de poroyecto funcionando en un o
     cd DondeReciclo-3
 
 - Ejecutar comando. </br>
-    npm init
+    npm install
 
 ### Ejecución
 
