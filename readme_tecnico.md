@@ -2,9 +2,8 @@
 
 ![Donde reciclo](src/assets/img/generico.png)
 
+![](https://img.shields.io/badge/readme-v3.4-blue)(https://github.com/datauy/DondeReciclo-3)
  # Donde Reciclo v3.4
-
-![(https://img.shields.io/badge/readme-v3.4-blue)](https://github.com/datauy/DondeReciclo-3)
 
 ## Actualización de dependencias.
 
