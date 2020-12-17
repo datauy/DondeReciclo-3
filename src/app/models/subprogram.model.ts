@@ -9,4 +9,7 @@ export interface Subprogram {
   neighbor: string,
   address: string,
   reception_conditions: string,
+  icon: string,
+  locations: string[],
+  receives: string
 }

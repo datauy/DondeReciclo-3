@@ -19,7 +19,7 @@ export class ContactFormComponent implements OnInit {
     public utils: UtilsService,
     public formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private session: SessionService,
+    public session: SessionService,
   ) { }
 
   user_data: FormGroup;
