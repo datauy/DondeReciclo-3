@@ -1,0 +1,129 @@
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" class="ion-text-center">
+        <ion-button class="back-button" color="pale-olive-green" (click)="goBack()">
+          <ion-icon slot="icon-only" name="close"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col  size-md="9" size-lg="8" size-xs="12">
+        <div class="section-header">
+          <h1>Solicitar recolección</h1>
+          <h2 class="sub-light">Por favor completa tus datos</h2>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col  size-md="9" size-lg="6" size-xs="12">
+        <form [formGroup]="user_data" (ngSubmit)="send()" *ngIf="!( success || fail )">
+          <h4>Datos de contacto</h4>
+          <div class="section">
+            <ion-item>
+              <ion-label position="floating">Nombre</ion-label>
+              <ion-input formControlName="name" type="textarea"></ion-input>
+            </ion-item>
+            <!--<ion-item>
+              <ion-label position="floating">Número de identificación</ion-label>
+              <ion-input formControlName="document" type="textarea"></ion-input>
+            </ion-item>-->
+            <ion-item>
+              <ion-label position="floating">Email</ion-label>
+              <ion-input formControlName="email" type="textarea"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Teléfono</ion-label>
+              <ion-input formControlName="phone" type="textarea"></ion-input>
+            </ion-item>
+          </div>
+          <h4>Datos de localización</h4>
+          <div class="section">
+            <ion-item>
+              <ion-label position="floating">Barrio</ion-label>
+              <ion-input formControlName="neighborhood" type="textarea"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Dirección</ion-label>
+              <ion-input formControlName="address" type="textarea"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Detalle de la dirección (apto, interior, casa, piso)</ion-label>
+              <ion-input formControlName="addressDetail" type="textarea"></ion-input>
+            </ion-item>
+          </div>
+          <h4>Datos de residuos</h4>
+          <div class="section">
+            <!--<ion-label>Tipos de residuos</ion-label>
+            <ion-col>
+              <ion-item *ngFor="let option of wasteTypes; let i=index">
+                <ion-label [innerHTML]="option.name"></ion-label>
+                <ion-checkbox
+                  slot="start" color="primary" class="boxes"
+                  [value]="option.value"
+                  [checked]="option.checked"
+                  (ionChange)="onSelectionChange($event, i)">
+                </ion-checkbox>
+              </ion-item>
+            </ion-col>-->
+            <ion-col>
+              <p>
+                <ion-item>
+                  <ion-label position="floating">Cantidad de bolsas</ion-label>
+                  <ion-input formControlName="weight" type="number"></ion-input>
+                </ion-item>
+              </p>
+            </ion-col>
+            <!--<ion-col>
+              <div class="top-space">
+                <p>¿Desea hacer algún tipo de donación en especie que entregará al momento de la recolección del material reciclado?</p>
+                <ion-radio-group formControlName="donation">
+                  <ion-item>
+                    <ion-label>Si</ion-label>
+                    <ion-radio value="si"></ion-radio>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>No</ion-label>
+                    <ion-radio value="no"></ion-radio>
+                  </ion-item>
+                </ion-radio-group>
+              </div>
+            </ion-col>-->
+            <p class="comment">
+              <ion-item>
+                <ion-label position="floating">Comentarios</ion-label>
+                <ion-textarea formControlName="comment" type="textarea" autoGrow="true"></ion-textarea>
+              </ion-item>
+              <small>
+                Agrega un comentario incluyendo el material y sus dimensiones aproximadas. Si tienes alguna indicación en especial recuerda enviarla, gracias.
+              </small>
+            </p>
+          </div>
+          <ion-item lines="none">
+            <ion-checkbox formControlName="terms" slot="start" class="terms"></ion-checkbox>
+            <small>
+              Autorizo de forma libre, consciente, expresa e informada el tratamiento de mi información personal de acuerdo a la finalidades establecidas en el Aviso de Privacidad y la Política de Tratamiento de Datos Personales. Acepto que esta transacción no implica remuneración de ningún tipo en dinero o especias.
+              <a href="http://cempre.org.co/politica_de_proteccion_de_datos_personales_cempre_colombia.pdf" target="_blank">Ver política de tratamiento de datos</a>
+            </small>
+          </ion-item>
+          <ion-row class="ion-justify-content-center section-header">
+            <ion-col  size-md="7" size-lg="7" size-xs="12">
+              <ion-button  [disabled]="!user_data.valid" size="large" type="submit" class="submit">Enviar</ion-button>
+            </ion-col>
+          </ion-row>
+        </form>
+        <div *ngIf="success">
+          <h3>Se ha enviado exitosamente</h3>
+          <p>Tu pedido ha sido ingresado en nuestro sistema de manejo de solicitudes, en breves te estará llegando un correo indicando el número de solicitud y otros datos relevantes para mantenernos en contacto. A la brevedad nuestro equipo se estará comunicando contigo respecto a tu reporte. Muchas gracias</p>
+          <ion-button class="submit" [routerLink]='["/intro/mapa"]'>Volver al inicio</ion-button>
+        </div>
+        <div *ngIf="fail">
+          <h3>No hemos podido enviar tu mensaje</h3>
+          <p>Por favor escríbenos a <a href="mailto:devops@data.org.uy">devops@data.org.uy</a> y explícanos lo que pasa, valoramos mucho tu esfuerzo y te pedimos disculpas por las molestias ocasionadas. Muchas gracias</p>
+          <ion-button class="submit" (click)="reload()" [routerLink]='[]'>Volver a intentarlo</ion-button>
+          <ion-button class="submit" [routerLink]='["/intro/mapa"]'>Ir al inicio</ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

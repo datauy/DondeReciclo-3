@@ -130,6 +130,7 @@ export class MapService {
   currentBounds: [number, number][];
   animating: boolean;
   markers: L.LayerGroup;
+  zones: L.Layer;
   private _pinClick = new BehaviorSubject<boolean>(false);
   private _mapChangeSub = new BehaviorSubject<boolean>(false);
   public zoom:number = 15;
@@ -138,7 +139,9 @@ export class MapService {
   constructor(
     private session: SessionService
   ) {
-    this.center = environment[this.session.country].center;
+    this.session.getCountry().then( (country) => {
+      this.center = environment[country].center;
+    });
   }
 
   loadMap(center?: number[]) {
@@ -200,7 +203,7 @@ export class MapService {
     }
     this.markers = L.layerGroup(markersLayer).addTo(this.map);
     this.currentBounds = mapBounds;
-    if ( markers.length > 0 ) {
+    if ( mapBounds.length > 0 ) {
       if ( fly ) {
         this.flyToBounds(mapBounds);
       }
@@ -270,7 +273,7 @@ export class MapService {
     this.map.once('moveend', this.toggleAnimation, this);
   }
   //
-  resizeMap(zoom: number) {
+  resizeMap(zoom?: number) {
     if ( zoom ){
       this.zoom = zoom;
     }
@@ -306,6 +309,38 @@ export class MapService {
   get mapChanged() {
     return this._mapChangeSub.asObservable();
   }
+  //
+  getBoundsWKT() {
+    let bounds = this.map.getBounds();
+    return "POLYGON(("
+    + Object.values(bounds.getNorthWest()).reverse().join(' ') +","
+    + Object.values(bounds.getSouthWest()).reverse().join(' ') +","
+    + Object.values(bounds.getSouthEast()).reverse().join(' ') +","
+    + Object.values(bounds.getNorthEast()).reverse().join(' ') +","
+    + Object.values(bounds.getNorthWest()).reverse().join(' ') +"))";
+  }
+  //
+  loadZones(layers: L.GeoJSON) {
+    const _this = this;
+    this.zones = L.geoJSON(
+      layers, {
+        onEachFeature: function (feature, layer) {
+          layer.
+          bindPopup('<div>'+feature.properties.subprograms.join('<br>')+'</div><small>'+feature.properties.name+'</small>').
+          on('popupopen', function(e) {
+            _this.userPosition = [ e.popup._latlng.lat, e.popup._latlng.lng];
+            _this.loadMarkers([], false);
+          });
+        }
+      }
+    ).addTo(this.map);
+  }
+  removeZones() {
+    if ( this.zones != undefined ) {
+      this.map.removeLayer(this.zones);
+    }
+  }
+
   //Create additional Control placeholders, to group all control buttons
   /*addControlPlaceholders(map: L.Map) {
    const corners = map._controlCorners;
