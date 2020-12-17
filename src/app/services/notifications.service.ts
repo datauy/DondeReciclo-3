@@ -68,7 +68,7 @@ export class NotificationsService {
   }
   //
   showNotification(notification: Message) {
-    if ( this.message ) {
+    if ( this.message && this.message.id != notification.id ) {
       this.messageBack = this.message;
     }
     this.message = notification;
@@ -82,10 +82,19 @@ export class NotificationsService {
     else {
       delete this.message
     }
+    return;
+  }
+  closeNotificationId(id: string) {
+    if ( this.messageBack != undefined && this.messageBack.id != undefined && this.messageBack.id == id ) {
+      delete this.messageBack;
+    }
+    if ( this.message != undefined && this.message.id != undefined && this.message.id == id ) {
+      this.notificationClose();
+    }
+    return;
   }
   //
   notificationCommingSoon() {
-    console.log('Comming soon');
     let notification = {
       id: null,
       type: 'notification',

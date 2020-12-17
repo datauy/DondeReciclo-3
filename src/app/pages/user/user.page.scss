@@ -6,6 +6,16 @@ ion-note {
 }
 ion-checkbox {
   margin-right: 5px;
+  &.terms {
+    margin-right: 30px;
+  }
+  &.boxes {
+    margin-right: 20px;
+  }
+}
+.suffix {
+  align-self: end;
+  margin-bottom: 10px;
 }
 .item-input.sc-ion-label-md-h,
 .item-input .sc-ion-label-md-h {
@@ -75,16 +85,16 @@ app-login-form:host {
     }
   }
 }
+ion-button.back-button {
+  position: relative;
+  color: var(--pale-olive-green);
+  box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2);
+  margin-bottom: 23px;
+  width: 48px;
+  height: 48px;
+  left: 0;
+}
 app-report-form:host {
-  ion-button.back-button {
-    position: relative;
-    color: var(--pale-olive-green);
-    box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2);
-    margin-bottom: 23px;
-    width: 48px;
-    height: 48px;
-    left: 0;
-  }
   h2 {
     font-size: 16px;
     line-height: 1.25;
@@ -117,6 +127,7 @@ app-report-form:host {
     color: var(--greyish-brown);
   }
 }
+
 app-register-form:host {
   #profile {
     margin: 30px auto;
@@ -133,5 +144,11 @@ app-register-form:host {
     &[type="submit"] {
       margin-top: 0;
     }
+  }
+}
+
+app-collect-form:host {
+  h4 {
+    margin-top: 40px;
   }
 }

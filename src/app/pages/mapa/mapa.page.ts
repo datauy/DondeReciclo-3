@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Event, Router, NavigationEnd } from '@angular/router';
 
 import {NativeGeocoder,NativeGeocoderOptions} from "@ionic-native/native-geocoder/ngx";
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -13,6 +14,7 @@ import { SessionService } from 'src/app/services/session.service';
 import { AuthGuardService } from 'src/app/services/auth-guard.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
+import { Subprogram } from "src/app/models/subprogram.model";
 
 @Component({
   selector: 'app-mapa',
@@ -25,19 +27,26 @@ export class MapaPage implements OnInit {
   container = {} as Container;
   infoPane: CupertinoPane;
   programs_sum: Program[];
-  uLocation = false as boolean;
+  uLocation = false;
+  subprograms: Subprogram[];
+  subprogram: Subprogram;
 
   infoPaneEl: HTMLDivElement;
-  loadingImg: boolean = false;
+  loadingImg = false;
   fileType: any = {
     name: 'Subir otra foto',
     class: 'camera'
   };
   weekday = new Weekdays;
   showSched = false;
+  //Displays: 0:Es contenedor, 1:Es Lista (subprogramas), 2:Es subprograma
+  list = 0;
+  //Estados: 0:Cerrado-Inactivo, 1:Abierto, 2:Cerrado-Activado, 3:Cerrado-Mostrando? O debiera ser abierto??
+  zoneVisible = 0;
 
   constructor(
     private geocoder: NativeGeocoder,
+    private router: Router,
     public api: ApiService,
     public utils: UtilsService,
     public map: MapService,
@@ -51,6 +60,7 @@ export class MapaPage implements OnInit {
     this.map.pinClicked.subscribe(
       pinData => {
         if ( pinData ) {
+          this.list = 0;
           this.showPane();
         }
       }
@@ -59,9 +69,21 @@ export class MapaPage implements OnInit {
       change => {
         if (change) {
           this.loadNearbyContainers(false);
+          if ( this.zoneVisible == 3 ) {
+            this.zoneVisible = 2;
+            this.getZones();
+          }
         }
       }
     );
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationEnd ) {
+        var url_arr = event.url.split('?');
+        if ( 1 in url_arr && url_arr[1].startsWith('zones') ) {
+          this.activateZone();
+        }
+      }
+    });
   }
   //
   ngOnInit() {
@@ -171,20 +193,25 @@ export class MapaPage implements OnInit {
       }
     );
   }
+  //
   cupertinoShow(){
     this.session.showSearchItem = false;
     this.session.cupertinoState = 'cupertinoOpen';
-    this.map.flyToBounds(
-      [[this.map.currentContainer.latitude, this.map.currentContainer.longitude],
-      this.map.userPosition],
-      {paddingBottomRight: [0,400]}
-    );
+    if (this.map.currentContainer != undefined) {
+      this.map.flyToBounds(
+        [[this.map.currentContainer.latitude, this.map.currentContainer.longitude],
+        this.map.userPosition],
+        {paddingBottomRight: [0,400]}
+      );
+    }
   }
+  //
   cupertinoHide(){
     this.session.showSearchItem = true;
     this.session.cupertinoState = 'cupertinoClosed';
     this.map.flyToBounds(this.map.currentBounds);
   }
+  //
   showPane() {
     this.api.getContainer(this.map.currentContainer.id).subscribe((container) => {
       this.formatContainer(container);
@@ -199,6 +226,7 @@ export class MapaPage implements OnInit {
       }
     });
   }
+  //
   hidePane() {
     this.infoPane.destroy({animate: true});
   }
@@ -214,6 +242,12 @@ export class MapaPage implements OnInit {
     this.geo.getCurrentPosition({ enableHighAccuracy: false }).then( (resp) => {
       this.uLocation = true;
       this.map.userPosition = [resp.coords.latitude, resp.coords.longitude];
+      this.notification.closeNotificationId('noLoc');
+      this.api.getCountryByLocation(this.map.userPosition).subscribe(
+        (country) => {
+          this.session.setCountry(country);
+        }
+      );
       this.api.getNearbyContainers(2, [resp.coords.latitude, resp.coords.longitude])
       .subscribe((containers) => {
           this.map.loadMarkers(containers, true);
@@ -235,11 +269,11 @@ export class MapaPage implements OnInit {
   }
   noLocation() {
     let noRes = {
-      id: null,
+      id: 'noLoc',
       type: 'notification',
       class: 'warnings',
       title: 'No pudimos localizarte',
-      note: 'Quizás no le diste permiso o la localización está desactivada. Prueba iniciar la app con la localización activada.'
+      note: 'Quizás no le diste permiso o la localización está desactivada. Prueba iniciar la app con la localización activada. Puedes seleccionar tu ubicación tocando el mapa.',
     };
     this.notification.showNotification(noRes);
   }
@@ -340,5 +374,80 @@ export class MapaPage implements OnInit {
       e.stopPropagation();
       e.preventDefault();
     }
+  }
+  subprograms4location() {
+    var point: [number, number];
+    if ( this.map.userPosition != undefined ) {
+      point = this.map.userPosition;
+    }
+    else {
+      point = [ this.map.map.getCenter().lat, this.map.map.getCenter().lng ];
+      this.map.userPosition = point;
+      this.map.loadMarkers([], false);
+    }
+    this.api.getSubprograms4Location(point).subscribe((subprograms) => {
+      if ( subprograms.length > 0 ) {
+        this.list = 1;
+        this.subprograms = subprograms;
+        this.infoPane.present({animate: true});
+      }
+      else if ( subprograms.length == 1) {
+        this.list = 2;
+        this.subprograms = subprograms;
+        this.infoPane.present({animate: true});
+      }
+      else {
+        let noRes = {
+          id: 'noSub',
+          type: 'notification',
+          class: 'alert',
+          title: 'No hay datos para la zona',
+          note: 'No tenemos datos de organizaciones que trabajen en la zona. ¿Conoces alguna?',
+          link: '/intro/mapa',//'map.toggleZone',
+          link_title: 'Ver Zonas',
+          link_params: {"zones": 1}
+        };
+        this.notification.showNotification(noRes);
+      }
+      console.log(subprograms);
+    });
+  }
+  //
+  subprogramShow(index) {
+    this.subprogram = this.subprograms[index];
+    this.list = 2;
+  }
+  //
+  getZones() {
+    let zoneBtn = document.querySelector(".map-zones");
+    if ( this.zoneVisible == 3 ) {
+      this.map.removeZones();
+      this.zoneVisible = 0;
+    }
+    else if ( this.zoneVisible == 0 ) {
+      this.zoneVisible = 1;
+      zoneBtn.classList.add('active');
+      setTimeout( () => {
+        if ( this.zoneVisible == 1 ) {
+          this.zoneVisible = 2;
+          zoneBtn.classList.remove('active');
+        }
+      }, 5000);
+    }
+    else {
+      let bounds = this.map.getBoundsWKT();
+      this.api.getZones4Boundaries(bounds).subscribe(
+        (zones) => {
+          this.map.removeZones();
+          zoneBtn.classList.remove('active');
+          this.zoneVisible = 3;
+          this.map.loadZones(zones);
+        }
+      );
+    }
+  }
+  activateZone(){
+    this.zoneVisible = 1;
+    this.getZones();
   }
 }

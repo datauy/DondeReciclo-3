@@ -4,6 +4,9 @@
     ion-item {
       overflow: visible;
     }
+    .no-height {
+      height: 0;
+    }
     .cupertino-pane {
       h5 {
         margin: 0;
@@ -56,6 +59,9 @@
               width: 33px;
             }
           }
+          ion-row {
+            width: 100%;
+          }
         }
         &.label-item {
           margin-bottom: 12px;
@@ -106,6 +112,16 @@
         width: 29px;
         height: 29px;
       }
+      .subprogram-list {
+        .header {
+          padding-bottom: 22px;
+        }
+        .scrollable {
+          ion-item {
+            cursor: pointer;
+          }
+        }
+      }
     }
     .back-button {
       --background: var(--vidrio);
@@ -122,13 +138,18 @@
         height: 24px
       }
     }
-    .map-locate {
+    .locations {
+      position: absolute;
+      top: 45px;
+      left: 0;
+      z-index: 401;
+      padding: 0 12px;
+    }
+    .map-buttons {
       border-radius: 8px;
       --box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2);
       background: var(--vidrio);
       position: absolute;
-      top: 270px;
-      left: 12px;
       z-index: 500;
       width: 39px;
       height: 39px;
@@ -137,6 +158,19 @@
       font-size: 16px;
       color: var(--greyish-brown);
       margin: 0;
+      left: 12px;
+    }
+    .map-locate {
+      top: 270px;
+    }
+    .map-zones {
+      top: 335px;
+      &.active {
+        width: 220px;
+      }
+      span {
+        margin-left: 10px;
+      }
     }
     .scheds {
       padding: 0 14px;
@@ -152,5 +186,6 @@
         font-weight: 900;
       }
     }
+
   }
 }

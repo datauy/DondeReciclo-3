@@ -4,8 +4,19 @@
   <ion-button class="back-button" *ngIf="session.cupertinoState == 'cupertinoOpen'" (click)="hidePane()">
     <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
   </ion-button>
-  <ion-button color="transparent" class="map-locate" (click)="geolocate()">
+  <ion-row class="no-height ion-justify-content-center">
+    <ion-col size-md="10" size-xl="8" size-xs="12" padding="0" >
+      <ion-button *ngIf="session.country == 'Colombia' && session.cupertinoState != 'cupertinoOpen'" class="submit locations" (click)="subprograms4location()">
+        ¿Quien recoge en esta zona?
+      </ion-button>
+    </ion-col>
+  </ion-row>
+  <ion-button color="transparent" class="map-buttons map-locate" (click)="geolocate()">
     <ion-icon name="dr-locate"></ion-icon>
+  </ion-button>
+  <ion-button color="transparent" class="map-buttons map-zones" (click)="getZones()">
+    <ion-icon name="dr-zones"></ion-icon>
+    <span *ngIf="zoneVisible == 1">Zonas de recolección</span>
   </ion-button>
 
   <div id="map"
@@ -14,101 +25,172 @@
   </div>
 
   <div #infoPane class="cupertino-pane">
-    <div class="cupertino-outofbox-image">
-      <img src="{{container.type_icon}}">
-    </div>
-    <ion-item class="header" lines="full">
-      <ion-avatar slot="start">
-        <img src="{{container.program_icon}}">
-      </ion-avatar>
-      <div class="title-wrapper">
-        <span size="small">Programa</span>
-        <h5>{{container.program}}</h5>
-      </div>
-    </ion-item>
-    <div class="scrollable" overflow-y>
-      <ion-item lines="none">
-        <div>
-          <h5>{{container.site}}</h5>
-          <p>{{container.address}}</p>
-          <p>{{container.location}}</p>
-          <p>{{container.state}}</p>
+    <div class="subprogram-list" *ngIf="list == 1">
+      <ion-item class="header" lines="full">
+        <div class="title-wrapper">
+          <span size="small">Ubicado en mapa</span>
+          <h5>Organizaciones que recolectan aquí</h5>
         </div>
-        <ion-avatar class="main" slot="end" *ngIf="container.photos?.length">
-          <img src="{{container.photos[0]}}">
-        </ion-avatar>
-        <ion-icon slot="end"
-          name="add-circle-sharp"
-          class="badge pale-olive-green">
-        </ion-icon>
       </ion-item>
-      <div class="scheds" *ngIf="container.schedules?.length">
-          <h5 (click)="toggleSched()">
-            Horario:
-            <ion-icon
-            name="add-circle-sharp"
-            class="pale-olive-green">
-          </ion-icon>
-          </h5>
-          <div class="sched" *ngFor="let h of container.schedules">
-            <p
-            *ngIf="showSched || h.class == 'today'"
-            [class]="h.class"
-            [innerHtml]="h.text">
-            </p>
+      <div class="scrollable" overflow-y>
+        <ion-item *ngFor="let subp of subprograms; let i = index" class="header" lines="none" (click)="subprogramShow(i)">
+          <ion-avatar slot="start">
+            <img src="{{subp.icon}}">
+          </ion-avatar>
+          <div class="title-wrapper">
+            <span size="small">{{subp.city}}, {{subp.address}}</span>
+            <h5>{{subp.name}}</h5>
           </div>
+        </ion-item>
       </div>
-
-      <ion-item lines="none">
-        <label class="add-photo" for="file-input">
-          <ion-icon slot="start"
-            name="{{fileType.class}}"
-            class="pale-olive-green">
-          </ion-icon>
-          <h5 class="pale-olive-green {{fileType.class}}" [innerHTML]="fileType.name"></h5>
-        </label>
-        <input #photo
-        id="file-input"
-        type="file"
-        (change)="newImage($event, container.id)"
-        (click)="checkLogin($event)"
-        accept="image/png, image/jpeg"
-        />
-      </ion-item>
-      <ion-item class="label-item" lines="none">
-        <div class="circle green"
-        slot="start"></div>
-        <h5>Recibe:</h5>
-      </ion-item>
-      <ion-item lines="none">
-        <div class="tags-wrapper">
-          <ion-button *ngFor="let mat of container.receives;"
-            [ngClass]="mat.class"
-            [color]="mat.class">
-            <ion-icon class="ion-float-left"
-            name="dr-{{mat.class}}"></ion-icon>
-            <ion-label [innerHTML]="mat.name"></ion-label>
-          </ion-button>
+    </div>
+    <div class="subprogram" *ngIf="list == 2">
+      <ion-item class="header" lines="full">
+        <ion-avatar slot="start">
+          <img src="{{subprogram.icon}}">
+        </ion-avatar>
+        <div class="title-wrapper">
+          <span size="small">{{subprogram.city}}, {{subprogram.address}}</span>
+          <h5>{{subprogram.name}}</h5>
         </div>
       </ion-item>
       <ion-item lines="none">
         <div>
-          <h5>Condiciones de recepción:</h5>
-          <p>{{container.reception_conditions}}</p>
+          <h5>Dirección:</h5>
+          <p>{{subprogram.address}}</p>
         </div>
       </ion-item>
-      <ion-item class="label-item" lines="none">
-        <div class="circle red"
-        slot="start"></div>
-        <h5>No Recibe:</h5>
+      <ion-item lines="none">
+        <div>
+          <h5>Cobertura:</h5>
+          <p>{{subprogram.locations.join(', ')}}</p>
+        </div>
       </ion-item>
-      <ion-item class="last-item" lines="none">
-        <div class="tags-wrapper receives-no" [innerHTML]="container.receives_no"></div>
+      <ion-item lines="none">
+        <div>
+          <h5>Horarios:</h5>
+          <p>{{subprogram.receives}}</p>
+        </div>
+      </ion-item>
+      <ion-item lines="none">
+        <div>
+          <h5>Teléfono:</h5>
+          <p>{{subprogram.phone}}</p>
+        </div>
+      </ion-item>
+      <ion-item lines="none">
+        <div>
+          <h5>Correo:</h5>
+          <p>{{subprogram.email}}</p>
+        </div>
       </ion-item>
       <ion-item class="panel-footer" lines="none">
-        <ion-col size="6">¿Algún inconveniente?</ion-col>
-        <ion-col size="6" class="ion-text-center"><a [routerLink]="[ '/usuario/reportar', container.id ]">Reportar aquí <ion-icon name="dr-reportar"></ion-icon></a></ion-col>
+        <ion-row class="ion-justify-content-center">
+          <ion-col size-md="10" size-xl="8" size-xs="12" padding="0" >
+            <ion-button class="submit" [routerLink]="'/usuario/recolectar/'+subprogram.id">
+              Solicitar recolección
+            </ion-button>
+          </ion-col>
+        </ion-row>
       </ion-item>
+    </div>
+    <div *ngIf="list == 0">
+      <div class="cupertino-outofbox-image">
+        <img src="{{container.type_icon}}">
+      </div>
+      <ion-item class="header" lines="full">
+        <ion-avatar slot="start">
+          <img src="{{container.program_icon}}">
+        </ion-avatar>
+        <div class="title-wrapper">
+          <span size="small">Programa</span>
+          <h5>{{container.program}}</h5>
+        </div>
+      </ion-item>
+      <div class="scrollable" overflow-y>
+        <ion-item lines="none">
+          <div>
+            <h5>{{container.site}}</h5>
+            <p>{{container.address}}</p>
+            <p>{{container.location}}</p>
+            <p>{{container.state}}</p>
+          </div>
+          <ion-avatar class="main" slot="end" *ngIf="container.photos?.length">
+            <img src="{{container.photos[0]}}">
+          </ion-avatar>
+          <ion-icon slot="end"
+            name="add-circle-sharp"
+            class="badge pale-olive-green">
+          </ion-icon>
+        </ion-item>
+        <div class="scheds" *ngIf="container.schedules?.length">
+            <h5 (click)="toggleSched()">
+              Horario:
+              <ion-icon
+              name="add-circle-sharp"
+              class="pale-olive-green">
+            </ion-icon>
+            </h5>
+            <div class="sched" *ngFor="let h of container.schedules">
+              <p
+              *ngIf="showSched || h.class == 'today'"
+              [class]="h.class"
+              [innerHtml]="h.text">
+              </p>
+            </div>
+        </div>
+
+        <ion-item lines="none">
+          <label class="add-photo" for="file-input">
+            <ion-icon slot="start"
+              name="{{fileType.class}}"
+              class="pale-olive-green">
+            </ion-icon>
+            <h5 class="pale-olive-green {{fileType.class}}" [innerHTML]="fileType.name"></h5>
+          </label>
+          <input #photo
+          id="file-input"
+          type="file"
+          (change)="newImage($event, container.id)"
+          (click)="checkLogin($event)"
+          accept="image/png, image/jpeg"
+          />
+        </ion-item>
+        <ion-item class="label-item" lines="none">
+          <div class="circle green"
+          slot="start"></div>
+          <h5>Recibe:</h5>
+        </ion-item>
+        <ion-item lines="none">
+          <div class="tags-wrapper">
+            <ion-button *ngFor="let mat of container.receives;"
+              [ngClass]="mat.class"
+              [color]="mat.class">
+              <ion-icon class="ion-float-left"
+              name="dr-{{mat.class}}"></ion-icon>
+              <ion-label [innerHTML]="mat.name"></ion-label>
+            </ion-button>
+          </div>
+        </ion-item>
+        <ion-item lines="none">
+          <div>
+            <h5>Condiciones de recepción:</h5>
+            <p>{{container.reception_conditions}}</p>
+          </div>
+        </ion-item>
+        <ion-item class="label-item" lines="none">
+          <div class="circle red"
+          slot="start"></div>
+          <h5>No Recibe:</h5>
+        </ion-item>
+        <ion-item class="last-item" lines="none">
+          <div class="tags-wrapper receives-no" [innerHTML]="container.receives_no"></div>
+        </ion-item>
+        <ion-item class="panel-footer" lines="none">
+          <ion-col size="6">¿Algún inconveniente?</ion-col>
+          <ion-col size="6" class="ion-text-center"><a [routerLink]="[ '/usuario/reportar', container.id ]">Reportar aquí <ion-icon name="dr-reportar"></ion-icon></a></ion-col>
+        </ion-item>
+      </div>
     </div>
   </div>
 </ion-content>

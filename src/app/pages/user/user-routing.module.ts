@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { RegisterForm } from './register.form';
 import { LoginForm } from './login.form';
 import { ReportForm } from './report.form';
+import { CollectForm } from './collect.form';
 import { ForgotForm } from './forgot.form';
 import { PasswordForm } from './password.form';
 import { UserPage } from './user.page';
@@ -32,6 +33,11 @@ const routes: Routes = [
       {
         path: 'reportar/:containerID',
         component: ReportForm,
+        canActivate: [AuthGuardService]
+      },
+      {
+        path: 'recolectar/:SubprogramID',
+        component: CollectForm,
         canActivate: [AuthGuardService]
       },
       {

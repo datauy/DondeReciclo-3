@@ -7,6 +7,7 @@ import { File } from '@ionic-native/file/ngx';
 
 import { ContainerType, Container, Material, SearchParams, Program } from "src/app/models/basic_models.model";
 import { News } from "src/app/models/news.model";
+import { Subprogram } from "src/app/models/subprogram.model";
 import { SessionService } from 'src/app/services/session.service';
 
 @Injectable({
@@ -117,8 +118,8 @@ export class ApiService<T=any> {
    /*        News         */
   /**********************/
   //
-  getNewsList(page: number) {
-    return  this.request.get(environment.backend + "news?page="+page).pipe(map(
+  getNewsList(page: number, country: string) {
+    return  this.request.get(environment.backend + "news?country="+ country +"&page="+ page).pipe(map(
       (result: News[]) => {
         return result;
       }
@@ -168,6 +169,7 @@ export class ApiService<T=any> {
       }
     ));
   }
+
   getContainers(bbox: string[]) {
     return  this.request.get(environment.backend + "containers_bbox?sw="+bbox[0]+"&ne="+bbox[1]).pipe(map(
       (result: Container[]) => {
@@ -195,6 +197,27 @@ export class ApiService<T=any> {
     return  this.request.get(url).pipe(map(
       (result: Container[]) => {
         return result;
+      }
+    ));
+  }
+  getSubprograms4Location(latlng: number[]) {
+    return  this.request.get(environment.backend + "subprograms4location?wkt=POINT("+latlng[1]+' '+latlng[0]+')').pipe(map(
+      (result: Subprogram[]) => {
+        return result;
+      }
+    ));
+  }
+  getCountryByLocation(latlng: number[]) {
+    return  this.request.get( environment.backend + "country4Point?wkt=POINT("+latlng[1]+' '+latlng[0]+')' ).pipe(map(
+      (country: string) => {
+        return country;
+      }
+    ));
+  }
+  getZones4Boundaries(bounds: string) {
+    return  this.request.get( environment.backend + "location4Polygon?wkt="+bounds ).pipe(map(
+      (zones: L.GeoJSON) => {
+        return zones;
       }
     ));
   }

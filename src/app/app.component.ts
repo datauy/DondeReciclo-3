@@ -46,19 +46,4 @@ export class AppComponent {
       this.session.isLoading = false;
     }, 3000);
   }
-
-  closeNotification() {
-    this.notification.notificationClose();
-  }
-  //
-  followLink(url: string) {
-    this.notification.notificationClose();
-    console.log(url.substring(0,3));
-    if ( url.substring(0,4) == 'http' ) {
-      window.open(url, "_blank");
-    }
-    else {
-      this.router.navigate([url]);
-    }
-  }
 }

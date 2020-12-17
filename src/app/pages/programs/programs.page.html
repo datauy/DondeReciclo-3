@@ -1,5 +1,8 @@
 <app-header display="full"></app-header>
-<ion-content>
+
+<!-- Uruguay -->
+
+<ion-content *ngIf="session.country == 'Uruguay'">
   <div class="section-header">
     <h1>Programas</h1>
     <h2 class="sub-light">Información sobre los distintos programas disponibles de recepción de residuos reciclables.</h2>
@@ -61,4 +64,67 @@
       </div>
     </ion-slide>
   </ion-slides>
+</ion-content>
+
+<!-- Colombia -->
+
+<ion-content *ngIf="session.country == 'Colombia'">
+  <div class="section-header">
+    <h1>Programas</h1>
+    <h2 class="sub-light">El Ministerio de Ambiente y Desarrollo Sostenible viene adelantando una estrategia dirigida a promover la gestión ambientalmente adecuada de los residuos posconsumo con el fin que sean sometidos a sistemas de gestión diferencial y evitar que la disposición final se realice de manera conjunta con los residuos de origen doméstico.</h2>
+
+    <p>Dicha estrategia involucra, como elemento fundamental, el concepto de responsabilidad extendida del productor, en el cual los fabricantes e importadores de productos son responsables de establecer canales de devolución de residuos posconsumo, a través de los cuales los consumidores puedan devolver dichos productos cuando estos se convierten en residuos.</p>
+
+    <p>En desarrollo de lo anterior, el Ministerio de Ambiente, Vivienda y Desarrollo Territorial, hoy Ministerio de Ambiente y Desarrollo Sostenible, ha expedido regulación para los sectores de plaguicidas, medicamentos, baterías plomo ácido, pilas y/o acumuladores, llantas, bombillas y computadores y/o periféricos.</p>
+
+    <p>A continuación se mencionan algunos de los programas posconsumo, para más información se puede ingresar a la <a href="https://www.minambiente.gov.co/index.php/component/content/article/28-plantilla-asuntos-ambientales-y-sectorial-y-urbana">pagina del Ministerio</a>.</p>
+
+    <h3>Programas posconsumo de residuos</h3>
+
+    <p>La información que se encuentra a continuación sobre los programas posconsumo de residuos tiene como fuente la página del Ministerio de Medio Ambiente y Desarrollo Sostenible de Colombia.</p>
+
+    <h4>Pilas usadas</h4>
+
+    <p>En este Sistema se incluyen las pilas de uso doméstico, tanto recargables como no recargables, de las tecnologías más comunes.</p>
+
+    <p>La mayor parte de los programas utilizan contenedores ubicados en tiendas, almacenes de grandes superficies, donde se recolectan las pilas cilíndricas domésticas; otros están en tiendas especializadas y consultorios médicos, puesto que muchas de las aplicaciones electrónicas que sirven a las prótesis o implantes usan pilas botón.</p>
+
+    <p>Las pilas de los computadores portátiles y otros aparatos tienen mecanismos de recolección ubicados en los centros de servicio de los aparatos, donde se conocen las medidas de seguridad adecuadas para entregarlos y manejarlos.</p>
+
+    <h4>Medicamentos vencidos</h4>
+
+    <p>Los medicamentos vencidos incluidos en estos planes son de uso humano y de uso veterinario, incluyen también los homeopáticos y fitoterapéuticos.</p>
+
+    <p>Los planes posconsumo de medicamentos vencidos incluyen mecanismos que deben cumplir con requisitos técnicos y de seguridad para asegurar que los residuos son manejados de forma segura y adecuada. Generalmente se pueden disponer en contenedores seguros instalados en droguerías, IPS o instituciones,</p>
+
+    <h4>Computadores e impresoras en desuso</h4>
+
+    <p>En este Sistema de Recolección se incluyen los computadores e impresoras más comúnmente usados en los hogares, establecimientos comerciales e instituciones.</p>
+
+    <p>Existen varios mecanismos para la recolección selectiva de los computadores, además de puntos fijos para la recolección se dispone de campañas periódicas y envío a través de empresas de mensajería y correspondencia.</p>
+
+    <p>El reúso de computadores es una de las metas de este programa, por lo que se debe asegurar el buen estado de los residuos para favorecer su reacondicionamiento.</p>
+
+    <ul>
+      <li>Disponen de publicidad visible y documentación que haga alusión a los sistemas y sus responsables.</li>
+      <li>Permiten el envío por mensajería de los residuos, embalados por el consumidor, para recibirlos en sus instalaciones.</li>
+    </ul>
+
+    <h4>Baterías usadas plomo ácido</h4>
+
+    <p>Los Planes de Gestión de Devolución de Productos Posconsumo de Baterías Usadas Plomo Ácido están reglamentados por la Resolución 372 de 2009, y tienen como objeto establecer los elementos que deben incluir los fabricantes o importadores de baterías plomo ácido, para lograr el retorno a la cadena de este tipo de elementos una vez se convierten en residuos o son desechados por los consumidores, con el fin de proteger la salud humana y el ambiente.</p>
+
+    <p>Incluyen las baterías que se implementan en el parque vehicular del país. El principio básico del posconsumo de baterías usadas plomo ácido – BUPA, es que los consumidores finales tengan a su disposición y fácil acceso puntos para entregar este tipo de residuos, con el fin de que sean gestionados con empresas que cumplan con la normativa ambiental vigente en materia. Principalmente se implementan puntos o centros de acopio en talleres, “servitecas”, almacenes de repuestos, grandes superficies y sitios formales, donde se venden baterías para el parque vehicular.</p>
+
+    <p>En estos sitios los técnicos, operarios y personal, con todas las medidas de protección personal, podrán recibirle y acopiar las baterías usadas, para posteriormente enviarlas a una empresa licenciada para el manejo adecuado.</p>
+
+    <h4>Llantas usadas</h4>
+
+    <p>Este sistema incluye las llantas de vehículos (carros, camiones, buses, camionetas, entre otros) con un rin menor o igual a 22.5. No se incluyen las llantas de motocicletas, bicicletas, vehículos fuera de carretera o de rin superior a 22.5.</p>
+
+    <p>Las llantas usadas no son consideradas en Colombia como un residuo peligroso, sin embargo, requieren ser devueltas a los productores para favorecer el reciclaje, aprovechamiento como agregado asfáltico o el reencauche, así como evitar que sean quemadas en espacios a cielo abierto y como combustible en actividades informales.</p>
+
+    <p>El uso de las llantas usadas como combustible está regulado por la Resolución 1488 de 2003.</p>
+
+  </div>
 </ion-content>

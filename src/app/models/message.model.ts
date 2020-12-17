@@ -6,4 +6,5 @@ export interface Message {
   note: string;
   link?: string;
   link_title?: string;
+  link_params?: object;
 }

@@ -9,11 +9,13 @@ export const environment = {
   backend: "https://dr3b.dev.data.org.uy/api/",
   Uruguay: {
     center: {lat: -34.905897, lng: -56.191406},
-    code: 'UY'
+    code: 'UY',
+    id: 1
   },
   Colombia: {
-    center: {lat: 4.666338, lng: -74.060665},
-    code: 'COL'
+    center: {lat: 4.804945, lng: -75.716337},
+    code: 'COL',
+    id: 2
   },
   geocoder: 'https://nominatim.openstreetmap.org/',
 };
