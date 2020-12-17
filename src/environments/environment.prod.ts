@@ -9,7 +9,7 @@ export const environment = {
     id: 1
   },
   Colombia: {
-    center: {lat: 4.804945, lng: -75.716337},
+    center: {lat: 4.814546, lng: -75.693720},
     code: 'COL',
     id: 2
   },

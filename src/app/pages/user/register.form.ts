@@ -25,7 +25,7 @@ export class RegisterForm implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private session: SessionService,
+    public session: SessionService,
     private auth: AuthService,
     public navCtrl: NavController,
     private notify: NotificationsService
