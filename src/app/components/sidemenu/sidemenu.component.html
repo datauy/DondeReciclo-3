@@ -135,7 +135,7 @@
             </ion-icon>
           </ion-button>
         </ion-buttons>
-        <ion-buttons>
+        <ion-buttons *ngIf="session.country == 'Uruguay'">
           <span>Seguinos en:</span>
           <ion-button href="https://twitter.com/CempreUy" target=_blank fill="clear">
             <ion-icon slot="icon-only"
@@ -150,6 +150,25 @@
               name="dr-facebook"></ion-icon>
           </ion-button>
           <ion-button href="https://www.linkedin.com/company/cempreuruguay" target=_blank fill="clear">
+            <ion-icon slot="icon-only"
+              name="dr-linked-in"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <ion-buttons *ngIf="session.country == 'Colombia'">
+          <span>Seguinos en:</span>
+          <ion-button href="https://twitter.com/CEMPRE_COLOMBIA" target=_blank fill="clear">
+            <ion-icon slot="icon-only"
+              name="dr-twitter"></ion-icon>
+          </ion-button>
+          <ion-button href="https://www.instagram.com/cempre_colombia/" target=_blank fill="clear">
+            <ion-icon slot="icon-only"
+              name="dr-instagram"></ion-icon>
+          </ion-button>
+          <ion-button href="https://www.facebook.com/CEMPREColombia" target=_blank fill="clear">
+            <ion-icon slot="icon-only"
+              name="dr-facebook"></ion-icon>
+          </ion-button>
+          <ion-button href="https://www.linkedin.com/company/cempre-colombia/" target=_blank fill="clear">
             <ion-icon slot="icon-only"
               name="dr-linked-in"></ion-icon>
           </ion-button>
