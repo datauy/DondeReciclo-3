@@ -16,5 +16,18 @@
     ion-button {
       color: var(--pale-olive-green);
     }
+    &.left {
+      padding-right: 0;
+    }
+  }
+  ion-fab-button {
+    --background: none;
+    --border-radius: 11px;
+    width: 40px;
+    height: 40px;
+    margin-top: 9px;
+    &.main {
+      margin-top: 13px;
+    }
   }
 }

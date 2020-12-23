@@ -1,6 +1,6 @@
 <ion-header id="header-main" [class]="display">
   <ion-toolbar>
-    <ion-buttons slot="start">
+    <ion-buttons class="left" slot="start">
       <ion-button class="back-button" *ngIf="session.showBackButton || backButton" (click)="goBack()">
         <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
       </ion-button>
@@ -12,6 +12,15 @@
         alt="Logo ¿Dónde Reciclo?">
       </ion-img>
     </ion-buttons>
+    <ion-fab vertical="center">
+      <ion-fab-button class="main">
+        <ion-icon name="dr-{{environment[this.session.country].code.toLowerCase()}}"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="end">
+        <ion-fab-button><ion-icon (click)="changeCountry('Uruguay')" name="dr-uy"></ion-icon></ion-fab-button>
+        <ion-fab-button><ion-icon (click)="changeCountry('Colombia')" name="dr-col"></ion-icon></ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
     <ion-title>{{ title }}</ion-title>
     <ion-buttons *ngIf="['map', 'full'].includes(display)" slot="end">
       <ion-button color="pale-olive-green"

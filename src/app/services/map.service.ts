@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Container } from "src/app/models/basic_models.model";
-import { environment } from 'src/environments/environment';
-import "leaflet";
-import "leaflet-routing-machine";
+import { Router } from "@angular/router";
 
+import { environment } from 'src/environments/environment';
 import { SessionService } from 'src/app/services/session.service';
 
+import "leaflet";
+import "leaflet-routing-machine";
 declare let L;
 
 const iconUrl = 'assets/custom-icons/dr-pin.svg';
@@ -137,7 +138,8 @@ export class MapService {
   public center:L.LatLng;
   //
   constructor(
-    private session: SessionService
+    private session: SessionService,
+    private router: Router,
   ) {
     this.session.getCountry().then( (country) => {
       this.center = environment[country].center;
@@ -341,6 +343,18 @@ export class MapService {
     }
   }
 
+  //Country selection
+  selectCountry(country: string) {
+    this.session.setCountry(country);
+    delete this.userPosition;
+    this.center = environment[country].center;
+    if ( this.router.routerState.snapshot.url != '/intro/mapa' ) {
+      this.router.navigate(['/']);
+    }
+    else {
+      this.resizeMap(17);
+    }
+  }
   //Create additional Control placeholders, to group all control buttons
   /*addControlPlaceholders(map: L.Map) {
    const corners = map._controlCorners;

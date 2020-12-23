@@ -84,16 +84,7 @@ export class SidemenuComponent implements OnInit {
   }
   //Country selection
   selectCountry(country: string) {
-    this.session.setCountry(country);
-    delete this.map.userPosition;
-    this.map.center = environment[country].center;
-    if ( this.router.routerState.snapshot.url != '/intro/mapa' ) {
-      this.router.navigate(['/']);
-    }
-    else {
-      this.map.resizeMap(17);
-    }
-    //Move to new center
+    this.map.selectCountry(country);
     this.toggleMenu();
   }
 }

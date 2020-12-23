@@ -2,6 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MenuController, ModalController} from '@ionic/angular';
 import { Location } from "@angular/common";
 import { SocialShareComponent } from '../social-share/social-share.component';
+
+import { MapService } from "src/app/services/map.service";
+
+import { environment } from 'src/environments/environment';
 import { SessionService } from 'src/app/services/session.service';
 
 @Component({
@@ -15,13 +19,16 @@ export class HeaderComponent implements OnInit {
   @Input('backButton') backButton: boolean;
   @Input('backLink') backLink: any;
 
+  environment
   constructor(
     public menuCtrl: MenuController,
     public modalController: ModalController,
     public session: SessionService,
-    private location: Location
+    private location: Location,
+    private map: MapService
   ) {
     this.session = session;
+    this.environment = environment;
   }
 
   ngOnInit() {
@@ -49,5 +56,9 @@ export class HeaderComponent implements OnInit {
       cssClass: 'share-modal'
     });
     return await modal.present();
+  }
+  //
+  changeCountry(country: string){
+    this.map.selectCountry(country);
   }
 }
