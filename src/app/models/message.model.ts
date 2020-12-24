@@ -7,4 +7,5 @@ export interface Message {
   link?: string;
   link_title?: string;
   link_params?: object;
+  link_fragment?: object;
 }
