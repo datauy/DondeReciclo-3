@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Event, Router, NavigationEnd } from '@angular/router';
+import { Event, Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 
 import {NativeGeocoder,NativeGeocoderOptions} from "@ionic-native/native-geocoder/ngx";
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -43,10 +43,13 @@ export class MapaPage implements OnInit {
   list = 0;
   //Estados: 0:Cerrado-Inactivo, 1:Abierto, 2:Cerrado-Activado, 3:Cerrado-Mostrando? O debiera ser abierto??
   zoneVisible = 0;
+  //Load data over recommended zoom
+  eagerLoad = false;
 
   constructor(
     private geocoder: NativeGeocoder,
     private router: Router,
+    private route: ActivatedRoute,
     public api: ApiService,
     public utils: UtilsService,
     public map: MapService,
@@ -68,10 +71,27 @@ export class MapaPage implements OnInit {
     this.map.mapChanged.subscribe(
       change => {
         if (change) {
-          this.loadNearbyContainers(false);
-          if ( this.zoneVisible == 3 ) {
-            this.zoneVisible = 2;
-            this.getZones();
+          if ( this.map.zoom >= 14 || this.eagerLoad ) {
+            this.notification.closeNotificationId('zoom');
+            this.loadNearbyContainers(false);
+            if ( this.zoneVisible == 3 ) {
+              this.zoneVisible = 2;
+              this.getZones();
+            }
+          }
+          else {
+            let noZoom = {
+              id: 'zoom',
+              type: 'notification',
+              class: 'alert',
+              title: 'No estamos cargando datos, acércate al mapa',
+              note: 'Debido al nivel de zoom y para proteger el funcionamiento de la aplicación y el dispositivo hemos desactivado la carga automática de datos mientras navega.',
+              link: '/intro/mapa',
+              link_title: 'Cargar de todas formas',
+              link_params: {'eager-load': 1}
+              //link_fragment: "load-data"
+            };
+            this.notification.showNotification(noZoom);
           }
         }
       }
@@ -79,14 +99,21 @@ export class MapaPage implements OnInit {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd ) {
         var url_arr = event.url.split('?');
-        if ( 1 in url_arr && url_arr[1].startsWith('zones') ) {
-          this.activateZone();
+        if ( 1 in url_arr ) {
+          if ( url_arr[1].startsWith('zones') ) {
+            this.activateZone();
+          }
+          if ( url_arr[1].startsWith('eager-load') ) {
+            this.eagerTrue();
+          }
         }
       }
     });
   }
   //
   ngOnInit() {
+    //claer parameters
+    this.router.navigate(['/intro/mapa']);
     // this.app = document.querySelector('app-search');
     this.api.loadProgramSummary().subscribe((programs) => {
       this.programs_sum = programs;
@@ -148,6 +175,10 @@ export class MapaPage implements OnInit {
   //       //   this.map.recenter(400);
   //   }
   // }
+  eagerTrue() {
+    this.eagerLoad = true;
+  }
+  //
   loadInfoPane() {
     var initPane: ('top' | 'middle' | 'bottom');
     initPane = 'middle';
@@ -248,7 +279,7 @@ export class MapaPage implements OnInit {
     }).catch((error) => {
       this.noLocation();
       this.uLocation = true;
-      this.api.getNearbyContainers(1, [this.map.center.lat, this.map.center.lng])
+      this.api.getNearbyContainers(2, [this.map.center.lat, this.map.center.lng])
       .subscribe((containers) => {
         this.map.loadMarkers(containers, true);
       });

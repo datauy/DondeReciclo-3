@@ -18,6 +18,7 @@
         <ion-button class="submit contrast"
           [routerLink]="notification.message.link"
           [queryParams]="notification.message.link_params ? notification.message.link_params : {}"
+          [fragment]="notification.message.link_fragment ? notification.message.link_fragment : {}"
           (click)="closeNotification()"
           [innerHTML]="notification.message.link_title"
           *ngIf="notification.message.link != null">
