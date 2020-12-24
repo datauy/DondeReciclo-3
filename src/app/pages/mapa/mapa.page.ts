@@ -112,6 +112,8 @@ export class MapaPage implements OnInit {
   }
   //
   ngOnInit() {
+    //claer parameters
+    this.router.navigate(['/intro/mapa']);
     // this.app = document.querySelector('app-search');
     this.api.loadProgramSummary().subscribe((programs) => {
       this.programs_sum = programs;
@@ -130,7 +132,6 @@ export class MapaPage implements OnInit {
     }
     else {
       this.uLocation = true;
-      console.log("VA por else en view: ", this.map.userPosition);
       this.api.getNearbyContainers(2, this.map.userPosition).subscribe(
         (containers) => {
           this.map.loadMarkers(containers, true);
