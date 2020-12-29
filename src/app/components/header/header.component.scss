@@ -20,6 +20,9 @@
       padding-right: 0;
     }
   }
+  ion-fab-list {
+    margin-inline: 40px;
+  }
   ion-fab-button {
     --background: none;
     --border-radius: 11px;
@@ -29,5 +32,9 @@
     &.main {
       margin-top: 6px;
     }
+  }
+  ion-img.logo {
+    max-width: 120px;
+    margin-left: 12px;
   }
 }

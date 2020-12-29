@@ -1,6 +1,5 @@
 <ion-header id="header-main" [class]="display">
   <ion-toolbar>
-    <ion-buttons class="left" slot="start">
       <ion-button class="back-button" *ngIf="session.showBackButton || backButton" (click)="goBack()">
         <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
       </ion-button>
@@ -11,7 +10,6 @@
         src="assets/img/donde_reciclo.png"
         alt="Logo ¿Dónde Reciclo?">
       </ion-img>
-    </ion-buttons>
     <ion-fab vertical="center">
       <ion-fab-button class="main">
         <ion-icon name="dr-{{environment[this.session.country].code.toLowerCase()}}"></ion-icon>
