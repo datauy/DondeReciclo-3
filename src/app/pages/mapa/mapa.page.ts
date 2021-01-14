@@ -68,6 +68,13 @@ export class MapaPage implements OnInit {
         }
       }
     );
+    this.map.zoneClicked.subscribe(
+      data => {
+        if ( data ) {
+          this.subprograms4location();
+        }
+      }
+    );
     this.map.mapChanged.subscribe(
       change => {
         if (change) {

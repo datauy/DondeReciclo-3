@@ -133,6 +133,7 @@ export class MapService {
   markers: L.LayerGroup;
   zones: L.Layer;
   private _pinClick = new BehaviorSubject<boolean>(false);
+  private _zoneClick = new BehaviorSubject<boolean>(false);
   private _mapChangeSub = new BehaviorSubject<boolean>(false);
   public zoom:number = 15;
   public center:L.LatLng;
@@ -289,9 +290,16 @@ export class MapService {
     this.currentContainer = this.containers[pos];
     this._pinClick.next(true);
   }
-  //Experimental Observable
+  //Observable
   get pinClicked() {
     return this._pinClick.asObservable();
+  }
+  clickZone() {
+    this._zoneClick.next(true);
+  }
+  //Observable
+  get zoneClicked() {
+    return this._zoneClick.asObservable();
   }
   zoomChange() {
     this.zoom = this.map.getZoom();
@@ -332,6 +340,7 @@ export class MapService {
           on('popupopen', function(e) {
             _this.userPosition = [ e.popup._latlng.lat, e.popup._latlng.lng];
             _this.loadMarkers([], false);
+            _this.clickZone();
           });
         }
       }
