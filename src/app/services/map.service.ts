@@ -143,7 +143,9 @@ export class MapService {
     private router: Router,
   ) {
     this.session.getCountry().then( (country) => {
-      this.center = environment[country].center;
+      if ( country != undefined ) {
+        this.center = environment[country].center;
+      }
     });
   }
 
@@ -356,7 +358,7 @@ export class MapService {
   selectCountry(country: string) {
     this.session.setCountry(country);
     delete this.userPosition;
-    this.center = environment[country].center;
+    this.center = L.latLng(environment[country].center);
     if ( this.router.routerState.snapshot.url != '/intro/mapa' ) {
       this.router.navigate(['/']);
     }

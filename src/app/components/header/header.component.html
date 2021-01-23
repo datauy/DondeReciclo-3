@@ -10,13 +10,17 @@
         src="assets/img/donde_reciclo.png"
         alt="Logo ¿Dónde Reciclo?">
       </ion-img>
-    <ion-fab vertical="center">
+    <ion-fab vertical="center" *ngIf="session.country != undefined">
       <ion-fab-button class="main">
         <ion-icon name="dr-{{environment[this.session.country].code.toLowerCase()}}"></ion-icon>
       </ion-fab-button>
       <ion-fab-list side="end">
-        <ion-fab-button><ion-icon (click)="changeCountry('Uruguay')" name="dr-uy"></ion-icon></ion-fab-button>
-        <ion-fab-button><ion-icon (click)="changeCountry('Colombia')" name="dr-col"></ion-icon></ion-fab-button>
+        <ion-fab-button (click)="changeCountry('Uruguay')">
+          <ion-icon name="dr-uy"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button (click)="changeCountry('Colombia')">
+          <ion-icon name="dr-col"></ion-icon>
+        </ion-fab-button>
       </ion-fab-list>
     </ion-fab>
     <ion-title>{{ title }}</ion-title>
@@ -37,3 +41,22 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+<div class="overlay" *ngIf="session.country == undefined">
+  <span>Seleccionar país:</span>
+  <ion-buttons>
+    <ion-button (click)="changeCountry('Uruguay')">
+      <ion-icon
+        class="country-selector"
+        slot="icon-only"
+        name="dr-uy">
+      </ion-icon>
+    </ion-button>
+    <ion-button (click)="changeCountry('Colombia')">
+      <ion-icon
+        class="country-selector"
+        slot="icon-only"
+        name="dr-col">
+      </ion-icon>
+    </ion-button>
+  </ion-buttons>
+</div>

@@ -129,11 +129,8 @@ export class MapaPage implements OnInit {
   }
   //
   ionViewDidEnter() {
+    //Carga mapa con centro en LA
     this.map.loadMap();
-    this.map.resizeMap(0);
-    if ( this.session.searchItem != undefined ) {
-      this.session.showSearchItem = true;
-    }
     if ( this.map.userPosition == undefined ) {
       this.gotoLocation();
     }
@@ -146,16 +143,23 @@ export class MapaPage implements OnInit {
       );
       //this.map.flytomarker(this.map.userPosition, 15);
     }
-    //Wait 3 seconds for user location and start loading LOad nearbymap
-    setTimeout( () => {
-      if ( !this.uLocation ) {
-        this.api.getNearbyContainers(0.5, [this.map.center.lat, this.map.center.lng]).subscribe(
-          (containers) => {
-            this.map.loadMarkers(containers, true);
-          }
-        );
+    if ( this.session.country != undefined ) {
+      //El resize hace un fly al centro del mapa
+      this.map.resizeMap(0);
+      if ( this.session.searchItem != undefined ) {
+        this.session.showSearchItem = true;
       }
-    }, 4000);
+      //Wait 3 seconds for user location and start loading LOad nearbymap
+      setTimeout( () => {
+        if ( !this.uLocation ) {
+          this.api.getNearbyContainers(0.5, [this.map.center.lat, this.map.center.lng]).subscribe(
+            (containers) => {
+              this.map.loadMarkers(containers, true);
+            }
+          );
+        }
+      }, 4000);
+    }
   }
   //
   ionViewWillLeave() {
@@ -286,10 +290,12 @@ export class MapaPage implements OnInit {
     }).catch((error) => {
       this.noLocation();
       this.uLocation = true;
-      this.api.getNearbyContainers(2, [this.map.center.lat, this.map.center.lng])
-      .subscribe((containers) => {
-        this.map.loadMarkers(containers, true);
-      });
+      if ( this.session.country != undefined ) {
+        this.api.getNearbyContainers(2, [this.map.center.lat, this.map.center.lng])
+        .subscribe((containers) => {
+          this.map.loadMarkers(containers, true);
+        });
+      }
     });
     setTimeout( () => {
       if ( !this.uLocation ){

@@ -13,13 +13,14 @@ import { SessionService } from 'src/app/services/session.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   @Input('title') title: any;
   @Input('display') display: any;
   @Input('backButton') backButton: boolean;
   @Input('backLink') backLink: any;
 
-  environment
+  environment = environment;
+
   constructor(
     public menuCtrl: MenuController,
     public modalController: ModalController,
@@ -27,14 +28,8 @@ export class HeaderComponent implements OnInit {
     private location: Location,
     private map: MapService
   ) {
-    this.session = session;
-    this.environment = environment;
   }
-
-  ngOnInit() {
-
-  }
-
+  //
   goBack(){
     /*if (this.backLink){
       this.navCtrl.navigateBack(this.backLink);
