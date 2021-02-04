@@ -1,8 +1,10 @@
 <ion-header id="header-main" [class]="display">
+  <ion-buttons class="back-button">
+    <ion-button *ngIf="session.showBackButton || backButton" (click)="goBack()">
+      <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
+    </ion-button>
+  </ion-buttons>
   <ion-toolbar>
-      <ion-button class="back-button" *ngIf="session.showBackButton || backButton" (click)="goBack()">
-        <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
-      </ion-button>
       <ion-img class="logo ion-hide-lg-up" *ngIf="['map', 'full'].includes(display)"
         routerLink="/"
         routerDirection="root"

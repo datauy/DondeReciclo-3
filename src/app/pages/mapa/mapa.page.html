@@ -68,10 +68,8 @@
       </ion-item>
       <ion-item lines="none">
         <div>
-          <h5>Calendario:</h5>
-          <p *ngFor="let sched of subprogram.schedules">
-            {{sched}}
-          </p>
+          <h5>Calendarios:</h5>
+          <span *ngFor="let sched of subprogram.schedules" [innerHtml]="sched"></span>
         </div>
       </ion-item>
       <ion-item lines="none">
