@@ -32,14 +32,20 @@
           <h5>Organizaciones que recolectan aquí</h5>
         </div>
       </ion-item>
-      <div class="scrollable" overflow-y>
+      <div class="scrollable" contain="none" overflow-y="scroll">
         <ion-item *ngFor="let subp of subprograms; let i = index" class="header" lines="none" (click)="subprogramShow(i)">
           <ion-avatar slot="start">
             <img src="{{subp.icon}}">
           </ion-avatar>
           <div class="title-wrapper">
-            <span size="small">{{subp.city}}, {{subp.address}}</span>
+            <span size="small">{{subp.city}}, {{subp.zone.name}}</span>
             <h5>{{subp.name}}</h5>
+            <span class="distance">{{subp.zone.distance}} metros </span>
+            <div [ngSwitch]="subp.zone.pick_up_type">
+              <span *ngSwitchCase="pick_up">Retiro</span>
+              <span *ngSwitchCase="take_out">Depositar</span>
+              <span *ngSwitchDefault>Recolección</span>
+            </div>
           </div>
         </ion-item>
       </div>
@@ -68,8 +74,26 @@
       </ion-item>
       <ion-item lines="none">
         <div>
-          <h5>Calendarios:</h5>
-          <span *ngFor="let sched of subprogram.schedules" [innerHtml]="sched"></span>
+          <h5>Recibe:</h5>
+          <span *ngFor="let sched of subprogram.receives" [innerHtml]="sched"></span>
+        </div>
+      </ion-item>
+      <ion-item lines="none" *ngIf="subprogram.zone.schedules.length > 0">
+        <div class="scheds">
+          <h5 (click)="toggleSched()">
+            Horario:
+            <ion-icon
+            name="add-circle-sharp"
+            class="pale-olive-green">
+          </ion-icon>
+          </h5>
+          <div class="sched" *ngFor="let h of subprogram.zone.schedules">
+            <p
+            *ngIf="showSched || h.class == 'today'"
+            [class]="h.class"
+            [innerHtml]="h.text">
+            </p>
+          </div>
         </div>
       </ion-item>
       <ion-item lines="none">

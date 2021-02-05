@@ -262,7 +262,14 @@ export class MapaPage implements OnInit {
   }
   //
   hidePane() {
-    this.infoPane.destroy({animate: true});
+    //Si está en sub-programa vuelvo al listado
+    if ( this.list == 2 ) {
+      this.list = 1;
+    }
+    else {
+      this.map.removeZones();
+      this.infoPane.destroy({animate: true});
+    }
   }
   //
   loadNearbyContainers(fly: boolean) {
@@ -445,13 +452,14 @@ export class MapaPage implements OnInit {
         };
         this.notification.showNotification(noRes);
       }
-      console.log(subprograms);
     });
   }
   //
   subprogramShow(index) {
     this.subprogram = this.subprograms[index];
     this.list = 2;
+    this.map.removeZones();
+    this.map.loadZones(this.subprograms[index].zone.location, true);
   }
   //
   getZones() {

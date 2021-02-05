@@ -783,6 +783,9 @@ ion-img.logo {
 /***************************/
 /*        MAP PAGE        */
 /*************************/
+.cupertinoOpen #map {
+  height: 40vh !important;
+}
 #map{
   .dr-marker{
     fill: var(--ion-color-base);
