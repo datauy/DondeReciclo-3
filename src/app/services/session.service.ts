@@ -21,7 +21,7 @@ export class SessionService {
   currentPage: string;
   cupertinoState: string = "cupertinoClosed";
   //Country
-  country: string = "Uruguay";
+  country: string;
   //Search items
   searchItem: SearchMessage;
   showSearchItem: boolean = true;

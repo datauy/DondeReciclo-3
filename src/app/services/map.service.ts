@@ -133,6 +133,7 @@ export class MapService {
   markers: L.LayerGroup;
   zones: L.Layer;
   private _pinClick = new BehaviorSubject<boolean>(false);
+  private _zoneClick = new BehaviorSubject<boolean>(false);
   private _mapChangeSub = new BehaviorSubject<boolean>(false);
   public zoom:number = 15;
   public center:L.LatLng;
@@ -142,7 +143,9 @@ export class MapService {
     private router: Router,
   ) {
     this.session.getCountry().then( (country) => {
-      this.center = environment[country].center;
+      if ( country != undefined ) {
+        this.center = environment[country].center;
+      }
     });
   }
 
@@ -289,9 +292,16 @@ export class MapService {
     this.currentContainer = this.containers[pos];
     this._pinClick.next(true);
   }
-  //Experimental Observable
+  //Observable
   get pinClicked() {
     return this._pinClick.asObservable();
+  }
+  clickZone() {
+    this._zoneClick.next(true);
+  }
+  //Observable
+  get zoneClicked() {
+    return this._zoneClick.asObservable();
   }
   zoomChange() {
     this.zoom = this.map.getZoom();
@@ -322,21 +332,33 @@ export class MapService {
     + Object.values(bounds.getNorthWest()).reverse().join(' ') +"))";
   }
   //
-  loadZones(layers: L.GeoJSON) {
+  loadZones(layers: L.GeoJSON, zoom2zone = false) {
     const _this = this;
+    var bounds = [];
     this.zones = L.geoJSON(
       layers, {
         onEachFeature: function (feature, layer) {
           layer.
-          bindPopup('<div>'+feature.properties.subprograms.join('<br>')+'</div><small>'+feature.properties.name+'</small>').
           on('popupopen', function(e) {
-            _this.userPosition = [ e.popup._latlng.lat, e.popup._latlng.lng];
-            _this.loadMarkers([], false);
+            //_this.userPosition = [ e.popup._latlng.lat, e.popup._latlng.lng];
+            //_this.loadMarkers([], false);
+            _this.clickZone();
           });
+          if ( feature.properties.subprograms != undefined && feature.properties.name != undefined ) {
+            layer.bindPopup('<div>'+feature.properties.subprograms.join('<br>')+'</div><small>'+feature.properties.name+'</small>');
+          }
+          if (zoom2zone) {
+            bounds.push(layer.getBounds());
+          }
         }
       }
     ).addTo(this.map);
+    if (zoom2zone) {
+      bounds.push(this.userPosition);
+      this.flyToBounds(bounds);
+    }
   }
+  //
   removeZones() {
     if ( this.zones != undefined ) {
       this.map.removeLayer(this.zones);
@@ -347,7 +369,7 @@ export class MapService {
   selectCountry(country: string) {
     this.session.setCountry(country);
     delete this.userPosition;
-    this.center = environment[country].center;
+    this.center = L.latLng(environment[country].center);
     if ( this.router.routerState.snapshot.url != '/intro/mapa' ) {
       this.router.navigate(['/']);
     }

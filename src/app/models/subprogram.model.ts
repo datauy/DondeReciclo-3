@@ -11,5 +11,12 @@ export interface Subprogram {
   reception_conditions: string,
   icon: string,
   locations: string[],
-  receives: string
+  receives: string,
+  zone: {
+    distance: number,
+    is_route:  boolean,
+    location: any,
+    name: string,
+    pick_up_type: string
+  }
 }

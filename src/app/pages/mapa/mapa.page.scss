@@ -8,7 +8,6 @@
       height: 0;
     }
     .cupertino-pane {
-      max-height: 68%;
       h5 {
         margin: 0;
       }
@@ -118,10 +117,16 @@
           padding-bottom: 22px;
         }
         .scrollable {
+          max-height: 48vh;
+          position: relative;
+          overflow-y: auto;
           ion-item {
             cursor: pointer;
           }
         }
+      }
+      .subprogram {
+        max-height: 65vh;
       }
     }
     .back-button {
@@ -133,7 +138,7 @@
       height: 50px;
       left: 14px;
       top: 14px;
-      z-index: 500;
+      z-index: 401;
       ion-icon {
         color: var(--pale-olive-green);
         height: 24px
@@ -151,7 +156,7 @@
       --box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2);
       background: var(--vidrio);
       position: absolute;
-      z-index: 500;
+      z-index: 401;
       width: 39px;
       height: 39px;
       --padding-start: 0;
