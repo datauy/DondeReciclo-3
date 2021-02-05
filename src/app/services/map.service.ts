@@ -332,22 +332,33 @@ export class MapService {
     + Object.values(bounds.getNorthWest()).reverse().join(' ') +"))";
   }
   //
-  loadZones(layers: L.GeoJSON) {
+  loadZones(layers: L.GeoJSON, zoom2zone = false) {
     const _this = this;
+    var bounds = [];
     this.zones = L.geoJSON(
       layers, {
         onEachFeature: function (feature, layer) {
           layer.
-          bindPopup('<div>'+feature.properties.subprograms.join('<br>')+'</div><small>'+feature.properties.name+'</small>').
           on('popupopen', function(e) {
-            _this.userPosition = [ e.popup._latlng.lat, e.popup._latlng.lng];
-            _this.loadMarkers([], false);
+            //_this.userPosition = [ e.popup._latlng.lat, e.popup._latlng.lng];
+            //_this.loadMarkers([], false);
             _this.clickZone();
           });
+          if ( feature.properties.subprograms != undefined && feature.properties.name != undefined ) {
+            layer.bindPopup('<div>'+feature.properties.subprograms.join('<br>')+'</div><small>'+feature.properties.name+'</small>');
+          }
+          if (zoom2zone) {
+            bounds.push(layer.getBounds());
+          }
         }
       }
     ).addTo(this.map);
+    if (zoom2zone) {
+      bounds.push(this.userPosition);
+      this.flyToBounds(bounds);
+    }
   }
+  //
   removeZones() {
     if ( this.zones != undefined ) {
       this.map.removeLayer(this.zones);
