@@ -70,7 +70,7 @@ export class MapaPage implements OnInit {
     );
     this.map.zoneClicked.subscribe(
       data => {
-        if ( data ) {
+        if ( data && this.zoneVisible == 3) {
           this.subprograms4location();
         }
       }
@@ -241,6 +241,7 @@ export class MapaPage implements OnInit {
   }
   //
   cupertinoHide(){
+    this.list = 0;
     this.session.showSearchItem = true;
     this.session.cupertinoState = 'cupertinoClosed';
     this.map.flyToBounds(this.map.currentBounds);
@@ -264,6 +265,8 @@ export class MapaPage implements OnInit {
   hidePane() {
     //Si está en sub-programa vuelvo al listado
     if ( this.list == 2 ) {
+      this.map.map.removeLayer(this.map.subZone);
+      this.map.showZones(true);
       this.list = 1;
     }
     else {
@@ -418,6 +421,7 @@ export class MapaPage implements OnInit {
       e.preventDefault();
     }
   }
+  //
   subprograms4location() {
     var point: [number, number];
     if ( this.map.userPosition != undefined ) {
@@ -429,10 +433,18 @@ export class MapaPage implements OnInit {
       this.map.loadMarkers([], false);
     }
     this.api.getSubprograms4Location(point).subscribe((subprograms) => {
+      this.map.removeZones();
       if ( subprograms.length > 0 ) {
         this.list = 1;
         this.subprograms = subprograms;
         this.infoPane.present({animate: true});
+        var zones = subprograms[0].zone.location;
+        subprograms.forEach( (subp, i) => {
+          if ( i != 0 ) {
+            zones.features.push(subp.zone.location.features[0]);
+          }
+        });
+        this.map.loadZones(zones);
       }
       else if ( subprograms.length == 1) {
         this.list = 2;
@@ -455,11 +467,11 @@ export class MapaPage implements OnInit {
     });
   }
   //
-  subprogramShow(index) {
+  subprogramShow(index: number) {
     this.subprogram = this.subprograms[index];
     this.list = 2;
     this.map.removeZones();
-    this.map.loadZones(this.subprograms[index].zone.location, true);
+    this.map.showSubZone(this.subprograms[index].zone.location.features[0]);
   }
   //
   getZones() {

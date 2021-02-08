@@ -131,7 +131,8 @@ export class MapService {
   currentBounds: [number, number][];
   animating: boolean;
   markers: L.LayerGroup;
-  zones: L.Layer;
+  zones: L.FeatureGroup;
+  subZone: L.FeatureGroup;
   private _pinClick = new BehaviorSubject<boolean>(false);
   private _zoneClick = new BehaviorSubject<boolean>(false);
   private _mapChangeSub = new BehaviorSubject<boolean>(false);
@@ -335,7 +336,8 @@ export class MapService {
   loadZones(layers: L.GeoJSON, zoom2zone = false) {
     const _this = this;
     var bounds = [];
-    this.zones = L.geoJSON(
+    var zonesData = L.featureGroup();
+    L.geoJSON(
       layers, {
         onEachFeature: function (feature, layer) {
           layer.
@@ -350,9 +352,13 @@ export class MapService {
           if (zoom2zone) {
             bounds.push(layer.getBounds());
           }
+          layer.addTo(zonesData);
         }
       }
-    ).addTo(this.map);
+    );
+    zonesData.addTo(this.map);
+    this.zones = zonesData;
+    console.log(this.zones);
     if (zoom2zone) {
       bounds.push(this.userPosition);
       this.flyToBounds(bounds);
@@ -364,7 +370,26 @@ export class MapService {
       this.map.removeLayer(this.zones);
     }
   }
-
+  //
+  showZones( zoom2zone: boolean, index?: number) {
+    if ( this.zones != undefined ) {
+        this.map.addLayer(this.zones);
+      if (zoom2zone) {
+        var zoneBounds = [];
+        var sw = this.zones.getBounds().getSouthWest();
+        var ne = this.zones.getBounds().getSouthWest();
+        this.flyToBounds( [
+          [ne.lat, ne.lng],
+          [sw.lat, sw.lng],
+          this.userPosition,
+        ]);
+      }
+    }
+  }
+  showSubZone(layer: L.GeoJSON) {
+    this.subZone = L.geoJSON( layer );
+    this.subZone.addTo(this.map);
+  }
   //Country selection
   selectCountry(country: string) {
     this.session.setCountry(country);

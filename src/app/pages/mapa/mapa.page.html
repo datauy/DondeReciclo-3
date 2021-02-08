@@ -38,7 +38,7 @@
             <img src="{{subp.icon}}">
           </ion-avatar>
           <div class="title-wrapper">
-            <span size="small">{{subp.city}}, {{subp.zone.name}}</span>
+            <span size="small">{{subp.city}}, {{subp.zone.location.features[0].name}}</span>
             <h5>{{subp.name}}</h5>
             <span class="distance">{{subp.zone.distance}} metros </span>
             <div [ngSwitch]="subp.zone.pick_up_type">
