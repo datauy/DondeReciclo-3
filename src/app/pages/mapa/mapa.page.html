@@ -35,10 +35,10 @@
       <div class="scrollable" contain="none" overflow-y="scroll">
         <ion-item *ngFor="let subp of subprograms; let i = index" class="header" lines="none" (click)="subprogramShow(i)">
           <ion-avatar slot="start">
-            <img src="{{subp.icon}}">
+            <img src="{{subp.program_icon}}">
           </ion-avatar>
           <div class="title-wrapper">
-            <span size="small">{{subp.city}}, {{subp.zone.location.features[0].name}}</span>
+            <span size="small">{{subp.city}}, {{subp.zone.location.features[0].properties.name}}</span>
             <h5>{{subp.name}}</h5>
             <span class="distance">{{subp.zone.distance}} metros </span>
             <div [ngSwitch]="subp.zone.pick_up_type">
@@ -53,7 +53,7 @@
     <div class="subprogram" *ngIf="list == 2">
       <ion-item class="header" lines="full">
         <ion-avatar slot="start">
-          <img src="{{subprogram.icon}}">
+          <img src="{{subprogram.program_icon}}">
         </ion-avatar>
         <div class="title-wrapper">
           <span size="small">{{subprogram.city}}, {{subprogram.address}}</span>

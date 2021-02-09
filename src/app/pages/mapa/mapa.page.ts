@@ -434,21 +434,27 @@ export class MapaPage implements OnInit {
     }
     this.api.getSubprograms4Location(point).subscribe((subprograms) => {
       this.map.removeZones();
-      if ( subprograms.length > 0 ) {
+      console.log(subprograms);
+      if ( subprograms.length > 1 ) {
         this.list = 1;
-        this.subprograms = subprograms;
-        this.infoPane.present({animate: true});
         var zones = subprograms[0].zone.location;
         subprograms.forEach( (subp, i) => {
           if ( i != 0 ) {
             zones.features.push(subp.zone.location.features[0]);
+            subprograms[i].program_icon = this.programs_sum[subp.program_id].icon;
+            subprograms[i].program = this.programs_sum[subp.program_id].name;
           }
         });
+        this.subprograms = subprograms;
+        this.infoPane.present({animate: true});
         this.map.loadZones(zones);
       }
       else if ( subprograms.length == 1) {
         this.list = 2;
-        this.subprograms = subprograms;
+        var subp = subprograms[0];
+        subp.program_icon = this.programs_sum[subp.program_id].icon;
+        subp.program = this.programs_sum[subp.program_id].name;
+        this.subprograms = [subp];
         this.infoPane.present({animate: true});
       }
       else {

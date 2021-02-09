@@ -2,6 +2,9 @@ export interface Subprogram {
   id: number;
   name: string;
   full_name: string;
+  program_id: number;
+  program_icon: string;
+  program: string;
   email: string;
   phone: string,
   state: string,
