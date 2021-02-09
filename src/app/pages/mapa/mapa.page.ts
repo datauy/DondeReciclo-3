@@ -441,9 +441,9 @@ export class MapaPage implements OnInit {
         subprograms.forEach( (subp, i) => {
           if ( i != 0 ) {
             zones.features.push(subp.zone.location.features[0]);
-            subprograms[i].program_icon = this.programs_sum[subp.program_id].icon;
-            subprograms[i].program = this.programs_sum[subp.program_id].name;
           }
+          subprograms[i].program_icon = this.programs_sum[subp.program_id].icon;
+          subprograms[i].program = this.programs_sum[subp.program_id].name;
         });
         this.subprograms = subprograms;
         this.infoPane.present({animate: true});
