@@ -131,7 +131,8 @@ export class MapService {
   currentBounds: [number, number][];
   animating: boolean;
   markers: L.LayerGroup;
-  zones: L.Layer;
+  zones: L.FeatureGroup;
+  subZone: L.FeatureGroup;
   private _pinClick = new BehaviorSubject<boolean>(false);
   private _zoneClick = new BehaviorSubject<boolean>(false);
   private _mapChangeSub = new BehaviorSubject<boolean>(false);
@@ -332,28 +333,63 @@ export class MapService {
     + Object.values(bounds.getNorthWest()).reverse().join(' ') +"))";
   }
   //
-  loadZones(layers: L.GeoJSON) {
+  loadZones(layers: L.GeoJSON, zoom2zone = false) {
     const _this = this;
-    this.zones = L.geoJSON(
+    var bounds = [];
+    var zonesData = L.featureGroup();
+    L.geoJSON(
       layers, {
         onEachFeature: function (feature, layer) {
           layer.
-          bindPopup('<div>'+feature.properties.subprograms.join('<br>')+'</div><small>'+feature.properties.name+'</small>').
           on('popupopen', function(e) {
-            _this.userPosition = [ e.popup._latlng.lat, e.popup._latlng.lng];
-            _this.loadMarkers([], false);
+            //_this.userPosition = [ e.popup._latlng.lat, e.popup._latlng.lng];
+            //_this.loadMarkers([], false);
             _this.clickZone();
           });
+          if ( feature.properties.subprograms != undefined && feature.properties.name != undefined ) {
+            layer.bindPopup('<div>'+feature.properties.subprograms.join('<br>')+'</div><small>'+feature.properties.name+'</small>');
+          }
+          if (zoom2zone) {
+            bounds.push(layer.getBounds());
+          }
+          layer.addTo(zonesData);
         }
       }
-    ).addTo(this.map);
+    );
+    zonesData.addTo(this.map);
+    this.zones = zonesData;
+    console.log(this.zones);
+    if (zoom2zone) {
+      bounds.push(this.userPosition);
+      this.flyToBounds(bounds);
+    }
   }
+  //
   removeZones() {
     if ( this.zones != undefined ) {
       this.map.removeLayer(this.zones);
     }
   }
-
+  //
+  showZones( zoom2zone: boolean, index?: number) {
+    if ( this.zones != undefined ) {
+        this.map.addLayer(this.zones);
+      if (zoom2zone) {
+        var zoneBounds = [];
+        var sw = this.zones.getBounds().getSouthWest();
+        var ne = this.zones.getBounds().getSouthWest();
+        this.flyToBounds( [
+          [ne.lat, ne.lng],
+          [sw.lat, sw.lng],
+          this.userPosition,
+        ]);
+      }
+    }
+  }
+  showSubZone(layer: L.GeoJSON) {
+    this.subZone = L.geoJSON( layer );
+    this.subZone.addTo(this.map);
+  }
   //Country selection
   selectCountry(country: string) {
     this.session.setCountry(country);

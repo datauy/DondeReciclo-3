@@ -117,6 +117,9 @@
           padding-bottom: 22px;
         }
         .scrollable {
+          max-height: 48vh;
+          position: relative;
+          overflow-y: auto;
           ion-item {
             cursor: pointer;
           }
