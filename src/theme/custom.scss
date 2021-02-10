@@ -617,6 +617,7 @@ ion-app {
     &.cupertinoOpen{
       #header-main ion-toolbar {
         height: 0;
+        --min-height: 0;
         @extend .dr-transition;
       }
       #search-app-content{
@@ -624,9 +625,10 @@ ion-app {
         @extend .dr-transition;
         // @extend .hide;
       }
+      .toolbar-wraper,
       ion-tab-bar {
         @extend .dr-transition;
-        display: none;
+        display: none !important;
       }
     }
     &.cupertinoClosed{
@@ -783,8 +785,14 @@ ion-img.logo {
 /***************************/
 /*        MAP PAGE        */
 /*************************/
-.cupertinoOpen #map {
-  height: 40vh !important;
+.cupertinoOpen {
+  #map {
+    height: 40vh !important;
+  }
+  .header-wrapper,
+  .map-zones {
+    display: none;
+  }
 }
 #map{
   .dr-marker{
