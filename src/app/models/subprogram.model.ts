@@ -20,6 +20,7 @@ export interface Subprogram {
     is_route:  boolean,
     location: any,
     name: string,
+    schedules: any[],
     pick_up_type: string
   }
 }

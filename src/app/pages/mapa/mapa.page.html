@@ -42,8 +42,8 @@
             <h5>{{subp.name}}</h5>
             <span class="distance">{{subp.zone.distance}} metros </span>
             <div [ngSwitch]="subp.zone.pick_up_type">
-              <span *ngSwitchCase="pick_up">Retiro</span>
-              <span *ngSwitchCase="take_out">Depositar</span>
+              <span *ngSwitchCase="'pick_up'">Retiro</span>
+              <span *ngSwitchCase="'take_out'">Depositar</span>
               <span *ngSwitchDefault>Recolección</span>
             </div>
           </div>
