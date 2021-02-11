@@ -1,18 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="38px" height="38px" viewBox="0 0 38 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>bandera-colombia</title>
-    <defs>
-        <rect id="path-1" x="0" y="0" width="38" height="38" rx="11"></rect>
-    </defs>
-    <g id="bandera-colombia" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="062-colombia">
-            <mask id="mask-2" fill="white">
-                <use xlink:href="#path-1"></use>
-            </mask>
-            <g id="Rectangle-Copy-2" fill-rule="nonzero"></g>
-            <rect id="Rectangle" fill="#FFDA44" fill-rule="nonzero" mask="url(#mask-2)" x="0" y="0.0374444444" width="37.9259259" height="37.9251111"></rect>
-            <rect id="Rectangle" fill="#D80027" fill-rule="nonzero" mask="url(#mask-2)" x="0" y="28.6773333" width="37.9259259" height="9.28522222"></rect>
-            <rect id="Rectangle" fill="#0052B4" fill-rule="nonzero" mask="url(#mask-2)" x="0" y="19" width="37.9259259" height="9.67733333"></rect>
-        </g>
-    </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38">
+  <g fill="none">
+    <rect width="37.926" height="37.925" y=".037" fill="#FFDA44" rx="11"/>
+    <path fill="#D80027" d="M0,28.6773333 L37.9259259,28.6773333 C37.9259259,33.80542 33.7687903,37.9625556 28.6407037,37.9625556 L9.28522222,37.9625556 C4.15713559,37.9625556 6.28009488e-16,33.80542 0,28.6773333 L0,28.6773333 L0,28.6773333 Z"/>
+    <rect width="37.926" height="9.677" y="19" fill="#0052B4"/>
+  </g>
 </svg>

@@ -8,6 +8,8 @@
     }
   }
   ion-buttons {
+    flex: 1 0 auto;
+    justify-content: flex-end;
     margin: 0;
     ion-img {
       height: 56px;
@@ -27,21 +29,24 @@
   ion-fab {
     position: relative;
     display: inline-flex;
-    align-items: flex-end;
+    align-items: center;
+    margin-top: 0;
     ion-fab-list {
       position: absolute;
-      align-items: flex-end;
+      align-items: center;
       height: 100%;
       margin-left: 50px;
+      padding-top: 1px;
     }
     ion-fab-button {
+      padding-top: 5px;
       --background: none;
       --border-radius: 11px;
       --box-shadow: none;
       width: 40px;
       height: 40px;
-      &.main {
-        margin-top: 6px;
+      ion-icon {
+        border-radius: 6px;
       }
     }
   }
