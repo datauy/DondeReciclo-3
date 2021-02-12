@@ -13,6 +13,9 @@
       </ion-grid>
     </div>
     <div class="overlay main-overlay" *ngIf="utils.showOverlay">
+      <ion-button class="back-button" color="pale-olive-green" (click)="overlayClose()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
       <app-image-slider></app-image-slider>
     </div>
   </ion-content>

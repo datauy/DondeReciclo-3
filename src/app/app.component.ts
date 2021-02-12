@@ -52,4 +52,7 @@ export class AppComponent {
       this.session.isLoading = false;
     }, 3000);
   }
+  overlayClose() {
+    this.utils.showOverlay = false;
+  }
 }
