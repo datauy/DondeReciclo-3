@@ -13,6 +13,7 @@ import { AboutPage } from './static-pages/about.page';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { AccordionComponent } from './accordion/accordion.component';
 import { NotificationComponent } from './notification/notification.component';
+import { ImageSliderComponent } from './image-slider/image-slider.component';
 //import { TestDirective } from './test.directive';
 
 @NgModule({
@@ -33,13 +34,15 @@ import { NotificationComponent } from './notification/notification.component';
     AboutPage,
     ContactFormComponent,
     AccordionComponent,
-    NotificationComponent
+    NotificationComponent,
+    ImageSliderComponent
   ],
   exports: [
     SidemenuComponent,
     HeaderComponent,
     SocialShareComponent,
     AccordionComponent,
+    ImageSliderComponent
     //TestDirective
     // SimpleServiceComponent
   ],

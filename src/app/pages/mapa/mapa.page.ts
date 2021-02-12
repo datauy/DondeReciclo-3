@@ -337,6 +337,7 @@ export class MapaPage implements OnInit {
     else {
       this.container.receives = this.api.getMaterials(container.materials);
     }
+    console.log(this.container);
     //Horario
     let days = [];
     if ( Object.keys(container.schedules).length ) {
@@ -508,8 +509,27 @@ export class MapaPage implements OnInit {
       );
     }
   }
+  //
   activateZone(){
     this.zoneVisible = 1;
     this.getZones();
+  }
+  //
+  openPhotos() {
+    if ( this.container.photos.length > 0 ) {
+      this.utils.photos = this.container.photos;
+      this.utils.showPhotos = true;
+      this.utils.showOverlay = true;
+    }
+    else {
+      let noRes = {
+        id: 'noPhoto',
+        type: 'notification',
+        class: 'warnings',
+        title: 'No hay fotos de este contenedor',
+        note: 'Ayudemos a otros usuarios en su búsqueda, sé el primero en subir una foto!',
+      };
+      this.notification.showNotification(noRes);
+    }
   }
 }

@@ -12,6 +12,9 @@
         </ion-row>
       </ion-grid>
     </div>
+    <div class="overlay main-overlay" *ngIf="utils.showOverlay">
+      <app-image-slider></app-image-slider>
+    </div>
   </ion-content>
   <app-sidemenu></app-sidemenu>
 </ion-app>
