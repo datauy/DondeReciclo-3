@@ -182,7 +182,7 @@
             accept="image/png, image/jpeg"
           />
         </ion-item>
-        <div class="items-wrapper" *ngIf="container.receives != undefined && container.receives != ''">
+        <div class="items-wrapper" *ngIf="container.receives != undefined && container.receives.length > 0">
           <ion-item class="label-item" lines="none">
             <div class="circle green"
             slot="start"></div>
