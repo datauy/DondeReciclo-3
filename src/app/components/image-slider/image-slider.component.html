@@ -1,0 +1,13 @@
+<div class="photoSliderWrapper" *ngIf="utils.showPhotos">
+  <ion-button class="swiper-prev" (click)="prevSlide()"></ion-button>
+  <ion-button class="swiper-next" (click)="nextSlide()"></ion-button>
+  <ion-slides #photoSlider pager="true" [options]="slideOpts">
+    <ion-slide *ngFor="let image_url of utils.photos">
+      <div class="slide-container">
+        <div class="image-wrapper">
+          <img [src]="image_url" class="slide-image" alt="slide.shortname"/>
+        </div>
+      </div>
+    </ion-slide>
+  </ion-slides>
+</div>

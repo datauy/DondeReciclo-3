@@ -12,6 +12,10 @@ import { AuthService } from 'src/app/services/auth.service';
 export class UtilsService {
 
   progress: number;
+  photos: string[];
+  showPhotos: boolean;
+  //
+  showOverlay: boolean = false;
 
   constructor(
     private request: HttpClient,

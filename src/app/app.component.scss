@@ -6,7 +6,23 @@ body.keyboard-is-open {
     margin-bottom: 0 !important;
   }
 }
-
+.overlay {
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  position: absolute;
+  background: rgba(0,0,0,0.6);
+  ion-button.back-button {
+    position: absolute;
+    color: var(--pale-olive-green);
+    box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2);
+    margin-bottom: 23px;
+    width: 48px;
+    height: 48px;
+    left: calc(50vw - 26px);
+    top: 30px;
+  }
+}
 // function to generate breakpoint classes based on ionic current breakpoints
 // (
 //   xs: 0,
