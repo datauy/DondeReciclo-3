@@ -23,7 +23,7 @@
     <ion-list-header>Materiales/residuos sugeridos:</ion-list-header>
     <div class="resultsWrap">
       <ion-button [color]="predefined.class"
-        *ngFor="let predefined of api.predefinedSearch;"
+        *ngFor="let predefined of environment[session.country].predefinedSearch;"
         [ngClass]="predefined.class"
         (click)="searchSuggestion(predefined)">
         <ion-label [innerHTML]="predefined.name"></ion-label>
@@ -39,13 +39,16 @@
     [ngClass]="searchVisibility ? 'show' : 'hide'">
     <ion-button [color]="attrs.data.class"
       expand="block"
-      [ngClass]="attrs.data.class">
+      [ngClass]="attrs.data.class"
+      *ngIf="attrs.data.class != 'none'"
+    >
       <ion-icon
         class="left"
         [name]="'dr-' + attrs.data.class">
       </ion-icon>
       <ion-label [innerHTML]="attrs.data.name"></ion-label>
     </ion-button>
+    <span *ngIf="attrs.data.class == 'none'">No hay resultados</span>
   </ng-template>
 
 </div>

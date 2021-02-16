@@ -8,6 +8,7 @@ import { MapService } from "src/app/services/map.service";
 import { SearchParams, Material } from "src/app/models/basic_models.model";
 import { SessionService } from 'src/app/services/session.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-search',
@@ -26,6 +27,8 @@ export class SearchComponent {
   suggestVisibility: boolean;
   searchString: string;
   searchAddress = false;
+  isInit = true;
+  environment = environment;
 
   constructor(
     public api: ApiService,
@@ -33,13 +36,15 @@ export class SearchComponent {
     public session: SessionService,
     public notification: NotificationsService
     ) {
-      this.session = session;
+    }
+
+  showSearch(event) {
+    if( this.isInit ) {
       if ( this.session.country == 'Colombia' ) {
         this.search4address(true);
       }
-  }
-
-  showSearch(event) {
+      this.isInit = false;
+    }
     this.searchVisibility = true;
     /*let clearButton = document.querySelector('.searchbar-clear-button') as HTMLElement;
     console.log(clearButton);
@@ -93,7 +98,7 @@ export class SearchComponent {
             this.notification.showNotification(noRes);
           }
           this.session.searchItem = item;
-          this.searchBarIonic.value = '';
+          this.searchBarIonic.value = null;
           this.hideSearch('item selected');
           setTimeout( () => {
             this.session.isLoading = false;
@@ -102,6 +107,10 @@ export class SearchComponent {
         }
       );
     }
+  }
+  //
+  getItemLabel(value) {
+    return '';
   }
   //
   closeSelection() {

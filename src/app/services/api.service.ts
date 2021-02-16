@@ -17,7 +17,7 @@ export class ApiService<T=any> {
   container_types: ContainerType[];
   containers: Container[];
   materials: Material[];
-  predefinedSearch: SearchParams[];
+  predefinedSearch: {[index:string] : SearchParams[]};
   remoteFile: any;
 
   // Search
@@ -85,10 +85,18 @@ export class ApiService<T=any> {
     );
   }
   //
-  loadPredefinedSearch(): Observable<SearchParams[]> {
-    return this.request.get(environment.backend + "search_predefined").pipe(
+  loadPredefinedSearch(): Observable<any> {
+    return this.request.get(environment.backend + "predefined_searches").pipe(
       map((result: SearchParams[]) => {
-        return this.predefinedSearch = this.formatSearchOptions(result);
+        let res: { [index:string] : SearchParams[] } = {};
+        result.forEach(
+          (country) => {
+            console.log(country);
+            let c = Object.keys(country)[0];
+            environment[c].predefinedSearch = country[c];
+          }
+        );
+        return this.predefinedSearch = res;
       })
     );
   }
@@ -230,10 +238,10 @@ export class ApiService<T=any> {
     return  this.request.get(environment.backend + "search?q="+str).pipe(map(
       (result: any[]) => {
         if (result.length) {
-          return this.formatSearchOptions(result);
+          return result;
         }
         else {
-          return false;
+          return [{name: 'No Results', class: 'none'}];
         }
       }
     ));
@@ -252,10 +260,10 @@ export class ApiService<T=any> {
       name: option.name,
       material_id: option.material_id,
       class: this.materials[option.material_id].class,
-      icon: this.materials[option.material_id].icon,
       deposition: option.deposition,
     });
   });
+  console.log(res);
   return res;
   }
   //Address search
