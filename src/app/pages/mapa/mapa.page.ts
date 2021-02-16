@@ -487,6 +487,7 @@ export class MapaPage implements OnInit {
         subp.program_icon = this.programs_sum[subp.program_id].icon;
         subp.program = this.programs_sum[subp.program_id].name;
         this.subprograms = [subp];
+        this.subprogramShow(0);
         this.infoPane.present({animate: true});
       }
       else {
