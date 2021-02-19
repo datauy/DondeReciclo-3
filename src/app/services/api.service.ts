@@ -18,6 +18,7 @@ export class ApiService<T=any> {
   containers: Container[];
   materials: Material[];
   predefinedSearch: {[index:string] : SearchParams[]};
+  programs: Program[]
   remoteFile: any;
 
   // Search
@@ -42,6 +43,7 @@ export class ApiService<T=any> {
     return this.loadContainerTypes().pipe(
       switchMap( () => this.loadMaterials() ),
       switchMap( () => this.loadPredefinedSearch() ),
+      switchMap( () => this.loadProgramSummary() ),
     );
   }
   //
@@ -91,7 +93,6 @@ export class ApiService<T=any> {
         let res: { [index:string] : SearchParams[] } = {};
         result.forEach(
           (country) => {
-            console.log(country);
             let c = Object.keys(country)[0];
             environment[c].predefinedSearch = country[c];
           }
@@ -118,7 +119,7 @@ export class ApiService<T=any> {
   loadProgramSummary() {
     return  this.request.get(environment.backend + "programs_sum").pipe(map(
       (result: Program[]) => {
-        return result;
+        return this.programs = result;
       }
     ));
   }
@@ -263,7 +264,6 @@ export class ApiService<T=any> {
       deposition: option.deposition,
     });
   });
-  console.log(res);
   return res;
   }
   //Address search

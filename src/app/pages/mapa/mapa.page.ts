@@ -115,10 +115,7 @@ export class MapaPage implements OnInit {
   ngOnInit() {
       // this.app = document.querySelector('app-search');
     this.currentUrl = this.router.url.split('?')[0];
-    this.api.loadProgramSummary().subscribe(
-    (programs) => {
-      this.programs_sum = programs;
-    });
+    this.programs_sum = this.api.programs;
     this.loadInfoPane();
   }
   //
@@ -126,7 +123,13 @@ export class MapaPage implements OnInit {
     //Carga mapa con centro en LA
     this.map.loadMap();
     if ( this.loadContainer > 0) {
-      this.showPane();
+      this.api.loadProgramSummary().subscribe(
+        (programs_sum) => {
+          this.programs_sum = programs_sum;
+          console.log("going to show pane", programs_sum);
+            this.showPane();
+        }
+      )
     }
     else {
       if ( this.map.userPosition == undefined ) {
@@ -173,6 +176,10 @@ export class MapaPage implements OnInit {
         }
         if ( url_arr[1].startsWith('eagerLoad') ) {
           this.eagerLoad = true;
+          //Set eager load for 10 secs
+          setTimeout( () => {
+            this.eagerLoad = false;
+          }, 10000);
         }
         this.router.navigate([this.currentUrl]);
       }
