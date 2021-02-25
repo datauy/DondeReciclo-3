@@ -368,7 +368,9 @@ accordion ion-list {
   z-index: 1050;
   box-sizing: content-box;
   text-align: center;
-
+  ion-grid {
+    padding: 0;
+  }
   img {
     margin: auto;
     float: left;

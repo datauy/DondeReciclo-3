@@ -48,14 +48,14 @@
 <div class="overlay" *ngIf="session.country == undefined">
   <span>Seleccionar país:</span>
   <ion-buttons>
-    <ion-button (click)="changeCountry('Uruguay')">
+    <ion-button (click)="selectCountry('Uruguay')">
       <ion-icon
         class="country-selector"
         slot="icon-only"
         name="dr-uy">
       </ion-icon>
     </ion-button>
-    <ion-button (click)="changeCountry('Colombia')">
+    <ion-button (click)="selectCountry('Colombia')">
       <ion-icon
         class="country-selector"
         slot="icon-only"

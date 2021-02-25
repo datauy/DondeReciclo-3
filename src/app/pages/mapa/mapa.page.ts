@@ -80,27 +80,29 @@ export class MapaPage implements OnInit {
     this.map.mapChanged.subscribe(
       change => {
         if (change) {
-          if ( this.map.zoom >= 14 || this.eagerLoad ) {
-            this.notification.closeNotificationId('zoom');
-            this.loadNearbyContainers(false);
-            if ( this.zoneVisible == 3 ) {
-              this.zoneVisible = 2;
-              this.getZones();
+          if ( this.map.map != undefined ) {
+            if ( this.map.map.getZoom() >= 14 || this.eagerLoad ) {
+              this.notification.closeNotificationId('zoom');
+              this.loadNearbyContainers(false);
+              if ( this.zoneVisible == 3 ) {
+                this.zoneVisible = 2;
+                this.getZones();
+              }
             }
-          }
-          else {
-            let noZoom = {
-              id: 'zoom',
-              type: 'notification',
-              class: 'alert',
-              title: 'No estamos cargando datos, acércate al mapa',
-              note: 'Debido al nivel de zoom y para proteger el funcionamiento de la aplicación y el dispositivo hemos desactivado la carga automática de datos mientras navega.',
-              link: this.currentUrl,
-              link_title: 'Cargar de todas formas',
-              link_params: {'eagerLoad': 1}
-              //link_fragment: "load-data"
-            };
-            this.notification.showNotification(noZoom);
+            else {
+              let noZoom = {
+                id: 'zoom',
+                type: 'notification',
+                class: 'alert',
+                title: 'No estamos cargando datos, acércate al mapa',
+                note: 'Debido al nivel de zoom y para proteger el funcionamiento de la aplicación y el dispositivo hemos desactivado la carga automática de datos mientras navega.',
+                link: this.currentUrl,
+                link_title: 'Cargar de todas formas',
+                link_params: {'eagerLoad': 1}
+                //link_fragment: "load-data"
+              };
+              this.notification.showNotification(noZoom);
+            }
           }
         }
       }
@@ -117,51 +119,63 @@ export class MapaPage implements OnInit {
     this.currentUrl = this.router.url.split('?')[0];
     this.programs_sum = this.api.programs;
     this.loadInfoPane();
+    this.api.loadProgramSummary().subscribe(
+      (programs_sum) => {
+        this.programs_sum = programs_sum;
+      }
+    );
   }
   //
   ionViewDidEnter() {
     //Carga mapa con centro en LA
     this.map.loadMap();
-    if ( this.loadContainer > 0) {
-      this.api.loadProgramSummary().subscribe(
-        (programs_sum) => {
-          this.programs_sum = programs_sum;
-          console.log("going to show pane", programs_sum);
-            this.showPane();
+    this.api.loadInitialData().subscribe(
+      () => {
+        if ( this.loadContainer > 0) {
+          this.api.loadProgramSummary().subscribe(
+            (programs_sum) => {
+              this.programs_sum = programs_sum;
+              this.showPane();
+            }
+          );
         }
-      )
-    }
-    else {
-      if ( this.map.userPosition == undefined ) {
-        this.gotoLocation();
-      }
-      else {
-        this.uLocation = true;
-        this.api.getNearbyContainers(2, this.map.userPosition).subscribe(
-          (containers) => {
-            this.map.loadMarkers(containers, true);
+        else {
+          if ( this.map.userPosition == undefined ) {
+            this.gotoLocation();
           }
-        );
-        //this.map.flytomarker(this.map.userPosition, 15);
-      }
-      if ( this.session.country != undefined ) {
-        //El resize hace un fly al centro del mapa
-        this.map.resizeMap(0);
-        if ( this.session.searchItem != undefined ) {
-          this.session.showSearchItem = true;
-        }
-        //Wait 3 seconds for user location and start loading LOad nearbymap
-        setTimeout( () => {
-          if ( !this.uLocation ) {
-            this.api.getNearbyContainers(0.5, [this.map.center.lat, this.map.center.lng]).subscribe(
+          else {
+            this.uLocation = true;
+            this.api.getNearbyContainers(2, this.map.userPosition).subscribe(
               (containers) => {
                 this.map.loadMarkers(containers, true);
               }
             );
+            //this.map.flytomarker(this.map.userPosition, 15);
           }
-        }, 4000);
+          //Fallback if location fails
+          /*if ( this.session.country != undefined ) {
+          console.log("VIEW STARTS HAY COUNTRY");
+          //El resize hace un fly al centro del mapa
+          this.map.resizeMap(0);
+          if ( this.session.searchItem != undefined ) {
+          this.session.showSearchItem = true;
+              }
+              //Wait 3 seconds for user location and start loading LOad nearbymap
+              setTimeout( () => {
+              console.log("VIEW STARTS TIMEOUT", this.map.center);
+              if ( !this.uLocation ) {
+              this.api.getNearbyContainers(0.5, [this.map.center.lat, this.map.center.lng]).subscribe(
+              (containers) => {
+              this.map.loadMarkers(containers, true);
+            }
+          );
+          }
+          }, 4000);
+          }*/
+        }
+
       }
-    }
+    );
   }
   //
   ionViewWillLeave() {
@@ -318,7 +332,7 @@ export class MapaPage implements OnInit {
   loadNearbyContainers(fly: boolean) {
     this.api.loadNearbyContainers(this.map.getBoundingCoords())
     .subscribe((containers) => {
-      this.map.loadMarkers(containers, fly);
+        this.map.loadMarkers(containers, fly);
     });
   }
   //
@@ -339,29 +353,29 @@ export class MapaPage implements OnInit {
       //this.map.flytomarker(this.map.userPosition, 15);
     }).catch((error) => {
       this.noLocation();
+    });
+    setTimeout( () => {
+      this.noLocation();
+    }, 3000);
+  }
+  noLocation() {
+    if ( !this.uLocation ){
       this.uLocation = true;
+      let noRes = {
+        id: 'noLoc',
+        type: 'notification',
+        class: 'warnings',
+        title: 'No pudimos localizarte',
+        note: 'Quizás no le diste permiso o la localización está desactivada. Prueba iniciar la app con la localización activada. Puedes seleccionar tu ubicación tocando el mapa.',
+      };
+      this.notification.showNotification(noRes);
       if ( this.session.country != undefined ) {
         this.api.getNearbyContainers(2, [this.map.center.lat, this.map.center.lng])
         .subscribe((containers) => {
           this.map.loadMarkers(containers, true);
         });
       }
-    });
-    setTimeout( () => {
-      if ( !this.uLocation ){
-        this.noLocation();
-      }
-    }, 5000);
-  }
-  noLocation() {
-    let noRes = {
-      id: 'noLoc',
-      type: 'notification',
-      class: 'warnings',
-      title: 'No pudimos localizarte',
-      note: 'Quizás no le diste permiso o la localización está desactivada. Prueba iniciar la app con la localización activada. Puedes seleccionar tu ubicación tocando el mapa.',
-    };
-    this.notification.showNotification(noRes);
+    }
   }
   //
   formatContainer(container: Container) {
@@ -375,7 +389,10 @@ export class MapaPage implements OnInit {
       });
     }
     else {
-      this.container.receives = this.api.getMaterials(container.materials);
+      this.container.receives = [];
+      container.materials.forEach((i) => {
+        this.container.receives.push(this.api.materials[this.session.country][i]);
+      });
     }
     //Horario
     let days = [];
@@ -420,7 +437,6 @@ export class MapaPage implements OnInit {
     };
     this.geocoder.reverseGeocode(lat, long, options).then(results => {
       this.address = Object.values(results[0]).reverse();
-      console.log(this.address);
     });
   }
   newImage(event: any, id: number) {

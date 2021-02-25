@@ -39,6 +39,7 @@ export class Container extends Base {
     reception_conditions: string;
     receives_no: string;
     schedules: any[];
+    main_material: number;
 }
 
 export class ContainerType extends Base {

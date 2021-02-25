@@ -358,7 +358,6 @@ export class MapService {
     );
     zonesData.addTo(this.map);
     this.zones = zonesData;
-    console.log(this.zones);
     if (zoom2zone) {
       bounds.push(this.userPosition);
       this.flyToBounds(bounds);

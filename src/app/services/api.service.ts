@@ -16,7 +16,7 @@ import { SessionService } from 'src/app/services/session.service';
 export class ApiService<T=any> {
   container_types: ContainerType[];
   containers: Container[];
-  materials: Material[];
+  materials: {[index:string] : Material[]} = {};
   predefinedSearch: {[index:string] : SearchParams[]};
   programs: Program[]
   remoteFile: any;
@@ -39,9 +39,9 @@ export class ApiService<T=any> {
  /***************************/
  //
   loadInitialData(): Observable<any> {
-    // console.log("API loading initial");
     return this.loadContainerTypes().pipe(
-      switchMap( () => this.loadMaterials() ),
+      // TODO: Cambiar a load countries
+      switchMap( () => this.getMaterials([]) ),
       switchMap( () => this.loadPredefinedSearch() ),
       switchMap( () => this.loadProgramSummary() ),
     );
@@ -55,15 +55,12 @@ export class ApiService<T=any> {
     ));
   }
   //
-  getMaterials(ids: number[]) :Material[] {
-    let res = [];
-    if (!this.materials) {
-      this.loadMaterials();
-    }
-    ids.forEach(id => res.push(this.materials[id]));
-    // console.log(res);
-    return res;
+  getMaterials(ids: number[]) :Observable<Material[]> {
+    return this.loadMaterials('Uruguay').pipe(
+      switchMap( () => this.loadMaterials('Colombia') )
+    );
   }
+  //
   getWastes(ids: number[]) :Observable<Material[]>  {
     return this.request.get(environment.backend + "wastes?ids=" + ids.join()).pipe(
       map( (result: Material[]) => {
@@ -72,19 +69,19 @@ export class ApiService<T=any> {
     );
   }
   //
-  loadMaterials(): Observable<Material[]> {
-    return this.request.get(environment.backend + "materials").pipe(
-      map((result: Material[]) => {
+  loadMaterials(country: string): Observable<Material[]> {
+    return this.request.get(environment.backend + "materials?locale=" + environment[country].locale).pipe(map(
+      (result: Material[]) => {
         //Check images
-        /*for (let key in result) {
+        //for (let key in result) {
           // TODO: Check type
-          if (result[key].icon) {
-            this.downloadFile(result[key].icon, 'dr-'+result[key].class+'.svg', 'custom-icons');
-          }
-        }*/
-        return this.materials = result;
-      })
-    );
+          //if (result[key].icon) {
+            //this.downloadFile(result[key].icon, 'dr-'+result[key].class+'.svg', 'custom-icons');
+          //}
+        //}
+        return this.materials[country] = result;
+      }
+    ));
   }
   //
   loadPredefinedSearch(): Observable<any> {
@@ -168,13 +165,13 @@ export class ApiService<T=any> {
     }
   }
 
-  getNearbyContainers (radius: number, location?: [number, number]) {
-    if (typeof location == 'undefined') {
+  getNearbyContainers (radius: number, location?: [number, number]): Observable<any> {
+    if (typeof location == undefined) {
       location = environment[this.session.country].center;
     }
     return  this.request.get(environment.backend + "containers_nearby?lat="+location[0]+"&lon="+location[1]+"&radius="+radius).pipe(map(
-      (result: Container[]) => {
-        return result;
+      (result: Container[]): Container[] => {
+        return this.formatMarker(result);
       }
     ));
   }
@@ -182,14 +179,14 @@ export class ApiService<T=any> {
   getContainers(bbox: string[]) {
     return  this.request.get(environment.backend + "containers_bbox?sw="+bbox[0]+"&ne="+bbox[1]).pipe(map(
       (result: Container[]) => {
-        return result;
+        return this.formatMarker(result);
       }
     ));
   }
   getContainers4Materials(bbox: string[], query: string) {
     return  this.request.get(environment.backend + "containers_bbox4materials?sw="+bbox[0]+"&ne="+bbox[1]+"&"+query).pipe(map(
       (result: Container[]) => {
-        return result;
+        return this.formatMarker(result);
       }
     ));
   }
@@ -205,7 +202,7 @@ export class ApiService<T=any> {
     url += "&lat="+location[0]+"&lon="+location[1];
     return  this.request.get(url).pipe(map(
       (result: Container[]) => {
-        return result;
+        return this.formatMarker(result);
       }
     ));
   }
@@ -229,6 +226,12 @@ export class ApiService<T=any> {
         return zones;
       }
     ));
+  }
+  formatMarker(containers: Container[]): Container[] {
+    for (let i = 0; i < containers.length; i++) {
+      containers[i].class = this.materials[this.session.country][containers[i].main_material].class;
+    }
+    return containers;
   }
   //
     /***********************/
@@ -260,7 +263,7 @@ export class ApiService<T=any> {
       type: option.type,
       name: option.name,
       material_id: option.material_id,
-      class: this.materials[option.material_id].class,
+      class: this.materials[this.session.country][option.material_id].class,
       deposition: option.deposition,
     });
   });
@@ -274,7 +277,7 @@ export class ApiService<T=any> {
           return this.formatAddressOptions(result);
         }
         else {
-          return false;
+          return [{name: 'No Results', class: 'none'}];
         }
       }
     ));

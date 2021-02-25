@@ -56,8 +56,6 @@ export class SidemenuComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.api.loadInitialData().subscribe( () =>  { // console.log(this.predefinedOptions)
-    });
     this.auth.isLoggedIn();
   }
 

@@ -21,7 +21,7 @@
   </div>
   <div id="suggestions" [ngClass]="(suggestVisibility && searchVisibility) ? 'show expand' : 'hide shrink'">
     <ion-list-header>Materiales/residuos sugeridos:</ion-list-header>
-    <div class="resultsWrap">
+    <div class="resultsWrap" *ngIf="session.country != undefined">
       <ion-button [color]="predefined.class"
         *ngFor="let predefined of environment[session.country].predefinedSearch;"
         [ngClass]="predefined.class"
