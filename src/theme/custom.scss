@@ -607,6 +607,10 @@ ion-app {
   #header-main ion-toolbar {
     // height: auto;
   }
+  &.container,
+  &.contenedor,
+  &.material,
+  &.residuo,
   &.mapa {
     .ion-page {
       #header-main ion-toolbar {

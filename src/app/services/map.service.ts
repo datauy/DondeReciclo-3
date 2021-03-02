@@ -136,9 +136,12 @@ export class MapService {
   private _pinClick = new BehaviorSubject<boolean>(false);
   private _zoneClick = new BehaviorSubject<boolean>(false);
   private _mapChangeSub = new BehaviorSubject<boolean>(false);
+  public _autoSearch = new BehaviorSubject<any>(null);
   public zoom:number = 15;
   public center:L.LatLng;
   //
+  initParams = true;
+
   constructor(
     private session: SessionService,
     private router: Router,
@@ -322,6 +325,10 @@ export class MapService {
   get mapChanged() {
     return this._mapChangeSub.asObservable();
   }
+  //Observable as function
+  get autoSearch() :any {
+    return this._autoSearch.asObservable();
+  }
   //
   getBoundsWKT() {
     let bounds = this.map.getBounds();
@@ -394,7 +401,7 @@ export class MapService {
     this.session.setCountry(country);
     delete this.userPosition;
     this.center = L.latLng(environment[country].center);
-    if ( this.router.routerState.snapshot.url != '/intro/mapa' ) {
+    if ( !this.router.routerState.snapshot.url.startsWith('/intro/mapa') ) {
       this.router.navigate(['/']);
     }
     else {

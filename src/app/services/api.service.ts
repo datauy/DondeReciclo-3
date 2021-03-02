@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { map, switchMap, mergeMap } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
+import { forkJoin} from 'rxjs';
 import { Observable } from 'rxjs';
 import { File } from '@ionic-native/file/ngx';
 
@@ -39,12 +40,13 @@ export class ApiService<T=any> {
  /***************************/
  //
   loadInitialData(): Observable<any> {
-    return this.loadContainerTypes().pipe(
-      // TODO: Cambiar a load countries
-      switchMap( () => this.getMaterials([]) ),
-      switchMap( () => this.loadPredefinedSearch() ),
-      switchMap( () => this.loadProgramSummary() ),
-    );
+    return forkJoin([
+      this.loadContainerTypes(),
+      this.loadMaterials('Uruguay'),
+      this.loadMaterials('Colombia'),
+      this.loadPredefinedSearch(),
+      this.loadProgramSummary()
+    ]);
   }
   //
   loadContainerTypes(): Observable<ContainerType[]> {
@@ -55,14 +57,8 @@ export class ApiService<T=any> {
     ));
   }
   //
-  getMaterials(ids: number[]) :Observable<Material[]> {
-    return this.loadMaterials('Uruguay').pipe(
-      switchMap( () => this.loadMaterials('Colombia') )
-    );
-  }
-  //
   getWastes(ids: number[]) :Observable<Material[]>  {
-    return this.request.get(environment.backend + "wastes?ids=" + ids.join()).pipe(
+    return this.request.get(environment.backend + "wastes?locale=" + environment[this.session.country].locale + "&ids=" + ids.join()).pipe(
       map( (result: Material[]) => {
         return result;
       })
@@ -239,7 +235,7 @@ export class ApiService<T=any> {
   /***********************/
   //
   getResults(str: string){
-    return  this.request.get(environment.backend + "search?q="+str).pipe(map(
+    return  this.request.get(environment.backend + "search?locale=" + environment[this.session.country].locale  + "&q="+str).pipe(map(
       (result: any[]) => {
         if (result.length) {
           return result;
