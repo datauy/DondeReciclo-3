@@ -30,6 +30,8 @@ export class SessionService {
   reloadMap: boolean = false;
   news: {News};
 
+  homeUrl = '/intro/mapa'
+  
   constructor(
     private router: Router,
     private storage: Storage
@@ -40,7 +42,7 @@ export class SessionService {
           this.currentPage = event.urlAfterRedirects.split( '/' )[2];
         }
         else {
-          this.currentPage = event.urlAfterRedirects.split( '/' ).pop().split('?')[0];  
+          this.currentPage = event.urlAfterRedirects.split( '/' ).pop().split('?')[0];
         }
       }
     });

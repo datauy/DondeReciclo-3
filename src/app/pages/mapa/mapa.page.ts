@@ -46,10 +46,11 @@ export class MapaPage implements OnInit {
   //Load data over recommended zoom
   eagerLoad = false;
   loadContainer = 0;
-  currentUrl = '/intro/mapa';
   initDataLoaded = false;
   autoSearch = false;
   autoSearchItem:any;
+  loadContainers: string;
+  loadSubContainers: string;
 
   constructor(
     private geocoder: NativeGeocoder,
@@ -69,7 +70,7 @@ export class MapaPage implements OnInit {
   //
   ngOnInit() {
       // this.app = document.querySelector('app-search');
-    this.currentUrl = this.router.url.split('?')[0];
+    this.session.homeUrl = this.router.url.split('?')[0];
     this.loadInfoPane();
     //Subscribe after initial data is loaded
     this.map.pinClicked.subscribe(
@@ -106,7 +107,7 @@ export class MapaPage implements OnInit {
                 class: 'alert',
                 title: 'No estamos cargando datos, acércate al mapa',
                 note: 'Debido al nivel de zoom y para proteger el funcionamiento de la aplicación y el dispositivo hemos desactivado la carga automática de datos mientras navega.',
-                link: this.currentUrl,
+                link: this.session.homeUrl,
                 link_title: 'Cargar de todas formas',
                 link_params: {'eagerLoad': 1}
                 //link_fragment: "load-data"
@@ -128,26 +129,44 @@ export class MapaPage implements OnInit {
         this.initDataLoaded = true;
         this.mapaRouter();
         // route for childs and params
-        if ( this.loadContainer > 0) {
-          this.showPane();
-        }
-        else {
-          if ( this.map.userPosition == undefined ) {
-            this.gotoLocation();
+        if ( this.loadSubContainers != undefined || this.loadContainers != undefined ) {
+          if ( this.loadSubContainers != undefined ) {
+            this.api.getSubContainers(this.loadSubContainers).subscribe(
+              (containers) => {
+                this.map.loadMarkers(containers, true);
+              }
+            );
           }
           else {
-            this.uLocation = true;
-            if ( this.autoSearch ) {
-              this.activateSearch(this.autoSearchItem);
+            this.api.getContainersIds(this.loadContainers).subscribe(
+              (containers) => {
+                this.map.loadMarkers(containers, true);
+              }
+            );
+          }
+        }
+        else {
+          if ( this.loadContainer > 0) {
+            this.showPane();
+          }
+          else {
+            if ( this.map.userPosition == undefined ) {
+              this.gotoLocation();
             }
             else {
-              this.api.getNearbyContainers(2, this.map.userPosition).subscribe(
-                (containers) => {
-                  this.map.loadMarkers(containers, true);
-                }
-              );
+              this.uLocation = true;
+              if ( this.autoSearch ) {
+                this.activateSearch(this.autoSearchItem);
+              }
+              else {
+                this.api.getNearbyContainers(2, this.map.userPosition).subscribe(
+                  (containers) => {
+                    this.map.loadMarkers(containers, true);
+                  }
+                );
+              }
+              //this.map.flytomarker(this.map.userPosition, 15);
             }
-            //this.map.flytomarker(this.map.userPosition, 15);
           }
         }
       }
@@ -193,7 +212,7 @@ export class MapaPage implements OnInit {
       if ( event != undefined ) {
         var url_arr = event.url.split('?');
         // Do not do anything if URL is unchanged
-        if ( url_arr[0] == this.currentUrl ) {
+        if ( url_arr[0] == this.session.homeUrl ) {
           return;
         }
         if ( 1 in url_arr ) {
@@ -207,7 +226,7 @@ export class MapaPage implements OnInit {
               this.eagerLoad = false;
             }, 10000);
           }
-          this.router.navigate([this.currentUrl]);
+          this.router.navigate([this.session.homeUrl]);
         }
       }
       let params = this.route.snapshot.queryParams;
@@ -229,6 +248,12 @@ export class MapaPage implements OnInit {
       if ( this.route.snapshot.params['wasteID'] != undefined && this.route.snapshot.params['wasteID'] > 0 ) {
         this.autoSearch = true;
         this.autoSearchItem = this.route.snapshot.params['wasteID'];
+      }
+      if ( this.route.snapshot.params['containersID'] != undefined && this.route.snapshot.params['containersID'].length > 0 ) {
+        this.loadContainers = this.route.snapshot.params['containersID'];
+      }
+      if ( this.route.snapshot.params['subsID'] != undefined && this.route.snapshot.params['subsID'].length > 0 ) {
+        this.loadSubContainers = this.route.snapshot.params['subsID'];
       }
     }
   }
@@ -555,7 +580,7 @@ export class MapaPage implements OnInit {
           class: 'alert',
           title: 'No hay datos para la zona',
           note: 'No tenemos datos de organizaciones que trabajen en la zona. ¿Conoces alguna?',
-          link: this.currentUrl,//'map.toggleZone',
+          link: this.session.homeUrl,//'map.toggleZone',
           link_title: 'Ver Zonas',
           link_params: {"zones": 1}
         };

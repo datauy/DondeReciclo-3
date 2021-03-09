@@ -51,6 +51,14 @@ const routes: Routes = [
             path: 'residuo/:wasteID',
             component: MapaPage
           },
+          {
+            path: 'subprograma/:subsID',
+            component: MapaPage
+          },
+          {
+            path: 'contenedores/:containersID',
+            component: MapaPage
+          },
         ]
       },
     ]

@@ -401,12 +401,22 @@ export class MapService {
     this.session.setCountry(country);
     delete this.userPosition;
     this.center = L.latLng(environment[country].center);
-    if ( !this.router.routerState.snapshot.url.startsWith('/intro/mapa') ) {
-      this.router.navigate(['/']);
+    this.reRoute();
+  }
+
+  reRoute(){
+    if ( !this.router.routerState.snapshot.url.startsWith('/intro/mapa') || this.map == undefined ) {
+      this.router.navigate([this.session.homeUrl]);
     }
     else {
       this.resizeMap(17);
     }
+  }
+  isMapPage() {
+    if ( this.router.routerState.snapshot.url.startsWith('/intro/mapa') ) {
+      return true;
+    }
+    return false;
   }
   //Create additional Control placeholders, to group all control buttons
   /*addControlPlaceholders(map: L.Map) {

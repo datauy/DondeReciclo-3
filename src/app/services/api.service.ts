@@ -202,6 +202,20 @@ export class ApiService<T=any> {
       }
     ));
   }
+  getSubContainers(subs: string) {
+    return  this.request.get(environment.backend + "subprogram_containers?sub_ids="+subs).pipe(map(
+      (result: Container[]) => {
+        return this.formatMarker(result);
+      }
+    ));
+  }
+  getContainersIds(cids: string) {
+    return  this.request.get(environment.backend + "containers?container_ids="+cids).pipe(map(
+      (result: Container[]) => {
+        return this.formatMarker(result);
+      }
+    ));
+  }
   getSubprograms4Location(latlng: number[]) {
     return  this.request.get(environment.backend + "subprograms4location?wkt=POINT("+latlng[1]+' '+latlng[0]+')').pipe(map(
       (result: Subprogram[]) => {
