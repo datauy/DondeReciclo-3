@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Event, Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 import {NativeGeocoder,NativeGeocoderOptions} from "@ionic-native/native-geocoder/ngx";
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -82,9 +83,20 @@ export class MapaPage implements OnInit {
       }
     );
     this.map.zoneClicked.subscribe(
-      data => {
-        if ( data && this.zoneVisible == 3) {
-          this.subprograms4location();
+      zid => {
+        if ( zid > 0 && this.zoneVisible == 3) {
+          this.api.getSubprogramByZone(zid).subscribe(
+            (subprograms) =>{
+              this.list = 1;
+              this.formatSubProgram(subprograms);
+              this.subprograms = subprograms;
+              if ( subprograms.length == 1) {
+                this.list = 4;
+                this.subprogram = subprograms[0];
+              }
+              this.infoPane.present({animate: true});
+            }
+          );
         }
       }
     );
@@ -92,7 +104,7 @@ export class MapaPage implements OnInit {
       change => {
         if (change) {
           if ( this.map.map != undefined ) {
-            if ( this.map.map.getZoom() >= 14 || this.eagerLoad ) {
+            if (( this.map.map.getZoom() >= 14 && !this.map.saturationWarn ) || this.eagerLoad ) {
               this.notification.closeNotificationId('zoom');
               this.loadNearbyContainers(false);
               if ( this.zoneVisible == 3 ) {
@@ -114,11 +126,12 @@ export class MapaPage implements OnInit {
               };
               this.notification.showNotification(noZoom);
             }
+            this.map.saturationWarn = false;
           }
         }
       }
     );
-    this.router.events.subscribe((event: Event) => {
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: Event) => {
       if (event instanceof NavigationEnd ) {
         this.mapaRouter(event);
       }
@@ -211,10 +224,23 @@ export class MapaPage implements OnInit {
     if ( this.initDataLoaded ) {
       if ( event != undefined ) {
         var url_arr = event.url.split('?');
-        // Do not do anything if URL is unchanged
-        if ( url_arr[0] == this.session.homeUrl ) {
-          return;
+        // HARD RESET
+        if ( this.session.lastUrl == "" ) {
+          this.session.lastUrl == this.session.homeUrl;
         }
+        if (
+        this.session.lastUrl.startsWith("/intro/mapa")
+        && this.session.lastUrl.split('?')[0] != url_arr[0]
+        && url_arr[0].startsWith("/intro/mapa")
+        ) {
+          let q = '';
+          if ( url_arr[1] != undefined ) {
+            q = '?' + url_arr[1];
+          }
+          //console.log("ROUTER RESET:", q );
+          window.location.replace( '/' + q );
+        }
+        // Do not do anything if URL is unchanged
         if ( 1 in url_arr ) {
           if ( url_arr[1].startsWith('zones') ) {
             this.activateZone();
@@ -223,15 +249,22 @@ export class MapaPage implements OnInit {
             this.eagerLoad = true;
             //Set eager load for 10 secs
             setTimeout( () => {
-              this.eagerLoad = false;
+            this.eagerLoad = false;
             }, 10000);
           }
           this.router.navigate([this.session.homeUrl]);
+        }
+        // Set last URL
+        this.session.lastUrl = url_arr[0];
+        //No need to continue
+        if ( url_arr[0] == this.session.homeUrl ) {
+          return;
         }
       }
       let params = this.route.snapshot.queryParams;
       if ( params.hasOwnProperty('zones') && params.zones == 1 ) {
         this.activateZone();
+        this.router.navigate([this.session.homeUrl]);
       }
       /*No allow eager in Load
         if ( params.hasOwnProperty('eagerLoad') && params.eagerLoad == 1 ) {
@@ -334,6 +367,10 @@ export class MapaPage implements OnInit {
   cupertinoHide(){
     this.list = 0;
     this.session.showSearchItem = true;
+    if ( this.map.route != null ) {
+      this.map.map.removeControl(this.map.route);
+      this.map.route = null;
+    }
     this.session.cupertinoState = 'cupertinoClosed';
     this.map.flyToBounds(this.map.currentBounds);
   }
@@ -371,9 +408,10 @@ export class MapaPage implements OnInit {
       this.map.map.removeLayer(this.map.subZone);
       this.map.showZones(true);
       this.list = 1;
+      this.zoneVisible = 2;
     }
     else {
-      this.map.removeZones();
+      //this.map.removeZones();
       this.infoPane.destroy({animate: true});
     }
   }
@@ -484,12 +522,26 @@ export class MapaPage implements OnInit {
     }
     container.schedules = days;
   }
+  //
+  formatSubProgram(subprograms) {
+    let zones = subprograms[0].zone.location;
+    subprograms.forEach( (subp, i) => {
+      if ( i != 0 ) {
+        zones.features.push(subp.zone.location.features[0]);
+      }
+      subprograms[i].program_icon = this.api.programs[subp.program_id].icon;
+      subprograms[i].program = this.api.programs[subp.program_id].name;
+    });
+    return zones;
+  }
   toggleSched() {
     this.showSched = !this.showSched;
   }
+  //
   geolocate() {
     this.gotoLocation();
   }
+  //
   getAddress(lat: number, long: number) {
     let options: NativeGeocoderOptions = {
       useLocale: true,
@@ -499,6 +551,7 @@ export class MapaPage implements OnInit {
       this.address = Object.values(results[0]).reverse();
     });
   }
+  //
   newImage(event: any, id: number) {
     if ( this.authGuard.isActive() ) {
       this.fileType = { name: 'Cargando...', class: 'camera'};
@@ -552,24 +605,17 @@ export class MapaPage implements OnInit {
       this.map.removeZones();
       if ( subprograms.length > 1 ) {
         this.list = 1;
-        var zones = subprograms[0].zone.location;
-        subprograms.forEach( (subp, i) => {
-          if ( i != 0 ) {
-            zones.features.push(subp.zone.location.features[0]);
-          }
-          subprograms[i].program_icon = this.api.programs[subp.program_id].icon;
-          subprograms[i].program = this.api.programs[subp.program_id].name;
-        });
+        var zones = this.formatSubProgram(subprograms);
         this.subprograms = subprograms;
         this.infoPane.present({animate: true});
         this.map.loadZones(zones);
       }
       else if ( subprograms.length == 1) {
         this.list = 2;
-        var subp = subprograms[0];
-        subp.program_icon = this.api.programs[subp.program_id].icon;
-        subp.program = this.api.programs[subp.program_id].name;
-        this.subprograms = [subp];
+        this.formatSubProgram(subprograms);
+        //subp.program_icon = this.api.programs[subp.program_id].icon;
+        //subp.program = this.api.programs[subp.program_id].name;
+        this.subprograms = subprograms;
         this.subprogramShow(0);
         this.infoPane.present({animate: true});
       }
@@ -598,6 +644,7 @@ export class MapaPage implements OnInit {
   //
   getZones() {
     let zoneBtn = document.querySelector(".map-zones");
+    zoneBtn.classList.remove('selected');
     if ( this.zoneVisible == 3 ) {
       this.map.removeZones();
       this.zoneVisible = 0;
@@ -618,8 +665,19 @@ export class MapaPage implements OnInit {
         (zones) => {
           this.map.removeZones();
           zoneBtn.classList.remove('active');
+          zoneBtn.classList.add('selected');
           this.zoneVisible = 3;
-          this.map.loadZones(zones);
+          if ( zones['features'].length == 0 ) {
+            this.api.getNextZone( [ this.map.map.getCenter().lat, this.map.map.getCenter().lng ] ).subscribe(
+              (zone) => {
+                this.map.loadZones(zone, true);
+                this.map.showSubZone(zone[0]);
+              }
+            )
+          }
+          else {
+            this.map.loadZones(zones);
+          }
         }
       );
     }

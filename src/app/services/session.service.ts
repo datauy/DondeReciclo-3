@@ -30,8 +30,9 @@ export class SessionService {
   reloadMap: boolean = false;
   news: {News};
 
-  homeUrl = '/intro/mapa'
-  
+  homeUrl = '/intro/mapa';
+  lastUrl = '';
+
   constructor(
     private router: Router,
     private storage: Storage

@@ -223,6 +223,13 @@ export class ApiService<T=any> {
       }
     ));
   }
+  getSubprogramByZone(zone_id: number) {
+    return  this.request.get( environment.backend + "subprogram4location?zone="+zone_id ).pipe(map(
+      (subp: Subprogram[]) => {
+        return subp;
+      }
+    ));
+  }
   getCountryByLocation(latlng: number[]) {
     return  this.request.get( environment.backend + "country4Point?wkt=POINT("+latlng[1]+' '+latlng[0]+')' ).pipe(map(
       (country: string) => {
@@ -237,6 +244,14 @@ export class ApiService<T=any> {
       }
     ));
   }
+  getNextZone(latlng: number[]) {
+    return  this.request.get( environment.backend + "zone4point?wkt=POINT("+latlng[1]+' '+latlng[0]+')' ).pipe(map(
+      (zones: L.GeoJSON) => {
+        return zones;
+      }
+    ));
+  }
+
   formatMarker(containers: Container[]): Container[] {
     for (let i = 0; i < containers.length; i++) {
       containers[i].class = this.materials[this.session.country][containers[i].main_material].class;

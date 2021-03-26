@@ -133,8 +133,9 @@ export class MapService {
   markers: L.LayerGroup;
   zones: L.FeatureGroup;
   subZone: L.FeatureGroup;
+  saturationWarn = false;
   private _pinClick = new BehaviorSubject<boolean>(false);
-  private _zoneClick = new BehaviorSubject<boolean>(false);
+  private _zoneClick = new BehaviorSubject<number>(0);
   private _mapChangeSub = new BehaviorSubject<boolean>(false);
   public _autoSearch = new BehaviorSubject<any>(null);
   public zoom:number = 15;
@@ -186,6 +187,13 @@ export class MapService {
   }
 
   loadMarkers( markers: Container[], fly:boolean ){
+    //Prevent marker load over saturation level
+    if ( markers.length > environment.pinSaturation ) {
+      this.saturationWarn = true;
+      this.mapChanges();
+      return;
+    }
+    this.saturationWarn = false;
     this.containers = markers;
     let mapBounds = [];
     //remove all markers and reload
@@ -300,8 +308,9 @@ export class MapService {
   get pinClicked() {
     return this._pinClick.asObservable();
   }
-  clickZone() {
-    this._zoneClick.next(true);
+  clickZone(zone) {
+    let zid = zone.feature.id;
+    this._zoneClick.next(zid);
   }
   //Observable
   get zoneClicked() {
@@ -351,10 +360,10 @@ export class MapService {
           on('popupopen', function(e) {
             //_this.userPosition = [ e.popup._latlng.lat, e.popup._latlng.lng];
             //_this.loadMarkers([], false);
-            _this.clickZone();
+            _this.clickZone(this);
           });
           if ( feature.properties.subprograms != undefined && feature.properties.name != undefined ) {
-            layer.bindPopup('<div>'+feature.properties.subprograms.join('<br>')+'</div><small>'+feature.properties.name+'</small>');
+            layer.bindPopup('<div>'+feature.properties.name+'</div><small>'+feature.properties.subprograms.join('<br>')+'</small>');
           }
           if (zoom2zone) {
             bounds.push(layer.getBounds());
@@ -365,7 +374,7 @@ export class MapService {
     );
     zonesData.addTo(this.map);
     this.zones = zonesData;
-    if (zoom2zone) {
+    if ( zoom2zone && bounds.length > 0 ) {
       bounds.push(this.userPosition);
       this.flyToBounds(bounds);
     }

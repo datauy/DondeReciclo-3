@@ -8,6 +8,7 @@
       height: 0;
     }
     .cupertino-pane {
+      max-height: 65%;
       h5 {
         margin: 0;
       }
@@ -126,9 +127,6 @@
           }
         }
       }
-      .subprogram {
-        max-height: 56vh;
-      }
     }
     .back-button {
       --background: var(--vidrio);
@@ -174,6 +172,10 @@
       top: 335px;
       &.active {
         width: 220px;
+      }
+      &.selected {
+        background: var(--pale-olive-green);
+        opacity: 0.9;
       }
       span {
         margin-left: 10px;
