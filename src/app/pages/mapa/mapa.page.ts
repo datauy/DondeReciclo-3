@@ -40,12 +40,11 @@ export class MapaPage implements OnInit {
   };
   weekday = new Weekdays;
   showSched = false;
-  //Displays: 0:Es contenedor, 1:Es Lista (subprogramas), 2:Es subprograma
+  //Displays: 0:Es contenedor (default), 1:Es Lista (subprogramas), 2:Es subprograma, 4: subprograma c/zona precargada
   list = 0;
   //Estados: 0:Cerrado-Inactivo, 1:Abierto, 2:Cerrado-Activado, 3:Cerrado-Mostrando? O debiera ser abierto??
   zoneVisible = 0;
   //Load data over recommended zoom
-  eagerLoad = false;
   loadContainer = 0;
   initDataLoaded = false;
   autoSearch = false;
@@ -83,17 +82,25 @@ export class MapaPage implements OnInit {
       }
     );
     this.map.zoneClicked.subscribe(
-      zid => {
-        if ( zid > 0 && this.zoneVisible == 3) {
-          this.api.getSubprogramByZone(zid).subscribe(
+      zone => {
+        if ( zone ) {
+          if ( this.list == 4 ) {
+            this.hidePane();
+          }
+          this.api.getSubprogramByZone(zone.feature.id).subscribe(
             (subprograms) =>{
-              this.list = 1;
               this.formatSubProgram(subprograms);
               this.subprograms = subprograms;
               if ( subprograms.length == 1) {
                 this.list = 4;
-                this.subprogram = subprograms[0];
+                this.subprogram = this.subprograms[0];
+                this.map.removeZones();
+                this.map.showSubZone(zone.feature);
               }
+              else {
+                this.list = 1;
+              }
+              //this.infoPane.destroy();
               this.infoPane.present({animate: true});
             }
           );
@@ -103,8 +110,8 @@ export class MapaPage implements OnInit {
     this.map.mapChanged.subscribe(
       change => {
         if (change) {
-          if ( this.map.map != undefined ) {
-            if (( this.map.map.getZoom() >= 14 && !this.map.saturationWarn ) || this.eagerLoad ) {
+          if ( this.map.map != undefined && this.list == 0 ) {
+            if (( this.map.map.getZoom() >= 14 && !this.map.saturationWarn ) || this.map.eagerLoad ) {
               this.notification.closeNotificationId('zoom');
               this.loadNearbyContainers(false);
               if ( this.zoneVisible == 3 ) {
@@ -246,10 +253,11 @@ export class MapaPage implements OnInit {
             this.activateZone();
           }
           if ( url_arr[1].startsWith('eagerLoad') ) {
-            this.eagerLoad = true;
+            this.map.eagerLoad = true;
+            this.map.loadMarkers(this.map.containers, false);
             //Set eager load for 10 secs
             setTimeout( () => {
-            this.eagerLoad = false;
+            this.map.eagerLoad = false;
             }, 10000);
           }
           this.router.navigate([this.session.homeUrl]);
@@ -322,6 +330,7 @@ export class MapaPage implements OnInit {
       initPane = 'top';
       topBreak = window.innerHeight*.7;
     }
+    document.querySelector(".cupertino-pane").classList.add(initPane);
     this.infoPane = new CupertinoPane(
       '.cupertino-pane', // Pane container selector
       {
@@ -411,7 +420,13 @@ export class MapaPage implements OnInit {
       this.zoneVisible = 2;
     }
     else {
-      //this.map.removeZones();
+      this.list = 0;
+      if ( this.list == 4 ) {
+        this.map.map.removeLayer(this.map.subZone);
+      }
+      if ( this.zoneVisible != 3 ) {
+        this.map.removeZones();
+      }
       this.infoPane.destroy({animate: true});
     }
   }
@@ -461,18 +476,24 @@ export class MapaPage implements OnInit {
         note: 'Quizás no le diste permiso o la localización está desactivada. Prueba iniciar la app con la localización activada. Puedes seleccionar tu ubicación tocando el mapa.',
       };
       this.notification.showNotification(noRes);
-      if ( this.session.country != undefined ) {
-        this.map.userPosition = [this.map.center.lat, this.map.center.lng];
-        if ( this.autoSearch ) {
-          this.activateSearch(this.autoSearchItem);
+      this.map.getUserPosition().then(
+        (res) => {
+          if ( res == undefined || res.length == 0 ) {
+            this.map.userPosition = [this.map.center.lat, this.map.center.lng];
+          }
+          if ( this.map.userPosition != undefined ) {
+            if ( this.autoSearch ) {
+              this.activateSearch(this.autoSearchItem);
+            }
+            else {
+              this.api.getNearbyContainers(2, [this.map.userPosition[0], this.map.userPosition[1]])
+              .subscribe((containers) => {
+                this.map.loadMarkers(containers, true);
+              });
+            }
+          }
         }
-        else {
-          this.api.getNearbyContainers(2, [this.map.center.lat, this.map.center.lng])
-          .subscribe((containers) => {
-            this.map.loadMarkers(containers, true);
-          });
-        }
-      }
+      );
     }
   }
   //
@@ -592,6 +613,7 @@ export class MapaPage implements OnInit {
   }
   //
   subprograms4location() {
+    this.session.isLoading = true;
     var point: [number, number];
     if ( this.map.userPosition != undefined ) {
       point = this.map.userPosition;
@@ -601,38 +623,43 @@ export class MapaPage implements OnInit {
       this.map.userPosition = point;
       this.map.loadMarkers([], false);
     }
-    this.api.getSubprograms4Location(point).subscribe((subprograms) => {
-      this.map.removeZones();
-      if ( subprograms.length > 1 ) {
-        this.list = 1;
-        var zones = this.formatSubProgram(subprograms);
-        this.subprograms = subprograms;
-        this.infoPane.present({animate: true});
-        this.map.loadZones(zones);
-      }
-      else if ( subprograms.length == 1) {
-        this.list = 2;
-        this.formatSubProgram(subprograms);
-        //subp.program_icon = this.api.programs[subp.program_id].icon;
-        //subp.program = this.api.programs[subp.program_id].name;
-        this.subprograms = subprograms;
-        this.subprogramShow(0);
-        this.infoPane.present({animate: true});
-      }
-      else {
-        let noRes = {
-          id: 'noSub',
-          type: 'notification',
-          class: 'alert',
-          title: 'No hay datos para la zona',
-          note: 'No tenemos datos de organizaciones que trabajen en la zona. ¿Conoces alguna?',
-          link: this.session.homeUrl,//'map.toggleZone',
-          link_title: 'Ver Zonas',
-          link_params: {"zones": 1}
-        };
-        this.notification.showNotification(noRes);
-      }
-    });
+    this.api.getSubprograms4Location(point).subscribe(
+      (subprograms) => {
+        this.map.removeZones();
+        if ( subprograms.length > 1 ) {
+          this.list = 1;
+          var zones = this.formatSubProgram(subprograms);
+          this.subprograms = subprograms;
+          this.infoPane.present({animate: true});
+          this.map.loadZones(zones);
+        }
+        else if ( subprograms.length == 1) {
+          this.list = 2;
+          this.formatSubProgram(subprograms);
+          //subp.program_icon = this.api.programs[subp.program_id].icon;
+          //subp.program = this.api.programs[subp.program_id].name;
+          this.subprograms = subprograms;
+          this.subprogramShow(0);
+          this.infoPane.present({animate: true});
+        }
+        else {
+          let noRes = {
+            id: 'noSub',
+            type: 'notification',
+            class: 'alert',
+            title: 'No hay datos para la zona',
+            note: 'No tenemos datos de organizaciones que trabajen en la zona. ¿Conoces alguna?',
+            link: this.session.homeUrl,//'map.toggleZone',
+            link_title: 'Ver Zonas',
+            link_params: {"zones": 1}
+          };
+          this.notification.showNotification(noRes);
+        }
+        this.session.isLoading = false;
+      },
+      err => this.session.isLoading = false,
+      () => this.session.isLoading = false
+    );
   }
   //
   subprogramShow(index: number) {

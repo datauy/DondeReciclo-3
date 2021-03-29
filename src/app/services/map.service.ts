@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Container } from "src/app/models/basic_models.model";
 import { Router } from "@angular/router";
+import { Storage } from  '@ionic/storage';
 
 import { environment } from 'src/environments/environment';
 import { SessionService } from 'src/app/services/session.service';
@@ -134,8 +135,9 @@ export class MapService {
   zones: L.FeatureGroup;
   subZone: L.FeatureGroup;
   saturationWarn = false;
+  eagerLoad = false;
   private _pinClick = new BehaviorSubject<boolean>(false);
-  private _zoneClick = new BehaviorSubject<number>(0);
+  private _zoneClick = new BehaviorSubject<any>(0);
   private _mapChangeSub = new BehaviorSubject<boolean>(false);
   public _autoSearch = new BehaviorSubject<any>(null);
   public zoom:number = 15;
@@ -146,6 +148,7 @@ export class MapService {
   constructor(
     private session: SessionService,
     private router: Router,
+    private  storage:  Storage
   ) {
     this.session.getCountry().then( (country) => {
       if ( country != undefined ) {
@@ -172,7 +175,7 @@ export class MapService {
         if (this.userMarker) { // check
           this.map.removeLayer(this.userMarker); // remove
         }
-        this.userPosition = [e.latlng.lat, e.latlng.lng];
+        this.setUserPosition([e.latlng.lat, e.latlng.lng]);
         this.userMarker = L.marker(this.userPosition, {icon: iconUser} ).addTo(this.map); // add the marker onclick
         if (this.route) {
           this.route.spliceWaypoints(0, 1, e.latlng);
@@ -186,15 +189,15 @@ export class MapService {
     return true;
   }
 
-  loadMarkers( markers: Container[], fly:boolean ){
+  loadMarkers( markers: Container[], fly = true ){
     //Prevent marker load over saturation level
-    if ( markers.length > environment.pinSaturation ) {
+    this.containers = markers;
+    if ( markers.length > environment.pinSaturation && !this.eagerLoad ) {
       this.saturationWarn = true;
       this.mapChanges();
       return;
     }
     this.saturationWarn = false;
-    this.containers = markers;
     let mapBounds = [];
     //remove all markers and reload
     if ( this.markers != undefined ) {
@@ -243,7 +246,7 @@ export class MapService {
         //this.getAddress(e.latitude, e.longitude);
       this.userMarker.on("dragend", () => {
         let userPos = this.userMarker.getLatLng();
-        this.userPosition = [ userPos[0], userPos[1] ] ;
+        this.setUserPosition( [ userPos[0], userPos[1] ] );
         //this.getAddress(position.lat, position.lng);
         //console.log(position.lat, position.lng);
       });
@@ -309,8 +312,7 @@ export class MapService {
     return this._pinClick.asObservable();
   }
   clickZone(zone) {
-    let zid = zone.feature.id;
-    this._zoneClick.next(zid);
+    this._zoneClick.next(zone);
   }
   //Observable
   get zoneClicked() {
@@ -408,7 +410,7 @@ export class MapService {
   //Country selection
   selectCountry(country: string) {
     this.session.setCountry(country);
-    delete this.userPosition;
+    this.removeUserPosition();
     this.center = L.latLng(environment[country].center);
     this.reRoute();
   }
@@ -426,6 +428,21 @@ export class MapService {
       return true;
     }
     return false;
+  }
+  async getUserPosition() {
+    return this.storage.get("userPosition").then(
+      (up) => {
+        return this.userPosition = up;
+      }
+    );
+  }
+  setUserPosition(coords:[number, number]) {
+    this.userPosition = [ coords[0], coords[1] ];
+    this.storage.set("userPosition", this.userPosition);
+  }
+  removeUserPosition() {
+    delete this.userPosition;
+    this.storage.remove("userPosition");
   }
   //Create additional Control placeholders, to group all control buttons
   /*addControlPlaceholders(map: L.Map) {
