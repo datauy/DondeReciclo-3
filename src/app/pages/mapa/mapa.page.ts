@@ -116,7 +116,7 @@ export class MapaPage implements OnInit {
               this.loadNearbyContainers(false);
               if ( this.zoneVisible == 3 ) {
                 this.zoneVisible = 2;
-                this.getZones();
+                this.getZones(false);
               }
             }
             else {
@@ -674,7 +674,7 @@ export class MapaPage implements OnInit {
     this.map.showSubZone(this.subprograms[index].zone.location.features[0]);
   }
   //
-  getZones() {
+  getZones(getNext = true) {
     let zoneBtn = document.querySelector(".map-zones");
     zoneBtn.classList.remove('selected');
     if ( this.zoneVisible == 3 ) {
@@ -696,10 +696,12 @@ export class MapaPage implements OnInit {
       this.api.getZones4Boundaries(bounds).subscribe(
         (zones) => {
           this.map.removeZones();
-          zoneBtn.classList.remove('active');
-          zoneBtn.classList.add('selected');
+          if ( !zoneBtn.classList.contains('selected') ) {
+            zoneBtn.classList.remove('active');
+            zoneBtn.classList.add('selected');
+          }
           this.zoneVisible = 3;
-          if ( zones['features'].length == 0 ) {
+          if ( zones['features'].length == 0 && getNext ) {
             this.api.getNextZone( [ this.map.map.getCenter().lat, this.map.map.getCenter().lng ] ).subscribe(
               (zone) => {
                 this.map.loadZones(zone, true);

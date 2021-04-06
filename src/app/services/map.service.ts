@@ -144,7 +144,6 @@ export class MapService {
   public center:L.LatLng;
   //
   initParams = true;
-  animationFix = false;
 
   constructor(
     private session: SessionService,
@@ -268,12 +267,6 @@ export class MapService {
 
   toggleAnimation() {
     this.animating = !this.animating;
-    if ( this.animationFix ) {
-      this.animationFix = false;
-      this.map.fitBounds(this.map.getBounds(), {
-        padding: [-100, 0]
-      });
-    }
   }
   getBoundingCoords() {
     let bounds = this.map.getBounds();
@@ -294,12 +287,9 @@ export class MapService {
     // this.map.fitBounds(newViewCenter);
 
   }
-  flyToBounds(mapBounds: [number, number][], options?: {}, fixAnimation = false) {
+  flyToBounds(mapBounds: [number, number][], options?: {}) {
     this.animating = true;
     this.map.flyToBounds(mapBounds, options);
-    if ( fixAnimation ) {
-      this.animationFix = true;
-    }
     this.map.once('moveend', this.toggleAnimation, this);
   }
   //
@@ -361,7 +351,7 @@ export class MapService {
     + Object.values(bounds.getNorthWest()).reverse().join(' ') +"))";
   }
   //
-  loadZones(layers: L.GeoJSON, zoom2zone = false) {
+  loadZones(layers: L.GeoJSON, zoom2zone = false, fixPosition = false) {
     const _this = this;
     var bounds = [];
     var zonesData = L.featureGroup();
@@ -389,7 +379,12 @@ export class MapService {
     if ( zoom2zone && bounds.length > 0 ) {
       bounds.push(this.userPosition);
       this.currentBounds = bounds;
-      this.flyToBounds(bounds, {}, true);
+      if ( fixPosition ) {
+        this.flyToBounds( bounds, {paddingBottomRight: [0,400]} );
+      }
+      else {
+        this.flyToBounds( bounds );
+      }
     }
   }
   //
