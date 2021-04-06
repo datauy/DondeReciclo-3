@@ -381,7 +381,7 @@ export class MapaPage implements OnInit {
       this.map.route = null;
     }
     this.session.cupertinoState = 'cupertinoClosed';
-    this.map.flyToBounds(this.map.currentBounds);
+    this.map.flytomarker(this.map.userPosition, this.map.zoom);
   }
   //
   showPane() {
@@ -420,13 +420,16 @@ export class MapaPage implements OnInit {
       this.zoneVisible = 2;
     }
     else {
-      this.list = 0;
       if ( this.list == 4 ) {
         this.map.map.removeLayer(this.map.subZone);
       }
       if ( this.zoneVisible != 3 ) {
         this.map.removeZones();
       }
+      else {
+        this.map.showZones(false);
+      }
+      this.list = 0;
       this.infoPane.destroy({animate: true});
     }
   }
@@ -632,6 +635,8 @@ export class MapaPage implements OnInit {
           this.subprograms = subprograms;
           this.infoPane.present({animate: true});
           this.map.loadZones(zones);
+          let fixedPos:[number, number] = [this.map.userPosition[0] - 0.001, this.map.userPosition[1] ];
+          this.map.flytomarker(fixedPos, this.map.zoom);
         }
         else if ( subprograms.length == 1) {
           this.list = 2;

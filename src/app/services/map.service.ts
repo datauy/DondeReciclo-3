@@ -144,6 +144,7 @@ export class MapService {
   public center:L.LatLng;
   //
   initParams = true;
+  animationFix = false;
 
   constructor(
     private session: SessionService,
@@ -215,16 +216,16 @@ export class MapService {
     for (var i = 0; i < markers.length; i++) {
       var newMarker = new L.CustomMarker([markers[i].latitude,markers[i].longitude], {container_pos: i, className: "ion-color-"+markers[i].class })
       .on('click', this.clickPin, this); //L.bind(this.showPane, null, markers[i]))
-      if ( center_markers != 0 ) {
+      if ( center_markers != 0 && fly ) {
         mapBounds.push([markers[i].latitude, markers[i].longitude]);
         center_markers = center_markers - 1;
       }
       markersLayer.push(newMarker);
     }
     this.markers = L.layerGroup(markersLayer).addTo(this.map);
-    this.currentBounds = mapBounds;
     if ( mapBounds.length > 0 ) {
       if ( fly ) {
+        this.currentBounds = mapBounds;
         this.flyToBounds(mapBounds);
       }
       return 1;
@@ -267,6 +268,12 @@ export class MapService {
 
   toggleAnimation() {
     this.animating = !this.animating;
+    if ( this.animationFix ) {
+      this.animationFix = false;
+      this.map.fitBounds(this.map.getBounds(), {
+        padding: [-100, 0]
+      });
+    }
   }
   getBoundingCoords() {
     let bounds = this.map.getBounds();
@@ -287,9 +294,12 @@ export class MapService {
     // this.map.fitBounds(newViewCenter);
 
   }
-  flyToBounds(mapBounds: [number, number][], options?: {}) {
+  flyToBounds(mapBounds: [number, number][], options?: {}, fixAnimation = false) {
     this.animating = true;
     this.map.flyToBounds(mapBounds, options);
+    if ( fixAnimation ) {
+      this.animationFix = true;
+    }
     this.map.once('moveend', this.toggleAnimation, this);
   }
   //
@@ -378,7 +388,8 @@ export class MapService {
     this.zones = zonesData;
     if ( zoom2zone && bounds.length > 0 ) {
       bounds.push(this.userPosition);
-      this.flyToBounds(bounds);
+      this.currentBounds = bounds;
+      this.flyToBounds(bounds, {}, true);
     }
   }
   //
