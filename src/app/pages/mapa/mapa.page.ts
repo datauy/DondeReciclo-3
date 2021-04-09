@@ -328,7 +328,7 @@ export class MapaPage implements OnInit {
     var topBreak = window.innerHeight*.9;
     if ( window.innerWidth >= 560 ) {
       initPane = 'top';
-      topBreak = window.innerHeight*.7;
+      topBreak = window.innerHeight*.71;
     }
     document.querySelector(".cupertino-pane").classList.add(initPane);
     this.infoPane = new CupertinoPane(
