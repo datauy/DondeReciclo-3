@@ -323,41 +323,52 @@ export class MapaPage implements OnInit {
   // }
   //
   loadInfoPane() {
+    let top = true;
     var initPane: ('top' | 'middle' | 'bottom');
-    initPane = 'middle';
-    var topBreak = window.innerHeight*.9;
+    initPane = "middle";
     if ( window.innerWidth >= 560 ) {
-      initPane = 'top';
-      topBreak = window.innerHeight*.71;
+      top = false;
+      //topBreak = Math.round(window.innerHeight*.7);
+      document.querySelector(".cupertino-pane").classList.add("desktop");
     }
-    document.querySelector(".cupertino-pane").classList.add(initPane);
+    let panelOptions = {
+      parentElement: '.map-section', // Parent container
+      // backdrop: true,
+      bottomClose: true,
+      //fitHeight: fit,
+      buttonDestroy: false,
+      showDraggable: true,
+        //simulateTouch: true,
+      topperOverflow: false,
+      fitScreenHeight: false,
+      topperOverflowOffset: 200,
+      //bottomOffset: 20,
+      clickBottomOpen: false,
+      //screenHeightOffset: Math.round(topBreak),
+      //followerElement: '#map',
+      //dragBy: ['.pane #map'],
+      initialBreak: initPane,
+      breaks: {
+        top: {
+          enabled: top,
+          //offset: (topBreak),
+          height: Math.round(window.innerHeight*.9),
+        },
+        middle: {
+          enabled: true,
+          //offset: window.innerHeight*.7,
+          height: Math.round(window.innerHeight*.65),
+        },
+      },
+      // onDidPresent: () => this.breakPointMapCupertino(),
+      onWillPresent: () => this.cupertinoShow(),
+      // onBackdropTap: () => this.infoPane.hide(),
+      onWillDismiss: () => this.cupertinoHide(),
+    };
+    //document.querySelector(".cupertino-pane").classList.add(initPane);
     this.infoPane = new CupertinoPane(
       '.cupertino-pane', // Pane container selector
-      {
-        parentElement: '.map-section', // Parent container
-        // backdrop: true,
-        bottomClose: true,
-        //topperOverflow: true,
-        showDraggable: true,
-        simulateTouch: false,
-        draggableOver: true,
-        topperOverflowOffset: 200,
-        initialBreak: initPane,
-        breaks: {
-          top: {
-            enabled: true,
-            offset: topBreak
-          },
-          middle: {
-            enabled: true,
-            offset: window.innerHeight*.7
-          },
-        },
-        // onDidPresent: () => this.breakPointMapCupertino(),
-        onWillPresent: () => this.cupertinoShow(),
-        // onBackdropTap: () => this.infoPane.hide(),
-        onWillDismiss: () => this.cupertinoHide(),
-      }
+      panelOptions
     );
   }
   //
@@ -629,23 +640,23 @@ export class MapaPage implements OnInit {
     this.api.getSubprograms4Location(point).subscribe(
       (subprograms) => {
         this.map.removeZones();
+        let fixedPos:[number, number] = [this.map.userPosition[0] - 0.002, this.map.userPosition[1] ];
         if ( subprograms.length > 1 ) {
           this.list = 1;
           var zones = this.formatSubProgram(subprograms);
           this.subprograms = subprograms;
           this.infoPane.present({animate: true});
           this.map.loadZones(zones);
-          let fixedPos:[number, number] = [this.map.userPosition[0] - 0.001, this.map.userPosition[1] ];
           this.map.flytomarker(fixedPos, this.map.zoom);
         }
         else if ( subprograms.length == 1) {
-          this.list = 2;
           this.formatSubProgram(subprograms);
           //subp.program_icon = this.api.programs[subp.program_id].icon;
           //subp.program = this.api.programs[subp.program_id].name;
           this.subprograms = subprograms;
-          this.subprogramShow(0);
+          this.subprogramShow(0, 4);
           this.infoPane.present({animate: true});
+          this.map.flytomarker(fixedPos, this.map.zoom);
         }
         else {
           let noRes = {
@@ -667,21 +678,22 @@ export class MapaPage implements OnInit {
     );
   }
   //
-  subprogramShow(index: number) {
+  subprogramShow(index: number, list = 2) {
     this.subprogram = this.subprograms[index];
-    this.list = 2;
+    this.list = list;
     this.map.removeZones();
     this.map.showSubZone(this.subprograms[index].zone.location.features[0]);
   }
   //
   getZones(getNext = true) {
     let zoneBtn = document.querySelector(".map-zones");
-    zoneBtn.classList.remove('selected');
     if ( this.zoneVisible == 3 ) {
+      zoneBtn.classList.remove('selected');
       this.map.removeZones();
       this.zoneVisible = 0;
     }
     else if ( this.zoneVisible == 0 ) {
+      zoneBtn.classList.remove('selected');
       this.zoneVisible = 1;
       zoneBtn.classList.add('active');
       setTimeout( () => {

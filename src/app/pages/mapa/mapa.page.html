@@ -32,7 +32,7 @@
           <h5>Organizaciones que recolectan aquí</h5>
         </div>
       </ion-item>
-      <div class="scrollable" contain="none" overflow-y="scroll">
+      <div class="scrollable-div" contain="none" overflow-y="scroll">
         <ion-item *ngFor="let subp of subprograms; let i = index" class="header" lines="none" (click)="subprogramShow(i)">
           <ion-avatar slot="start">
             <img src="{{subp.program_icon}}">
@@ -60,7 +60,7 @@
           <h5>{{subprogram.name}}</h5>
         </div>
       </ion-item>
-      <div class="scrollable" overflow-y="auto">
+      <div class="scrollable-div" overflow-y="auto">
         <ion-item lines="none">
           <div>
             <h5>Dirección:</h5>
@@ -133,7 +133,7 @@
           <h5>{{container.program}}</h5>
         </div>
       </ion-item>
-      <div class="scrollable" overflow-y="auto">
+      <div class="scrollable-div">
         <ion-item lines="none">
           <div>
             <h5>{{container.site}}</h5>

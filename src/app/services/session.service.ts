@@ -32,6 +32,7 @@ export class SessionService {
 
   homeUrl = '/intro/mapa';
   lastUrl = '';
+  is_mobile = false;
 
   constructor(
     private router: Router,

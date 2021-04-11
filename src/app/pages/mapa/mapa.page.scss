@@ -8,14 +8,18 @@
       height: 0;
     }
     .cupertino-pane {
-      &.top {
-        height: 58vh;
-      }
-      &.middle {
-        height: 86vh;
+      &.desktop {
+        overflow: hidden;
+        .scrollable-div {
+          height: calc(70vh - 124px);
+        }
       }
       .pane-container {
         height: 100%;
+      }
+      .scrollable-div {
+        overflow-y: auto;
+        height: calc(90vh - 124px);
       }
       h5 {
         margin: 0;
@@ -35,6 +39,9 @@
         display: flex;
         flex-flow: row wrap;
         margin-bottom: 20px;
+        &.header {
+          margin-top: 10px;
+        }
         .tags-wrapper {
           ion-button {
             margin-right: 12px;
@@ -58,7 +65,7 @@
         }
         &.panel-footer {
           margin-top: 10px;
-          margin-bottom: 0;
+          margin-bottom: 20px;
           padding-top: 16px;
           border-top: solid 1px rgba(151, 151, 151, 0.26);
           a {
@@ -101,7 +108,7 @@
         height: 54px;
         position: absolute;
         right: 14px;
-        bottom: 0;
+        top: 0;
         margin: 0;
       }
       .cupertino-outofbox-image {
@@ -116,7 +123,7 @@
         cursor: pointer;
         position: absolute;
         right: 54px;
-        bottom: -5px;
+        top: 30px;
         margin: 0;
         fill: var(--pale-olive-green);
         width: 29px;
