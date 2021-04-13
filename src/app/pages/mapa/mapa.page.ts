@@ -564,7 +564,7 @@ export class MapaPage implements OnInit {
       if ( i != 0 ) {
         zones.features.push(subp.zone.location.features[0]);
       }
-      subprograms[i].program_icon = this.api.programs[subp.program_id].icon;
+      subprograms[i].program_icon = this.api.programs[subp.program_id].icon != "" ? this.api.programs[subp.program_id].icon : '/assets/custom-icons/dr-generic.svg';
       subprograms[i].program = this.api.programs[subp.program_id].name;
     });
     return zones;
