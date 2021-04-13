@@ -513,7 +513,7 @@ export class MapaPage implements OnInit {
   //
   formatContainer(container: Container) {
     container.type_icon = this.api.container_types[container.type_id].icon;
-    container.program_icon = this.api.programs[container.program_id].icon;
+    container.program_icon = this.api.programs[container.program_id].icon != "" ? this.api.programs[container.program_id].icon : '/assets/custom-icons/dr-generic.svg';
     container.program = this.api.programs[container.program_id].name;
     this.container = container;
     if ( container.materials.length == 0 ) {
