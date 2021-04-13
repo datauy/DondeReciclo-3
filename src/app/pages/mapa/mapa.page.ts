@@ -512,8 +512,9 @@ export class MapaPage implements OnInit {
   }
   //
   formatContainer(container: Container) {
+    console.log('Format container', this.api.programs);
     container.type_icon = this.api.container_types[container.type_id].icon;
-    container.program_icon = this.api.programs[container.program_id].icon != "" ? this.api.programs[container.program_id].icon : '/assets/custom-icons/dr-generic.svg';
+    container.program_icon = this.api.programs[container.program_id].icon ? this.api.programs[container.program_id].icon : '/assets/custom-icons/dr-generic.svg';
     container.program = this.api.programs[container.program_id].name;
     this.container = container;
     if ( container.materials.length == 0 ) {
@@ -564,7 +565,7 @@ export class MapaPage implements OnInit {
       if ( i != 0 ) {
         zones.features.push(subp.zone.location.features[0]);
       }
-      subprograms[i].program_icon = this.api.programs[subp.program_id].icon != "" ? this.api.programs[subp.program_id].icon : '/assets/custom-icons/dr-generic.svg';
+      subprograms[i].program_icon = this.api.programs[subp.program_id].icon ? this.api.programs[subp.program_id].icon : '/assets/custom-icons/dr-generic.svg';
       subprograms[i].program = this.api.programs[subp.program_id].name;
     });
     return zones;
