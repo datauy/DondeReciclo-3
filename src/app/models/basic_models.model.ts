@@ -40,6 +40,7 @@ export class Container extends Base {
     receives_no: string;
     schedules: any[];
     main_material: number;
+    information: string;
 }
 
 export class ContainerType extends Base {
