@@ -30,14 +30,22 @@ export class SessionService {
   reloadMap: boolean = false;
   news: {News};
 
+  homeUrl = '/intro/mapa';
+  lastUrl = '';
+  is_mobile = false;
+
   constructor(
     private router: Router,
     private storage: Storage
   ) {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd ) {
-        this.currentPage = event.urlAfterRedirects.split( '/' ).pop().split('?')[0];
-        // console.log('event: ', this.currentPage);
+        if ( event.urlAfterRedirects.split( '/' ).length > 2 ) {
+          this.currentPage = event.urlAfterRedirects.split( '/' )[2];
+        }
+        else {
+          this.currentPage = event.urlAfterRedirects.split( '/' ).pop().split('?')[0];
+        }
       }
     });
   }

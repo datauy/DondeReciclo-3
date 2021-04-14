@@ -25,14 +25,14 @@
   </div>
 
   <div #infoPane class="cupertino-pane">
-    <div class="subprogram-list" *ngIf="list == 1">
+    <div class="subprogram-list pane-container" *ngIf="list == 1">
       <ion-item class="header" lines="full">
         <div class="title-wrapper">
           <span size="small">Ubicado en mapa</span>
           <h5>Organizaciones que recolectan aquí</h5>
         </div>
       </ion-item>
-      <div class="scrollable" contain="none" overflow-y="scroll">
+      <div class="scrollable-div" contain="none" overflow-y="scroll">
         <ion-item *ngFor="let subp of subprograms; let i = index" class="header" lines="none" (click)="subprogramShow(i)">
           <ion-avatar slot="start">
             <img src="{{subp.program_icon}}">
@@ -50,7 +50,7 @@
         </ion-item>
       </div>
     </div>
-    <div class="subprogram" *ngIf="list == 2">
+    <div class="subprogram pane-container" *ngIf="list == 2 || list == 4">
       <ion-item class="header" lines="full">
         <ion-avatar slot="start">
           <img src="{{subprogram.program_icon}}">
@@ -60,65 +60,67 @@
           <h5>{{subprogram.name}}</h5>
         </div>
       </ion-item>
-      <ion-item lines="none">
-        <div>
-          <h5>Dirección:</h5>
-          <p>{{subprogram.address}}</p>
-        </div>
-      </ion-item>
-      <ion-item lines="none">
-        <div>
-          <h5>Cobertura:</h5>
-          <p>{{subprogram.locations.join(', ')}}</p>
-        </div>
-      </ion-item>
-      <ion-item lines="none" *ngIf="subprogram.receives.length">
-        <div>
-          <h5>Recibe:</h5>
-          <span *ngFor="let sched of subprogram.receives" [innerHtml]="sched"></span>
-        </div>
-      </ion-item>
-      <ion-item lines="none" *ngIf="subprogram.zone.schedules.length">
-        <div class="scheds">
-          <h5 (click)="toggleSched()">
-            Horario:
-            <ion-icon
-            name="add-circle-sharp"
-            class="pale-olive-green">
-          </ion-icon>
-          </h5>
-          <div class="sched" *ngFor="let h of subprogram.zone.schedules">
-            <p
-            *ngIf="showSched || h.class == 'today'"
-            [class]="h.class"
-            [innerHtml]="h.text">
-            </p>
+      <div class="scrollable-div" overflow-y="auto">
+        <ion-item lines="none">
+          <div>
+            <h5>Dirección:</h5>
+            <p>{{subprogram.address}}</p>
           </div>
-        </div>
-      </ion-item>
-      <ion-item lines="none">
-        <div>
-          <h5>Teléfono:</h5>
-          <p>{{subprogram.phone}}</p>
-        </div>
-      </ion-item>
-      <ion-item lines="none">
-        <div>
-          <h5>Correo:</h5>
-          <p>{{subprogram.email}}</p>
-        </div>
-      </ion-item>
-      <ion-item class="panel-footer" lines="none">
-        <ion-row class="ion-justify-content-center">
-          <ion-col size-md="10" size-xl="8" size-xs="12" padding="0" >
-            <ion-button class="submit" [routerLink]="'/usuario/recolectar/'+subprogram.id">
-              Solicitar recolección
-            </ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-item>
+        </ion-item>
+        <ion-item lines="none">
+          <div>
+            <h5>Cobertura:</h5>
+            <p>{{subprogram.locations.join(', ')}}</p>
+          </div>
+        </ion-item>
+        <ion-item lines="none" *ngIf="subprogram.receives.length">
+          <div>
+            <h5>Recibe:</h5>
+            <span *ngFor="let sched of subprogram.receives" [innerHtml]="sched"></span>
+          </div>
+        </ion-item>
+        <ion-item lines="none" *ngIf="subprogram.zone.schedules.length">
+          <div class="scheds">
+            <h5 (click)="toggleSched()">
+              Horario:
+              <ion-icon
+              name="add-circle-sharp"
+              class="pale-olive-green">
+            </ion-icon>
+            </h5>
+            <div class="sched" *ngFor="let h of subprogram.zone.schedules">
+              <p
+              *ngIf="showSched || h.class == 'today'"
+              [class]="h.class"
+              [innerHtml]="h.text">
+              </p>
+            </div>
+          </div>
+        </ion-item>
+        <ion-item lines="none">
+          <div>
+            <h5>Teléfono:</h5>
+            <p>{{subprogram.phone}}</p>
+          </div>
+        </ion-item>
+        <ion-item lines="none">
+          <div>
+            <h5>Correo:</h5>
+            <p>{{subprogram.email}}</p>
+          </div>
+        </ion-item>
+        <ion-item class="panel-footer" lines="none">
+          <ion-row class="ion-justify-content-center">
+            <ion-col size-md="10" size-xl="8" size-xs="12" padding="0" >
+              <ion-button class="submit" [routerLink]="'/usuario/recolectar/'+subprogram.id">
+                Solicitar recolección
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </div>
     </div>
-    <div *ngIf="list == 0">
+    <div class="pane-container containers" *ngIf="list == 0">
       <div class="cupertino-outofbox-image">
         <img src="{{container.type_icon}}">
       </div>
@@ -131,7 +133,7 @@
           <h5>{{container.program}}</h5>
         </div>
       </ion-item>
-      <div class="scrollable" overflow-y>
+      <div class="scrollable-div">
         <ion-item lines="none">
           <div>
             <h5>{{container.site}}</h5>
@@ -143,7 +145,7 @@
             <img src="{{container.photos[0]}}">
           </ion-avatar>
           <ion-avatar class="main" slot="end" *ngIf="container.photos?.length == 0">
-            <img src="/assets/custom-icons/dr-generic.svg">
+            <img src="/assets/custom-icons/dr-generic-container.svg">
           </ion-avatar>
           <ion-icon slot="end"
             name="add-circle-sharp"
@@ -184,6 +186,12 @@
             (click)="checkLogin($event)"
             accept="image/png, image/jpeg"
           />
+        </ion-item>
+        <ion-item lines="none" *ngIf="container.information != undefined && container.information != ''">
+          <div>
+            <h5>Información:</h5>
+            <p>{{container.information}}</p>
+          </div>
         </ion-item>
         <div class="items-wrapper" *ngIf="container.receives != undefined && container.receives.length > 0">
           <ion-item class="label-item" lines="none">

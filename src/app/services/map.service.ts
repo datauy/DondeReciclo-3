@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Container } from "src/app/models/basic_models.model";
 import { Router } from "@angular/router";
+import { Storage } from  '@ionic/storage';
 
 import { environment } from 'src/environments/environment';
 import { SessionService } from 'src/app/services/session.service';
@@ -133,15 +134,21 @@ export class MapService {
   markers: L.LayerGroup;
   zones: L.FeatureGroup;
   subZone: L.FeatureGroup;
+  saturationWarn = false;
+  eagerLoad = false;
   private _pinClick = new BehaviorSubject<boolean>(false);
-  private _zoneClick = new BehaviorSubject<boolean>(false);
+  private _zoneClick = new BehaviorSubject<any>(0);
   private _mapChangeSub = new BehaviorSubject<boolean>(false);
+  public _autoSearch = new BehaviorSubject<any>(null);
   public zoom:number = 15;
   public center:L.LatLng;
   //
+  initParams = true;
+
   constructor(
     private session: SessionService,
     private router: Router,
+    private  storage:  Storage
   ) {
     this.session.getCountry().then( (country) => {
       if ( country != undefined ) {
@@ -168,7 +175,7 @@ export class MapService {
         if (this.userMarker) { // check
           this.map.removeLayer(this.userMarker); // remove
         }
-        this.userPosition = [e.latlng.lat, e.latlng.lng];
+        this.setUserPosition([e.latlng.lat, e.latlng.lng]);
         this.userMarker = L.marker(this.userPosition, {icon: iconUser} ).addTo(this.map); // add the marker onclick
         if (this.route) {
           this.route.spliceWaypoints(0, 1, e.latlng);
@@ -182,8 +189,15 @@ export class MapService {
     return true;
   }
 
-  loadMarkers( markers: Container[], fly:boolean ){
+  loadMarkers( markers: Container[], fly = true ){
+    //Prevent marker load over saturation level
     this.containers = markers;
+    if ( markers.length > environment.pinSaturation && !this.eagerLoad ) {
+      this.saturationWarn = true;
+      this.mapChanges();
+      return;
+    }
+    this.saturationWarn = false;
     let mapBounds = [];
     //remove all markers and reload
     if ( this.markers != undefined ) {
@@ -201,16 +215,16 @@ export class MapService {
     for (var i = 0; i < markers.length; i++) {
       var newMarker = new L.CustomMarker([markers[i].latitude,markers[i].longitude], {container_pos: i, className: "ion-color-"+markers[i].class })
       .on('click', this.clickPin, this); //L.bind(this.showPane, null, markers[i]))
-      if ( center_markers != 0 ) {
+      if ( center_markers != 0 && fly ) {
         mapBounds.push([markers[i].latitude, markers[i].longitude]);
         center_markers = center_markers - 1;
       }
       markersLayer.push(newMarker);
     }
     this.markers = L.layerGroup(markersLayer).addTo(this.map);
-    this.currentBounds = mapBounds;
     if ( mapBounds.length > 0 ) {
       if ( fly ) {
+        this.currentBounds = mapBounds;
         this.flyToBounds(mapBounds);
       }
       return 1;
@@ -232,7 +246,7 @@ export class MapService {
         //this.getAddress(e.latitude, e.longitude);
       this.userMarker.on("dragend", () => {
         let userPos = this.userMarker.getLatLng();
-        this.userPosition = [ userPos[0], userPos[1] ] ;
+        this.setUserPosition( [ userPos[0], userPos[1] ] );
         //this.getAddress(position.lat, position.lng);
         //console.log(position.lat, position.lng);
       });
@@ -297,8 +311,8 @@ export class MapService {
   get pinClicked() {
     return this._pinClick.asObservable();
   }
-  clickZone() {
-    this._zoneClick.next(true);
+  clickZone(zone) {
+    this._zoneClick.next(zone);
   }
   //Observable
   get zoneClicked() {
@@ -322,6 +336,10 @@ export class MapService {
   get mapChanged() {
     return this._mapChangeSub.asObservable();
   }
+  //Observable as function
+  get autoSearch() :any {
+    return this._autoSearch.asObservable();
+  }
   //
   getBoundsWKT() {
     let bounds = this.map.getBounds();
@@ -333,7 +351,7 @@ export class MapService {
     + Object.values(bounds.getNorthWest()).reverse().join(' ') +"))";
   }
   //
-  loadZones(layers: L.GeoJSON, zoom2zone = false) {
+  loadZones(layers: L.GeoJSON, zoom2zone = false, fixPosition = false) {
     const _this = this;
     var bounds = [];
     var zonesData = L.featureGroup();
@@ -344,10 +362,10 @@ export class MapService {
           on('popupopen', function(e) {
             //_this.userPosition = [ e.popup._latlng.lat, e.popup._latlng.lng];
             //_this.loadMarkers([], false);
-            _this.clickZone();
+            _this.clickZone(this);
           });
           if ( feature.properties.subprograms != undefined && feature.properties.name != undefined ) {
-            layer.bindPopup('<div>'+feature.properties.subprograms.join('<br>')+'</div><small>'+feature.properties.name+'</small>');
+            layer.bindPopup('<div>'+feature.properties.name+'</div><small>'+feature.properties.subprograms.join('<br>')+'</small>');
           }
           if (zoom2zone) {
             bounds.push(layer.getBounds());
@@ -358,10 +376,15 @@ export class MapService {
     );
     zonesData.addTo(this.map);
     this.zones = zonesData;
-    console.log(this.zones);
-    if (zoom2zone) {
+    if ( zoom2zone && bounds.length > 0 ) {
       bounds.push(this.userPosition);
-      this.flyToBounds(bounds);
+      this.currentBounds = bounds;
+      if ( fixPosition ) {
+        this.flyToBounds( bounds, {paddingBottomRight: [0,400]} );
+      }
+      else {
+        this.flyToBounds( bounds );
+      }
     }
   }
   //
@@ -393,14 +416,39 @@ export class MapService {
   //Country selection
   selectCountry(country: string) {
     this.session.setCountry(country);
-    delete this.userPosition;
+    this.removeUserPosition();
     this.center = L.latLng(environment[country].center);
-    if ( this.router.routerState.snapshot.url != '/intro/mapa' ) {
-      this.router.navigate(['/']);
+    this.reRoute();
+  }
+
+  reRoute(){
+    if ( !this.router.routerState.snapshot.url.startsWith('/intro/mapa') || this.map == undefined ) {
+      this.router.navigate([this.session.homeUrl]);
     }
     else {
       this.resizeMap(17);
     }
+  }
+  isMapPage() {
+    if ( this.router.routerState.snapshot.url.startsWith('/intro/mapa') ) {
+      return true;
+    }
+    return false;
+  }
+  async getUserPosition() {
+    return this.storage.get("userPosition").then(
+      (up) => {
+        return this.userPosition = up;
+      }
+    );
+  }
+  setUserPosition(coords:[number, number]) {
+    this.userPosition = [ coords[0], coords[1] ];
+    this.storage.set("userPosition", this.userPosition);
+  }
+  removeUserPosition() {
+    delete this.userPosition;
+    this.storage.remove("userPosition");
   }
   //Create additional Control placeholders, to group all control buttons
   /*addControlPlaceholders(map: L.Map) {

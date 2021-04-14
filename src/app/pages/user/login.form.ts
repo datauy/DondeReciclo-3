@@ -51,7 +51,7 @@ export class LoginForm implements OnInit {
         this.session.isLoading = false;
         if (res) {
           if (this.route.snapshot.queryParams['intro']) {
-            this.navCtl.navigateBack('/intro/mapa');
+            this.navCtl.navigateBack(this.session.homeUrl);
           }
           else {
             this.navCtl.back();

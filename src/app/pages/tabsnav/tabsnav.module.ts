@@ -10,6 +10,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
 import { SearchComponent } from 'src/app/components/search/search.component';
 import { AutoCompleteModule } from 'ionic4-auto-complete';
 import { navPage } from 'src/app/components/animations';
+import { MapaPageModule } from 'src/app/pages/mapa/mapa.module';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { navPage } from 'src/app/components/animations';
     TabsnavPageRoutingModule,
     ComponentsModule,
     AutoCompleteModule,
+    MapaPageModule,
   ],
   exports: [
     SearchComponent,

@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, UrlSegment } from '@angular/router';
 
 import { TabsnavPage } from './tabsnav.page';
 import { ContactFormComponent } from 'src/app/components/contact-form/contact-form.component';
 import { AboutPage } from 'src/app/components/static-pages/about.page';
+import { MapaPage } from 'src/app/pages/mapa/mapa.page';
 
 const routes: Routes = [
   {
@@ -20,37 +21,48 @@ const routes: Routes = [
         component: AboutPage
       },
       {
-        path: 'consejos',
-        loadChildren: () => import('../consejos/consejos.module').then( m => m.ConsejosPageModule)
+        path: 'contacto',
+        component: ContactFormComponent
       },
       {
-        path: 'mapa',
-        children: [
-          {
-            path: '',
-            loadChildren: () => import('../mapa/mapa.module').then( m => m.MapaPageModule),
-          },
-          {
-            path: ':containerID',
-            loadChildren: () => import('../mapa/mapa.module').then( m => m.MapaPageModule),
-          }
-        ]
+        path: 'consejos',
+        loadChildren: () => import('../consejos/consejos.module').then( m => m.ConsejosPageModule)
       },
       {
         path: 'fichas',
         loadChildren: () => import('../cards/cards.module').then( m => m.CardsPageModule)
       },
       {
-        path: 'contacto',
-        component: ContactFormComponent
+        path: 'mapa',
+        children: [
+          {
+            path: '',
+            component: MapaPage
+          },
+          {
+            path: 'contenedor/:containerID',
+            component: MapaPage
+          },
+          {
+            path: 'material/:materialID',
+            component: MapaPage
+          },
+          {
+            path: 'residuo/:wasteID',
+            component: MapaPage
+          },
+          {
+            path: 'subprograma/:subsID',
+            component: MapaPage
+          },
+          {
+            path: 'contenedores/:containersID',
+            component: MapaPage
+          },
+        ]
       },
     ]
   },
-  {
-    path: '',
-    redirectTo: 'mapa',
-    pathMatch: 'full'
-  }
 ];
 
 @NgModule({

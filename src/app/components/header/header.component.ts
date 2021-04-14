@@ -56,4 +56,11 @@ export class HeaderComponent {
   changeCountry(country: string){
     this.map.selectCountry(country);
   }
+  selectCountry(country: string){
+    this.map.selectCountry(country);
+    //Wait for animation to finish and load markers
+    setTimeout( () => {
+      this.map.mapChanges();
+    }, 6000);
+  }
 }

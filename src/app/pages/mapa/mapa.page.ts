@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Event, Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 import {NativeGeocoder,NativeGeocoderOptions} from "@ionic-native/native-geocoder/ngx";
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -26,7 +28,6 @@ export class MapaPage implements OnInit {
   address: string[];
   container = {} as Container;
   infoPane: CupertinoPane;
-  programs_sum: Program[];
   uLocation = false;
   subprograms: Subprogram[];
   subprogram: Subprogram;
@@ -39,14 +40,17 @@ export class MapaPage implements OnInit {
   };
   weekday = new Weekdays;
   showSched = false;
-  //Displays: 0:Es contenedor, 1:Es Lista (subprogramas), 2:Es subprograma
+  //Displays: 0:Es contenedor (default), 1:Es Lista (subprogramas), 2:Es subprograma, 4: subprograma c/zona precargada
   list = 0;
   //Estados: 0:Cerrado-Inactivo, 1:Abierto, 2:Cerrado-Activado, 3:Cerrado-Mostrando? O debiera ser abierto??
   zoneVisible = 0;
   //Load data over recommended zoom
-  eagerLoad = false;
   loadContainer = 0;
-  currentUrl = '/intro/mapa';
+  initDataLoaded = false;
+  autoSearch = false;
+  autoSearchItem:any;
+  loadContainers: string;
+  loadSubContainers: string;
 
   constructor(
     private geocoder: NativeGeocoder,
@@ -62,6 +66,13 @@ export class MapaPage implements OnInit {
     // private backbuttonSubscription: Subscription
   ) {
     this.session = session;
+  }
+  //
+  ngOnInit() {
+      // this.app = document.querySelector('app-search');
+    this.session.homeUrl = this.router.url.split('?')[0];
+    this.loadInfoPane();
+    //Subscribe after initial data is loaded
     this.map.pinClicked.subscribe(
       pinData => {
         if ( pinData ) {
@@ -71,124 +82,224 @@ export class MapaPage implements OnInit {
       }
     );
     this.map.zoneClicked.subscribe(
-      data => {
-        if ( data && this.zoneVisible == 3) {
-          this.subprograms4location();
+      zone => {
+        if ( zone ) {
+          if ( this.list == 4 ) {
+            this.hidePane();
+          }
+          this.api.getSubprogramByZone(zone.feature.id).subscribe(
+            (subprograms) =>{
+              this.formatSubProgram(subprograms);
+              this.subprograms = subprograms;
+              if ( subprograms.length == 1) {
+                this.list = 4;
+                this.subprogram = this.subprograms[0];
+                this.map.removeZones();
+                this.map.showSubZone(zone.feature);
+              }
+              else {
+                this.list = 1;
+              }
+              //this.infoPane.destroy();
+              this.infoPane.present({animate: true});
+            }
+          );
         }
       }
     );
     this.map.mapChanged.subscribe(
       change => {
         if (change) {
-          if ( this.map.zoom >= 14 || this.eagerLoad ) {
-            this.notification.closeNotificationId('zoom');
-            this.loadNearbyContainers(false);
-            if ( this.zoneVisible == 3 ) {
-              this.zoneVisible = 2;
-              this.getZones();
+          if ( this.map.map != undefined && this.list == 0 ) {
+            if (( this.map.map.getZoom() >= 14 && !this.map.saturationWarn ) || this.map.eagerLoad ) {
+              this.notification.closeNotificationId('zoom');
+              this.loadNearbyContainers(false);
+              if ( this.zoneVisible == 3 ) {
+                this.zoneVisible = 2;
+                this.getZones(false);
+              }
             }
-          }
-          else {
-            let noZoom = {
-              id: 'zoom',
-              type: 'notification',
-              class: 'alert',
-              title: 'No estamos cargando datos, acércate al mapa',
-              note: 'Debido al nivel de zoom y para proteger el funcionamiento de la aplicación y el dispositivo hemos desactivado la carga automática de datos mientras navega.',
-              link: this.currentUrl,
-              link_title: 'Cargar de todas formas',
-              link_params: {'eagerLoad': 1}
-              //link_fragment: "load-data"
-            };
-            this.notification.showNotification(noZoom);
+            else {
+              let noZoom = {
+                id: 'zoom',
+                type: 'notification',
+                class: 'alert',
+                title: 'No estamos cargando datos, acércate al mapa',
+                note: 'Debido al nivel de zoom y para proteger el funcionamiento de la aplicación y el dispositivo hemos desactivado la carga automática de datos mientras navega.',
+                link: this.session.homeUrl,
+                link_title: 'Cargar de todas formas',
+                link_params: {'eagerLoad': 1}
+                //link_fragment: "load-data"
+              };
+              this.notification.showNotification(noZoom);
+            }
+            this.map.saturationWarn = false;
           }
         }
       }
     );
-    this.router.events.subscribe((event: Event) => {
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe((event: Event) => {
       if (event instanceof NavigationEnd ) {
         this.mapaRouter(event);
       }
     });
-  }
-  //
-  ngOnInit() {
-      // this.app = document.querySelector('app-search');
-    this.currentUrl = this.router.url.split('?')[0];
-    this.api.loadProgramSummary().subscribe(
-    (programs) => {
-      this.programs_sum = programs;
-    });
-    this.loadInfoPane();
-  }
-  //
-  ionViewDidEnter() {
-    //Carga mapa con centro en LA
-    this.map.loadMap();
-    if ( this.loadContainer > 0) {
-      this.showPane();
-    }
-    else {
-      if ( this.map.userPosition == undefined ) {
-        this.gotoLocation();
-      }
-      else {
-        this.uLocation = true;
-        this.api.getNearbyContainers(2, this.map.userPosition).subscribe(
-          (containers) => {
-            this.map.loadMarkers(containers, true);
-          }
-        );
-        //this.map.flytomarker(this.map.userPosition, 15);
-      }
-      if ( this.session.country != undefined ) {
-        //El resize hace un fly al centro del mapa
-        this.map.resizeMap(0);
-        if ( this.session.searchItem != undefined ) {
-          this.session.showSearchItem = true;
-        }
-        //Wait 3 seconds for user location and start loading LOad nearbymap
-        setTimeout( () => {
-          if ( !this.uLocation ) {
-            this.api.getNearbyContainers(0.5, [this.map.center.lat, this.map.center.lng]).subscribe(
+    //load data
+    this.api.loadInitialData().subscribe(
+      () => {
+        this.initDataLoaded = true;
+        this.mapaRouter();
+        // route for childs and params
+        if ( this.loadSubContainers != undefined || this.loadContainers != undefined ) {
+          if ( this.loadSubContainers != undefined ) {
+            this.api.getSubContainers(this.loadSubContainers).subscribe(
               (containers) => {
                 this.map.loadMarkers(containers, true);
               }
             );
           }
-        }, 4000);
+          else {
+            this.api.getContainersIds(this.loadContainers).subscribe(
+              (containers) => {
+                this.map.loadMarkers(containers, true);
+              }
+            );
+          }
+        }
+        else {
+          if ( this.loadContainer > 0) {
+            this.showPane();
+          }
+          else {
+            if ( this.map.userPosition == undefined ) {
+              this.gotoLocation();
+            }
+            else {
+              this.uLocation = true;
+              if ( this.autoSearch ) {
+                this.activateSearch(this.autoSearchItem);
+              }
+              else {
+                this.api.getNearbyContainers(2, this.map.userPosition).subscribe(
+                  (containers) => {
+                    this.map.loadMarkers(containers, true);
+                  }
+                );
+              }
+              //this.map.flytomarker(this.map.userPosition, 15);
+            }
+          }
+        }
       }
+    );
+  }
+  //
+  ionViewDidEnter() {
+    //Carga mapa con centro en LA
+    this.map.loadMap();
+    //Fallback if location fails
+    /*if ( this.session.country != undefined ) {
+    console.log("VIEW STARTS HAY COUNTRY");
+    //El resize hace un fly al centro del mapa
+    this.map.resizeMap(0);
+    if ( this.session.searchItem != undefined ) {
+    this.session.showSearchItem = true;
+        }
+        //Wait 3 seconds for user location and start loading LOad nearbymap
+        setTimeout( () => {
+        console.log("VIEW STARTS TIMEOUT", this.map.center);
+        if ( !this.uLocation ) {
+        this.api.getNearbyContainers(0.5, [this.map.center.lat, this.map.center.lng]).subscribe(
+        (containers) => {
+        this.map.loadMarkers(containers, true);
+      }
+    );
     }
+    }, 4000);
+    }*/
   }
   //
   ionViewWillLeave() {
     this.session.showSearchItem = false;
+    //Remove notification messages
+    this.notification.closeNotificationId('noLoc');
+    this.notification.closeNotificationId('zoom');
+    this.notification.closeNotificationId('noSub');
+    this.notification.closeNotificationId('noPhoto');
+    this.notification.closeNotificationId('noSearch');
   }
   mapaRouter(event?: any) {
-    if ( event != undefined ) {
-      var url_arr = event.url.split('?');
-      if ( 1 in url_arr ) {
-        if ( url_arr[1].startsWith('zones') ) {
-          this.activateZone();
+    if ( this.initDataLoaded ) {
+      if ( event != undefined ) {
+        var url_arr = event.url.split('?');
+        // HARD RESET
+        if ( this.session.lastUrl == "" ) {
+          this.session.lastUrl == this.session.homeUrl;
         }
-        if ( url_arr[1].startsWith('eagerLoad') ) {
-          this.eagerLoad = true;
+        if (
+        this.session.lastUrl.startsWith("/intro/mapa")
+        && this.session.lastUrl.split('?')[0] != url_arr[0]
+        && url_arr[0].startsWith("/intro/mapa")
+        ) {
+          let q = '';
+          if ( url_arr[1] != undefined ) {
+            q = '?' + url_arr[1];
+          }
+          //console.log("ROUTER RESET:", q );
+          window.location.replace( '/' + q );
         }
-        this.router.navigate([this.currentUrl]);
+        // Do not do anything if URL is unchanged
+        if ( 1 in url_arr ) {
+          if ( url_arr[1].startsWith('zones') ) {
+            this.activateZone();
+          }
+          if ( url_arr[1].startsWith('eagerLoad') ) {
+            this.map.eagerLoad = true;
+            this.map.loadMarkers(this.map.containers, false);
+            //Set eager load for 10 secs
+            setTimeout( () => {
+            this.map.eagerLoad = false;
+            }, 10000);
+          }
+          this.router.navigate([this.session.homeUrl]);
+        }
+        // Set last URL
+        this.session.lastUrl = url_arr[0];
+        //No need to continue
+        if ( url_arr[0] == this.session.homeUrl ) {
+          return;
+        }
+      }
+      let params = this.route.snapshot.queryParams;
+      if ( params.hasOwnProperty('zones') && params.zones == 1 ) {
+        this.activateZone();
+        this.router.navigate([this.session.homeUrl]);
+      }
+      /*No allow eager in Load
+        if ( params.hasOwnProperty('eagerLoad') && params.eagerLoad == 1 ) {
+        console.log('EAGER');
+        this.eagerLoad = true;
+      }*/
+      if ( this.route.snapshot.params['containerID'] != undefined && this.route.snapshot.params['containerID'] > 0 ) {
+        this.loadContainer = this.route.snapshot.params['containerID'];
+      }
+      if ( this.route.snapshot.params['materialID'] != undefined && this.route.snapshot.params['materialID'] > 0 ) {
+        this.autoSearch = true;
+        this.autoSearchItem = this.api.materials[this.session.country][this.route.snapshot.params['materialID']];
+      }
+      if ( this.route.snapshot.params['wasteID'] != undefined && this.route.snapshot.params['wasteID'] > 0 ) {
+        this.autoSearch = true;
+        this.autoSearchItem = this.route.snapshot.params['wasteID'];
+      }
+      if ( this.route.snapshot.params['containersID'] != undefined && this.route.snapshot.params['containersID'].length > 0 ) {
+        this.loadContainers = this.route.snapshot.params['containersID'];
+      }
+      if ( this.route.snapshot.params['subsID'] != undefined && this.route.snapshot.params['subsID'].length > 0 ) {
+        this.loadSubContainers = this.route.snapshot.params['subsID'];
       }
     }
-    let params = this.route.snapshot.queryParams;
-    if ( params.hasOwnProperty('zones') && params.zones == 1 ) {
-      this.activateZone();
-    }
-    /*No allow eager in Load
-    if ( params.hasOwnProperty('eagerLoad') && params.eagerLoad == 1 ) {
-      console.log('EAGER');
-      this.eagerLoad = true;
-    }*/
-    if ( this.route.snapshot.params['containerID'] != undefined && this.route.snapshot.params['containerID'] > 0 ) {
-      this.loadContainer = this.route.snapshot.params['containerID'];
-    }
+  }
+  activateSearch(object) {
+    this.map._autoSearch.next(object);
   }
   // dragMapCupertino(){  m
   //   this.infoPaneEl = document.querySelector('.cupertino-pane > .pane');
@@ -212,40 +323,52 @@ export class MapaPage implements OnInit {
   // }
   //
   loadInfoPane() {
+    let top = true;
     var initPane: ('top' | 'middle' | 'bottom');
-    initPane = 'middle';
-    var topBreak = window.innerHeight*.9;
+    initPane = "middle";
     if ( window.innerWidth >= 560 ) {
-      initPane = 'top';
-      topBreak = window.innerHeight*.7;
+      top = false;
+      //topBreak = Math.round(window.innerHeight*.7);
+      document.querySelector(".cupertino-pane").classList.add("desktop");
     }
+    let panelOptions = {
+      parentElement: '.map-section', // Parent container
+      // backdrop: true,
+      bottomClose: true,
+      //fitHeight: fit,
+      buttonDestroy: false,
+      showDraggable: true,
+        //simulateTouch: true,
+      topperOverflow: false,
+      fitScreenHeight: false,
+      topperOverflowOffset: 200,
+      //bottomOffset: 20,
+      clickBottomOpen: false,
+      //screenHeightOffset: Math.round(topBreak),
+      //followerElement: '#map',
+      //dragBy: ['.pane #map'],
+      initialBreak: initPane,
+      breaks: {
+        top: {
+          enabled: top,
+          //offset: (topBreak),
+          height: Math.round(window.innerHeight*.9),
+        },
+        middle: {
+          enabled: true,
+          //offset: window.innerHeight*.7,
+          height: Math.round(window.innerHeight*.65),
+        },
+      },
+      // onDidPresent: () => this.breakPointMapCupertino(),
+      onWillPresent: () => this.cupertinoShow(),
+      // onBackdropTap: () => this.infoPane.hide(),
+      onWillDismiss: () => this.cupertinoHide(),
+    };
+    //document.querySelector(".cupertino-pane").classList.add(initPane);
     this.infoPane = new CupertinoPane(
       '.cupertino-pane', // Pane container selector
-      {
-        parentElement: '.map-section', // Parent container
-        // backdrop: true,
-        bottomClose: true,
-        //topperOverflow: true,
-        showDraggable: true,
-        simulateTouch: false,
-        draggableOver: true,
-        topperOverflowOffset: 200,
-        initialBreak: initPane,
-        breaks: {
-          top: {
-            enabled: true,
-            offset: topBreak
-          },
-          middle: {
-            enabled: true,
-            offset: window.innerHeight*.7
-          },
-        },
-        // onDidPresent: () => this.breakPointMapCupertino(),
-        onWillPresent: () => this.cupertinoShow(),
-        // onBackdropTap: () => this.infoPane.hide(),
-        onWillDismiss: () => this.cupertinoHide(),
-      }
+      panelOptions
     );
   }
   //
@@ -264,8 +387,12 @@ export class MapaPage implements OnInit {
   cupertinoHide(){
     this.list = 0;
     this.session.showSearchItem = true;
+    if ( this.map.route != null ) {
+      this.map.map.removeControl(this.map.route);
+      this.map.route = null;
+    }
     this.session.cupertinoState = 'cupertinoClosed';
-    this.map.flyToBounds(this.map.currentBounds);
+    this.map.flytomarker(this.map.userPosition, this.map.zoom);
   }
   //
   showPane() {
@@ -301,9 +428,19 @@ export class MapaPage implements OnInit {
       this.map.map.removeLayer(this.map.subZone);
       this.map.showZones(true);
       this.list = 1;
+      this.zoneVisible = 2;
     }
     else {
-      this.map.removeZones();
+      if ( this.list == 4 ) {
+        this.map.map.removeLayer(this.map.subZone);
+      }
+      if ( this.zoneVisible != 3 ) {
+        this.map.removeZones();
+      }
+      else {
+        this.map.showZones(false);
+      }
+      this.list = 0;
       this.infoPane.destroy({animate: true});
     }
   }
@@ -311,7 +448,7 @@ export class MapaPage implements OnInit {
   loadNearbyContainers(fly: boolean) {
     this.api.loadNearbyContainers(this.map.getBoundingCoords())
     .subscribe((containers) => {
-      this.map.loadMarkers(containers, fly);
+        this.map.loadMarkers(containers, fly);
     });
   }
   //
@@ -325,42 +462,59 @@ export class MapaPage implements OnInit {
           this.session.setCountry(country);
         }
       );
-      this.api.getNearbyContainers(2, [resp.coords.latitude, resp.coords.longitude])
-      .subscribe((containers) => {
-          this.map.loadMarkers(containers, true);
-      });
+      if ( this.autoSearch ) {
+        this.activateSearch(this.autoSearchItem);
+      }
+      else {
+        this.api.getNearbyContainers(2, [resp.coords.latitude, resp.coords.longitude])
+        .subscribe((containers) => {
+            this.map.loadMarkers(containers, true);
+        });
+      }
       //this.map.flytomarker(this.map.userPosition, 15);
     }).catch((error) => {
       this.noLocation();
-      this.uLocation = true;
-      if ( this.session.country != undefined ) {
-        this.api.getNearbyContainers(2, [this.map.center.lat, this.map.center.lng])
-        .subscribe((containers) => {
-          this.map.loadMarkers(containers, true);
-        });
-      }
     });
     setTimeout( () => {
-      if ( !this.uLocation ){
-        this.noLocation();
-      }
-    }, 5000);
+      this.noLocation();
+    }, 3000);
   }
   noLocation() {
-    let noRes = {
-      id: 'noLoc',
-      type: 'notification',
-      class: 'warnings',
-      title: 'No pudimos localizarte',
-      note: 'Quizás no le diste permiso o la localización está desactivada. Prueba iniciar la app con la localización activada. Puedes seleccionar tu ubicación tocando el mapa.',
-    };
-    this.notification.showNotification(noRes);
+    if ( !this.uLocation ){
+      this.uLocation = true;
+      let noRes = {
+        id: 'noLoc',
+        type: 'notification',
+        class: 'warnings',
+        title: 'No pudimos localizarte',
+        note: 'Quizás no le diste permiso o la localización está desactivada. Prueba iniciar la app con la localización activada. Puedes seleccionar tu ubicación tocando el mapa.',
+      };
+      this.notification.showNotification(noRes);
+      this.map.getUserPosition().then(
+        (res) => {
+          if ( res == undefined || res.length == 0 ) {
+            this.map.userPosition = [this.map.center.lat, this.map.center.lng];
+          }
+          if ( this.map.userPosition != undefined ) {
+            if ( this.autoSearch ) {
+              this.activateSearch(this.autoSearchItem);
+            }
+            else {
+              this.api.getNearbyContainers(2, [this.map.userPosition[0], this.map.userPosition[1]])
+              .subscribe((containers) => {
+                this.map.loadMarkers(containers, true);
+              });
+            }
+          }
+        }
+      );
+    }
   }
   //
   formatContainer(container: Container) {
     container.type_icon = this.api.container_types[container.type_id].icon;
-    container.program_icon = this.programs_sum[container.program_id].icon;
-    container.program = this.programs_sum[container.program_id].name;
+    container.program_icon = this.api.programs[container.program_id].icon ? this.api.programs[container.program_id].icon : '/assets/custom-icons/dr-generic.svg';
+    container.program = this.api.programs[container.program_id].name;
     this.container = container;
     if ( container.materials.length == 0 ) {
       this.api.getWastes(container.wastes).subscribe((wastes) => {
@@ -368,7 +522,10 @@ export class MapaPage implements OnInit {
       });
     }
     else {
-      this.container.receives = this.api.getMaterials(container.materials);
+      this.container.receives = [];
+      container.materials.forEach((i) => {
+        this.container.receives.push(this.api.materials[this.session.country][i]);
+      });
     }
     //Horario
     let days = [];
@@ -400,12 +557,26 @@ export class MapaPage implements OnInit {
     }
     container.schedules = days;
   }
+  //
+  formatSubProgram(subprograms) {
+    let zones = subprograms[0].zone.location;
+    subprograms.forEach( (subp, i) => {
+      if ( i != 0 ) {
+        zones.features.push(subp.zone.location.features[0]);
+      }
+      subprograms[i].program_icon = this.api.programs[subp.program_id].icon ? this.api.programs[subp.program_id].icon : '/assets/custom-icons/dr-generic.svg';
+      subprograms[i].program = this.api.programs[subp.program_id].name;
+    });
+    return zones;
+  }
   toggleSched() {
     this.showSched = !this.showSched;
   }
+  //
   geolocate() {
     this.gotoLocation();
   }
+  //
   getAddress(lat: number, long: number) {
     let options: NativeGeocoderOptions = {
       useLocale: true,
@@ -413,9 +584,9 @@ export class MapaPage implements OnInit {
     };
     this.geocoder.reverseGeocode(lat, long, options).then(results => {
       this.address = Object.values(results[0]).reverse();
-      console.log(this.address);
     });
   }
+  //
   newImage(event: any, id: number) {
     if ( this.authGuard.isActive() ) {
       this.fileType = { name: 'Cargando...', class: 'camera'};
@@ -456,6 +627,7 @@ export class MapaPage implements OnInit {
   }
   //
   subprograms4location() {
+    this.session.isLoading = true;
     var point: [number, number];
     if ( this.map.userPosition != undefined ) {
       point = this.map.userPosition;
@@ -465,61 +637,63 @@ export class MapaPage implements OnInit {
       this.map.userPosition = point;
       this.map.loadMarkers([], false);
     }
-    this.api.getSubprograms4Location(point).subscribe((subprograms) => {
-      this.map.removeZones();
-      if ( subprograms.length > 1 ) {
-        this.list = 1;
-        var zones = subprograms[0].zone.location;
-        subprograms.forEach( (subp, i) => {
-          if ( i != 0 ) {
-            zones.features.push(subp.zone.location.features[0]);
-          }
-          subprograms[i].program_icon = this.programs_sum[subp.program_id].icon;
-          subprograms[i].program = this.programs_sum[subp.program_id].name;
-        });
-        this.subprograms = subprograms;
-        this.infoPane.present({animate: true});
-        this.map.loadZones(zones);
-      }
-      else if ( subprograms.length == 1) {
-        this.list = 2;
-        var subp = subprograms[0];
-        subp.program_icon = this.programs_sum[subp.program_id].icon;
-        subp.program = this.programs_sum[subp.program_id].name;
-        this.subprograms = [subp];
-        this.subprogramShow(0);
-        this.infoPane.present({animate: true});
-      }
-      else {
-        let noRes = {
-          id: 'noSub',
-          type: 'notification',
-          class: 'alert',
-          title: 'No hay datos para la zona',
-          note: 'No tenemos datos de organizaciones que trabajen en la zona. ¿Conoces alguna?',
-          link: this.currentUrl,//'map.toggleZone',
-          link_title: 'Ver Zonas',
-          link_params: {"zones": 1}
-        };
-        this.notification.showNotification(noRes);
-      }
-    });
+    this.api.getSubprograms4Location(point).subscribe(
+      (subprograms) => {
+        this.map.removeZones();
+        let fixedPos:[number, number] = [this.map.userPosition[0] - 0.002, this.map.userPosition[1] ];
+        if ( subprograms.length > 1 ) {
+          this.list = 1;
+          var zones = this.formatSubProgram(subprograms);
+          this.subprograms = subprograms;
+          this.infoPane.present({animate: true});
+          this.map.loadZones(zones);
+          this.map.flytomarker(fixedPos, this.map.zoom);
+        }
+        else if ( subprograms.length == 1) {
+          this.formatSubProgram(subprograms);
+          //subp.program_icon = this.api.programs[subp.program_id].icon;
+          //subp.program = this.api.programs[subp.program_id].name;
+          this.subprograms = subprograms;
+          this.subprogramShow(0, 4);
+          this.infoPane.present({animate: true});
+          this.map.flytomarker(fixedPos, this.map.zoom);
+        }
+        else {
+          let noRes = {
+            id: 'noSub',
+            type: 'notification',
+            class: 'alert',
+            title: 'No hay datos para la zona',
+            note: 'No tenemos datos de organizaciones que trabajen en la zona. ¿Conoces alguna?',
+            link: this.session.homeUrl,//'map.toggleZone',
+            link_title: 'Ver Zonas',
+            link_params: {"zones": 1}
+          };
+          this.notification.showNotification(noRes);
+        }
+        this.session.isLoading = false;
+      },
+      err => this.session.isLoading = false,
+      () => this.session.isLoading = false
+    );
   }
   //
-  subprogramShow(index: number) {
+  subprogramShow(index: number, list = 2) {
     this.subprogram = this.subprograms[index];
-    this.list = 2;
+    this.list = list;
     this.map.removeZones();
     this.map.showSubZone(this.subprograms[index].zone.location.features[0]);
   }
   //
-  getZones() {
+  getZones(getNext = true) {
     let zoneBtn = document.querySelector(".map-zones");
     if ( this.zoneVisible == 3 ) {
+      zoneBtn.classList.remove('selected');
       this.map.removeZones();
       this.zoneVisible = 0;
     }
     else if ( this.zoneVisible == 0 ) {
+      zoneBtn.classList.remove('selected');
       this.zoneVisible = 1;
       zoneBtn.classList.add('active');
       setTimeout( () => {
@@ -534,9 +708,22 @@ export class MapaPage implements OnInit {
       this.api.getZones4Boundaries(bounds).subscribe(
         (zones) => {
           this.map.removeZones();
-          zoneBtn.classList.remove('active');
+          if ( !zoneBtn.classList.contains('selected') ) {
+            zoneBtn.classList.remove('active');
+            zoneBtn.classList.add('selected');
+          }
           this.zoneVisible = 3;
-          this.map.loadZones(zones);
+          if ( zones['features'].length == 0 && getNext ) {
+            this.api.getNextZone( [ this.map.map.getCenter().lat, this.map.map.getCenter().lng ] ).subscribe(
+              (zone) => {
+                this.map.loadZones(zone, true);
+                this.map.showSubZone(zone[0]);
+              }
+            )
+          }
+          else {
+            this.map.loadZones(zones);
+          }
         }
       );
     }

@@ -33,6 +33,10 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.notification.notificationSetup();
     });
+    let ua = navigator.userAgent;
+    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i.test(ua)) {
+      this.session.is_mobile = true;
+    }
   }
 
     // La cifra al final de este bloque es la cantidad de milisegundos del loading, cargador o splash

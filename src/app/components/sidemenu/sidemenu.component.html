@@ -76,13 +76,11 @@
           <ion-icon slot="end"
             name="chevron-forward-outline"></ion-icon>
         </ion-item>
-        <ion-item class= "inicio"
+        <ion-item
           lines="none"
-          (click)="toggleMenu()"
+          (click)="goToMap()"
           detail-icon="none"
-          routerDirection="forward"
-          routerLink="intro"
-          routerLinkActive="active-item">
+          [ngClass]="map.isMapPage() ? 'inicio active-item' : 'inicio'">
           <ion-icon slot="start"
             name="dr-inicio"></ion-icon>
           <div>

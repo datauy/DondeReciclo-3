@@ -32,6 +32,12 @@
           left: 57px;
         }
       }
+      span {
+        color: var(--vidrio);
+        justify-content: center;
+        display: flex;
+        margin-top: 30px;
+      }
     }
 
     #suggestions {

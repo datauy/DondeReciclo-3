@@ -277,6 +277,14 @@
     display: none;
   }
   /******** MAP PAGE **************/
+  .cupertinoOpen {
+    .leaflet-control-container .leaflet-top {
+      top: 100px;
+    }
+    ion-content .map-buttons .map-locate {
+      top: 216px;
+    }
+  }
   .leaflet-control-container .leaflet-top {
     top: 156px;
     z-index: 400;
@@ -368,7 +376,9 @@ accordion ion-list {
   z-index: 1050;
   box-sizing: content-box;
   text-align: center;
-
+  ion-grid {
+    padding: 0;
+  }
   img {
     margin: auto;
     float: left;
@@ -605,6 +615,10 @@ ion-app {
   #header-main ion-toolbar {
     // height: auto;
   }
+  &.container,
+  &.contenedor,
+  &.material,
+  &.residuo,
   &.mapa {
     .ion-page {
       #header-main ion-toolbar {
@@ -793,6 +807,9 @@ ion-img.logo {
   .map-zones {
     display: none;
   }
+  ion-content .map-locate {
+    top: 212px;
+  }
 }
 #map{
   .dr-marker{
@@ -809,8 +826,14 @@ ion-img.logo {
     /* Similar syntax to box-shadow */
   }
 }
-.cupertino-pane {
+.cupertino-pane-wrapper {
+  //position: relative;
   z-index: 500;
+  .pane {
+    max-width: none;
+  }
+}
+.cupertino-pane {
   .pane {
     overflow: visible !important;
     padding: 2px 14px;
