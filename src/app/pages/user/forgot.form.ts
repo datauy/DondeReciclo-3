@@ -20,8 +20,10 @@ export class ForgotForm implements OnInit {
   ) { }
 
   user_data: FormGroup;
+  homeUrl: string;
 
   ngOnInit() {
+    this.homeUrl = this.session.homeUrl
     this.user_data = this.formBuilder.group({
       email: new FormControl('', Validators.compose([
         Validators.required,
