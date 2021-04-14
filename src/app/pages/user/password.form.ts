@@ -14,6 +14,7 @@ export class PasswordForm implements OnInit {
   public success: boolean;
   public fail: boolean;
   showPass = false;
+  homeUrl: string;
 
   constructor(
     public formBuilder: FormBuilder,
@@ -25,6 +26,7 @@ export class PasswordForm implements OnInit {
   user_data: FormGroup;
   //
   ngOnInit() {
+    this.homeUrl = this.session.homeUrl;
     this.user_data = this.formBuilder.group({
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
       confirmPassword: new FormControl('', Validators.required),
