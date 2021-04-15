@@ -58,7 +58,7 @@ export class ApiService<T=any> {
   }
   //
   getWastes(ids: number[]) :Observable<Material[]>  {
-    return this.request.get(environment.backend + "wastes?locale=" + environment[this.session.country].locale + "&ids=" + ids.join()).pipe(
+    return this.request.get(environment.backend + "wastes?version="+environment.apiVersion+"&locale=" + environment[this.session.country].locale + "&ids=" + ids.join()).pipe(
       map( (result: Material[]) => {
         return result;
       })
@@ -66,7 +66,7 @@ export class ApiService<T=any> {
   }
   //
   loadMaterials(country: string): Observable<Material[]> {
-    return this.request.get(environment.backend + "materials?locale=" + environment[country].locale).pipe(map(
+    return this.request.get(environment.backend + "materials?version="+environment.apiVersion+"&locale=" + environment[country].locale).pipe(map(
       (result: Material[]) => {
         //Check images
         //for (let key in result) {
@@ -121,7 +121,7 @@ export class ApiService<T=any> {
   /**********************/
   //
   getNewsList(page: number, country: string) {
-    return  this.request.get(environment.backend + "news?country="+ country +"&page="+ page).pipe(map(
+    return  this.request.get(environment.backend + "news?version="+environment.apiVersion+"&country="+ country +"&page="+ page).pipe(map(
       (result: News[]) => {
         return result;
       }
@@ -131,7 +131,7 @@ export class ApiService<T=any> {
   getNew(id: number, full: boolean) {
     var url = environment.backend + "new/"+id;
     if (full) {
-      url += "?full=1"
+      url += "?version="+environment.apiVersion+"&full=1"
     }
     return  this.request.get(url).pipe(map(
       (result: News) => {
@@ -165,7 +165,7 @@ export class ApiService<T=any> {
     if (typeof location == undefined) {
       location = environment[this.session.country].center;
     }
-    return  this.request.get(environment.backend + "containers_nearby?lat="+location[0]+"&lon="+location[1]+"&radius="+radius).pipe(map(
+    return  this.request.get(environment.backend + "containers_nearby?version="+environment.apiVersion+"&lat="+location[0]+"&lon="+location[1]+"&radius="+radius).pipe(map(
       (result: Container[]): Container[] => {
         return this.formatMarker(result);
       }
@@ -173,14 +173,14 @@ export class ApiService<T=any> {
   }
 
   getContainers(bbox: string[]) {
-    return  this.request.get(environment.backend + "containers_bbox?sw="+bbox[0]+"&ne="+bbox[1]).pipe(map(
+    return  this.request.get(environment.backend + "containers_bbox?version="+environment.apiVersion+"&sw="+bbox[0]+"&ne="+bbox[1]).pipe(map(
       (result: Container[]) => {
         return this.formatMarker(result);
       }
     ));
   }
   getContainers4Materials(bbox: string[], query: string) {
-    return  this.request.get(environment.backend + "containers_bbox4materials?sw="+bbox[0]+"&ne="+bbox[1]+"&"+query).pipe(map(
+    return  this.request.get(environment.backend + "containers_bbox4materials?version="+environment.apiVersion+"&sw="+bbox[0]+"&ne="+bbox[1]+"&"+query).pipe(map(
       (result: Container[]) => {
         return this.formatMarker(result);
       }
@@ -188,7 +188,7 @@ export class ApiService<T=any> {
   }
   //
   getContainersByMaterials(query: string, location?: number[]) {
-    var url = environment.backend + "containers4materials?"+query;
+    var url = environment.backend + "containers4materials?version="+environment.apiVersion+"&"+query;
     if ( typeof location == 'undefined' || location == null ) {
       location = environment[this.session.country].center;
     }
@@ -203,49 +203,49 @@ export class ApiService<T=any> {
     ));
   }
   getSubContainers(subs: string) {
-    return  this.request.get(environment.backend + "subprogram_containers?sub_ids="+subs).pipe(map(
+    return  this.request.get(environment.backend + "subprogram_containers?version="+environment.apiVersion+"&sub_ids="+subs).pipe(map(
       (result: Container[]) => {
         return this.formatMarker(result);
       }
     ));
   }
   getContainersIds(cids: string) {
-    return  this.request.get(environment.backend + "containers?container_ids="+cids).pipe(map(
+    return  this.request.get(environment.backend + "containers?version="+environment.apiVersion+"&container_ids="+cids).pipe(map(
       (result: Container[]) => {
         return this.formatMarker(result);
       }
     ));
   }
   getSubprograms4Location(latlng: number[]) {
-    return  this.request.get(environment.backend + "subprograms4location?wkt=POINT("+latlng[1]+' '+latlng[0]+')').pipe(map(
+    return  this.request.get(environment.backend + "subprograms4location?version="+environment.apiVersion+"&wkt=POINT("+latlng[1]+' '+latlng[0]+')').pipe(map(
       (result: Subprogram[]) => {
         return result;
       }
     ));
   }
   getSubprogramByZone(zone_id: number) {
-    return  this.request.get( environment.backend + "subprogram4location?zone="+zone_id ).pipe(map(
+    return  this.request.get( environment.backend + "subprogram4location?version="+environment.apiVersion+"&zone="+zone_id ).pipe(map(
       (subp: Subprogram[]) => {
         return subp;
       }
     ));
   }
   getCountryByLocation(latlng: number[]) {
-    return  this.request.get( environment.backend + "country4Point?wkt=POINT("+latlng[1]+' '+latlng[0]+')' ).pipe(map(
+    return  this.request.get( environment.backend + "country4Point?version="+environment.apiVersion+"&wkt=POINT("+latlng[1]+' '+latlng[0]+')' ).pipe(map(
       (country: string) => {
         return country;
       }
     ));
   }
   getZones4Boundaries(bounds: string) {
-    return  this.request.get( environment.backend + "location4Polygon?wkt="+bounds ).pipe(map(
+    return  this.request.get( environment.backend + "location4Polygon?version="+environment.apiVersion+"&wkt="+bounds ).pipe(map(
       (zones: L.GeoJSON) => {
         return zones;
       }
     ));
   }
   getNextZone(latlng: number[]) {
-    return  this.request.get( environment.backend + "zone4point?wkt=POINT("+latlng[1]+' '+latlng[0]+')' ).pipe(map(
+    return  this.request.get( environment.backend + "zone4point?version="+environment.apiVersion+"&wkt=POINT("+latlng[1]+' '+latlng[0]+')' ).pipe(map(
       (zones: L.GeoJSON) => {
         return zones;
       }
@@ -264,7 +264,7 @@ export class ApiService<T=any> {
   /***********************/
   //
   getResults(str: string){
-    return  this.request.get(environment.backend + "search?locale=" + environment[this.session.country].locale  + "&q="+str).pipe(map(
+    return  this.request.get(environment.backend + "search?version="+environment.apiVersion+"&locale=" + environment[this.session.country].locale  + "&q="+str).pipe(map(
       (result: any[]) => {
         if (result.length) {
           return result;
@@ -296,7 +296,7 @@ export class ApiService<T=any> {
   }
   //Address search
   getAddressLocation(str: string) {
-    return  this.request.get(environment.geocoder + "search?q="+str+','+this.session.country+'&countrycodes='+environment[this.session.country].code+'&format=json').pipe(map(
+    return  this.request.get(environment.geocoder + "search?version="+environment.apiVersion+"&q="+str+','+this.session.country+'&countrycodes='+environment[this.session.country].code+'&format=json').pipe(map(
       (result: any[]) => {
         if (result.length) {
           return this.formatAddressOptions(result);
