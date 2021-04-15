@@ -23,6 +23,7 @@ export const environment = {
   },
   geocoder: 'https://nominatim.openstreetmap.org/',
   pinSaturation: 200,
+  apiVersion: '1.3'
 };
 
 /*
