@@ -150,6 +150,7 @@ export class MapaPage implements OnInit {
         this.mapaRouter();
         // route for childs and params
         if ( this.loadSubContainers != undefined || this.loadContainers != undefined ) {
+          this.gotoLocation(false);
           if ( this.loadSubContainers != undefined ) {
             this.api.getSubContainers(this.loadSubContainers).subscribe(
               (containers) => {
@@ -167,6 +168,7 @@ export class MapaPage implements OnInit {
         }
         else {
           if ( this.loadContainer > 0) {
+            this.gotoLocation(false);
             this.showPane();
           }
           else {
@@ -392,7 +394,10 @@ export class MapaPage implements OnInit {
       this.map.route = null;
     }
     this.session.cupertinoState = 'cupertinoClosed';
-    this.map.flytomarker(this.map.userPosition, this.map.zoom);
+    this.map.flyToBounds([
+      [this.map.currentContainer.latitude, this.map.currentContainer.longitude],
+      this.map.userPosition
+    ]);
   }
   //
   showPane() {
@@ -452,7 +457,7 @@ export class MapaPage implements OnInit {
     });
   }
   //
-  gotoLocation() {
+  gotoLocation(load=true) {
     this.geo.getCurrentPosition({ enableHighAccuracy: false }).then( (resp) => {
       this.uLocation = true;
       this.map.userPosition = [resp.coords.latitude, resp.coords.longitude];
@@ -466,20 +471,22 @@ export class MapaPage implements OnInit {
         this.activateSearch(this.autoSearchItem);
       }
       else {
-        this.api.getNearbyContainers(2, [resp.coords.latitude, resp.coords.longitude])
-        .subscribe((containers) => {
+        if (load) {
+          this.api.getNearbyContainers(2, [resp.coords.latitude, resp.coords.longitude])
+          .subscribe((containers) => {
             this.map.loadMarkers(containers, true);
-        });
+          });
+        }
       }
       //this.map.flytomarker(this.map.userPosition, 15);
     }).catch((error) => {
-      this.noLocation();
+      this.noLocation(load);
     });
     setTimeout( () => {
-      this.noLocation();
+      this.noLocation(load);
     }, 3000);
   }
-  noLocation() {
+  noLocation(load=true) {
     if ( !this.uLocation ){
       this.uLocation = true;
       let noRes = {
@@ -500,10 +507,12 @@ export class MapaPage implements OnInit {
               this.activateSearch(this.autoSearchItem);
             }
             else {
-              this.api.getNearbyContainers(2, [this.map.userPosition[0], this.map.userPosition[1]])
-              .subscribe((containers) => {
-                this.map.loadMarkers(containers, true);
-              });
+              if (load) {
+                this.api.getNearbyContainers(2, [this.map.userPosition[0], this.map.userPosition[1]])
+                .subscribe((containers) => {
+                  this.map.loadMarkers(containers, true);
+                });
+              }
             }
           }
         }

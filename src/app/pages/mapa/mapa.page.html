@@ -199,7 +199,7 @@
             slot="start"></div>
             <h5>Recibe:</h5>
           </ion-item>
-          <ion-item lines="none">
+          <ion-item lines="none" class="no-margin">
             <div class="tags-wrapper">
               <ion-button *ngFor="let mat of container.receives;"
                 [ngClass]="mat.class"
@@ -209,6 +209,9 @@
                 <ion-label [innerHTML]="mat.name"></ion-label>
               </ion-button>
             </div>
+          </ion-item>
+          <ion-item class="label-item" lines="none">
+            <span [innerHTML]="container.receives_text"></span>
           </ion-item>
         </div>
         <ion-item lines="none" *ngIf="container.reception_conditions != undefined && container.reception_conditions != ''">

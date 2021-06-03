@@ -39,6 +39,9 @@
         display: flex;
         flex-flow: row wrap;
         margin-bottom: 20px;
+        &.no-margin {
+          margin-bottom: 0;
+        }
         &.header {
           margin-top: 10px;
         }
