@@ -136,6 +136,10 @@
   .no-margin {
     margin: 0;
   }
+  .inline {
+    display: inline-flex;
+    align-items: center;
+  }
   .back-button {
     position: absolute;
     top: 56px;
