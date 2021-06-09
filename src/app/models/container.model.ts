@@ -12,4 +12,5 @@ export class Container extends Base {
     materials: number[];
     photos: string[];
     address: string;
+    main_material: number;
 }

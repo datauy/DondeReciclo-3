@@ -4,7 +4,7 @@
 </app-header>
 <ion-content class="news-detail">
   <div class="section-header image-wrapper">
-    <img *ngIf="article.images" src="{{article.images[0]}}" alt="Novedad imagen"/>
+    <img src="{{article.images.length ? article.images[0] : '/assets/img/splash.png'}}" alt="Novedad imagen"/>
   </div>
   <div class="section-body">
     <h1 [innerHTML]="article.title"></h1>

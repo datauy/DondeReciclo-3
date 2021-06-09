@@ -1,9 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonMenu, MenuController, IonSearchbar, NavController } from '@ionic/angular';
+import { IonMenu, MenuController} from '@ionic/angular';
 import { ApiService } from "src/app/services/api.service";
 import { SessionService } from "src/app/services/session.service";
 import { AuthService } from "src/app/services/auth.service";
-//import { createAnimation, Animation } from '@ionic/core';
+import { environment } from 'src/environments/environment';
+import { MapService } from "src/app/services/map.service";
+import { Router } from "@angular/router";
+
 @Component({
   selector: 'app-sidemenu',
   templateUrl: './sidemenu.component.html',
@@ -47,12 +50,12 @@ export class SidemenuComponent implements OnInit {
     public api: ApiService,
     public session: SessionService,
     public auth: AuthService,
+    private router: Router,
+    public map: MapService
   ) {
   }
 
   ngOnInit() {
-    this.api.loadInitialData().subscribe( () =>  { // console.log(this.predefinedOptions)
-    });
     this.auth.isLoggedIn();
   }
 
@@ -74,11 +77,15 @@ export class SidemenuComponent implements OnInit {
   }
   closeSession() {
     this.auth.logout();
+    this.router.navigate(['/']);
     this.toggleMenu();
   }
   //Country selection
   selectCountry(country: string) {
-    this.session.country = country;
+    this.map.selectCountry(country);
     this.toggleMenu();
+  }
+  goToMap() {
+    this.map.reRoute();
   }
 }

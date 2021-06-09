@@ -12,6 +12,8 @@ import { NotFoundPage } from './static-pages/notfound.page';
 import { AboutPage } from './static-pages/about.page';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { AccordionComponent } from './accordion/accordion.component';
+import { NotificationComponent } from './notification/notification.component';
+import { ImageSliderComponent } from './image-slider/image-slider.component';
 //import { TestDirective } from './test.directive';
 
 @NgModule({
@@ -21,7 +23,7 @@ import { AccordionComponent } from './accordion/accordion.component';
     RouterModule,
     AutoCompleteModule,
     FormsModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule
     // SimpleServiceModule
   ],
   declarations: [
@@ -31,13 +33,16 @@ import { AccordionComponent } from './accordion/accordion.component';
     NotFoundPage,
     AboutPage,
     ContactFormComponent,
-    AccordionComponent
+    AccordionComponent,
+    NotificationComponent,
+    ImageSliderComponent
   ],
   exports: [
     SidemenuComponent,
     HeaderComponent,
     SocialShareComponent,
     AccordionComponent,
+    ImageSliderComponent
     //TestDirective
     // SimpleServiceComponent
   ],

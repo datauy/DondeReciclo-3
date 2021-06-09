@@ -1,6 +1,5 @@
-
 ![Donde reciclo](src/assets/img/generico.png)
- # Donde Reciclo v3.4
+ # Donde Reciclo v3.7
 ![](https://img.shields.io/badge/version-v3.4-blue) ![](https://img.shields.io/badge/build-ionic-blue) ![](https://img.shields.io/github/issues/datauy/DondeReciclo-3) ![](https://img.shields.io/github/license/datauy/DondeReciclo-3) ![](https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2Fdatauy%2FDondeReciclo-3)
 ## Indice
 
@@ -137,27 +136,3 @@ contacto@data.org.uy
 </td>
 </tr>
 </table>
-
-
-<!-- ## Incluye v3.4.0
-
-* Menú principal y secundario con navegación móvil y desktop
-* Mapa con geolocaliazción y centros de reciclaje
-* Rutas a los contenedores próximos
-* Busqueda de Materiales reciclables y localización de contenedores
-* Compartir en redes sociales
-* Fichas de materiales
-* Consejos para deposición de materiales
-* Programas de reciclaje
-* Formulario de contacto
-* Creación de usuarios
-* Login de usuarios
-* Reseteo de contraseña
-* Función de reporte de contenedores
-* Subir fotos de contenedores
-* Editar perfil
-
-## Bitácora de cambios (changelog)
-http://soporte.data.org.uy/es/blog/dr-changelog
-
-

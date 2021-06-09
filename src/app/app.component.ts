@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Platform } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { SessionService } from './services/session.service';
 import { NotificationsService } from './services/notifications.service';
+import { UtilsService } from './services/utils.service';
 
 @Component({
   selector: 'app-root',
@@ -21,9 +20,8 @@ export class AppComponent {
 
   constructor(
     private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
     public session: SessionService,
+    public utils: UtilsService,
     public notification: NotificationsService,
     private router: Router,
   ) {
@@ -33,32 +31,32 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
       this.notification.notificationSetup();
     });
+    let ua = navigator.userAgent;
+    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i.test(ua)) {
+      this.session.is_mobile = true;
+    }
   }
 
     // La cifra al final de este bloque es la cantidad de milisegundos del loading, cargador o splash
 
   ngAfterViewInit() {
+    if ( this.session.country == undefined || this.session.country == '' ) {
+      if ( window.location.host == 'dondereciclo.co' ) {
+        this.session.country = 'Colombia'
+      }
+      else {
+        if ( window.location.host == 'dondereciclo.uy' ) {
+          this.session.country = 'Uruguay'
+        }
+      }
+    }
     setTimeout( () => {
       this.session.isLoading = false;
     }, 3000);
   }
-
-  closeNotification() {
-    this.notification.notificationClose();
-  }
-  //
-  followLink(url: string) {
-    this.notification.notificationClose();
-    console.log(url.substring(0,3));
-    if ( url.substring(0,4) == 'http' ) {
-      window.open(url, "_blank");
-    }
-    else {
-      this.router.navigate([url]);
-    }
+  overlayClose() {
+    this.utils.showOverlay = false;
   }
 }

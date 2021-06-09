@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Container } from "src/app/models/basic_models.model";
-import { environment } from 'src/environments/environment';
-import "leaflet";
-import "leaflet-routing-machine";
+import { Router } from "@angular/router";
+import { Storage } from  '@ionic/storage';
 
+import { environment } from 'src/environments/environment';
 import { SessionService } from 'src/app/services/session.service';
 
+import "leaflet";
+import "leaflet-routing-machine";
 declare let L;
 
 const iconUrl = 'assets/custom-icons/dr-pin.svg';
@@ -130,15 +132,29 @@ export class MapService {
   currentBounds: [number, number][];
   animating: boolean;
   markers: L.LayerGroup;
+  zones: L.FeatureGroup;
+  subZone: L.FeatureGroup;
+  saturationWarn = false;
+  eagerLoad = false;
   private _pinClick = new BehaviorSubject<boolean>(false);
+  private _zoneClick = new BehaviorSubject<any>(0);
   private _mapChangeSub = new BehaviorSubject<boolean>(false);
+  public _autoSearch = new BehaviorSubject<any>(null);
   public zoom:number = 15;
   public center:L.LatLng;
   //
+  initParams = true;
+
   constructor(
-    private session: SessionService
+    private session: SessionService,
+    private router: Router,
+    private  storage:  Storage
   ) {
-    this.center = environment[this.session.country].center;
+    this.session.getCountry().then( (country) => {
+      if ( country != undefined ) {
+        this.center = environment[country].center;
+      }
+    });
   }
 
   loadMap(center?: number[]) {
@@ -159,7 +175,7 @@ export class MapService {
         if (this.userMarker) { // check
           this.map.removeLayer(this.userMarker); // remove
         }
-        this.userPosition = [e.latlng.lat, e.latlng.lng];
+        this.setUserPosition([e.latlng.lat, e.latlng.lng]);
         this.userMarker = L.marker(this.userPosition, {icon: iconUser} ).addTo(this.map); // add the marker onclick
         if (this.route) {
           this.route.spliceWaypoints(0, 1, e.latlng);
@@ -173,8 +189,15 @@ export class MapService {
     return true;
   }
 
-  loadMarkers( markers: Container[], fly:boolean ){
+  loadMarkers( markers: Container[], fly = true ){
+    //Prevent marker load over saturation level
     this.containers = markers;
+    if ( markers.length > environment.pinSaturation && !this.eagerLoad ) {
+      this.saturationWarn = true;
+      this.mapChanges();
+      return;
+    }
+    this.saturationWarn = false;
     let mapBounds = [];
     //remove all markers and reload
     if ( this.markers != undefined ) {
@@ -192,16 +215,16 @@ export class MapService {
     for (var i = 0; i < markers.length; i++) {
       var newMarker = new L.CustomMarker([markers[i].latitude,markers[i].longitude], {container_pos: i, className: "ion-color-"+markers[i].class })
       .on('click', this.clickPin, this); //L.bind(this.showPane, null, markers[i]))
-      if ( center_markers != 0 ) {
+      if ( center_markers != 0 && fly ) {
         mapBounds.push([markers[i].latitude, markers[i].longitude]);
         center_markers = center_markers - 1;
       }
       markersLayer.push(newMarker);
     }
     this.markers = L.layerGroup(markersLayer).addTo(this.map);
-    this.currentBounds = mapBounds;
-    if ( markers.length > 0 ) {
+    if ( mapBounds.length > 0 ) {
       if ( fly ) {
+        this.currentBounds = mapBounds;
         this.flyToBounds(mapBounds);
       }
       return 1;
@@ -223,7 +246,7 @@ export class MapService {
         //this.getAddress(e.latitude, e.longitude);
       this.userMarker.on("dragend", () => {
         let userPos = this.userMarker.getLatLng();
-        this.userPosition = [ userPos[0], userPos[1] ] ;
+        this.setUserPosition( [ userPos[0], userPos[1] ] );
         //this.getAddress(position.lat, position.lng);
         //console.log(position.lat, position.lng);
       });
@@ -270,7 +293,7 @@ export class MapService {
     this.map.once('moveend', this.toggleAnimation, this);
   }
   //
-  resizeMap(zoom: number) {
+  resizeMap(zoom?: number) {
     if ( zoom ){
       this.zoom = zoom;
     }
@@ -284,9 +307,16 @@ export class MapService {
     this.currentContainer = this.containers[pos];
     this._pinClick.next(true);
   }
-  //Experimental Observable
+  //Observable
   get pinClicked() {
     return this._pinClick.asObservable();
+  }
+  clickZone(zone) {
+    this._zoneClick.next(zone);
+  }
+  //Observable
+  get zoneClicked() {
+    return this._zoneClick.asObservable();
   }
   zoomChange() {
     this.zoom = this.map.getZoom();
@@ -305,6 +335,120 @@ export class MapService {
   }
   get mapChanged() {
     return this._mapChangeSub.asObservable();
+  }
+  //Observable as function
+  get autoSearch() :any {
+    return this._autoSearch.asObservable();
+  }
+  //
+  getBoundsWKT() {
+    let bounds = this.map.getBounds();
+    return "POLYGON(("
+    + Object.values(bounds.getNorthWest()).reverse().join(' ') +","
+    + Object.values(bounds.getSouthWest()).reverse().join(' ') +","
+    + Object.values(bounds.getSouthEast()).reverse().join(' ') +","
+    + Object.values(bounds.getNorthEast()).reverse().join(' ') +","
+    + Object.values(bounds.getNorthWest()).reverse().join(' ') +"))";
+  }
+  //
+  loadZones(layers: L.GeoJSON, zoom2zone = false, fixPosition = false) {
+    const _this = this;
+    var bounds = [];
+    var zonesData = L.featureGroup();
+    L.geoJSON(
+      layers, {
+        onEachFeature: function (feature, layer) {
+          layer.
+          on('popupopen', function(e) {
+            //_this.userPosition = [ e.popup._latlng.lat, e.popup._latlng.lng];
+            //_this.loadMarkers([], false);
+            _this.clickZone(this);
+          });
+          if ( feature.properties.subprograms != undefined && feature.properties.name != undefined ) {
+            layer.bindPopup('<div>'+feature.properties.name+'</div><small>'+feature.properties.subprograms.join('<br>')+'</small>');
+          }
+          if (zoom2zone) {
+            bounds.push(layer.getBounds());
+          }
+          layer.addTo(zonesData);
+        }
+      }
+    );
+    zonesData.addTo(this.map);
+    this.zones = zonesData;
+    if ( zoom2zone && bounds.length > 0 ) {
+      bounds.push(this.userPosition);
+      this.currentBounds = bounds;
+      if ( fixPosition ) {
+        this.flyToBounds( bounds, {paddingBottomRight: [0,400]} );
+      }
+      else {
+        this.flyToBounds( bounds );
+      }
+    }
+  }
+  //
+  removeZones() {
+    if ( this.zones != undefined ) {
+      this.map.removeLayer(this.zones);
+    }
+  }
+  //
+  showZones( zoom2zone: boolean, index?: number) {
+    if ( this.zones != undefined ) {
+        this.map.addLayer(this.zones);
+      if (zoom2zone) {
+        var zoneBounds = [];
+        var sw = this.zones.getBounds().getSouthWest();
+        var ne = this.zones.getBounds().getSouthWest();
+        this.flyToBounds( [
+          [ne.lat, ne.lng],
+          [sw.lat, sw.lng],
+          this.userPosition,
+        ]);
+      }
+    }
+  }
+  showSubZone(layer: L.GeoJSON) {
+    this.subZone = L.geoJSON( layer );
+    this.subZone.addTo(this.map);
+  }
+  //Country selection
+  selectCountry(country: string) {
+    this.session.setCountry(country);
+    this.removeUserPosition();
+    this.center = L.latLng(environment[country].center);
+    this.reRoute();
+  }
+
+  reRoute(){
+    if ( !this.router.routerState.snapshot.url.startsWith('/intro/mapa') || this.map == undefined ) {
+      this.router.navigate([this.session.homeUrl]);
+    }
+    else {
+      this.resizeMap(17);
+    }
+  }
+  isMapPage() {
+    if ( this.router.routerState.snapshot.url.startsWith('/intro/mapa') ) {
+      return true;
+    }
+    return false;
+  }
+  async getUserPosition() {
+    return this.storage.get("userPosition").then(
+      (up) => {
+        return this.userPosition = up;
+      }
+    );
+  }
+  setUserPosition(coords:[number, number]) {
+    this.userPosition = [ coords[0], coords[1] ];
+    this.storage.set("userPosition", this.userPosition);
+  }
+  removeUserPosition() {
+    delete this.userPosition;
+    this.storage.remove("userPosition");
   }
   //Create additional Control placeholders, to group all control buttons
   /*addControlPlaceholders(map: L.Map) {

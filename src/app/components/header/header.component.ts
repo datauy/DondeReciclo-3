@@ -2,6 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MenuController, ModalController} from '@ionic/angular';
 import { Location } from "@angular/common";
 import { SocialShareComponent } from '../social-share/social-share.component';
+
+import { MapService } from "src/app/services/map.service";
+
+import { environment } from 'src/environments/environment';
 import { SessionService } from 'src/app/services/session.service';
 
 @Component({
@@ -9,25 +13,23 @@ import { SessionService } from 'src/app/services/session.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   @Input('title') title: any;
   @Input('display') display: any;
   @Input('backButton') backButton: boolean;
   @Input('backLink') backLink: any;
 
+  environment = environment;
+
   constructor(
     public menuCtrl: MenuController,
     public modalController: ModalController,
     public session: SessionService,
-    private location: Location
+    private location: Location,
+    private map: MapService
   ) {
-    this.session = session;
   }
-
-  ngOnInit() {
-
-  }
-
+  //
   goBack(){
     /*if (this.backLink){
       this.navCtrl.navigateBack(this.backLink);
@@ -49,5 +51,16 @@ export class HeaderComponent implements OnInit {
       cssClass: 'share-modal'
     });
     return await modal.present();
+  }
+  //
+  changeCountry(country: string){
+    this.map.selectCountry(country);
+  }
+  selectCountry(country: string){
+    this.map.selectCountry(country);
+    //Wait for animation to finish and load markers
+    setTimeout( () => {
+      this.map.mapChanges();
+    }, 6000);
   }
 }

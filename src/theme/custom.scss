@@ -127,17 +127,24 @@
       // --transition	Transition of the button
     }
   }
+  ion-checkbox{
+    min-width: 18px;
+  }
+  .error {
+    color: var(--residuos-peligrosos);
+  }
   .no-margin {
     margin: 0;
   }
   .back-button {
     position: absolute;
-    //top: 17px;
+    top: 56px;
     background: var(--vidrio);
     padding: 0;
     left: 20px;
     border-radius: 24px;
-    z-index: 10;
+    z-index: 11;
+    box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2);
   }
   .sc-ion-buttons-ios-s ion-button {
     height: 48px;
@@ -270,6 +277,14 @@
     display: none;
   }
   /******** MAP PAGE **************/
+  .cupertinoOpen {
+    .leaflet-control-container .leaflet-top {
+      top: 100px;
+    }
+    ion-content .map-buttons .map-locate {
+      top: 216px;
+    }
+  }
   .leaflet-control-container .leaflet-top {
     top: 156px;
     z-index: 400;
@@ -355,11 +370,15 @@ accordion ion-list {
   left: 0;
   width: 100%;
   height: 100%;
+  min-width: 100vw;
+  min-height: 100vh;
   background: var(--dark-sea-green);
   z-index: 1050;
   box-sizing: content-box;
   text-align: center;
-
+  ion-grid {
+    padding: 0;
+  }
   img {
     margin: auto;
     float: left;
@@ -596,6 +615,10 @@ ion-app {
   #header-main ion-toolbar {
     // height: auto;
   }
+  &.container,
+  &.contenedor,
+  &.material,
+  &.residuo,
   &.mapa {
     .ion-page {
       #header-main ion-toolbar {
@@ -608,6 +631,7 @@ ion-app {
     &.cupertinoOpen{
       #header-main ion-toolbar {
         height: 0;
+        --min-height: 0;
         @extend .dr-transition;
       }
       #search-app-content{
@@ -615,9 +639,10 @@ ion-app {
         @extend .dr-transition;
         // @extend .hide;
       }
+      .toolbar-wraper,
       ion-tab-bar {
         @extend .dr-transition;
-        display: none;
+        display: none !important;
       }
     }
     &.cupertinoClosed{
@@ -774,6 +799,18 @@ ion-img.logo {
 /***************************/
 /*        MAP PAGE        */
 /*************************/
+.cupertinoOpen {
+  #map {
+    height: 40vh !important;
+  }
+  .header-wrapper,
+  .map-zones {
+    display: none;
+  }
+  ion-content .map-locate {
+    top: 212px;
+  }
+}
 #map{
   .dr-marker{
     fill: var(--ion-color-base);
@@ -789,8 +826,14 @@ ion-img.logo {
     /* Similar syntax to box-shadow */
   }
 }
-.cupertino-pane {
+.cupertino-pane-wrapper {
+  //position: relative;
   z-index: 500;
+  .pane {
+    max-width: none;
+  }
+}
+.cupertino-pane {
   .pane {
     overflow: visible !important;
     padding: 2px 14px;

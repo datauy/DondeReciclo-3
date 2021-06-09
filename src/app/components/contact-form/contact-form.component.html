@@ -17,37 +17,61 @@
             <ion-label position="floating">Nombre</ion-label>
             <ion-input  formControlName="name" type="text"></ion-input>
           </ion-item>
+          <small class="error" *ngIf="
+            user_data.controls.name.errors &&
+            user_data.controls.name.errors.required &&
+            user_data.controls.name.touched">
+            Por favor ingrese su nombre
+          </small>
           <ion-item>
             <ion-label position="floating">Correo electrónico</ion-label>
             <ion-input formControlName="email" type="email"></ion-input>
           </ion-item>
-          <ion-item>
+          <small class="error" *ngIf="
+            user_data.controls.email.errors &&
+            user_data.controls.email.errors.required &&
+            user_data.controls.email.touched">
+            Debe ingresar un email de contacto
+          </small>
+          <ion-item *ngIf="session.country == 'Uruguay'">
             <ion-label position="floating">Asunto</ion-label>
-            <ion-select formControlName="subject">
+            <ion-select *ngIf="session.country == 'Uruguay'" formControlName="subject">
               <ion-select-option text-wrap value="CEMPRE">Comentarios o dudas sobre reciclaje (CEMPRE)</ion-select-option>
               <ion-select-option text-wrap value="DATA">Comentarios o dudas sobre esta aplicación (DATA)</ion-select-option>
             </ion-select>
+            <small class="error" *ngIf="
+              user_data.controls.subject.errors &&
+              user_data.controls.subject.errors.required &&
+              user_data.controls.subject.touched">
+              Debe ingresar un asunto
+            </small>
           </ion-item>
           <ion-item>
             <ion-label position="floating">Mensaje</ion-label>
             <ion-input formControlName="body" type="textarea"></ion-input>
           </ion-item>
+          <small class="error" *ngIf="
+            user_data.controls.body.errors &&
+            user_data.controls.body.errors.required &&
+            user_data.controls.body.touched">
+            Debe ingresar un mensaje
+          </small>
           <ion-row class="ion-justify-content-center section-header">
             <ion-col  size-md="7" size-lg="7" size-xs="12">
-              <ion-button  size="large" type="submit" class="submit">Enviar</ion-button>
+              <ion-button  [disabled]="!user_data.valid" size="large" type="submit" class="submit">Enviar</ion-button>
             </ion-col>
           </ion-row>
         </form>
         <div *ngIf="success">
           <h3>Se ha enviado exitosamente</h3>
           <p>Tu mensaje ha sido ingresado en nuestro sistema de manejo de solicitudes, en breves te estará llegando un correo indicando el número de solicitud y otros datos relevantes para mantenernos en contacto. A la brevedad nuestro equipo se estará comunicando contigo respecto a tu comentario. Muchas gracias</p>
-          <ion-button class="submit" [routerLink]='["/intro/mapa"]'>Volver al inicio</ion-button>
+          <ion-button class="submit" [routerLink]='this.session.homeUrl'>Volver al inicio</ion-button>
         </div>
         <div *ngIf="fail">
           <h3>No hemos podido enviar tu mensaje</h3>
           <p>Por favor escríbenos a devops@data.org.uy y explícanos lo que pasa, valoramos mucho tu esfuerzo y te pedimos disculpas por las molestias ocasionadas. Muchas gracias</p>
-          <ion-button class="submit" [routerLink]='["/intro/contacto"]'>Volver a intentarlo</ion-button>
-          <ion-button class="submit" [routerLink]='["/intro/mapa"]'>Ir al inicio</ion-button>
+          <ion-button class="submit" (click)="retry()">Volver a intentarlo</ion-button>
+          <ion-button class="submit" [routerLink]='[this.session.homeUrl]'>Ir al inicio</ion-button>
         </div>
       </ion-col>
     </ion-row>

@@ -12,6 +12,10 @@ import { AuthService } from 'src/app/services/auth.service';
 export class UtilsService {
 
   progress: number;
+  photos: string[];
+  showPhotos: boolean;
+  //
+  showOverlay: boolean = false;
 
   constructor(
     private request: HttpClient,
@@ -27,6 +31,25 @@ export class UtilsService {
         return false;
       },
     ));
+  }
+  //
+  collectRequest(form: any) {
+    if ( this.auth.isLogged ) {
+      let options = {
+        headers: {
+          'Authorization': "Bearer "+ this.auth.user_token
+        }
+      };
+      return this.request.post(environment.backend + "collect", form, options).
+      pipe(
+        map( (result: any) => {
+          if (!result.error) {
+            return true;
+          }
+          return false;
+        })
+      );
+    }
   }
   //
   createReport(form: any): Observable<boolean> {
@@ -86,5 +109,20 @@ export class UtilsService {
         })
       );
     }
+  }
+  validateForm(user_data: any) {
+    let res = true;
+    if ( !user_data.valid ) {
+      let res = false;
+      Object.keys(user_data.controls).forEach(
+        control_key => {
+          if ( user_data.controls[control_key].invalid ) {
+            user_data.controls[control_key].setError();
+
+          }
+        }
+      );
+    }
+    return res;
   }
 }

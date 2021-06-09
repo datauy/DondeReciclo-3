@@ -1,13 +1,14 @@
-import { Component, OnInit, ViewChild, Injectable } from '@angular/core';
-import { IonSearchbar, IonButton, IonBackdrop} from '@ionic/angular';
-import { createAnimation } from '@ionic/core';
-import { AutoCompleteOptions, AutoCompleteComponent } from 'ionic4-auto-complete';
+import { Component, Input } from '@angular/core';
+//import { IonSearchbar, IonButton, IonBackdrop} from '@ionic/angular';
+//import { createAnimation } from '@ionic/core';
+//import { AutoCompleteOptions, AutoCompleteComponent } from 'ionic4-auto-complete';
 import { ApiService } from "src/app/services/api.service";
 import { MapService } from "src/app/services/map.service";
 
-import { SearchParams, Material } from "src/app/models/basic_models.model";
+//import { SearchParams, Material } from "src/app/models/basic_models.model";
 import { SessionService } from 'src/app/services/session.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-search',
@@ -26,20 +27,40 @@ export class SearchComponent {
   suggestVisibility: boolean;
   searchString: string;
   searchAddress = false;
+  isInit = true;
+  environment = environment;
 
   constructor(
     public api: ApiService,
     public map: MapService,
     public session: SessionService,
-    public notification: NotificationsService
+    public notification: NotificationsService,
     ) {
-      this.session = session;
+      this.map.autoSearch.subscribe(
+        (sitem) => {
+          if ( sitem != null ) {
+            if ( typeof sitem === "object" ) {
+              sitem.type = 'materials';
+              this.itemSelected(sitem);
+            }
+            else {
+              this.api.getWastes([sitem]).subscribe((wastes: any) => {
+                wastes[0].type = 'wastes';
+                this.itemSelected(wastes[0]);
+              });
+            }
+          }
+        }
+      );
+    }
+
+  showSearch(event) {
+    if( this.isInit ) {
       if ( this.session.country == 'Colombia' ) {
         this.search4address(true);
       }
-  }
-
-  showSearch(event) {
+      this.isInit = false;
+    }
     this.searchVisibility = true;
     /*let clearButton = document.querySelector('.searchbar-clear-button') as HTMLElement;
     console.log(clearButton);
@@ -84,7 +105,7 @@ export class SearchComponent {
         (containers) => {
           if (this.map.loadMarkers(containers, true) == 0){
             let noRes = {
-              id: null,
+              id: 'noSearch',
               type: 'notification',
               class: 'warnings',
               title: 'No hay resultados para: '+item.name,
@@ -93,7 +114,7 @@ export class SearchComponent {
             this.notification.showNotification(noRes);
           }
           this.session.searchItem = item;
-          this.searchBarIonic.value = '';
+          this.searchBarIonic.value = null;
           this.hideSearch('item selected');
           setTimeout( () => {
             this.session.isLoading = false;
@@ -102,6 +123,10 @@ export class SearchComponent {
         }
       );
     }
+  }
+  //
+  getItemLabel(value) {
+    return '';
   }
   //
   closeSelection() {

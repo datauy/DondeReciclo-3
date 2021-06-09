@@ -1,0 +1,22 @@
+:host {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  .swiper-prev, .swiper-next {
+    top: auto
+  }
+  .photoSliderWrapper {
+    display: inline-flex;
+    align-items: center;
+  }
+  ion-slides{
+    overflow: visible;
+    width: 100%;
+    position: absolute;
+    img {
+      object-fit: cover;
+      border-radius: 16px;
+      width: 100%;
+    }
+  }
+}

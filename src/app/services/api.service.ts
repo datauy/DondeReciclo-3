@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { map, switchMap, mergeMap } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
+import { forkJoin} from 'rxjs';
 import { Observable } from 'rxjs';
 import { File } from '@ionic-native/file/ngx';
 
 import { ContainerType, Container, Material, SearchParams, Program } from "src/app/models/basic_models.model";
 import { News } from "src/app/models/news.model";
+import { Subprogram } from "src/app/models/subprogram.model";
 import { SessionService } from 'src/app/services/session.service';
 
 @Injectable({
@@ -15,8 +17,9 @@ import { SessionService } from 'src/app/services/session.service';
 export class ApiService<T=any> {
   container_types: ContainerType[];
   containers: Container[];
-  materials: Material[];
-  predefinedSearch: SearchParams[];
+  materials: {[index:string] : Material[]} = {};
+  predefinedSearch: {[index:string] : SearchParams[]};
+  programs: Program[]
   remoteFile: any;
 
   // Search
@@ -37,11 +40,13 @@ export class ApiService<T=any> {
  /***************************/
  //
   loadInitialData(): Observable<any> {
-    // console.log("API loading initial");
-    return this.loadContainerTypes().pipe(
-      switchMap( () => this.loadMaterials() ),
-      switchMap( () => this.loadPredefinedSearch() ),
-    );
+    return forkJoin([
+      this.loadContainerTypes(),
+      this.loadMaterials('Uruguay'),
+      this.loadMaterials('Colombia'),
+      this.loadPredefinedSearch(),
+      this.loadProgramSummary()
+    ]);
   }
   //
   loadContainerTypes(): Observable<ContainerType[]> {
@@ -52,42 +57,40 @@ export class ApiService<T=any> {
     ));
   }
   //
-  getMaterials(ids: number[]) :Material[] {
-    let res = [];
-    if (!this.materials) {
-      this.loadMaterials();
-    }
-    ids.forEach(id => res.push(this.materials[id]));
-    // console.log(res);
-    return res;
-  }
   getWastes(ids: number[]) :Observable<Material[]>  {
-    return this.request.get(environment.backend + "wastes?ids=" + ids.join()).pipe(
+    return this.request.get(environment.backend + "wastes?version="+environment.apiVersion+"&locale=" + environment[this.session.country].locale + "&ids=" + ids.join()).pipe(
       map( (result: Material[]) => {
         return result;
       })
     );
   }
   //
-  loadMaterials(): Observable<Material[]> {
-    return this.request.get(environment.backend + "materials").pipe(
-      map((result: Material[]) => {
+  loadMaterials(country: string): Observable<Material[]> {
+    return this.request.get(environment.backend + "materials?version="+environment.apiVersion+"&locale=" + environment[country].locale).pipe(map(
+      (result: Material[]) => {
         //Check images
-        /*for (let key in result) {
+        //for (let key in result) {
           // TODO: Check type
-          if (result[key].icon) {
-            this.downloadFile(result[key].icon, 'dr-'+result[key].class+'.svg', 'custom-icons');
-          }
-        }*/
-        return this.materials = result;
-      })
-    );
+          //if (result[key].icon) {
+            //this.downloadFile(result[key].icon, 'dr-'+result[key].class+'.svg', 'custom-icons');
+          //}
+        //}
+        return this.materials[country] = result;
+      }
+    ));
   }
   //
-  loadPredefinedSearch(): Observable<SearchParams[]> {
-    return this.request.get(environment.backend + "search_predefined").pipe(
+  loadPredefinedSearch(): Observable<any> {
+    return this.request.get(environment.backend + "predefined_searches").pipe(
       map((result: SearchParams[]) => {
-        return this.predefinedSearch = this.formatSearchOptions(result);
+        let res: { [index:string] : SearchParams[] } = {};
+        result.forEach(
+          (country) => {
+            let c = Object.keys(country)[0];
+            environment[c].predefinedSearch = country[c];
+          }
+        );
+        return this.predefinedSearch = res;
       })
     );
   }
@@ -109,7 +112,7 @@ export class ApiService<T=any> {
   loadProgramSummary() {
     return  this.request.get(environment.backend + "programs_sum").pipe(map(
       (result: Program[]) => {
-        return result;
+        return this.programs = result;
       }
     ));
   }
@@ -117,8 +120,8 @@ export class ApiService<T=any> {
    /*        News         */
   /**********************/
   //
-  getNewsList(page: number) {
-    return  this.request.get(environment.backend + "news?page="+page).pipe(map(
+  getNewsList(page: number, country: string) {
+    return  this.request.get(environment.backend + "news?version="+environment.apiVersion+"&country="+ country +"&page="+ page).pipe(map(
       (result: News[]) => {
         return result;
       }
@@ -128,7 +131,7 @@ export class ApiService<T=any> {
   getNew(id: number, full: boolean) {
     var url = environment.backend + "new/"+id;
     if (full) {
-      url += "?full=1"
+      url += "?version="+environment.apiVersion+"&full=1"
     }
     return  this.request.get(url).pipe(map(
       (result: News) => {
@@ -158,33 +161,34 @@ export class ApiService<T=any> {
     }
   }
 
-  getNearbyContainers (radius: number, location?: [number, number]) {
-    if (typeof location == 'undefined') {
+  getNearbyContainers (radius: number, location?: [number, number]): Observable<any> {
+    if (typeof location == undefined) {
       location = environment[this.session.country].center;
     }
-    return  this.request.get(environment.backend + "containers_nearby?lat="+location[0]+"&lon="+location[1]+"&radius="+radius).pipe(map(
-      (result: Container[]) => {
-        return result;
+    return  this.request.get(environment.backend + "containers_nearby?version="+environment.apiVersion+"&lat="+location[0]+"&lon="+location[1]+"&radius="+radius).pipe(map(
+      (result: Container[]): Container[] => {
+        return this.formatMarker(result);
       }
     ));
   }
+
   getContainers(bbox: string[]) {
-    return  this.request.get(environment.backend + "containers_bbox?sw="+bbox[0]+"&ne="+bbox[1]).pipe(map(
+    return  this.request.get(environment.backend + "containers_bbox?version="+environment.apiVersion+"&sw="+bbox[0]+"&ne="+bbox[1]).pipe(map(
       (result: Container[]) => {
-        return result;
+        return this.formatMarker(result);
       }
     ));
   }
   getContainers4Materials(bbox: string[], query: string) {
-    return  this.request.get(environment.backend + "containers_bbox4materials?sw="+bbox[0]+"&ne="+bbox[1]+"&"+query).pipe(map(
+    return  this.request.get(environment.backend + "containers_bbox4materials?version="+environment.apiVersion+"&sw="+bbox[0]+"&ne="+bbox[1]+"&"+query).pipe(map(
       (result: Container[]) => {
-        return result;
+        return this.formatMarker(result);
       }
     ));
   }
   //
   getContainersByMaterials(query: string, location?: number[]) {
-    var url = environment.backend + "containers4materials?"+query;
+    var url = environment.backend + "containers4materials?version="+environment.apiVersion+"&"+query;
     if ( typeof location == 'undefined' || location == null ) {
       location = environment[this.session.country].center;
     }
@@ -194,9 +198,65 @@ export class ApiService<T=any> {
     url += "&lat="+location[0]+"&lon="+location[1];
     return  this.request.get(url).pipe(map(
       (result: Container[]) => {
+        return this.formatMarker(result);
+      }
+    ));
+  }
+  getSubContainers(subs: string) {
+    return  this.request.get(environment.backend + "subprogram_containers?version="+environment.apiVersion+"&sub_ids="+subs).pipe(map(
+      (result: Container[]) => {
+        return this.formatMarker(result);
+      }
+    ));
+  }
+  getContainersIds(cids: string) {
+    return  this.request.get(environment.backend + "containers?version="+environment.apiVersion+"&container_ids="+cids).pipe(map(
+      (result: Container[]) => {
+        return this.formatMarker(result);
+      }
+    ));
+  }
+  getSubprograms4Location(latlng: number[]) {
+    return  this.request.get(environment.backend + "subprograms4location?version="+environment.apiVersion+"&wkt=POINT("+latlng[1]+' '+latlng[0]+')').pipe(map(
+      (result: Subprogram[]) => {
         return result;
       }
     ));
+  }
+  getSubprogramByZone(zone_id: number) {
+    return  this.request.get( environment.backend + "subprogram4location?version="+environment.apiVersion+"&zone="+zone_id ).pipe(map(
+      (subp: Subprogram[]) => {
+        return subp;
+      }
+    ));
+  }
+  getCountryByLocation(latlng: number[]) {
+    return  this.request.get( environment.backend + "country4Point?version="+environment.apiVersion+"&wkt=POINT("+latlng[1]+' '+latlng[0]+')' ).pipe(map(
+      (country: string) => {
+        return country;
+      }
+    ));
+  }
+  getZones4Boundaries(bounds: string) {
+    return  this.request.get( environment.backend + "location4Polygon?version="+environment.apiVersion+"&wkt="+bounds ).pipe(map(
+      (zones: L.GeoJSON) => {
+        return zones;
+      }
+    ));
+  }
+  getNextZone(latlng: number[]) {
+    return  this.request.get( environment.backend + "zone4point?version="+environment.apiVersion+"&wkt=POINT("+latlng[1]+' '+latlng[0]+')' ).pipe(map(
+      (zones: L.GeoJSON) => {
+        return zones;
+      }
+    ));
+  }
+
+  formatMarker(containers: Container[]): Container[] {
+    for (let i = 0; i < containers.length; i++) {
+      containers[i].class = this.materials[this.session.country][containers[i].main_material].class;
+    }
+    return containers;
   }
   //
     /***********************/
@@ -204,13 +264,13 @@ export class ApiService<T=any> {
   /***********************/
   //
   getResults(str: string){
-    return  this.request.get(environment.backend + "search?q="+str).pipe(map(
+    return  this.request.get(environment.backend + "search?version="+environment.apiVersion+"&locale=" + environment[this.session.country].locale  + "&q="+str).pipe(map(
       (result: any[]) => {
         if (result.length) {
-          return this.formatSearchOptions(result);
+          return result;
         }
         else {
-          return false;
+          return [{name: 'No Results', class: 'none'}];
         }
       }
     ));
@@ -228,8 +288,7 @@ export class ApiService<T=any> {
       type: option.type,
       name: option.name,
       material_id: option.material_id,
-      class: this.materials[option.material_id].class,
-      icon: this.materials[option.material_id].icon,
+      class: this.materials[this.session.country][option.material_id].class,
       deposition: option.deposition,
     });
   });
@@ -237,13 +296,13 @@ export class ApiService<T=any> {
   }
   //Address search
   getAddressLocation(str: string) {
-    return  this.request.get(environment.geocoder + "search?q="+str+','+this.session.country+'&countrycodes='+environment[this.session.country].code+'&format=json').pipe(map(
+    return  this.request.get(environment.geocoder + "search?version="+environment.apiVersion+"&q="+str+','+this.session.country+'&countrycodes='+environment[this.session.country].code+'&format=json').pipe(map(
       (result: any[]) => {
         if (result.length) {
           return this.formatAddressOptions(result);
         }
         else {
-          return false;
+          return [{name: 'No Results', class: 'none'}];
         }
       }
     ));

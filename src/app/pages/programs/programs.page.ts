@@ -5,6 +5,8 @@ import { IonSlides } from '@ionic/angular';
 import { ApiService } from "src/app/services/api.service";
 import { Program } from "src/app/models/basic_models.model";
 
+import { SessionService } from 'src/app/services/session.service';
+
 @Component({
   selector: 'app-programs',
   templateUrl: './programs.page.html',
@@ -24,6 +26,7 @@ export class ProgramsPage implements OnInit {
 
   constructor(
     public api: ApiService<any>,
+    public session: SessionService,
   ) { }
 
   ngOnInit() {
