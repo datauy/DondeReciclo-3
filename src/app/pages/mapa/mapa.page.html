@@ -194,20 +194,23 @@
           </div>
         </ion-item>
         <div class="items-wrapper" *ngIf="container.receives != undefined && container.receives.length > 0">
-          <ion-item class="label-item" lines="none">
-            <div class="circle green"
-            slot="start"></div>
-            <h5>Recibe:</h5>
-          </ion-item>
           <ion-item lines="none">
-            <div class="tags-wrapper">
-              <ion-button *ngFor="let mat of container.receives;"
-                [ngClass]="mat.class"
-                [color]="mat.class">
-                <ion-icon class="ion-float-left"
-                name="dr-{{mat.class}}"></ion-icon>
-                <ion-label [innerHTML]="mat.name"></ion-label>
-              </ion-button>
+            <div>
+              <div class="inline">
+                <div class="circle green"
+                slot="start"></div>
+                <h5>Recibe:</h5>
+              </div>
+              <p [innerHTML]="container.receives_text"></p>
+              <div class="tags-wrapper">
+                <ion-button *ngFor="let mat of container.receives;"
+                  [ngClass]="mat.class"
+                  [color]="mat.class">
+                  <ion-icon class="ion-float-left"
+                  name="dr-{{mat.class}}"></ion-icon>
+                  <ion-label [innerHTML]="mat.name"></ion-label>
+                </ion-button>
+              </div>
             </div>
           </ion-item>
         </div>
@@ -218,13 +221,15 @@
           </div>
         </ion-item>
         <div class="items-wrapper" *ngIf="container.receives_no != undefined && container.receives_no != ''">
-          <ion-item class="label-item" lines="none">
-            <div class="circle red"
-            slot="start"></div>
-            <h5>No Recibe:</h5>
-          </ion-item>
-          <ion-item class="last-item" lines="none">
-            <div class="tags-wrapper receives-no" [innerHTML]="container.receives_no"></div>
+          <ion-item lines="none">
+            <div>
+              <div class="inline">
+                <div class="circle red"
+                slot="start"></div>
+                <h5>No Recibe:</h5>
+              </div>
+              <div class="tags-wrapper receives-no" [innerHTML]="container.receives_no"></div>
+            </div>
           </ion-item>
         </div>
         <ion-item class="panel-footer" lines="none">
