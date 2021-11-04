@@ -6,8 +6,11 @@
   </ion-button>
   <ion-row class="no-height ion-justify-content-center">
     <ion-col size-md="10" size-xl="8" size-xs="12" padding="0" >
-      <ion-button *ngIf="session.country == 'Colombia' && session.cupertinoState != 'cupertinoOpen'" class="submit locations" (click)="subprograms4location()">
-        ¿Quien recoge en esta zona?
+      <ion-button
+      [innerHtml]="session.country == 'Colombia' ? '¿Quien recoge en esta zona?' : 'Ver servicios para esta zona'"
+      *ngIf="session.cupertinoState != 'cupertinoOpen'"
+      class="submit locations"
+      (click)="subprograms4location()">
       </ion-button>
     </ion-col>
   </ion-row>
@@ -135,7 +138,7 @@
       </ion-item>
       <div class="scrollable-div">
         <ion-item lines="none">
-          <div>
+          <div class="conteiner-directions">
             <h5>{{container.site}}</h5>
             <p>{{container.address}}</p>
             <p>{{container.location}}</p>
@@ -217,7 +220,7 @@
         <ion-item lines="none" *ngIf="container.reception_conditions != undefined && container.reception_conditions != ''">
           <div>
             <h5>Condiciones de recepción:</h5>
-            <p>{{container.reception_conditions}}</p>
+            <p innerHTML="{{container.reception_conditions}}"></p>
           </div>
         </ion-item>
         <div class="items-wrapper" *ngIf="container.receives_no != undefined && container.receives_no != ''">

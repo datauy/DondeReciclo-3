@@ -394,10 +394,15 @@ export class MapaPage implements OnInit {
       this.map.route = null;
     }
     this.session.cupertinoState = 'cupertinoClosed';
-    this.map.flyToBounds([
-      [this.map.currentContainer.latitude, this.map.currentContainer.longitude],
-      this.map.userPosition
-    ]);
+    if ( this.map.currentContainer != undefined ) {
+      this.map.flyToBounds([
+        [this.map.currentContainer.latitude, this.map.currentContainer.longitude],
+        this.map.userPosition
+      ]);
+    }
+    else {
+      this.map.flytomarker(this.map.userPosition, this.map.zoom);
+    }
   }
   //
   showPane() {
