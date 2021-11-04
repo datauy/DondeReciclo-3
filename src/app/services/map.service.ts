@@ -213,7 +213,18 @@ export class MapService {
     var markersLayer = []
     let center_markers = 10;
     for (var i = 0; i < markers.length; i++) {
-      var newMarker = new L.CustomMarker([markers[i].latitude,markers[i].longitude], {container_pos: i, className: "ion-color-"+markers[i].class })
+      var marker_options = { container_pos: i, className: "ion-color-"+markers[i].class };
+      if ( markers[i].hasOwnProperty('custom_icon') && markers[i].custom_icon != '' ) {
+        marker_options['icon'] = L.icon({
+          iconUrl: markers[i].custom_icon,
+          iconSize: [50, 50],
+          iconAnchor: [25, 25],
+          popupAnchor: [1, -34],
+          tooltipAnchor: [16, -28],
+          shadowSize: [41, 41]
+        });
+      }
+      var newMarker = new L.CustomMarker([markers[i].latitude,markers[i].longitude], marker_options)
       .on('click', this.clickPin, this); //L.bind(this.showPane, null, markers[i]))
       if ( center_markers != 0 && fly ) {
         mapBounds.push([markers[i].latitude, markers[i].longitude]);
