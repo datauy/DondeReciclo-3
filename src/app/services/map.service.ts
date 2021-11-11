@@ -217,11 +217,11 @@ export class MapService {
       if ( markers[i].hasOwnProperty('custom_icon') && markers[i].custom_icon != '' ) {
         marker_options['icon'] = L.icon({
           iconUrl: markers[i].custom_icon,
-          iconSize: [50, 50],
-          iconAnchor: [25, 25],
+          iconSize: [46, 56],
+          iconAnchor: [23, 28],
           popupAnchor: [1, -34],
           tooltipAnchor: [16, -28],
-          shadowSize: [41, 41]
+          shadowSize: [60, 60]
         });
       }
       var newMarker = new L.CustomMarker([markers[i].latitude,markers[i].longitude], marker_options)
