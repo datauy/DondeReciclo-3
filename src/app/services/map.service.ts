@@ -217,8 +217,8 @@ export class MapService {
       if ( markers[i].hasOwnProperty('custom_icon') && markers[i].custom_icon != '' ) {
         marker_options['icon'] = L.icon({
           iconUrl: markers[i].custom_icon,
-          iconSize: [46, 56],
-          iconAnchor: [23, 56],
+          iconSize: [37, 45],
+          iconAnchor: [18.5, 45],
           popupAnchor: [1, -34],
           tooltipAnchor: [16, -28],
           shadowSize: [60, 60]

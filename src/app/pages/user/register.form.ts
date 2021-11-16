@@ -7,6 +7,7 @@ import { SessionService } from 'src/app/services/session.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
 import { Message } from "src/app/models/message.model";
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-register-form',
@@ -137,6 +138,7 @@ export class RegisterForm implements OnInit {
   //
   register() {
     this.session.isLoading = true;
+    this.user_data.value.country_id = environment[this.session.country].id;
     if ( this.auth.isLogged ){
       this.auth.updateUser( this.user_data.value ).then(
         (res) => {
