@@ -31,7 +31,7 @@ export class MapaPage implements OnInit {
   uLocation = false;
   subprograms: Subprogram[];
   subprogram: Subprogram;
-
+  zones: any;
   infoPaneEl: HTMLDivElement;
   loadingImg = false;
   fileType: any = {
@@ -82,28 +82,9 @@ export class MapaPage implements OnInit {
       }
     );
     this.map.zoneClicked.subscribe(
-      zone => {
-        if ( zone ) {
-          if ( this.list == 4 ) {
-            this.hidePane();
-          }
-          this.api.getSubprogramByZone(zone.feature.id).subscribe(
-            (subprograms) =>{
-              this.formatSubProgram(subprograms);
-              this.subprograms = subprograms;
-              if ( subprograms.length == 1) {
-                this.list = 4;
-                this.subprogram = this.subprograms[0];
-                this.map.removeZones();
-                this.map.showSubZone(zone.feature);
-              }
-              else {
-                this.list = 1;
-              }
-              //this.infoPane.destroy();
-              this.infoPane.present({animate: true});
-            }
-          );
+      distance => {
+        if ( this.list > 0 || this.zoneVisible == 1 || this.zoneVisible > 3 ) {
+          this.subprograms4location(distance);
         }
       }
     );
@@ -312,7 +293,6 @@ export class MapaPage implements OnInit {
   // }
   //
   // breakPointMapCupertino(){
-  //   console.log('wtf');
   //   const currentBreak = this.infoPane.currentBreak();
   //   console.log('break: ', currentBreak);
   //   switch (true) {
@@ -573,16 +553,12 @@ export class MapaPage implements OnInit {
   }
   //
   formatSubProgram(subprograms) {
-    let zones = subprograms[0].zone.location;
     subprograms.forEach( (subp, i) => {
-      if ( i != 0 ) {
-        zones.features.push(subp.zone.location.features[0]);
-      }
       subprograms[i].program_icon = this.api.programs[subp.program_id].icon ? this.api.programs[subp.program_id].icon : '/assets/custom-icons/dr-generic.svg';
       subprograms[i].program = this.api.programs[subp.program_id].name;
     });
-    return zones;
   }
+  //
   toggleSched() {
     this.showSched = !this.showSched;
   }
@@ -640,7 +616,7 @@ export class MapaPage implements OnInit {
     }
   }
   //
-  subprograms4location() {
+  subprograms4location(distance = null) {
     this.session.isLoading = true;
     var point: [number, number];
     if ( this.map.userPosition != undefined ) {
@@ -651,16 +627,18 @@ export class MapaPage implements OnInit {
       this.map.userPosition = point;
       this.map.loadMarkers([], false);
     }
-    this.api.getSubprograms4Location(point).subscribe(
-      (subprograms) => {
+    this.api.getSubprograms4Location(point, distance).subscribe(
+      (subprograms_zones) => {
+        var subprograms = subprograms_zones.subprograms;
         this.map.removeZones();
         let fixedPos:[number, number] = [this.map.userPosition[0] - 0.002, this.map.userPosition[1] ];
         if ( subprograms.length > 1 ) {
           this.list = 1;
-          var zones = this.formatSubProgram(subprograms);
+          this.formatSubProgram(subprograms);
+          this.zones = subprograms_zones.locations;
           this.subprograms = subprograms;
           this.infoPane.present({animate: true});
-          this.map.loadZones(zones);
+          this.map.loadZones(this.zones);
           this.map.flytomarker(fixedPos, this.map.zoom);
         }
         else if ( subprograms.length == 1) {
@@ -696,7 +674,7 @@ export class MapaPage implements OnInit {
     this.subprogram = this.subprograms[index];
     this.list = list;
     this.map.removeZones();
-    this.map.showSubZone(this.subprograms[index].zone.location.features[0]);
+    this.map.showSubZone(this.zones[this.subprograms[index].zone.location_id]);
   }
   //
   getZones(getNext = true) {
