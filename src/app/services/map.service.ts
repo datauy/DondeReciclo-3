@@ -413,6 +413,9 @@ export class MapService {
     }
   }
   showSubZone(layer: L.GeoJSON) {
+    if (this.subZone) {
+      this.map.removeLayer(this.subZone);
+    }
     this.subZone = L.geoJSON( layer );
     this.subZone.addTo(this.map);
   }
