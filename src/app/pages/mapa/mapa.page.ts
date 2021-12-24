@@ -369,7 +369,9 @@ export class MapaPage implements OnInit {
   cupertinoHide(){
     this.list = 0;
     this.session.showSearchItem = true;
-    this.map.map.removeLayer(this.map.subZone);
+    if ( this.map.subZone != undefined ) {
+      this.map.map.removeLayer(this.map.subZone);
+    }
     if ( this.zoneVisible != 3 ) {
       this.map.removeZones();
     }
@@ -565,6 +567,12 @@ export class MapaPage implements OnInit {
     subprograms.forEach( (subp, i) => {
       subprograms[i].program_icon = this.api.programs[subp.program_id].icon ? this.api.programs[subp.program_id].icon : '/assets/custom-icons/dr-generic.svg';
       subprograms[i].program = this.api.programs[subp.program_id].name;
+      if ( subprograms[i].materials.length != 0 ) {
+        subprograms[i].receives_mat = [];
+        subprograms[i].materials.forEach((p) => {
+          subprograms[i].receives_mat.push(this.api.materials[this.session.country][p]);
+        });
+      }
     });
   }
   //
@@ -639,10 +647,10 @@ export class MapaPage implements OnInit {
     this.api.getSubprograms4Location(point, distance).subscribe(
       (subprograms_zones) => {
         var subprograms = subprograms_zones.subprograms;
-        this.map.removeZones();
         let fixedPos:[number, number] = [this.map.userPosition[0] - 0.002, this.map.userPosition[1] ];
         if ( subprograms.length > 1 ) {
           this.list = 1;
+          this.map.removeZones();
           this.formatSubProgram(subprograms);
           this.zones = subprograms_zones.locations;
           this.subprograms = subprograms;
@@ -651,6 +659,7 @@ export class MapaPage implements OnInit {
           this.map.flytomarker(fixedPos, this.map.zoom);
         }
         else if ( subprograms.length == 1) {
+          this.map.removeZones();
           if ( this.zones == undefined || this.zones.features.length <= 1 ) {
             this.zones = subprograms_zones.locations;
           }
@@ -689,6 +698,7 @@ export class MapaPage implements OnInit {
     else {
       this.subprogram = this.subprograms[index];
     }
+    console.log(this.subprogram);
     this.list = list;
     this.map.removeZones();
     for (var i = 0; i < this.zones.features.length; i++) {

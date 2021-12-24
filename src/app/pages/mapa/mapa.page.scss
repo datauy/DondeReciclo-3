@@ -144,6 +144,11 @@
             cursor: pointer;
           }
         }
+        .tags-wrapper {
+          ion-button {
+            font-size: 11px;
+          }
+        }
       }
       .conteiner-directions {
         padding-right: 54px;
