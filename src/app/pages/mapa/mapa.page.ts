@@ -31,7 +31,7 @@ export class MapaPage implements OnInit {
   uLocation = false;
   subprograms: Subprogram[];
   subprogram: Subprogram;
-
+  zones: any;
   infoPaneEl: HTMLDivElement;
   loadingImg = false;
   fileType: any = {
@@ -82,28 +82,9 @@ export class MapaPage implements OnInit {
       }
     );
     this.map.zoneClicked.subscribe(
-      zone => {
-        if ( zone ) {
-          if ( this.list == 4 ) {
-            this.hidePane();
-          }
-          this.api.getSubprogramByZone(zone.feature.id).subscribe(
-            (subprograms) =>{
-              this.formatSubProgram(subprograms);
-              this.subprograms = subprograms;
-              if ( subprograms.length == 1) {
-                this.list = 4;
-                this.subprogram = this.subprograms[0];
-                this.map.removeZones();
-                this.map.showSubZone(zone.feature);
-              }
-              else {
-                this.list = 1;
-              }
-              //this.infoPane.destroy();
-              this.infoPane.present({animate: true});
-            }
-          );
+      distance => {
+        if ( this.list > 0 || this.zoneVisible == 1 || this.zoneVisible >= 3 ) {
+          this.subprograms4location(distance);
         }
       }
     );
@@ -312,7 +293,6 @@ export class MapaPage implements OnInit {
   // }
   //
   // breakPointMapCupertino(){
-  //   console.log('wtf');
   //   const currentBreak = this.infoPane.currentBreak();
   //   console.log('break: ', currentBreak);
   //   switch (true) {
@@ -389,6 +369,12 @@ export class MapaPage implements OnInit {
   cupertinoHide(){
     this.list = 0;
     this.session.showSearchItem = true;
+    if ( this.map.subZone != undefined ) {
+      this.map.map.removeLayer(this.map.subZone);
+    }
+    if ( this.zoneVisible != 3 ) {
+      this.map.removeZones();
+    }
     if ( this.map.route != null ) {
       this.map.map.removeControl(this.map.route);
       this.map.route = null;
@@ -434,16 +420,18 @@ export class MapaPage implements OnInit {
   //
   hidePane() {
     //Si está en sub-programa vuelvo al listado
-    if ( this.list == 2 ) {
+    if ( this.list == 2 || this.list == 4 ) {
       this.map.map.removeLayer(this.map.subZone);
       this.map.showZones(true);
       this.list = 1;
-      this.zoneVisible = 2;
+      //this.zoneVisible = 2;
+      //Salvo que sea un único subprograma
+      if (this.subprograms.length <= 1 ) {
+        this.hidePane();
+      }
     }
     else {
-      if ( this.list == 4 ) {
-        this.map.map.removeLayer(this.map.subZone);
-      }
+      //Si no está mostrando las zonas
       if ( this.zoneVisible != 3 ) {
         this.map.removeZones();
       }
@@ -452,6 +440,9 @@ export class MapaPage implements OnInit {
       }
       this.list = 0;
       this.infoPane.destroy({animate: true});
+      setTimeout( () => {
+        this.map.map.invalidateSize();
+      }, 500);
     }
   }
   //
@@ -573,16 +564,18 @@ export class MapaPage implements OnInit {
   }
   //
   formatSubProgram(subprograms) {
-    let zones = subprograms[0].zone.location;
     subprograms.forEach( (subp, i) => {
-      if ( i != 0 ) {
-        zones.features.push(subp.zone.location.features[0]);
-      }
       subprograms[i].program_icon = this.api.programs[subp.program_id].icon ? this.api.programs[subp.program_id].icon : '/assets/custom-icons/dr-generic.svg';
       subprograms[i].program = this.api.programs[subp.program_id].name;
+      if ( subprograms[i].materials.length != 0 ) {
+        subprograms[i].receives_mat = [];
+        subprograms[i].materials.forEach((p) => {
+          subprograms[i].receives_mat.push(this.api.materials[this.session.country][p]);
+        });
+      }
     });
-    return zones;
   }
+  //
   toggleSched() {
     this.showSched = !this.showSched;
   }
@@ -640,7 +633,7 @@ export class MapaPage implements OnInit {
     }
   }
   //
-  subprograms4location() {
+  subprograms4location(distance = null) {
     this.session.isLoading = true;
     var point: [number, number];
     if ( this.map.userPosition != undefined ) {
@@ -651,24 +644,30 @@ export class MapaPage implements OnInit {
       this.map.userPosition = point;
       this.map.loadMarkers([], false);
     }
-    this.api.getSubprograms4Location(point).subscribe(
-      (subprograms) => {
-        this.map.removeZones();
+    this.api.getSubprograms4Location(point, distance).subscribe(
+      (subprograms_zones) => {
+        var subprograms = subprograms_zones.subprograms;
         let fixedPos:[number, number] = [this.map.userPosition[0] - 0.002, this.map.userPosition[1] ];
         if ( subprograms.length > 1 ) {
           this.list = 1;
-          var zones = this.formatSubProgram(subprograms);
+          this.map.removeZones();
+          this.formatSubProgram(subprograms);
+          this.zones = subprograms_zones.locations;
           this.subprograms = subprograms;
           this.infoPane.present({animate: true});
-          this.map.loadZones(zones);
+          this.map.loadZones(this.zones);
           this.map.flytomarker(fixedPos, this.map.zoom);
         }
         else if ( subprograms.length == 1) {
+          this.map.removeZones();
+          if ( this.zones == undefined || this.zones.features.length <= 1 ) {
+            this.zones = subprograms_zones.locations;
+          }
+          if ( this.subprograms == undefined || this.subprograms.length <= 1 ) {
+            this.subprograms = subprograms;
+          }
           this.formatSubProgram(subprograms);
-          //subp.program_icon = this.api.programs[subp.program_id].icon;
-          //subp.program = this.api.programs[subp.program_id].name;
-          this.subprograms = subprograms;
-          this.subprogramShow(0, 4);
+          this.subprogramShow(0, 4, subprograms[0]);
           this.infoPane.present({animate: true});
           this.map.flytomarker(fixedPos, this.map.zoom);
         }
@@ -692,11 +691,22 @@ export class MapaPage implements OnInit {
     );
   }
   //
-  subprogramShow(index: number, list = 2) {
-    this.subprogram = this.subprograms[index];
+  subprogramShow(index: number, list = 4, subprogram?) {
+    if ( subprogram != null ) {
+      this.subprogram = subprogram
+    }
+    else {
+      this.subprogram = this.subprograms[index];
+    }
+    console.log(this.subprogram);
     this.list = list;
     this.map.removeZones();
-    this.map.showSubZone(this.subprograms[index].zone.location.features[0]);
+    for (var i = 0; i < this.zones.features.length; i++) {
+      if (this.zones.features[i].id == this.subprogram.zone.location_id ) {
+        break;
+      }
+    }
+    this.map.showSubZone(this.zones.features[i]);
   }
   //
   getZones(getNext = true) {

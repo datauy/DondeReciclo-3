@@ -41,13 +41,21 @@
             <img src="{{subp.program_icon}}">
           </ion-avatar>
           <div class="title-wrapper">
-            <span size="small">{{subp.city}}, {{subp.zone.location.features[0].properties.name}}</span>
+            <span size="small">{{subp.city}}, {{subp.zone.name}}</span>
             <h5>{{subp.name}}</h5>
-            <span class="distance">{{subp.zone.distance}} metros </span>
             <div [ngSwitch]="subp.zone.pick_up_type">
-              <span *ngSwitchCase="'pick_up'">Retiro</span>
-              <span *ngSwitchCase="'take_out'">Depositar</span>
-              <span *ngSwitchDefault>Recolección</span>
+              <span *ngSwitchCase="'pick_up'">Retiro,</span>
+              <span *ngSwitchCase="'take_out'">Depositar,</span>
+              <span *ngSwitchDefault>Recolección,</span>
+              <span class="distance"> {{subp.zone.distance}} metros </span>
+            </div>
+            <div class="tags-wrapper">
+              <ion-button *ngFor="let mat of subp.receives_mat;"
+              [ngClass]="mat.class"
+              [color]="mat.class">
+                <ion-icon class="ion-float-left" name="dr-{{mat.class}}"></ion-icon>
+                <ion-label [innerHTML]="mat.name"></ion-label>
+              </ion-button>
             </div>
           </div>
         </ion-item>
@@ -64,22 +72,28 @@
         </div>
       </ion-item>
       <div class="scrollable-div" overflow-y="auto">
-        <ion-item lines="none">
-          <div>
-            <h5>Dirección:</h5>
-            <p>{{subprogram.address}}</p>
-          </div>
-        </ion-item>
-        <ion-item lines="none">
+        <ion-item lines="none" *ngIf="subprogram.locations.length">
           <div>
             <h5>Cobertura:</h5>
             <p>{{subprogram.locations.join(', ')}}</p>
           </div>
         </ion-item>
-        <ion-item lines="none" *ngIf="subprogram.receives.length">
+        <ion-item lines="none" *ngIf="subprogram.address">
           <div>
-            <h5>Recibe:</h5>
-            <span *ngFor="let sched of subprogram.receives" [innerHtml]="sched"></span>
+            <h5>Dirección:</h5>
+            <p>{{subprogram.address}}</p>
+          </div>
+        </ion-item>
+        <ion-item lines="none" *ngIf="subprogram.phone">
+          <div>
+            <h5>Teléfono:</h5>
+            <p>{{subprogram.phone}}</p>
+          </div>
+        </ion-item>
+        <ion-item lines="none" *ngIf="subprogram.email">
+          <div>
+            <h5>Correo:</h5>
+            <p>{{subprogram.email}}</p>
           </div>
         </ion-item>
         <ion-item lines="none" *ngIf="subprogram.zone.schedules.length">
@@ -87,9 +101,9 @@
             <h5 (click)="toggleSched()">
               Horario:
               <ion-icon
-              name="add-circle-sharp"
-              class="pale-olive-green">
-            </ion-icon>
+                name="add-circle-sharp"
+                class="pale-olive-green">
+              </ion-icon>
             </h5>
             <div class="sched" *ngFor="let h of subprogram.zone.schedules">
               <p
@@ -100,16 +114,27 @@
             </div>
           </div>
         </ion-item>
-        <ion-item lines="none">
+        <ion-item lines="none" *ngIf="subprogram.receives.length">
           <div>
-            <h5>Teléfono:</h5>
-            <p>{{subprogram.phone}}</p>
+            <div class="inline">
+              <div class="circle green" slot="start"></div>
+              <h5>Recibe:</h5>
+            </div>
+            <p *ngFor="let receive of subprogram.receives" [innerHtml]="receive"></p>
+            <div class="tags-wrapper">
+              <ion-button *ngFor="let mat of subprogram.receives_mat;"
+              [ngClass]="mat.class"
+              [color]="mat.class">
+                <ion-icon class="ion-float-left" name="dr-{{mat.class}}"></ion-icon>
+                <ion-label [innerHTML]="mat.name"></ion-label>
+              </ion-button>
+            </div>
           </div>
         </ion-item>
-        <ion-item lines="none">
+        <ion-item lines="none" *ngIf="subprogram.zone.information">
           <div>
-            <h5>Correo:</h5>
-            <p>{{subprogram.email}}</p>
+            <h5>Información adicional:</h5>
+            <p>{{subprogram.zone.information}}</p>
           </div>
         </ion-item>
         <ion-item class="panel-footer" lines="none">

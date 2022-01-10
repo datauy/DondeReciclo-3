@@ -216,9 +216,13 @@ export class ApiService<T=any> {
       }
     ));
   }
-  getSubprograms4Location(latlng: number[]) {
-    return  this.request.get(environment.backend + "subprograms4location?version="+environment.apiVersion+"&wkt=POINT("+latlng[1]+' '+latlng[0]+')').pipe(map(
-      (result: Subprogram[]) => {
+  getSubprograms4Location(latlng: number[], distance?: number) {
+    var req = environment.backend + "subprograms4location?version="+environment.apiVersion+"&wkt=POINT("+latlng[1]+' '+latlng[0]+')';
+    if ( distance != null ) {
+      req += '&distance=' + distance;
+    }
+    return  this.request.get(req).pipe(map(
+      (result: any) => {
         return result;
       }
     ));

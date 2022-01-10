@@ -180,6 +180,7 @@ export class MapService {
         if (this.route) {
           this.route.spliceWaypoints(0, 1, e.latlng);
         }
+        this.clickZone(0.0002);
       });
       this.map.on('zoomend', this.zoomChange, this);
       this.map.on('dragend', this.centerChange, this);
@@ -369,15 +370,6 @@ export class MapService {
     L.geoJSON(
       layers, {
         onEachFeature: function (feature, layer) {
-          layer.
-          on('popupopen', function(e) {
-            //_this.userPosition = [ e.popup._latlng.lat, e.popup._latlng.lng];
-            //_this.loadMarkers([], false);
-            _this.clickZone(this);
-          });
-          if ( feature.properties.subprograms != undefined && feature.properties.name != undefined ) {
-            layer.bindPopup('<div>'+feature.properties.name+'</div><small>'+feature.properties.subprograms.join('<br>')+'</small>');
-          }
           if (zoom2zone) {
             bounds.push(layer.getBounds());
           }
@@ -421,6 +413,9 @@ export class MapService {
     }
   }
   showSubZone(layer: L.GeoJSON) {
+    if (this.subZone) {
+      this.map.removeLayer(this.subZone);
+    }
     this.subZone = L.geoJSON( layer );
     this.subZone.addTo(this.map);
   }
