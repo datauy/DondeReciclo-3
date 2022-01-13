@@ -41,6 +41,8 @@ export class Container extends Base {
     schedules: any[];
     main_material: number;
     information: string;
+    receives_text: string;
+    custom_icon: string;
 }
 
 export class ContainerType extends Base {

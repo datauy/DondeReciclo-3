@@ -180,6 +180,7 @@ export class MapService {
         if (this.route) {
           this.route.spliceWaypoints(0, 1, e.latlng);
         }
+        this.clickZone(0.0002);
       });
       this.map.on('zoomend', this.zoomChange, this);
       this.map.on('dragend', this.centerChange, this);
@@ -213,7 +214,18 @@ export class MapService {
     var markersLayer = []
     let center_markers = 10;
     for (var i = 0; i < markers.length; i++) {
-      var newMarker = new L.CustomMarker([markers[i].latitude,markers[i].longitude], {container_pos: i, className: "ion-color-"+markers[i].class })
+      var marker_options = { container_pos: i, className: "ion-color-"+markers[i].class };
+      if ( markers[i].hasOwnProperty('custom_icon') && markers[i].custom_icon != '' ) {
+        marker_options['icon'] = L.icon({
+          iconUrl: markers[i].custom_icon,
+          iconSize: [37, 45],
+          iconAnchor: [18.5, 45],
+          popupAnchor: [1, -34],
+          tooltipAnchor: [16, -28],
+          shadowSize: [60, 60]
+        });
+      }
+      var newMarker = new L.CustomMarker([markers[i].latitude,markers[i].longitude], marker_options)
       .on('click', this.clickPin, this); //L.bind(this.showPane, null, markers[i]))
       if ( center_markers != 0 && fly ) {
         mapBounds.push([markers[i].latitude, markers[i].longitude]);
@@ -358,15 +370,6 @@ export class MapService {
     L.geoJSON(
       layers, {
         onEachFeature: function (feature, layer) {
-          layer.
-          on('popupopen', function(e) {
-            //_this.userPosition = [ e.popup._latlng.lat, e.popup._latlng.lng];
-            //_this.loadMarkers([], false);
-            _this.clickZone(this);
-          });
-          if ( feature.properties.subprograms != undefined && feature.properties.name != undefined ) {
-            layer.bindPopup('<div>'+feature.properties.name+'</div><small>'+feature.properties.subprograms.join('<br>')+'</small>');
-          }
           if (zoom2zone) {
             bounds.push(layer.getBounds());
           }
@@ -410,6 +413,9 @@ export class MapService {
     }
   }
   showSubZone(layer: L.GeoJSON) {
+    if (this.subZone) {
+      this.map.removeLayer(this.subZone);
+    }
     this.subZone = L.geoJSON( layer );
     this.subZone.addTo(this.map);
   }

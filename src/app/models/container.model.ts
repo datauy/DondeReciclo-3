@@ -13,4 +13,5 @@ export class Container extends Base {
     photos: string[];
     address: string;
     main_material: number;
+    custom_icon: string;
 }

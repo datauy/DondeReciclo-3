@@ -18,7 +18,7 @@ export interface Subprogram {
   zone: {
     distance: number,
     is_route:  boolean,
-    location: any,
+    location_id: number,
     name: string,
     schedules: any[],
     pick_up_type: string

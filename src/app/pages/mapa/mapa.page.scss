@@ -136,7 +136,7 @@
         .header {
           padding-bottom: 22px;
         }
-        .scrollable {
+        .scrollable-div {
           max-height: 48vh;
           position: relative;
           overflow-y: auto;
@@ -144,6 +144,14 @@
             cursor: pointer;
           }
         }
+        .tags-wrapper {
+          ion-button {
+            font-size: 11px;
+          }
+        }
+      }
+      .conteiner-directions {
+        padding-right: 54px;
       }
     }
     .back-button {

@@ -7,6 +7,7 @@ import { SessionService } from 'src/app/services/session.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
 import { Message } from "src/app/models/message.model";
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-register-form',
@@ -41,6 +42,7 @@ export class RegisterForm implements OnInit {
       state: '',
       neighborhood: '',
       age: null,
+      country_id: 1
     };
     if ( this.auth.isLogged ){
       this.title = 'Perfil';
@@ -51,6 +53,7 @@ export class RegisterForm implements OnInit {
           name: user.name,
           email: user.email,
           sex: user.sex,
+          country_id: user.country_id,
           state: user.state,
           neighborhood: user.neighborhood,
           age: user.age,
@@ -104,6 +107,7 @@ export class RegisterForm implements OnInit {
       state: [predefined.state, Validators.required],
       neighborhood: [predefined.neighborhood],
       age: [predefined.age],
+      country_id: [predefined.country_id, Validators.required],
     };
     if ( !partial ) {
       fields = {
@@ -127,6 +131,15 @@ export class RegisterForm implements OnInit {
     if ( this.disabled ) {
       this.user_data.disable();
     }
+    //Get country changes for state switch
+    this.user_data.get('country_id').valueChanges.subscribe(val => {
+      if (val == 2) {
+        this.session.country = 'Colombia';
+      }
+      else {
+        this.session.country = 'Uruguay';
+      }
+    });
     console.log('End predefined');
     this._formLoaded.next(true);
   }
@@ -292,6 +305,15 @@ export class RegisterForm implements OnInit {
         } else {
             matchingControl.setErrors(null);
         }
+    }
+  }
+  toggleCountry() {
+    console.log("Toggle Country");
+    if (this.user_data.value.country_id == 2) {
+      this.session.country = 'Colombia';
+    }
+    else {
+      this.session.country = 'Uruguay';
     }
   }
   public checkTC(c: AbstractControl){
