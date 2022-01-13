@@ -21,6 +21,10 @@ export interface Subprogram {
     location_id: number,
     name: string,
     schedules: any[],
-    pick_up_type: string
-  }
+    pick_up_type: string,
+    information: string,
+  },
+  receives_mat: string,
+  action_title: string,
+  action_link: string
 }
