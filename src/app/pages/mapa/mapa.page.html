@@ -142,7 +142,7 @@
             <ion-col size-md="10" size-xl="8" size-xs="12" padding="0" >
               <ion-button *ngIf="!subprogram.action_link"
                 class="submit"
-                [routerLink]="subprogram.action_link ? subprogram.link : '/usuario/recolectar/'+subprogram.id"
+                [routerLink]="'/usuario/recolectar/'+subprogram.id"
                 [innerHTML]="subprogram.action_title ? subprogram.action_title : 'Solicitar recolección'">
               </ion-button>
               <ion-button *ngIf="subprogram.action_link"
