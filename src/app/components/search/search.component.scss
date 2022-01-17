@@ -8,6 +8,12 @@
       position: absolute;
       left: 0px;
     }
+    img {
+      width: 24px;
+      height: 24px;
+      left: 5px;
+      position: absolute;
+    }
   }
   #search-app-content {
     ion-auto-complete {
@@ -123,6 +129,12 @@
         ion-note {
           font-size: 12px;
         }
+      }
+      img {
+        width: 24px;
+        height: 24px;
+        left: 5px;
+        position: absolute;
       }
       ion-button {
         position: absolute;
