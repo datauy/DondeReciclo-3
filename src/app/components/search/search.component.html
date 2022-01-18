@@ -27,7 +27,8 @@
         [ngClass]="predefined.class"
         (click)="searchSuggestion(predefined)">
         <ion-label [innerHTML]="predefined.name"></ion-label>
-        <ion-icon class="right" [name]="'dr-'+predefined.class"></ion-icon>
+        <img class="right" *ngIf="predefined.icon != ''" src="{{predefined.icon}}" alt="imagen de residuo">
+        <ion-icon *ngIf="predefined.icon == ''" class="right" [name]="'dr-'+predefined.class"></ion-icon>
       </ion-button>
     </div>
   </div>

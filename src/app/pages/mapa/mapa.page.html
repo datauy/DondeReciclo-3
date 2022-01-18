@@ -53,7 +53,8 @@
               <ion-button *ngFor="let mat of subp.receives_mat;"
               [ngClass]="mat.class"
               [color]="mat.class">
-                <ion-icon class="ion-float-left" name="dr-{{mat.class}}"></ion-icon>
+                <img class="left" *ngIf="mat.icon != ''" src="{{mat.icon}}" alt="imagen de residuo">
+                <ion-icon *ngIf="mat.icon == ''" class="ion-float-left" name="dr-{{mat.class}}"></ion-icon>
                 <ion-label [innerHTML]="mat.name"></ion-label>
               </ion-button>
             </div>
@@ -125,7 +126,8 @@
               <ion-button *ngFor="let mat of subprogram.receives_mat;"
               [ngClass]="mat.class"
               [color]="mat.class">
-                <ion-icon class="ion-float-left" name="dr-{{mat.class}}"></ion-icon>
+                <img class="left" *ngIf="mat.icon != ''" src="{{mat.icon}}" alt="imagen de residuo">
+                <ion-icon *ngIf="mat.icon == ''" class="ion-float-left" name="dr-{{mat.class}}"></ion-icon>
                 <ion-label [innerHTML]="mat.name"></ion-label>
               </ion-button>
             </div>
@@ -242,7 +244,8 @@
                 <ion-button *ngFor="let mat of container.receives;"
                   [ngClass]="mat.class"
                   [color]="mat.class">
-                  <ion-icon class="ion-float-left"
+                  <img class="left" *ngIf="mat.icon != ''" src="{{mat.icon}}" alt="imagen de residuo">
+                  <ion-icon *ngIf="mat.icon == ''" class="ion-float-left"
                   name="dr-{{mat.class}}"></ion-icon>
                   <ion-label [innerHTML]="mat.name"></ion-label>
                 </ion-button>
