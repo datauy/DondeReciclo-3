@@ -42,7 +42,9 @@
       [ngClass]="attrs.data.class"
       *ngIf="attrs.data.class != 'none'"
     >
+      <img class="left" *ngIf="attrs.data.icon != ''" src="{{attrs.data.icon}}" alt="imagen de residuo">
       <ion-icon
+        *ngIf="attrs.data.icon == ''"
         class="left"
         [name]="'dr-' + attrs.data.class">
       </ion-icon>
@@ -54,10 +56,12 @@
 </div>
 <div id="search-item" *ngIf="session.searchItem && session.showSearchItem">
   <ion-item lines="none" [color]="session.searchItem.class">
+    <img class="left" *ngIf="session.searchItem.icon != ''" src="{{session.searchItem.icon}}" alt="imagen de residuo">
     <ion-icon
-    class="left"
-    [name]="'dr-' + session.searchItem.class">
-  </ion-icon>
+      *ngIf="session.searchItem.icon == ''"
+      class="left"
+      [name]="'dr-' + session.searchItem.class">
+    </ion-icon>
   <div class="item-text">
     <ion-label [innerHTML]="session.searchItem.name"></ion-label>
     <ion-note slot="start" [innerHTML]="session.searchItem.deposition" *ngIf="session.searchItem.deposition"></ion-note>

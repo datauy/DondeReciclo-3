@@ -292,17 +292,9 @@ export class MapaPage implements OnInit {
   //   console.log(this.mapEl.clientHeight);
   // }
   //
-  // breakPointMapCupertino(){
-  //   const currentBreak = this.infoPane.currentBreak();
-  //   console.log('break: ', currentBreak);
-  //   switch (true) {
-  //       case currentBreak == "middle":
-  //         console.log('break: ', currentBreak);
-  //         this.map.flytomarker(200);
-  //       // case currentBreak == "bottom":
-  //       //   this.map.recenter(400);
-  //   }
-  // }
+  breakPointMapCupertino(){
+     document.querySelector('.cupertino-pane').className = 'cupertino-pane ' + this.infoPane.currentBreak();
+  }
   //
   loadInfoPane() {
     let top = true;
@@ -342,7 +334,7 @@ export class MapaPage implements OnInit {
           height: Math.round(window.innerHeight*.65),
         },
       },
-      // onDidPresent: () => this.breakPointMapCupertino(),
+      onTransitionEnd: () => this.breakPointMapCupertino(),
       onWillPresent: () => this.cupertinoShow(),
       // onBackdropTap: () => this.infoPane.hide(),
       onWillDismiss: () => this.cupertinoHide(),
@@ -698,7 +690,6 @@ export class MapaPage implements OnInit {
     else {
       this.subprogram = this.subprograms[index];
     }
-    console.log(this.subprogram);
     this.list = list;
     this.map.removeZones();
     for (var i = 0; i < this.zones.features.length; i++) {

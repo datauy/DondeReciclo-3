@@ -14,12 +14,17 @@
           height: calc(70vh - 188px);
         }
       }
-      .pane-container {
-        height: 100%;
-      }
       .scrollable-div {
         overflow-y: auto;
-        height: calc(90vh - 164px);
+      }
+      &.middle .scrollable-div {
+        height: 45vh;
+      }
+      &.top .scrollable-div {
+        height: 68vh;
+      }
+      .pane-container {
+        height: 100%;
       }
       h5 {
         margin: 0;
@@ -137,7 +142,6 @@
           padding-bottom: 22px;
         }
         .scrollable-div {
-          max-height: 48vh;
           position: relative;
           overflow-y: auto;
           ion-item {
