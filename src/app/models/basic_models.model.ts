@@ -89,4 +89,5 @@ export interface SearchMessage {
     name: string;
     class: string;
     deposition: string;
+    icon: string;
 }
