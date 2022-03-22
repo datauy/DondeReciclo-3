@@ -34,14 +34,13 @@ export class SidemenuComponent implements OnInit {
       desc: 'Marcas que hacen posible esta app',
       url: 'empresas',
       icon: 'dr-empresas'
+    },
+    {
+      title: 'Recicladores',
+      desc: 'Formalización de recicladores',
+      url: 'recicladores',
+      icon: 'dr-recycle'
     }
-    //,
-    //{
-      //title: 'Inicio',
-      //desc: 'Volver al mapa',
-      //url: 'intro',
-      //icon: 'dr-inicio'
-    //}
   ];
 
 

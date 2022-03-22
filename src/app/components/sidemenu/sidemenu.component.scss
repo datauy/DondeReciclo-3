@@ -70,6 +70,10 @@
       background: none;
       margin: 0;
       cursor: pointer;
+      &.secondary-menu {
+        --padding-top: 0;
+        --padding-bottom: 0;
+      }
       h5{
         color: white;
       }

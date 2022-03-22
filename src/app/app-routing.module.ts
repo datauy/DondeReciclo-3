@@ -1,6 +1,8 @@
 import { NgModule} from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotFoundPage } from './components/static-pages/notfound.page';
+import { PrivacyPolicyPage } from './components/static-pages/privacy_policy.page';
+import { RecyclersPage } from './components/static-pages/recyclers.page';
 
 const routes: Routes = [
   { path: '', redirectTo: 'intro', pathMatch: 'full' },
@@ -27,6 +29,14 @@ const routes: Routes = [
   {
     path: 'usuario',
     loadChildren: () => import('./pages/user/user.module').then( m => m.UserPageModule)
+  },
+  {
+    path: 'privacidad',
+    component: PrivacyPolicyPage
+  },
+  {
+    path: 'recicladores',
+    component: RecyclersPage
   },
   {
     path: '**',
