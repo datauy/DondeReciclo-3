@@ -14,4 +14,46 @@
       color: var(--vidrio);
     }
   }
+  .image-wrapper {
+    height: calc(160px + 10vw);
+    width: 99%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 0;
+    border-radius: 16px;
+    margin: 16px auto 48px;
+    img{
+      border-radius: 16px;
+      height: 100%;
+      max-width: none;
+      object-fit: contain;
+      background: #FFF;
+      }
+    }
+  .ion-grid {
+  --ion-grid-column-padding: 10px;
+  border-collapse: collapse;
+  border-style: hidden;
+
+  ion-row:first-child {
+    background-color: var(--dark-sea-green);
+    font-weight: bold;
+    color: var(--vidrio);
+    text-align: center;
+  }
+  ion-col {
+    border: 1px solid black;
+    border-bottom: 0;
+    border-right: 0;
+  }
+  ion-col:last-child {
+    border-right: 1px solid black;
+  }
+
+  ion-row:last-child {
+    border-bottom: 1px solid black;
+  }
+  }
 }

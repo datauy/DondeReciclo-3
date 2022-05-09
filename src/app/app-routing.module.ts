@@ -35,7 +35,7 @@ const routes: Routes = [
     component: PrivacyPolicyPage
   },
   {
-    path: 'recicladores',
+    path: 'clasificadores',
     component: RecyclersPage
   },
   {

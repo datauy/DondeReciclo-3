@@ -36,9 +36,9 @@ export class SidemenuComponent implements OnInit {
       icon: 'dr-empresas'
     },
     {
-      title: 'Recicladores',
-      desc: 'Formalización de recicladores',
-      url: 'recicladores',
+      title: 'Clasificadores',
+      desc: 'Información para formalización',
+      url: 'clasificadores',
       icon: 'dr-recycle'
     }
   ];
