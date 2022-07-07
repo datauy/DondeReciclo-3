@@ -37,9 +37,9 @@ export class SidemenuComponent implements OnInit {
     },
     {
       title: 'Clasificadores',
-      desc: 'Información para formalización',
+      desc: 'Información para formalizacitón',
       url: 'clasificadores',
-      icon: 'dr-recycle'
+      icon: 'user-helmet-safety'
     }
   ];
 
