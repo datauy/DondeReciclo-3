@@ -10,6 +10,8 @@ import { SocialShareComponent } from './social-share/social-share.component';
 import { AutoCompleteModule } from 'ionic4-auto-complete';
 import { NotFoundPage } from './static-pages/notfound.page';
 import { AboutPage } from './static-pages/about.page';
+import { PrivacyPolicyPage } from './static-pages/privacy_policy.page';
+import { RecyclersPage } from './static-pages/recyclers.page';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { AccordionComponent } from './accordion/accordion.component';
 import { NotificationComponent } from './notification/notification.component';
@@ -32,6 +34,8 @@ import { ImageSliderComponent } from './image-slider/image-slider.component';
     SocialShareComponent,
     NotFoundPage,
     AboutPage,
+    PrivacyPolicyPage,
+    RecyclersPage,
     ContactFormComponent,
     AccordionComponent,
     NotificationComponent,

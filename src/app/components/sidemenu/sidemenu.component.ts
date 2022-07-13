@@ -35,13 +35,6 @@ export class SidemenuComponent implements OnInit {
       url: 'empresas',
       icon: 'dr-empresas'
     }
-    //,
-    //{
-      //title: 'Inicio',
-      //desc: 'Volver al mapa',
-      //url: 'intro',
-      //icon: 'dr-inicio'
-    //}
   ];
 
 

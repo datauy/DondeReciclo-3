@@ -34,6 +34,20 @@
           </div>
           <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
         </ion-item>
+        <ion-item
+          *ngIf="session.country == 'Uruguay'"
+          (click)="toggleMenu()"
+          lines="none"
+          routerLink="/clasificadores"
+          routerLinkActive="active-item"
+          detail-icon="none">
+          <ion-icon slot="start" name="user-helmet-safety"></ion-icon>
+          <div>
+            <h4>Clasificadores</h4>
+            <p>Información para formalizacitón</p>
+          </div>
+          <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+        </ion-item>
         <ion-item lines="none"
           (click)="toggleMenu()"
           detail-icon="none"
@@ -94,7 +108,7 @@
           lines="none">
           <ion-button (click)="toggleMenu()" routerLink="usuario/nuevo" size="large" type="submit" class="submit">Registrarme</ion-button>
         </ion-item>
-        <ion-item lines="none"
+        <ion-item lines="none" class="secondary-menu"
           (click)="introSlide()"
           detail-icon="none"
           routerDirection="forward"
@@ -103,7 +117,16 @@
             <h5>Repetir introducción</h5>
           </div>
         </ion-item>
-
+        <ion-item lines="none" class="secondary-menu"
+          (click)="toggleMenu()"
+          detail-icon="none"
+          routerDirection="forward"
+          routerLink="privacidad"
+          routerLinkActive="active-item">
+          <div>
+            <h5>Políticas de Privacidad</h5>
+          </div>
+        </ion-item>
       </ion-list>
     </ion-content>
     <div class="menu-rounded-bottom">

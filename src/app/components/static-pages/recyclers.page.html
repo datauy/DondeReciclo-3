@@ -1,0 +1,868 @@
+<app-header display="full"></app-header>
+
+<!--Uruguay-->
+
+<ion-content class="recyclers inner-scroll" *ngIf="session.country == 'Uruguay'">
+  <ion-grid>
+    <ion-row #advice class="ion-justify-content-center section-header">
+      <ion-col  size-md="11" size-lg="10" size-xs="12">
+        <div class="section-header">
+          <h1>Formalización</h1>
+          <h2 class="sub-light">Soy clasificador de residuos y quiero formalizar mi trabajo, ¿cómo debo hacer?</h2>
+        </div>
+
+        <div class="image-wrapper">
+          <img src="assets/img/cabezal-formalizacion.jpg" alt="">
+        </div>
+
+        <h2>¿Por qué es importante formalizarse?</h2>
+        <p>La informalidad laboral refiere a aquellas relaciones de empleo que no son legalmente reguladas o socialmente protegidas. Según <a href="http://www.gub.uy/presidencia/comunicacion/noticias/uruguay-lidera-indices-formalidad-laboral-america-latina#:~:text=Mientras%20en%20algunos%20pa%C3%ADses%20de,tras%20participar%20en%20la%2019">datos del Ministerio de Trabajo y Seguridad Social</a> el porcentaje de informalidad en Uruguay se ubica cercano al 24%. El desempeñar la labor de manera formal es importante, porque permite:</p>
+
+        <li>Acceder a la seguridad Social y de salud</li>
+        <li>Ampliar la posibilidad de servicios a comercios y empresas</li>
+        <li>Acceder a financiamiento</li>
+
+        <p>El contar con cobertura de seguridad social y salud, protege al trabajador en caso de enfermedad, accidente y le da un respaldo económico al momento de dejar de ejercer su labor. A su vez, al estar formalizado, contar con registro en BPS y DGI, le da la posibilidad de ampliar la gama de servicios que puede prestar, y acceder a financiamiento para mejorar la infraestructura de trabajo.</p>
+
+        <ion-item-divider></ion-item-divider>
+        <br>
+
+        <h3><ion-icon name="warning"></ion-icon><strong>Importante:</strong> Anotarse en el <strong>Registro Único de Clasificadores</strong></h3>
+        <p><strong>Este registro llevado a cabo por el MTSS en conjunto con el MIDES, es uno de los puntos que establece la Ley 19829/19 para poder acceder a los beneficios de la inclusión social, laboral y productiva que surjan de la aplicación de la presente ley, los clasificadores deben estar registrados.</strong></p>
+
+        <ion-item-divider></ion-item-divider>
+        <br>
+
+<!--Opciones-->
+
+        <h2>Opciones de formalización</h2>
+
+        <p>Existen distintas opciones para formalizar el trabajo que llevan adelante los clasificadores de residuos en Uruguay, este es un registro inacabado y en construcción de las mismas.</p>
+
+        <li>Plantas de Clasificación de la Ley de Envases</li>
+        <li>Programas de inclusión de la Intendencia de Montevideo</li>
+        <li>Formación de Cooperativas</li>
+
+<!--Tabla comparativa
+        <ion-grid class="ion-grid">
+          <ion-row>
+            <ion-col></ion-col>
+            <ion-col>Ventajas</ion-col>
+            <ion-col>Desventajas</ion-col>
+          </ion-row>
+          <ion-row >
+            <ion-col>Plantas de clasificación (Ley de Envases)</ion-col>
+            <ion-col></ion-col>
+            <ion-col></ion-col>
+          </ion-row>
+          <ion-row >
+            <ion-col>Programa de inclusión social de clasificadores (Int. de Montevideo)</ion-col>
+            <ion-col></ion-col>
+            <ion-col></ion-col>
+          </ion-row>
+          <ion-row >
+            <ion-col>Cooperativa social de clasificadores</ion-col>
+            <ion-col></ion-col>
+            <ion-col></ion-col>
+          </ion-row>
+        </ion-grid>
+-->
+
+<!--Diagrama de flujo
+
+        <p>Introducción al diagrama de flujo que viene a continuación.</p>
+
+        <div class="diagrama">
+        <img src="assets/img/flujo_formalizacion.svg" alt="">
+        </div>
+
+-->
+        <ion-item-divider></ion-item-divider>
+        <br>
+
+<!--Opción 1-->
+
+        <h2>Opción 1: Plantas de clasificación de la Ley de Envases (Montevideo)</h2>
+        <p>Este sistema integra el principio de responsabilidad extendida al productor, responsabilizando a los propietarios de marca e importadores de productos de la recuperación de materiales y su envío a reciclaje. En este proceso es clave la inclusión social de clasificadores a través de las Plantas de clasificación, cumpliendo con un objetivo ambiental y social.</p>
+        <br>
+
+        <accordion title="Paso 1: Anotarse en la lista de espera" class="ion-color-papel-y-carton">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Presentarse en cualquiera de estos lugares</ion-label>
+                <ion-icon name="warning"></ion-icon><ion-note slot="start"> <strong>Importante:</strong> Llevar cédula de identidad.</ion-note>
+              </div>
+
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>MIDES (Ministerio de Desarrollo Social)</ion-label>
+                <ion-note slot="start">18 de Julio 1453,	<a href="tel:24000302">24000302</a>, <a href="tel:08006273">08006273</a>, <a href="mailto:informacion@mides.gub.uy">informacion@mides.gub.uy</a></ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Cooperativa La Paloma - Planta de Reciclado</ion-label>
+                <ion-note slot="start">FALTA INFORMACIÓN</ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Cooperativa Géminis – Planta de Clasificación</ion-label>
+                <ion-note slot="start">Géminis y Chacarita de los Padres, <a href="tel:04405315">04405315</a>,	<a href="mailto:cooperativaplantageminis2020@gmail.com">cooperativaplantageminis2020@gmail.com</a>,	lunes a viernes de 7:00 a 14:00</ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Cooperativa Burgues – Planta de Clasificación</ion-label>
+                <ion-note slot="start">Burgues 4259 (casi Aparicio Saravia)</ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Cooperativa Duran – Planta de Clasificación</ion-label>
+                <ion-note slot="start">Camino Durán 4900, lunes a viernes de 7:00 a 19:00, <a href="29152020">29152020</a>, <a href="096318644">096318644</a> (Patricia, Presidente), <a href="0927470020">0927470020</a> (Fernando, Secretario), jueves de 16:00 a 18:00</ion-note>
+              </div>
+            </ion-item>
+          </ion-list>
+        </accordion>
+
+        <accordion title="Paso 2: Esperar disponibilidad de puestos" class="ion-color-papel-y-carton">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Explicación breve de cómo es el sistema de lista de espera.</ion-label>
+                <ion-icon name="warning"></ion-icon><ion-note slot="start"> <strong>Importante:</strong> No hay un plazo máximo para la espera, ni se garantiza la obtención de un lugar.</ion-note>
+              </div>
+            </ion-item>
+          </ion-list>
+        </accordion>
+
+        <ion-item-divider></ion-item-divider>
+        <br>
+
+<!--Opción 2-->
+
+        <h2>Opción 2: Programa de inclusión social de clasificadores/as de residuos sólidos de la secretaría de empleabilidad de la Intendencia de Montevideo</h2>
+        <p>La Secretaría de empleabilidad de la IM, implementa un conjunto de dispositivos que promueven la inclusión social brindando herramientas, para el acceso al mundo del trabajo con igualdad de oportunidades. Entre ellos el Programa de Inclusión social de clasificadores/as de residuos sólidos Urbanos.</p>
+        <li><a href="http://montevideo.gub.uy/institucional/dependencias/secretaria-de-empleabilidad-para-la-inclusion-social">Más información en el sitio web de la Intendencia de Montevideo</a></li>
+        <li><a href="http://montevideo.gub.uy/tramites-y-tributos/registro/habilitacion-de-vehiculos-transportistas-de-residuos">Habilitación de vehículos</a></li>
+        <li><a href="http://montevideo.gub.uy/tramites-y-tributos/registro/empresas-transportistas-de-residuos">Trámite para transportistas</a></li>
+        <br>
+
+        <accordion title="Paso 1: Anotarse en el Registro Único de Clasificadores" class="ion-color-aceite-de-cocina">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Presentarse en cualquiera de estos lugares</ion-label>
+                <ion-icon name="warning"></ion-icon><ion-note slot="start"> <strong>Importante:</strong> Llevar cédula de identidad</ion-note>
+              </div>
+
+            </ion-item>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Ministerio de Trabajo y Seguridad Social (MTSS)</ion-label>
+                <ion-note slot="start">Juncal 1511, <a href="tel:29152020">29152020</a>, lunes a viernes de 9:00 a 17:00</ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>PIT-CNT</ion-label>
+                <ion-note slot="start">Jackson 1283,	<a href="tel:24096680">24096680</a>, <a href="tel:24092267">24092267</a>, <a href="mailto:pitcnt@pitcnt.uy">pitcnt@pitcnt.uy</a></ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>UCRUS (Unión de Clasificadores de Residuos Urbanos Sólidos)</ion-label>
+                <ion-note slot="start">Camino Corrales 3041 (Frente a galpones de FUNSA), <a href="29152020">29152020</a>, <a href="096318644">096318644</a> (Patricia, Presidente), <a href="0927470020">0927470020</a> (Fernando, Secretario), jueves de 16:00 a 18:00</ion-note>
+              </div>
+            </ion-item>
+
+          </ion-list>
+        </accordion>
+
+        <accordion title="Paso 2: Seleccionar modalidad" class="ion-color-aceite-de-cocina">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Proyecto Motocarros</ion-label>
+                <ion-note slot="start">Reconversión laboral de clasificadores/as de RSU que se insertan a trabajar como proveedores de al IM, en régimen de trabajo protegido y transitorio</ion-note>
+              </div>
+            </ion-item>
+                - Convocatoria<br>
+                - Entrevista<br>
+                - Capacitación<br>
+                - Registro de monotributo (ver punto 5)<br>
+                Contacto: <a href="mailto:secretaria.empleabilidad@imm.gub.uy">secretaria.empleabilidad@imm.gub.uy</a>, <a href="tel:19508601">19508601</a>, <a href="tel:19508602">19508602</a>, <a href="tel:19508619">19508619</a>
+
+              <ion-item lines="none">
+                <div class="item-text">
+                  <ion-label>Proyecto transportistas de residuos comerciales</ion-label>
+                  <ion-note slot="start">ara brindar un servicio de recolección y transporte de residuos a empresas y comercios de la ciudad.</ion-note>
+                </div>
+              </ion-item>
+              <strong>IMPORTANTE:</strong> Para registrarse como transportista de residuos con la Intendencia de Montevideo debería registrarse como empresa y contar con un vehículo que cumple con determinadas condiciones.<br>
+              Contacto: <a href="mailto:transportistas.residuos@imm.gub.uy">transportistas.residuos@imm.gub.uy</a>, <a href="tel:19503731">19503731</a>, <a href="tel:19503732">19503732</a>, <a href="tel:19503736">19503736</a>, <a href="tel:19503737">19503737</a>, <a href="tel:19503738">19503738</a>, <a href="tel:19503740">19503740</a>
+
+          </ion-list>
+        </accordion>
+
+        <ion-item-divider></ion-item-divider>
+        <br>
+
+<!--Opción 3-->
+
+        <h2>Opción 3: Conformación de una cooperativa social de clasificadores</h2>
+        <p>Una cooperativa es una asociación autónoma de personas que se han unido voluntariamente para hacer frente a sus necesidades y aspiraciones económicas, sociales y culturales comunes por medio de una empresa de propiedad conjunta y democrática controlada (Alianza Cooperativa Internacional).</p>
+        <accordion title="Requisitos" class="ion-color-materiales-reciclables">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Cédula de identidad</ion-label>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Grupo de por lo menos 5 personas</ion-label>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Proyecto viable y económicamente rentable y sostenible en el tiempo</ion-label>
+              </div>
+            </ion-item>
+
+          </ion-list>
+        </accordion>
+        <br>
+
+        <accordion title="Otros datos de interés" class="ion-color-materiales-reciclables">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Duración/entrega: Depende del grupo</ion-label>
+                <ion-note slot="start">Mínimo de 3 meses</ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Vigencia: Indeterminada</ion-label>
+              </div>
+            </ion-item>
+
+          </ion-list>
+        </accordion>
+        <br>
+
+        <h4>¿Cómo se hace?</h4>
+        <p>Solicitar una entrevista con la División de Cooperativas Sociales y Procesos Asociativos en cualquier Oficina Territorial o Centro de Atención del MIDES, en forma telefónica o vía correo electrónico.</p>
+
+        <accordion title="¿Dónde y cuándo se realiza?" class="ion-color-materiales-reciclables">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>En Montevideo:</ion-label>
+                <ion-note slot="start">Área de Promoción Sociolaboral MIDES, San José 1414, <a href="tel:24000302">24000302</a> internos 3506 y 3511, <a href="mailto:coopsociales@mides.gub.uy">coopsociales@mides.gub.uy</a></ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>En el interior:</ion-label>
+                <ion-note slot="start">Oficinas Territoriales del MIDES en todo el país.</ion-note>
+              </div>
+            </ion-item>
+
+          </ion-list>
+        </accordion>
+
+         <ion-item-divider></ion-item-divider>
+         <br>
+
+<!-- Trámites BPS -->
+
+        <h2>¿Cómo hago para registrarme como empresa en BPS?</h2>
+        <p>El Monotributo es un tributo único cuyo objetivo es que pequeños empresarios que tienen emprendimientos productivos de reducida dimensión tributen al Estado y se encuentren amparados en la seguridad social. Concentra en un único tributo los aportes a BPS (contribuciones especiales de seguridad social (CESS) generadas por su propia actividad) y a DGI (impuestos nacionales vigentes, excluidos los que gravan la importación).</p>
+        <p>Los beneficios de estar registrado son: tener una cobertura médica y adherir a los hijos o conviviente a la misma cobertura médica, acreditar ingresos en blanco y estar en la economía formal. Además de poder facturar al Estado o entidades privadas los trabajos realizados</p>
+        <p>Podrán ampararse exclusivamente al régimen de monotributo los siguientes sujetos:</p>
+        <li> Las empresas unipersonales, incluidas aquellas en las que el titular ejerza la actividad con su cónyuge o concubino colaborador, siempre que tales empresas no tengan más de un dependiente;</li>
+        <li> Las sociedades de hecho integradas por un máximo de dos socios, sin dependientes; y</li>
+        <li> Las sociedades de hecho integradas exclusivamente por familiares, con hasta un cuarto grado de consanguinidad o un segundo de afinidad, siempre que el número de socios no supere a tres y la sociedad no tenga dependientes.</li>
+
+        <h3>Monotributo MIDES</h3>
+        <p>En el año 2011 se crea el Monotributo Social gestionado por el MIDES, que establece un tributo único que pagan personas que integran hogares por debajo de la línea de pobreza o están en situación de vulnerabilidad social y que producen y/o comercializan cualquier tipo de bienes o prestan cualquier tipo de servicios.</p>
+        <p>Es una prestación tributaria unificada en sustitución de las contribuciones especiales de seguridad social generadas por la actividad y de todos los impuestos nacionales vigentes (excluidos los que gravan la importación) que permite la formalización ante BPS y DGI de pequeños emprendimientos productivos o de servicios, de personas que integran hogares en situación de vulnerabilidad socioeconómica. <a href="https://www.dgi.gub.uy/wdgi/page?2,principal,_Ampliacion,O,es,0,PAG;CONC;40;1;D;informacion-general-monotributo-social-mides;17;PAG;">Más información</a>.</p>
+
+        <ion-grid class="ion-grid">
+          <ion-row>
+            <ion-col></ion-col>
+            <ion-col>Derechos</ion-col>
+            <ion-col>Obligaciones</ion-col>
+            <ion-col>Condiciones</ion-col>
+          </ion-row>
+          <ion-row >
+            <ion-col>Social Mides-Unipersonal</ion-col>
+            <ion-col>No paga DGI</ion-col>
+            <ion-col>Pago de impuesto en BPS<br>Declaración jurada<br>Documentación de operaciones<br>Importaciones</ion-col>
+            <ion-col>Ingresos menores a $875.655 anuales</ion-col>
+          </ion-row>
+          <ion-row >
+            <ion-col>Social Mides-Sociedad de hecho</ion-col>
+            <ion-col>No paga DGI</ion-col>
+            <ion-col>Pago de impuesto en BPS<br>Declaración jurada<br>Documentación de operaciones<br>Importaciones</ion-col>
+            <ion-col>Ingresos menores a $1.459.425 anuales<br>2 socios o 3 socios familiares hasta 4º grado de consanguinidad o 2º de afinidad</ion-col>
+          </ion-row>
+          <ion-row >
+            <ion-col>Unipersonal</ion-col>
+            <ion-col>No paga DGI<br>Se pagan aportes sólo cuando se tiene trabajo<br>Se abre la posibilidad de venderle al Estado y a empresas privadas<br>Se accede a la Seguridad Social<br>Pago en forma progresiva (no aplica FONASA):<br>-25% durante los primeros doce meses de actividad registrada.<br>-50 % en los siguientes doce meses.<br>-75% en los terceros doce meses.</ion-col>
+            <ion-col>Pago de impuesto en BPS<br>Declaración jurada<br>Documentación de operaciones<br>Importaciones</ion-col>
+            <ion-col>Ingresos menores a $875.655 anuales</ion-col>
+          </ion-row>
+          <ion-row >
+            <ion-col>Sociedad de hecho</ion-col>
+            <ion-col>No paga DGI<br>Se pagan aportes sólo cuando se tiene trabajo<br>Se abre la posibilidad de venderle al Estado y a empresas privadas<br>Se accede a la Seguridad Social<br>Pago en forma progresiva (no aplica FONASA):<br>-25% durante los primeros doce meses de actividad registrada.<br>-50 % en los siguientes doce meses.<br>-75% en los terceros doce meses.</ion-col>
+            <ion-col>Pago de impuesto en BPS<br>Declaración jurada<br>Documentación de operaciones<br>Importaciones</ion-col>
+            <ion-col>Ingresos menores a $1.459.425 anuales<br>2 socios o 3 socios familiares hasta 4º grado de consanguinidad o 2º de afinidad</ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <p><a href="https://www.dgi.gub.uy/wdgi/page?2,principal,Ampliacion-Normativa,O,es,0,PAG;CONC;837;4;D;Cuadro%20pequena%20empresa%20monotributo;2;PAG">Más información</a>.</p>
+
+        <h3>Preguntas frecuentes</h3>
+
+        <li><a href="https://www.dgi.gub.uy/wdgi/page?2,principal,_Ampliacion,O,es,0,PAG;CONC;40;1;D;cual-es-el-monto-mensual-que-se-paga-al-b-p-s-en-el-regimen-de-monotributo;7;PAG">¿Cuál es el monto mensual que se paga al B.P.S. en el régimen de Monotributo?</a></li>
+        <li><a href="https://www.bps.gub.uy/6667/monotributo-social-mides-18874.html">¿Cual es el monto que se paga al BPS en régimen monotributo social MIDES?</a></li>
+        <li>¿Cual es la diferencia entre unipersonal y sociedad de hecho?</li>
+        <p><b>UNIPERSONAL:</b> Es un emprendimiento que se realiza a título individual sin constituir una sociedad por lo tanto no tienen personería jurídica. Este tipo de empresa se utiliza para emprendimientos con un único titular o dueño. Existe una identidad total entre la persona y la empresa, siendo la persona dueña de la empresa y sus utilidades. La administración de la empresa recae sobre el titular quien responde ilimitadamente con todo su patrimonio personal por las obligaciones de la empresa. El patrimonio de la empresa es el patrimonio del dueño. No se requiere contrato para registrarse como empresa unipersonal por lo que el costo y tiempo de apertura es menor que en otros tipos de empresa.</p>
+        <p><b>SOCIEDAD DE HECHO:</b> Son aquellas sociedades que carecen de contrato social documentado por escrito, las cuales tienen un régimen similar al de las sociedades comerciales. Debe ser formada por 2 o más socios. No es necesario realizar un contrato social al igual que en las empresas unipersonales. Ambos tipos de empresa no están incluidos dentro de la ley 16060 de sociedades comerciales. La responsabilidad de sus socios en este caso es ilimitada, pudiendo los acreedores de la sociedad embargar bienes propios de los socios, aunque no se haya atacado en primer término los ubicados en el patrimonio del ente. Quienes responden ante terceros por la empresa son sus socios.</p>
+        <br>
+
+        <h4>3.1 ¿Cómo registrar monotributo social MIDES-Unipersonal en BPS?</h4>
+
+        <accordion title="Requisitos" class="ion-color-plasticos">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note>Hogares que se encuentren por debajo de la línea de pobreza que determina el Instituto Nacional de Estadística o integrantes de hogares en situación de vulnerabilidad socioeconómica.</ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note>Desarrollen actividad de reducida dimensión económica, no realizando la explotación de más de un puesto o de un pequeño local simultáneamente</ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note>Integradas por el titular y su cónyuge o concubino colaborador y no ocupe más de un dependiente.</ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note>Los ingresos derivados de su actividad no superen, en el ejercicio, el 60 % del límite establecido en el literal E) del art. 52 del título 4 del Texto ordenado 1996.</ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note>Enajenen bienes y presten servicios exclusivamente a consumidores finales, no pudiendo prestar servicios personales fuera de la relación de dependencia como intermediarios.</ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note>Que ejerzan una única y exclusiva actividad de afiliación patronal, no pudiendo ser integrantes inactivos (titular y cónyuge o concubino colaborador) de cualquier tipo de sociedad personal o tenga la calidad de director de sociedades anónimas aun cuando permanezcan inactivos.</ion-note>
+              </div>
+            </ion-item>
+
+          </ion-list>
+        </accordion>
+        <br>
+
+        <h4>3.2 ¿Cómo registrar monotributo social MIDES-Sociedad de hecho?</h4>
+
+        <accordion title="Requisitos" class="ion-color-plasticos">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note>Que realicen emprendimientos asociativos, de más de una persona y máximo cinco socios.</ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note>No ocupen dependientes.</ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note>Hogares que se encuentren por debajo de la línea de pobreza que determina el Instituto Nacional de Estadística o integrantes de hogares en situación de vulnerabilidad socioeconómica.</ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note>Que los ingresos derivados de su actividad no superen, en el ejercicio, el 100 % del límite establecido en el literal E) del art. 52 del título 4 del Texto Ordenado 1996.</ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note>Que ejerzan una única y exclusiva actividad de afiliación patronal, no pudiendo ser integrantes inactivos (titular y cónyuge o concubino colaborador) de cualquier tipo de sociedad personal o tenga la calidad de director de sociedades anónimas aun cuando permanezcan inactivos.</ion-note>
+              </div>
+            </ion-item>
+
+          </ion-list>
+        </accordion>
+
+        <p><ion-icon name="warning"></ion-icon> Para ambas modalidades (presencial o en línea), los titulares de empresas unipersonales y sociedades de hecho deben constituir domicilio electrónico ante BPS. Para ello, deben ingresar al servicio <strong>Constituir domicilio electrónico para recibir notificaciones del contribuyente.</strong></p>
+        <br>
+
+        <accordion title="Documentación requerida (presencial):" class="ion-color-plasticos">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note>Formulario 0356 Inscripción monotributo social Mides (en tres vías y doble faz).</ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note>Dos fotocopias del documento de identidad del titular que no concurra; si asistiera, alcanza con mostrar su documento vigente y una fotocopia.</ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note>Factura reciente (no más de 60 días) de empresas públicas (UTE, Antel, OSE, etc.) o privadas (estados de cuenta de tarjetas de crédito, mutualistas, TV cable, etc.) a nombre del titular, donde figure el domicilio particular para el caso de feriantes y ambulantes o del domicilio fiscal donde desarrolla la actividad en demás casos, adjuntando dos fotocopias de este. En caso de no tener una factura que cumpla con esas condiciones, presentar la constancia de domicilio expedida por la seccional policial y una fotocopia.</ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note>De concurrir un tercero a realizar el trámite, debe presentar una fotocopia de su documento de identidad.</ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note>Si el trámite se realiza fuera del plazo establecido, se debe adjuntar o presentar el comprobante del pago de la multa de DGI.</ion-note>
+              </div>
+            </ion-item>
+
+          </ion-list>
+        </accordion>
+
+        <p><ion-icon name="warning"></ion-icon> <strong>Inscripciones retroactivas:</strong> las solicitudes de inscripción de Industria y Comercio, cuya fecha de inicio de actividad sea anterior a 90 días corridos, deben realizarse mediante una petición, que se gestiona en Mesa de Entrada de Montevideo o en sucursales y agencias del interior del país. Para ello, se debe presentar una nota (ver formalidades) acompañada de los requisitos de inscripción y de todos los elementos probatorios que sustenten el reconocimiento de la actividad patronal desarrollada.</p>
+        <br>
+
+        <h4>3.3 ¿Cómo registrar monotributo Unipersonal?</h4>
+
+        <accordion title="Requisitos" class="ion-color-plasticos">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note>Desarrollen actividad de reducida dimensión económica, no realizando la explotación de más de un puesto o de un pequeño local simultáneamente.</ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note>Integradas por el titular y su cónyuge o concubino colaborador y no ocupe más de un dependiente.</ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note>Los ingresos derivados de su actividad no superen, en el ejercicio, el 60 % del límite establecido en el literal E) del art. 52 del título 4 del Texto ordenado 1996.</ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note>Enajenen bienes y presten servicios exclusivamente a consumidores finales, no pudiendo prestar servicios personales fuera de la relación de dependencia como intermediarios.</ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note>Que ejerzan una única y exclusiva actividad de afiliación patronal, no pudiendo ser integrantes inactivos (titular y cónyuge o concubino colaborador) de cualquier tipo de sociedad personal o tenga la calidad de director de sociedades anónimas aun cuando permanezcan inactivos.</ion-note>
+              </div>
+            </ion-item>
+          </ion-list>
+        </accordion>
+
+        <accordion title="Formularios" class="ion-color-plasticos">
+        <ion-list>
+          <ion-item lines="none">
+            <div class="item-text">
+              <ion-note>Formulario 0351 Inscripción y actualización (en tres vías y doble faz), con un timbre profesional.</ion-note>
+            </div>
+          </ion-item>
+
+          <ion-item lines="none">
+            <div class="item-text">
+              <ion-note>Formulario 0354 Anexo de inscripción y actualización de locales (en tres vías y doble faz) en caso de registrar más de un local.</ion-note>
+            </div>
+          </ion-item>
+
+        </ion-list>
+        </accordion>
+
+        <accordion title="Documentación" class="ion-color-plasticos">
+        <ion-list>
+          <ion-item lines="none">
+            <div class="item-text">
+              <ion-note>Dos fotocopias del documento de identidad del titular que no concurra; si asistiera, alcanza con mostrar su documento vigente y una fotocopia.</ion-note>
+            </div>
+          </ion-item>
+
+          <ion-item lines="none">
+            <div class="item-text">
+              <ion-note>Factura, con no más de 60 días de emitida, de empresas públicas (UTE, Antel, OSE, etc.) o privadas (estados de cuenta de tarjetas de crédito, mutualistas, TV cable, etc.) a nombre del titular donde figure el domicilio particular para el caso de feriantes y ambulantes o del domicilio fiscal donde desarrolla la actividad en demás casos, adjuntando dos fotocopias.</ion-note>
+            </div>
+          </ion-item>
+
+          <ion-item lines="none">
+            <div class="item-text">
+              <ion-note>En caso de no tener una factura que cumpla con esas condiciones, presentar la constancia de domicilio expedida por la seccional policial y una fotocopia.</ion-note>
+            </div>
+          </ion-item>
+
+          <ion-item lines="none">
+            <div class="item-text">
+              <ion-note>En caso de tener una pasividad por Industria y comercio, último recibo de cobro y fotocopia.</ion-note>
+            </div>
+          </ion-item>
+
+          <ion-item lines="none">
+            <div class="item-text">
+              <ion-note>Si concurre un tercero a realizar el trámite, debe presentar una fotocopia de su documento de identidad.</ion-note>
+            </div>
+          </ion-item>
+
+          <ion-item lines="none">
+            <div class="item-text">
+              <ion-note>Si el trámite se realiza fuera del plazo establecido, se debe adjuntar o presentar el comprobante del pago de la multa de DGI.</ion-note>
+            </div>
+          </ion-item>
+
+        </ion-list>
+        </accordion>
+        <br>
+
+        <h4>3.4 ¿Cómo registrar monotributo Sociedad de hecho?</h4>
+
+        <accordion title="Requisitos" class="ion-color-plasticos">
+        <ion-list>
+          <ion-item lines="none">
+            <div class="item-text">
+              <ion-note>Desarrollen actividad de reducida dimensión económica, no realizando la explotación de más de un puesto o de un pequeño local simultáneamente.</ion-note>
+            </div>
+          </ion-item>
+
+          <ion-item lines="none">
+            <div class="item-text">
+              <ion-note>Integradas por un máximo de dos socios, sin dependientes.</ion-note>
+            </div>
+          </ion-item>
+
+          <ion-item lines="none">
+            <div class="item-text">
+              <ion-note>Integradas exclusivamente por familiares, con hasta cuarto grado de consanguinidad o un segundo de afinidad, siempre que el número de socios no supere a tres y no tenga dependientes.</ion-note>
+            </div>
+          </ion-item>
+
+          <ion-item lines="none">
+            <div class="item-text">
+              <ion-note>Los ingresos derivados de su actividad, en el ejercicio, no podrán superar el 100 % del límite establecido en el literal E) del art. 52 del título 4 del Texto Ordenado 1996.</ion-note>
+            </div>
+          </ion-item>
+
+          <ion-item lines="none">
+            <div class="item-text">
+              <ion-note>Enajenen bienes y presten servicios exclusivamente a consumidores finales. No pudiendo prestar servicios personales fuera de la relación de dependencia como intermediarios.</ion-note>
+            </div>
+          </ion-item>
+
+          <ion-item lines="none">
+            <div class="item-text">
+              <ion-note>Que ejerzan una única y exclusiva actividad de afiliación patronal, no pudiendo ser integrantes inactivos de cualquier tipo de sociedad personal o tenga la calidad de director de sociedades anónimas aun cuando permanezcan inactivos.</ion-note>
+            </div>
+          </ion-item>
+
+          </ion-list>
+        </accordion>
+
+        <p><ion-icon name="warning"></ion-icon> Para ambas modalidades (presencial o en línea), los titulares de empresas unipersonales y sociedades de hecho deben constituir domicilio electrónico ante BPS. Para ello, deben ingresar al servicio <strong>Constituir domicilio electrónico para recibir notificaciones del contribuyente.</strong></p>
+
+        <accordion title="Formularios" class="ion-color-plasticos">
+        <ion-list>
+          <ion-item lines="none">
+            <div class="item-text">
+              <ion-note>Formulario 0351 Inscripción y actualización (en tres vías y doble faz), con un timbre profesional.</ion-note>
+            </div>
+          </ion-item>
+
+          <ion-item lines="none">
+            <div class="item-text">
+              <ion-note>Formulario 0352 Personas físicas vinculadas (en tres vías y doble faz).</ion-note>
+            </div>
+          </ion-item>
+
+          <ion-item lines="none">
+            <div class="item-text">
+              <ion-note>Formulario 0354 Anexo de inscripción y actualización de locales (en tres vías y doble faz) en caso de registrar más de un local.</ion-note>
+            </div>
+          </ion-item>
+
+        </ion-list>
+        </accordion>
+
+        <accordion title="Documentación" class="ion-color-plasticos">
+        <ion-list>
+          <ion-item lines="none">
+            <div class="item-text">
+              <ion-note>Dos fotocopias del documento de identidad de los titulares que no concurran; si asistieran, alcanza con mostrar su documento vigente y una fotocopia.</ion-note>
+            </div>
+          </ion-item>
+
+          <ion-item lines="none">
+            <div class="item-text">
+              <ion-note>Factura, con no más de 60 días de emitida, de empresas públicas (UTE, ANTEL, OSE, etc.) o privadas (estados de cuenta de tarjetas de crédito, mutualistas, TV cable, etc.) a nombre de alguno de los titulares donde figure el domicilio particular para el caso de feriantes y ambulantes o del domicilio fiscal donde desarrolla la actividad en los demás casos, adjuntando dos fotocopias del mismo.</ion-note>
+            </div>
+          </ion-item>
+
+          <ion-item lines="none">
+            <div class="item-text">
+              <ion-note>En caso de no tener una factura que cumpla con esas condiciones, presentar la constancia de domicilio expedida por la seccional policial y una fotocopia.</ion-note>
+            </div>
+          </ion-item>
+
+          <ion-item lines="none">
+            <div class="item-text">
+              <ion-note>En caso de tener una pasividad por Industria y comercio, último recibo de cobro y fotocopia.</ion-note>
+            </div>
+          </ion-item>
+
+          <ion-item lines="none">
+            <div class="item-text">
+              <ion-note>Si concurre un tercero a realizar el trámite, debe presentar una fotocopia de su documento de identidad.</ion-note>
+            </div>
+          </ion-item>
+
+          <ion-item lines="none">
+            <div class="item-text">
+              <ion-note>Si el trámite se realiza fuera del plazo establecido, se debe adjuntar o presentar el comprobante del pago de la multa de DGI.</ion-note>
+            </div>
+          </ion-item>
+
+        </ion-list>
+        </accordion>
+        <br>
+
+        <h2>¿Dónde debo realizar estos trámites?</h2>
+        <ion-grid class="ion-grid">
+          <ion-row>
+            <ion-col><strong>Presencial</strong></ion-col>
+            <ion-col><strong>En línea</strong></ion-col>
+          </ion-row>
+          <ion-row >
+            <ion-col><p>Según el domicilio constituido de la empresa, en:</p>
+            <li>Las sucursales de Montevideo, Maldonado, Florida, Rivera y Tacuarembó, en las que se efectúa la gestión en forma conjunta para BPS y DGI.</li>
+            <li>Las sucursales y agencias del resto del país. En este caso, se debe realizar el trámite primero en DGI y, luego, en BPS.</li>
+            <p><strong>IMPORTANTE: Agendarse en la web de BPS.</strong><br>
+            Tener presente que la fecha agendada no sea superior a los plazos establecidos en el trámite.</p></ion-col>
+            <ion-col><p>Completando la información en: <a href="http://www.bps.gub.uy/15073/">http://www.bps.gub.uy/15073/</a></p></ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <ion-item-divider></ion-item-divider>
+        <br>
+
+<!--Trámites DGI-->
+
+        <h2>Cómo hago para registrarme como monotributista en DGI?</h2>
+        <p>Introducción a el trámite en DGI. Para mayor informacion acceder a: <a href="http://www.dgi.gub.uy/">http://www.dgi.gub.uy/</a></p>
+
+        <accordion title="Requisitos" class="ion-color-residuos-compostables">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Límite de ingresos:</ion-label>
+                <ion-note slot="start">
+                  Los ingresos derivados de la actividad no deben superar en el ejercicio:
+                </ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">
+                  - Para empresas unipersonales: 183.000 Unidades Indexadas (UI), que representan el 60% del límite establecido en el lit. E) del Art. 52, Título 4.
+                </ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">
+                  - Para sociedades de hecho: 305.000 UI, que representan el 100% del monto establecido en el referido lit. E).
+                </ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">
+                  <strong>IMPORTANTE:</strong> los ingresos de operaciones cobradas a través de medios electrónicos de pago cuentan con beneficios adicionales.
+                </ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label slot="start">
+                  Que desarrollen actividades de reducida dimensión económica
+                </ion-label>
+                <ion-note>
+                   Lo que implica que:
+                </ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">
+                  - Posean activos como vehículos, mercadería, disponibilidades u otros, menores a 152.500 UI.
+                </ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">
+                  - No comercialicen prendas de vestir en centros comerciales, expo ferias y similares.
+                </ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">
+                  - No realicen la explotación de más de un puesto o pequeño local en forma simultánea. La rotación entre diferentes localizaciones físicas - ya sea puesto o local - no excluye del Monotributo, salvo que se verifique la simultaneidad del ejercicio de la actividad.
+                </ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">
+                  - Desarrollen su actividad en un puesto o local cuya superficie ocupada no supere a 15 metros cuadrados.
+                </ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-note slot="start">
+                  - Los locales no estén ubicados en centros comerciales de grandes superficies.
+                </ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label slot="start">
+                  Ejerzan una única actividad sujeta a afiliación patronal;
+                </ion-label>
+                <ion-note slot="start">
+                  salvo los productores rurales que complementen los ingresos derivados de la producción de bienes en estado natural provenientes de su establecimiento, con la enajenación en forma accesoria de otros bienes agropecuarios en estado natural o sometido a algún proceso artesanal.
+                </ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label slot="start">
+                  Enajenen bienes y presten servicios exclusivamente a consumidores finales.
+                </ion-label>
+                <ion-note slot="start">
+                  Existen <a href="http://www.dgi.gub.uy/wdgi/page?2,monotributo,preguntas-frecuentes-ampliacion,P,es,0,PAG;CONC;1017;8;D;quienes-no-son-consumidores-finales;1;PAG;">excepciones</a> para esta condición.
+                </ion-note>
+              </div>
+            </ion-item>
+          </ion-list>
+        </accordion>
+
+        <accordion title="Obligaciones de los contribuyentes de Monotributo" class="ion-color-residuos-compostables">
+          <ion-list>
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Pago:</ion-label>
+                <ion-note slot="start">Los contribuyentes comprendidos en el Monotributo no efectúan pagos a la Dirección General Impositiva. Deberán abonar un <a href="http://www.dgi.gub.uy/wdgi/page?2,monotributo,preguntas-frecuentes-ampliacion,O,es,0,PAG;CONC;1017;8;D;cual-es-el-monto-mensual-que-se-paga-al-b-p-s-en-el-regimen-de-monotributo;1;PAG;">monto mensual al Banco de Previsión Social</a>.</ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>TITULO</ion-label>
+                <ion-note slot="start">NOTA</ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Declaración Jurada:</ion-label>
+                <ion-note slot="start">No se deben realizar declaraciones juradas.</ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Documentación:</ion-label>
+                <ion-note slot="start">En relación a la documentación de operaciones, estos contribuyentes deberán emitir documentación que contenga un recuadro con la leyenda “Monotributo”. No se incluirá la mención de estar al día con el IVA.</ion-note>
+              </div>
+            </ion-item>
+
+            <ion-item lines="none">
+              <div class="item-text">
+                <ion-label>Importaciones:</ion-label>
+                <ion-note slot="start">Si realizan importaciones, lo harán como no contribuyentes. Para ello, deben realizar un trámite previo, en el Departamento Comercio Exterior de la Dirección General Impositiva.</ion-note>
+              </div>
+            </ion-item>
+          </ion-list>
+        </accordion>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<!--Colombia-->
+
+<ion-content class="inner-scroll" *ngIf="session.country == 'Colombia'">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center section-header">
+      <ion-col  size-md="11" size-lg="10" size-xs="12">
+        <div class="section-header">
+          <h1>Recicladores en Colombia</h1>
+        </div>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
