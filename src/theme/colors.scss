@@ -124,6 +124,24 @@
 }
 
 :root {
+  --ion-color-envase-cero: #827b61;
+  --ion-color-envase-cero-rgb: 130,123,97;
+  --ion-color-envase-cero-contrast: #ffffff;
+  --ion-color-envase-cero-contrast-rgb: 255,255,255;
+  --ion-color-envase-cero-shade: #726c55;
+  --ion-color-envase-cero-tint: #8f8871;
+}
+
+.ion-color-envase-cero {
+  --ion-color-base: var(--ion-color-envase-cero);
+  --ion-color-base-rgb: var(--ion-color-envase-cero-rgb);
+  --ion-color-contrast: var(--ion-color-envase-cero-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-envase-cero-contrast-rgb);
+  --ion-color-shade: var(--ion-color-envase-cero-shade);
+  --ion-color-tint: var(--ion-color-envase-cero-tint);
+}
+
+:root {
   --ion-color-materiales-reciclables: #63b563;
   --ion-color-materiales-reciclables-rgb: 245,166,36;
   --ion-color-materiales-reciclables-contrast: #fff;
@@ -140,6 +158,7 @@
   --ion-color-shade: var(--ion-color-materiales-reciclables-shade);
   --ion-color-tint: var(--ion-color-materiales-reciclables-tint);
 }
+
 :root {
   --ion-color-residuos-peligrosos: #f64b4b;
   --ion-color-residuos-peligrosos-rgb: 244,101,57;
