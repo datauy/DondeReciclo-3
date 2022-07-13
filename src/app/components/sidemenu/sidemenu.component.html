@@ -34,6 +34,20 @@
           </div>
           <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
         </ion-item>
+        <ion-item
+          *ngIf="session.country == 'Uruguay'"
+          (click)="toggleMenu()"
+          lines="none"
+          routerLink="/clasificadores"
+          routerLinkActive="active-item"
+          detail-icon="none">
+          <ion-icon slot="start" name="user-helmet-safety"></ion-icon>
+          <div>
+            <h4>Clasificadores</h4>
+            <p>Información para formalizacitón</p>
+          </div>
+          <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+        </ion-item>
         <ion-item lines="none"
           (click)="toggleMenu()"
           detail-icon="none"
