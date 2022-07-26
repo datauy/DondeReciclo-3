@@ -34,12 +34,6 @@ export class SidemenuComponent implements OnInit {
       desc: 'Marcas que hacen posible esta app',
       url: 'empresas',
       icon: 'dr-empresas'
-    },
-    {
-      title: 'Clasificadores',
-      desc: 'Información para formalizacitón',
-      url: 'clasificadores',
-      icon: 'user-helmet-safety'
     }
   ];
 
