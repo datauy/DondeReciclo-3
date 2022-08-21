@@ -3,6 +3,7 @@
   ion-toolbar {
     --min-height: 80px;
     .toolbar-wraper {
+      margin-top: -14px;
       width: 100%;
       display: inline-flex;
     }
@@ -18,9 +19,6 @@
       image {
         width: initial;
       }
-    }
-    ion-button {
-      color: var(--pale-olive-green);
     }
     &.left {
       padding-right: 0;
@@ -51,8 +49,8 @@
     }
   }
   ion-img.logo {
-    max-width: 120px;
-    margin-left: 12px;
+    max-width: 167px;
+    margin: 0 12px;
   }
   .overlay {
     position: absolute;

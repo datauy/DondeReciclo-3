@@ -19,7 +19,7 @@
   // --ion-item-color	Color of the components in the Item
   // --ion-placeholder-color	Color of the placeholder in Inputs
   // Size and spacing variables
-  --dr-header-height-map: 122px;
+  --dr-header-height-map: 93px;
   --dr-header-height-full: 88px;
   --dr-header-height-short: 60px;
   --dr-margin: 12px;
@@ -706,8 +706,8 @@ ion-img.logo {
 
   ion-auto-complete {
     ul {
-      position: absolute;
-      height: calc(100vh - var(--dr-header-height-map));
+      position: relative;
+      height: calc(100vh - 192px);
       width: 100%;
       left: 0;
       right: 0;
@@ -720,8 +720,6 @@ ion-img.logo {
       background: none;
       box-shadow: none;
       z-index: 1002;
-      padding: --dr-margin;
-
       li {
         background: none;
         border: none;
@@ -765,16 +763,14 @@ ion-img.logo {
     --clear-button-color: var(--pale-olive-green);
     .searchbar-input.sc-ion-searchbar-md {
       // position: absolute;
-      padding: 16px 36px 16px 16px;
+      padding: 16px 36px 16px 58px;
       border-radius: 36px;
       box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2);
     }
 
     .searchbar-search-icon.sc-ion-searchbar-md {
       top: 8px;
-      left: auto;
-      right: 11px;
-      background-color: var(--pale-olive-green);
+      color: var(--dark-sea-green);
       width: 20px;
       height: 20px;
       border-radius: 40px;
