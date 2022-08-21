@@ -5,7 +5,7 @@ import { Component, Input } from '@angular/core';
 import { ApiService } from "src/app/services/api.service";
 import { MapService } from "src/app/services/map.service";
 
-//import { SearchParams, Material } from "src/app/models/basic_models.model";
+import { SearchMessage, Dimension } from "src/app/models/basic_models.model";
 import { SessionService } from 'src/app/services/session.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
 import { environment } from 'src/environments/environment';
@@ -29,6 +29,9 @@ export class SearchComponent {
   searchAddress = false;
   isInit = true;
   environment = environment;
+  predefinedSearch: Array<SearchMessage> = [];
+  dimensions: Array<Dimension> = [];
+  showAllDimensions = true;
 
   constructor(
     public api: ApiService,
@@ -52,12 +55,37 @@ export class SearchComponent {
           }
         }
       );
+      this.session.countryChanged.subscribe(
+        countryName => {
+          this.predefinedArrange();
+        }
+      );
+      this.api.initialDataLoaded.subscribe( (loaded) => {
+        if ( loaded ) {
+          this.session.searchDimensions = [];
+          environment[this.session.country].dimensions.forEach(dim => {
+            this.session.searchDimensions.push(dim.id);
+          });
+        }
+      });
     }
-
+  toggleSearch() {
+    if ( this.searchVisibility == true ) {
+      this.hideSearch(null);
+    }
+    else {
+      this.showSearch(null);
+      this.suggestVisibility = true;
+    }
+  }
   showSearch(event) {
     if( this.isInit ) {
       if ( this.session.country == 'Colombia' ) {
         this.search4address(true);
+      }
+      if ( !this.predefinedSearch.length ) {
+        this.dimensions = environment[this.session.country].dimensions;
+        this.predefinedArrange();
       }
       this.isInit = false;
     }
@@ -72,8 +100,36 @@ export class SearchComponent {
     this.searchVisibility = false;
   }
 
-  searchSuggestion(predefined){
-    this.itemSelected(predefined);
+  dimensionSelected(dim) {
+    let pos = this.session.searchDimensions.indexOf(dim);
+    if ( pos !== -1 ) {
+      //Prevent unselect all
+      if ( this.session.searchDimensions.length > 1 ) {
+        this.session.searchDimensions.splice(pos, 1);
+      }
+      else {
+        return;
+      }
+    }
+    else {
+      this.session.searchDimensions.push(dim);
+    }
+    this.predefinedArrange();
+  }
+  //
+  predefinedArrange() {
+    let predefined = [];
+    this.session.searchDimensions.forEach( dim => {
+      predefined = predefined.concat(this.environment[this.session.country].predefinedSearch[dim].filter( (item) => !predefined.includes(item) ));
+    });
+    this.predefinedSearch = predefined.sort((a, b) => (a.name > b.name) ? 1 : -1);
+
+    if ( this.environment[this.session.country].dimensions != undefined && this.session.searchDimensions.length != this.environment[this.session.country].dimensions.length ) {
+      this.showAllDimensions = false;
+    }
+    else {
+      this.showAllDimensions = true;
+    }
   }
 
   itemSelected(item) {

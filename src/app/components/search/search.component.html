@@ -12,49 +12,65 @@
     [clearInvalidInput]="false"
     >
   </ion-auto-complete>
-  <div class="swift-buttons" [ngClass]="searchVisibility ? 'show expand' : 'hide shrink'">
-    Buscar:
-    <div class="swift-container">
-      <span [ngClass]="!searchAddress ? 'active selectable' : 'selectable'" (click)="search4address(false)">materiales</span>
-      <span [ngClass]="searchAddress ? 'active selectable' : 'selectable'" (click)="search4address(true)">direcciones</span>
+  <div id="dimension-filter-wrapper" (click)="toggleSearch(null)">
+    <div id="dimension-filter">
+      Filtro
+      <ion-icon *ngIf="showAllDimensions" name="dr-filtro"></ion-icon>
+      <div *ngIf="!showAllDimensions" [innerHTML]="session.searchDimensions.length"  class="circle"></div>
     </div>
   </div>
-  <div id="suggestions" [ngClass]="(suggestVisibility && searchVisibility) ? 'show expand' : 'hide shrink'">
-    <ion-list-header>Materiales/residuos sugeridos:</ion-list-header>
-    <div class="resultsWrap" *ngIf="session.country != undefined">
-      <ion-button [color]="predefined.class"
-        *ngFor="let predefined of environment[session.country].predefinedSearch;"
-        [ngClass]="predefined.class"
-        (click)="searchSuggestion(predefined)">
-        <ion-label [innerHTML]="predefined.name"></ion-label>
-        <img class="right" *ngIf="predefined.icon != ''" src="{{predefined.icon}}" alt="imagen de residuo">
-        <ion-icon *ngIf="predefined.icon == ''" class="right" [name]="'dr-'+predefined.class"></ion-icon>
+  <div id="search-overlay" [ngClass]="searchVisibility ? 'show expand' : 'hide shrink'" >
+    <div class="swift-buttons">
+      Buscar:
+      <div class="swift-container">
+        <span [ngClass]="!searchAddress ? 'active selectable' : 'selectable'" (click)="search4address(false)">materiales</span>
+        <span [ngClass]="searchAddress ? 'active selectable' : 'selectable'" (click)="search4address(true)">direcciones</span>
+      </div>
+    </div>
+    <div id="dimensions">
+      <ion-button fill="clear"
+        *ngFor="let dimension of this.dimensions;"
+        [ngClass]="session.searchDimensions.includes(dimension.id) ? 'selected' : ''"
+        (click)="dimensionSelected(dimension.id)">
+        <ion-label [innerHTML]="dimension.name"></ion-label>
       </ion-button>
     </div>
-  </div>
-  <!-- <ion-searchbar id="searchBar" type="text" debounce="500" animated placeholder="Busca materiales" color="dark"
-  (click)="showSearch()" (ionChange)="searchAPI($event)" clearInput></ion-searchbar> -->
-  <ng-template [ngClass]=""
-    #dr
-    let-attrs="attrs"
-    [ngClass]="searchVisibility ? 'show' : 'hide'">
-    <ion-button [color]="attrs.data.class"
-      expand="block"
-      [ngClass]="attrs.data.class"
-      *ngIf="attrs.data.class != 'none'"
-    >
-      <img class="left" *ngIf="attrs.data.icon != ''" src="{{attrs.data.icon}}" alt="imagen de residuo">
-      <ion-icon
-        *ngIf="attrs.data.icon == ''"
-        class="left"
-        [name]="'dr-' + attrs.data.class">
-      </ion-icon>
-      <ion-label [innerHTML]="attrs.data.name"></ion-label>
-    </ion-button>
-    <span *ngIf="attrs.data.class == 'none'">No hay resultados</span>
-  </ng-template>
+    <div id="suggestions" [ngClass]="(suggestVisibility && searchVisibility) ? 'show expand' : 'hide shrink'">
+      <ion-list-header>Materiales/residuos sugeridos:</ion-list-header>
+      <div class="resultsWrap" *ngIf="session.country != undefined">
+        <ion-button [color]="predefined.class"
+          *ngFor="let predefined of this.predefinedSearch;"
+          [ngClass]="predefined.class"
+          (click)="itemSelected(predefined)">
+          <ion-label [innerHTML]="predefined.name"></ion-label>
+          <img class="right" *ngIf="predefined.icon != ''" src="{{predefined.icon}}" alt="imagen de residuo">
+          <ion-icon *ngIf="predefined.icon == ''" class="right" [name]="'dr-'+predefined.class"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+    <!-- <ion-searchbar id="searchBar" type="text" debounce="500" animated placeholder="Busca materiales" color="dark"
+    (click)="showSearch()" (ionChange)="searchAPI($event)" clearInput></ion-searchbar> -->
 
+    <!-- search-list -->
+    <ng-template #dr let-attrs="attrs">
+      <ion-button [color]="attrs.data.class"
+        expand="block"
+        [ngClass]="attrs.data.class"
+        *ngIf="attrs.data.class != 'none'"
+      >
+        <img class="left" *ngIf="attrs.data.icon != ''" src="{{attrs.data.icon}}" alt="imagen de residuo">
+        <ion-icon
+          *ngIf="attrs.data.icon == ''"
+          class="left"
+          [name]="'dr-' + attrs.data.class">
+        </ion-icon>
+        <ion-label [innerHTML]="attrs.data.name"></ion-label>
+      </ion-button>
+      <span *ngIf="attrs.data.class == 'none'">No hay resultados</span>
+    </ng-template>
+  </div>
 </div>
+<!-- search-banner -->
 <div id="search-item" *ngIf="session.searchItem && session.showSearchItem">
   <ion-item lines="none" [color]="session.searchItem.class">
     <img class="left" *ngIf="session.searchItem.icon != ''" src="{{session.searchItem.icon}}" alt="imagen de residuo">

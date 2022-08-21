@@ -1,5 +1,10 @@
 import { Base } from './base.model';
 
+export class Dimension {
+  name: string;
+  color: string;
+  information: string;
+}
 export class Material extends Base {
     //id is inherited from Resource
     name: string;
