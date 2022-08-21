@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map, mergeMap } from 'rxjs/operators';
 import { forkJoin} from 'rxjs';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { File } from '@ionic-native/file/ngx';
 
 import { ContainerType, Container, Material, SearchParams, Program } from "src/app/models/basic_models.model";
 import { News } from "src/app/models/news.model";
 import { Subprogram } from "src/app/models/subprogram.model";
 import { SessionService } from 'src/app/services/session.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,6 @@ export class ApiService<T=any> {
   container_types: ContainerType[];
   containers: Container[];
   materials: {[index:string] : Material[]} = {};
-  predefinedSearch: {[index:string] : SearchParams[]};
   programs: Program[]
   remoteFile: any;
 
@@ -26,25 +26,35 @@ export class ApiService<T=any> {
   labelAttribute = 'material_id';
   formValueAttribute = 'name';
 
+  _initial_data_loaded = new BehaviorSubject<boolean>(false);
   //Search property for non results
   constructor(
     private request: HttpClient,
     public session: SessionService,
     private file: File
-  ) {}
+  ) {
+    this.loadInitialData().subscribe(()=>{
+      this._initial_data_loaded.next(true);
+    });
+  }
+  get initialDataLoaded() {
+    return this._initial_data_loaded;
+  }
+  //
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
+  params = new HttpParams().set( "version", environment.apiVersion);
    /***************************/
   /* Initial/General Queries */
  /***************************/
  //
   loadInitialData(): Observable<any> {
     return forkJoin([
+      this.loadCountries(),
       this.loadContainerTypes(),
       this.loadMaterials('Uruguay'),
       this.loadMaterials('Colombia'),
-      this.loadPredefinedSearch(),
       this.loadProgramSummary()
     ]);
   }
@@ -80,20 +90,19 @@ export class ApiService<T=any> {
     ));
   }
   //
-  loadPredefinedSearch(): Observable<any> {
-    return this.request.get(environment.backend + "predefined_searches").pipe(
+  loadCountries(): Observable<any> {
+    return this.request.get(environment.backend + "countries?version="+environment.apiVersion).pipe(
       map((result: SearchParams[]) => {
-        let res: { [index:string] : SearchParams[] } = {};
         result.forEach(
           (country) => {
-            let c = Object.keys(country)[0];
-            environment[c].predefinedSearch = country[c];
+            environment[country.name] = country;
           }
         );
-        return this.predefinedSearch = res;
+        return true;
       })
     );
   }
+  //
   downloadFile(url:string, fileName: string, type: string): Observable<any> {
     // console.log('Writting file assets/'+type+'/'+fileName);
     return this.request.get(url, {responseType: 'blob'}).pipe(
@@ -268,7 +277,10 @@ export class ApiService<T=any> {
   /***********************/
   //
   getResults(str: string){
-    return  this.request.get(environment.backend + "search?version="+environment.apiVersion+"&locale=" + environment[this.session.country].locale  + "&q="+str).pipe(map(
+    let params = this.params;
+    params.set("q", str);
+    params.set("locale", environment[this.session.country].locale);
+    return  this.request.get(environment.backend + "search?version="+environment.apiVersion+"&locale=" + environment[this.session.country].locale + "&q="+str+"&dimensions="+this.session.searchDimensions.join(',') ).pipe(map(
       (result: any[]) => {
         if (result.length) {
           return result;

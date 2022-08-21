@@ -125,50 +125,52 @@ export class MapaPage implements OnInit {
       }
     });
     //load data
-    this.api.loadInitialData().subscribe(
-      () => {
-        this.initDataLoaded = true;
-        this.mapaRouter();
-        // route for childs and params
-        if ( this.loadSubContainers != undefined || this.loadContainers != undefined ) {
-          this.gotoLocation(false);
-          if ( this.loadSubContainers != undefined ) {
-            this.api.getSubContainers(this.loadSubContainers).subscribe(
-              (containers) => {
-                this.map.loadMarkers(containers, true);
-              }
-            );
-          }
-          else {
-            this.api.getContainersIds(this.loadContainers).subscribe(
-              (containers) => {
-                this.map.loadMarkers(containers, true);
-              }
-            );
-          }
-        }
-        else {
-          if ( this.loadContainer > 0) {
+    this.api.initialDataLoaded.subscribe(
+      (loaded) => {
+        if (loaded) {
+          this.initDataLoaded = true;
+          this.mapaRouter();
+          // route for childs and params
+          if ( this.loadSubContainers != undefined || this.loadContainers != undefined ) {
             this.gotoLocation(false);
-            this.showPane();
-          }
-          else {
-            if ( this.map.userPosition == undefined ) {
-              this.gotoLocation();
+            if ( this.loadSubContainers != undefined ) {
+              this.api.getSubContainers(this.loadSubContainers).subscribe(
+                (containers) => {
+                  this.map.loadMarkers(containers, true);
+                }
+              );
             }
             else {
-              this.uLocation = true;
-              if ( this.autoSearch ) {
-                this.activateSearch(this.autoSearchItem);
+              this.api.getContainersIds(this.loadContainers).subscribe(
+                (containers) => {
+                  this.map.loadMarkers(containers, true);
+                }
+              );
+            }
+          }
+          else {
+            if ( this.loadContainer > 0) {
+              this.gotoLocation(false);
+              this.showPane();
+            }
+            else {
+              if ( this.map.userPosition == undefined ) {
+                this.gotoLocation();
               }
               else {
-                this.api.getNearbyContainers(2, this.map.userPosition).subscribe(
-                  (containers) => {
-                    this.map.loadMarkers(containers, true);
-                  }
-                );
+                this.uLocation = true;
+                if ( this.autoSearch ) {
+                  this.activateSearch(this.autoSearchItem);
+                }
+                else {
+                  this.api.getNearbyContainers(2, this.map.userPosition).subscribe(
+                    (containers) => {
+                      this.map.loadMarkers(containers, true);
+                    }
+                  );
+                }
+                //this.map.flytomarker(this.map.userPosition, 15);
               }
-              //this.map.flytomarker(this.map.userPosition, 15);
             }
           }
         }

@@ -3,6 +3,7 @@ import { Event, Router, NavigationEnd } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { SearchMessage } from 'src/app/models/basic_models.model';
 import { News } from "src/app/models/news.model";
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,7 @@ export class SessionService {
   //Search items
   searchItem: SearchMessage;
   showSearchItem: boolean = true;
+  searchDimensions: Array<number> = [];
   //Initial Slider
   showSlider: boolean = true;
   reloadMap: boolean = false;
@@ -33,6 +35,8 @@ export class SessionService {
   homeUrl = '/intro/mapa';
   lastUrl = '';
   is_mobile = false;
+
+  _country_change = new BehaviorSubject<string>('Uruguay');
 
   constructor(
     private router: Router,
@@ -58,6 +62,10 @@ export class SessionService {
       return toShow;
     });
   }
+  //Observable as function
+  get countryChanged() {
+    return this._country_change;
+  }
   //
   watchSlider(toShow: boolean) {
     this.storage.set('showSlider', toShow);
@@ -80,6 +88,7 @@ export class SessionService {
   setCountry(country: string) {
     this.storage.set('country', country);
     this.country = country;
+    this._country_change.next(country);
     this.clearCaches();
   }
   clearCaches() {
