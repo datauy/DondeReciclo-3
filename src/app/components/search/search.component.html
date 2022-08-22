@@ -6,7 +6,7 @@
     [options]="{ placeholder : '¿Qué o dónde querés reciclar?' }"
     [template]="dr"
     [showResultsFirst]="true"
-    (click)="showSearch($event)"
+    (click)="this.searchVisibility = true"
     (itemSelected)="itemSelected($event)"
     [dataProvider]="this"
     [clearInvalidInput]="false"

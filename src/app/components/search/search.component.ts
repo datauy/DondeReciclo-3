@@ -27,7 +27,7 @@ export class SearchComponent {
   suggestVisibility: boolean;
   searchString: string;
   searchAddress = false;
-  isInit = true;
+  initialDataLoaded = false;
   environment = environment;
   predefinedSearch: Array<SearchItem> = [];
   dimensions: Array<Dimension> = [];
@@ -35,67 +35,63 @@ export class SearchComponent {
   not_filter_dimensions = ['item selected', 'dimension'];
 
   constructor(
-    public api: ApiService,
-    public map: MapService,
-    public session: SessionService,
-    public notification: NotificationsService,
-    ) {
-      this.map.autoSearch.subscribe(
-        (sitem) => {
-          if ( sitem != null ) {
-            if ( typeof sitem === "object" ) {
-              sitem.type = 'materials';
-              this.itemSelected(sitem);
-            }
-            else {
-              this.api.getWastes([sitem]).subscribe((wastes: any) => {
-                wastes[0].type = 'wastes';
-                this.itemSelected(wastes[0]);
-              });
-            }
+  public api: ApiService,
+  public map: MapService,
+  public session: SessionService,
+  public notification: NotificationsService,
+  ) {
+    this.map.autoSearch.subscribe(
+      (sitem) => {
+        if ( sitem != null ) {
+          if ( typeof sitem === "object" ) {
+            sitem.type = 'materials';
+            this.itemSelected(sitem);
           }
-        }
-      );
-      this.session.countryChanged.subscribe(
-        countryName => {
-          this.predefinedArrange();
-        }
-      );
-      this.api.initialDataLoaded.subscribe( (loaded) => {
-        if ( loaded ) {
-          this.session.searchDimensions = [];
-          if ( this.session.country != undefined ) {
-            environment[this.session.country].dimensions.forEach(dim => {
-              this.session.searchDimensions.push(dim.id);
+          else {
+            this.api.getWastes([sitem]).subscribe((wastes: any) => {
+              wastes[0].type = 'wastes';
+              this.itemSelected(wastes[0]);
             });
           }
         }
+      }
+    );
+    this.session.countryChanged.subscribe(
+      countryName => {
+        console.log("COUNTRY CANHGED", this.session.country);
+        if ( this.session.country == 'Colombia' ) {
+          this.search4address(true);
+        }
+        this.loadSearchDimensions()
+      }
+    );
+    this.api.initialDataLoaded.subscribe( (loaded) => {
+      if ( loaded ) {
+        this.initialDataLoaded = true;
+        this.loadSearchDimensions();
+      }
+    });
+  }
+  //
+  loadSearchDimensions() {
+    this.session.searchDimensions = [];
+    if ( this.initialDataLoaded && this.session.country != undefined ) {
+      this.dimensions = environment[this.session.country].dimensions;
+      this.dimensions.forEach(dim => {
+        this.session.searchDimensions.push(dim.id);
       });
+      this.predefinedArrange();
     }
+  }
+  //
   toggleSearch() {
     if ( this.searchVisibility == true ) {
       this.hideSearch('toggle');
     }
     else {
-      this.showSearch(null);
+      this.searchVisibility = true;
       this.suggestVisibility = true;
     }
-  }
-  showSearch(event) {
-    if( this.isInit ) {
-      if ( this.session.country == 'Colombia' ) {
-        this.search4address(true);
-      }
-      if ( !this.predefinedSearch.length ) {
-        this.dimensions = environment[this.session.country].dimensions;
-        this.predefinedArrange();
-      }
-      this.isInit = false;
-    }
-    this.searchVisibility = true;
-    /*let clearButton = document.querySelector('.searchbar-clear-button') as HTMLElement;
-    console.log(clearButton);
-    clearButton.addEventListener("click", (event: Event) => this.hideSearch(event) );*/
   }
 
   hideSearch(event) {
@@ -127,11 +123,12 @@ export class SearchComponent {
   predefinedArrange() {
     let predefined = [];
     this.session.searchDimensions.forEach( dim => {
-      predefined = predefined.concat(this.environment[this.session.country].predefinedSearch[dim].filter( (item) => !predefined.includes(item) ));
+      if ( environment[this.session.country].predefinedSearch[dim] != undefined ) {
+        predefined = predefined.concat(environment[this.session.country].predefinedSearch[dim].filter( (item) => !predefined.includes(item) ));
+      }
     });
     this.predefinedSearch = predefined.sort((a, b) => (a.name > b.name) ? 1 : -1);
-
-    if ( this.session.country != undefined && this.environment[this.session.country].dimensions != undefined && this.session.searchDimensions.length != this.environment[this.session.country].dimensions.length ) {
+    if ( this.session.country != undefined && environment[this.session.country].dimensions != undefined && this.session.searchDimensions.length != environment[this.session.country].dimensions.length ) {
       this.showAllDimensions = false;
     }
     else {
@@ -153,8 +150,6 @@ export class SearchComponent {
           m_ids = m_ids.concat(dim.materials.filter( (item) => !m_ids.includes(item) ));
         }
       });
-      console.log(new Dimension);
-
       let item = {
         id: 0,
         name: "Dimensiones",
