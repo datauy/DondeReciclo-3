@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Event, Router, NavigationEnd } from '@angular/router';
 import { Storage } from '@ionic/storage';
-import { SearchMessage } from 'src/app/models/basic_models.model';
+import { SearchItem } from 'src/app/models/basic_models.model';
 import { News } from "src/app/models/news.model";
 import { BehaviorSubject } from 'rxjs';
 
@@ -24,7 +24,7 @@ export class SessionService {
   //Country
   country: string;
   //Search items
-  searchItem: SearchMessage;
+  searchItem: SearchItem;
   showSearchItem: boolean = true;
   searchDimensions: Array<number> = [];
   //Initial Slider

@@ -94,7 +94,10 @@ export class MapaPage implements OnInit {
           if ( this.map.map != undefined && this.list == 0 ) {
             if (( this.map.map.getZoom() >= 14 && !this.map.saturationWarn ) || this.map.eagerLoad ) {
               this.notification.closeNotificationId('zoom');
-              this.loadNearbyContainers(false);
+              this.api.loadNearbyContainers(this.map.getBoundingCoords())
+              .subscribe((containers) => {
+                  this.map.loadMarkers(containers, false);
+              });
               if ( this.zoneVisible == 3 ) {
                 this.zoneVisible = 2;
                 this.getZones(false);
@@ -438,13 +441,6 @@ export class MapaPage implements OnInit {
         this.map.map.invalidateSize();
       }, 500);
     }
-  }
-  //
-  loadNearbyContainers(fly: boolean) {
-    this.api.loadNearbyContainers(this.map.getBoundingCoords())
-    .subscribe((containers) => {
-        this.map.loadMarkers(containers, fly);
-    });
   }
   //
   gotoLocation(load=true) {

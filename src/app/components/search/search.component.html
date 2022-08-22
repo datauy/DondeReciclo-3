@@ -34,6 +34,13 @@
         (click)="dimensionSelected(dimension.id)">
         <ion-label [innerHTML]="dimension.name"></ion-label>
       </ion-button>
+      <div id="filter-dimensions-wraper">
+        <ion-button fill="clear" slot="icon-only"
+          (click)="dimensionsFilter()">
+          <ion-label>Volver al mapa</ion-label>
+          <ion-icon class="right" name="dr-filtro"></ion-icon>
+        </ion-button>
+      </div>
     </div>
     <div id="suggestions" [ngClass]="(suggestVisibility && searchVisibility) ? 'show expand' : 'hide shrink'">
       <ion-list-header>Materiales/residuos sugeridos:</ion-list-header>

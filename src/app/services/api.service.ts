@@ -163,7 +163,8 @@ export class ApiService<T=any> {
   // Función genrica para cargar contenedores
   loadNearbyContainers(bounds) {
     if ( this.session.searchItem != undefined){
-      return this.getContainers4Materials(bounds, this.session.searchItem.type+"="+this.session.searchItem.id);
+      let ids = this.session.searchItem.ids !== undefined ? this.session.searchItem.ids : this.session.searchItem.id;
+      return this.getContainers4Materials(bounds, this.session.searchItem.type+"="+ids);
     }
     else {
       return this.getContainers(bounds);

@@ -1,11 +1,15 @@
 :host{
   height: 100%;
+  .ion-activated {
+    background: transparent;
+  }
   ion-button{
     text-align: left;
     height: 40px;
     ion-label{
       position: absolute;
       left: 0px;
+      background-color: none;
     }
     img {
       width: 24px;
@@ -94,6 +98,19 @@
     #dimensions {
       display: flex;
       justify-content: center;
+      flex-wrap: wrap;
+      #filter-dimensions-wraper {
+        width: 100%;
+        justify-content: center;
+        display: flex;
+        margin-top: 15px;
+        ion-button {
+          border-radius: 6px;
+          height: 42px;
+          width: 33%;
+          min-width: 242px;
+        }
+      }
       ion-button {
         height: 31.4px;
         flex-grow: 0;

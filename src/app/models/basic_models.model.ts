@@ -4,6 +4,7 @@ export class Dimension {
   name: string;
   color: string;
   information: string;
+  materials: number[];
 }
 export class Material extends Base {
     //id is inherited from Resource
@@ -88,11 +89,12 @@ export class Program extends Base {
   icon: string;
 }
 
-export interface SearchMessage {
+export interface SearchItem {
     id: number;
     type: string;
     name: string;
     class: string;
     deposition: string;
     icon: string;
+    ids: string;
 }

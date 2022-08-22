@@ -5,7 +5,7 @@ import { Component, Input } from '@angular/core';
 import { ApiService } from "src/app/services/api.service";
 import { MapService } from "src/app/services/map.service";
 
-import { SearchMessage, Dimension } from "src/app/models/basic_models.model";
+import { SearchItem, Dimension } from "src/app/models/basic_models.model";
 import { SessionService } from 'src/app/services/session.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
 import { environment } from 'src/environments/environment';
@@ -29,9 +29,10 @@ export class SearchComponent {
   searchAddress = false;
   isInit = true;
   environment = environment;
-  predefinedSearch: Array<SearchMessage> = [];
+  predefinedSearch: Array<SearchItem> = [];
   dimensions: Array<Dimension> = [];
   showAllDimensions = true;
+  not_filter_dimensions = ['item selected', 'dimension'];
 
   constructor(
     public api: ApiService,
@@ -71,7 +72,7 @@ export class SearchComponent {
     }
   toggleSearch() {
     if ( this.searchVisibility == true ) {
-      this.hideSearch(null);
+      this.hideSearch('toggle');
     }
     else {
       this.showSearch(null);
@@ -96,6 +97,10 @@ export class SearchComponent {
   }
 
   hideSearch(event) {
+    //filter dimensions if hidding from other sources
+    if ( !this.not_filter_dimensions.includes(event) ) {
+      this.dimensionsFilter();
+    }
     this.suggestVisibility = false;
     this.searchVisibility = false;
   }
@@ -131,7 +136,43 @@ export class SearchComponent {
       this.showAllDimensions = true;
     }
   }
+  dimensionsFilter() {
+    if ( this.showAllDimensions ) {
+      // Lo devolvemos al flujo normal
+      if ( this.session.searchItem != undefined && this.session.searchItem.type == 'dimensions' ) {
+        delete this.session.searchItem;
+        this.map.mapChanges();
+      }
+    }
+    else {
+      let m_ids = []
+      environment[this.session.country].dimensions.forEach( dim => {
+        if ( this.session.searchDimensions.includes( dim.id ) ) {
+          m_ids = m_ids.concat(dim.materials.filter( (item) => !m_ids.includes(item) ));
+        }
+      });
+      console.log(new Dimension);
 
+      let item = {
+        id: 0,
+        name: "Dimensiones",
+        class: "dimensions",
+        ids: m_ids.join(','),
+        type: 'dimensions',
+        deposition: '',
+        icon: ''
+      }
+      let center = this.map.map.getCenter();
+      let pos = [center.lat, center.lng];
+      this.session.searchItem = item;
+      this.api.getContainersByMaterials(item.type+"="+item.ids, pos)
+      .subscribe((containers) => {
+        this.map.loadMarkers(containers, true);
+      });
+    }
+    this.session.showSearchItem = false;
+    this.hideSearch('dimension');
+  }
   itemSelected(item) {
     this.searchBarIonic = document.querySelector('.searchbar-input');
     if (item.class == 'address' ) {
@@ -187,8 +228,14 @@ export class SearchComponent {
   //
   closeSelection() {
     delete this.session.searchItem;
-    //reload pins
-    this.map.mapChanges();
+    if ( !this.showAllDimensions ) {
+      this.dimensionsFilter();
+    }
+    else {
+      this.session.showSearchItem = false;
+      //reload pins
+      this.map.mapChanges();
+    }
   }
   //Selector between materials and addresses
   search4address(isit: boolean) {
