@@ -18,10 +18,10 @@
           <ion-icon name="dr-{{environment[this.session.country].code.toLowerCase()}}"></ion-icon>
         </ion-fab-button>
         <ion-fab-list side="end">
-          <ion-fab-button (click)="changeCountry('Uruguay')">
+          <ion-fab-button (click)="map.selectCountry('Uruguay')">
             <ion-icon name="dr-uy"></ion-icon>
           </ion-fab-button>
-          <ion-fab-button (click)="changeCountry('Colombia')">
+          <ion-fab-button (click)="map.selectCountry('Colombia')">
             <ion-icon name="dr-col"></ion-icon>
           </ion-fab-button>
         </ion-fab-list>
@@ -48,14 +48,14 @@
 <div class="overlay" *ngIf="session.country == undefined">
   <span>Seleccionar país:</span>
   <ion-buttons>
-    <ion-button (click)="selectCountry('Uruguay')">
+    <ion-button (click)="map.selectCountry('Uruguay')">
       <ion-icon
         class="country-selector"
         slot="icon-only"
         name="dr-uy">
       </ion-icon>
     </ion-button>
-    <ion-button (click)="selectCountry('Colombia')">
+    <ion-button (click)="map.selectCountry('Colombia')">
       <ion-icon
         class="country-selector"
         slot="icon-only"

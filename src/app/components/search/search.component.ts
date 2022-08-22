@@ -64,9 +64,11 @@ export class SearchComponent {
       this.api.initialDataLoaded.subscribe( (loaded) => {
         if ( loaded ) {
           this.session.searchDimensions = [];
-          environment[this.session.country].dimensions.forEach(dim => {
-            this.session.searchDimensions.push(dim.id);
-          });
+          if ( this.session.country != undefined ) {
+            environment[this.session.country].dimensions.forEach(dim => {
+              this.session.searchDimensions.push(dim.id);
+            });
+          }
         }
       });
     }
@@ -129,7 +131,7 @@ export class SearchComponent {
     });
     this.predefinedSearch = predefined.sort((a, b) => (a.name > b.name) ? 1 : -1);
 
-    if ( this.environment[this.session.country].dimensions != undefined && this.session.searchDimensions.length != this.environment[this.session.country].dimensions.length ) {
+    if ( this.session.country != undefined && this.environment[this.session.country].dimensions != undefined && this.session.searchDimensions.length != this.environment[this.session.country].dimensions.length ) {
       this.showAllDimensions = false;
     }
     else {

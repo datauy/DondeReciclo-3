@@ -485,7 +485,7 @@ export class MapaPage implements OnInit {
       this.notification.showNotification(noRes);
       this.map.getUserPosition().then(
         (res) => {
-          if ( res == undefined || res.length == 0 ) {
+          if ( (res == undefined || res.length == 0) && this.map.center != undefined ) {
             this.map.userPosition = [this.map.center.lat, this.map.center.lng];
           }
           if ( this.map.userPosition != undefined ) {
