@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   assets: "assets",
   url: 'http://localhost:8100',
-  backend: "http://localhost:3000/api/",
+  backend: "https://dr3b.stage.data.org.uy/api/",
   Uruguay: {
     center: {lat: -34.905897, lng: -56.191406},
     code: 'UY',
