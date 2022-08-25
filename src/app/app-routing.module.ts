@@ -3,12 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { NotFoundPage } from './components/static-pages/notfound.page';
 import { PrivacyPolicyPage } from './components/static-pages/privacy_policy.page';
 import { RecyclersPage } from './components/static-pages/recyclers.page';
+import { MapaPage } from 'src/app/pages/mapa/mapa.page';
+import { ContactFormComponent } from 'src/app/components/contact-form/contact-form.component';
+import { AboutPage } from 'src/app/components/static-pages/about.page';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'intro', pathMatch: 'full' },
+  { path: '', redirectTo: 'mapa', pathMatch: 'full' },
   {
-    path: 'intro',
-    loadChildren: () => import('./pages/tabsnav/tabsnav.module').then( m => m.TabsnavPageModule)
+    path: 'mapa',
+    loadChildren: () => import('./pages/mapa/mapa.module').then( m => m.MapaPageModule)
   },
   {
     path: 'empresas',
@@ -37,6 +40,14 @@ const routes: Routes = [
   {
     path: 'clasificadores',
     component: RecyclersPage
+  },
+  {
+    path: 'sobre-el-proyecto',
+    component: AboutPage
+  },
+  {
+    path: 'contacto',
+    component: ContactFormComponent
   },
   {
     path: '**',

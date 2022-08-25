@@ -1,6 +1,7 @@
 import { Base } from './base.model';
 
 export class Dimension {
+  id: number;
   name: string;
   color: string;
   information: string;

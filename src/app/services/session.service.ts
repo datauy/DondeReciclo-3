@@ -86,8 +86,8 @@ export class SessionService {
     return 1;
   }
   setCountry(country: string) {
-    this.storage.set('country', country);
     this.country = country;
+    this.storage.set('country', country);
     this._country_change.next(country);
     this.clearCaches();
   }
