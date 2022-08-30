@@ -191,6 +191,7 @@ export class MapService {
   }
 
   loadMarkers( markers: Container[], fly = true ){
+    this.loadMap();
     //Prevent marker load over saturation level
     this.containers = markers;
     if ( markers.length > environment.pinSaturation && !this.eagerLoad ) {
@@ -428,7 +429,7 @@ export class MapService {
   }
 
   reRoute(){
-    if ( !this.router.routerState.snapshot.url.startsWith('/intro/mapa') || this.map == undefined ) {
+    if ( !this.router.routerState.snapshot.url.startsWith('/mapa') || this.map == undefined ) {
       this.router.navigate([this.session.homeUrl]);
     }
     else {

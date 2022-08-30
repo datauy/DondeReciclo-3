@@ -7,30 +7,50 @@
     class="mainMenu ion-no-shadow"
     (ionWillOpen)="menuWillOpen()"
     (ionDidClose)="menuWillClose()">
-    <ion-header class="ion-no-border">
-      <ion-buttons id="desktop-logo">
-        <ion-img class="logo"
-          routerLink="/"
-          routerDirection="root"
-          src="assets/img/logo_dr_horizontal.svg"
-          alt="Logo ¿Dónde Reciclo?">
-        </ion-img>
-      </ion-buttons>
-    </ion-header>
+    <app-header display="mobile"></app-header>
     <ion-content class="menu-list">
       <ion-list>
+        <ion-item lines="none" class="label">
+          <ion-label>Reciclaje</ion-label>
+        </ion-item>
         <ion-item
-          *ngFor="let p of appPages"
           (click)="toggleMenu()"
           lines="none"
-          [routerLink]="p.url"
+          href="https://cempre.org.uy/category/informacion/fichas-tecnicas/"
+          target="_blank"
           routerLinkActive="active-item"
           detail-icon="none">
-          <ion-icon slot="start"
-            [name]="p.icon"></ion-icon>
+          <ion-icon slot="start" name="dr-fichas"></ion-icon>
           <div>
-            <h4>{{p.title}}</h4>
-            <p>{{p.desc}}</p>
+            <h4>Fichas sobre materiales</h4>
+            <p>Origen, flujo e información relevante.</p>
+          </div>
+          <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+        <ion-item
+          (click)="toggleMenu()"
+          lines="none"
+          href="https://cempre.org.uy/buenas-practicas/"
+          target="_blank"
+          routerLinkActive="active-item"
+          detail-icon="none">
+          <ion-icon slot="start" name="dr-consejos"></ion-icon>
+          <div>
+            <h4>Consejos</h4>
+            <p>¿Cómo clasificar?</p>
+          </div>
+          <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+        <ion-item
+          (click)="toggleMenu()"
+          lines="none"
+          routerLink="programas"
+          routerLinkActive="active-item"
+          detail-icon="none">
+          <ion-icon slot="start" name="dr-programas"></ion-icon>
+          <div>
+            <h4>Programas</h4>
+            <p>Ciclo de vida de los residuos</p>
           </div>
           <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
         </ion-item>
@@ -48,6 +68,27 @@
           </div>
           <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
         </ion-item>
+        <ion-item lines="none" class="label">
+          <ion-label>Donde Reciclo</ion-label>
+        </ion-item>
+        <ion-item
+          *ngFor="let p of appDR"
+          (click)="toggleMenu()"
+          lines="none"
+          [routerLink]="p.url"
+          routerLinkActive="active-item"
+          detail-icon="none">
+          <ion-icon slot="start"
+            [name]="p.icon"></ion-icon>
+          <div>
+            <h4>{{p.title}}</h4>
+            <p>{{p.desc}}</p>
+          </div>
+          <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+        <ion-item lines="none" class="label">
+          <ion-label>Mi cuenta</ion-label>
+        </ion-item>
         <ion-item lines="none"
           (click)="toggleMenu()"
           detail-icon="none"
@@ -56,7 +97,7 @@
           routerDirection="forward"
           routerLinkActive="active-item"
           *ngIf="auth.isLogged">
-          <ion-icon slot="start" name="dr-user"></ion-icon>
+          <ion-icon slot="start" name="dr-session"></ion-icon>
           <div>
             <h4>Mi Perfil</h4>
           </div>
@@ -69,7 +110,7 @@
           routerDirection="forward"
           routerLinkActive="active-item"
           *ngIf="!auth.isLogged">
-          <ion-icon slot="start" name="log-in-outline"></ion-icon>
+          <ion-icon slot="start" name="dr-session"></ion-icon>
           <div>
             <h4>Iniciar Sesión</h4>
           </div>
@@ -90,23 +131,26 @@
           <ion-icon slot="end"
             name="chevron-forward-outline"></ion-icon>
         </ion-item>
-        <ion-item
-          lines="none"
-          (click)="goToMap()"
-          detail-icon="none"
-          [ngClass]="map.isMapPage() ? 'inicio active-item' : 'inicio'">
-          <ion-icon slot="start"
-            name="dr-inicio"></ion-icon>
-          <div>
-            <h4>Volver al mapa</h4>
-          </div>
-          <ion-icon slot="end"
-            name="chevron-forward-outline"></ion-icon>
-        </ion-item>
         <ion-item class= "register"
           *ngIf="!auth.isLogged"
           lines="none">
           <ion-button (click)="toggleMenu()" routerLink="usuario/nuevo" size="large" type="submit" class="submit">Registrarme</ion-button>
+        </ion-item>
+        <ion-item
+          lines="none"
+          routerLink=""
+          routerDirection="root"
+          [routerLinkActiveOptions]="{ exact: true }"
+          detail-icon="none"
+          routerLinkActive="active-item"
+          class="inicio"
+          (click)="toggleMenu()"
+          >
+          <div>
+            <h4>Volver al mapa</h4>
+          </div>
+          <ion-icon slot="end"
+          name="chevron-forward-outline"></ion-icon>
         </ion-item>
         <ion-item lines="none" class="secondary-menu"
           (click)="introSlide()"
@@ -129,13 +173,13 @@
         </ion-item>
       </ion-list>
     </ion-content>
-    <div class="menu-rounded-bottom">
+    <!--<div class="menu-rounded-bottom">
     </div>
 
     <ion-footer class="menu-social-links">
-      <!-- <ul >
+       <ul >
         <li><ion-text slot="start">Seguinos en:</ion-text></li>
-      </ul> -->
+      </ul>
       <ion-toolbar>
         <ion-buttons>
           <span>Cambiar país:</span>
@@ -195,7 +239,7 @@
           </ion-button>
         </ion-buttons>
       </ion-toolbar>
-    </ion-footer>
+    </ion-footer>-->
   </ion-menu>
   <ion-router-outlet id="menu-content">
     <app-notification></app-notification>

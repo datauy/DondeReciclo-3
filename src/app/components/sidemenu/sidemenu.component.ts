@@ -16,18 +16,18 @@ export class SidemenuComponent implements OnInit {
 
   @ViewChild(IonMenu, { static: false }) public sidemenu: IonMenu;
   //@ViewChild("#search-app-component", { static: false }) private searchBar: HTMLElement;
-  public appPages = [
+  public appDR = [
     {
-      title: 'Novedades',
-      desc: 'Sobre clasificación y reciclaje',
-      url: 'novedades',
-      icon: 'dr-newspaper'
+      title: 'El proyecto',
+      desc: 'Quienes somos. Contacto.',
+      url: 'sobre-el-proyecto',
+      icon: 'dr-proyecto'
     },
     {
-      title: 'Programas',
-      desc: 'Ciclo de vida de los residuos',
-      url: 'programas',
-      icon: 'dr-recycle'
+      title: 'Novedades',
+      desc: 'Últimas noticias relacionadas',
+      url: 'novedades',
+      icon: 'dr-news'
     },
     {
       title: 'Auspiciantes',
@@ -35,7 +35,7 @@ export class SidemenuComponent implements OnInit {
       url: 'empresas',
       icon: 'dr-empresas'
     }
-  ];
+  ]
 
 
   constructor(

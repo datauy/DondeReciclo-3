@@ -1,9 +1,12 @@
 :host {
   z-index: 402;
+  background: var(--dark-sea-green);
+  .header-mobile.header-md::after {
+    display: none;
+  }
   ion-toolbar {
-    --min-height: 80px;
+    display: flex;
     .toolbar-wraper {
-      margin-top: -14px;
       width: 100%;
       display: inline-flex;
     }

@@ -19,11 +19,11 @@
   // --ion-item-color	Color of the components in the Item
   // --ion-placeholder-color	Color of the placeholder in Inputs
   // Size and spacing variables
-  --dr-header-height-map: 93px;
-  --dr-header-height-full: 88px;
-  --dr-header-height-short: 60px;
-  --dr-margin: 12px;
-  --dr-searchbox-top: calc(var(--dr-header-height-map) - 32px);
+  --dr-header-height-map: 96px;
+  --dr-header-height-full: 80px;
+  --dr-header-height-mobile: 80px;
+  --dr-margin: -32px;
+  --dr-searchbox-top: calc(var(--dr-header-height-map) + var(--dr-margin));
   // Font
   --dr-font-size: 20px;
   --padding-start: 0;
@@ -604,17 +604,13 @@ ion-icon {
 .header-full{
   height: var(--dr-header-height-full);
 }
-.header-short{
-  height: var(--dr-header-height-short);
+.header-mobile{
+  height: var(--dr-header-height-mobile);
 }
 .header-hide{
   height: 0;
 }
-
 ion-app {
-  #search-app-content{
-    @extend .hide;
-  }
   #header-main ion-toolbar {
     // height: auto;
   }

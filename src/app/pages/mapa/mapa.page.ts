@@ -69,7 +69,10 @@ export class MapaPage implements OnInit {
   }
   //
   ngOnInit() {
-      // this.app = document.querySelector('app-search');
+    this.session.isShowSlider().then((toShow) => {
+      this.session.watchSlider(toShow);
+    });
+    // this.app = document.querySelector('app-search');
     this.session.homeUrl = this.router.url.split('?')[0];
     this.loadInfoPane();
     //Subscribe after initial data is loaded
@@ -219,22 +222,6 @@ export class MapaPage implements OnInit {
     if ( this.initDataLoaded ) {
       if ( event != undefined ) {
         var url_arr = event.url.split('?');
-        // HARD RESET
-        if ( this.session.lastUrl == "" ) {
-          this.session.lastUrl == this.session.homeUrl;
-        }
-        if (
-        this.session.lastUrl.startsWith("/intro/mapa")
-        && this.session.lastUrl.split('?')[0] != url_arr[0]
-        && url_arr[0].startsWith("/intro/mapa")
-        ) {
-          let q = '';
-          if ( url_arr[1] != undefined ) {
-            q = '?' + url_arr[1];
-          }
-          //console.log("ROUTER RESET:", q );
-          window.location.replace( '/' + q );
-        }
         // Do not do anything if URL is unchanged
         if ( 1 in url_arr ) {
           if ( url_arr[1].startsWith('zones') ) {
@@ -250,8 +237,6 @@ export class MapaPage implements OnInit {
           }
           this.router.navigate([this.session.homeUrl]);
         }
-        // Set last URL
-        this.session.lastUrl = url_arr[0];
         //No need to continue
         if ( url_arr[0] == this.session.homeUrl ) {
           return;

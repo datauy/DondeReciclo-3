@@ -6,7 +6,6 @@ import { MapaPage } from './mapa.page';
 const routes: Routes = [
   {
     path: '',
-    component: MapaPage,
     children: [
       {
         path: '',
@@ -32,8 +31,32 @@ const routes: Routes = [
         path: 'contenedores/:containersID',
         component: MapaPage
       },
+      {
+        path: 'intro/mapa',
+        component: MapaPage
+      },
+      {
+        path: 'intro/mapa/contenedor/:containerID',
+        component: MapaPage
+      },
+      {
+        path: 'intro/mapa/material/:materialID',
+        component: MapaPage
+      },
+      {
+        path: 'intro/mapa/residuo/:wasteID',
+        component: MapaPage
+      },
+      {
+        path: 'intro/mapa/subprograma/:subsID',
+        component: MapaPage
+      },
+      {
+        path: 'intro/mapa/contenedores/:containersID',
+        component: MapaPage
+      },
     ]
-  }
+  },
 ];
 
 @NgModule({
