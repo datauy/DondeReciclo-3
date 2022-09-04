@@ -126,7 +126,7 @@ export class MapService {
   map: L.Map;
   route: any;
   userPosition: [number, number];
-  userMarker: L.Marker;
+  private userMarker: L.Marker;
   currentContainer: Container;
   containers: Container[];
   currentBounds: [number, number][];
@@ -139,6 +139,7 @@ export class MapService {
   private _pinClick = new BehaviorSubject<boolean>(false);
   private _zoneClick = new BehaviorSubject<any>(0);
   private _mapChangeSub = new BehaviorSubject<boolean>(false);
+  private _userPos = new BehaviorSubject<[number, number]>(null);
   public _autoSearch = new BehaviorSubject<any>(null);
   public zoom:number = 15;
   public center:L.LatLng;
@@ -167,6 +168,8 @@ export class MapService {
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
       }).addTo(this.map);
+      console.log("USER POS ON LOAD", this.userPosition);
+
       if ( this.userPosition ) {
         this.userMarker = L.marker(this.userPosition, {icon: iconUser} ).addTo(this.map);
       }
@@ -175,7 +178,8 @@ export class MapService {
         if (this.userMarker) { // check
           this.map.removeLayer(this.userMarker); // remove
         }
-        this.setUserPosition([e.latlng.lat, e.latlng.lng]);
+        //Do not propagate since click is handled
+        this.setUserPosition([e.latlng.lat, e.latlng.lng], false);
         this.userMarker = L.marker(this.userPosition, {icon: iconUser} ).addTo(this.map); // add the marker onclick
         if (this.route) {
           this.route.spliceWaypoints(0, 1, e.latlng);
@@ -339,6 +343,9 @@ export class MapService {
     this.center = this.map.getCenter();
     this.mapChanges();
   }
+  get userPositionChanged() {
+    return this._userPos.asObservable();
+  }
   //MAP behavior
   mapChanges(){
     //Si no es una animación auto);
@@ -449,9 +456,12 @@ export class MapService {
       }
     );
   }
-  setUserPosition(coords:[number, number]) {
-    this.userPosition = [ coords[0], coords[1] ];
+  setUserPosition(coords:[number, number], propagate = true) {
+    this.userPosition = coords;
     this.storage.set("userPosition", this.userPosition);
+    if ( propagate ) {
+      this._userPos.next(this.userPosition);
+    }
   }
   removeUserPosition() {
     delete this.userPosition;

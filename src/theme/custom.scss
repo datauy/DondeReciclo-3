@@ -280,6 +280,27 @@
     display: none;
   }
   /******** MAP PAGE **************/
+  .cupertino-pane {
+    .pane {
+      overflow: visible !important;
+      padding: 2px 14px;
+    }
+  }
+  .cupertino-pane-wrapper{
+    z-index: 500;
+    .pane {
+      max-width: none;
+      padding-top: 35px;
+    }
+    .draggable {
+      display: flex;
+      align-items: flex-end;
+    }
+    .move {
+      width: 50px;
+      height: 4px;
+    }
+  }
   .cupertinoOpen {
     .leaflet-control-container .leaflet-top {
       top: 100px;
@@ -805,6 +826,9 @@ ion-img.logo {
   ion-content .map-locate {
     top: 212px;
   }
+  app-search {
+    display: none;
+  }
 }
 #map{
   .dr-marker{
@@ -819,18 +843,5 @@ ion-img.logo {
     // -webkit-filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .5));
     // filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .5));
     /* Similar syntax to box-shadow */
-  }
-}
-.cupertino-pane-wrapper {
-  //position: relative;
-  z-index: 500;
-  .pane {
-    max-width: none;
-  }
-}
-.cupertino-pane {
-  .pane {
-    overflow: visible !important;
-    padding: 2px 14px;
   }
 }

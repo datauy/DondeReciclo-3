@@ -5,16 +5,6 @@
   <ion-button class="back-button" *ngIf="session.cupertinoState == 'cupertinoOpen'" (click)="hidePane()">
     <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
   </ion-button>
-  <ion-row class="no-height ion-justify-content-center">
-    <ion-col size-md="10" size-xl="8" size-xs="12" padding="0" >
-      <ion-button
-      [innerHtml]="session.country == 'Colombia' ? '¿Quien recoge en esta zona?' : 'Ver servicios para esta zona'"
-      *ngIf="session.cupertinoState != 'cupertinoOpen'"
-      class="submit locations"
-      (click)="subprograms4location()">
-      </ion-button>
-    </ion-col>
-  </ion-row>
   <ion-button color="transparent" class="map-buttons map-locate" (click)="geolocate()">
     <ion-icon name="dr-locate"></ion-icon>
   </ion-button>
@@ -27,17 +17,18 @@
     style="height:100%; width: 100%;"
     center='Montevideo, Uruguay'>
   </div>
-
-  <div #infoPane class="cupertino-pane">
-    <div class="subprogram-list pane-container" *ngIf="list == 1">
+  <div class="services-pane cupertino-pane">
+    <div class="subprogram-list pane-container">
       <ion-item class="header" lines="full">
         <div class="title-wrapper">
-          <span size="small">Ubicado en mapa</span>
-          <h5>Servicios disponibles en tu ubicación</h5>
+          <span size="small">
+            Encontramos <span class="services-count" [innerHTML]="subprograms.length + ' servicios'"></span> en tu zona
+          </span>
+          <h5 (click)="toggleServices()">Ver servicios para esta zona <ion-icon name="chevron-down"></ion-icon></h5>
         </div>
       </ion-item>
       <div class="scrollable-div" contain="none" overflow-y="scroll">
-        <ion-item *ngFor="let subp of subprograms; let i = index" class="header" lines="none" (click)="subprogramShow(i)">
+        <ion-item *ngFor="let subp of subprograms; let i = index" lines="none" (click)="subprogramShow(i)">
           <ion-avatar slot="start">
             <img src="{{subp.program_icon}}">
           </ion-avatar>
@@ -63,6 +54,8 @@
         </ion-item>
       </div>
     </div>
+  </div>
+  <div #infoPane class="info-pane cupertino-pane">
     <div class="subprogram pane-container" *ngIf="list == 2 || list == 4">
       <ion-item class="header" lines="full">
         <ion-avatar slot="start">

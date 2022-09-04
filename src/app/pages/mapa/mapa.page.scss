@@ -8,6 +8,7 @@
       height: 0;
     }
     .cupertino-pane {
+
       &.desktop {
         overflow: hidden;
         .scrollable-div {
@@ -143,9 +144,6 @@
         height: 29px;
       }
       .subprogram-list {
-        .header {
-          padding-bottom: 22px;
-        }
         .scrollable-div {
           position: relative;
           overflow-y: auto;
@@ -161,6 +159,36 @@
       }
       .conteiner-directions {
         padding-right: 54px;
+      }
+      &.services-pane {
+        .header .title-wrapper {
+          display: flex;
+          flex-direction: column;
+          text-align: center;
+          width: 100%;
+          span {
+            line-height: 27px;
+            font-family: SourceSansPro;
+            font-size: 14px;
+            font-weight: 600;
+            .services-count {
+              padding: 2px 8px;
+              border-radius: 20px;
+              background-color: var(--dark-sea-green);
+              color: var(--vidrio);
+            }
+          }
+          h5 {
+            margin-top: 10px;
+            margin-bottom: 13px;
+            cursor: pointer;
+            ion-icon {
+              margin: -5px 0;
+              width: 20px;
+              height: 20px;
+            }
+          }
+        }
       }
     }
     .back-button {

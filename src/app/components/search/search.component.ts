@@ -173,7 +173,7 @@ export class SearchComponent {
   itemSelected(item) {
     this.searchBarIonic = document.querySelector('.searchbar-input');
     if (item.class == 'address' ) {
-      this.map.userPosition = [item.latlng.lat, item.latlng.lng];
+      this.map.setUserPosition([item.latlng.lat, item.latlng.lng]);
       //this.map.flyToBounds();
       this.api.getNearbyContainers(2, this.map.userPosition)
       .subscribe((containers) => {
