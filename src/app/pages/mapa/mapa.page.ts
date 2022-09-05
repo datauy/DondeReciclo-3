@@ -245,7 +245,7 @@ export class MapaPage implements OnInit {
           }
           if ( url_arr[1].startsWith('eagerLoad') ) {
             this.map.eagerLoad = true;
-            this.map.loadMarkers(this.map.containers, false);
+            this.map.mapChanges();
             //Set eager load for 10 secs
             setTimeout( () => {
             this.map.eagerLoad = false;
@@ -364,9 +364,6 @@ export class MapaPage implements OnInit {
       buttonDestroy: false,
       showDraggable: true,
         //simulateTouch: true,
-      topperOverflow: true,
-      topperOverflowOffset: 0,
-      bottomOffset: 115,
       initialBreak: initPane,
       clickBottomOpen: false,
       breaks: {
@@ -378,7 +375,7 @@ export class MapaPage implements OnInit {
         middle: {
           enabled: true,
           //offset: window.innerHeight*.7,
-          height: Math.round(window.innerHeight*.65),
+          height: Math.round(window.innerHeight*.65 - 57.5),
         },
         bottom: {
           enabled: true,

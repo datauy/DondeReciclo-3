@@ -291,6 +291,7 @@
     .pane {
       max-width: none;
       padding-top: 35px;
+      height: inherit !important;
     }
     .draggable {
       display: flex;
