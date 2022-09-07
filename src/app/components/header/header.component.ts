@@ -52,12 +52,4 @@ export class HeaderComponent {
     });
     return await modal.present();
   }
-  //
-  selectCountry(country: string){
-    this.map.selectCountry(country);
-    //Wait for animation to finish and load markers
-    setTimeout( () => {
-      this.map.mapChanges();
-    }, 6000);
-  }
 }

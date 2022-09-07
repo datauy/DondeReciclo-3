@@ -18,6 +18,8 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
 import { Subprogram } from "src/app/models/subprogram.model";
 
+import { environment } from 'src/environments/environment';
+
 @Component({
   selector: 'app-mapa',
   templateUrl: './mapa.page.html',
@@ -103,6 +105,20 @@ export class MapaPage implements OnInit {
       pos => {
         if ( pos && pos != null ) {
           this.subprograms4location();
+        }
+      }
+    );
+    this.session.countryChanged.subscribe(
+      countryName => {
+        if ( this.initDataLoaded == true && countryName ) {
+          //Set possition and load services
+          let userPos = [environment[countryName].center.lat, environment[countryName].center.lon];
+          this.map.setUserPosition(userPos);
+          this.api.getNearbyContainers(2, userPos).subscribe(
+            (containers) => {
+              this.map.loadMarkers(containers, true);
+            }
+          );
         }
       }
     );
@@ -202,7 +218,9 @@ export class MapaPage implements OnInit {
   ionViewDidEnter() {
     //Carga mapa con centro en LA
     this.map.loadMap();
-    this.subprograms4location();
+    this.loadPosition(true).then(() => {
+      this.subprograms4location();
+    });
     //Fallback if location fails
     /*if ( this.session.country != undefined ) {
     console.log("VIEW STARTS HAY COUNTRY");
@@ -366,6 +384,9 @@ export class MapaPage implements OnInit {
         //simulateTouch: true,
       initialBreak: initPane,
       clickBottomOpen: false,
+      bottomOffset: 120,
+      topperOverflow: true,
+      topperOverflowOffset: 110,
       breaks: {
         top: {
           enabled: top,
@@ -375,12 +396,12 @@ export class MapaPage implements OnInit {
         middle: {
           enabled: true,
           //offset: window.innerHeight*.7,
-          height: Math.round(window.innerHeight*.65 - 57.5),
+          height: Math.round(window.innerHeight*.65 - 90),
         },
         bottom: {
           enabled: true,
           //offset: window.innerHeight*.7,
-          height: 115,
+          height: 110,
         },
       },
       //onTransitionEnd: () => this.breakPointMapCupertino(),
@@ -538,27 +559,32 @@ export class MapaPage implements OnInit {
         note: 'Quizás no le diste permiso o la localización está desactivada. Prueba iniciar la app con la localización activada. Puedes seleccionar tu ubicación tocando el mapa.',
       };
       this.notification.showNotification(noRes);
-      this.map.getUserPosition().then(
-        (res) => {
-          if ( (res == undefined || res.length == 0) && this.map.center != undefined ) {
-            this.map.setUserPosition([this.map.center.lat, this.map.center.lng]);
+      this.loadPosition(load);
+    }
+  }
+  //
+  loadPosition(load) {
+    return this.map.getUserPosition().then(
+      (res) => {
+        if ( (res == undefined || res.length == 0) && this.map.center != undefined ) {
+          this.map.setUserPosition([this.map.center.lat, this.map.center.lng]);
+        }
+        if ( this.map.userPosition != undefined ) {
+          if ( this.autoSearch ) {
+            this.activateSearch(this.autoSearchItem);
           }
-          if ( this.map.userPosition != undefined ) {
-            if ( this.autoSearch ) {
-              this.activateSearch(this.autoSearchItem);
-            }
-            else {
-              if (load) {
-                this.api.getNearbyContainers(2, [this.map.userPosition[0], this.map.userPosition[1]])
-                .subscribe((containers) => {
-                  this.map.loadMarkers(containers, true);
-                });
-              }
+          else {
+            if (load) {
+              this.api.getNearbyContainers(2, [this.map.userPosition[0], this.map.userPosition[1]])
+              .subscribe((containers) => {
+                this.map.loadMarkers(containers, true);
+              });
             }
           }
         }
-      );
-    }
+        return true;
+      }
+    );
   }
   //
   formatContainer(container: Container) {
@@ -688,8 +714,7 @@ export class MapaPage implements OnInit {
       }
       else {
         point = [ this.map.map.getCenter().lat, this.map.map.getCenter().lng ];
-        this.map.setUserPosition(point);
-        this.map.loadMarkers([], false);
+        this.map.setUserPosition(point, false);
       }
       this.api.getSubprograms4Location(point, distance).subscribe(
         (subprograms_zones) => {

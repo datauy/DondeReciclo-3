@@ -73,11 +73,6 @@ export class SidemenuComponent implements OnInit {
     this.router.navigate(['/']);
     this.toggleMenu();
   }
-  //Country selection
-  selectCountry(country: string) {
-    this.map.selectCountry(country);
-    this.toggleMenu();
-  }
   goToMap() {
     this.map.reRoute();
   }

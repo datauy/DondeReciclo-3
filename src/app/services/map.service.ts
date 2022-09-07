@@ -426,13 +426,6 @@ export class MapService {
     this.subZone = L.geoJSON( layer );
     this.subZone.addTo(this.map);
   }
-  //Country selection
-  selectCountry(country: string) {
-    this.session.setCountry(country);
-    this.removeUserPosition();
-    this.center = L.latLng(environment[country].center);
-    this.reRoute();
-  }
 
   reRoute(){
     if ( !this.router.routerState.snapshot.url.startsWith('/mapa') || this.map == undefined ) {

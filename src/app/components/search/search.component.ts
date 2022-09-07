@@ -58,7 +58,6 @@ export class SearchComponent {
     );
     this.session.countryChanged.subscribe(
       countryName => {
-        console.log("COUNTRY CANHGED", this.session.country);
         if ( this.session.country == 'Colombia' ) {
           this.search4address(true);
         }
