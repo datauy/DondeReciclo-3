@@ -110,9 +110,9 @@ export class MapaPage implements OnInit {
     );
     this.session.countryChanged.subscribe(
       countryName => {
-        if ( this.initDataLoaded == true && countryName ) {
+        if ( this.initDataLoaded == true && countryName != '' ) {
           //Set possition and load services
-          let userPos = [environment[countryName].center.lat, environment[countryName].center.lon];
+          let userPos: [number, number] = [environment[countryName].center.lat, environment[countryName].center.lon];
           this.map.setUserPosition(userPos);
           this.api.getNearbyContainers(2, userPos).subscribe(
             (containers) => {
@@ -567,7 +567,12 @@ export class MapaPage implements OnInit {
     return this.map.getUserPosition().then(
       (res) => {
         if ( (res == undefined || res.length == 0) && this.map.center != undefined ) {
-          this.map.setUserPosition([this.map.center.lat, this.map.center.lng]);
+          if ( this.session.country != undefined ) {
+            this.map.setUserPosition([this.map.center.lat, this.map.center.lng]);
+          }
+          else {
+            this.map.setUserPosition([this.map.center.lat, this.map.center.lng]);
+          }
         }
         if ( this.map.userPosition != undefined ) {
           if ( this.autoSearch ) {
@@ -742,17 +747,7 @@ export class MapaPage implements OnInit {
             //this.map.flytomarker(fixedPos, this.map.zoom);
           }
           else {
-            let noRes = {
-              id: 'noSub',
-              type: 'notification',
-              class: 'alert',
-              title: 'No hay datos para la zona',
-              note: 'No tenemos datos de organizaciones que trabajen en la zona. ¿Conoces alguna?',
-              link: this.session.homeUrl,//'map.toggleZone',
-              link_title: 'Ver Zonas',
-              link_params: {"zones": 1}
-            };
-            this.notification.showNotification(noRes);
+            this.subprograms = [];
           }
           this.session.isLoading = false;
         },

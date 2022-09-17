@@ -36,7 +36,7 @@ export class SessionService {
   lastUrl = '';
   is_mobile = false;
 
-  _country_change = new BehaviorSubject<string>('Uruguay');
+  _country_change = new BehaviorSubject<string>('');
 
   constructor(
     private router: Router,
@@ -97,7 +97,7 @@ export class SessionService {
   async getCountry() {
     return this.storage.get('country').then( (country) => {
       if ( country != null ) {
-        this.country = country
+        this.setCountry(country);
       }
       return this.country;
     });

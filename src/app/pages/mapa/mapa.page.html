@@ -24,7 +24,11 @@
           <span size="small">
             Encontramos <span class="services-count" [innerHTML]="subprograms.length + ' servicios'"></span> en tu zona
           </span>
-          <h5 (click)="toggleServices()">Ver servicios para esta zona <ion-icon name="chevron-down"></ion-icon></h5>
+          <h5
+          (click)="toggleServices()"
+          [innerHTML]="subprograms.length ? 'Ver servicios para esta zona' : 'No hay datos para la zona'">
+            <ion-icon name="chevron-down"></ion-icon>
+          </h5>
         </div>
       </ion-item>
       <div class="scrollable-div" contain="none" overflow-y="scroll">

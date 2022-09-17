@@ -58,10 +58,12 @@ export class SearchComponent {
     );
     this.session.countryChanged.subscribe(
       countryName => {
-        if ( this.session.country == 'Colombia' ) {
-          this.search4address(true);
+        if ( countryName != '' ) {
+          if ( this.session.country == 'Colombia' ) {
+            this.search4address(true);
+          }
+          this.loadSearchDimensions()
         }
-        this.loadSearchDimensions()
       }
     );
     this.api.initialDataLoaded.subscribe( (loaded) => {
