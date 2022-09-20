@@ -1,6 +1,6 @@
 <ion-header id="header-main" [class]="'header-' + display">
   <ion-buttons class="back-button">
-    <ion-button *ngIf="session.showBackButton || backButton" (click)="goBack()">
+    <ion-button *ngIf="(session.showBackButton || backButton) && display != 'mobile'" (click)="goBack()">
       <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
     </ion-button>
   </ion-buttons>

@@ -111,6 +111,13 @@ export class ApiService<T=any> {
       })
     );
   }
+  loadTagsPrograms() {
+    return  this.request.get(environment.backend + "tags_programs?version="+environment.apiVersion).pipe(map(
+      ( result: {name: string, programs: Program[]} ) => {
+        return result;
+      }
+    ));
+  }
   loadPrograms() {
     return  this.request.get(environment.backend + "programs").pipe(map(
       (result: Program[]) => {

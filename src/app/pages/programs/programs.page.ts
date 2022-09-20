@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { IonSlides } from '@ionic/angular';
-
-import { ApiService } from "src/app/services/api.service";
 import { Program } from "src/app/models/basic_models.model";
-
+import { ApiService } from "src/app/services/api.service";
 import { SessionService } from 'src/app/services/session.service';
 
 @Component({
@@ -15,24 +14,44 @@ import { SessionService } from 'src/app/services/session.service';
 export class ProgramsPage implements OnInit {
 
   @ViewChild('programSlider', {static: false}) slider: IonSlides;
-
+  pid: integer;
   programs: Program[];
+  tags: {name:string, programs:Program[]};
   slideOpts = {
     pagination: {
       el: '.swiper-pagination',
       clickable: true,
     },
   };
+  showCategories = true;
 
   constructor(
     public api: ApiService<any>,
     public session: SessionService,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
-    this.api.loadPrograms().subscribe( (programs: Program[]) =>  { // console.log(this.predefinedOptions)
-      this.programs = programs;
-    });
+    this.pid = this.route.snapshot.params['programID'];
+    //Reverse order if program has to be loaded
+    if ( this.pid != undefined ) {
+      this.api.loadPrograms().subscribe( (programs: Program[]) =>  {
+        console.log("PROGRAMS", programs);
+        this.programs = programs;
+        this.showProgram();
+        this.api.loadTagsPrograms().subscribe( ( tags: {name:string, programs: Program[]} ) =>  {
+          this.tags = tags;
+        });
+      });
+    }
+    else {
+      this.api.loadTagsPrograms().subscribe( ( tags: {name:string, programs: Program[]} ) =>  {
+        this.tags = tags;
+        this.api.loadPrograms().subscribe( (programs: Program[]) =>  {
+          this.programs = programs;
+        });
+      });
+    }
   }
   //
   nextSlide() {
@@ -41,5 +60,14 @@ export class ProgramsPage implements OnInit {
   //
   prevSlide() {
     this.slider.slidePrev();
+  }
+  showProgram() {
+    let index = this.programs.findIndex( p => p.id == this.pid );
+    this.slider.slideTo(index);
+    this.session.showBackButton = true;
+    this.showCategories = false;
+  }
+  goBack() {
+    this.showCategories = true;
   }
 }
