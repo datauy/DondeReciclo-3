@@ -14,6 +14,7 @@
           <ion-label>Reciclaje</ion-label>
         </ion-item>
         <ion-item
+          *ngIf="session.country == 'Uruguay'"
           (click)="toggleMenu()"
           lines="none"
           href="https://cempre.org.uy/category/informacion/fichas-tecnicas/"
@@ -28,10 +29,39 @@
           <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
         </ion-item>
         <ion-item
+          *ngIf="session.country == 'Uruguay'"
           (click)="toggleMenu()"
           lines="none"
           href="https://cempre.org.uy/buenas-practicas/"
           target="_blank"
+          routerLinkActive="active-item"
+          detail-icon="none">
+          <ion-icon slot="start" name="dr-consejos"></ion-icon>
+          <div>
+            <h4>Consejos</h4>
+            <p>¿Cómo clasificar?</p>
+          </div>
+          <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+        <ion-item
+          *ngIf="session.country != 'Uruguay'"
+          (click)="toggleMenu()"
+          lines="none"
+          routerLink="/fichas"
+          routerLinkActive="active-item"
+          detail-icon="none">
+          <ion-icon slot="start" name="dr-fichas"></ion-icon>
+          <div>
+            <h4>Fichas sobre materiales</h4>
+            <p>Origen, flujo e información relevante.</p>
+          </div>
+          <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+        <ion-item
+          *ngIf="session.country != 'Uruguay'"
+          (click)="toggleMenu()"
+          lines="none"
+          routerLink="/consejos"
           routerLinkActive="active-item"
           detail-icon="none">
           <ion-icon slot="start" name="dr-consejos"></ion-icon>
