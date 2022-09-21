@@ -7,9 +7,14 @@
   <div class="categories-wraper">
     <div class="tag" *ngFor="let tag of tags" >
       <h3 [innerHTML]="tag.name"></h3>
-      <ion-button *ngFor="let prog of tag.programs" [routerLink]="[ '/programas', prog.id ]">
-        <img class="full" *ngIf="prog.icon_url != ''" src="{{prog.icon_url}}" alt="imagen de programa"/>
-      </ion-button>
+      <div class="tag-program-wrapper">
+        <div class="tag-program" *ngFor="let prog of tag.programs">
+          <ion-button [routerLink]="[ '/programas', prog.id ]">
+            <img class="full" *ngIf="prog.icon_url != ''" src="{{prog.icon_url}}" alt="imagen de programa"/>
+          </ion-button>
+          <h6 [innerHTML]="prog.name"></h6>
+        </div>
+      </div>
     </div>
   </div>
 </ion-content>

@@ -31,11 +31,33 @@
       line-height: 22px;
       color: var(--greyish-brown);
     }
-    ion-button {
-      border-radius: 16px;
-      width: 100px;
-      height: 100px;
-      margin: 7px 8px;
+    .tag {
+      .tag-program-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        .tag-program {
+          width: 106px;
+          margin: 10px 8px;
+          ion-button {
+            height: 106px;
+            width: 106px;
+            border-radius: 16px;
+            --padding-start: 0;
+            --padding-end: 0;
+            margin: 0;
+            img {
+              width: 100%;
+            }
+          }
+          h6 {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 13px;
+            font-weight: normal;
+          }
+        }
+      }
     }
   }
   ion-slides{

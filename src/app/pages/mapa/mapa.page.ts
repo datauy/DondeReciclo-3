@@ -384,9 +384,9 @@ export class MapaPage implements OnInit {
         //simulateTouch: true,
       initialBreak: initPane,
       clickBottomOpen: false,
-      bottomOffset: 120,
+      bottomOffset: 30,
       topperOverflow: true,
-      topperOverflowOffset: 110,
+      topperOverflowOffset: 200,
       breaks: {
         top: {
           enabled: top,
@@ -396,12 +396,12 @@ export class MapaPage implements OnInit {
         middle: {
           enabled: true,
           //offset: window.innerHeight*.7,
-          height: Math.round(window.innerHeight*.65 - 90),
+          height: Math.round(window.innerHeight*.65),
         },
         bottom: {
           enabled: true,
           //offset: window.innerHeight*.7,
-          height: 110,
+          height: 210,
         },
       },
       //onTransitionEnd: () => this.breakPointMapCupertino(),
@@ -714,7 +714,7 @@ export class MapaPage implements OnInit {
         (subprograms_zones) => {
           var subprograms = subprograms_zones.subprograms;
           let fixedPos:[number, number] = [this.map.userPosition[0] - 0.002, this.map.userPosition[1] ];
-          if ( subprograms.length > 1 ) {
+          if ( subprograms.length >= 1 ) {
             this.formatSubProgram(subprograms);
             this.zones = subprograms_zones.locations;
             this.subprograms = subprograms;
@@ -722,18 +722,6 @@ export class MapaPage implements OnInit {
             if ( this.zoneVisible == 3 ) {
               this.map.loadZones(this.zones);
             }
-          }
-          else if ( subprograms.length == 1) {
-            this.map.removeZones();
-            if ( this.zones == undefined || this.zones.features.length <= 1 ) {
-              this.zones = subprograms_zones.locations;
-            }
-            if ( this.subprograms == undefined || this.subprograms.length <= 1 ) {
-              this.subprograms = subprograms;
-            }
-            this.formatSubProgram(subprograms);
-            this.subprogramShow(0, 4, subprograms[0]);
-            //this.map.flytomarker(fixedPos, this.map.zoom);
           }
           else {
             this.subprograms = [];
