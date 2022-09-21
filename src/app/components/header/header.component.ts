@@ -37,6 +37,7 @@ export class HeaderComponent {
     else{
       this.navCtrl.pop();
     }*/
+    this.session.showBackButton = false
     this.location.back();
   }
 

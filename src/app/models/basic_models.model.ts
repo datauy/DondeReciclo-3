@@ -88,6 +88,10 @@ export class Program extends Base {
   supporters_arr: Supporters[];
   locations_arr: string[];
   icon: string;
+  materials: number[];
+  wastes: number[];
+  sub_programs_arr: number[];
+  sub_programs: number[];
 }
 
 export interface SearchItem {
