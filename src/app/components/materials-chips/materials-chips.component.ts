@@ -24,15 +24,17 @@ export class MaterialsChipsComponent implements OnInit {
     if ( Object.keys(changes['materials_obj'].currentValue).length !== 0 ) {
       let materials_obj = changes['materials_obj'].currentValue;
       this.chips = [];
-      if ( materials_obj.materials.length == 0 ) {
-        this.api.getWastes(materials_obj.wastes).subscribe((wastes) => {
-          this.chips = wastes;
-        });
-      }
-      else {
-        materials_obj.materials.forEach((i) => {
-          this.chips.push(this.api.materials[this.session.country][i]);
-        });
+      if ( materials_obj.materials != undefined ) {
+        if ( materials_obj.materials.length == 0 ) {
+          this.api.getWastes(materials_obj.wastes).subscribe((wastes) => {
+            this.chips = wastes;
+          });
+        }
+        else {
+          materials_obj.materials.forEach((i) => {
+            this.chips.push(this.api.materials[this.session.country][i]);
+          });
+        }
       }
     }
   }

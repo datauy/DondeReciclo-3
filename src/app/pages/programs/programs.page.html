@@ -8,7 +8,7 @@
     <div class="tag" *ngFor="let tag of tags" >
       <h3 [innerHTML]="tag.name"></h3>
       <ion-button *ngFor="let prog of tag.programs" [routerLink]="[ '/programas', prog.id ]">
-        <img class="full" *ngIf="prog.icon != ''" src="{{prog.icon}}" alt="imagen de programa"/>
+        <img class="full" *ngIf="prog.icon_url != ''" src="{{prog.icon_url}}" alt="imagen de programa"/>
       </ion-button>
     </div>
   </div>
@@ -36,7 +36,7 @@
             <div class="slide-body" *ngFor="let location of slide.locations_arr">
               <span class="location-tag" [innerHTML]="location"></span>
             </div>
-            <ion-button class="contenedores" [routerLink]="[ '/subprograma', slide.sub_programs.join(',') ]">Ver contenedores</ion-button>
+            <ion-button class="contenedores" *ngIf="slide.sub_programs != undefined" [routerLink]="[ '/subprograma', slide.sub_programs.join(',') ]">Ver contenedores</ion-button>
           </div>
           <div class="slide-supporters section">
             <div class="slide-title">Apoyan</div>

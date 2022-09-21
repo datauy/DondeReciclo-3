@@ -289,10 +289,11 @@
       overflow: visible !important;
       padding: 2px 14px;
     }
-    .subprogram-list {
-      .tags-wrapper {
-        ion-button {
-          font-size: 11px;
+    .tags-wrapper {
+      ion-button {
+        font-size: 13px;
+        ion-icon {
+          margin-right: 5px;
         }
       }
     }
