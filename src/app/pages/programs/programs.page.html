@@ -36,6 +36,7 @@
             <div class="slide-body" *ngFor="let location of slide.locations_arr">
               <span class="location-tag" [innerHTML]="location"></span>
             </div>
+            <ion-button class="contenedores" [routerLink]="[ '/subprograma', slide.sub_programs.join(',') ]">Ver contenedores</ion-button>
           </div>
           <div class="slide-supporters section">
             <div class="slide-title">Apoyan</div>
@@ -46,6 +47,7 @@
           <div class="receives section">
             <div class="slide-title">Recibe</div>
             <div class="slide-body" [innerHTML]="slide.receives"></div>
+            <app-materials-chips [materials_obj]="slide"></app-materials-chips>
           </div>
           <div class="receives-no section">
             <div class="slide-title">No recibe</div>

@@ -14,7 +14,7 @@ import { SessionService } from 'src/app/services/session.service';
 export class ProgramsPage implements OnInit {
 
   @ViewChild('programSlider', {static: false}) slider: IonSlides;
-  pid: integer;
+  pid: number;
   programs: Program[];
   tags: {name:string, programs:Program[]};
   slideOpts = {
@@ -36,8 +36,7 @@ export class ProgramsPage implements OnInit {
     //Reverse order if program has to be loaded
     if ( this.pid != undefined ) {
       this.api.loadPrograms().subscribe( (programs: Program[]) =>  {
-        console.log("PROGRAMS", programs);
-        this.programs = programs;
+        this.format_programs(programs);
         this.showProgram();
         this.api.loadTagsPrograms().subscribe( ( tags: {name:string, programs: Program[]} ) =>  {
           this.tags = tags;
@@ -52,6 +51,15 @@ export class ProgramsPage implements OnInit {
         });
       });
     }
+  }
+  //
+  format_programs(programs: Program[]) {
+    programs.forEach(program => {
+      program.materials = program.materials_arr;
+      program.sub_programs = program.sub_programs_arr;
+      program.wastes = program.wastes_arr;
+    });
+    this.programs = programs;
   }
   //
   nextSlide() {

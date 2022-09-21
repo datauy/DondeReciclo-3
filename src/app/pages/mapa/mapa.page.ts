@@ -579,7 +579,7 @@ export class MapaPage implements OnInit {
             this.activateSearch(this.autoSearchItem);
           }
           else {
-            if (load) {
+            if (load && this.loadSubContainers == undefined && this.loadContainers == undefined ) {
               this.api.getNearbyContainers(2, [this.map.userPosition[0], this.map.userPosition[1]])
               .subscribe((containers) => {
                 this.map.loadMarkers(containers, true);
@@ -597,17 +597,6 @@ export class MapaPage implements OnInit {
     container.program_icon = this.api.programs[container.program_id].icon ? this.api.programs[container.program_id].icon : '/assets/custom-icons/dr-generic.svg';
     container.program = this.api.programs[container.program_id].name;
     this.container = container;
-    if ( container.materials.length == 0 ) {
-      this.api.getWastes(container.wastes).subscribe((wastes) => {
-        this.container.receives = wastes;
-      });
-    }
-    else {
-      this.container.receives = [];
-      container.materials.forEach((i) => {
-        this.container.receives.push(this.api.materials[this.session.country][i]);
-      });
-    }
     //Horario
     let days = [];
     if ( Object.keys(container.schedules).length ) {
@@ -636,7 +625,7 @@ export class MapaPage implements OnInit {
         }
       }
     }
-    container.schedules = days;
+    this.container.schedules = days;
   }
   //
   formatSubProgram(subprograms) {

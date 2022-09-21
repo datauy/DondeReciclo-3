@@ -45,15 +45,7 @@
               <span *ngSwitchDefault>Recolección,</span>
               <span class="distance"> {{subp.zone.distance}} metros </span>
             </div>
-            <div class="tags-wrapper">
-              <ion-button *ngFor="let mat of subp.receives_mat;"
-              [ngClass]="mat.class"
-              [color]="mat.class">
-                <img class="left" *ngIf="mat.icon != ''" src="{{mat.icon}}" alt="imagen de residuo">
-                <ion-icon *ngIf="mat.icon == ''" class="ion-float-left" name="dr-{{mat.class}}"></ion-icon>
-                <ion-label [innerHTML]="mat.name"></ion-label>
-              </ion-button>
-            </div>
+            <app-materials-chips [materials_obj]="subp"></app-materials-chips>
           </div>
         </ion-item>
       </div>
@@ -120,15 +112,7 @@
               <h5>Recibe:</h5>
             </div>
             <p *ngFor="let receive of subprogram.receives" [innerHtml]="receive"></p>
-            <div class="tags-wrapper">
-              <ion-button *ngFor="let mat of subprogram.receives_mat;"
-              [ngClass]="mat.class"
-              [color]="mat.class">
-                <img class="left" *ngIf="mat.icon != ''" src="{{mat.icon}}" alt="imagen de residuo">
-                <ion-icon *ngIf="mat.icon == ''" class="ion-float-left" name="dr-{{mat.class}}"></ion-icon>
-                <ion-label [innerHTML]="mat.name"></ion-label>
-              </ion-button>
-            </div>
+            <app-materials-chips [materials_obj]="subprogram"></app-materials-chips>
           </div>
         </ion-item>
         <ion-item lines="none" *ngIf="subprogram.zone.information">
@@ -160,7 +144,7 @@
       <div class="cupertino-outofbox-image">
         <img src="{{container.type_icon}}">
       </div>
-      <ion-item class="header" lines="full">
+      <ion-item class="header" lines="full" [routerLink]="'/programas/'+container.program_id">
         <ion-avatar slot="start">
           <img src="{{container.program_icon}}">
         </ion-avatar>
@@ -229,7 +213,7 @@
             <p>{{container.information}}</p>
           </div>
         </ion-item>
-        <div class="items-wrapper" *ngIf="container.receives != undefined && container.receives.length > 0">
+        <div class="items-wrapper">
           <ion-item lines="none">
             <div>
               <div class="inline">
@@ -238,16 +222,7 @@
                 <h5>Recibe:</h5>
               </div>
               <p [innerHTML]="container.receives_text"></p>
-              <div class="tags-wrapper">
-                <ion-button *ngFor="let mat of container.receives;"
-                  [ngClass]="mat.class"
-                  [color]="mat.class">
-                  <img class="left" *ngIf="mat.icon != ''" src="{{mat.icon}}" alt="imagen de residuo">
-                  <ion-icon *ngIf="mat.icon == ''" class="ion-float-left"
-                  name="dr-{{mat.class}}"></ion-icon>
-                  <ion-label [innerHTML]="mat.name"></ion-label>
-                </ion-button>
-              </div>
+              <app-materials-chips [materials_obj]="container"></app-materials-chips>
             </div>
           </ion-item>
         </div>

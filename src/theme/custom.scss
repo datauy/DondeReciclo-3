@@ -149,6 +149,10 @@
     border-radius: 24px;
     z-index: 11;
     box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2);
+    ion-icon {
+      color: var(--pale-olive-green);
+      height: 24px
+    }
   }
   .sc-ion-buttons-ios-s ion-button {
     height: 48px;
@@ -284,6 +288,13 @@
     .pane {
       overflow: visible !important;
       padding: 2px 14px;
+    }
+    .subprogram-list {
+      .tags-wrapper {
+        ion-button {
+          font-size: 11px;
+        }
+      }
     }
   }
   .cupertino-pane-wrapper{

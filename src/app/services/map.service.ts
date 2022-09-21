@@ -197,11 +197,11 @@ export class MapService {
     this.loadMap();
     //Prevent marker load over saturation level
     this.containers = markers;
-    if ( markers.length > environment.pinSaturation && !this.eagerLoad ) {
+    /*if ( markers.length > environment.pinSaturation && !this.eagerLoad ) {
       this.saturationWarn = true;
       this.mapChanges();
       return;
-    }
+    }*/
     this.saturationWarn = false;
     let mapBounds = [];
     //remove all markers and reload
@@ -236,6 +236,11 @@ export class MapService {
         center_markers = center_markers - 1;
       }
       markersLayer.push(newMarker);
+      if ( i > environment.pinSaturation ) {
+        this.saturationWarn = true;
+        this.mapChanges(true);
+        break;
+      }
     }
     this.markers = L.layerGroup(markersLayer).addTo(this.map);
     if ( mapBounds.length > 0 ) {
@@ -346,9 +351,9 @@ export class MapService {
     return this._userPos.asObservable();
   }
   //MAP behavior
-  mapChanges(){
+  mapChanges(skip = false){
     //Si no es una animación auto);
-    if ( !this.animating && this.animating != undefined ) {
+    if ( (!this.animating && this.animating != undefined ) || skip ) {
       this._mapChangeSub.next(true);
     }
   }
