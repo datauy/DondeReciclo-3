@@ -14,23 +14,23 @@ export class WalkthroughComponent implements OnInit {
   step = 0;
   steps = [
     {
-      'title': 'Buscá y filtrá por acción o material',
-      'note': 'Podés encontrar muchos residuos y materiales que ya tienen su deposición en tu zona! Buscá tu dirección o localizate en el mapa.',
+      'title': 'Búsqueda y filtro',
+      'note': 'Desde aquí se pueden buscar materiales, residuos o direcciones para ver los puntos en el mapa.',
       'layout': "search"
     },
     {
-      'title': 'Conocé los servicios disponibles',
-      'note': 'Al moverte en el mapa, podrás ver los servicios activos en la zona con la información correspondiente.',
+      'title': 'Servicios disponibles',
+      'note': 'También mapeamos servicios de recolección o entrega por zonas. Aquí se ven los disponibles en tu ubicación.',
       'layout': "services"
     },
     {
-      'title': 'Encontrá puntos dónde reciclar',
-      'note': 'Al moverte en el mapa, podrás ver los servicios activos en la zona con la información correspondiente.',
+      'title': 'Encontrar puntos y zonas en el mapa',
+      'note': 'Haciendo click en un punto se accede a la información completa. También es posible ver las zonas de servicio con el botón a la izquierda.',
       'layout': "middle"
     },
     {
-      'title': 'Muchas opciones más!',
-      'note': 'Podés encontrar muchos residuos y materiales que ya tienen su deposición en tu zona! Buscá tu dirección o localizate en el mapa.',
+      'title': '¡Mucha más información!',
+      'note': 'Consejos de reciclaje, fichas de materiales y más desde el menú.',
       'layout': "menu"
     },
   ];

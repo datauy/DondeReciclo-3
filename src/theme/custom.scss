@@ -693,7 +693,13 @@ ion-app {
       }
     }
   }
-
+  .split-pane-visible .step-wrapper.menu {
+    left: 0;
+    .step-inner .step-item::before {
+      top: 50%;
+      left: -10px;
+    }
+  }
   &.contacto{}
   &.sobre-el-proyecto{}
 }

@@ -16,25 +16,25 @@
     &.search {
       top: 120px;
       width: 100%;
-      &::before {
-        top: 3px;
+      .step-item::before {
+        top: -10px;;
         left: calc(50% - 10px);
       }
     }
     &.services {
       bottom: 160px;
       width: 100%;
-      &::before {
+      .step-item::before {
         left: calc(50% - 10px);
-        bottom: 3px;
+        bottom: -10px;
       }
     }
     &.middle {
       top: 50%;
       width: 60%;
       right: 0;
-      &::before {
-        left: 3px;
+      .step-item::before {
+        left: -10px;
         bottom: calc(50% - 10px);
       }
     }
@@ -42,67 +42,72 @@
       top: 44px;
       right: 0;
       width: 60%;
-      &::before {
-        top: 5px;
-        right: 25px;
+      .step-item::before {
+        top: -10px;
+        right: 15px;
       }
     }
-    &::before {
-      content: "";
-      width: 20px;
-      height: 20px;
-      background: var(--orange-yellow);
-      display: block;
-      position: absolute;
-      rotate: 45deg;
-    }
-  }
-  .step-item {
-    background: var(--orange-yellow);
-    background-clip: border-box;
-    text-align: right;
-    padding: 16px 23px;
-    ion-item {
-      --padding-start: 0;
-      --padding-end: 0;
-      --color: var(--vidrio);
-      --background: transparent;
-      .item-text {
-        position: relative;
-        word-wrap: break-word;
-        width: calc(100% - 20px);
-        ion-note,
-        ion-label {
-          white-space: normal;
-          position: relative;
-          --color: var(--ion-color-contrast);
+    .step-inner {
+      max-width: 560px;
+      position: relative;
+      .step-item {
+        background: var(--orange-yellow);
+        background-clip: border-box;
+        text-align: right;
+        padding: 16px 23px;
+        width: 100%;
+        ion-item {
+          --padding-start: 0;
+          --padding-end: 0;
+          --color: var(--vidrio);
+          --background: transparent;
+          .item-text {
+            position: relative;
+            word-wrap: break-word;
+            width: calc(100% - 20px);
+            ion-note,
+            ion-label {
+              white-space: normal;
+              position: relative;
+              --color: var(--ion-color-contrast);
+            }
+            ion-label {
+              font-size: 16px;
+              font-weight: 700;
+              line-height: 19px;
+              margin-bottom: 6px;
+            }
+            ion-note {
+              font-size: 13px;
+              line-height: 16px;
+            }
+          }
         }
-        ion-label {
-          font-size: 16px;
-          font-weight: 700;
-          line-height: 19px;
-          margin-bottom: 6px;
-        }
-        ion-note {
+        ion-button{
           font-size: 13px;
-          line-height: 16px;
+          --background: none;
+          &.close {
+            position: absolute;
+            right: 0;
+            height: inherit;
+            --padding-start: 0;
+            --padding-end: 0;
+            top: 0;
+          }
+          ion-icon {
+            margin-left: 6px;
+            color: var(--ion-color-contrast);
+          }
         }
-      }
-    }
-    ion-button{
-      font-size: 13px;
-      --background: none;
-      &.close {
-        position: absolute;
-        right: 0;
-        height: inherit;
-        --padding-start: 0;
-        --padding-end: 0;
-        top: 0;
-      }
-      ion-icon {
-        margin-left: 6px;
-        color: var(--ion-color-contrast);
+        &::before {
+          content: "";
+          width: 20px;
+          height: 20px;
+          background: var(--orange-yellow);
+          display: block;
+          position: absolute;
+          rotate: 45deg;
+        }
       }
     }
   }
