@@ -11,6 +11,7 @@ export class WalkthroughComponent implements OnInit {
   //@Input('step') step: number;
   //@Input('layout') layout: string;
   delay_notification = false;
+  step = 0;
   steps = [
     {
       'title': 'Buscá y filtrá por acción o material',
@@ -39,18 +40,13 @@ export class WalkthroughComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log("WALK?", this.session.showSlider);
-    if ( this.session.walkStep == undefined ) {
-      this.step = 0;
-      if ( this.notification.showMessage == true ) {
-        this.delay_notification = true;
-        this.notification.showMessage = false;
-      }
+    if ( this.notification.showMessage == true ) {
+      this.delay_notification = true;
+      this.notification.showMessage = false;
     }
   }
   //
   changeStep() {
-    console.log("CHANGE STEP");
     if ( this.notification.showMessage == true ) {
       this.delay_notification = true;
       this.notification.showMessage = false;
