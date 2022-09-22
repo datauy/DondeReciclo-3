@@ -695,8 +695,9 @@ ion-app {
   }
   .split-pane-visible .step-wrapper.menu {
     left: 0;
+    justify-content: left;
     .step-inner .step-item::before {
-      top: 50%;
+      top: 50% !important;
       left: -10px;
     }
   }
