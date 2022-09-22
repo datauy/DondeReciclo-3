@@ -17,6 +17,7 @@ import { AccordionComponent } from './accordion/accordion.component';
 import { NotificationComponent } from './notification/notification.component';
 import { ImageSliderComponent } from './image-slider/image-slider.component';
 import { MaterialsChipsComponent } from './materials-chips/materials-chips.component';
+import { WalkthroughComponent } from './walkthrough/walkthrough.component';
 //import { TestDirective } from './test.directive';
 
 @NgModule({
@@ -41,7 +42,8 @@ import { MaterialsChipsComponent } from './materials-chips/materials-chips.compo
     AccordionComponent,
     NotificationComponent,
     ImageSliderComponent,
-    MaterialsChipsComponent
+    MaterialsChipsComponent,
+    WalkthroughComponent
   ],
   exports: [
     SidemenuComponent,
@@ -50,6 +52,7 @@ import { MaterialsChipsComponent } from './materials-chips/materials-chips.compo
     AccordionComponent,
     ImageSliderComponent,
     MaterialsChipsComponent,
+    WalkthroughComponent
     //TestDirective
     // SimpleServiceComponent
   ],
