@@ -56,6 +56,15 @@
       border-bottom: 1px solid black;
     }
   }
+  .ion-grid-inv {
+
+    ion-col {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+    }
+  }
   .recyclers a {
     color: #034077;
   }

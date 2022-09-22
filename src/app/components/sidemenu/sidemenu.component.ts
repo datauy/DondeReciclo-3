@@ -31,7 +31,7 @@ export class SidemenuComponent implements OnInit {
     },
     {
       title: 'Auspiciantes',
-      desc: 'Marcas que hacen posible esta app',
+      desc: 'Empresas que hacen posible esta app',
       url: 'empresas',
       icon: 'dr-empresas'
     }
