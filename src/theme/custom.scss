@@ -19,11 +19,11 @@
   // --ion-item-color	Color of the components in the Item
   // --ion-placeholder-color	Color of the placeholder in Inputs
   // Size and spacing variables
-  --dr-header-height-map: 122px;
-  --dr-header-height-full: 88px;
-  --dr-header-height-short: 60px;
-  --dr-margin: 12px;
-  --dr-searchbox-top: calc(var(--dr-header-height-map) - 32px);
+  --dr-header-height-map: 96px;
+  --dr-header-height-full: 80px;
+  --dr-header-height-mobile: 80px;
+  --dr-margin: -32px;
+  --dr-searchbox-top: calc(var(--dr-header-height-map) + var(--dr-margin));
   // Font
   --dr-font-size: 20px;
   --padding-start: 0;
@@ -41,7 +41,7 @@
 
   ion-modal {
     --max-width: 300px;
-    --max-height: 230px;
+    --max-height: 440px;
     --border-radius: 16px;
     --border-style: solid 1px #979797;
   }
@@ -149,6 +149,10 @@
     border-radius: 24px;
     z-index: 11;
     box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2);
+    ion-icon {
+      color: var(--pale-olive-green);
+      height: 24px
+    }
   }
   .sc-ion-buttons-ios-s ion-button {
     height: 48px;
@@ -280,6 +284,35 @@
     display: none;
   }
   /******** MAP PAGE **************/
+  .cupertino-pane {
+    .pane {
+      overflow: visible !important;
+      padding: 2px 14px;
+    }
+    .tags-wrapper {
+      ion-button {
+        font-size: 13px;
+        ion-icon {
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+  .cupertino-pane-wrapper{
+    z-index: 500;
+    .pane {
+      max-width: none;
+      padding-top: 35px;
+    }
+    .draggable {
+      display: flex;
+      align-items: flex-end;
+    }
+    .move {
+      width: 50px;
+      height: 4px;
+    }
+  }
   .cupertinoOpen {
     .leaflet-control-container .leaflet-top {
       top: 100px;
@@ -604,17 +637,13 @@ ion-icon {
 .header-full{
   height: var(--dr-header-height-full);
 }
-.header-short{
-  height: var(--dr-header-height-short);
+.header-mobile{
+  height: var(--dr-header-height-mobile);
 }
 .header-hide{
   height: 0;
 }
-
 ion-app {
-  #search-app-content{
-    @extend .hide;
-  }
   #header-main ion-toolbar {
     // height: auto;
   }
@@ -664,7 +693,14 @@ ion-app {
       }
     }
   }
-
+  .split-pane-visible .step-wrapper.menu {
+    left: 0;
+    justify-content: left;
+    .step-inner .step-item::before {
+      top: 50% !important;
+      left: -10px;
+    }
+  }
   &.contacto{}
   &.sobre-el-proyecto{}
 }
@@ -706,22 +742,20 @@ ion-img.logo {
 
   ion-auto-complete {
     ul {
-      position: absolute;
-      height: calc(100vh - var(--dr-header-height-map));
+      position: relative;
+      height: calc(100vh - 192px);
       width: 100%;
       left: 0;
       right: 0;
       top: 0;
       bottom: 0;
       margin: 0;
-      padding: calc(var(--dr-searchbox-top) + 47px) 0 0;
+      padding: calc(var(--dr-header-height-map) + 47px) 0 0;
       overflow: auto !important;
       display: block;
       background: none;
       box-shadow: none;
       z-index: 1002;
-      padding: --dr-margin;
-
       li {
         background: none;
         border: none;
@@ -765,16 +799,14 @@ ion-img.logo {
     --clear-button-color: var(--pale-olive-green);
     .searchbar-input.sc-ion-searchbar-md {
       // position: absolute;
-      padding: 16px 36px 16px 16px;
+      padding: 16px 36px 16px 58px;
       border-radius: 36px;
       box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2);
     }
 
     .searchbar-search-icon.sc-ion-searchbar-md {
       top: 8px;
-      left: auto;
-      right: 11px;
-      background-color: var(--pale-olive-green);
+      color: var(--dark-sea-green);
       width: 20px;
       height: 20px;
       border-radius: 40px;
@@ -804,7 +836,7 @@ ion-img.logo {
 /*************************/
 .cupertinoOpen {
   #map {
-    height: 40vh !important;
+    height: 32vh !important;
   }
   .header-wrapper,
   .map-zones {
@@ -812,6 +844,9 @@ ion-img.logo {
   }
   ion-content .map-locate {
     top: 212px;
+  }
+  app-search {
+    display: none;
   }
 }
 #map{
@@ -827,18 +862,5 @@ ion-img.logo {
     // -webkit-filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .5));
     // filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .5));
     /* Similar syntax to box-shadow */
-  }
-}
-.cupertino-pane-wrapper {
-  //position: relative;
-  z-index: 500;
-  .pane {
-    max-width: none;
-  }
-}
-.cupertino-pane {
-  .pane {
-    overflow: visible !important;
-    padding: 2px 14px;
   }
 }

@@ -126,7 +126,7 @@ export class MapService {
   map: L.Map;
   route: any;
   userPosition: [number, number];
-  userMarker: L.Marker;
+  private userMarker: L.Marker;
   currentContainer: Container;
   containers: Container[];
   currentBounds: [number, number][];
@@ -139,6 +139,7 @@ export class MapService {
   private _pinClick = new BehaviorSubject<boolean>(false);
   private _zoneClick = new BehaviorSubject<any>(0);
   private _mapChangeSub = new BehaviorSubject<boolean>(false);
+  private _userPos = new BehaviorSubject<[number, number]>(null);
   public _autoSearch = new BehaviorSubject<any>(null);
   public zoom:number = 15;
   public center:L.LatLng;
@@ -167,6 +168,7 @@ export class MapService {
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
       }).addTo(this.map);
+
       if ( this.userPosition ) {
         this.userMarker = L.marker(this.userPosition, {icon: iconUser} ).addTo(this.map);
       }
@@ -175,7 +177,8 @@ export class MapService {
         if (this.userMarker) { // check
           this.map.removeLayer(this.userMarker); // remove
         }
-        this.setUserPosition([e.latlng.lat, e.latlng.lng]);
+        //Do not propagate since click is handled
+        this.setUserPosition([e.latlng.lat, e.latlng.lng], false);
         this.userMarker = L.marker(this.userPosition, {icon: iconUser} ).addTo(this.map); // add the marker onclick
         if (this.route) {
           this.route.spliceWaypoints(0, 1, e.latlng);
@@ -191,13 +194,14 @@ export class MapService {
   }
 
   loadMarkers( markers: Container[], fly = true ){
+    this.loadMap();
     //Prevent marker load over saturation level
     this.containers = markers;
-    if ( markers.length > environment.pinSaturation && !this.eagerLoad ) {
+    /*if ( markers.length > environment.pinSaturation && !this.eagerLoad ) {
       this.saturationWarn = true;
       this.mapChanges();
       return;
-    }
+    }*/
     this.saturationWarn = false;
     let mapBounds = [];
     //remove all markers and reload
@@ -232,6 +236,11 @@ export class MapService {
         center_markers = center_markers - 1;
       }
       markersLayer.push(newMarker);
+      if ( i > environment.pinSaturation ) {
+        this.saturationWarn = true;
+        this.mapChanges(true);
+        break;
+      }
     }
     this.markers = L.layerGroup(markersLayer).addTo(this.map);
     if ( mapBounds.length > 0 ) {
@@ -338,10 +347,13 @@ export class MapService {
     this.center = this.map.getCenter();
     this.mapChanges();
   }
+  get userPositionChanged() {
+    return this._userPos.asObservable();
+  }
   //MAP behavior
-  mapChanges(){
+  mapChanges(skip = false){
     //Si no es una animación auto);
-    if ( !this.animating && this.animating != undefined ) {
+    if ( (!this.animating && this.animating != undefined ) || skip ) {
       this._mapChangeSub.next(true);
     }
   }
@@ -419,16 +431,9 @@ export class MapService {
     this.subZone = L.geoJSON( layer );
     this.subZone.addTo(this.map);
   }
-  //Country selection
-  selectCountry(country: string) {
-    this.session.setCountry(country);
-    this.removeUserPosition();
-    this.center = L.latLng(environment[country].center);
-    this.reRoute();
-  }
 
   reRoute(){
-    if ( !this.router.routerState.snapshot.url.startsWith('/intro/mapa') || this.map == undefined ) {
+    if ( !this.router.routerState.snapshot.url.startsWith('/mapa') || this.map == undefined ) {
       this.router.navigate([this.session.homeUrl]);
     }
     else {
@@ -448,9 +453,12 @@ export class MapService {
       }
     );
   }
-  setUserPosition(coords:[number, number]) {
-    this.userPosition = [ coords[0], coords[1] ];
+  setUserPosition(coords:[number, number], propagate = true) {
+    this.userPosition = coords;
     this.storage.set("userPosition", this.userPosition);
+    if ( propagate ) {
+      this._userPos.next(this.userPosition);
+    }
   }
   removeUserPosition() {
     delete this.userPosition;

@@ -1,15 +1,27 @@
 <app-header display="full"></app-header>
 
 <!-- Uruguay -->
-
-<ion-content *ngIf="session.country == 'Uruguay'">
-  <div class="section-header">
-    <h1>Programas</h1>
-    <h2 class="sub-light">Información sobre los distintos programas disponibles de recepción de residuos reciclables.</h2>
+<ion-content class="tags" *ngIf="session.country == 'Uruguay' && showCategories == true">
+  <h1>Programas</h1>
+  <h2 class="sub-light">Información sobre los distintos programas disponibles de recepción de residuos reciclables.</h2>
+  <div class="categories-wraper">
+    <div class="tag" *ngFor="let tag of tags" >
+      <h3 [innerHTML]="tag.name"></h3>
+      <div class="tag-program-wrapper">
+        <div class="tag-program" *ngFor="let prog of tag.programs">
+          <ion-button [routerLink]="[ '/programas', prog.id ]">
+            <img class="full" *ngIf="prog.icon_url != ''" src="{{prog.icon_url}}" alt="imagen de programa"/>
+          </ion-button>
+          <h6 [innerHTML]="prog.name"></h6>
+        </div>
+      </div>
+    </div>
   </div>
+</ion-content>
+<ion-content class="programs" *ngIf="session.country == 'Uruguay'" [hidden]="showCategories">
   <ion-button class="swiper-prev" (click)="prevSlide()"></ion-button>
   <ion-button class="swiper-next" (click)="nextSlide()"></ion-button>
-  <ion-slides #programSlider pager="true" [options]="slideOpts">
+  <ion-slides #programSlider [options]="slideOpts">
     <ion-slide *ngFor="let slide of programs">
       <div class="slide-container">
         <div class="slide-head">
@@ -29,6 +41,7 @@
             <div class="slide-body" *ngFor="let location of slide.locations_arr">
               <span class="location-tag" [innerHTML]="location"></span>
             </div>
+            <ion-button class="contenedores" *ngIf="slide.sub_programs != undefined" [routerLink]="[ '/subprograma', slide.sub_programs.join(',') ]">Ver contenedores</ion-button>
           </div>
           <div class="slide-supporters section">
             <div class="slide-title">Apoyan</div>
@@ -39,6 +52,7 @@
           <div class="receives section">
             <div class="slide-title">Recibe</div>
             <div class="slide-body" [innerHTML]="slide.receives"></div>
+            <app-materials-chips [materials_obj]="slide"></app-materials-chips>
           </div>
           <div class="receives-no section">
             <div class="slide-title">No recibe</div>

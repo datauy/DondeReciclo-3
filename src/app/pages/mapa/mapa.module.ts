@@ -6,7 +6,12 @@ import { IonicModule } from '@ionic/angular';
 import { HttpClientModule } from '@angular/common/http';
 import { LeafletModule } from "@asymmetrik/ngx-leaflet";
 
+import { navPage } from 'src/app/components/animations';
+import { Keyboard } from '@ionic-native/keyboard/ngx';
+import { SliderComponent } from 'src/app/components/slider/slider.component';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { SearchComponent } from 'src/app/components/search/search.component';
+import { AutoCompleteModule } from 'ionic4-auto-complete';
 
 import { MapaPage } from './mapa.page';
 
@@ -19,21 +24,17 @@ import { MapaPage } from './mapa.page';
     MapaPageRoutingModule,
     LeafletModule.forRoot(),
     ComponentsModule,
-    // commented out by Bruno, this is redundant, right?
-    // RouterModule.forChild([
-    //   {
-    //     path: '',
-    //     component: MapaPage
-    //   }
-    // ]),
-    // ComponentsModule,
-    // SimpleServiceModule,
+    AutoCompleteModule,
+    //IonicModule.forRoot({
+    //  navAnimation: navPage,
+    //}),
   ],
-  // exports: [
-  //   SearchComponent,
-  // ],
-  declarations: [MapaPage],
-
+  declarations: [MapaPage, SliderComponent, SearchComponent],
+  exports: [ SearchComponent ],
+  entryComponents: [ SearchComponent ],
+  providers: [
+    Keyboard
+  ],
   // necesario para que funcionara
   // entryComponents: [SearchComponent],
 

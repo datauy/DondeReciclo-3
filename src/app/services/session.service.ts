@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Event, Router, NavigationEnd } from '@angular/router';
 import { Storage } from '@ionic/storage';
-import { SearchMessage } from 'src/app/models/basic_models.model';
+import { SearchItem } from 'src/app/models/basic_models.model';
 import { News } from "src/app/models/news.model";
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -23,16 +24,19 @@ export class SessionService {
   //Country
   country: string;
   //Search items
-  searchItem: SearchMessage;
+  searchItem: SearchItem;
   showSearchItem: boolean = true;
+  searchDimensions: Array<number> = [];
   //Initial Slider
   showSlider: boolean = true;
   reloadMap: boolean = false;
   news: {News};
 
-  homeUrl = '/intro/mapa';
+  homeUrl = '/mapa';
   lastUrl = '';
   is_mobile = false;
+
+  _country_change = new BehaviorSubject<string>('');
 
   constructor(
     private router: Router,
@@ -51,16 +55,20 @@ export class SessionService {
   }
   //
   async isShowSlider() {
-    return this.storage.get('showSlider').then( (toShow) => {
+    return this.storage.get('showIntro').then( (toShow) => {
       if ( toShow == null ) {
         return true;
       }
       return toShow;
     });
   }
+  //Observable as function
+  get countryChanged() {
+    return this._country_change;
+  }
   //
   watchSlider(toShow: boolean) {
-    this.storage.set('showSlider', toShow);
+    this.storage.set('showIntro', toShow);
     this.showSlider = toShow;
   }
   //
@@ -78,8 +86,9 @@ export class SessionService {
     return 1;
   }
   setCountry(country: string) {
-    this.storage.set('country', country);
     this.country = country;
+    this.storage.set('country', country);
+    this._country_change.next(country);
     this.clearCaches();
   }
   clearCaches() {
@@ -88,7 +97,7 @@ export class SessionService {
   async getCountry() {
     return this.storage.get('country').then( (country) => {
       if ( country != null ) {
-        this.country = country
+        this.setCountry(country);
       }
       return this.country;
     });

@@ -26,6 +26,8 @@ import { navPage } from './components/animations/';
 
 import { IonicStorageModule } from '@ionic/storage';
 import { FirebaseX } from "@ionic-native/firebase-x/ngx";
+
+import { MapaPageModule } from 'src/app/pages/mapa/mapa.module';
 /*
 export function initApp(backConfig: ApiService<any>) {
   console.log("Loading initial data");
@@ -45,7 +47,8 @@ export function initApp(backConfig: ApiService<any>) {
     AppRoutingModule,
     ComponentsModule,
     HttpClientModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    MapaPageModule
   ],
   providers: [
     StatusBar,

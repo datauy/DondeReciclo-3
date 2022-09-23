@@ -6,7 +6,16 @@ import { ProgramsPage } from './programs.page';
 const routes: Routes = [
   {
     path: '',
-    component: ProgramsPage
+    children: [
+      {
+        path: '',
+        component: ProgramsPage
+      },
+      {
+        path: ':programID',
+        component: ProgramsPage
+      }
+    ]
   }
 ];
 

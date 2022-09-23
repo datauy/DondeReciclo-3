@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="25px" height="25px" viewBox="0 0 25 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>dr-locate</title>
+    <g id="dr-locate" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M12.5,2.5 C6.9771525,2.5 2.5,6.9771525 2.5,12.5 C2.5,18.0228475 6.9771525,22.5 12.5,22.5 C18.0228475,22.5 22.5,18.0228475 22.5,12.5 C22.5,6.9771525 18.0228475,2.5 12.5,2.5 Z M12.5,5.5 C16.3659932,5.5 19.5,8.63400675 19.5,12.5 C19.5,16.3659932 16.3659932,19.5 12.5,19.5 C8.63400675,19.5 5.5,16.3659932 5.5,12.5 C5.5,8.63400675 8.63400675,5.5 12.5,5.5 Z" id="Oval" fill="#4A4A4A" fill-rule="nonzero"></path>
+        <polygon id="Path-5" fill="#4A4A4A" fill-rule="nonzero" points="25 11 25 14 17 14 17 11"></polygon>
+        <polygon id="Path-5-Copy" fill="#4A4A4A" fill-rule="nonzero" points="8 11 8 14 0 14 0 11"></polygon>
+        <polygon id="Path-5" fill="#4A4A4A" fill-rule="nonzero" transform="translate(12.500000, 21.000000) rotate(-270.000000) translate(-12.500000, -21.000000) " points="16.5 19.5 16.5 22.5 8.5 22.5 8.5 19.5"></polygon>
+        <polygon id="Path-5-Copy" fill="#4A4A4A" fill-rule="nonzero" transform="translate(12.500000, 4.000000) rotate(-270.000000) translate(-12.500000, -4.000000) " points="16.5 2.5 16.5 5.5 8.5 5.5 8.5 2.5"></polygon>
+    </g>
+</svg>

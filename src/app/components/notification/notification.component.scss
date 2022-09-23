@@ -4,7 +4,7 @@
   display: inline-grid;
   z-index: 1000;
   width: 100%;
-  bottom: 0;
+  bottom: 136px;
   ion-grid {
     padding: 12px;
     width: 100%;
@@ -14,7 +14,7 @@
     border-radius: 6px;
     --min-height: 55px;
     height: inherit;
-    background: var(--pale-olive-green);
+    background: var(--dark-sea-green);
     background-clip: border-box;
     text-align: center;
     &.warnings-error {

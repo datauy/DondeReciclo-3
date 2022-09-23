@@ -1,5 +1,12 @@
 import { Base } from './base.model';
 
+export class Dimension {
+  id: number;
+  name: string;
+  color: string;
+  information: string;
+  materials: number[];
+}
 export class Material extends Base {
     //id is inherited from Resource
     name: string;
@@ -81,13 +88,18 @@ export class Program extends Base {
   supporters_arr: Supporters[];
   locations_arr: string[];
   icon: string;
+  materials: number[];
+  wastes: number[];
+  sub_programs_arr: number[];
+  sub_programs: number[];
 }
 
-export interface SearchMessage {
+export interface SearchItem {
     id: number;
     type: string;
     name: string;
     class: string;
     deposition: string;
     icon: string;
+    ids: string;
 }

@@ -3,12 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { NotFoundPage } from './components/static-pages/notfound.page';
 import { PrivacyPolicyPage } from './components/static-pages/privacy_policy.page';
 import { RecyclersPage } from './components/static-pages/recyclers.page';
+import { ContactFormComponent } from 'src/app/components/contact-form/contact-form.component';
+import { AboutPage } from 'src/app/components/static-pages/about.page';
+
 
 const routes: Routes = [
-  { path: '', redirectTo: 'intro', pathMatch: 'full' },
+  //{ path: '', component: MapaPage, pathMatch: 'full' },
   {
-    path: 'intro',
-    loadChildren: () => import('./pages/tabsnav/tabsnav.module').then( m => m.TabsnavPageModule)
+    path: '',
+    loadChildren: () => import('./pages/mapa/mapa.module').then( m => m.MapaPageModule)
   },
   {
     path: 'empresas',
@@ -17,6 +20,10 @@ const routes: Routes = [
   {
     path: 'consejos',
     loadChildren: () => import('./pages/consejos/consejos.module').then( m => m.ConsejosPageModule)
+  },
+  {
+    path: 'fichas',
+    loadChildren: () => import('./pages/cards/cards.module').then( m => m.CardsPageModule)
   },
   {
     path: 'programas',
@@ -37,6 +44,14 @@ const routes: Routes = [
   {
     path: 'clasificadores',
     component: RecyclersPage
+  },
+  {
+    path: 'sobre-el-proyecto',
+    component: AboutPage
+  },
+  {
+    path: 'contacto',
+    component: ContactFormComponent
   },
   {
     path: '**',

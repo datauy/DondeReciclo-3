@@ -1,0 +1,20 @@
+<div [class]="'step-wrapper ' + steps[step].layout">
+  <div class="step-inner">
+    <div class="step-item">
+      <ion-item lines="none">
+        <div class="item-text">
+          <ion-label [innerHTML]="steps[step].title"></ion-label>
+          <ion-note slot="start" [innerHTML]="steps[step].note" *ngIf="steps[step].note"></ion-note>
+        </div>
+        <ion-button class="close" (click)="closeWalk()">
+          <ion-icon name="close-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-button (click)="changeStep()">
+        SIGUIENTE
+        <ion-icon name="arrow-forward"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+</div>
+<div class="overlay" (click)="changeStep()"></div>

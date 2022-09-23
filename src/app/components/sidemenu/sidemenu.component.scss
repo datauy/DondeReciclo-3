@@ -15,24 +15,23 @@
     --background: red !important;
   }
 
-    #desktop-logo{
-      // height: var(--dr-header-height-large);
-      width: 100%;
-      background: var(--dark-sea-green);
-      text-align: left;
-      z-index: 0;
-      ion-img{
-        display: inline-block;
-        height: 56px;
-        margin: 12px;
-      }
+  #desktop-logo{
+    // height: var(--dr-header-height-large);
+    width: 100%;
+    background: var(--dark-sea-green);
+    text-align: left;
+    z-index: 0;
+    ion-img{
+      display: inline-block;
+      height: 38px;
+      margin: 12px 0 12px 66px;
     }
-
+  }
   ion-split-pane{
       --border: none !important;
       ion-menu{
         @media (max-width: 991px) {
-          margin-top: var(--dr-header-height-full);
+          //margin-top: var(--dr-header-height-full);
           ion-header {
             height: 0;
             display: none !important;
@@ -73,6 +72,22 @@
       &.secondary-menu {
         --padding-top: 0;
         --padding-bottom: 0;
+      }
+      &.label {
+        --padding-top: 0;
+        --padding-bottom: 0;
+        height: 60px;
+        align-items: baseline;
+        ion-label {
+          color: #9cd060;
+          font-size: 15px;
+          font-weight: 600;
+          margin-bottom: 0;
+          align-self: end;
+        }
+      }
+      &.register ion-button {
+        margin-top: 0;
       }
       h5{
         color: white;

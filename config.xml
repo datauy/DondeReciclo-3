@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.datauy.dondereciclo.app" version="3.8.4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.datauy.dondereciclo.app" version="4.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>¿Dónde Reciclo?</name>
     <description>Información sobre dónde y cómo clasificar y reciclar.</description>
     <author email="contacto@data.org.uy" href="http://data.org.uy/">DATA Uruguay</author>
@@ -108,6 +108,8 @@
             <string>Usamos tu localización para poder mostrar los contendores y zonas más cercanas a tu ubicación.</string>
         </edit-config>
         <allow-navigation href="https://*youtube-nocookie.com/*" />
+        <allow-navigation href="https://cempre.org.uy/*" />
+        <allow-navigation href="https://instagram.com/dondereciclouy/*" />
         <config-file parent="NSCameraUsageDescription" platform="ios" target="*-Info.plist">
             <string>Usa tu cámara para tomar fotos del estado y ubicación de los contenedores.</string>
         </config-file>

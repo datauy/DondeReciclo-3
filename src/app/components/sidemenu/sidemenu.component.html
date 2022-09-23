@@ -7,30 +7,80 @@
     class="mainMenu ion-no-shadow"
     (ionWillOpen)="menuWillOpen()"
     (ionDidClose)="menuWillClose()">
-    <ion-header class="ion-no-border">
-      <ion-buttons id="desktop-logo">
-        <ion-img class="logo"
-          routerLink="/"
-          routerDirection="root"
-          src="assets/img/donde_reciclo.png"
-          alt="Logo ¿Dónde Reciclo?">
-        </ion-img>
-      </ion-buttons>
-    </ion-header>
+    <app-header display="mobile"></app-header>
     <ion-content class="menu-list">
       <ion-list>
+        <ion-item lines="none" class="label">
+          <ion-label>Reciclaje</ion-label>
+        </ion-item>
         <ion-item
-          *ngFor="let p of appPages"
+          *ngIf="session.country == 'Uruguay'"
           (click)="toggleMenu()"
           lines="none"
-          [routerLink]="p.url"
+          href="https://cempre.org.uy/category/informacion/fichas-tecnicas/"
+          target="_blank"
           routerLinkActive="active-item"
           detail-icon="none">
-          <ion-icon slot="start"
-            [name]="p.icon"></ion-icon>
+          <ion-icon slot="start" name="dr-fichas"></ion-icon>
           <div>
-            <h4>{{p.title}}</h4>
-            <p>{{p.desc}}</p>
+            <h4>Fichas sobre materiales</h4>
+            <p>Origen, flujo e información relevante.</p>
+          </div>
+          <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+        <ion-item
+          *ngIf="session.country == 'Uruguay'"
+          (click)="toggleMenu()"
+          lines="none"
+          href="https://cempre.org.uy/buenas-practicas/"
+          target="_blank"
+          routerLinkActive="active-item"
+          detail-icon="none">
+          <ion-icon slot="start" name="dr-consejos"></ion-icon>
+          <div>
+            <h4>Consejos</h4>
+            <p>¿Cómo clasificar?</p>
+          </div>
+          <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+        <ion-item
+          *ngIf="session.country != 'Uruguay'"
+          (click)="toggleMenu()"
+          lines="none"
+          routerLink="/fichas"
+          routerLinkActive="active-item"
+          detail-icon="none">
+          <ion-icon slot="start" name="dr-fichas"></ion-icon>
+          <div>
+            <h4>Fichas sobre materiales</h4>
+            <p>Origen, flujo e información relevante.</p>
+          </div>
+          <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+        <ion-item
+          *ngIf="session.country != 'Uruguay'"
+          (click)="toggleMenu()"
+          lines="none"
+          routerLink="/consejos"
+          routerLinkActive="active-item"
+          detail-icon="none">
+          <ion-icon slot="start" name="dr-consejos"></ion-icon>
+          <div>
+            <h4>Consejos</h4>
+            <p>¿Cómo clasificar?</p>
+          </div>
+          <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+        <ion-item
+          (click)="toggleMenu()"
+          lines="none"
+          routerLink="programas"
+          routerLinkActive="active-item"
+          detail-icon="none">
+          <ion-icon slot="start" name="dr-programas"></ion-icon>
+          <div>
+            <h4>Programas</h4>
+            <p>Ciclo de vida de los residuos</p>
           </div>
           <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
         </ion-item>
@@ -44,9 +94,30 @@
           <ion-icon slot="start" name="user-helmet-safety"></ion-icon>
           <div>
             <h4>Clasificadores</h4>
-            <p>Información para formalizacitón</p>
+            <p>Información para formalización</p>
           </div>
           <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+        <ion-item lines="none" class="label">
+          <ion-label>Donde Reciclo</ion-label>
+        </ion-item>
+        <ion-item
+          *ngFor="let p of appDR"
+          (click)="toggleMenu()"
+          lines="none"
+          [routerLink]="p.url"
+          routerLinkActive="active-item"
+          detail-icon="none">
+          <ion-icon slot="start"
+            [name]="p.icon"></ion-icon>
+          <div>
+            <h4>{{p.title}}</h4>
+            <p>{{p.desc}}</p>
+          </div>
+          <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+        </ion-item>
+        <ion-item lines="none" class="label">
+          <ion-label>Mi cuenta</ion-label>
         </ion-item>
         <ion-item lines="none"
           (click)="toggleMenu()"
@@ -56,7 +127,7 @@
           routerDirection="forward"
           routerLinkActive="active-item"
           *ngIf="auth.isLogged">
-          <ion-icon slot="start" name="dr-user"></ion-icon>
+          <ion-icon slot="start" name="dr-session"></ion-icon>
           <div>
             <h4>Mi Perfil</h4>
           </div>
@@ -69,7 +140,7 @@
           routerDirection="forward"
           routerLinkActive="active-item"
           *ngIf="!auth.isLogged">
-          <ion-icon slot="start" name="log-in-outline"></ion-icon>
+          <ion-icon slot="start" name="dr-session"></ion-icon>
           <div>
             <h4>Iniciar Sesión</h4>
           </div>
@@ -90,29 +161,32 @@
           <ion-icon slot="end"
             name="chevron-forward-outline"></ion-icon>
         </ion-item>
-        <ion-item
-          lines="none"
-          (click)="goToMap()"
-          detail-icon="none"
-          [ngClass]="map.isMapPage() ? 'inicio active-item' : 'inicio'">
-          <ion-icon slot="start"
-            name="dr-inicio"></ion-icon>
-          <div>
-            <h4>Volver al mapa</h4>
-          </div>
-          <ion-icon slot="end"
-            name="chevron-forward-outline"></ion-icon>
-        </ion-item>
         <ion-item class= "register"
           *ngIf="!auth.isLogged"
           lines="none">
           <ion-button (click)="toggleMenu()" routerLink="usuario/nuevo" size="large" type="submit" class="submit">Registrarme</ion-button>
         </ion-item>
+        <ion-item
+          lines="none"
+          routerLink=""
+          routerDirection="root"
+          [routerLinkActiveOptions]="{ exact: true }"
+          detail-icon="none"
+          routerLinkActive="active-item"
+          class="inicio"
+          (click)="toggleMenu()"
+          >
+          <div>
+            <h4>Volver al mapa</h4>
+          </div>
+          <ion-icon slot="end"
+          name="chevron-forward-outline"></ion-icon>
+        </ion-item>
         <ion-item lines="none" class="secondary-menu"
           (click)="introSlide()"
           detail-icon="none"
           routerDirection="forward"
-          routerLink="intro">
+          routerLink="/">
           <div>
             <h5>Repetir introducción</h5>
           </div>
@@ -124,78 +198,11 @@
           routerLink="privacidad"
           routerLinkActive="active-item">
           <div>
-            <h5>Políticas de Privacidad</h5>
+            <h5>Política de Privacidad</h5>
           </div>
         </ion-item>
       </ion-list>
     </ion-content>
-    <div class="menu-rounded-bottom">
-    </div>
-
-    <ion-footer class="menu-social-links">
-      <!-- <ul >
-        <li><ion-text slot="start">Seguinos en:</ion-text></li>
-      </ul> -->
-      <ion-toolbar>
-        <ion-buttons>
-          <span>Cambiar país:</span>
-          <ion-button (click)="selectCountry('Uruguay')">
-            <ion-icon
-              class="country-selector"
-              slot="icon-only"
-              name="dr-uy"
-              [ngClass]="session.country == 'Uruguay' ? 'active' : ''">
-            </ion-icon>
-          </ion-button>
-          <ion-button (click)="selectCountry('Colombia')">
-            <ion-icon
-              class="country-selector"
-              slot="icon-only"
-              name="dr-col"
-              [ngClass]="session.country == 'Colombia' ? 'active' : ''">
-            </ion-icon>
-          </ion-button>
-        </ion-buttons>
-        <ion-buttons *ngIf="session.country == 'Uruguay'">
-          <span>Seguinos en:</span>
-          <ion-button href="https://twitter.com/CempreUy" target=_blank fill="clear">
-            <ion-icon slot="icon-only"
-              name="dr-twitter"></ion-icon>
-          </ion-button>
-          <ion-button href="https://www.instagram.com/cempreuy/" target=_blank fill="clear">
-            <ion-icon slot="icon-only"
-              name="dr-instagram"></ion-icon>
-          </ion-button>
-          <ion-button href="https://www.facebook.com/compromisoempresarialparaelreciclaje" target=_blank fill="clear">
-            <ion-icon slot="icon-only"
-              name="dr-facebook"></ion-icon>
-          </ion-button>
-          <ion-button href="https://www.linkedin.com/company/cempreuruguay" target=_blank fill="clear">
-            <ion-icon slot="icon-only"
-              name="dr-linked-in"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-        <ion-buttons *ngIf="session.country == 'Colombia'">
-          <span>Seguinos en:</span>
-          <ion-button href="https://twitter.com/CEMPRE_COLOMBIA" target=_blank fill="clear">
-            <ion-icon slot="icon-only"
-              name="dr-twitter"></ion-icon>
-          </ion-button>
-          <ion-button href="https://www.instagram.com/cempre_colombia/" target=_blank fill="clear">
-            <ion-icon slot="icon-only"
-              name="dr-instagram"></ion-icon>
-          </ion-button>
-          <ion-button href="https://www.facebook.com/CEMPREColombia" target=_blank fill="clear">
-            <ion-icon slot="icon-only"
-              name="dr-facebook"></ion-icon>
-          </ion-button>
-          <ion-button href="https://www.linkedin.com/company/cempre-colombia/" target=_blank fill="clear">
-            <ion-icon slot="icon-only"
-              name="dr-linked-in"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-      </ion-toolbar>
-    </ion-footer>
   </ion-menu>
   <ion-router-outlet id="menu-content">
     <app-notification></app-notification>

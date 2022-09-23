@@ -1,19 +1,10 @@
 <app-header display="map"></app-header>
-
+<app-search class="dr-transition"></app-search>
+<app-walkthrough *ngIf="session.showSlider"></app-walkthrough>
 <ion-content no-bounce scroll-y="false" class="map-section">
   <ion-button class="back-button" *ngIf="session.cupertinoState == 'cupertinoOpen'" (click)="hidePane()">
     <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
   </ion-button>
-  <ion-row class="no-height ion-justify-content-center">
-    <ion-col size-md="10" size-xl="8" size-xs="12" padding="0" >
-      <ion-button
-      [innerHtml]="session.country == 'Colombia' ? '¿Quien recoge en esta zona?' : 'Ver servicios para esta zona'"
-      *ngIf="session.cupertinoState != 'cupertinoOpen'"
-      class="submit locations"
-      (click)="subprograms4location()">
-      </ion-button>
-    </ion-col>
-  </ion-row>
   <ion-button color="transparent" class="map-buttons map-locate" (click)="geolocate()">
     <ion-icon name="dr-locate"></ion-icon>
   </ion-button>
@@ -26,17 +17,22 @@
     style="height:100%; width: 100%;"
     center='Montevideo, Uruguay'>
   </div>
-
-  <div #infoPane class="cupertino-pane">
-    <div class="subprogram-list pane-container" *ngIf="list == 1">
+  <div class="services-pane cupertino-pane">
+    <div class="subprogram-list pane-container">
       <ion-item class="header" lines="full">
         <div class="title-wrapper">
-          <span size="small">Ubicado en mapa</span>
-          <h5>Servicios disponibles en tu ubicación</h5>
+          <span size="small">
+            Encontramos <span class="services-count" [innerHTML]="subprograms.length + ' servicios'"></span> en tu zona
+          </span>
+          <h5
+          (click)="toggleServices()"
+          [innerHTML]="subprograms.length ? 'Ver servicios para esta zona' : 'No hay datos para la zona'">
+            <ion-icon name="chevron-down"></ion-icon>
+          </h5>
         </div>
       </ion-item>
       <div class="scrollable-div" contain="none" overflow-y="scroll">
-        <ion-item *ngFor="let subp of subprograms; let i = index" class="header" lines="none" (click)="subprogramShow(i)">
+        <ion-item *ngFor="let subp of subprograms; let i = index" lines="none" (click)="subprogramShow(i)">
           <ion-avatar slot="start">
             <img src="{{subp.program_icon}}">
           </ion-avatar>
@@ -49,19 +45,13 @@
               <span *ngSwitchDefault>Recolección,</span>
               <span class="distance"> {{subp.zone.distance}} metros </span>
             </div>
-            <div class="tags-wrapper">
-              <ion-button *ngFor="let mat of subp.receives_mat;"
-              [ngClass]="mat.class"
-              [color]="mat.class">
-                <img class="left" *ngIf="mat.icon != ''" src="{{mat.icon}}" alt="imagen de residuo">
-                <ion-icon *ngIf="mat.icon == ''" class="ion-float-left" name="dr-{{mat.class}}"></ion-icon>
-                <ion-label [innerHTML]="mat.name"></ion-label>
-              </ion-button>
-            </div>
+            <app-materials-chips [materials_obj]="subp"></app-materials-chips>
           </div>
         </ion-item>
       </div>
     </div>
+  </div>
+  <div #infoPane class="info-pane cupertino-pane">
     <div class="subprogram pane-container" *ngIf="list == 2 || list == 4">
       <ion-item class="header" lines="full">
         <ion-avatar slot="start">
@@ -122,15 +112,7 @@
               <h5>Recibe:</h5>
             </div>
             <p *ngFor="let receive of subprogram.receives" [innerHtml]="receive"></p>
-            <div class="tags-wrapper">
-              <ion-button *ngFor="let mat of subprogram.receives_mat;"
-              [ngClass]="mat.class"
-              [color]="mat.class">
-                <img class="left" *ngIf="mat.icon != ''" src="{{mat.icon}}" alt="imagen de residuo">
-                <ion-icon *ngIf="mat.icon == ''" class="ion-float-left" name="dr-{{mat.class}}"></ion-icon>
-                <ion-label [innerHTML]="mat.name"></ion-label>
-              </ion-button>
-            </div>
+            <app-materials-chips [materials_obj]="subprogram"></app-materials-chips>
           </div>
         </ion-item>
         <ion-item lines="none" *ngIf="subprogram.zone.information">
@@ -162,7 +144,7 @@
       <div class="cupertino-outofbox-image">
         <img src="{{container.type_icon}}">
       </div>
-      <ion-item class="header" lines="full">
+      <ion-item class="header" lines="full" [routerLink]="'/programas/'+container.program_id">
         <ion-avatar slot="start">
           <img src="{{container.program_icon}}">
         </ion-avatar>
@@ -231,7 +213,7 @@
             <p>{{container.information}}</p>
           </div>
         </ion-item>
-        <div class="items-wrapper" *ngIf="container.receives != undefined && container.receives.length > 0">
+        <div class="items-wrapper">
           <ion-item lines="none">
             <div>
               <div class="inline">
@@ -240,16 +222,7 @@
                 <h5>Recibe:</h5>
               </div>
               <p [innerHTML]="container.receives_text"></p>
-              <div class="tags-wrapper">
-                <ion-button *ngFor="let mat of container.receives;"
-                  [ngClass]="mat.class"
-                  [color]="mat.class">
-                  <img class="left" *ngIf="mat.icon != ''" src="{{mat.icon}}" alt="imagen de residuo">
-                  <ion-icon *ngIf="mat.icon == ''" class="ion-float-left"
-                  name="dr-{{mat.class}}"></ion-icon>
-                  <ion-label [innerHTML]="mat.name"></ion-label>
-                </ion-button>
-              </div>
+              <app-materials-chips [materials_obj]="container"></app-materials-chips>
             </div>
           </ion-item>
         </div>

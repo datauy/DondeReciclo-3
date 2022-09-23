@@ -1,12 +1,16 @@
 :host {
   ion-content{
-      --padding-start: 5vw;
-      --padding-end: 5vw;
-      font-size: 16px;
-      line-height: 1.5;
-      .swiper-prev, .swiper-next {
-        top: calc(120px + -1vw);
-      }
+    --padding-start: 5vw;
+    --padding-end: 5vw;
+    font-size: 16px;
+    line-height: 1.5;
+    .swiper-prev, .swiper-next {
+      top: 0;
+    }
+    &.programs {
+      --padding-start: 0;
+      --padding-end: 0;
+    }
   }
   h1, p {
     width: 100%;
@@ -20,24 +24,59 @@
     color: var(--pale-olive-green);
     text-decoration: none;
   }
+  .tags {
+    h3 {
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 22px;
+      color: var(--greyish-brown);
+    }
+    .tag {
+      .tag-program-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        .tag-program {
+          width: 106px;
+          margin: 10px 8px;
+          ion-button {
+            height: 106px;
+            width: 106px;
+            border-radius: 16px;
+            --padding-start: 0;
+            --padding-end: 0;
+            margin: 0;
+            img {
+              width: 100%;
+            }
+          }
+          h6 {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 13px;
+            font-weight: normal;
+          }
+        }
+      }
+    }
+  }
   ion-slides{
-    overflow: visible;
+    //overflow: visible;
     ion-slide{
 		  transition: 100ms ease-in-out;
       display: block;
       text-align: left;
       .slide-head {
         //min-height: calc(12vw + 16vh);
-        min-height: 200px;
-        margin-top: 30px;
+        min-height: 120px;
         .image-wrapper {
-          height: calc(160px + 10vw);
-          width: 99%;
+          height: calc(120px + 10vw);
+          width: 100%;
           overflow: hidden;
           display: flex;
           justify-content: center;
           text-align: center;
-          border-radius: 16px;
+          border-radius: 0 0 16px 16px;
           padding: 0;
           background-color: #000;
         }
@@ -54,10 +93,7 @@
       }
       .slide-content{
         opacity: 1;
-        padding-bottom: 60px;
-        .slide-header {
-          margin-top: 60px;
-        }
+        padding: 0 5vw 60px 5vw;
         .slide-title {
           font-size: 20px;
           font-weight: bold;
@@ -75,6 +111,9 @@
           margin-right: 12px;
           margin-top: 4px;
           margin-bottom: 4px;
+        }
+        .contenedores {
+          margin-top: 20px;
         }
         .location-tag {
           margin-top: 20px;

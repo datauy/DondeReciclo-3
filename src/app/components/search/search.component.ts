@@ -5,7 +5,7 @@ import { Component, Input } from '@angular/core';
 import { ApiService } from "src/app/services/api.service";
 import { MapService } from "src/app/services/map.service";
 
-//import { SearchParams, Material } from "src/app/models/basic_models.model";
+import { SearchItem, Dimension } from "src/app/models/basic_models.model";
 import { SessionService } from 'src/app/services/session.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
 import { environment } from 'src/environments/environment';
@@ -27,59 +27,154 @@ export class SearchComponent {
   suggestVisibility: boolean;
   searchString: string;
   searchAddress = false;
-  isInit = true;
+  initialDataLoaded = false;
   environment = environment;
+  predefinedSearch: Array<SearchItem> = [];
+  dimensions: Array<Dimension> = [];
+  showAllDimensions = true;
+  not_filter_dimensions = ['item selected', 'dimension'];
 
   constructor(
-    public api: ApiService,
-    public map: MapService,
-    public session: SessionService,
-    public notification: NotificationsService,
-    ) {
-      this.map.autoSearch.subscribe(
-        (sitem) => {
-          if ( sitem != null ) {
-            if ( typeof sitem === "object" ) {
-              sitem.type = 'materials';
-              this.itemSelected(sitem);
-            }
-            else {
-              this.api.getWastes([sitem]).subscribe((wastes: any) => {
-                wastes[0].type = 'wastes';
-                this.itemSelected(wastes[0]);
-              });
-            }
+  public api: ApiService,
+  public map: MapService,
+  public session: SessionService,
+  public notification: NotificationsService,
+  ) {
+    this.map.autoSearch.subscribe(
+      (sitem) => {
+        if ( sitem != null ) {
+          if ( typeof sitem === "object" ) {
+            sitem.type = 'materials';
+            this.itemSelected(sitem);
+          }
+          else {
+            this.api.getWastes([sitem]).subscribe((wastes: any) => {
+              wastes[0].type = 'wastes';
+              this.itemSelected(wastes[0]);
+            });
           }
         }
-      );
-    }
-
-  showSearch(event) {
-    if( this.isInit ) {
-      if ( this.session.country == 'Colombia' ) {
-        this.search4address(true);
       }
-      this.isInit = false;
+    );
+    this.session.countryChanged.subscribe(
+      countryName => {
+        if ( countryName != '' ) {
+          if ( this.session.country == 'Colombia' ) {
+            this.search4address(true);
+          }
+          this.loadSearchDimensions()
+        }
+      }
+    );
+    this.api.initialDataLoaded.subscribe( (loaded) => {
+      if ( loaded ) {
+        this.initialDataLoaded = true;
+        this.loadSearchDimensions();
+      }
+    });
+  }
+  //
+  loadSearchDimensions() {
+    this.session.searchDimensions = [];
+    if ( this.initialDataLoaded && this.session.country != undefined ) {
+      this.dimensions = environment[this.session.country].dimensions;
+      this.dimensions.forEach(dim => {
+        this.session.searchDimensions.push(dim.id);
+      });
+      this.predefinedArrange();
     }
-    this.searchVisibility = true;
-    /*let clearButton = document.querySelector('.searchbar-clear-button') as HTMLElement;
-    console.log(clearButton);
-    clearButton.addEventListener("click", (event: Event) => this.hideSearch(event) );*/
+  }
+  //
+  toggleSearch() {
+    if ( this.searchVisibility == true ) {
+      this.hideSearch('toggle');
+    }
+    else {
+      this.searchVisibility = true;
+      this.suggestVisibility = true;
+    }
   }
 
   hideSearch(event) {
+    //filter dimensions if hidding from other sources
+    if ( !this.not_filter_dimensions.includes(event) ) {
+      this.dimensionsFilter();
+    }
     this.suggestVisibility = false;
     this.searchVisibility = false;
   }
 
-  searchSuggestion(predefined){
-    this.itemSelected(predefined);
+  dimensionSelected(dim) {
+    let pos = this.session.searchDimensions.indexOf(dim);
+    if ( pos !== -1 ) {
+      //Prevent unselect all
+      if ( this.session.searchDimensions.length > 1 ) {
+        this.session.searchDimensions.splice(pos, 1);
+      }
+      else {
+        return;
+      }
+    }
+    else {
+      this.session.searchDimensions.push(dim);
+    }
+    this.predefinedArrange();
   }
-
+  //
+  predefinedArrange() {
+    let predefined = [];
+    this.session.searchDimensions.forEach( dim => {
+      if ( environment[this.session.country].predefinedSearch[dim] != undefined ) {
+        predefined = predefined.concat(environment[this.session.country].predefinedSearch[dim].filter( (item) => !predefined.includes(item) ));
+      }
+    });
+    this.predefinedSearch = predefined.sort((a, b) => (a.name > b.name) ? 1 : -1);
+    if ( this.session.country != undefined && environment[this.session.country].dimensions != undefined && this.session.searchDimensions.length != environment[this.session.country].dimensions.length ) {
+      this.showAllDimensions = false;
+    }
+    else {
+      this.showAllDimensions = true;
+    }
+  }
+  dimensionsFilter() {
+    if ( this.showAllDimensions ) {
+      // Lo devolvemos al flujo normal
+      if ( this.session.searchItem != undefined && this.session.searchItem.type == 'dimensions' ) {
+        delete this.session.searchItem;
+        this.map.mapChanges();
+      }
+    }
+    else {
+      let m_ids = []
+      environment[this.session.country].dimensions.forEach( dim => {
+        if ( this.session.searchDimensions.includes( dim.id ) ) {
+          m_ids = m_ids.concat(dim.materials.filter( (item) => !m_ids.includes(item) ));
+        }
+      });
+      let item = {
+        id: 0,
+        name: "Dimensiones",
+        class: "dimensions",
+        ids: m_ids.join(','),
+        type: 'dimensions',
+        deposition: '',
+        icon: ''
+      }
+      let center = this.map.map.getCenter();
+      let pos = [center.lat, center.lng];
+      this.session.searchItem = item;
+      this.api.getContainersByMaterials(item.type+"="+item.ids, pos)
+      .subscribe((containers) => {
+        this.map.loadMarkers(containers, true);
+      });
+    }
+    this.session.showSearchItem = false;
+    this.hideSearch('dimension');
+  }
   itemSelected(item) {
     this.searchBarIonic = document.querySelector('.searchbar-input');
     if (item.class == 'address' ) {
-      this.map.userPosition = [item.latlng.lat, item.latlng.lng];
+      this.map.setUserPosition([item.latlng.lat, item.latlng.lng]);
       //this.map.flyToBounds();
       this.api.getNearbyContainers(2, this.map.userPosition)
       .subscribe((containers) => {
@@ -131,8 +226,14 @@ export class SearchComponent {
   //
   closeSelection() {
     delete this.session.searchItem;
-    //reload pins
-    this.map.mapChanges();
+    if ( !this.showAllDimensions ) {
+      this.dimensionsFilter();
+    }
+    else {
+      this.session.showSearchItem = false;
+      //reload pins
+      this.map.mapChanges();
+    }
   }
   //Selector between materials and addresses
   search4address(isit: boolean) {

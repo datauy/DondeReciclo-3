@@ -1,34 +1,42 @@
-<ion-header id="header-main" [class]="display">
+<ion-header id="header-main" [class]="'header-' + display">
   <ion-buttons class="back-button">
-    <ion-button *ngIf="session.showBackButton || backButton" (click)="goBack()">
+    <ion-button *ngIf="(session.showBackButton || backButton) && display != 'mobile'" (click)="goBack()">
       <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
     </ion-button>
   </ion-buttons>
   <ion-toolbar>
-    <div class="toolbar-wraper" *ngIf="['map', 'full'].includes(display)">
-      <ion-img class="logo ion-hide-lg-up"
-        routerLink="/"
-        routerDirection="root"
-        slot="start"
-        src="assets/img/donde_reciclo.png"
-        alt="Logo ¿Dónde Reciclo?">
-      </ion-img>
+    <ion-img [class]="display == 'mobile' ? 'logo' : 'logo ion-hide-lg-up'"
+      routerLink="/"
+      routerDirection="root"
+      slot="start"
+      src="assets/img/logo_dr_horizontal.svg"
+      alt="Logo ¿Dónde Reciclo?">
+    </ion-img>
+    <div [class]="display != 'mobile' ? 'toolbar-wraper' : 'toolbar-wraper ion-hide-lg-up'" >
       <ion-fab vertical="center" *ngIf="session.country != undefined">
         <ion-fab-button class="main">
           <ion-icon name="dr-{{environment[this.session.country].code.toLowerCase()}}"></ion-icon>
         </ion-fab-button>
         <ion-fab-list side="end">
-          <ion-fab-button (click)="changeCountry('Uruguay')">
+          <ion-fab-button (click)="session.setCountry('Uruguay')">
             <ion-icon name="dr-uy"></ion-icon>
           </ion-fab-button>
-          <ion-fab-button (click)="changeCountry('Colombia')">
-            <ion-icon name="dr-col"></ion-icon>
+          <ion-fab-button (click)="session.setCountry('Colombia')">
+            <ion-icon name="dr-co"></ion-icon>
           </ion-fab-button>
         </ion-fab-list>
       </ion-fab>
-      <ion-title>{{ title }}</ion-title>
+      <ion-title *ngIf="title != undefined && title != ''">{{ title }}</ion-title>
       <ion-buttons slot="end">
-        <ion-button color="pale-olive-green"
+        <ion-button color="vidrios"
+          *ngIf="this.session.country == 'Uruguay'"
+          href="https://instagram.com/dondereciclouy/"
+          target="_blank"
+          slot="start">
+          <ion-icon name="instagram"
+          slot="icon-only"></ion-icon>
+        </ion-button>
+        <ion-button color="vidrios"
           (click)="showShareModal()"
           slot="end">
           <ion-icon name="dr-share"
@@ -48,18 +56,18 @@
 <div class="overlay" *ngIf="session.country == undefined">
   <span>Seleccionar país:</span>
   <ion-buttons>
-    <ion-button (click)="selectCountry('Uruguay')">
+    <ion-button (click)="session.setCountry('Uruguay')">
       <ion-icon
         class="country-selector"
         slot="icon-only"
         name="dr-uy">
       </ion-icon>
     </ion-button>
-    <ion-button (click)="selectCountry('Colombia')">
+    <ion-button (click)="session.setCountry('Colombia')">
       <ion-icon
         class="country-selector"
         slot="icon-only"
-        name="dr-col">
+        name="dr-co">
       </ion-icon>
     </ion-button>
   </ion-buttons>

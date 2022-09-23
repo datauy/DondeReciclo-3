@@ -16,6 +16,8 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
 import { AccordionComponent } from './accordion/accordion.component';
 import { NotificationComponent } from './notification/notification.component';
 import { ImageSliderComponent } from './image-slider/image-slider.component';
+import { MaterialsChipsComponent } from './materials-chips/materials-chips.component';
+import { WalkthroughComponent } from './walkthrough/walkthrough.component';
 //import { TestDirective } from './test.directive';
 
 @NgModule({
@@ -39,14 +41,18 @@ import { ImageSliderComponent } from './image-slider/image-slider.component';
     ContactFormComponent,
     AccordionComponent,
     NotificationComponent,
-    ImageSliderComponent
+    ImageSliderComponent,
+    MaterialsChipsComponent,
+    WalkthroughComponent
   ],
   exports: [
     SidemenuComponent,
     HeaderComponent,
     SocialShareComponent,
     AccordionComponent,
-    ImageSliderComponent
+    ImageSliderComponent,
+    MaterialsChipsComponent,
+    WalkthroughComponent
     //TestDirective
     // SimpleServiceComponent
   ],
