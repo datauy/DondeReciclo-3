@@ -55,7 +55,7 @@ export class SessionService {
   }
   //
   async isShowSlider() {
-    return this.storage.get('showSlider').then( (toShow) => {
+    return this.storage.get('showIntro').then( (toShow) => {
       if ( toShow == null ) {
         return true;
       }
@@ -68,7 +68,7 @@ export class SessionService {
   }
   //
   watchSlider(toShow: boolean) {
-    this.storage.set('showSlider', toShow);
+    this.storage.set('showIntro', toShow);
     this.showSlider = toShow;
   }
   //

@@ -108,7 +108,8 @@
             <string>Usamos tu localización para poder mostrar los contendores y zonas más cercanas a tu ubicación.</string>
         </edit-config>
         <allow-navigation href="https://*youtube-nocookie.com/*" />
-        <allow-navigation href="https://cempre.org.uy//*" />
+        <allow-navigation href="https://cempre.org.uy/*" />
+        <allow-navigation href="https://instagram.com/dondereciclouy/*" />
         <config-file parent="NSCameraUsageDescription" platform="ios" target="*-Info.plist">
             <string>Usa tu cámara para tomar fotos del estado y ubicación de los contenedores.</string>
         </config-file>

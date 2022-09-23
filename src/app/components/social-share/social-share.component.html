@@ -1,4 +1,4 @@
-<ion-content>
+<div id="share-main" *ngIf="this.session.country == 'Uruguay'" >
   <h1>Seguinos en Instagram</h1>
   <p>Consejos para clasificar, eventos, novedades y más.</p>
   <div class="social-links">
@@ -11,24 +11,26 @@
       </ion-buttons>
     </ion-toolbar>
   </div>
+</div>
+<div class="share-bottom">
   <h1>¿Te sirvió la app?</h1>
   <p>Compartila y ayudanos a que cada vez más personas clasifiquen.</p>
   <div class="social-links">
     <ion-toolbar>
       <ion-buttons>
-        <ion-button href="https://twitter.com/intent/tweet/?text=%C2%A1Ten%C3%A9s%20que%20probar%20%23DondeReciclo!%20Informaci%C3%B3n%20sobre%20puntos%20de%20recepci%C3%B3n%20de%20residuos%20reciclables%20y%20consejos%20para%20clasificar%20en%20casa.&amp;url=http%3A%2F%2Fdondereciclo.uy" target="_blank" fill="clear">
+        <ion-button [href]="'https://twitter.com/intent/tweet/?text=%C2%A1Ten%C3%A9s%20que%20probar%20%23DondeReciclo!%20Informaci%C3%B3n%20sobre%20puntos%20de%20recepci%C3%B3n%20de%20residuos%20reciclables%20y%20consejos%20para%20clasificar%20en%20casa.&amp;url=http%3A%2F%2Fdondereciclo.'+environment[this.session.country].code.toLowerCase()" target="_blank" fill="clear">
           <ion-icon slot="icon-only"
             name="dr-twitter"></ion-icon>
         </ion-button>
-        <ion-button href="https://wa.me/?text=¡Tenés que probar http://dondereciclo.uy! Información sobre puntos de recepción de residuos reciclables y consejos para clasificar en casa." target="_blank" fill="clear">
+        <ion-button [href]="'https://wa.me/?text=¡Tenés que probar http://dondereciclo.'+environment[this.session.country].code.toLowerCase()+'! Información sobre puntos de recepción de residuos reciclables y consejos para clasificar en casa.'" target="_blank" fill="clear">
           <ion-icon slot="icon-only"
             name="dr-whatsapp"></ion-icon>
         </ion-button>
-        <ion-button href="https://facebook.com/sharer/sharer.php?u=http%3A%2F%2Fdondereciclo.uy" target="_blank" fill="clear">
+        <ion-button [href]="'https://facebook.com/sharer/sharer.php?u=http%3A%2F%2Fdondereciclo.'+environment[this.session.country].code.toLowerCase()" target="_blank" fill="clear">
           <ion-icon slot="icon-only"
             name="dr-facebook"></ion-icon>
         </ion-button>
       </ion-buttons>
     </ion-toolbar>
   </div>
-</ion-content>
+</div>
