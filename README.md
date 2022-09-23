@@ -1,5 +1,5 @@
 ![Donde reciclo](src/assets/img/generico.png)
- # Donde Reciclo v3.8
+ # Donde Reciclo v4.0
 ![](https://img.shields.io/badge/version-v3.4-blue) ![](https://img.shields.io/badge/build-ionic-blue) ![](https://img.shields.io/github/issues/datauy/DondeReciclo-3) ![](https://img.shields.io/github/license/datauy/DondeReciclo-3) ![](https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2Fdatauy%2FDondeReciclo-3)
 ## Indice
 
@@ -45,7 +45,7 @@ En Uruguay existen muchos esfuerzos destinados a la recuperación de residuos s�
 
 Son instrucciones que permitira tener una copia de poroyecto funcionando en un ordenador local para desarrollo y pruebas.
 
-### Pre-requisitos: 
+### Pre-requisitos:
 
 #### [Node.js](https://nodejs.org/en/)  >=10.19.0 <=12.15.0
 
@@ -89,7 +89,7 @@ Para iniciar el proyecto en local es a través del siguiente comando. </br>
 
 - **[Ionic](https://ionicframework.com/docs/cli)**
 
-## Ejemplo de inicio 
+## Ejemplo de inicio
 
 ![Codigo](src/assets/img/codigo.png)
 
@@ -113,17 +113,17 @@ Los datos utilizados en esta aplicación se encuentran disponibles para su reuti
 
  Es una organización de la sociedad civil que busca el fortalecimiento de comunidades y activismo social a traves de herramientas sociales para la participación y el uso de datos abiertos. [Conoce más](https://data.org.uy/)
 
-## Bitácora de cambios 
- 
+## Bitácora de cambios
+
 - [Changelog](http://soporte.data.org.uy/es/blog/dr-changelog)
 ## Contacto
-* Consultas sobre el proyecto en general o reciclaje (CEMPRE): 
+* Consultas sobre el proyecto en general o reciclaje (CEMPRE):
  cempre@cempre.org.uy
 
-* Consultas sobre la herramienta (DATA Uruguay): 
+* Consultas sobre la herramienta (DATA Uruguay):
 contacto@data.org.uy
 
-## Autores 
+## Autores
 <table>
 <tr>
 <td>
