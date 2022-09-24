@@ -158,7 +158,9 @@ export class SearchComponent {
         ids: m_ids.join(','),
         type: 'dimensions',
         deposition: '',
-        icon: ''
+        icon: '',
+        color: null,
+        contrast_color: null
       }
       let center = this.map.map.getCenter();
       let pos = [center.lat, center.lng];
