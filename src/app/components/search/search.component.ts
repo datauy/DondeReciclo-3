@@ -167,8 +167,8 @@ export class SearchComponent {
       .subscribe((containers) => {
         this.map.loadMarkers(containers, true);
       });
+      this.session.showSearchItem = false;
     }
-    this.session.showSearchItem = false;
     this.hideSearch('dimension');
   }
   itemSelected(item) {

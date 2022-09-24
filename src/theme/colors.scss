@@ -277,7 +277,15 @@
   --ion-color-reparacion-shade: #d75932;
   --ion-color-reparacion-tint: #f5744d;
 }
-
+:root {
+  --ion-color-reutilizacion: #F7931E;
+  --ion-color-reutilizacion-rgb: 247,147,30;
+  --ion-color-reutilizacion-contrast: #fff;
+  --ion-color-reutilizacion-contrast-rgb: 0,0,0;
+  --ion-color-reutilizacion-shade: #d75932;
+  --ion-color-reutilizacion-tint: #f5744d;
+}
+.ion-color-reutilizacion,
 .ion-color-reparacion {
   --ion-color-base: var(--ion-color-reparacion);
   --ion-color-base-rgb: var(--ion-color-reparacion-rgb);
