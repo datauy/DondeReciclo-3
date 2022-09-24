@@ -91,8 +91,7 @@
     --padding-start: 0.7em;
     --padding-end: 0.7em;
     text-transform: none;
-    // padding: 10px;
-    // margin: 6px;
+    border-radius: 6px;
     font-family: "SourceSansPro";
     font-size: 16px;
     &.submit {
@@ -292,8 +291,8 @@
     .tags-wrapper {
       ion-button {
         font-size: 13px;
-        ion-icon {
-          margin-right: 5px;
+        ion-label {
+          margin-left: 5px;
         }
       }
     }

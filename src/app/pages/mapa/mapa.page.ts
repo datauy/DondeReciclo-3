@@ -31,7 +31,9 @@ export class MapaPage implements OnInit {
   container = {} as Container;
   infoPane: CupertinoPane;
   servicesPane: CupertinoPane;
+  //// TODO: REVISAR ULOCATION y geoLocation
   uLocation = false;
+  geoLocation = false;
   subprograms = <Subprogram[]>([]);
   subprogram: Subprogram;
   zones: any;
@@ -111,10 +113,16 @@ export class MapaPage implements OnInit {
     this.session.countryChanged.subscribe(
       countryName => {
         if ( this.initDataLoaded == true && countryName != '' ) {
-          //Set possition and load services
-          let userPos: [number, number] = [environment[countryName].center.lat, environment[countryName].center.lon];
-          this.map.setUserPosition(userPos);
-          this.api.getNearbyContainers(2, userPos).subscribe(
+          //If not geolocated
+          if ( !this.geoLocation ) {
+            //Set possition and load services
+            let userPos: [number, number] = [environment[countryName].center.lat, environment[countryName].center.lon];
+            this.map.setUserPosition(userPos);
+          }
+          else {
+            this.geoLocation = false;
+          }
+          this.api.getNearbyContainers(2, this.map.userPosition).subscribe(
             (containers) => {
               this.map.loadMarkers(containers, true);
             }
@@ -522,6 +530,7 @@ export class MapaPage implements OnInit {
   gotoLocation(load=true) {
     this.geo.getCurrentPosition({ enableHighAccuracy: false }).then( (resp) => {
       this.uLocation = true;
+      this.geoLocation = true;
       this.map.setUserPosition([resp.coords.latitude, resp.coords.longitude]);
       this.notification.closeNotificationId('noLoc');
       this.api.getCountryByLocation(this.map.userPosition).subscribe(
@@ -632,12 +641,12 @@ export class MapaPage implements OnInit {
     subprograms.forEach( (subp, i) => {
       subprograms[i].program_icon = this.api.programs[subp.program_id].icon ? this.api.programs[subp.program_id].icon : '/assets/custom-icons/dr-generic.svg';
       subprograms[i].program = this.api.programs[subp.program_id].name;
-      if ( subprograms[i].materials.length != 0 ) {
+      /*if ( subprograms[i].materials.length != 0 ) {
         subprograms[i].receives_mat = [];
         subprograms[i].materials.forEach((p) => {
           subprograms[i].receives_mat.push(this.api.materials[this.session.country][p]);
         });
-      }
+      }*/
     });
   }
   //

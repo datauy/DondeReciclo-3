@@ -45,7 +45,10 @@
     <div id="suggestions" [ngClass]="(suggestVisibility && searchVisibility) ? 'show expand' : 'hide shrink'">
       <ion-list-header>Materiales/residuos sugeridos:</ion-list-header>
       <div class="resultsWrap" *ngIf="session.country != undefined">
-        <ion-button [color]="predefined.class"
+        <ion-button
+        [color]="predefined.class"
+        [style.background-color] = "predefined.color != undefined ? predefined.color : ''"
+        [style.color]="predefined.contrast_color != undefined ? predefined.contrast_color : ''"
           *ngFor="let predefined of this.predefinedSearch;"
           [ngClass]="predefined.class"
           (click)="itemSelected(predefined)">
@@ -64,6 +67,8 @@
         expand="block"
         [ngClass]="attrs.data.class"
         *ngIf="attrs.data.class != 'none'"
+        [style.background-color] = "attrs.data.color != undefined ? attrs.data.color : ''"
+        [style.color]="attrs.data.contrast_color != undefined ? attrs.data.contrast_color : ''"
       >
         <img class="left" *ngIf="attrs.data.icon != ''" src="{{attrs.data.icon}}" alt="imagen de residuo">
         <ion-icon
@@ -79,7 +84,11 @@
 </div>
 <!-- search-banner -->
 <div id="search-item" *ngIf="session.searchItem && session.showSearchItem">
-  <ion-item lines="none" [color]="session.searchItem.class">
+  <ion-item
+    lines="none"
+    [color]="session.searchItem.class"
+    [style.color]="session.searchItem.contrast_color != undefined ? session.searchItem.contrast_color : ''"
+    [style.background-color] = "session.searchItem.color != undefined ? session.searchItem.color : ''">
     <img class="left" *ngIf="session.searchItem.icon != ''" src="{{session.searchItem.icon}}" alt="imagen de residuo">
     <ion-icon
       *ngIf="session.searchItem.icon == ''"
