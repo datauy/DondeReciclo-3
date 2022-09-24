@@ -102,4 +102,6 @@ export interface SearchItem {
     deposition: string;
     icon: string;
     ids: string;
+    color: string;
+    contrast_color: string;
 }
