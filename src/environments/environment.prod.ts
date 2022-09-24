@@ -12,7 +12,7 @@ export const environment = {
   },
   Colombia: {
     center: {lat: 4.65087958676269, lng: -74.05580210009016},
-    code: 'COL',
+    code: 'CO',
     id: 2,
     predefinedSearch: [],
     locale: 'es_CO'

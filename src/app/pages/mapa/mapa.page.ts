@@ -114,15 +114,17 @@ export class MapaPage implements OnInit {
       countryName => {
         if ( this.initDataLoaded == true && countryName != '' ) {
           //If not geolocated
+          let userPos: [number, number];
           if ( !this.geoLocation ) {
             //Set possition and load services
-            let userPos: [number, number] = [environment[countryName].center.lat, environment[countryName].center.lon];
+            userPos = [environment[countryName].center.lat, environment[countryName].center.lon];
             this.map.setUserPosition(userPos);
           }
           else {
+            userPos = this.map.userPosition;
             this.geoLocation = false;
           }
-          this.api.getNearbyContainers(2, this.map.userPosition).subscribe(
+          this.api.getNearbyContainers(2, userPos).subscribe(
             (containers) => {
               this.map.loadMarkers(containers, true);
             }
