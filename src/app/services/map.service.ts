@@ -195,13 +195,7 @@ export class MapService {
 
   loadMarkers( markers: Container[], fly = true ){
     this.loadMap();
-    //Prevent marker load over saturation level
     this.containers = markers;
-    /*if ( markers.length > environment.pinSaturation && !this.eagerLoad ) {
-      this.saturationWarn = true;
-      this.mapChanges();
-      return;
-    }*/
     this.saturationWarn = false;
     let mapBounds = [];
     //remove all markers and reload
@@ -236,12 +230,14 @@ export class MapService {
         center_markers = center_markers - 1;
       }
       markersLayer.push(newMarker);
+      //Prevent marker load over saturation level
       if ( i > environment.pinSaturation ) {
         this.saturationWarn = true;
         this.mapChanges(true);
         break;
       }
     }
+    this.map.invalidateSize();
     this.markers = L.layerGroup(markersLayer).addTo(this.map);
     if ( mapBounds.length > 0 ) {
       if ( fly ) {

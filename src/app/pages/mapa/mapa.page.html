@@ -5,7 +5,7 @@
   <ion-button class="back-button" *ngIf="session.cupertinoState == 'cupertinoOpen'" (click)="hidePane()">
     <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
   </ion-button>
-  <ion-button color="transparent" class="map-buttons map-locate" (click)="geolocate()">
+  <ion-button color="transparent" [ngClass]="geoLocationActive ? 'map-buttons map-locate active' : 'map-buttons map-locate'" (click)="geolocate()">
     <ion-icon name="dr-locate"></ion-icon>
   </ion-button>
   <ion-button color="transparent" class="map-buttons map-zones" (click)="getZones()">
@@ -144,13 +144,15 @@
       <div class="cupertino-outofbox-image">
         <img src="{{container.type_icon}}">
       </div>
-      <ion-item class="header" lines="full" [routerLink]="'/programas/'+container.program_id">
-        <ion-avatar slot="start">
-          <img src="{{container.program_icon}}">
-        </ion-avatar>
-        <div class="title-wrapper">
-          <span size="small">Programa</span>
-          <h5>{{container.program}}</h5>
+      <ion-item class="header" lines="full">
+        <div class="partial" [routerLink]="'/programas/'+container.program_id">
+          <ion-avatar slot="start">
+            <img src="{{container.program_icon}}">
+          </ion-avatar>
+          <div class="title-wrapper">
+            <span size="small">Programa</span>
+            <h5>{{container.program}}</h5>
+          </div>
         </div>
       </ion-item>
       <div class="scrollable-div">

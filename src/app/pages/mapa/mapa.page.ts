@@ -31,9 +31,8 @@ export class MapaPage implements OnInit {
   container = {} as Container;
   infoPane: CupertinoPane;
   servicesPane: CupertinoPane;
-  //// TODO: REVISAR ULOCATION y geoLocation
-  uLocation = false;
-  geoLocation = false;
+  geoLocationActive = false;
+  locationLoop = 0;
   subprograms = <Subprogram[]>([]);
   subprogram: Subprogram;
   zones: any;
@@ -79,6 +78,7 @@ export class MapaPage implements OnInit {
     });
     // this.app = document.querySelector('app-search');
     this.session.homeUrl = this.router.url.split('?')[0];
+    this.map.loadMap();
     this.loadServicesPane();
     this.loadInfoPane();
     //Subscribe after initial data is loaded
@@ -115,20 +115,17 @@ export class MapaPage implements OnInit {
         if ( this.initDataLoaded == true && countryName != '' ) {
           //If not geolocated
           let userPos: [number, number];
-          if ( !this.geoLocation ) {
-            //Set possition and load services
-            userPos = [environment[countryName].center.lat, environment[countryName].center.lon];
-            this.map.setUserPosition(userPos);
+          //Set possition and load services
+          userPos = [environment[countryName].center.lat, environment[countryName].center.lon];
+          this.map.setUserPosition(userPos);
+          // Si no está ejecutando la geoloc cargamos contenedores, sino lo maneja la geoloc
+          if ( !this.geoLocationActive ) {
+            this.api.getNearbyContainers(2, userPos).subscribe(
+              (containers) => {
+                this.map.loadMarkers(containers, true);
+              }
+            );
           }
-          else {
-            userPos = this.map.userPosition;
-            this.geoLocation = false;
-          }
-          this.api.getNearbyContainers(2, userPos).subscribe(
-            (containers) => {
-              this.map.loadMarkers(containers, true);
-            }
-          );
         }
       }
     );
@@ -177,9 +174,11 @@ export class MapaPage implements OnInit {
         if (loaded) {
           this.initDataLoaded = true;
           this.mapaRouter();
+          this.loadPosition(true).then(() => {
+            this.subprograms4location();
+          });
           // route for childs and params
-          if ( this.loadSubContainers != undefined || this.loadContainers != undefined ) {
-            this.gotoLocation(false);
+          if ( this.loadSubContainers != undefined || this.loadContainers != undefined || this.loadContainer > 0 ) {
             if ( this.loadSubContainers != undefined ) {
               this.api.getSubContainers(this.loadSubContainers).subscribe(
                 (containers) => {
@@ -187,70 +186,20 @@ export class MapaPage implements OnInit {
                 }
               );
             }
-            else {
+            else if ( this.loadContainers != undefined ){
               this.api.getContainersIds(this.loadContainers).subscribe(
                 (containers) => {
                   this.map.loadMarkers(containers, true);
                 }
               );
             }
-          }
-          else {
-            if ( this.loadContainer > 0) {
-              this.gotoLocation(false);
+            else {
               this.showPane();
             }
-            else {
-              if ( this.map.userPosition == undefined ) {
-                this.gotoLocation();
-              }
-              else {
-                this.uLocation = true;
-                if ( this.autoSearch ) {
-                  this.activateSearch(this.autoSearchItem);
-                }
-                else {
-                  this.api.getNearbyContainers(2, this.map.userPosition).subscribe(
-                    (containers) => {
-                      this.map.loadMarkers(containers, true);
-                    }
-                  );
-                }
-                //this.map.flytomarker(this.map.userPosition, 15);
-              }
-            }
           }
         }
       }
     );
-  }
-  //
-  ionViewDidEnter() {
-    //Carga mapa con centro en LA
-    this.map.loadMap();
-    this.loadPosition(true).then(() => {
-      this.subprograms4location();
-    });
-    //Fallback if location fails
-    /*if ( this.session.country != undefined ) {
-    console.log("VIEW STARTS HAY COUNTRY");
-    //El resize hace un fly al centro del mapa
-    this.map.resizeMap(0);
-    if ( this.session.searchItem != undefined ) {
-    this.session.showSearchItem = true;
-        }
-        //Wait 3 seconds for user location and start loading LOad nearbymap
-        setTimeout( () => {
-        console.log("VIEW STARTS TIMEOUT", this.map.center);
-        if ( !this.uLocation ) {
-        this.api.getNearbyContainers(0.5, [this.map.center.lat, this.map.center.lng]).subscribe(
-        (containers) => {
-        this.map.loadMarkers(containers, true);
-      }
-    );
-    }
-    }, 4000);
-    }*/
   }
   //
   ionViewWillLeave() {
@@ -287,6 +236,7 @@ export class MapaPage implements OnInit {
         }
       }
       let params = this.route.snapshot.queryParams;
+
       if ( params.hasOwnProperty('zones') && params.zones == 1 ) {
         this.activateZone();
         this.router.navigate([this.session.homeUrl]);
@@ -296,22 +246,34 @@ export class MapaPage implements OnInit {
         console.log('EAGER');
         this.eagerLoad = true;
       }*/
+      let objectLocation = false;
       if ( this.route.snapshot.params['containerID'] != undefined && this.route.snapshot.params['containerID'] > 0 ) {
         this.loadContainer = this.route.snapshot.params['containerID'];
+        objectLocation = true;
       }
       if ( this.route.snapshot.params['materialID'] != undefined && this.route.snapshot.params['materialID'] > 0 ) {
         this.autoSearch = true;
         this.autoSearchItem = this.api.materials[this.session.country][this.route.snapshot.params['materialID']];
+        objectLocation = true;
       }
       if ( this.route.snapshot.params['wasteID'] != undefined && this.route.snapshot.params['wasteID'] > 0 ) {
         this.autoSearch = true;
         this.autoSearchItem = this.route.snapshot.params['wasteID'];
+        objectLocation = true;
       }
       if ( this.route.snapshot.params['containersID'] != undefined && this.route.snapshot.params['containersID'].length > 0 ) {
         this.loadContainers = this.route.snapshot.params['containersID'];
+        objectLocation = true;
       }
       if ( this.route.snapshot.params['subsID'] != undefined && this.route.snapshot.params['subsID'].length > 0 ) {
         this.loadSubContainers = this.route.snapshot.params['subsID'];
+        objectLocation = true;
+      }
+      if (objectLocation) {
+        this.gotoLocation(false);
+      }
+      else {
+        this.gotoLocation(true);
       }
     }
   }
@@ -395,7 +357,7 @@ export class MapaPage implements OnInit {
       initialBreak: initPane,
       clickBottomOpen: false,
       bottomOffset: 30,
-      topperOverflow: true,
+      topperOverflow: false,
       topperOverflowOffset: 200,
       breaks: {
         top: {
@@ -530,14 +492,14 @@ export class MapaPage implements OnInit {
   }
   //
   gotoLocation(load=true) {
+    this.geoLocationActive = true;
     this.geo.getCurrentPosition({ enableHighAccuracy: false }).then( (resp) => {
-      this.uLocation = true;
-      this.geoLocation = true;
       this.map.setUserPosition([resp.coords.latitude, resp.coords.longitude]);
       this.notification.closeNotificationId('noLoc');
       this.api.getCountryByLocation(this.map.userPosition).subscribe(
         (country) => {
           this.session.setCountry(country);
+          this.geoLocationActive = false;
         }
       );
       if ( this.autoSearch ) {
@@ -556,45 +518,60 @@ export class MapaPage implements OnInit {
       this.noLocation(load);
     });
     setTimeout( () => {
-      this.noLocation(load);
+      if (this.geoLocationActive ) {
+        this.noLocation(load);
+      }
     }, 3000);
   }
   noLocation(load=true) {
-    if ( !this.uLocation ){
-      this.uLocation = true;
-      let noRes = {
-        id: 'noLoc',
-        type: 'notification',
-        class: 'warnings',
-        title: 'No pudimos localizarte',
-        note: 'Quizás no le diste permiso o la localización está desactivada. Prueba iniciar la app con la localización activada. Puedes seleccionar tu ubicación tocando el mapa.',
-      };
-      this.notification.showNotification(noRes);
-      this.loadPosition(load);
-    }
+    //Desactivamos ya que las llamadas sólo se hacen desde geoloc que falla
+    this.geoLocationActive = false;
+    let noRes = {
+      id: 'noLoc',
+      type: 'notification',
+      class: 'warnings',
+      title: 'No pudimos localizarte',
+      note: 'Quizás no le diste permiso o la localización está desactivada. Prueba iniciar la app con la localización activada. Puedes seleccionar tu ubicación tocando el mapa.',
+    };
+
+    this.notification.showNotification(noRes);
+    this.loadPosition(load);
   }
   //
   loadPosition(load) {
     return this.map.getUserPosition().then(
       (res) => {
-        if ( (res == undefined || res.length == 0) && this.map.center != undefined ) {
-          if ( this.session.country != undefined ) {
-            this.map.setUserPosition([this.map.center.lat, this.map.center.lng]);
+        if (!this.geoLocationActive) {
+          //Si no tiene  localización preguntamos por el país y sino el centro del mapa (sólo cuando aún no elijió el país)
+          if ( (res == undefined || res.length == 0) && this.map.center != undefined ) {
+            if ( this.session.country != undefined ) {
+              this.map.setUserPosition([this.map.center.lat, this.map.center.lng]);
+            }
+            else {
+              this.map.setUserPosition([this.map.center.lat, this.map.center.lng]);
+            }
+          }
+          if ( this.map.userPosition != undefined ) {
+            if ( this.autoSearch ) {
+              //Activa search que enruta al usuario con contenedores filtrados
+              this.activateSearch(this.autoSearchItem);
+            }
+            else {
+              if (load && this.loadSubContainers == undefined && this.loadContainers == undefined ) {
+                this.api.getNearbyContainers(2, this.map.userPosition)
+                .subscribe((containers) => {
+                  this.map.loadMarkers(containers, true);
+                });
+              }
+            }
           }
           else {
-            this.map.setUserPosition([this.map.center.lat, this.map.center.lng]);
-          }
-        }
-        if ( this.map.userPosition != undefined ) {
-          if ( this.autoSearch ) {
-            this.activateSearch(this.autoSearchItem);
-          }
-          else {
-            if (load && this.loadSubContainers == undefined && this.loadContainers == undefined ) {
-              this.api.getNearbyContainers(2, [this.map.userPosition[0], this.map.userPosition[1]])
-              .subscribe((containers) => {
-                this.map.loadMarkers(containers, true);
-              });
+            if ( this.locationLoop < 3 ) {
+              //Se supone que no tiene localización activada y no ha seleccionado el país, démosle tiempo
+              setTimeout( () => {
+                this.locationLoop += 1;
+                this.gotoLocation();
+              }, 2000);
             }
           }
         }
@@ -713,7 +690,6 @@ export class MapaPage implements OnInit {
     if ( this.map.map != undefined ) {
       //this.session.isLoading = true;
       var point: [number, number];
-
       if ( this.map.userPosition != undefined ) {
         point = this.map.userPosition;
       }
