@@ -28,7 +28,7 @@ export class SessionService {
   showSearchItem: boolean = true;
   searchDimensions: Array<number> = [];
   //Initial Slider
-  showSlider: boolean = true;
+  showSlider: boolean = false;
   reloadMap: boolean = false;
   news: {News};
 
