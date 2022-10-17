@@ -40,17 +40,12 @@ export class WalkthroughComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if ( this.notification.showMessage == true ) {
-      this.delay_notification = true;
+    if ( this.session.showSlider == true ) {
       this.notification.showMessage = false;
     }
   }
   //
   changeStep() {
-    if ( this.notification.showMessage == true ) {
-      this.delay_notification = true;
-      this.notification.showMessage = false;
-    }
     if ( this.steps.length == this.step + 1 ) {
       this.closeWalk();
     }
@@ -60,9 +55,7 @@ export class WalkthroughComponent implements OnInit {
   }
   //
   closeWalk() {
-    if (this.delay_notification) {
-      this.notification.showMessage = true;
-    }
+    this.notification.showMessage = true;
     this.session.watchSlider(false);
   }
 }
