@@ -7,17 +7,17 @@ export const environment = {
     center: {lat: -34.905897, lng: -56.191406},
     code: 'UY',
     id: 1,
-    predefinedSearch: [],
+    ///predefinedSearch: [],
     locale: 'es_UY'
   },
   Colombia: {
     center: {lat: 4.65087958676269, lng: -74.05580210009016},
     code: 'CO',
     id: 2,
-    predefinedSearch: [],
+    //predefinedSearch: [],
     locale: 'es_CO'
   },
   geocoder: 'https://nominatim.openstreetmap.org/',
   pinSaturation: 200,
-  apiVersion: '1.4'
+  apiVersion: '2.0'
 };
