@@ -55,6 +55,7 @@ export class MapaPage implements OnInit {
   autoSearchItem:any;
   loadContainers: string;
   loadSubContainers: string;
+  panelTop = true;
 
   constructor(
     private geocoder: NativeGeocoder,
@@ -79,6 +80,9 @@ export class MapaPage implements OnInit {
     // this.app = document.querySelector('app-search');
     this.session.homeUrl = this.router.url.split('?')[0];
     this.map.loadMap();
+    if ( window.innerWidth >= 560 ) {
+      this.panelTop = false;
+    }
     this.loadServicesPane();
     this.loadInfoPane();
     //Subscribe after initial data is loaded
@@ -273,7 +277,10 @@ export class MapaPage implements OnInit {
         this.gotoLocation(false);
       }
       else {
-        this.gotoLocation(true);
+        //Only in map page
+        if ( event && (event.url == "/" || event.url == "/intro/mapa") ) {
+          this.gotoLocation(true);
+        }
       }
     }
   }
@@ -288,19 +295,20 @@ export class MapaPage implements OnInit {
   //   console.log(this.mapEl.clientHeight);
   // }
   //
-  breakPointMapCupertino(){
-     document.querySelector('.info-pane').className = 'info-pane cupertino-pane ' + this.infoPane.currentBreak();
+  breakPointMapCupertino(className){
+    var cupertinoBrake = '';
+    if (className == 'services-pane') {
+      cupertinoBrake = this.servicesPane.currentBreak();
+    }
+    else {
+      cupertinoBrake = this.infoPane.currentBreak();
+    }
+     document.querySelector('.'+className).className = className + ' cupertino-pane ' + cupertinoBrake;
   }
   //
   loadInfoPane() {
-    let top = true;
     var initPane: ('top' | 'middle' | 'bottom');
     initPane = "middle";
-    if ( window.innerWidth >= 560 ) {
-      top = false;
-      //topBreak = Math.round(window.innerHeight*.7);
-      document.querySelector(".cupertino-pane").classList.add("desktop");
-    }
     let panelOptions = {
       parentElement: '.map-section', // Parent container
       // backdrop: true,
@@ -320,7 +328,7 @@ export class MapaPage implements OnInit {
       initialBreak: initPane,
       breaks: {
         top: {
-          enabled: top,
+          enabled: this.panelTop,
           //offset: (topBreak),
           height: Math.round(window.innerHeight*.9),
         },
@@ -330,7 +338,7 @@ export class MapaPage implements OnInit {
           height: Math.round(window.innerHeight*.65),
         },
       },
-      onTransitionEnd: () => this.breakPointMapCupertino(),
+      onTransitionEnd: () => this.breakPointMapCupertino('info-pane'),
       onWillPresent: () => this.cupertinoShow(),
       // onBackdropTap: () => this.infoPane.hide(),
       onWillDismiss: () => this.cupertinoHide(),
@@ -343,7 +351,6 @@ export class MapaPage implements OnInit {
   }
   //
   loadServicesPane() {
-    let top = false;
     var initPane: ('top' | 'middle' | 'bottom');
     initPane = "bottom";
     let panelServices = {
@@ -361,7 +368,7 @@ export class MapaPage implements OnInit {
       topperOverflowOffset: 200,
       breaks: {
         top: {
-          enabled: top,
+          enabled: this.panelTop,
           //offset: (topBreak),
           height: Math.round(window.innerHeight*.9),
         },
@@ -376,7 +383,7 @@ export class MapaPage implements OnInit {
           height: 210,
         },
       },
-      //onTransitionEnd: () => this.breakPointMapCupertino(),
+      onTransitionEnd: () => this.breakPointMapCupertino('services-pane'),
       //onWillPresent: () => this.cupertinoShow(),
       // onBackdropTap: () => this.infoPane.hide(),
       //onWillDismiss: () => this.cupertinoHide(),
@@ -391,7 +398,12 @@ export class MapaPage implements OnInit {
   //
   toggleServices() {
     if ( this.servicesPane.currentBreak() == 'bottom' ) {
-      this.servicesPane.moveToBreak('middle');
+      if ( this.panelTop ) {
+        this.servicesPane.moveToBreak('top');
+      }
+      else {
+        this.servicesPane.moveToBreak('middle');
+      }
     }
     else {
       this.servicesPane.moveToBreak('bottom');
@@ -463,17 +475,13 @@ export class MapaPage implements OnInit {
   }
   //
   hidePane() {
-    this.list = 0;
     //Si está en sub-programa vuelvo al listado
     if ( this.list == 2 || this.list == 4 ) {
       this.map.map.removeLayer(this.map.subZone);
-      this.map.showZones(true);
       //Salvo que sea un único subprograma
-      if (this.subprograms.length <= 1 ) {
-        this.hidePane();
-      }
-      else {
-        this.servicesPane.moveToBreak('middle');
+      if (this.subprograms.length > 1 ) {
+        this.map.showZones(true);
+        this.servicesPane.moveToBreak('top');
       }
     }
     else {
@@ -484,11 +492,11 @@ export class MapaPage implements OnInit {
       else {
         this.map.showZones(false);
       }
-      this.infoPane.destroy({animate: true});
-      setTimeout( () => {
-        this.map.map.invalidateSize();
-      }, 500);
     }
+    this.infoPane.destroy({animate: true});
+    setTimeout( () => {
+      this.map.map.invalidateSize();
+    }, 500);
   }
   //
   gotoLocation(load=true) {
@@ -723,7 +731,7 @@ export class MapaPage implements OnInit {
   //
   subprogramShow(index: number, list = 4, subprogram?) {
     if ( subprogram != null ) {
-      this.subprogram = subprogram
+      this.subprogram = subprogram;
     }
     else {
       this.subprogram = this.subprograms[index];
@@ -737,6 +745,9 @@ export class MapaPage implements OnInit {
       }
     }
     this.map.showSubZone(this.zones.features[i]);
+    if ( this.servicesPane.currentBreak() == 'top' ) {
+      this.servicesPane.moveToBreak('middle');
+    }
     this.infoPane.present({animate: true});
   }
   //

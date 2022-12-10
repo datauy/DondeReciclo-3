@@ -19,10 +19,10 @@
         overflow-y: auto;
       }
       &.middle .scrollable-div {
-        height: 45vh;
+        height: 41vh;
       }
       &.top .scrollable-div {
-        height: 68vh;
+        height: 66vh;
       }
       .pane-container {
         height: 100%;
@@ -149,9 +149,6 @@
       }
       .subprogram-list {
         .scrollable-div {
-          position: relative;
-          overflow-y: auto;
-          height: 44vh;
           ion-item {
             cursor: pointer;
           }
