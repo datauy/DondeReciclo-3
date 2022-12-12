@@ -233,10 +233,17 @@ export class ApiService<T=any> {
       }
     ));
   }
-  getSubprograms4Location(latlng: number[], distance?: number) {
+  getSubprograms4Location(latlng: number[], distance?: number, dimensions?: string) {
+    let ids = null;
+    if ( this.session.searchItem != undefined){
+      ids = this.session.searchItem.ids != undefined ? this.session.searchItem.ids : this.session.searchItem.id;
+    }
     var req = environment.backend + "subprograms4location?version="+environment.apiVersion+"&wkt=POINT("+latlng[1]+' '+latlng[0]+')';
     if ( distance != null ) {
       req += '&distance=' + distance;
+    }
+    if ( this.session.searchDimensions.length >= 1 && ids !== null ) {
+      req += '&dimensions=' + ids;
     }
     return  this.request.get(req).pipe(map(
       (result: any) => {
