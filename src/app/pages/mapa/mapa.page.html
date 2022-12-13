@@ -8,7 +8,7 @@
   <ion-button color="transparent" [ngClass]="geoLocationActive ? 'map-buttons map-locate active' : 'map-buttons map-locate'" (click)="geolocate()">
     <ion-icon name="dr-locate"></ion-icon>
   </ion-button>
-  <ion-button color="transparent" class="map-buttons map-zones" (click)="getZones()">
+  <ion-button color="transparent" [ngClass]="'map-buttons map-zones zone-'+zoneVisible" (click)="getZones()">
     <ion-icon name="dr-zones"></ion-icon>
     <span *ngIf="zoneVisible == 1">Zonas de recolección</span>
   </ion-button>

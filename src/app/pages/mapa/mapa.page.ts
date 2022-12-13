@@ -299,6 +299,14 @@ export class MapaPage implements OnInit {
     var cupertinoBrake = '';
     if (className == 'services-pane') {
       cupertinoBrake = this.servicesPane.currentBreak();
+      if (cupertinoBrake == 'bottom') {
+        this.zoneVisible = 0;
+        this.map.removeZones();
+      }
+      else {
+        this.zoneVisible = 3;
+        this.map.loadZones(this.zones);
+      }
     }
     else {
       cupertinoBrake = this.infoPane.currentBreak();
@@ -774,10 +782,7 @@ export class MapaPage implements OnInit {
       this.api.getZones4Boundaries(bounds).subscribe(
         (zones) => {
           this.map.removeZones();
-          if ( !zoneBtn.classList.contains('selected') ) {
-            zoneBtn.classList.remove('active');
-            zoneBtn.classList.add('selected');
-          }
+          zoneBtn.classList.remove('active');
           this.zoneVisible = 3;
           if ( zones['features'].length == 0 && getNext ) {
             this.api.getNextZone( [ this.map.map.getCenter().lat, this.map.map.getCenter().lng ] ).subscribe(

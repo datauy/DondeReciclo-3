@@ -257,10 +257,11 @@
 
     .map-zones {
       top: 335px;
+      z-index: 501;
       &.active {
         width: 220px;
       }
-      &.selected {
+      &.zone-3 {
         background: var(--pale-olive-green);
         opacity: 0.9;
       }
