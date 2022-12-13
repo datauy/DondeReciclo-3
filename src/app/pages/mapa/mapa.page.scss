@@ -16,6 +16,7 @@
         }
       }
       .scrollable-div {
+        padding-bottom: 30px;
         overflow-y: auto;
       }
       &.middle .scrollable-div {
@@ -260,7 +261,7 @@
       &.active {
         width: 220px;
       }
-      &.selected {
+      &.zone-3 {
         background: var(--pale-olive-green);
         opacity: 0.9;
       }

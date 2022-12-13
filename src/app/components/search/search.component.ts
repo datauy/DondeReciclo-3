@@ -139,9 +139,11 @@ export class SearchComponent {
   dimensionsFilter() {
     if ( this.showAllDimensions ) {
       // Lo devolvemos al flujo normal
+
       if ( this.session.searchItem != undefined && this.session.searchItem.type == 'dimensions' ) {
         delete this.session.searchItem;
         this.map.mapChanges();
+        this.map.clickZone(0.0002);
       }
     }
     else {
@@ -165,6 +167,8 @@ export class SearchComponent {
       let center = this.map.map.getCenter();
       let pos = [center.lat, center.lng];
       this.session.searchItem = item;
+      //Trigger zone services reload
+      this.map.clickZone(0.0002);
       this.api.getContainersByMaterials(item.type+"="+item.ids, pos)
       .subscribe((containers) => {
         this.map.loadMarkers(containers, true);

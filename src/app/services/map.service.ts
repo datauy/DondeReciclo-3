@@ -375,6 +375,8 @@ export class MapService {
     const _this = this;
     var bounds = [];
     var zonesData = L.featureGroup();
+
+    this.removeZones();
     L.geoJSON(
       layers, {
         onEachFeature: function (feature, layer) {
@@ -385,8 +387,8 @@ export class MapService {
         }
       }
     );
-    zonesData.addTo(this.map);
     this.zones = zonesData;
+    zonesData.addTo(this.map);
     if ( zoom2zone && bounds.length > 0 ) {
       bounds.push(this.userPosition);
       this.currentBounds = bounds;
