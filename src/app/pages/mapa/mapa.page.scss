@@ -16,6 +16,7 @@
         }
       }
       .scrollable-div {
+        padding-bottom: 30px;
         overflow-y: auto;
       }
       &.middle .scrollable-div {
@@ -257,7 +258,6 @@
 
     .map-zones {
       top: 335px;
-      z-index: 501;
       &.active {
         width: 220px;
       }

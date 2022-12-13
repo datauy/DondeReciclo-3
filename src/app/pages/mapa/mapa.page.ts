@@ -383,7 +383,7 @@ export class MapaPage implements OnInit {
         middle: {
           enabled: true,
           //offset: window.innerHeight*.7,
-          height: Math.round(window.innerHeight*.65),
+          height: Math.round(window.innerHeight*.62),
         },
         bottom: {
           enabled: true,
