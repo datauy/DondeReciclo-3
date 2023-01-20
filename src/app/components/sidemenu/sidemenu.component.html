@@ -15,9 +15,10 @@
         </ion-item>
         <ion-item
           *ngIf="session.country == 'Uruguay'"
+          (click)="toggleMenu()"
           lines="none"
           href="https://cempre.org.uy/category/informacion/fichas-tecnicas/"
-          target="_blank"
+          target="_system"
           routerLinkActive="active-item"
           detail-icon="none">
           <ion-icon slot="start" name="dr-fichas"></ion-icon>
@@ -29,9 +30,10 @@
         </ion-item>
         <ion-item
           *ngIf="session.country == 'Uruguay'"
+          (click)="toggleMenu()"
           lines="none"
           href="https://cempre.org.uy/buenas-practicas/"
-          target="_blank"
+          target="_system"
           routerLinkActive="active-item"
           detail-icon="none">
           <ion-icon slot="start" name="dr-consejos"></ion-icon>
