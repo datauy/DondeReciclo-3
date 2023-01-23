@@ -1,0 +1,23 @@
+<app-header display="full"></app-header>
+
+<!--Uruguay-->
+
+<ion-content class="inner-scroll" *ngIf="session.country == 'Uruguay'">
+  <ion-grid>
+    <ion-row class="ion-justify-content-center section-header">
+      <ion-col  size-md="11" size-lg="10" size-xs="12">
+        <div class="section-header">
+          <h1>Estadísticas</h1>
+          <div style="text-align:center">
+          <apx-chart
+            [series]="chartOptions.series"
+            [chart]="chartOptions.chart"
+            [xaxis]="chartOptions.xaxis"
+            [title]="chartOptions.title"
+          ></apx-chart>
+        </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

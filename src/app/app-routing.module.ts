@@ -5,6 +5,7 @@ import { PrivacyPolicyPage } from './components/static-pages/privacy_policy.page
 import { RecyclersPage } from './components/static-pages/recyclers.page';
 import { ContactFormComponent } from 'src/app/components/contact-form/contact-form.component';
 import { AboutPage } from 'src/app/components/static-pages/about.page';
+import { StatsPage } from './components/static-pages/stats.page';
 
 
 const routes: Routes = [
@@ -48,6 +49,10 @@ const routes: Routes = [
   {
     path: 'sobre-el-proyecto',
     component: AboutPage
+  },
+  {
+    path: 'estadisticas',
+    component: StatsPage
   },
   {
     path: 'contacto',
