@@ -52,8 +52,11 @@ export class SidemenuComponent implements OnInit {
     this.auth.isLoggedIn();
   }
 
-  toggleMenu(){
-    this.menuCtrl.toggle(); //Add this method to your button click function
+  toggleMenu( link = null ){
+    this.menuCtrl.toggle();
+    if ( link ) {
+      window.open(link, '_system');
+    }
   }
   //
   introSlide() {
