@@ -6,11 +6,13 @@ import { AuthService } from "src/app/services/auth.service";
 import { environment } from 'src/environments/environment';
 import { MapService } from "src/app/services/map.service";
 import { Router } from "@angular/router";
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
   selector: 'app-sidemenu',
   templateUrl: './sidemenu.component.html',
   styleUrls: ['./sidemenu.component.scss'],
+  providers: [InAppBrowser]
 })
 export class SidemenuComponent implements OnInit {
 
@@ -44,7 +46,8 @@ export class SidemenuComponent implements OnInit {
     public session: SessionService,
     public auth: AuthService,
     private router: Router,
-    public map: MapService
+    public map: MapService,
+    private iab: InAppBrowser
   ) {
   }
 
@@ -55,7 +58,7 @@ export class SidemenuComponent implements OnInit {
   toggleMenu( link = null ){
     this.menuCtrl.toggle();
     if ( link ) {
-      window.open(link, '_system');
+      this.iab.create(link, '_system');
     }
   }
   //
