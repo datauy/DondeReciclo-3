@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { IonSlides } from '@ionic/angular';
 import { SessionService } from 'src/app/services/session.service';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
   selector: 'app-consejos',
   templateUrl: './consejos.page.html',
   styleUrls: ['./consejos.page.scss'],
+  providers: [InAppBrowser]
 })
 export class ConsejosPage implements OnInit {
   @ViewChild('advise', {static: false}) slider: IonSlides;
@@ -20,6 +22,7 @@ export class ConsejosPage implements OnInit {
 
   constructor(
     public session: SessionService,
+    private iab: InAppBrowser
   ) { }
 
   ngOnInit() {
@@ -29,5 +32,8 @@ export class ConsejosPage implements OnInit {
   }
   prevSlide() {
     this.slider.slidePrev();
+  }
+  goTo(link) {
+    this.iab.create(link, '_system');
   }
 }

@@ -28,8 +28,8 @@
 
         <ion-grid class="ion-grid-inv">
           <ion-row>
-            <ion-col><a href="http://www.cempre.org.uy"><img src="/assets/img/cempre.svg" alt="CEMPRE (Compromiso Empresarial Para el Reciclaje)"></a></ion-col>
-            <ion-col><a href="https://www.data.org.uy"><img src="/assets/img/data.svg" alt="Data Uruguay"></a></ion-col>
+            <ion-col><a (click)="goTo('http://www.cempre.org.uy')"><img src="/assets/img/cempre.svg" alt="CEMPRE (Compromiso Empresarial Para el Reciclaje)"></a></ion-col>
+            <ion-col><a (click)="goTo('https://www.data.org.uy')"><img src="/assets/img/data.svg" alt="Data Uruguay"></a></ion-col>
           </ion-row>
         </ion-grid>
 
@@ -37,35 +37,35 @@
 
         <ion-grid class="ion-grid-inv">
           <ion-row>
-            <ion-col><a href="https://www.un-page.org/about/who-we-are"><img src="/assets/img/page.svg" alt="PAGE Uruguay"></a></ion-col>
-            <ion-col><a href="https://www.uy.undp.org/"><img src="/assets/img/pnud.svg" alt="Programa de las Naciones Unidas para el Desarrollo"></a></ion-col>
-            <ion-col><a href="https://www.ande.org.uy/"><img src="/assets/img/ande.svg" alt="Logo ANDE"></a></ion-col>
+            <ion-col><a (click)="goTo('https://www.un-page.org/about/who-we-are')"><img src="/assets/img/page.svg" alt="PAGE Uruguay"></a></ion-col>
+            <ion-col><a (click)="goTo('https://www.uy.undp.org/')"><img src="/assets/img/pnud.svg" alt="Programa de las Naciones Unidas para el Desarrollo"></a></ion-col>
+            <ion-col><a (click)="goTo('https://www.ande.org.uy/')"><img src="/assets/img/ande.svg" alt="Logo ANDE"></a></ion-col>
           </ion-row>
         </ion-grid>
 
-          <p>¿Dónde Reciclo? es posible gracias al apoyo de nuestros <a href="https://dondereciclo.uy/empresas">auspiciantes</a>.</p>
+          <p>¿Dónde Reciclo? es posible gracias al apoyo de nuestros <a href="/empresas">auspiciantes</a>.</p>
 
         <h2>Contacto</h2>
         <p>Dependiendo del tema de tu consulta, es conveniente contactar a las distintas organizaciones que forman parte de este proyecto.</p>
         <p>Consultas sobre el proyecto en general o reciclaje:</p>
         <ion-row class="ion-justify-content-center section-header">
           <ion-col  size-md="7" size-lg="7" size-xs="12">
-            <ion-button size="large" href="/intro/contacto?subject=CEMPRE" class="submit">Contacto CEMPRE Uruguay</ion-button>
+            <ion-button size="large" href="/contacto?subject=CEMPRE" class="submit">Contacto CEMPRE Uruguay</ion-button>
         <ion-buttons>
             <span>Redes sociales:</span>
-            <ion-button href="https://twitter.com/CempreUy" target=_blank fill="clear">
+            <ion-button (click)="goTo('https://twitter.com/CempreUy')" fill="clear">
               <ion-icon slot="icon-only"
                   name="dr-twitter"></ion-icon>
               </ion-button>
-              <ion-button href="https://www.instagram.com/dondereciclouy/" target=_blank fill="clear">
+              <ion-button (click)="goTo('https://www.instagram.com/dondereciclouy/')" fill="clear">
                 <ion-icon slot="icon-only"
                   name="dr-instagram"></ion-icon>
               </ion-button>
-              <ion-button href="https://www.facebook.com/compromisoempresarialparaelreciclaje" target=_blank fill="clear">
+              <ion-button (click)="goTo('https://www.facebook.com/compromisoempresarialparaelreciclaje')" fill="clear">
                 <ion-icon slot="icon-only"
                   name="dr-facebook"></ion-icon>
               </ion-button>
-              <ion-button href="https://www.linkedin.com/company/cempreuruguay" target=_blank fill="clear">
+              <ion-button (click)="goTo('https://www.linkedin.com/company/cempreuruguay')" fill="clear">
                 <ion-icon slot="icon-only"
                   name="dr-linked-in"></ion-icon>
               </ion-button>
@@ -75,22 +75,22 @@
         <p>Consultas sobre la herramienta:</p>
         <ion-row class="ion-justify-content-center section-header">
           <ion-col  size-md="7" size-lg="7" size-xs="12">
-            <ion-button  size="large" href="/intro/contacto?subject=DATA" class="submit">Contacto DATA Uruguay</ion-button>
+            <ion-button  size="large" href="/contacto?subject=DATA" class="submit">Contacto DATA Uruguay</ion-button>
         <ion-buttons>
             <span>Redes sociales:</span>
-            <ion-button href="https://twitter.com/DATAuy" target=_blank fill="clear">
+            <ion-button (click)="goTo('https://twitter.com/DATAuy')" fill="clear">
               <ion-icon slot="icon-only"
                 name="dr-twitter"></ion-icon>
             </ion-button>
-            <ion-button href="https://www.instagram.com/datauy/" target=_blank fill="clear">
+            <ion-button (click)="goTo('https://www.instagram.com/datauy/')" fill="clear">
               <ion-icon slot="icon-only"
                 name="dr-instagram"></ion-icon>
             </ion-button>
-            <ion-button href="https://www.facebook.com/DATAUruguay" target=_blank fill="clear">
+            <ion-button (click)="goTo('https://www.facebook.com/DATAUruguay')" fill="clear">
               <ion-icon slot="icon-only"
                 name="dr-facebook"></ion-icon>
             </ion-button>
-            <ion-button href="https://www.linkedin.com/company/DATAuy" target=_blank fill="clear">
+            <ion-button (click)="goTo('https://www.linkedin.com/company/DATAuy')" fill="clear">
               <ion-icon slot="icon-only"
                 name="dr-linked-in"></ion-icon>
             </ion-button>
@@ -103,12 +103,12 @@
         </p>
         <ion-row class="ion-justify-content-center section-header">
           <ion-col  size-md="7" size-lg="7" size-xs="12">
-            <ion-button  size="large" href="https://drive.google.com/open?id=1O5wmrN1P0rF6aytNaVi_OUr1zMOs1pj2" target="_blank" class="submit">Descargar materiales</ion-button>
+            <ion-button  size="large" (click)="goTo('https://drive.google.com/open?id=1O5wmrN1P0rF6aytNaVi_OUr1zMOs1pj2')" class="submit">Descargar materiales</ion-button>
           </ion-col>
        </ion-row>
         <h2>Antecedentes</h2>
         <p>
-          Una primera versión de esta herramienta, disponible en la web fue desarrollada y diseñada por <a href="https://twitter.com/agustinkry">Agustín Kryger</a> y <a href="https://twitter.com/hiroagustin">Agustín Díaz</a>,
+          Una primera versión de esta herramienta, disponible en la web fue desarrollada y diseñada por <a (click)="goTo('https://twitter.com/agustinkry')">Agustín Kryger</a> y <a (click)="goTo('https://twitter.com/hiroagustin')">Agustín Díaz</a>,
           en coordinación con DATA Uruguay, de forma voluntaria. La misma utilizaba datos de la Intendencia de Montevideo para mostrar en qué lugares se podían depositar pilas, latas, plástico y vidrio.
         </p>
         <p>
@@ -121,17 +121,17 @@
         </p>
         <h2>Datos/servicios abiertos que usa la aplicación</h2>
         <p>
-        Los datos utilizados en esta aplicación se encuentran disponibles para su reutilización a través del <a href="https://catalogodatos.gub.uy/">Catálogo Nacional de Datos Abiertos</a> de AGESIC y/u otras fuentes, como datos abiertos, en formatos abiertos.
+        Los datos utilizados en esta aplicación se encuentran disponibles para su reutilización a través del <a (click)="goTo('https://catalogodatos.gub.uy/')">Catálogo Nacional de Datos Abiertos</a> de AGESIC y/u otras fuentes, como datos abiertos, en formatos abiertos.
         </p>
         <ul>
-        <li><a href="https://catalogodatos.gub.uy/dataset/data-contenedores-para-la-recepcion-de-residuos-reciclables-donde-reciclo">Contenedores para la recepción de residuos reciclables (¿Dónde Reciclo?)</a>
-        <li><a href="https://catalogodatos.gub.uy/dataset/intendencia-montevideo-contenedores_reciclable">Contenedores de residuos reciclables (plásticos, latas, vidrios y pilas)</a>
-        <li><a href="https://catalogodatos.gub.uy/dataset/intendencia-montevideo-contenedores-residuos-secos-domicialiarios">Contenedores para clasificación de residuos secos domiciliarios</a>
+        <li><a (click)="goTo('https://catalogodatos.gub.uy/dataset/data-contenedores-para-la-recepcion-de-residuos-reciclables-donde-reciclo')">Contenedores para la recepción de residuos reciclables (¿Dónde Reciclo?)</a>
+        <li><a (click)="goTo('https://catalogodatos.gub.uy/dataset/intendencia-montevideo-contenedores_reciclable')">Contenedores de residuos reciclables (plásticos, latas, vidrios y pilas)</a>
+        <li><a (click)="goTo('https://catalogodatos.gub.uy/dataset/intendencia-montevideo-contenedores-residuos-secos-domicialiarios')">Contenedores para clasificación de residuos secos domiciliarios</a>
         </li>
         </ul>
         <h2>Software Libre</h2>
         <p>
-        Un programa es software libre si los usuarios tienen la libertad de ejecutar, copiar, distribuir, estudiar, modificar y mejorar el software, a través de cuatro libertades esenciales (<a href="https://www.gnu.org/philosophy/free-sw.html">Definición de software libre</a>):
+        Un programa es software libre si los usuarios tienen la libertad de ejecutar, copiar, distribuir, estudiar, modificar y mejorar el software, a través de cuatro libertades esenciales (<a (click)="goTo('https://www.gnu.org/philosophy/free-sw.html')">Definición de software libre</a>):
         </p>
         <ul>
         <li>Libertad de ejecutar el programa como se desee, con cualquier propósito (libertad 0).
@@ -141,10 +141,10 @@
         </li>
         </ul>
         <p>
-        DATA Uruguay incentiva la reutilización de este software para cualquier propósito, brindándolo bajo <a href="https://www.gnu.org/licenses/gpl-3.0.html">licencia GPLv3</a> para que otras organizaciones, gobiernos, empresas o ciudadanos puedan sacar provecho del trabajo aquí realizado.
+        DATA Uruguay incentiva la reutilización de este software para cualquier propósito, brindándolo bajo <a (click)="goTo('https://www.gnu.org/licenses/gpl-3.0.html')">licencia GPLv3</a> para que otras organizaciones, gobiernos, empresas o ciudadanos puedan sacar provecho del trabajo aquí realizado.
         </p>
         <ul>
-        <li><a href="https://github.com/datauy/DondeReciclo-3/">Enlace Repositorio Github</a>
+        <li><a (click)="goTo('https://github.com/datauy/DondeReciclo-3/')">Enlace Repositorio Github</a>
         </li>
         </ul>
         <h2>Términos y condiciones</h2>
@@ -156,11 +156,11 @@
         </p>
         <h2>Procesamiento de datos</h2>
         <p>
-        Los análisis y visualizaciones provistos por esta aplicación son realizados por DATA Uruguay. Estas operaciones están disponibles para consulta a través del <a href="https://github.com/datauy/DondeReciclo-3/">código de la aplicación disponible en GitHub</a>, así como el resto del código fuente.
+        Los análisis y visualizaciones provistos por esta aplicación son realizados por DATA Uruguay. Estas operaciones están disponibles para consulta a través del <a (click)="goTo('https://github.com/datauy/DondeReciclo-3/')">código de la aplicación disponible en GitHub</a>, así como el resto del código fuente.
         </p>
         <h2>Publicaciones, casos de estudio y materiales</h2>
         <ul>
-        <li><a href="https://repositorio.cepal.org/bitstream/handle/11362/37158/1/S1420677_en.pdf">Big Data and Open Data as Sustainability Tools</a>
+        <li><a (click)="goTo('https://repositorio.cepal.org/bitstream/handle/11362/37158/1/S1420677_en.pdf')">Big Data and Open Data as Sustainability Tools</a>
         </li>
         </ul>
         <h2>Cómo se financia el proyecto</h2>
@@ -176,18 +176,18 @@
         </li>
         </ul>
         <p>
-        La composición de los fondos cada año varía según oportunidades y proyectos, por más información nuestros balances financieros están disponibles para su consulta en <a href="https://data.org.uy/transparencia/">nuestro sitio web</a>.
+        La composición de los fondos cada año varía según oportunidades y proyectos, por más información nuestros balances financieros están disponibles para su consulta en <a (click)="goTo('https://data.org.uy/transparencia/')">nuestro sitio web</a>.
         </p>
         <p>
         En el caso concreto de ¿Dónde Reciclo? en Uruguay, el proyecto inicial de 2013 se realizó de forma voluntaria con la colaboración de Agustín Kryger y Agustín Díaz. En 2016, cuando surge la alianza con CEMPRE Uruguay, se cuenta con la colaboración económica de SCJohnson y Salus, a lo que se sumó parte de una cooperación técnica preexistente del BID con DATA Uruguay. Para la tercera versión, en 2020 se cuenta con fondos aportados por Salus, Conaprole y CocaCola Uruguay.
         </p>
         <h2>Fotos</h2>
         <p>
-        Las imágenes en el siguiente enlace corresponden a eventos relacionados con este proyecto y están bajo una <a href="https://creativecommons.org/licenses/by/4.0/deed.es">Licencia Creative Commons Atribución 4.0 Internacional</a>. Las licencias CC aclaran expresamente que sus términos no cubren los derechos relacionados con la "privacidad ni otros derechos personales similares." Las "libertades" que se otorgan mediante el uso de licencias CC, no incluyen la potestad de publicar la imagen propia de terceros sin su autorización. Sin embargo, se entiende que éstas imágenes de eventos públicos están incluídas dentro de la excepción planteada en el último inciso del artículo 21 de la Ley 9.739 (Derechos de Autor): "<em>Es libre la publicación del retrato cuando se relacione con fines científicos, didácticos y, en general, culturales o con hechos o acontecimientos de interés público, o que se hubieren realizado en público"</em>. Por más información consultar: <a href="http://www.creativecommons.uy/uso-de-licencias-cc-en-obras-que-contengan-la-imagen-de-personas/?preview=true">Uso de licencias CC en obras que contengan imágenes de personas</a> (Creative Commons Uruguay).
+        Las imágenes en el siguiente enlace corresponden a eventos relacionados con este proyecto y están bajo una <a (click)="goTo('https://creativecommons.org/licenses/by/4.0/deed.es')">Licencia Creative Commons Atribución 4.0 Internacional</a>. Las licencias CC aclaran expresamente que sus términos no cubren los derechos relacionados con la "privacidad ni otros derechos personales similares." Las "libertades" que se otorgan mediante el uso de licencias CC, no incluyen la potestad de publicar la imagen propia de terceros sin su autorización. Sin embargo, se entiende que éstas imágenes de eventos públicos están incluídas dentro de la excepción planteada en el último inciso del artículo 21 de la Ley 9.739 (Derechos de Autor): "<em>Es libre la publicación del retrato cuando se relacione con fines científicos, didácticos y, en general, culturales o con hechos o acontecimientos de interés público, o que se hubieren realizado en público"</em>. Por más información consultar: <a (click)="goTo('http://www.creativecommons.uy/uso-de-licencias-cc-en-obras-que-contengan-la-imagen-de-personas/?preview=true')">Uso de licencias CC en obras que contengan imágenes de personas</a> (Creative Commons Uruguay).
         </p>
         <ion-row class="ion-justify-content-center section-header">
           <ion-col  size-md="7" size-lg="7" size-xs="12">
-            <ion-button  size="large" href="https://www.flickr.com/photos/datauy/collections/72157656766249026/" target="_blank" class="submit">Colección en Flickr</ion-button>
+            <ion-button  size="large" (click)="goTo('https://www.flickr.com/photos/datauy/collections/72157656766249026/')" class="submit">Colección en Flickr</ion-button>
           </ion-col>
         </ion-row>
         <h2>Notas de prensa</h2>
@@ -196,7 +196,7 @@
         </p>
         <ion-row class="ion-justify-content-center section-header">
           <ion-col  size-md="7" size-lg="7" size-xs="12">
-            <ion-button  size="large" href="https://raindrop.io/collection/10558883" target="_blank" class="submit">Ver notas de prensa</ion-button>
+            <ion-button  size="large" (click)="goTo('https://raindrop.io/collection/10558883')" target="_blank" class="submit">Ver notas de prensa</ion-button>
           </ion-col>
         </ion-row>
       </ion-col>
@@ -242,7 +242,7 @@
         <p>Consultas sobre el proyecto en general o reciclaje:</p>
         <ion-row class="ion-justify-content-center section-header">
           <ion-col  size-md="7" size-lg="7" size-xs="12">
-            <ion-button size="large" href="http://cempre.org.co" class="submit">CEMPRE Colombia</ion-button>
+            <ion-button size="large" (click)="goTo('http://cempre.org.co')" class="submit">CEMPRE Colombia</ion-button>
           </ion-col>
         </ion-row>
 
@@ -257,7 +257,7 @@
         </p>
         <h2>Procesamiento de datos</h2>
         <p>
-        Los análisis y visualizaciones provistos por esta aplicación son realizados por DATA Uruguay. Estas operaciones están disponibles para consulta a través del <a href="https://github.com/datauy/DondeReciclo-3/">código de la aplicación disponible en GitHub</a>, así como el resto del código fuente.
+        Los análisis y visualizaciones provistos por esta aplicación son realizados por DATA Uruguay. Estas operaciones están disponibles para consulta a través del <a (click)="goTo('https://github.com/datauy/DondeReciclo-3/')">código de la aplicación disponible en GitHub</a>, así como el resto del código fuente.
         </p>
 
       </ion-col>

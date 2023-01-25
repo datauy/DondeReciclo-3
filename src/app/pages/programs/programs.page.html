@@ -32,9 +32,9 @@
         <div class="slide-content">
           <div class="slide-header">
             <h2 class="title" [innerHTML]="slide.shortname"></h2>
-            <a href="{{slide.responsable_url}}" target="_blank" [innerHTML]="slide.responsable"></a>
+            <a (click)="goTo(slide.responsable_url)" [innerHTML]="slide.responsable"></a>
             <div class="slide-description" [innerHTML]="slide.information"></div>
-            <a class="more" href="{{slide.more_info}}" target="_blank">Más información</a>
+            <a class="more" (click)="goTo(slide.more_info)">Más información</a>
           </div>
           <div class="slide-cobertura section">
             <div class="slide-title">Cobertura</div>
@@ -46,7 +46,7 @@
           <div class="slide-supporters section">
             <div class="slide-title">Apoyan</div>
             <div class="slide-body-supporters" *ngFor="let supporter of slide.supporters_arr">
-                <a href="{{supporter.url}}" [innerHTML]="supporter.name"></a>
+                <a (click)="goTo(supporter.url)" [innerHTML]="supporter.name"></a>
             </div>
           </div>
           <div class="receives section">
@@ -91,7 +91,7 @@
 
     <p>En desarrollo de lo anterior, el Ministerio de Ambiente, Vivienda y Desarrollo Territorial, hoy Ministerio de Ambiente y Desarrollo Sostenible, ha expedido regulación para los sectores de plaguicidas, medicamentos, baterías plomo ácido, pilas y/o acumuladores, llantas, bombillas y computadores y/o periféricos.</p>
 
-    <p>A continuación se mencionan algunos de los programas posconsumo, para más información se puede ingresar a la <a href="https://www.minambiente.gov.co/index.php/component/content/article/28-plantilla-asuntos-ambientales-y-sectorial-y-urbana">pagina del Ministerio</a>.</p>
+    <p>A continuación se mencionan algunos de los programas posconsumo, para más información se puede ingresar a la <a (click)="goTo('https://www.minambiente.gov.co/index.php/component/content/article/28-plantilla-asuntos-ambientales-y-sectorial-y-urbana')">pagina del Ministerio</a>.</p>
 
     <h3>Programas posconsumo de residuos</h3>
 

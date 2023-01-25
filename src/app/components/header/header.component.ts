@@ -7,11 +7,13 @@ import { MapService } from "src/app/services/map.service";
 
 import { environment } from 'src/environments/environment';
 import { SessionService } from 'src/app/services/session.service';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  providers: [InAppBrowser]
 })
 export class HeaderComponent {
   @Input('title') title: any;
@@ -26,8 +28,12 @@ export class HeaderComponent {
     public modalController: ModalController,
     public session: SessionService,
     private location: Location,
-    private map: MapService
+    private map: MapService,
+    private iab: InAppBrowser
   ) {
+  }
+  goTo(link) {
+    this.iab.create(link, '_system');
   }
   //
   goBack(){
