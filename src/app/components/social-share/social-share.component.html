@@ -4,7 +4,7 @@
   <div class="social-links">
     <ion-toolbar>
       <ion-buttons>
-        <ion-button href="https://www.instagram.com/dondereciclouy/" target="_system" fill="clear">
+        <ion-button (click)="goTo('https://www.instagram.com/dondereciclouy/')" fill="clear">
           <ion-icon slot="icon-only"
             name="dr-instagram"></ion-icon>
         </ion-button>
@@ -18,15 +18,15 @@
   <div class="social-links">
     <ion-toolbar>
       <ion-buttons>
-        <ion-button [href]="'https://twitter.com/intent/tweet/?text=%C2%A1Ten%C3%A9s%20que%20probar%20%23DondeReciclo!%20Informaci%C3%B3n%20sobre%20puntos%20de%20recepci%C3%B3n%20de%20residuos%20reciclables%20y%20consejos%20para%20clasificar%20en%20casa.&amp;url=http%3A%2F%2Fdondereciclo.'+environment[this.session.country].code.toLowerCase()" target="_system" fill="clear">
+        <ion-button (click)="goTo('https://twitter.com/intent/tweet/?text=%C2%A1Ten%C3%A9s%20que%20probar%20%23DondeReciclo!%20Informaci%C3%B3n%20sobre%20puntos%20de%20recepci%C3%B3n%20de%20residuos%20reciclables%20y%20consejos%20para%20clasificar%20en%20casa.&amp;url=https%3A%2F%2Fdondereciclo.'+environment[this.session.country].code.toLowerCase() )" fill="clear">
           <ion-icon slot="icon-only"
             name="dr-twitter"></ion-icon>
         </ion-button>
-        <ion-button [href]="'https://wa.me/?text=¡Tenés que probar http://dondereciclo.'+environment[this.session.country].code.toLowerCase()+'! Información sobre puntos de recepción de residuos reciclables y consejos para clasificar en casa.'" target="_system" fill="clear">
+        <ion-button (click)="goTo('https://wa.me/?text=¡Tenés que probar https://dondereciclo.'+environment[this.session.country].code.toLowerCase()+'! Información sobre puntos de recepción de residuos reciclables y consejos para clasificar en casa.')" fill="clear">
           <ion-icon slot="icon-only"
             name="dr-whatsapp"></ion-icon>
         </ion-button>
-        <ion-button [href]="'https://facebook.com/sharer/sharer.php?u=http%3A%2F%2Fdondereciclo.'+environment[this.session.country].code.toLowerCase()" target="_system" fill="clear">
+        <ion-button (click)="goTo('https://facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdondereciclo.'+environment[this.session.country].code.toLowerCase() )" fill="clear">
           <ion-icon slot="icon-only"
             name="dr-facebook"></ion-icon>
         </ion-button>

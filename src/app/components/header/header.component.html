@@ -30,7 +30,7 @@
       <ion-buttons slot="end">
         <ion-button color="vidrios"
           *ngIf="this.session.country == 'Uruguay'"
-          href="https://instagram.com/dondereciclouy/"
+          (click)="goTo('https://instagram.com/dondereciclouy/')"
           target="_system"
           slot="start">
           <ion-icon name="instagram"

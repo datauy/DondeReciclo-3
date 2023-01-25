@@ -5,11 +5,13 @@ import { IonSlides } from '@ionic/angular';
 import { Program } from "src/app/models/basic_models.model";
 import { ApiService } from "src/app/services/api.service";
 import { SessionService } from 'src/app/services/session.service';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
   selector: 'app-programs',
   templateUrl: './programs.page.html',
   styleUrls: ['./programs.page.scss'],
+  providers: [InAppBrowser]
 })
 export class ProgramsPage implements OnInit {
 
@@ -29,6 +31,7 @@ export class ProgramsPage implements OnInit {
     public api: ApiService<any>,
     public session: SessionService,
     private route: ActivatedRoute,
+    private iab: InAppBrowser
   ) { }
 
   ngOnInit() {
@@ -51,6 +54,10 @@ export class ProgramsPage implements OnInit {
         });
       });
     }
+  }
+  //
+  goTo(link) {
+    this.iab.create(link, '_system');
   }
   //
   format_programs(programs: Program[]) {

@@ -5,12 +5,14 @@ import { SessionService } from 'src/app/services/session.service';
 import { UtilsService } from "src/app/services/utils.service";
 import { ActivatedRoute } from '@angular/router';
 import { MapService } from "src/app/services/map.service";
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 //import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 @Component({
   selector: 'app-collect-form',
   templateUrl: './collect.form.html',
   styleUrls: ['./user.page.scss'],
+  providers: [InAppBrowser]
 })
 export class CollectForm implements OnInit {
 
@@ -25,7 +27,8 @@ export class CollectForm implements OnInit {
     public session: SessionService,
     public utils: UtilsService,
     private route: ActivatedRoute,
-    private map: MapService
+    private map: MapService,
+    private iab: InAppBrowser
     //private camera: Camera
   ) { }
   /*base64Image: string;
@@ -79,6 +82,10 @@ export class CollectForm implements OnInit {
       comment: new FormControl('', Validators.required),
       terms: new FormControl(null, Validators.required),
     });
+  }
+  //
+  goTo(link) {
+    this.iab.create(link, '_system');
   }
   //
   onSelectionChange(e, i) {
