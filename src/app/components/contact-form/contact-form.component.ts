@@ -4,11 +4,13 @@ import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router';
 import { SessionService } from 'src/app/services/session.service';
 import { environment } from 'src/environments/environment';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
   selector: 'app-contact-form',
   templateUrl: './contact-form.component.html',
   styleUrls: ['./contact-form.component.scss'],
+  providers: [InAppBrowser]
 })
 export class ContactFormComponent implements OnInit {
 
@@ -20,6 +22,7 @@ export class ContactFormComponent implements OnInit {
     public formBuilder: FormBuilder,
     private route: ActivatedRoute,
     public session: SessionService,
+    private iab: InAppBrowser
   ) { }
 
   user_data: FormGroup;
@@ -43,6 +46,9 @@ export class ContactFormComponent implements OnInit {
     this.user_data = this.formBuilder.group(fields);
   }
 
+  goTo(link) {
+    this.iab.create(link, '_system');
+  }
   register() {
     this.session.isLoading = true;
     this.user_data.value.country_id = environment[this.session.country].id

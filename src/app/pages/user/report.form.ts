@@ -4,12 +4,14 @@ import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms'
 import { SessionService } from 'src/app/services/session.service';
 import { UtilsService } from "src/app/services/utils.service";
 import { ActivatedRoute } from '@angular/router';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 //import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 @Component({
   selector: 'app-report-form',
   templateUrl: './report.form.html',
   styleUrls: ['./user.page.scss'],
+  providers: [InAppBrowser]
 })
 export class ReportForm implements OnInit {
 
@@ -24,6 +26,7 @@ export class ReportForm implements OnInit {
     public session: SessionService,
     public utils: UtilsService,
     private route: ActivatedRoute,
+    private iab: InAppBrowser
     //private camera: Camera
   ) { }
   /*base64Image: string;
@@ -60,6 +63,10 @@ export class ReportForm implements OnInit {
      console.log(err);
     });
   }*/
+  //
+  goTo(link) {
+    this.iab.create(link, '_system');
+  }
   report() {
     this.session.isLoading = true;
     //Subject assign
