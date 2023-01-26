@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Platform, NavController } from '@ionic/angular';
 
-import { FirebaseX } from "@ionic-native/firebase-x/ngx";
+import { FirebaseX } from "@awesome-cordova-plugins/firebase-x/ngx";
 import { Message } from "src/app/models/message.model";
 
 @Injectable({

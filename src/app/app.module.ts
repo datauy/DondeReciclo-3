@@ -25,7 +25,7 @@ import { File } from '@ionic-native/file/ngx';
 import { navPage } from './components/animations/';
 
 import { IonicStorageModule } from '@ionic/storage';
-import { FirebaseX } from "@ionic-native/firebase-x/ngx";
+import { FirebaseX } from "@awesome-cordova-plugins//firebase-x/ngx";
 
 import { MapaPageModule } from 'src/app/pages/mapa/mapa.module';
 /*
