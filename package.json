@@ -27,7 +27,7 @@
     "@capacitor/core": "1.5.2",
     "@ionic-native/core": "^5.32.0",
     "@ionic-native/file": "^5.32.0",
-    "@ionic-native/firebase-x": "^5.32.0",
+    "@ionic-native/firebase-x": "^5.36.0",
     "@ionic-native/geolocation": "^5.32.0",
     "@ionic-native/in-app-browser": "^5.36.0",
     "@ionic-native/keyboard": "^5.32.0",

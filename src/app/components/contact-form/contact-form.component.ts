@@ -23,12 +23,14 @@ export class ContactFormComponent implements OnInit {
     private route: ActivatedRoute,
     public session: SessionService,
     private iab: InAppBrowser
-  ) { }
+  ) {
+    this.session = session;
+  }
 
   user_data: FormGroup;
 
   ngOnInit() {
-    var sub = '';
+    let sub = '';
     if ( this.route.snapshot.queryParams['subject'] ) {
       sub = this.route.snapshot.queryParams['subject'];
     }
@@ -40,10 +42,20 @@ export class ContactFormComponent implements OnInit {
       ])),
       body: new FormControl('', Validators.required),
     }
-    if ( this.session.country == 'Uruguay' ) {
-      fields['subject'] = new FormControl(sub, Validators.required);
-    }
     this.user_data = this.formBuilder.group(fields);
+    //
+    this.session.countryChanged.subscribe(
+      countryName => {
+        if ( countryName != undefined ) {
+          if ( countryName == 'Uruguay' ) {
+            this.user_data.addControl( 'subject', new FormControl(sub, Validators.required) );
+          }
+          else {
+            this.user_data.removeControl('subject');
+          }
+        }
+      }
+    );
   }
 
   goTo(link) {
