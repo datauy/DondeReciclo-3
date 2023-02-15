@@ -54,7 +54,7 @@ export class LoginForm implements OnInit {
             this.navCtl.navigateBack(this.session.homeUrl);
           }
           else {
-            this.navCtl.back();
+            this.navCtl.navigateForward('/');
           }
         }
         else {

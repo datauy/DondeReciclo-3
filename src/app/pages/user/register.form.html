@@ -104,6 +104,10 @@
               <ion-icon class="pale-olive-green" slot="end" name="dr-editar"></ion-icon>
               <h5 class="pale-olive-green" [innerHtml]="disabled ? 'Editar datos' : 'Dejar de editar'"></h5>
             </ion-button>
+            <ion-button (click)="deleteAccountConfirmation()">
+              <ion-icon class="residuos-peligrosos" slot="end" name="close"></ion-icon>
+              <h5 class="residuos-peligrosos"> Borrar mi cuenta</h5>
+            </ion-button>
           </div>
           <ion-item *ngIf="full">
             <ion-label position="floating">Contraseña</ion-label>
