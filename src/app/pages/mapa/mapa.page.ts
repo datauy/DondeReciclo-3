@@ -206,6 +206,10 @@ export class MapaPage implements OnInit {
     );
   }
   //
+  ionViewWillEnter() {
+    this.map.loadMap();
+  }
+  //
   ionViewWillLeave() {
     this.session.showSearchItem = false;
     //Remove notification messages
