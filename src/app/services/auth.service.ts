@@ -92,7 +92,7 @@ export class AuthService {
     ));
   }
   //
-  async updateUser(user: User): Promise<boolean> {
+  async updateUser(user: User, operation = 'update'): Promise<boolean> {
     return this.isLoggedIn().then(
       (isLogged) => {
         if (isLogged) {
@@ -101,11 +101,13 @@ export class AuthService {
               'Authorization': "Bearer " + this.user_token
             },
           };
-          return this.request.post(environment.backend + "user/update", user, options)
+          return this.request.post(environment.backend + "user/" + operation, user, options)
           .toPromise()
           .then( (result: any) => {
               if (!result.error) {
-                this.user = result;
+                if ( operation == 'update' ) {
+                  this.user = result;
+                }
                 return true;
               }
               return false;
@@ -151,6 +153,7 @@ export class AuthService {
       }
     ));
   }
+
   async loadUserData(): Promise<User> {
     return this.isLoggedIn().then(
       (isLogged) => {

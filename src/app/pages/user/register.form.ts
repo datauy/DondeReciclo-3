@@ -9,6 +9,8 @@ import { NotificationsService } from 'src/app/services/notifications.service';
 import { Message } from "src/app/models/message.model";
 import { environment } from 'src/environments/environment';
 
+import { AlertController } from '@ionic/angular';
+
 @Component({
   selector: 'app-register-form',
   templateUrl: './register.form.html',
@@ -29,7 +31,8 @@ export class RegisterForm implements OnInit {
     public session: SessionService,
     private auth: AuthService,
     public navCtrl: NavController,
-    private notify: NotificationsService
+    private notify: NotificationsService,
+    private alertController: AlertController
   ) { }
 
   user_data: FormGroup;
@@ -283,6 +286,16 @@ export class RegisterForm implements OnInit {
           }
           break;
         }
+        case 'account_deleted': {
+          notification = {
+            id: type,
+            type: 'info',
+            class: 'warnings-error',
+            title: 'Se ha eliminado su cuenta del sistema',
+            note: "Esperamos verte pronto. Muchas gracias."
+          }
+          break;
+        }
       }
     }
     this.session.isLoading = false;
@@ -321,5 +334,44 @@ export class RegisterForm implements OnInit {
       return false;
     }
     return true;
+  }
+
+  async deleteAccountConfirmation() {
+    const alert = await this.alertController.create({
+      header: 'Eliminar cuenta',
+      message: 'Al eliminar su cuenta se borrarán todos los datos del sistema. ¿Está seguro que desea continuar?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Eliminar',
+          role: 'confirm',
+          handler: () => {
+            this.session.isLoading = true;
+            if ( this.auth.isLogged ){
+              this.auth.updateUser( this.user_data.value, 'delete' ).then(
+                (res) => {
+                  this.session.isLoading = false;
+                  if (res) {
+                    this.handleNotifications('account_deleted');
+                    this.auth.logout();
+                    this.navCtrl.navigateBack('/');
+                  }
+                  else {
+                    this.handleNotifications(false);
+                  }
+                }
+              );
+            }
+            else {
+              this.handleNotifications(false);
+            }
+          },
+        },
+      ],
+    });
+    alert.present();
   }
 }
