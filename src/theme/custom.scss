@@ -864,3 +864,25 @@ ion-img.logo {
     /* Similar syntax to box-shadow */
   }
 }
+/**********************
+/*    STATS PAGE      *
+**********************/
+.mat-tab-label {
+  font-size: 15px;
+  font-weight: 400;
+}
+.mat-tab-label-active {
+  border-bottom: 3px solid #0D744E;
+  color: #0D744E;
+  font-size: 16px;
+  font-weight: 700;
+}
+.mat-tab-header {
+  box-shadow: 0px 4px 4px 0px #95959540;
+}
+.mat-tab-body-wrapper {
+  padding-top: 18px;
+}
+.apexcharts-grid-borders {
+  display: none;
+}

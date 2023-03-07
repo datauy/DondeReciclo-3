@@ -19,7 +19,8 @@ import { NotificationComponent } from './notification/notification.component';
 import { ImageSliderComponent } from './image-slider/image-slider.component';
 import { MaterialsChipsComponent } from './materials-chips/materials-chips.component';
 import { WalkthroughComponent } from './walkthrough/walkthrough.component';
-import { NgApexchartsModule } from "ng-apexcharts"
+import { NgApexchartsModule } from "ng-apexcharts";
+import {MatTabsModule} from '@angular/material/tabs';
 //import { TestDirective } from './test.directive';
 
 @NgModule({
@@ -30,7 +31,8 @@ import { NgApexchartsModule } from "ng-apexcharts"
     AutoCompleteModule,
     FormsModule,
     ReactiveFormsModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    MatTabsModule
   ],
   declarations: [
     SidemenuComponent,

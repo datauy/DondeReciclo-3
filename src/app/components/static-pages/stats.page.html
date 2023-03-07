@@ -1,21 +1,48 @@
 <app-header display="full"></app-header>
 
-<!--Uruguay-->
-
-<ion-content class="inner-scroll" *ngIf="session.country == 'Uruguay'">
+<ion-content class="inner-scroll stats">
   <ion-grid>
-    <ion-row class="ion-justify-content-center section-header">
+    <div class="section-header">
+      <ion-row class="ion-justify-content-center section-header">
+        <ion-col  size-md="11" size-lg="10" size-xs="12">
+          <h1>Indicadores</h1>
+          <p>En esta sección te mostramos algo de la información que manejamos para tu país.</p>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center section-header-bottom">
+        <ion-col size-md="3" size-lg="3" size-xs="12" [class]="'col-'+i" *ngFor="let total of totals; let i = index" >
+          <h3 class="title" [innerHTML]="total.total"></h3>
+          <h4 [innerHTML]="total.title"></h4>
+        </ion-col>
+      </ion-row>
+    </div>
+    <ion-row class="ion-justify-content-center tabs-wrapper">
       <ion-col  size-md="11" size-lg="10" size-xs="12">
-        <div class="section-header">
-          <h1>Estadísticas</h1>
-          <div style="text-align:center">
-          <apx-chart
-            [series]="chartOptions.series"
-            [chart]="chartOptions.chart"
-            [xaxis]="chartOptions.xaxis"
-            [title]="chartOptions.title"
-          ></apx-chart>
-        </div>
+        <div class="section-tabs">
+          <mat-tab-group mat-stretch-tabs>
+            <mat-tab isActive=true label="Programas">
+              <div *ngIf="programs_chart">
+                <apx-chart
+                [series]="chartOptions.series"
+                [chart]="chartOptions.chart"
+                [xaxis]="chartOptions.xaxis"
+                [yaxis]="chartOptions.yaxis"
+                [title]="chartOptions.title"
+                [plotOptions]="chartOptions.plotOptions"
+                [colors]="chartOptions.colors"
+                [dataLabels]="chartOptions.dataLabels"
+                [stroke]="chartOptions.stroke"
+                [grid]="chartOptions.grid"
+                [legend]="chartOptions.legend"
+                [tooltip]="chartOptions.tooltip"
+                [labels]="chartOptions.labels"
+                ></apx-chart>
+            </div>
+            </mat-tab>
+            <mat-tab label="Contenedores"> Contenedores </mat-tab>
+            <mat-tab label="Servicios"> Servicios </mat-tab>
+            <mat-tab label="Usuarios"> Usuarios </mat-tab>
+          </mat-tab-group>
         </div>
       </ion-col>
     </ion-row>

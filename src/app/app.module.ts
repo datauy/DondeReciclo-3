@@ -28,6 +28,8 @@ import { IonicStorageModule } from '@ionic/storage';
 import { FirebaseX } from "@ionic-native/firebase-x/ngx";
 
 import { MapaPageModule } from 'src/app/pages/mapa/mapa.module';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 /*
 export function initApp(backConfig: ApiService<any>) {
   console.log("Loading initial data");
@@ -48,7 +50,8 @@ export function initApp(backConfig: ApiService<any>) {
     ComponentsModule,
     HttpClientModule,
     IonicStorageModule.forRoot(),
-    MapaPageModule
+    MapaPageModule,
+    BrowserAnimationsModule
   ],
   providers: [
     StatusBar,

@@ -357,4 +357,18 @@ export class ApiService<T=any> {
   });
   return res;
   }
+  getStatsTotals() {
+    return  this.request.get(environment.backend + "stats/totals?version="+environment.apiVersion+"&country=" + environment[this.session.country].id ).pipe(map(
+      (result: {title: string, total: number}[]) => {
+        return result;
+      }
+    ));
+  }
+  getStatsPrograms() {
+    return  this.request.get(environment.backend + "stats/programs?version="+environment.apiVersion+"&country=" + environment[this.session.country].id ).pipe(map(
+      (result: {title: string, total: number}[]) => {
+        return result;
+      }
+    ));
+  }
 }
