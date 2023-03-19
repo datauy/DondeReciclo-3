@@ -370,12 +370,47 @@ export class MapService {
     + Object.values(bounds.getNorthEast()).reverse().join(' ') +","
     + Object.values(bounds.getNorthWest()).reverse().join(' ') +"))";
   }
+  createStartEndMarkers(layers, zonesData){
+    if ( layers.hasOwnProperty('features') ) {
+      layers.features.forEach( feature => {
+        if ( feature.geometry.type == "MultiLineString" && ( feature.properties.icon_start != '' || feature.properties.icon_end != '' ) ) {
+          var coords = feature.geometry.coordinates[0];
+          var nCoords = coords.length - 1;
+          var marker_options = { className: "custom-icon" };
+          if ( feature.properties.icon_start != null && feature.properties.icon_start != '' ) {
+            marker_options['icon'] = L.icon({
+              iconUrl: feature.properties.icon_start,
+              iconSize: [37, 45],
+              iconAnchor: [18.5, 45],
+              popupAnchor: [1, -34],
+              tooltipAnchor: [16, -28],
+              shadowSize: [60, 60]
+            });
+            var start_marker = new L.CustomMarker([ coords[0][1], coords[0][0] ], marker_options).addTo(zonesData);
+          }
+          if ( feature.properties.icon_end != null && feature.properties.icon_end != '' ) {
+            marker_options['icon'] = L.icon({
+              iconUrl: feature.properties.icon_end,
+              iconSize: [37, 45],
+              iconAnchor: [18.5, 45],
+              popupAnchor: [1, -34],
+              tooltipAnchor: [16, -28],
+              shadowSize: [60, 60]
+            });
+            var end_marker = new L.CustomMarker([ coords[nCoords][1], coords[nCoords][0] ], marker_options).addTo(zonesData);
+          }
+        }
+      });
+    }
+  }
   //
   loadZones(layers: L.GeoJSON, zoom2zone = false, fixPosition = false) {
     const _this = this;
     var bounds = [];
     var zonesData = L.featureGroup();
-
+    //Create custom markers
+    this.createStartEndMarkers(layers, zonesData);
+    //Add Zones
     this.removeZones();
     L.geoJSON(
       layers, {
@@ -383,10 +418,16 @@ export class MapService {
           if (zoom2zone) {
             bounds.push(layer.getBounds());
           }
+          //Custom design
+          if (feature.properties.custom_active) {
+            //Add color
+            layer.setStyle({color: feature.properties.color});
+          }
           layer.addTo(zonesData);
         }
       }
     );
+    //Store and add to map
     this.zones = zonesData;
     zonesData.addTo(this.map);
     if ( zoom2zone && bounds.length > 0 ) {
@@ -426,7 +467,21 @@ export class MapService {
     if (this.subZone) {
       this.map.removeLayer(this.subZone);
     }
-    this.subZone = L.geoJSON( layer );
+    var zonesData = L.featureGroup();
+    //Create custom markers
+    this.createStartEndMarkers({features: [layer]}, zonesData);
+    L.geoJSON(
+      layer, {
+        onEachFeature: function (feature, layer) {
+          if (feature.properties.custom_active) {
+            //Add color
+            layer.setStyle({color: feature.properties.color});
+          }
+          layer.addTo(zonesData);
+        }
+      }
+    );
+    this.subZone = zonesData;
     this.subZone.addTo(this.map);
   }
 

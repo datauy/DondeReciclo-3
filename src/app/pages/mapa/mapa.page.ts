@@ -721,7 +721,7 @@ export class MapaPage implements OnInit {
         (subprograms_zones) => {
           var subprograms = subprograms_zones.subprograms;
           let fixedPos:[number, number] = [this.map.userPosition[0] - 0.002, this.map.userPosition[1] ];
-          if ( subprograms.length >= 1 ) {
+          if ( subprograms.length > 1 ) {
             this.formatSubProgram(subprograms);
             this.zones = subprograms_zones.locations;
             this.subprograms = subprograms;
@@ -729,6 +729,18 @@ export class MapaPage implements OnInit {
             if ( this.zoneVisible == 3 ) {
               this.map.loadZones(this.zones);
             }
+          }
+          else if ( subprograms.length == 1) {
+            this.map.removeZones();
+            if ( this.zones == undefined || this.zones.features.length <= 1 ) {
+              this.zones = subprograms_zones.locations;
+            }
+            if ( this.subprograms == undefined || this.subprograms.length <= 1 ) {
+              this.subprograms = subprograms;
+            }
+            this.formatSubProgram(subprograms);
+            this.subprogramShow(0, 4, subprograms[0]);
+            //this.map.flytomarker(fixedPos, this.map.zoom);
           }
           else {
             this.subprograms = [];
@@ -782,7 +794,10 @@ export class MapaPage implements OnInit {
       }, 5000);
     }
     else {
-      let bounds = this.map.getBoundsWKT();
+      this.zoneVisible = 3;
+      zoneBtn.classList.remove('active');
+      this.map.loadZones(this.zones);
+      /*let bounds = this.map.getBoundsWKT();
       this.api.getZones4Boundaries(bounds).subscribe(
         (zones) => {
           this.map.removeZones();
@@ -800,7 +815,7 @@ export class MapaPage implements OnInit {
             this.map.loadZones(zones);
           }
         }
-      );
+      );*/
     }
   }
   //
