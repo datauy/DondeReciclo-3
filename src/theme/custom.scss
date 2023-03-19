@@ -743,14 +743,14 @@ ion-img.logo {
   ion-auto-complete {
     ul {
       position: relative;
-      height: calc(100vh - 192px);
+      height: calc(100vh - 2*var(--dr-header-height-map));
       width: 100%;
       left: 0;
       right: 0;
       top: 0;
       bottom: 0;
       margin: 0;
-      padding: calc(var(--dr-header-height-map) + 47px) 0 0;
+      padding: calc(2*var(--dr-header-height-map)) 0 0;
       overflow: auto !important;
       display: block;
       background: none;
