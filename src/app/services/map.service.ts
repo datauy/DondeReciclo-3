@@ -133,6 +133,7 @@ export class MapService {
   animating: boolean;
   markers: L.LayerGroup;
   zones: L.FeatureGroup;
+  customZones: L.FeatureGroup;
   subZone: L.FeatureGroup;
   saturationWarn = false;
   eagerLoad = false;
@@ -145,7 +146,7 @@ export class MapService {
   public center:L.LatLng;
   //
   initParams = true;
-
+  zoneClick = -1;
   constructor(
     private session: SessionService,
     private router: Router,
@@ -174,12 +175,15 @@ export class MapService {
       }
       //Create user marker upon click
       this.map.on("click", <LeafletMouseEvent>(e) => {
-        if (this.userMarker) { // check
-          this.map.removeLayer(this.userMarker); // remove
+        //Do not change user position if zone clicked
+        if ( this.zoneClick < 0 ) {
+          if (this.userMarker) { // check
+            this.map.removeLayer(this.userMarker); // remove
+          }
+          //Do not propagate since click is handled
+          this.setUserPosition([e.latlng.lat, e.latlng.lng], false);
+          this.userMarker = L.marker(this.userPosition, {icon: iconUser} ).addTo(this.map); // add the marker onclick
         }
-        //Do not propagate since click is handled
-        this.setUserPosition([e.latlng.lat, e.latlng.lng], false);
-        this.userMarker = L.marker(this.userPosition, {icon: iconUser} ).addTo(this.map); // add the marker onclick
         if (this.route) {
           this.route.spliceWaypoints(0, 1, e.latlng);
         }
@@ -371,37 +375,71 @@ export class MapService {
     + Object.values(bounds.getNorthWest()).reverse().join(' ') +"))";
   }
   createStartEndMarkers(layers, zonesData){
-    if ( layers.hasOwnProperty('features') ) {
+
+    if ( layers.type == 'FeatureCollection' ) {
       layers.features.forEach( feature => {
-        if ( feature.geometry.type == "MultiLineString" && ( feature.properties.icon_start != '' || feature.properties.icon_end != '' ) ) {
-          var coords = feature.geometry.coordinates[0];
-          var nCoords = coords.length - 1;
-          var marker_options = { className: "custom-icon" };
-          if ( feature.properties.icon_start != null && feature.properties.icon_start != '' ) {
-            marker_options['icon'] = L.icon({
-              iconUrl: feature.properties.icon_start,
-              iconSize: [37, 45],
-              iconAnchor: [18.5, 45],
-              popupAnchor: [1, -34],
-              tooltipAnchor: [16, -28],
-              shadowSize: [60, 60]
-            });
-            var start_marker = new L.CustomMarker([ coords[0][1], coords[0][0] ], marker_options).addTo(zonesData);
-          }
-          if ( feature.properties.icon_end != null && feature.properties.icon_end != '' ) {
-            marker_options['icon'] = L.icon({
-              iconUrl: feature.properties.icon_end,
-              iconSize: [37, 45],
-              iconAnchor: [18.5, 45],
-              popupAnchor: [1, -34],
-              tooltipAnchor: [16, -28],
-              shadowSize: [60, 60]
-            });
-            var end_marker = new L.CustomMarker([ coords[nCoords][1], coords[nCoords][0] ], marker_options).addTo(zonesData);
-          }
-        }
+        this.multilineMarkers(feature, zonesData);
       });
     }
+    else {
+      if ( layers.type == 'Feature' ) {
+        this.multilineMarkers(layers, zonesData);
+      }
+    }
+  }
+  multilineMarkers(feature, zonesData) {
+    if ( feature.geometry.type == "MultiLineString" && ( feature.properties.icon_start != '' || feature.properties.icon_end != '' ) ) {
+      var coords = feature.geometry.coordinates[0];
+      var nCoords = coords.length - 1;
+      var marker_options = { className: "custom-icon" };
+      if ( feature.properties.icon_start != null && feature.properties.icon_start != '' ) {
+        this.createCustomMarker(feature.properties.icon_start, [ coords[0][1], coords[0][0] ], zonesData);
+      }
+      if ( feature.properties.icon_end != null && feature.properties.icon_end != '' ) {
+        this.createCustomMarker(feature.properties.icon_end, [ coords[nCoords][1], coords[nCoords][0] ], zonesData);
+      }
+    }
+  }
+  //
+  createCustomMarker(url: string, latlng, zonesData) {
+    var marker_options = { className: "custom-icon" };
+    marker_options['icon'] = L.icon({
+      iconUrl: url,
+      iconSize: [37, 45],
+      iconAnchor: [18.5, 45],
+      popupAnchor: [1, -34],
+      tooltipAnchor: [16, -28],
+      shadowSize: [60, 60]
+    });
+    var custom = new L.CustomMarker(latlng, marker_options).addTo(zonesData);
+  }
+  //
+  loadCustomZones (layers: L.GeoJSON) {
+    var customZonesData = L.featureGroup();
+    var zpos = 0;
+    this.createStartEndMarkers(layers, customZonesData);
+    L.geoJSON(
+      layers, {
+        onEachFeature: function (feature, layer) {
+          //Custom design
+          if (feature.properties.custom_active) {
+            //Add color
+            layer.zpos = zpos;
+            layer.addTo(customZonesData);
+          }
+          if ( feature.properties.color ) {
+            layer.setStyle({color: feature.properties.color});
+          }
+          zpos += 1;
+        }
+      }
+    );
+    //Add click to group to prevent propagation
+    customZonesData.on('click', function(e) {
+      this.zoneClick = e.propagatedFrom.zpos;
+    }, this)
+    this.customZones = customZonesData;
+    customZonesData.addTo(this.map);
   }
   //
   loadZones(layers: L.GeoJSON, zoom2zone = false, fixPosition = false) {
@@ -409,7 +447,6 @@ export class MapService {
     var bounds = [];
     var zonesData = L.featureGroup();
     //Create custom markers
-    this.createStartEndMarkers(layers, zonesData);
     //Add Zones
     this.removeZones();
     L.geoJSON(
@@ -447,6 +484,11 @@ export class MapService {
       this.map.removeLayer(this.zones);
     }
   }
+  removeCustomZones() {
+    if ( this.customZones != undefined ) {
+      this.map.removeLayer(this.customZones);
+    }
+  }
   //
   showZones( zoom2zone: boolean, index?: number) {
     if ( this.zones != undefined ) {
@@ -468,13 +510,12 @@ export class MapService {
       this.map.removeLayer(this.subZone);
     }
     var zonesData = L.featureGroup();
-    //Create custom markers
-    this.createStartEndMarkers({features: [layer]}, zonesData);
+    this.createStartEndMarkers(layer, zonesData);
     L.geoJSON(
       layer, {
         onEachFeature: function (feature, layer) {
-          if (feature.properties.custom_active) {
-            //Add color
+          //Do not load custom markers already handled
+          if ( feature.properties.color ) {
             layer.setStyle({color: feature.properties.color});
           }
           layer.addTo(zonesData);

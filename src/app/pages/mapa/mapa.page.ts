@@ -96,14 +96,20 @@ export class MapaPage implements OnInit {
     );
     this.map.zoneClicked.subscribe(
       distance => {
-        if ( distance == 0.0002 ) {
-          if ( this.zoneVisible == 3 ) {
-            this.subprograms4location(distance);
-            this.servicesPane.moveToBreak('middle');
+        if (this.map.zoneClick < 0 ) {
+          if ( distance == 0.0002 ) {
+            if ( this.zoneVisible == 3 ) {
+              this.subprograms4location(distance);
+              this.servicesPane.moveToBreak('middle');
+            }
+            else {
+              this.subprograms4location();
+            }
           }
-          else {
-            this.subprograms4location();
-          }
+        }
+        else {
+          this.subprogramShow(this.map.zoneClick);
+          this.map.zoneClick = -1;
         }
       }
     );
@@ -457,6 +463,7 @@ export class MapaPage implements OnInit {
     else {
       this.map.flytomarker(this.map.userPosition, this.map.zoom);
     }
+    this.map.loadCustomZones(this.zones);
   }
   //
   showPane() {
@@ -609,29 +616,23 @@ export class MapaPage implements OnInit {
     let days = [];
     if ( Object.keys(container.schedules).length ) {
       let d=new Date();
-      var today = d.getDay().toString();
-      for ( let d in this.weekday ) {
+      var today = d.toLocaleDateString('es', { weekday: 'long' });
+      container.schedules.forEach( day_obj => {
         let selected = '';
-        if ( d == today ) {
+        if ( day_obj.day.toLowerCase() == today ) {
           selected = 'today';
         }
-        if( container.schedules.hasOwnProperty(d) ) {
-          if ( container.schedules[d].closed == true ) {
-            days.push( {class: selected, text: this.weekday[d] + ': Cerrado'} );
-          }
-          else {
-            let sched = container.schedules[d];
-            let day_text = this.weekday[d] + ': ' + sched.start + ' a ' + sched.end;
-            if ( sched.hasOwnProperty('start2') ){
-              day_text += ' y ' + sched.start2 + ' a ' + sched.end2;
-            }
-            days.push( {class: selected, text: day_text} );
-          }
+        if ( day_obj.closed == true ) {
+          days.push( {class: selected, text: day_obj.day + ': Cerrado'} );
         }
         else {
-          days.push( {class: selected, text: this.weekday[d] + ': - '} );
+          let day_text = day_obj.day + ': ' + day_obj.start + ' a ' + day_obj.end;
+          if ( day_obj.hasOwnProperty('start2') ){
+            day_text += ' y ' + day_obj.start2 + ' a ' + day_obj.end2;
+          }
+          days.push( {class: selected, text: day_text} );
         }
-      }
+      });
     }
     this.container.schedules = days;
   }
@@ -726,12 +727,16 @@ export class MapaPage implements OnInit {
             this.zones = subprograms_zones.locations;
             this.subprograms = subprograms;
             this.map.removeZones();
+            this.map.removeCustomZones();
             if ( this.zoneVisible == 3 ) {
               this.map.loadZones(this.zones);
             }
+            this.map.loadCustomZones(this.zones);
           }
           else if ( subprograms.length == 1) {
             this.map.removeZones();
+            this.map.removeCustomZones();
+            //Sobreescribe si no hay listados, para poder volver a ellos o no...
             if ( this.zones == undefined || this.zones.features.length <= 1 ) {
               this.zones = subprograms_zones.locations;
             }
@@ -741,6 +746,7 @@ export class MapaPage implements OnInit {
             this.formatSubProgram(subprograms);
             this.subprogramShow(0, 4, subprograms[0]);
             //this.map.flytomarker(fixedPos, this.map.zoom);
+            this.map.loadCustomZones(this.zones);
           }
           else {
             this.subprograms = [];
@@ -763,6 +769,7 @@ export class MapaPage implements OnInit {
 
     this.list = list;
     this.map.removeZones();
+    this.map.removeCustomZones();
     for (var i = 0; i < this.zones.features.length; i++) {
       if (this.zones.features[i].id == this.subprogram.zone.location_id ) {
         break;

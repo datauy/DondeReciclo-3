@@ -160,7 +160,7 @@ export class ApiService<T=any> {
   /**********************/
   //
   getContainer(id: number) {
-    return  this.request.get(environment.backend + "container/"+id).pipe(map(
+    return  this.request.get(environment.backend + "container/"+id+"?version="+environment.apiVersion).pipe(map(
       (result: Container) => {
         return result;
       }
@@ -366,7 +366,7 @@ export class ApiService<T=any> {
   }
   getStatsPrograms() {
     return  this.request.get(environment.backend + "stats/programs?version="+environment.apiVersion+"&country=" + environment[this.session.country].id ).pipe(map(
-      (result: {title: string, total: number}[]) => {
+      (result: {name: string, total: number}[]) => {
         return result;
       }
     ));
