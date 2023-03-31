@@ -53,7 +53,7 @@
   </div>
   <div #infoPane class="info-pane cupertino-pane">
     <div class="subprogram pane-container" *ngIf="list == 2 || list == 4">
-      <ion-item class="header" lines="full">
+      <ion-item *ngIf="subprogram !== undefined" class="header" lines="full">
         <ion-avatar slot="start">
           <img src="{{subprogram.program_icon}}">
         </ion-avatar>
@@ -62,7 +62,7 @@
           <h5>{{subprogram.name}}</h5>
         </div>
       </ion-item>
-      <div class="scrollable-div" overflow-y="auto">
+      <div *ngIf="subprogram !== undefined" class="scrollable-div" overflow-y="auto">
         <ion-item lines="none" *ngIf="subprogram.locations.length">
           <div>
             <h5>Cobertura:</h5>
@@ -87,7 +87,7 @@
             <p>{{subprogram.email}}</p>
           </div>
         </ion-item>
-        <ion-item lines="none" *ngIf="subprogram.zone.schedules.length">
+        <ion-item lines="none" *ngIf="subprogram.zone.schedules !== undefined && subprogram.zone.schedules.length">
           <div class="scheds">
             <h5 (click)="toggleSched()">
               Horario:
@@ -105,13 +105,15 @@
             </div>
           </div>
         </ion-item>
-        <ion-item lines="none" *ngIf="subprogram.receives.length">
+        <ion-item lines="none">
           <div>
             <div class="inline">
               <div class="circle green" slot="start"></div>
               <h5>Recibe:</h5>
             </div>
-            <p *ngFor="let receive of subprogram.receives" [innerHtml]="receive"></p>
+            <div *ngIf="subprogram.receives.length" >
+              <p *ngFor="let receive of subprogram.receives" [innerHtml]="receive"></p>
+            </div>
             <app-materials-chips [materials_obj]="subprogram"></app-materials-chips>
           </div>
         </ion-item>
