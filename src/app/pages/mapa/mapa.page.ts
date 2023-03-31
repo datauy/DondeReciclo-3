@@ -108,7 +108,18 @@ export class MapaPage implements OnInit {
           }
         }
         else {
-          this.subprogramShow(this.map.zoneClick);
+          if (this.subprograms.length == 0 ) {
+            this.list = 4;
+            //this.map.loadCustomZones(subp.locations);
+            //this.map.loadZones(subp.locations);
+            if ( this.servicesPane.currentBreak() == 'top' ) {
+              this.servicesPane.moveToBreak('middle');
+            }
+            this.infoPane.present({animate: true});
+          }
+          else {
+            this.subprogramShow(this.map.zoneClick);
+          }
           this.map.zoneClick = -1;
         }
       }
@@ -184,15 +195,29 @@ export class MapaPage implements OnInit {
         if (loaded) {
           this.initDataLoaded = true;
           this.mapaRouter();
-          this.loadPosition(true).then(() => {
-            this.subprograms4location();
-          });
           // route for childs and params
           if ( this.loadSubContainers != undefined || this.loadContainers != undefined || this.loadContainer > 0 ) {
             if ( this.loadSubContainers != undefined ) {
               this.api.getSubContainers(this.loadSubContainers).subscribe(
                 (containers) => {
                   this.map.loadMarkers(containers, true);
+                }
+              );
+              this.api.getSubProgram(this.loadSubContainers).subscribe(
+                (subp) => {
+                  subp.subprogram.program_icon = this.api.programs[subp.subprogram.program_id].icon ? this.api.programs[subp.subprogram.program_id].icon : '/assets/custom-icons/dr-generic.svg';
+                  subp.subprogram.program = this.api.programs[subp.subprogram.program_id].name;
+                  if ( this.zones == undefined || this.zones.features.length <= 1 ) {
+                    this.zones = subp.locations;
+                  }
+                  this.subprogram = subp.subprogram;
+                  this.list = 4;
+                  this.map.loadCustomZones(subp.locations);
+                  this.map.loadZones(subp.locations);
+                  if ( this.servicesPane.currentBreak() == 'top' ) {
+                    this.servicesPane.moveToBreak('middle');
+                  }
+                  this.infoPane.present({animate: true});
                 }
               );
             }
@@ -206,6 +231,11 @@ export class MapaPage implements OnInit {
             else {
               this.showPane();
             }
+          }
+          else {
+            this.loadPosition(true).then(() => {
+              this.subprograms4location();
+            });
           }
         }
       }
@@ -496,7 +526,9 @@ export class MapaPage implements OnInit {
   hidePane() {
     //Si está en sub-programa vuelvo al listado
     if ( this.list == 2 || this.list == 4 ) {
-      this.map.map.removeLayer(this.map.subZone);
+      if (this.map.subZone !== undefined ) {
+        this.map.map.removeLayer(this.map.subZone);
+      }
       //Salvo que sea un único subprograma
       if (this.subprograms.length > 1 ) {
         this.map.showZones(true);

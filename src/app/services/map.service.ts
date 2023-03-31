@@ -377,31 +377,31 @@ export class MapService {
   createStartEndMarkers(layers, zonesData){
 
     if ( layers.type == 'FeatureCollection' ) {
-      layers.features.forEach( feature => {
-        this.multilineMarkers(feature, zonesData);
+      layers.features.forEach( (feature, i) => {
+        this.multilineMarkers(feature, zonesData, i);
       });
     }
     else {
       if ( layers.type == 'Feature' ) {
-        this.multilineMarkers(layers, zonesData);
+        this.multilineMarkers(layers, zonesData, 0);
       }
     }
   }
-  multilineMarkers(feature, zonesData) {
+  multilineMarkers(feature, zonesData, i) {
     if ( feature.geometry.type == "MultiLineString" && ( feature.properties.icon_start != '' || feature.properties.icon_end != '' ) ) {
       var coords = feature.geometry.coordinates[0];
       var nCoords = coords.length - 1;
       var marker_options = { className: "custom-icon" };
       if ( feature.properties.icon_start != null && feature.properties.icon_start != '' ) {
-        this.createCustomMarker(feature.properties.icon_start, [ coords[0][1], coords[0][0] ], zonesData);
+        this.createCustomMarker(feature.properties.icon_start, [ coords[0][1], coords[0][0] ], zonesData, i);
       }
       if ( feature.properties.icon_end != null && feature.properties.icon_end != '' ) {
-        this.createCustomMarker(feature.properties.icon_end, [ coords[nCoords][1], coords[nCoords][0] ], zonesData);
+        this.createCustomMarker(feature.properties.icon_end, [ coords[nCoords][1], coords[nCoords][0] ], zonesData, i);
       }
     }
   }
   //
-  createCustomMarker(url: string, latlng, zonesData) {
+  createCustomMarker(url: string, latlng, zonesData, i) {
     var marker_options = { className: "custom-icon" };
     marker_options['icon'] = L.icon({
       iconUrl: url,
@@ -411,12 +411,18 @@ export class MapService {
       tooltipAnchor: [16, -28],
       shadowSize: [60, 60]
     });
-    var custom = new L.CustomMarker(latlng, marker_options).addTo(zonesData);
+    var custom = new L.CustomMarker(latlng, marker_options);
+    custom.zpos = i;
+    custom.on('click', function(e) {
+      console.log("PINCLICK: ", e.target.zpos);
+      this.clickZone(e.target.zpos);
+    }, this).addTo(zonesData);
   }
   //
-  loadCustomZones (layers: L.GeoJSON) {
+  loadCustomZones (layers: L.GeoJSON, zoom2zone = false) {
     var customZonesData = L.featureGroup();
     var zpos = 0;
+    var bounds = [];
     this.createStartEndMarkers(layers, customZonesData);
     L.geoJSON(
       layers, {
@@ -426,9 +432,12 @@ export class MapService {
             //Add color
             layer.zpos = zpos;
             layer.addTo(customZonesData);
-          }
-          if ( feature.properties.color ) {
-            layer.setStyle({color: feature.properties.color});
+            if (zoom2zone) {
+              bounds.push(layer.getBounds());
+            }
+            if ( feature.properties.color ) {
+              layer.setStyle({color: feature.properties.color});
+            }
           }
           zpos += 1;
         }
@@ -437,9 +446,21 @@ export class MapService {
     //Add click to group to prevent propagation
     customZonesData.on('click', function(e) {
       this.zoneClick = e.propagatedFrom.zpos;
-    }, this)
+    }, this);
     this.customZones = customZonesData;
-    customZonesData.addTo(this.map);
+    if ( this.animating ) {
+      setTimeout( () => {
+        customZonesData.addTo(this.map);
+      }, 3000);
+    }
+    else {
+      customZonesData.addTo(this.map);
+    }
+
+    if ( zoom2zone && bounds.length > 0 ) {
+      this.currentBounds = bounds;
+      this.flyToBounds( bounds );
+    }
   }
   //
   loadZones(layers: L.GeoJSON, zoom2zone = false, fixPosition = false) {
@@ -466,7 +487,14 @@ export class MapService {
     );
     //Store and add to map
     this.zones = zonesData;
-    zonesData.addTo(this.map);
+    if (this.animating) {
+      setTimeout( () => {
+      zonesData.addTo(this.map);
+    }, 3000);
+    }
+    else {
+      zonesData.addTo(this.map);
+    }
     if ( zoom2zone && bounds.length > 0 ) {
       bounds.push(this.userPosition);
       this.currentBounds = bounds;
