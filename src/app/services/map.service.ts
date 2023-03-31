@@ -164,7 +164,7 @@ export class MapService {
       if ( center == undefined ) {
         center = [-11.336196, -63.605775];
       }
-      this.animating = true;
+      //this.animating = true;
       this.map = new L.Map("map", {minZoom:4}).setView(center, 4);
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
@@ -191,7 +191,7 @@ export class MapService {
       });
       this.map.on('zoomend', this.zoomChange, this);
       this.map.on('dragend', this.centerChange, this);
-      this.map.once('moveend', this.toggleAnimation, this);
+      //this.map.once('moveend', this.toggleAnimation, this);
       this.session.reloadMap = false;
     }
     return true;
@@ -414,7 +414,6 @@ export class MapService {
     var custom = new L.CustomMarker(latlng, marker_options);
     custom.zpos = i;
     custom.on('click', function(e) {
-      console.log("PINCLICK: ", e.target.zpos);
       this.clickZone(e.target.zpos);
     }, this).addTo(zonesData);
   }

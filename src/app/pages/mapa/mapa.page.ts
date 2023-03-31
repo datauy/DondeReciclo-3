@@ -473,6 +473,7 @@ export class MapaPage implements OnInit {
   cupertinoHide(){
     this.list = 0;
     this.session.showSearchItem = true;
+    this.map.loadCustomZones(this.zones);
     if ( this.map.subZone != undefined ) {
       this.map.map.removeLayer(this.map.subZone);
     }
@@ -493,7 +494,6 @@ export class MapaPage implements OnInit {
     else {
       this.map.flytomarker(this.map.userPosition, this.map.zoom);
     }
-    this.map.loadCustomZones(this.zones);
   }
   //
   showPane() {
