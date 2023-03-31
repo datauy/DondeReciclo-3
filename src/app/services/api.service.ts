@@ -219,6 +219,13 @@ export class ApiService<T=any> {
       }
     ));
   }
+  getSubProgram(id: string) {
+    return  this.request.get(environment.backend + "subprogram/"+id+"?version="+environment.apiVersion).pipe(map(
+      (sub: any) => {
+        return sub;
+      }
+    ));
+  }
   getSubContainers(subs: string) {
     return  this.request.get(environment.backend + "subprogram_containers?version="+environment.apiVersion+"&sub_ids="+subs).pipe(map(
       (result: Container[]) => {
