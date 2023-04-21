@@ -20,6 +20,12 @@ export class SidemenuComponent implements OnInit {
   //@ViewChild("#search-app-component", { static: false }) private searchBar: HTMLElement;
   public appDR = [
     {
+      title: 'Estadísticas',
+      desc: 'Cantidad de puntos, servicios y más.',
+      url: 'estadisticas',
+      icon: 'stats-chart-sharp'
+    },
+    {
       title: 'El proyecto',
       desc: 'Quienes somos. Contacto.',
       url: 'sobre-el-proyecto',

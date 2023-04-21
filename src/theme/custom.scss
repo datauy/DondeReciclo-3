@@ -867,22 +867,29 @@ ion-img.logo {
 /**********************
 /*    STATS PAGE      *
 **********************/
+.mat-tab-body-wrapper {
+  flex-grow: 1;
+  padding-top: 18px;
+}
+.mat-tab-header {
+  box-shadow: 0px 4px 4px 0px #95959540;
+}
 .mat-tab-label {
   font-size: 15px;
   font-weight: 400;
 }
-.mat-tab-label-active {
+.mat-tab-label.mat-tab-label-active {
   border-bottom: 3px solid #0D744E;
   color: #0D744E;
   font-size: 16px;
   font-weight: 700;
 }
-.mat-tab-header {
-  box-shadow: 0px 4px 4px 0px #95959540;
+.mat-tab-label, .mat-tab-link {
+  color: #656565;
 }
-.mat-tab-body-wrapper {
-  padding-top: 18px;
+.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: #0D744E;
 }
-.apexcharts-grid-borders {
-  display: none;
+.mat-tab-header-pagination-chevron {
+  border-color: #4d4d4d;
 }

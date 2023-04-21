@@ -378,4 +378,25 @@ export class ApiService<T=any> {
       }
     ));
   }
+  getStatsContainers() {
+    return  this.request.get(environment.backend + "stats/containers?version="+environment.apiVersion+"&country=" + environment[this.session.country].id ).pipe(map(
+      (result: {name: string, total: number}[]) => {
+        return result;
+      }
+    ));
+  }
+  getStatsServices() {
+    return  this.request.get(environment.backend + "stats/services?version="+environment.apiVersion+"&country=" + environment[this.session.country].id ).pipe(map(
+      (result: {name: string, total: number}[]) => {
+        return result;
+      }
+    ));
+  }
+  getStatsUsers() {
+    return  this.request.get(environment.backend + "stats/users?version="+environment.apiVersion+"&country=" + environment[this.session.country].id ).pipe(map(
+      (result: {name: string, total: number}[]) => {
+        return result;
+      }
+    ));
+  }
 }
