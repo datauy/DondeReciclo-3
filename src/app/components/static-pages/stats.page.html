@@ -1,0 +1,123 @@
+<app-header display="full"></app-header>
+
+<ion-content class="inner-scroll stats">
+  <ion-grid>
+    <div class="section-header">
+      <ion-row class="ion-justify-content-center section-header">
+        <ion-col  size-md="11" size-lg="10" size-xs="12">
+          <h1>Indicadores</h1>
+          <p>En esta sección te mostramos algo de la información que manejamos para tu país.</p>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center section-header-bottom">
+        <ion-col size-md="3" size-lg="3" size-xs="3" class="col-0" class="ion-text-center">
+          <h3 class="title" [innerHTML]="programs_total" *ngIf="programs_total != 0"></h3>
+          <ion-spinner color="success" name="lines" *ngIf="programs_total == 0"></ion-spinner>
+          <h4>Programas</h4>
+        </ion-col>
+        <ion-col size-md="3" size-lg="3" size-xs="3" class="col-1" class="ion-text-center">
+          <h3 class="title" [innerHTML]="containers" *ngIf="containers != 0"></h3>
+          <ion-spinner color="success" name="lines" *ngIf="containers == 0"></ion-spinner>
+          <h4>Contenedores</h4>
+        </ion-col>
+        <ion-col size-md="3" size-lg="3" size-xs="3" class="col-2" class="ion-text-center">
+          <h3 class="title" [innerHTML]="services_total" *ngIf="services_total != 0"></h3>
+          <ion-spinner color="success" name="lines" *ngIf="services_total == 0"></ion-spinner>
+          <h4>Servicios</h4>
+        </ion-col>
+        <ion-col size-md="3" size-lg="3" size-xs="3" class="col-3" class="ion-text-center">
+          <h3 class="title" [innerHTML]="users" *ngIf="users != 0"></h3>
+          <ion-spinner color="success" name="lines" *ngIf="users == 0"></ion-spinner>
+          <h4>Usuarios</h4>
+        </ion-col>
+      </ion-row>
+    </div>
+    <ion-row class="ion-justify-content-center tabs-wrapper">
+      <ion-col  size-md="11" size-lg="10" size-xs="12">
+        <div class="section-tabs">
+          <mat-tab-group mat-stretch-tabs (selectedTabChange)="onTabClick($event)" id="tab-group" >
+            <mat-tab isActive=true label="Programas">
+              <p>Los totales de programas se encuentran categorizados, por lo que pueden diferir del total real, ya que algunos programas suman en más de una categoría.</p>
+              <div *ngIf="programs > 0">
+                <apx-chart
+                [series]="chartPrograms.series"
+                [chart]="chartPrograms.chart"
+                [xaxis]="chartPrograms.xaxis"
+                [yaxis]="chartPrograms.yaxis"
+                [title]="chartPrograms.title"
+                [plotOptions]="chartPrograms.plotOptions"
+                [colors]="chartPrograms.colors"
+                [dataLabels]="chartPrograms.dataLabels"
+                [stroke]="chartPrograms.stroke"
+                [grid]="chartPrograms.grid"
+                [legend]="chartPrograms.legend"
+                [tooltip]="chartPrograms.tooltip"
+                [labels]="chartPrograms.labels"
+                ></apx-chart>
+              </div>
+              <ion-spinner color="success" name="lines" *ngIf="programs == 0"></ion-spinner>
+            </mat-tab>
+            <mat-tab label="Contenedores">
+              <div *ngIf="containers > 0">
+                <apx-chart
+                [series]="chartContainers.series"
+                [chart]="chartContainers.chart"
+                [xaxis]="chartContainers.xaxis"
+                [yaxis]="chartContainers.yaxis"
+                [title]="chartContainers.title"
+                [plotOptions]="chartContainers.plotOptions"
+                [colors]="chartContainers.colors"
+                [dataLabels]="chartContainers.dataLabels"
+                [stroke]="chartContainers.stroke"
+                [grid]="chartContainers.grid"
+                [legend]="chartContainers.legend"
+                [tooltip]="chartContainers.tooltip"
+                [labels]="chartContainers.labels"
+                ></apx-chart>
+              </div>
+            </mat-tab>
+            <mat-tab label="Servicios">
+              <p>Los totales de servicios se encuentran regionalizados, por lo que pueden diferir del total real, ya que algunos servicios operan en más de una región.</p>
+              <div *ngIf="services > 0">
+                <apx-chart
+                [series]="chartServices.series"
+                [chart]="chartServices.chart"
+                [xaxis]="chartServices.xaxis"
+                [yaxis]="chartServices.yaxis"
+                [title]="chartServices.title"
+                [plotOptions]="chartServices.plotOptions"
+                [colors]="chartServices.colors"
+                [dataLabels]="chartServices.dataLabels"
+                [stroke]="chartServices.stroke"
+                [grid]="chartServices.grid"
+                [legend]="chartServices.legend"
+                [tooltip]="chartServices.tooltip"
+                [labels]="chartServices.labels"
+                ></apx-chart>
+              </div>
+            </mat-tab>
+            <mat-tab label="Usuarios">
+              <div *ngIf="users > 0">
+                <apx-chart
+                [series]="chartUsers.series"
+                [chart]="chartUsers.chart"
+                [xaxis]="chartUsers.xaxis"
+                [yaxis]="chartUsers.yaxis"
+                [title]="chartUsers.title"
+                [plotOptions]="chartUsers.plotOptions"
+                [colors]="chartUsers.colors"
+                [dataLabels]="chartUsers.dataLabels"
+                [stroke]="chartUsers.stroke"
+                [grid]="chartUsers.grid"
+                [legend]="chartUsers.legend"
+                [tooltip]="chartUsers.tooltip"
+                [labels]="chartUsers.labels"
+                ></apx-chart>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

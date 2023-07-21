@@ -12,12 +12,15 @@ import { NotFoundPage } from './static-pages/notfound.page';
 import { AboutPage } from './static-pages/about.page';
 import { PrivacyPolicyPage } from './static-pages/privacy_policy.page';
 import { RecyclersPage } from './static-pages/recyclers.page';
+import { StatsPage } from './static-pages/stats.page';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { AccordionComponent } from './accordion/accordion.component';
 import { NotificationComponent } from './notification/notification.component';
 import { ImageSliderComponent } from './image-slider/image-slider.component';
 import { MaterialsChipsComponent } from './materials-chips/materials-chips.component';
 import { WalkthroughComponent } from './walkthrough/walkthrough.component';
+import { NgApexchartsModule } from "ng-apexcharts";
+import {MatTabsModule} from '@angular/material/tabs';
 //import { TestDirective } from './test.directive';
 
 @NgModule({
@@ -27,8 +30,9 @@ import { WalkthroughComponent } from './walkthrough/walkthrough.component';
     RouterModule,
     AutoCompleteModule,
     FormsModule,
-    ReactiveFormsModule
-    // SimpleServiceModule
+    ReactiveFormsModule,
+    NgApexchartsModule,
+    MatTabsModule
   ],
   declarations: [
     SidemenuComponent,
@@ -38,6 +42,7 @@ import { WalkthroughComponent } from './walkthrough/walkthrough.component';
     AboutPage,
     PrivacyPolicyPage,
     RecyclersPage,
+    StatsPage,
     ContactFormComponent,
     AccordionComponent,
     NotificationComponent,
