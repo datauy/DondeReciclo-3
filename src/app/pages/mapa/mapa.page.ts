@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { Component, OnInit, ViewChild, Renderer2, ElementRef } from '@angular/core';
+=======
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+>>>>>>> 2b19808 (Se corrige bug de geolocalización)
 import { Event, Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -23,7 +27,12 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-mapa',
   templateUrl: './mapa.page.html',
+<<<<<<< HEAD
   styleUrls: ['./mapa.page.scss']
+=======
+  styleUrls: ['./mapa.page.scss'],
+  encapsulation: ViewEncapsulation.None
+>>>>>>> 2b19808 (Se corrige bug de geolocalización)
 })
 export class MapaPage implements OnInit {
 
@@ -137,12 +146,12 @@ export class MapaPage implements OnInit {
       countryName => {
         if ( this.initDataLoaded == true && countryName != '' ) {
           //If not geolocated
-          let userPos: [number, number];
-          //Set possition and load services
-          userPos = [environment[countryName].center.lat, environment[countryName].center.lon];
-          this.map.setUserPosition(userPos);
-          // Si no está ejecutando la geoloc cargamos contenedores, sino lo maneja la geoloc
           if ( !this.geoLocationActive ) {
+            let userPos: [number, number];
+            //Set possition and load services
+            userPos = [environment[countryName].center.lat, environment[countryName].center.lon];
+            this.map.setUserPosition(userPos);
+            // Si no está ejecutando la geoloc cargamos contenedores, sino lo maneja la geoloc
             this.api.getNearbyContainers(2, userPos).subscribe(
               (containers) => {
                 this.map.loadMarkers(containers, true);
@@ -565,21 +574,25 @@ export class MapaPage implements OnInit {
       this.notification.closeNotificationId('noLoc');
       this.api.getCountryByLocation(this.map.userPosition).subscribe(
         (country) => {
-          this.session.setCountry(country);
-          this.geoLocationActive = false;
+          this.session.setCountry(country, false);
+          if ( this.autoSearch ) {
+            this.activateSearch(this.autoSearchItem);
+            this.geoLocationActive = false;  
+          }
+          else {
+            if (load) {
+              this.api.getNearbyContainers(2, [resp.coords.latitude, resp.coords.longitude])
+              .subscribe((containers) => {
+                this.map.loadMarkers(containers, true);
+                this.geoLocationActive = false;
+              });
+            }
+            else {
+              this.geoLocationActive = false;
+            }
+          }
         }
       );
-      if ( this.autoSearch ) {
-        this.activateSearch(this.autoSearchItem);
-      }
-      else {
-        if (load) {
-          this.api.getNearbyContainers(2, [resp.coords.latitude, resp.coords.longitude])
-          .subscribe((containers) => {
-            this.map.loadMarkers(containers, true);
-          });
-        }
-      }
       //this.map.flytomarker(this.map.userPosition, 15);
     }).catch((error) => {
       this.noLocation(load);
@@ -597,7 +610,7 @@ export class MapaPage implements OnInit {
       id: 'noLoc',
       type: 'notification',
       class: 'warnings',
-      title: 'No pudimos localizarte',
+      title: 'Aún no hemos pudimos localizarte',
       note: 'Quizás no le diste permiso o la localización está desactivada. Prueba iniciar la app con la localización activada. Puedes seleccionar tu ubicación tocando el mapa.',
     };
 

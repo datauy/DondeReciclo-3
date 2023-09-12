@@ -85,19 +85,21 @@ export class SessionService {
     this[key] = value;
     return 1;
   }
-  setCountry(country: string) {
+  setCountry(country: string, propagate = true) {
     this.country = country;
     this.storage.set('country', country);
-    this._country_change.next(country);
     this.clearCaches();
+    if ( propagate ) {
+      this._country_change.next(country);
+    }
   }
   clearCaches() {
     this.news = null;
   }
-  async getCountry() {
+  async getCountry(propagate = true) {
     return this.storage.get('country').then( (country) => {
       if ( country != null ) {
-        this.setCountry(country);
+        this.setCountry(country, propagate);
       }
       return this.country;
     });
