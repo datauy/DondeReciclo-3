@@ -21,7 +21,7 @@ export class ApiService<T=any> {
   materials: {[index:string] : Material[]} = {};
   programs: Program[]
   remoteFile: any;
-
+  material_styles = '';
   // Search
   labelAttribute = 'material_id';
   formValueAttribute = 'name';
@@ -70,6 +70,8 @@ export class ApiService<T=any> {
   getWastes(ids: number[]) :Observable<Material[]>  {
     return this.request.get(environment.backend + "wastes?version="+environment.apiVersion+"&locale=" + environment[this.session.country].locale + "&ids=" + ids.join()).pipe(
       map( (result: Material[]) => {
+        console.log('GETTING WASTES'+ ids.join(), result);
+        
         return result;
       })
     );
@@ -78,13 +80,16 @@ export class ApiService<T=any> {
   loadMaterials(country: string): Observable<Material[]> {
     return this.request.get(environment.backend + "materials?version="+environment.apiVersion+"&locale=" + environment[country].locale).pipe(map(
       (result: Material[]) => {
-        //Check images
-        //for (let key in result) {
-          // TODO: Check type
-          //if (result[key].icon) {
-            //this.downloadFile(result[key].icon, 'dr-'+result[key].class+'.svg', 'custom-icons');
-          //}
-        //}
+        //Load meterial styles
+        if (country == 'Uruguay') {
+          Object.keys(result).forEach(key => {
+            var mat = result[key]; 
+            this.material_styles += ' .ion-color-'+mat.class+' { '+
+            ( (mat.color != '' && mat.color != 'null') ? '--ion-color: '+mat.color+'; fill: '+mat.color+';' : '' )+
+            ( (mat.contrast_color != '' && mat.contrast_color != 'null') ? '--ion-color-contrast: '+mat.contrast_color+'; ' : '' )+
+            ' } ';
+          });
+        }
         return this.materials[country] = result;
       }
     ));

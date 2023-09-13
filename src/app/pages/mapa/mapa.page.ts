@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Renderer2, ElementRef } from '@angular/core';
 import { Event, Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -23,10 +23,11 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-mapa',
   templateUrl: './mapa.page.html',
-  styleUrls: ['./mapa.page.scss'],
+  styleUrls: ['./mapa.page.scss']
 })
 export class MapaPage implements OnInit {
 
+  @ViewChild("stylesContainer", {static: true}) private stylesDist: ElementRef;
   address: string[];
   container = {} as Container;
   infoPane: CupertinoPane;
@@ -68,6 +69,7 @@ export class MapaPage implements OnInit {
     private geo: Geolocation,
     private authGuard: AuthGuardService,
     private notification: NotificationsService,
+    private renderer: Renderer2
     // private backbuttonSubscription: Subscription
   ) {
     this.session = session;
@@ -194,6 +196,12 @@ export class MapaPage implements OnInit {
       (loaded) => {
         if (loaded) {
           this.initDataLoaded = true;
+          //load dinamic styles
+          const classStyle = this.renderer.createText(this.api.material_styles);
+          const newStyleElement = this.renderer.createElement('style');
+          this.renderer.appendChild(newStyleElement, classStyle);
+          this.renderer.appendChild(this.stylesDist.nativeElement, newStyleElement);
+          //
           this.mapaRouter();
           // route for childs and params
           if ( this.loadSubContainers != undefined || this.loadContainers != undefined || this.loadContainer > 0 ) {
