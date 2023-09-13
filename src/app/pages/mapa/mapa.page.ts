@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import { Component, OnInit, ViewChild, Renderer2, ElementRef } from '@angular/core';
-=======
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
->>>>>>> 2b19808 (Se corrige bug de geolocalización)
 import { Event, Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -27,12 +23,7 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-mapa',
   templateUrl: './mapa.page.html',
-<<<<<<< HEAD
   styleUrls: ['./mapa.page.scss']
-=======
-  styleUrls: ['./mapa.page.scss'],
-  encapsulation: ViewEncapsulation.None
->>>>>>> 2b19808 (Se corrige bug de geolocalización)
 })
 export class MapaPage implements OnInit {
 
