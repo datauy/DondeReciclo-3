@@ -1,17 +1,7 @@
 <div id="custom_backdrop" (click)="hideSearch('backdrop')" [ngClass]="searchVisibility ? 'show' : 'hide'"></div>
 <div id="search-app-content">
-  <ion-auto-complete
-    #searchbar
-    class="searchContent"
-    [options]="{ placeholder : '¿Qué o dónde querés clasificar?' }"
-    [template]="dr"
-    [showResultsFirst]="true"
-    (click)="this.searchVisibility = true"
-    (itemSelected)="itemSelected($event)"
-    [dataProvider]="this"
-    [clearInvalidInput]="false"
-    >
-  </ion-auto-complete>
+  <ion-searchbar id="searchBar" type="text" debounce="500" animated placeholder="¿Qué o dónde querés clasificar?" color=""
+  (click)="this.searchVisibility = true" (ionInput)="getResults($event)" clearInput></ion-searchbar>
   <div id="dimension-filter-wrapper" (click)="toggleSearch()">
     <div id="dimension-filter">
       Filtro
@@ -58,28 +48,7 @@
         </ion-button>
       </div>
     </div>
-    <!-- <ion-searchbar id="searchBar" type="text" debounce="500" animated placeholder="Busca materiales" color="dark"
-    (click)="showSearch()" (ionChange)="searchAPI($event)" clearInput></ion-searchbar> -->
-
-    <!-- search-list -->
-    <ng-template #dr let-attrs="attrs">
-      <ion-button [color]="attrs.data.class"
-        expand="block"
-        [ngClass]="attrs.data.class"
-        *ngIf="attrs.data.class != 'none'"
-        [style.background-color] = "attrs.data.color != undefined ? attrs.data.color : ''"
-        [style.color]="attrs.data.contrast_color != undefined ? attrs.data.contrast_color : ''"
-      >
-        <img class="left" *ngIf="attrs.data.icon != ''" src="{{attrs.data.icon}}" alt="imagen de residuo">
-        <ion-icon
-          *ngIf="attrs.data.icon == ''"
-          class="left"
-          [name]="'dr-' + attrs.data.class">
-        </ion-icon>
-        <ion-label [innerHTML]="attrs.data.name"></ion-label>
-      </ion-button>
-      <span *ngIf="attrs.data.class == 'none'">No hay resultados</span>
-    </ng-template>
+    <app-materials-chips *ngIf="this.searchResult.length" [materials_obj]="searchResult" materials_type="search"></app-materials-chips>
   </div>
 </div>
 <!-- search-banner -->

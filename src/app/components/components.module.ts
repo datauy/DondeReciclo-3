@@ -7,7 +7,6 @@ import { RouterModule } from '@angular/router';
 import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { HeaderComponent } from './header/header.component';
 import { SocialShareComponent } from './social-share/social-share.component';
-import { AutoCompleteModule } from 'ionic4-auto-complete';
 import { NotFoundPage } from './static-pages/notfound.page';
 import { AboutPage } from './static-pages/about.page';
 import { PrivacyPolicyPage } from './static-pages/privacy_policy.page';
@@ -28,7 +27,6 @@ import {MatTabsModule} from '@angular/material/tabs';
     CommonModule,
     IonicModule,
     RouterModule,
-    AutoCompleteModule,
     FormsModule,
     ReactiveFormsModule,
     NgApexchartsModule,

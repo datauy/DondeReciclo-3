@@ -50,7 +50,6 @@
     "core-js": "^2.6.12",
     "cupertino-pane": "^1.2.61",
     "ionic-cli": "0.0.0",
-    "ionic4-auto-complete": "^2.8.2",
     "leaflet": "^1.7.1",
     "leaflet-gesture-handling": "^1.2.1",
     "leaflet-routing-machine": "^3.2.12",

@@ -766,7 +766,7 @@ export class MapaPage implements OnInit {
         (subprograms_zones) => {
           var subprograms = subprograms_zones.subprograms;
           let fixedPos:[number, number] = [this.map.userPosition[0] - 0.002, this.map.userPosition[1] ];
-          if ( subprograms.length > 1 ) {
+          if ( subprograms.length > 0 ) {
             this.formatSubProgram(subprograms);
             this.zones = subprograms_zones.locations;
             this.subprograms = subprograms;
@@ -777,7 +777,7 @@ export class MapaPage implements OnInit {
             }
             this.map.loadCustomZones(this.zones);
           }
-          else if ( subprograms.length == 1) {
+          /*else if ( subprograms.length == 1) {
             this.map.removeZones();
             this.map.removeCustomZones();
             //Sobreescribe si no hay listados, para poder volver a ellos o no...
@@ -791,7 +791,7 @@ export class MapaPage implements OnInit {
             this.subprogramShow(0, 4, subprograms[0]);
             //this.map.flytomarker(fixedPos, this.map.zoom);
             this.map.loadCustomZones(this.zones);
-          }
+          }*/
           else {
             this.subprograms = [];
           }

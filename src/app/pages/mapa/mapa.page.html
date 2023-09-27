@@ -45,7 +45,7 @@
               <span *ngSwitchDefault>Recolección,</span>
               <span class="distance"> {{subp.zone.distance}} metros </span>
             </div>
-            <app-materials-chips [materials_obj]="subp"></app-materials-chips>
+            <app-materials-chips [materials_obj]="subp" materials_type="org"></app-materials-chips>
           </div>
         </ion-item>
       </div>
@@ -114,7 +114,7 @@
             <div *ngIf="subprogram.receives.length" >
               <p *ngFor="let receive of subprogram.receives" [innerHtml]="receive"></p>
             </div>
-            <app-materials-chips [materials_obj]="subprogram"></app-materials-chips>
+            <app-materials-chips [materials_obj]="subprogram" materials_type="org"></app-materials-chips>
           </div>
         </ion-item>
         <ion-item lines="none" *ngIf="subprogram.zone.information">
@@ -226,7 +226,7 @@
                 <h5>Recibe:</h5>
               </div>
               <p [innerHTML]="container.receives_text"></p>
-              <app-materials-chips [materials_obj]="container"></app-materials-chips>
+              <app-materials-chips [materials_obj]="container" materials_type="org"></app-materials-chips>
             </div>
           </ion-item>
         </div>

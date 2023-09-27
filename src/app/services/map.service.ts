@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { Container } from "src/app/models/basic_models.model";
 import { Router } from "@angular/router";
 import { Storage } from  '@ionic/storage';
