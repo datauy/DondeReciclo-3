@@ -27,6 +27,7 @@ export class ApiService<T=any> {
   formValueAttribute = 'name';
 
   _initial_data_loaded = new BehaviorSubject<boolean>(false);
+  public _itemSelected = new BehaviorSubject<any>(null);
   //Search property for non results
   constructor(
     private request: HttpClient,
@@ -247,6 +248,8 @@ export class ApiService<T=any> {
   }
   getSubprograms4Location(latlng: number[], distance?: number, dimensions?: string) {
     let ids = null;
+    console.log("SEARCH ITEM API", this.session.searchItem);
+    
     if ( this.session.searchItem != undefined){
       ids = this.session.searchItem.ids != undefined ? this.session.searchItem.ids : this.session.searchItem.id;
     }
@@ -254,8 +257,8 @@ export class ApiService<T=any> {
     if ( distance != null ) {
       req += '&distance=' + distance;
     }
-    if ( this.session.searchDimensions.length >= 1 && ids !== null ) {
-      req += '&dimensions=' + ids;
+    if ( ids !== null ) {
+      req += '&' + this.session.searchItem.type + '=' + ids;
     }
     return  this.request.get(req).pipe(map(
       (result: any) => {
@@ -318,28 +321,9 @@ export class ApiService<T=any> {
       }
     ));
   }
-  //
-  formatSearchOptions(options: SearchParams[]) :any[]{
-  let res = [];
-  options.forEach( (option) => {
-    // console.log(option);
-    if (!option.material_id){
-      option.material_id = 5;
-    }
-    res.push({
-      id: option.id,
-      type: option.type,
-      name: option.name,
-      material_id: option.material_id,
-      class: this.materials[this.session.country][option.material_id].class,
-      deposition: option.deposition,
-    });
-  });
-  return res;
-  }
   //Address search
   getAddressLocation(str: string) {
-    return  this.request.get(environment.geocoder + "search?version="+environment.apiVersion+"&q="+str+','+this.session.country+'&countrycodes='+environment[this.session.country].code+'&format=json').pipe(map(
+    return  this.request.get(environment.geocoder + "search?q="+str+','+this.session.country+'&countrycodes='+environment[this.session.country].code+'&format=json').pipe(map(
       (result: any[]) => {
         if (result.length) {
           return this.formatAddressOptions(result);
@@ -369,6 +353,11 @@ export class ApiService<T=any> {
   });
   return res;
   }
+  //searchItem selected
+  get searchItemSelected() :any {
+    return this._itemSelected.asObservable();
+  }
+  /* STATS */
   getStatsTotals() {
     return  this.request.get(environment.backend + "stats/totals?version="+environment.apiVersion+"&country=" + environment[this.session.country].id ).pipe(map(
       (result: {title: string, total: number}[]) => {
