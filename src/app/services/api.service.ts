@@ -71,8 +71,6 @@ export class ApiService<T=any> {
   getWastes(ids: number[]) :Observable<Material[]>  {
     return this.request.get(environment.backend + "wastes?version="+environment.apiVersion+"&locale=" + environment[this.session.country].locale + "&ids=" + ids.join()).pipe(
       map( (result: Material[]) => {
-        console.log('GETTING WASTES'+ ids.join(), result);
-        
         return result;
       })
     );
@@ -226,7 +224,14 @@ export class ApiService<T=any> {
     ));
   }
   getSubProgram(id: string) {
-    return  this.request.get(environment.backend + "subprogram/"+id+"?version="+environment.apiVersion).pipe(map(
+    return  this.request.get(environment.backend + "subprograms/"+id+"?version="+environment.apiVersion).pipe(map(
+      (sub: any) => {
+        return sub;
+      }
+    ));
+  }
+  getSubPrograms(ids: string) {
+    return  this.request.get(environment.backend + "subprograms/"+ids+"?version="+environment.apiVersion).pipe(map(
       (sub: any) => {
         return sub;
       }
@@ -248,7 +253,6 @@ export class ApiService<T=any> {
   }
   getSubprograms4Location(latlng: number[], distance?: number, dimensions?: string) {
     let ids = null;
-    console.log("SEARCH ITEM API", this.session.searchItem);
     
     if ( this.session.searchItem != undefined){
       ids = this.session.searchItem.ids != undefined ? this.session.searchItem.ids : this.session.searchItem.id;

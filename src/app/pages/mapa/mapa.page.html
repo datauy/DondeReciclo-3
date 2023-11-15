@@ -1,7 +1,7 @@
 <app-header display="map"></app-header>
 <app-search class="dr-transition"></app-search>
 <app-walkthrough *ngIf="session.showSlider"></app-walkthrough>
-<ion-content no-bounce scroll-y="false" class="map-section">
+<ion-content no-bounce scroll-y="false" class="map-section" #mapSection>
   <ion-button class="back-button" *ngIf="session.cupertinoState == 'cupertinoOpen'" (click)="hidePane()">
     <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
   </ion-button>
@@ -15,9 +15,10 @@
 
   <div id="map"
     style="height:100%; width: 100%;"
-    center='Montevideo, Uruguay'>
+    center='Montevideo, Uruguay' 
+    #leafletMap>
   </div>
-  <div class="services-pane cupertino-pane">
+  <div #serviceContainer class="services-pane cupertino-pane">
     <div class="subprogram-list pane-container">
       <ion-item class="header" lines="full">
         <div class="title-wrapper">
@@ -40,10 +41,10 @@
             <span size="small">{{subp.city}}, {{subp.zone.name}}</span>
             <h5>{{subp.name}}</h5>
             <div [ngSwitch]="subp.zone.pick_up_type">
-              <span *ngSwitchCase="'pick_up'">Retiro,</span>
-              <span *ngSwitchCase="'take_out'">Depositar,</span>
-              <span *ngSwitchDefault>Recolección,</span>
-              <span class="distance"> {{subp.zone.distance}} metros </span>
+              <span *ngSwitchCase="'pick_up'">Retiro</span>
+              <span *ngSwitchCase="'take_out'">Depositar</span>
+              <span *ngSwitchDefault>Recolección</span>
+              <span class="distance" *ngIf="subp.zone.distance">, {{subp.zone.distance}} metros </span>
             </div>
             <app-materials-chips [materials_obj]="subp" materials_type="org"></app-materials-chips>
           </div>
@@ -51,9 +52,9 @@
       </div>
     </div>
   </div>
-  <div #infoPane class="info-pane cupertino-pane">
-    <div class="subprogram pane-container" *ngIf="list == 2 || list == 4">
-      <ion-item *ngIf="subprogram !== undefined" class="header" lines="full">
+  <div #infoContainer class="info-pane cupertino-pane">
+    <div class="subprogram pane-container" *ngIf="list == 2 || list == 4 || list == 3">
+      <ion-item *ngIf="subprogram !== undefined" class="header" lines="full" [routerLink]="'/programas/'+subprogram.program_id">
         <ion-avatar slot="start">
           <img src="{{subprogram.program_icon}}">
         </ion-avatar>

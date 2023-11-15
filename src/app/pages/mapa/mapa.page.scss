@@ -18,6 +18,7 @@
       .scrollable-div {
         padding-bottom: 30px;
         overflow-y: auto;
+        height: calc(70vh - 188px);
       }
       &.middle .scrollable-div {
         height: 41vh;

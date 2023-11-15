@@ -93,14 +93,6 @@ const iconDefault = L.divIcon({
   tooltipAnchor: [16, -28],
   shadowSize: [41, 41]
 });
-const iconUser = L.icon({
-  iconUrl: 'assets/custom-icons/dr-user-gps.svg',
-  iconSize: [50, 50],
-  iconAnchor: [25, 25],
-  popupAnchor: [1, -34],
-  tooltipAnchor: [16, -28],
-  shadowSize: [41, 41]
-});
 
 L.Marker.prototype.options.icon = iconDefault;
 L.CustomMarker = L.Marker.extend({
@@ -126,7 +118,7 @@ export class MapService {
   map: L.Map;
   route: any;
   userPosition: [number, number];
-  private userMarker: L.Marker;
+  public userMarker: L.Marker;
   currentContainer: Container;
   containers: Container[];
   currentBounds: [number, number][];
@@ -147,6 +139,14 @@ export class MapService {
   //
   initParams = true;
   zoneClick = -1;
+  public iconUser = L.icon({
+    iconUrl: 'assets/custom-icons/dr-user-gps.svg',
+    iconSize: [50, 50],
+    iconAnchor: [25, 25],
+    popupAnchor: [1, -34],
+    tooltipAnchor: [16, -28],
+    shadowSize: [41, 41]
+  });
   constructor(
     private session: SessionService,
     private router: Router,
@@ -159,46 +159,8 @@ export class MapService {
     });
   }
 
-  loadMap(center?: number[]) {
-    if ( this.map == undefined || this.session.reloadMap ) {
-      if ( center == undefined ) {
-        center = [-11.336196, -63.605775];
-      }
-      //this.animating = true;
-      this.map = new L.Map("map", {minZoom:4}).setView(center, 4);
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-      }).addTo(this.map);
-
-      if ( this.userPosition ) {
-        this.userMarker = L.marker(this.userPosition, {icon: iconUser} ).addTo(this.map);
-      }
-      //Create user marker upon click
-      this.map.on("click", <LeafletMouseEvent>(e) => {
-        //Do not change user position if zone clicked
-        if ( this.zoneClick < 0 ) {
-          if (this.userMarker) { // check
-            this.map.removeLayer(this.userMarker); // remove
-          }
-          //Do not propagate since click is handled
-          this.setUserPosition([e.latlng.lat, e.latlng.lng], false);
-          this.userMarker = L.marker(this.userPosition, {icon: iconUser} ).addTo(this.map); // add the marker onclick
-        }
-        if (this.route) {
-          this.route.spliceWaypoints(0, 1, e.latlng);
-        }
-        this.clickZone(0.0002);
-      });
-      this.map.on('zoomend', this.zoomChange, this);
-      this.map.on('dragend', this.centerChange, this);
-      //this.map.once('moveend', this.toggleAnimation, this);
-      this.session.reloadMap = false;
-    }
-    return true;
-  }
-
   loadMarkers( markers: Container[], fly = true ){
-    this.loadMap();
+    //this.loadMap();
     this.containers = markers;
     this.saturationWarn = false;
     let mapBounds = [];
@@ -210,7 +172,7 @@ export class MapService {
       if (this.userMarker) { // check
         this.map.removeLayer(this.userMarker); // remove
       }
-      this.userMarker = L.marker(this.userPosition, {icon: iconUser} ).addTo(this.map);
+      this.userMarker = L.marker(this.userPosition, {icon: this.iconUser} ).addTo(this.map);
       mapBounds.push(this.userPosition);
     }
     var markersLayer = []
@@ -524,11 +486,13 @@ export class MapService {
         var zoneBounds = [];
         var sw = this.zones.getBounds().getSouthWest();
         var ne = this.zones.getBounds().getSouthWest();
-        this.flyToBounds( [
-          [ne.lat, ne.lng],
-          [sw.lat, sw.lng],
-          this.userPosition,
-        ]);
+        if ( ne != undefined && sw != undefined ) {
+          this.flyToBounds( [
+            [ne.lat, ne.lng],
+            [sw.lat, sw.lng],
+            this.userPosition,
+          ]);
+        }
       }
     }
   }
