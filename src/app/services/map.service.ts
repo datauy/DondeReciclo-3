@@ -481,11 +481,12 @@ export class MapService {
   //
   showZones( zoom2zone: boolean, index?: number) {
     if ( this.zones != undefined ) {
-        this.map.addLayer(this.zones);
+      this.removeZones();
+      this.map.addLayer(this.zones);
       if (zoom2zone) {
         var zoneBounds = [];
         var sw = this.zones.getBounds().getSouthWest();
-        var ne = this.zones.getBounds().getSouthWest();
+        var ne = this.zones.getBounds().getNorthEast();
         if ( ne != undefined && sw != undefined ) {
           this.flyToBounds( [
             [ne.lat, ne.lng],

@@ -286,7 +286,6 @@ export class MapaPage implements OnInit {
   }
   //
   ionViewWillLeave() {
-    this.session.showSearchItem = false;
     //Remove notification messages
     this.notification.closeNotificationId('noLoc');
     this.notification.closeNotificationId('zoom');
@@ -300,15 +299,21 @@ export class MapaPage implements OnInit {
     if ( this.infoPane.isPanePresented() ){
       this.infoPane.destroy();
     }
+    this.list = 0;
     //Remove search variables
+    this.session.showSearchItem = false;
+    delete this.session.searchItem;
     delete this.loadContainer; 
     delete this.autoSearch;
     delete this.autoSearchItem;
+    //Remove loaded objects
+    delete this.container;
     delete this.loadContainers;
     delete this.loadSubContainers;
+    this.map.removeZones();
+    this.map.removeCustomZones();
   }
   mapaRouter(event?: any) {
-    
     if ( this.initDataLoaded && !this.routing ) {
       this.routing = true;
       var section = this.router.url.split('/')[1];
@@ -368,7 +373,7 @@ export class MapaPage implements OnInit {
               }
             );
             this.api.getSubPrograms(this.loadSubContainers).subscribe(
-              (subp) => {
+              (subp) => {                             
                 this.list = 3;
                 if ( subp.subprograms.length == 1 ) {
                   this.subprogram = this.formatSubProgram(subp.subprograms)[0];
@@ -449,7 +454,9 @@ export class MapaPage implements OnInit {
       }
     }
     else {
-      cupertinoBrake = this.infoPane.currentBreak();
+      if ( this.infoPane.isPanePresented() ) {
+        cupertinoBrake = this.infoPane.currentBreak();
+      }
     }
      document.querySelector('.'+className).className = className + ' cupertino-pane ' + cupertinoBrake;
   }
@@ -489,7 +496,7 @@ export class MapaPage implements OnInit {
       onTransitionEnd: () => this.breakPointMapCupertino('info-pane'),
       onWillPresent: () => this.cupertinoShow(),
       // onBackdropTap: () => this.infoPane.hide(),
-      onWillDismiss: () => this.cupertinoHide(),
+      onWillDismiss: () => this.hidePane(false),
     };
     //document.querySelector(".cupertino-pane").classList.add(initPane);
     this.infoPane = new CupertinoPane(
@@ -532,9 +539,6 @@ export class MapaPage implements OnInit {
         },
       },
       onTransitionEnd: () => this.breakPointMapCupertino('services-pane'),
-      //onWillPresent: () => this.cupertinoShow(),
-      // onBackdropTap: () => this.infoPane.hide(),
-      //onWillDismiss: () => this.cupertinoHide(),
     };
     
     //document.querySelector(".cupertino-pane").classList.add(initPane);
@@ -572,34 +576,6 @@ export class MapaPage implements OnInit {
     }
   }
   //
-  cupertinoHide(){
-    this.list = 0;
-    this.session.showSearchItem = true;
-    if ( this.zones ) {
-      this.map.loadCustomZones(this.zones);
-    }
-    if ( this.map.subZone != undefined ) {
-      this.map.map.removeLayer(this.map.subZone);
-    }
-    if ( this.zoneVisible != 3 ) {
-      this.map.removeZones();
-    }
-    if ( this.map.route != null ) {
-      this.map.map.removeControl(this.map.route);
-      this.map.route = null;
-    }
-    this.session.cupertinoState = 'cupertinoClosed';
-    if ( this.map.currentContainer != undefined ) {
-      this.map.flyToBounds([
-        [this.map.currentContainer.latitude, this.map.currentContainer.longitude],
-        this.map.userPosition
-      ]);
-    }
-    else {
-      this.map.flytomarker(this.map.userPosition, this.map.zoom);
-    }
-  }
-  //
   showPane() {
     let cid = 0;
     if ( this.loadContainer > 0 ) {
@@ -627,9 +603,34 @@ export class MapaPage implements OnInit {
     });
   }
   //
-  hidePane() {
+  hidePane(destroy=true) {
     //Si está en sub-programa vuelvo al listado
-    if ( this.list == 2 || this.list == 4 ) {
+    //this.list = 0;
+    this.session.showSearchItem = true;
+    if ( this.zones ) {
+      this.map.loadCustomZones(this.zones);
+    }
+    if ( this.map.subZone != undefined ) {
+      this.map.map.removeLayer(this.map.subZone);
+    }
+    if ( this.zoneVisible != 3 ) {
+      this.map.removeZones();
+    }
+    if ( this.map.route != null ) {
+      this.map.map.removeControl(this.map.route);
+      this.map.route = null;
+    }
+    this.session.cupertinoState = 'cupertinoClosed';
+    /*if ( this.map.currentContainer != undefined ) {
+      this.map.flyToBounds([
+        [this.map.currentContainer.latitude, this.map.currentContainer.longitude],
+        this.map.userPosition
+      ]);
+    }
+    else {
+      this.map.flytomarker(this.map.userPosition, this.map.zoom);
+    }*/
+    if ( this.list == 2 ||  this.list == 4 ) {
       if (this.map.subZone !== undefined ) {
         this.map.map.removeLayer(this.map.subZone);
       }
@@ -637,6 +638,11 @@ export class MapaPage implements OnInit {
       if (this.subprograms.length > 1 ) {
         this.map.showZones(true);
         this.servicesPane.moveToBreak('middle');
+        this.api.getSubContainers(this.subprograms.map(sub => {return sub.id.toString()}).join(',')).subscribe(
+          (containers) => {
+            this.map.loadMarkers(containers, true);
+          }
+        );
       }
       else {
         //Reload subprograms and data
@@ -644,22 +650,13 @@ export class MapaPage implements OnInit {
       }
     }
     else if ( this.list == 3 ) {
-      this.list = 0;
-      this.session.cupertinoState = 'cupertinoClosed';
+      this.zoneVisible = 0;
       delete this.loadSubContainers;
-      this.gotoLocation();
+      this.gotoLocation(true);
       this.servicesPane.moveToBreak('bottom');
     }
-    else {
-      //Si no está mostrando las zonas
-      if ( this.zoneVisible != 3 ) {
-        this.map.removeZones();
-      }
-      else {
-        this.map.showZones(false);
-      }
-    }
-    if ( this.infoPane.isPanePresented() ) {
+    if ( this.infoPane.isPanePresented() && destroy ) {
+      this.zoneVisible = 0;
       this.infoPane.destroy({animate: true});
     }
     setTimeout( () => {
@@ -752,7 +749,7 @@ export class MapaPage implements OnInit {
               //Se supone que no tiene localización activada y no ha seleccionado el país, démosle tiempo
               setTimeout( () => {
                 this.gotoLocation();
-              }, 2000);
+              }, 3000);
             }
           }
         }
@@ -773,18 +770,20 @@ export class MapaPage implements OnInit {
       var today = d.toLocaleDateString('es', { weekday: 'long' });
       container.schedules.forEach( day_obj => {
         let selected = '';
-        if ( day_obj.day.toLowerCase() == today ) {
-          selected = 'today';
-        }
-        if ( day_obj.closed == true ) {
-          days.push( {class: selected, text: day_obj.day + ': Cerrado'} );
-        }
-        else {
-          let day_text = day_obj.day + ': ' + day_obj.start + ' a ' + day_obj.end;
-          if ( day_obj.hasOwnProperty('start2') ){
-            day_text += ' y ' + day_obj.start2 + ' a ' + day_obj.end2;
+        if ( day_obj.day != undefined ) {
+          if ( day_obj.day.toLowerCase() == today ) {
+            selected = 'today';
           }
-          days.push( {class: selected, text: day_text} );
+          if ( day_obj.closed == true ) {
+            days.push( {class: selected, text: day_obj.day + ': Cerrado'} );
+          }
+          else {
+            let day_text = day_obj.day + ': ' + day_obj.start + ' a ' + day_obj.end;
+            if ( day_obj.hasOwnProperty('start2') ){
+              day_text += ' y ' + day_obj.start2 + ' a ' + day_obj.end2;
+            }
+            days.push( {class: selected, text: day_text} );
+          }
         }
       });
     }
@@ -940,7 +939,11 @@ export class MapaPage implements OnInit {
 
       }
     }
-    
+    this.api.getSubContainers(this.subprogram.id.toString()).subscribe(
+      (containers) => {
+        this.map.loadMarkers(containers, true);
+      }
+    );
     if ( this.servicesPane.currentBreak() == 'top' ) {
       this.servicesPane.moveToBreak('middle');
     }
@@ -948,7 +951,7 @@ export class MapaPage implements OnInit {
   }
   //
   getZones(getNext = true) {
-    let zoneBtn = document.querySelector(".map-zones");
+  let zoneBtn = document.querySelector(".map-zones");
     if ( this.zoneVisible == 3 ) {
       zoneBtn.classList.remove('selected');
       this.map.removeZones();

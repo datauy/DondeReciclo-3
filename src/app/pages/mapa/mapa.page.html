@@ -33,7 +33,7 @@
         </div>
       </ion-item>
       <div class="scrollable-div" contain="none" overflow-y="scroll">
-        <ion-item *ngFor="let subp of subprograms; let i = index" lines="none" (click)="subprogramShow(i)">
+        <ion-item *ngFor="let subp of subprograms; let i = index" lines="none" (click)="subprogramShow(i, 3)">
           <ion-avatar slot="start">
             <img src="{{subp.program_icon}}">
           </ion-avatar>
@@ -124,7 +124,7 @@
             <p>{{subprogram.zone.information}}</p>
           </div>
         </ion-item>
-        <ion-item class="panel-footer" lines="none">
+        <ion-item class="panel-footer" lines="none" *ngIf="this.map.subZone !== undefined || this.map.route !== undefined ">
           <ion-row class="ion-justify-content-center">
             <ion-col size-md="10" size-xl="8" size-xs="12" padding="0" >
               <ion-button *ngIf="!subprogram.action_link"
@@ -143,7 +143,7 @@
         </ion-item>
       </div>
     </div>
-    <div class="pane-container containers" *ngIf="list == 0">
+    <div class="pane-container containers" *ngIf="list == 0 && container != undefined">
       <div class="cupertino-outofbox-image">
         <img src="{{container.type_icon}}">
       </div>

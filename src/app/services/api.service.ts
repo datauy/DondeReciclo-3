@@ -186,7 +186,12 @@ export class ApiService<T=any> {
     if (typeof location == undefined) {
       location = environment[this.session.country].center;
     }
-    return  this.request.get(environment.backend + "containers_nearby?version="+environment.apiVersion+"&lat="+location[0]+"&lon="+location[1]+"&radius="+radius).pipe(map(
+    let query = ''
+    if ( this.session.searchItem != undefined){
+      let ids = this.session.searchItem.ids !== undefined ? this.session.searchItem.ids : this.session.searchItem.id;
+      query = '&'+this.session.searchItem.type+"="+ids;
+    }
+    return  this.request.get(environment.backend + "containers_nearby?version="+environment.apiVersion+"&lat="+location[0]+"&lon="+location[1]+"&radius="+radius+query).pipe(map(
       (result: Container[]): Container[] => {
         return this.formatMarker(result);
       }
