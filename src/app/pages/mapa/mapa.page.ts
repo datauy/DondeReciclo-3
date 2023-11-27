@@ -61,7 +61,7 @@ export class MapaPage implements OnInit {
   autoSearch = false;
   autoSearchItem:any;
   loadContainers: string;
-  loadSubContainers: string;
+  loadSubIds: string;
   panelTop = true;
   routing = false;
   
@@ -309,7 +309,7 @@ export class MapaPage implements OnInit {
     //Remove loaded objects
     delete this.container;
     delete this.loadContainers;
-    delete this.loadSubContainers;
+    delete this.loadSubIds;
     this.map.removeZones();
     this.map.removeCustomZones();
   }
@@ -366,13 +366,13 @@ export class MapaPage implements OnInit {
           }
           //MAP SERVICES
           if ( this.route.snapshot.params['subsID'] != undefined && this.route.snapshot.params['subsID'].length > 0 ) {
-            this.loadSubContainers = this.route.snapshot.params['subsID'];
-            this.api.getSubContainers(this.loadSubContainers).subscribe(
+            this.loadSubIds = this.route.snapshot.params['subsID'];
+            this.api.getSubContainers(this.loadSubIds).subscribe(
               (containers) => {
                 this.map.loadMarkers(containers, true);
               }
             );
-            this.api.getSubPrograms(this.loadSubContainers).subscribe(
+            this.api.getSubPrograms(this.loadSubIds).subscribe(
               (subp) => {                             
                 this.list = 3;
                 if ( subp.subprograms.length == 1 ) {
@@ -441,10 +441,10 @@ export class MapaPage implements OnInit {
       if (cupertinoBrake == 'bottom') {
         this.zoneVisible = 0;
         this.map.removeZones();
-        if ( this.list == 3 ) {
+        if ( this.list == 3 && this.routing_load() ) {
           this.list = 0;
           this.session.cupertinoState = 'cupertinoClosed';
-          delete this.loadSubContainers;
+          delete this.loadSubIds;
           this.gotoLocation();
         }
       }
@@ -651,7 +651,7 @@ export class MapaPage implements OnInit {
     }
     else if ( this.list == 3 ) {
       this.zoneVisible = 0;
-      delete this.loadSubContainers;
+      delete this.loadSubIds;
       this.gotoLocation(true);
       this.servicesPane.moveToBreak('bottom');
     }
@@ -677,7 +677,8 @@ export class MapaPage implements OnInit {
             this.geoLocationActive = false;  
           }
           else {
-            if (load) {
+            //Check routing load
+            if (load && this.routing_load() ) {
               this.subprograms4location();
               this.api.getNearbyContainers(2, [resp.coords.latitude, resp.coords.longitude])
               .subscribe((containers) => {
@@ -735,7 +736,7 @@ export class MapaPage implements OnInit {
               this.activateSearch(this.autoSearchItem);
             }
             else {
-              if (load && this.loadSubContainers == undefined && this.loadContainers == undefined ) {
+              if ( load ) {
                 this.subprograms4location();
                 this.api.getNearbyContainers(2, this.map.userPosition)
                 .subscribe((containers) => {
@@ -756,6 +757,10 @@ export class MapaPage implements OnInit {
         return true;
       }
     );
+  }
+  //
+  routing_load() {
+    return this.loadSubIds == undefined && this.loadContainers == undefined && this.loadContainer == undefined 
   }
   //
   formatContainer(container: Container) {
