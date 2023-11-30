@@ -1,6 +1,6 @@
 <div id="custom_backdrop" (click)="hideSearch('backdrop')" [ngClass]="searchVisibility ? 'show' : 'hide'"></div>
 <div id="search-app-content">
-  <ion-searchbar id="searchBar" type="text" debounce="500" animated placeholder="¿Qué o dónde querés clasificar?" color=""
+  <ion-searchbar mode="md" id="searchBar" type="text" debounce="500" animated placeholder="¿Qué o dónde querés clasificar?" color=""
   (click)="this.searchVisibility = true" (ionInput)="getResults($event)" clearInput></ion-searchbar>
   <div id="dimension-filter-wrapper" (click)="toggleSearch()">
     <div id="dimension-filter">
