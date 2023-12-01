@@ -32,7 +32,7 @@
   }
   #dimension-filter-wrapper {
     position: absolute;
-    top: 2px;
+    top: 8px;
     right: 12px;
     z-index: 1100;
     background: white;
@@ -69,34 +69,13 @@
     font-size: 12px;
   }
   #search-app-content {
-    ion-auto-complete {
-      padding: 0 12px;
-      overflow: visible !important;
-      width: 100%;
-      max-width: 100% !important;
+    app-materials-chips {
       position: relative;
-      z-index: 1020;
-
-      ion-button {
-        width: 100%;
-        &.address {
-          max-width: 680px;
-          --padding-start: 20px;
-          ion-label {
-            left: 38px;
-          }
-        }
-        ion-label{
-          position: absolute;
-          left: 57px;
-        }
-      }
-      span {
-        color: var(--vidrio);
-        justify-content: center;
-        display: flex;
-        margin-top: 90px;
-      }
+      height: calc(100vh - 4*var(--dr-header-height-map));
+      width: 100%;
+      overflow: auto;
+      display: block;
+      margin-top: 20px;
     }
     #search-overlay {
       position: absolute;
@@ -148,7 +127,7 @@
       z-index: 500;
       position: relative;
       overflow-y: auto;
-      max-height: calc(100vh - 224px);
+      max-height: calc(100vh - 312px);
       ion-list-header {
         --color: white;
       }

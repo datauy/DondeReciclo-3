@@ -42,7 +42,6 @@
 
   --ion-color-step-350: var(--vidrio);
   --ion-color-step-600: var(--vidrio);
-}
 
 .ion-color-warnings,
 .pale-olive-green {
@@ -54,7 +53,6 @@
   --ion-color-base: var(--residuos-peligrosos);
 }
 
-:root {
   // Metales
   --ion-color-metales: #464646;
   --ion-color-metales-rgb: 70,70,70;
@@ -62,7 +60,6 @@
   --ion-color-metales-contrast-rgb: 255,255,255;
   --ion-color-metales-shade: #3e3e3e;
   --ion-color-metales-tint: #595959;
-}
 .ion-color-metales {
   --ion-color-base: var(--ion-color-metales);
   --ion-color-base-rgb: var(--ion-color-metales-rgb);
@@ -71,8 +68,6 @@
   --ion-color-shade: var(--ion-color-metales-shade);
   --ion-color-tint: var(--ion-color-metales-tint);
 }
-
-:root {
   // Vidrios
   --ion-color-vidrios: #ffffff;
   --ion-color-vidrios-rgb: 255,255,255;
@@ -80,7 +75,6 @@
   --ion-color-vidrios-contrast-rgb: 0,0,0;
   --ion-color-vidrios-shade: #e0e0e0;
   --ion-color-vidrios-tint: #ffffff;
-}
 
 .ion-color-vidrios {
   --ion-color-base: var(--ion-color-vidrios);
@@ -91,14 +85,12 @@
   --ion-color-tint: var(--ion-color-vidrios-tint);
 }
 
-:root {
   --ion-color-plasticos: #ffcb02;
   --ion-color-plasticos-rgb: 255,203,2;
   --ion-color-plasticos-contrast: #fff;
   --ion-color-plasticos-contrast-rgb: 0,0,0;
   --ion-color-plasticos-shade: #e0b302;
   --ion-color-plasticos-tint: #ffd01b;
-}
 
 .ion-color-plasticos {
   --ion-color-base: var(--ion-color-plasticos);
@@ -109,14 +101,12 @@
   --ion-color-tint: var(--ion-color-plasticos-tint);
 }
 
-:root {
   --ion-color-residuos-compostables: #827b61;
   --ion-color-residuos-compostables-rgb: 130,123,97;
   --ion-color-residuos-compostables-contrast: #ffffff;
   --ion-color-residuos-compostables-contrast-rgb: 255,255,255;
   --ion-color-residuos-compostables-shade: #726c55;
   --ion-color-residuos-compostables-tint: #8f8871;
-}
 
 .ion-color-residuos-compostables {
   --ion-color-base: var(--ion-color-residuos-compostables);
@@ -127,14 +117,12 @@
   --ion-color-tint: var(--ion-color-residuos-compostables-tint);
 }
 
-:root {
   --ion-color-envase-cero: #827b61;
   --ion-color-envase-cero-rgb: 130,123,97;
   --ion-color-envase-cero-contrast: #ffffff;
   --ion-color-envase-cero-contrast-rgb: 255,255,255;
   --ion-color-envase-cero-shade: #726c55;
   --ion-color-envase-cero-tint: #8f8871;
-}
 
 .ion-color-envase-cero {
   --ion-color-base: var(--ion-color-envase-cero);
@@ -145,14 +133,12 @@
   --ion-color-tint: var(--ion-color-envase-cero-tint);
 }
 
-:root {
   --ion-color-materiales-reciclables: #63b563;
   --ion-color-materiales-reciclables-rgb: 245,166,36;
   --ion-color-materiales-reciclables-contrast: #fff;
   --ion-color-materiales-reciclables-contrast-rgb: 0,0,0;
   --ion-color-materiales-reciclables-shade: #d89220;
   --ion-color-materiales-reciclables-tint: #f6af3a;
-}
 
 .ion-color-materiales-reciclables {
   --ion-color-base: var(--ion-color-materiales-reciclables);
@@ -163,15 +149,12 @@
   --ion-color-tint: var(--ion-color-materiales-reciclables-tint);
 }
 
-:root {
   --ion-color-residuos-peligrosos: #f64b4b;
   --ion-color-residuos-peligrosos-rgb: 244,101,57;
   --ion-color-residuos-peligrosos-contrast: #fff;
   --ion-color-residuos-peligrosos-contrast-rgb: 0,0,0;
   --ion-color-residuos-peligrosos-shade: #d75932;
   --ion-color-residuos-peligrosos-tint: #f5744d;
-}
-
 .ion-color-residuos-peligrosos {
   --ion-color-base: var(--ion-color-residuos-peligrosos);
   --ion-color-base-rgb: var(--ion-color-residuos-peligrosos-rgb);
@@ -180,14 +163,12 @@
   --ion-color-shade: var(--ion-color-residuos-peligrosos-shade);
   --ion-color-tint: var(--ion-color-residuos-peligrosos-tint);
 }
-:root {
   --ion-color-papel-y-carton: #75aaf1;
   --ion-color-papel-y-carton-rgb: 117,170,241;
   --ion-color-papel-y-carton-contrast: #fff;
   --ion-color-papel-y-carton-contrast-rgb: 0,0,0;
   --ion-color-papel-y-carton-shade: #6796d4;
   --ion-color-papel-y-carton-tint: #83b3f2;
-}
 
 .ion-color-papel-y-carton {
   --ion-color-base: var(--ion-color-papel-y-carton);
@@ -198,14 +179,12 @@
   --ion-color-tint: var(--ion-color-papel-y-carton-tint);
 }
 
-:root {
   --ion-color-residuos-compostables: #827b61;
   --ion-color-residuos-compostables-rgb: 130,123,97;
   --ion-color-residuos-compostables-contrast: #ffffff;
   --ion-color-residuos-compostables-contrast-rgb: 255,255,255;
   --ion-color-residuos-compostables-shade: #726c55;
   --ion-color-residuos-compostables-tint: #8f8871;
-}
 
 .ion-color-residuos-compostables {
   --ion-color-base: var(--ion-color-residuos-compostables);
@@ -216,14 +195,12 @@
   --ion-color-tint: var(--ion-color-residuos-compostables-tint);
 }
 
-:root {
   --ion-color-residuos-mezclados: #9ba498;
   --ion-color-residuos-mezclados-rgb: 155,164,152;
   --ion-color-residuos-mezclados-contrast: #fff;
   --ion-color-residuos-mezclados-contrast-rgb: 0,0,0;
   --ion-color-residuos-mezclados-shade: #889086;
   --ion-color-residuos-mezclados-tint: #a5ada2;
-}
 
 .ion-color-address,
 .ion-color-residuos-electronicos,
@@ -237,14 +214,12 @@
   --ion-color-tint: var(--ion-color-residuos-mezclados-tint);
 }
 
-:root {
   --ion-color-aceite-de-cocina: #7cbf1b;
   --ion-color-aceite-de-cocina-rgb: 122,192,0;
   --ion-color-aceite-de-cocina-contrast: #fff;
   --ion-color-aceite-de-cocina-contrast-rgb: 0,0,0;
   --ion-color-aceite-de-cocina-shade: #e0b302;
   --ion-color-aceite-de-cocina-tint: #ffd01b;
-}
 
 .ion-color-aceite-de-cocina {
   --ion-color-base: var(--ion-color-aceite-de-cocina);
@@ -255,14 +230,12 @@
   --ion-color-tint: var(--ion-color-aceite-de-cocina-tint);
 }
 
-:root {
   --ion-color-donar-o-regalar: #D0021B;
   --ion-color-donar-o-regalar-rgb: 208,2,27;
   --ion-color-donar-o-regalar-contrast: #fff;
   --ion-color-donar-o-regalar-contrast-rgb: 0,0,0;
   --ion-color-donar-o-regalar-shade: #d75932;
   --ion-color-donar-o-regalar-tint: #f5744d;
-}
 
 .ion-color-donar-o-regalar {
   --ion-color-base: var(--ion-color-donar-o-regalar);
@@ -273,22 +246,19 @@
   --ion-color-tint: var(--ion-color-donar-o-regalar-tint);
 }
 
-:root {
   --ion-color-reparacion: #F7931E;
   --ion-color-reparacion-rgb: 247,147,30;
   --ion-color-reparacion-contrast: #fff;
   --ion-color-reparacion-contrast-rgb: 0,0,0;
   --ion-color-reparacion-shade: #d75932;
   --ion-color-reparacion-tint: #f5744d;
-}
-:root {
+
   --ion-color-reutilizacion: #F7931E;
   --ion-color-reutilizacion-rgb: 247,147,30;
   --ion-color-reutilizacion-contrast: #fff;
   --ion-color-reutilizacion-contrast-rgb: 0,0,0;
   --ion-color-reutilizacion-shade: #d75932;
   --ion-color-reutilizacion-tint: #f5744d;
-}
 .ion-color-reutilizacion,
 .ion-color-reparacion {
   --ion-color-base: var(--ion-color-reparacion);
@@ -298,15 +268,12 @@
   --ion-color-shade: var(--ion-color-reparacion-shade);
   --ion-color-tint: var(--ion-color-reparacion-tint);
 }
-
-:root {
   --ion-color-caucho: #000000;
   --ion-color-caucho-rgb: 0,0,0;
   --ion-color-caucho-contrast: #fff;
   --ion-color-caucho-contrast-rgb: 0,0,0;
   --ion-color-caucho-shade: #d75932;
   --ion-color-caucho-tint: #595959;
-}
 
 .ion-color-caucho {
   --ion-color-base: var(--ion-color-caucho);
@@ -315,4 +282,5 @@
   --ion-color-contrast-rgb: var(--ion-color-caucho-contrast-rgb);
   --ion-color-shade: var(--ion-color-caucho-shade);
   --ion-color-tint: var(--ion-color-caucho-tint);
+}
 }

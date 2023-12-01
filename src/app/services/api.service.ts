@@ -21,12 +21,13 @@ export class ApiService<T=any> {
   materials: {[index:string] : Material[]} = {};
   programs: Program[]
   remoteFile: any;
-
+  material_styles = '';
   // Search
   labelAttribute = 'material_id';
   formValueAttribute = 'name';
 
   _initial_data_loaded = new BehaviorSubject<boolean>(false);
+  public _itemSelected = new BehaviorSubject<any>(null);
   //Search property for non results
   constructor(
     private request: HttpClient,
@@ -78,13 +79,16 @@ export class ApiService<T=any> {
   loadMaterials(country: string): Observable<Material[]> {
     return this.request.get(environment.backend + "materials?version="+environment.apiVersion+"&locale=" + environment[country].locale).pipe(map(
       (result: Material[]) => {
-        //Check images
-        //for (let key in result) {
-          // TODO: Check type
-          //if (result[key].icon) {
-            //this.downloadFile(result[key].icon, 'dr-'+result[key].class+'.svg', 'custom-icons');
-          //}
-        //}
+        //Load meterial styles
+        if (country == 'Uruguay') {
+          Object.keys(result).forEach(key => {
+            var mat = result[key]; 
+            this.material_styles += ' .ion-color-'+mat.class+' { '+
+            ( (mat.color != '' && mat.color != 'null') ? '--ion-color: '+mat.color+'; fill: '+mat.color+';' : '' )+
+            ( (mat.contrast_color != '' && mat.contrast_color != 'null') ? '--ion-color-contrast: '+mat.contrast_color+'; ' : '' )+
+            ' } ';
+          });
+        }
         return this.materials[country] = result;
       }
     ));
@@ -182,7 +186,12 @@ export class ApiService<T=any> {
     if (typeof location == undefined) {
       location = environment[this.session.country].center;
     }
-    return  this.request.get(environment.backend + "containers_nearby?version="+environment.apiVersion+"&lat="+location[0]+"&lon="+location[1]+"&radius="+radius).pipe(map(
+    let query = ''
+    if ( this.session.searchItem != undefined){
+      let ids = this.session.searchItem.ids !== undefined ? this.session.searchItem.ids : this.session.searchItem.id;
+      query = '&'+this.session.searchItem.type+"="+ids;
+    }
+    return  this.request.get(environment.backend + "containers_nearby?version="+environment.apiVersion+"&lat="+location[0]+"&lon="+location[1]+"&radius="+radius+query).pipe(map(
       (result: Container[]): Container[] => {
         return this.formatMarker(result);
       }
@@ -220,7 +229,14 @@ export class ApiService<T=any> {
     ));
   }
   getSubProgram(id: string) {
-    return  this.request.get(environment.backend + "subprogram/"+id+"?version="+environment.apiVersion).pipe(map(
+    return  this.request.get(environment.backend + "subprograms/"+id+"?version="+environment.apiVersion).pipe(map(
+      (sub: any) => {
+        return sub;
+      }
+    ));
+  }
+  getSubPrograms(ids: string) {
+    return  this.request.get(environment.backend + "subprograms/"+ids+"?version="+environment.apiVersion).pipe(map(
       (sub: any) => {
         return sub;
       }
@@ -242,6 +258,7 @@ export class ApiService<T=any> {
   }
   getSubprograms4Location(latlng: number[], distance?: number, dimensions?: string) {
     let ids = null;
+    
     if ( this.session.searchItem != undefined){
       ids = this.session.searchItem.ids != undefined ? this.session.searchItem.ids : this.session.searchItem.id;
     }
@@ -249,8 +266,8 @@ export class ApiService<T=any> {
     if ( distance != null ) {
       req += '&distance=' + distance;
     }
-    if ( this.session.searchDimensions.length >= 1 && ids !== null ) {
-      req += '&dimensions=' + ids;
+    if ( ids !== null ) {
+      req += '&' + this.session.searchItem.type + '=' + ids;
     }
     return  this.request.get(req).pipe(map(
       (result: any) => {
@@ -313,28 +330,9 @@ export class ApiService<T=any> {
       }
     ));
   }
-  //
-  formatSearchOptions(options: SearchParams[]) :any[]{
-  let res = [];
-  options.forEach( (option) => {
-    // console.log(option);
-    if (!option.material_id){
-      option.material_id = 5;
-    }
-    res.push({
-      id: option.id,
-      type: option.type,
-      name: option.name,
-      material_id: option.material_id,
-      class: this.materials[this.session.country][option.material_id].class,
-      deposition: option.deposition,
-    });
-  });
-  return res;
-  }
   //Address search
   getAddressLocation(str: string) {
-    return  this.request.get(environment.geocoder + "search?version="+environment.apiVersion+"&q="+str+','+this.session.country+'&countrycodes='+environment[this.session.country].code+'&format=json').pipe(map(
+    return  this.request.get(environment.geocoder + "search?q="+str+','+this.session.country+'&countrycodes='+environment[this.session.country].code+'&format=json').pipe(map(
       (result: any[]) => {
         if (result.length) {
           return this.formatAddressOptions(result);
@@ -364,6 +362,11 @@ export class ApiService<T=any> {
   });
   return res;
   }
+  //searchItem selected
+  get searchItemSelected() :any {
+    return this._itemSelected.asObservable();
+  }
+  /* STATS */
   getStatsTotals() {
     return  this.request.get(environment.backend + "stats/totals?version="+environment.apiVersion+"&country=" + environment[this.session.country].id ).pipe(map(
       (result: {title: string, total: number}[]) => {
@@ -373,6 +376,27 @@ export class ApiService<T=any> {
   }
   getStatsPrograms() {
     return  this.request.get(environment.backend + "stats/programs?version="+environment.apiVersion+"&country=" + environment[this.session.country].id ).pipe(map(
+      (result: {name: string, total: number}[]) => {
+        return result;
+      }
+    ));
+  }
+  getStatsContainers() {
+    return  this.request.get(environment.backend + "stats/containers?version="+environment.apiVersion+"&country=" + environment[this.session.country].id ).pipe(map(
+      (result: {name: string, total: number}[]) => {
+        return result;
+      }
+    ));
+  }
+  getStatsServices() {
+    return  this.request.get(environment.backend + "stats/services?version="+environment.apiVersion+"&country=" + environment[this.session.country].id ).pipe(map(
+      (result: {name: string, total: number}[]) => {
+        return result;
+      }
+    ));
+  }
+  getStatsUsers() {
+    return  this.request.get(environment.backend + "stats/users?version="+environment.apiVersion+"&country=" + environment[this.session.country].id ).pipe(map(
       (result: {name: string, total: number}[]) => {
         return result;
       }

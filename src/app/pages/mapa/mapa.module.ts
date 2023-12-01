@@ -11,7 +11,6 @@ import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { SliderComponent } from 'src/app/components/slider/slider.component';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { SearchComponent } from 'src/app/components/search/search.component';
-import { AutoCompleteModule } from 'ionic4-auto-complete';
 
 import { MapaPage } from './mapa.page';
 
@@ -24,7 +23,6 @@ import { MapaPage } from './mapa.page';
     MapaPageRoutingModule,
     LeafletModule.forRoot(),
     ComponentsModule,
-    AutoCompleteModule,
     //IonicModule.forRoot({
     //  navAnimation: navPage,
     //}),

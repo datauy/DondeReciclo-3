@@ -24,9 +24,10 @@ export class SearchComponent {
   // searchBarIonic: unknown;
   showBackdrop = false;
   searchVisibility = false;
-  suggestVisibility: boolean;
+  suggestVisibility = true;
   searchString: string;
   searchAddress = false;
+  searchResult = [];
   initialDataLoaded = false;
   environment = environment;
   predefinedSearch: Array<SearchItem> = [];
@@ -56,6 +57,13 @@ export class SearchComponent {
         }
       }
     );
+    this.api.searchItemSelected.subscribe(
+      item => {
+        if ( item ) {
+          this.itemSelected(item);
+        }
+      }
+    );
     this.session.countryChanged.subscribe(
       countryName => {
         if ( countryName != '' ) {
@@ -68,6 +76,7 @@ export class SearchComponent {
     );
     this.api.initialDataLoaded.subscribe( (loaded) => {
       if ( loaded ) {
+        this.searchBarIonic = document.querySelector('.searchbar-input');
         this.initialDataLoaded = true;
         this.loadSearchDimensions();
       }
@@ -100,8 +109,9 @@ export class SearchComponent {
     if ( !this.not_filter_dimensions.includes(event) ) {
       this.dimensionsFilter();
     }
-    this.suggestVisibility = false;
     this.searchVisibility = false;
+    this.suggestVisibility = true;
+    this.searchResult = [];
   }
 
   dimensionSelected(dim) {
@@ -119,6 +129,7 @@ export class SearchComponent {
       this.session.searchDimensions.push(dim);
     }
     this.predefinedArrange();
+    this.getResults({ target: { value: this.searchBarIonic.value } });
   }
   //
   predefinedArrange() {
@@ -139,7 +150,6 @@ export class SearchComponent {
   dimensionsFilter() {
     if ( this.showAllDimensions ) {
       // Lo devolvemos al flujo normal
-
       if ( this.session.searchItem != undefined && this.session.searchItem.type == 'dimensions' ) {
         delete this.session.searchItem;
         this.map.mapChanges();
@@ -167,6 +177,7 @@ export class SearchComponent {
       let center = this.map.map.getCenter();
       let pos = [center.lat, center.lng];
       this.session.searchItem = item;
+      
       //Trigger zone services reload
       this.map.clickZone(0.0002);
       this.api.getContainersByMaterials(item.type+"="+item.ids, pos)
@@ -202,6 +213,9 @@ export class SearchComponent {
         let center = this.map.map.getCenter();
         pos = [center.lat, center.lng];
       }
+      //Trigger zone services reload
+      this.session.searchItem = item;
+      this.map.clickZone(0.0002);
       this.api.getContainersByMaterials(item.type+"="+item.id, pos).subscribe(
         (containers) => {
           if (this.map.loadMarkers(containers, true) == 0){
@@ -214,7 +228,6 @@ export class SearchComponent {
             };
             this.notification.showNotification(noRes);
           }
-          this.session.searchItem = item;
           this.searchBarIonic.value = null;
           this.hideSearch('item selected');
           setTimeout( () => {
@@ -239,6 +252,7 @@ export class SearchComponent {
       this.session.showSearchItem = false;
       //reload pins
       this.map.mapChanges();
+      this.map.clickZone(0.0002);
     }
   }
   //Selector between materials and addresses
@@ -247,25 +261,35 @@ export class SearchComponent {
     this.suggestVisibility = !isit;
   }
   //results
-  getResults(str: string){
+  getResults(event){
+    const str = event.target.value;
     if ( this.searchAddress ) {
       if ( str != undefined && str.length >= 3 ) {
-        return this.api.getAddressLocation(str);
+        this.api.getAddressLocation(str).subscribe(
+          (result) => {
+            this.searchResult = result;
+          }
+        );
       }
       else {
-        return false;
+        this.searchResult = [];
       }
     }
     else {
       if ( str != undefined && str.length >= 3 && ( this.session.searchItem == undefined || str != this.session.searchItem.name ) ) {
         this.suggestVisibility = false;
+        this.api.getResults(str).subscribe(
+          (result) => {
+            this.searchResult = result;
+          }
+        );
       }
       else {
         this.suggestVisibility = true;
-        return false;
+        this.searchResult = [];
       }
-      return this.api.getResults(str);
     }
+    return this.searchResult;
   }
 
 }

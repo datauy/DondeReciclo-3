@@ -1,4 +1,24 @@
 :host {
+  .tags-wrapper{
+    &.search {
+      text-align: center;
+      padding: 0 30px;
+      ion-button {
+        opacity: 1;
+        margin: 6px;
+        height: 50px;
+        min-width: 300px;
+        ion-icon, img {
+          position: absolute;
+          left: 0;
+        }
+        ion-label {
+          font-size: 18px;
+          max-width: calc(100% - 50px);
+        }
+      }
+    }
+  }
   img {
     width: 18px;
     height: 18px;

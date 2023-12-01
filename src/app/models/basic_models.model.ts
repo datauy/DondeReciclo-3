@@ -11,6 +11,7 @@ export class Material extends Base {
     //id is inherited from Resource
     name: string;
     color: string;
+    contrast_color: string;
     icon: string;
     class: string;
 }

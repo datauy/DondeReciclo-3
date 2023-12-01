@@ -41,9 +41,9 @@
             <div class="slide-body" *ngFor="let location of slide.locations_arr">
               <span class="location-tag" [innerHTML]="location"></span>
             </div>
-            <ion-button class="contenedores" *ngIf="slide.sub_programs != undefined" [routerLink]="[ '/subprograma', slide.sub_programs.join(',') ]">Ver contenedores</ion-button>
+            <ion-button class="contenedores" *ngIf="slide.sub_programs != undefined" [routerLink]="[ '/subprograma', slide.sub_programs.join(',') ]">Ver servicios / contenedores</ion-button>
           </div>
-          <div class="slide-supporters section">
+          <div class="slide-supporters section" *ngIf="slide.supporters_arr.length">
             <div class="slide-title">Apoyan</div>
             <div class="slide-body-supporters" *ngFor="let supporter of slide.supporters_arr">
                 <a (click)="goTo(supporter.url)" [innerHTML]="supporter.name"></a>
@@ -52,7 +52,7 @@
           <div class="receives section">
             <div class="slide-title">Recibe</div>
             <div class="slide-body" [innerHTML]="slide.receives"></div>
-            <app-materials-chips [materials_obj]="slide"></app-materials-chips>
+            <app-materials-chips [materials_obj]="slide" materials_type="org"></app-materials-chips>
           </div>
           <div class="receives-no section">
             <div class="slide-title">No recibe</div>

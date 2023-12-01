@@ -36,24 +36,29 @@ export class ProgramsPage implements OnInit {
 
   ngOnInit() {
     this.pid = this.route.snapshot.params['programID'];
-    //Reverse order if program has to be loaded
-    if ( this.pid != undefined ) {
-      this.api.loadPrograms().subscribe( (programs: Program[]) =>  {
-        this.format_programs(programs);
-        this.showProgram();
-        this.api.loadTagsPrograms().subscribe( ( tags: {name:string, programs: Program[]} ) =>  {
-          this.tags = tags;
-        });
-      });
-    }
-    else {
-      this.api.loadTagsPrograms().subscribe( ( tags: {name:string, programs: Program[]} ) =>  {
-        this.tags = tags;
-        this.api.loadPrograms().subscribe( (programs: Program[]) =>  {
-          this.programs = programs;
-        });
-      });
-    }
+    
+    this.session.countryChanged.subscribe(
+      countryName => {
+        //Reverse order if program has to be loaded
+        if ( this.pid != undefined ) {
+          this.api.loadPrograms().subscribe( (programs: Program[]) =>  {
+            this.format_programs(programs);
+            this.showProgram();
+            this.api.loadTagsPrograms().subscribe( ( tags: {name:string, programs: Program[]} ) =>  {
+              this.tags = tags;
+            });
+          });
+        }
+        else {
+          this.api.loadTagsPrograms().subscribe( ( tags: {name:string, programs: Program[]} ) =>  {
+            this.tags = tags;
+            this.api.loadPrograms().subscribe( (programs: Program[]) =>  {
+              this.programs = programs;
+            });
+          });
+        }
+      }
+    );
   }
   //
   goTo(link) {

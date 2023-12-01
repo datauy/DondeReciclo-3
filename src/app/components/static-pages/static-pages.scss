@@ -68,4 +68,36 @@
   .recyclers a {
     color: #034077;
   }
+  .stats {
+    h3 {
+      font-size: 25px;
+      font-weight: 700;
+      line-height: 48px;
+      letter-spacing: 0px;
+      margin: 0;
+    }
+    h4 {
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 22px;
+      letter-spacing: 0px;
+      color: var(--dark-sea-green);
+      text-align: center;
+      margin: 0;
+    }
+  }
+  .section-header-bottom ion-col:not(:last-child)::after {
+    border-left: 1px solid #E0E0E0;
+  }
+  .col-1 {
+    border: solid #E0E0E0;
+    border-width: 0 1px;
+  }
+  .col-2 {
+    border-right: 1px solid #E0E0E0;
+  }
+  .tabs-wrapper {
+    margin-top: 24px;
+    height: calc(100vh - 360px);
+  }
 }
