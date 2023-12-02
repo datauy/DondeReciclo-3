@@ -69,6 +69,9 @@ export class StatsPage implements OnInit {
         }
       }
     );
+    if ( this.session.country != undefined ) {
+      this.load_graph_data();
+    }
   }
   /*ionViewDidEnter() {
     this.initiated = true;
