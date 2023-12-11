@@ -121,7 +121,7 @@
         <ion-item lines="none" *ngIf="subprogram.zone.information">
           <div>
             <h5>Información adicional:</h5>
-            <p>{{subprogram.zone.information}}</p>
+            <div [innerHTML]="subprogram.zone.information"></div>
           </div>
         </ion-item>
         <ion-item class="panel-footer" lines="none" *ngIf="this.map.subZone !== undefined || this.map.route !== undefined ">
@@ -215,7 +215,7 @@
         <ion-item lines="none" *ngIf="container.information != undefined && container.information != ''">
           <div>
             <h5>Información:</h5>
-            <p>{{container.information}}</p>
+            <div [innerHTML]="container.information"></div>
           </div>
         </ion-item>
         <div class="items-wrapper">
