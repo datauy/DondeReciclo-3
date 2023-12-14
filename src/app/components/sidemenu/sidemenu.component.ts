@@ -27,9 +27,15 @@ export class SidemenuComponent implements OnInit {
     },
     {
       title: 'El proyecto',
-      desc: 'Quienes somos. Contacto.',
+      desc: 'Quienes somos.',
       url: 'sobre-el-proyecto',
       icon: 'dr-proyecto'
+    },
+    {
+      title: 'Contacto',
+      desc: '¿Dudas, consultas, sugerencias?',
+      url: 'contacto',
+      icon: 'envelope'
     },
     {
       title: 'Novedades',
