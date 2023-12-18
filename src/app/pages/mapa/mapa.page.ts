@@ -43,6 +43,7 @@ export class MapaPage implements OnInit {
   subprograms = <Subprogram[]>([]);
   subprogram: Subprogram;
   zones: any;
+  reportLocationActive = false;
   //infoPaneEl: HTMLDivElement;
   loadingImg = false;
   fileType: any = {
@@ -65,6 +66,8 @@ export class MapaPage implements OnInit {
   panelTop = true;
   routing = false;
   
+  public userPopup = L.popup().on("remove", this.closePopUp, this);
+
   constructor(
     private geocoder: NativeGeocoder,
     private router: Router,
@@ -238,7 +241,7 @@ export class MapaPage implements OnInit {
         }).addTo(this.map.map);
   
         if ( this.map.userPosition ) {
-          this.map.userMarker = L.marker(this.map.userPosition, {icon: this.map.iconUser} ).addTo(this.map.map);
+          this.map.createUserMarker();
         }
         //Create user marker upon click
         this.map.map.on("click", <LeafletMouseEvent>(e) => {
@@ -249,7 +252,7 @@ export class MapaPage implements OnInit {
             }
             //Do not propagate since click is handled
             this.map.setUserPosition([e.latlng.lat, e.latlng.lng], false);
-            this.map.userMarker = L.marker(this.map.userPosition, {icon: this.map.iconUser} ).addTo(this.map.map); // add the marker onclick
+            this.map.createUserMarker();
           }
           if (this.map.route) {
             this.map.route.spliceWaypoints(0, 1, e.latlng);
@@ -1019,5 +1022,26 @@ export class MapaPage implements OnInit {
       };
       this.notification.showNotification(noRes);
     }
+  }
+  reportLocation() {
+    if ( this.reportLocationActive ) {
+      this.userPopup.remove();
+      this.reportLocationActive = false;
+    }
+    else {
+      this.reportLocationActive = true;
+      var latlng = this.map.userMarker.getLatLng();
+      console.log("reportLocation", this.map.userMarker);
+      this.userPopup.
+      setContent('<a class="user-popup" href="/usuario/reportar/'+latlng.lat+','+latlng.lng +'"><span>Confirmar ubicación</span><ion-icon name="check-green"></ion-icon></a>').
+      setLatLng(latlng);
+      //
+      this.map.userMarker.
+      bindPopup(this.userPopup).
+      openPopup();
+    }
+  }
+  closePopUp() {
+    this.reportLocationActive = false;
   }
 }

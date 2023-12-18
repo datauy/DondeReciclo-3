@@ -87,15 +87,24 @@ app-login-form:host {
     }
   }
 }
-ion-button.back-button {
-  position: relative;
-  color: var(--pale-olive-green);
-  box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2);
-  margin-bottom: 23px;
-  width: 48px;
-  height: 48px;
-  left: 0;
-  top: 0;
+ion-button {
+  &.submit {
+    font-weight: 900;
+  }
+  &.back-button {
+    position: relative;
+    color: var(--pale-olive-green);
+    box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2);
+    margin-bottom: 23px;
+    width: 48px;
+    height: 48px;
+    left: 0;
+    top: 0;
+  }
+  span {
+    max-width: calc(100% - 110px);
+    white-space: pre-line;
+  }
 }
 app-report-form:host {
   h2 {

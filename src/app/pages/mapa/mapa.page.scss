@@ -93,6 +93,7 @@
             font-weight: bold;
             ion-icon {
               width: 33px;
+              stroke: var(--vidrio);
             }
           }
           ion-row {
@@ -211,6 +212,46 @@
       left: 0;
       z-index: 401;
       padding: 0 12px;
+    }
+    .map-report {
+      position: absolute;
+      bottom: 156px;
+      right: 60px;
+      z-index: 401;
+      background: #FFF;
+      padding: 10px 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--dark-sea-green);
+      border-radius: 16px;
+      display: flex;
+      gap: 5px;
+      box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.25);
+      --ripple-color: transparent;
+      stroke: #FFF;
+      fill: var(--pale-olive-green);
+      height: auto;
+      ion-icon {
+        margin-left: 5px;
+        color: var(--pale-olive-green);
+        &.active {
+          .icon-border {
+            stroke: var(--vidrio);
+          }
+        }
+        .icon-border {
+          stroke: var(--pale-olive-green);
+        }
+      }
+      &.active {
+        background: var(--pale-olive-green);
+        color: #FFF;
+        ion-icon {
+          color: #FFF;
+          stroke: var(--pale-olive-green);
+        }
+      }
     }
     .map-buttons {
       border-radius: 8px;

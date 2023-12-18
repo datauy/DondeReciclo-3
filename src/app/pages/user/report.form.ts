@@ -53,6 +53,11 @@ export class ReportForm implements OnInit {
       photo: new FormControl(null, Validators.required)
     });
   }
+  ngAfterViewInit() {
+    if ( this.route.snapshot.params['containerID'].includes((',')) ) {
+      this.selectSubject('mapa');
+    }
+  }
   /*getCameraPhoto() {
     this.camera.getPicture(this.options).then((imageData) => {
      // imageData is either a base64 encoded string or a file URI
@@ -78,7 +83,11 @@ export class ReportForm implements OnInit {
     else {
       this.user_data.value.subject = this.subject_id;
     }
-    if ( this.is_loading ) {
+    //Validates comment
+    if ( this.user_data.value.comment.length < 10 ) {
+      this.error.comment = true;
+      this.session.isLoading = false;
+      return false;
     }
     this.user_data.value.id = this.route.snapshot.params['containerID'];
     //Assign file to send along

@@ -18,6 +18,10 @@
     center='Montevideo, Uruguay' 
     #leafletMap>
   </div>
+  <ion-button class="map-report" color="transparent" [ngClass]="reportLocationActive ? 'active' : ''" (click)="reportLocation()">
+    <span>Reportar aquí</span>
+    <ion-icon name="dr-reportar"></ion-icon>
+  </ion-button>
   <div #serviceContainer class="services-pane cupertino-pane">
     <div class="subprogram-list pane-container">
       <ion-item class="header" lines="full">

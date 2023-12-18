@@ -189,8 +189,6 @@
   ion-tab-bar {
   	ion-tab-button {
       @extend .dr-transition-buttons;
-      ion-icon, ion-label{
-      }
     }
   }
   /***********************************/
@@ -379,9 +377,6 @@ accordion ion-list {
         font-size: 20px;
         font-weight: 600;
         color: var(--ion-color-contrast);
-      }
-      span {
-
       }
     }
     img {
@@ -644,9 +639,6 @@ ion-icon {
   height: 0;
 }
 ion-app {
-  #header-main ion-toolbar {
-    // height: auto;
-  }
   &.container,
   &.contenedor,
   &.material,
@@ -693,6 +685,27 @@ ion-app {
       }
     }
   }
+  .leaflet-popup-content {
+    width: max-content !important;
+    a {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      span {
+        color: var(--dark-sea-green);
+        font-size: 15px;
+        font-weight: 600;
+        font-family: SourceSansPro;
+        font-style: normal;
+      }
+      ion-icon {
+        width: 19px;
+        height: 19px;
+        fill: var(--pale-olive-green);
+        stroke: var(--vidrio);
+      }
+    }
+  }
   .split-pane-visible .step-wrapper.menu {
     left: 0;
     justify-content: left;
@@ -701,8 +714,6 @@ ion-app {
       left: -10px;
     }
   }
-  &.contacto{}
-  &.sobre-el-proyecto{}
 }
 
 ion-img.logo {
