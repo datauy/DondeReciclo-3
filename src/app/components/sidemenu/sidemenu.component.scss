@@ -60,7 +60,8 @@
     // --width: 80%;
     // left: 10%;
     --font-size: 20px;
-
+    overflow-y: auto;
+    height: 100%;
     ion-item {
       --background: none;
       --color: white;
