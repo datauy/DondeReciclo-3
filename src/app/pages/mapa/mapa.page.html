@@ -12,6 +12,11 @@
     <ion-icon name="dr-zones"></ion-icon>
     <span *ngIf="zoneVisible == 1">Zonas de recolección</span>
   </ion-button>
+  <ion-button color="transparent" [ngClass]="'map-buttons map-share share-'+shareVisible" (click)="share()">
+    <ion-icon name="dr-share"></ion-icon>
+    <span *ngIf="shareVisible == 1">Compartir ubicación</span>
+    <span class="success" *ngIf="shareVisible == 2">Enlace copiado!</span>
+  </ion-button>
 
   <div id="map"
     style="height:100%; width: 100%;"

@@ -216,7 +216,7 @@
     .map-report {
       position: absolute;
       bottom: 156px;
-      right: 60px;
+      right: 5%;
       z-index: 401;
       background: #FFF;
       padding: 10px 15px;
@@ -309,6 +309,19 @@
       }
       span {
         margin-left: 10px;
+      }
+    }
+    .map-share {
+      top: 400px;
+      &.share-2,
+      &.share-1 {
+        width: 196px;
+      }
+      span {
+        margin-left: 5px;
+        &.success {
+          color: var(--dark-sea-green);
+        }
       }
     }
     .scheds {

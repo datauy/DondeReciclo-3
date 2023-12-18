@@ -219,8 +219,6 @@ export class MapService {
   }
   //
   createUserMarker() {
-    console.log(this.userPosition);
-    
     if ( this.userPosition ) {
       this.userMarker = L.marker(this.userPosition, {icon: this.iconUser} )
       .bindPopup('<a class="user-popup" href="/usuario/reportar/'+this.userPosition[0]+','+this.userPosition[1] +'"><span>Reportar aquí</span><ion-icon name="dr-reportar"></ion-icon></a>')

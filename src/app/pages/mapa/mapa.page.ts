@@ -18,6 +18,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
 import { Subprogram } from "src/app/models/subprogram.model";
 
+
 import { environment } from 'src/environments/environment';
 
 import * as L from 'leaflet';
@@ -56,6 +57,7 @@ export class MapaPage implements OnInit {
   list = 0;
   //Estados: 0:Cerrado-Inactivo, 1:Abierto, 2:Cerrado-Activado, 3:Cerrado-Mostrando? O debiera ser abierto??
   zoneVisible = 0;
+  shareVisible = 0;
   //Load data over recommended zoom
   loadContainer = 0;
   initDataLoaded = false;
@@ -319,7 +321,7 @@ export class MapaPage implements OnInit {
     if ( this.initDataLoaded && !this.routing ) {
       this.routing = true;
       var section = this.router.url.split('/')[1];
-      if ( ['', '/', 'subprograma', 'contenedores', 'contenedor', 'intro', 'residuo', 'material'].indexOf(section) != -1 ) {
+      if ( ['', '/', 'subprograma', 'contenedores', 'contenedor', 'intro', 'residuo', 'material', 'lugar'].indexOf(section) != -1 ) {
         if ( event != undefined ) {
           var url_arr = event.url.split('?');
           // Do not do anything if URL is unchanged
@@ -415,6 +417,17 @@ export class MapaPage implements OnInit {
                 objectLocation = true;
                 this.showPane();
                 this.routing = false;
+            }
+            else if ( this.route.snapshot.params['coords'] != undefined ) {
+              var latlng = this.route.snapshot.params['coords'].split(',');
+              if ( latlng[1] != undefined ) {
+                this.map.setUserPosition(latlng);
+                this.loadPosition(true);
+              }
+              else {
+                this.gotoLocation();
+                this.routing = false;
+              }
             }
             else {
                 this.gotoLocation();
@@ -733,6 +746,7 @@ export class MapaPage implements OnInit {
             }
           }
           if ( this.map.userPosition != undefined ) {
+            this.locationLoop = 0;
             if ( this.autoSearch ) {
               //Activa search que enruta al usuario con contenedores filtrados
               this.activateSearch(this.autoSearchItem);
@@ -1043,5 +1057,41 @@ export class MapaPage implements OnInit {
   }
   closePopUp() {
     this.reportLocationActive = false;
+  }
+  share() {
+    if ( this.shareVisible ) {
+      this.map.getUserPosition().then(
+        (res) => {
+          if (res != undefined ) {
+            this.shareVisible = 2;
+            var domain = 'https://dondereciclo.uy/';
+            if ( this.session.country != undefined && this.session.country == 'Colombia' ) {
+              domain = 'https://dondereciclo.co/';
+            }
+            var link = domain + 'lugar/' + res[0] + ',' + res[1];
+            const selBox = document.createElement('textarea');
+            selBox.style.position = 'fixed';
+            selBox.style.left = '0';
+            selBox.style.top = '0';
+            selBox.style.opacity = '0';
+            selBox.value = link;
+            document.body.appendChild(selBox);
+            selBox.focus();
+            selBox.select();
+            document.execCommand('copy');
+            document.body.removeChild(selBox);
+            setTimeout( () => {
+              this.shareVisible = 0;
+          }, 2500);
+          }
+        }
+      );
+    }
+    else {
+      this.shareVisible = 1;
+      setTimeout( () => {
+          this.shareVisible = 0;
+      }, 5000);
+    }
   }
 }
