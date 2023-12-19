@@ -48,6 +48,8 @@ export class ReportForm implements OnInit {
 
   ngOnInit() {
     this.user_data = this.formBuilder.group({
+      name: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.required),
       subject: new FormControl('', Validators.required),
       comment: new FormControl('', Validators.required),
       photo: new FormControl(null, Validators.required)

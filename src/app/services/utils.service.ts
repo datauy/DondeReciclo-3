@@ -53,34 +53,31 @@ export class UtilsService {
   }
   //
   createReport(form: any): Observable<boolean> {
-    if ( this.auth.isLogged ) {
-      let body = form;
-      let options = {
-        headers: {
-          'Authorization': "Bearer "+ this.auth.user_token
-        }
-      };
-      if ( form.file ) {
-        body = form.file;
-        form.MimeType = form.fileType.type;
-        form.ClientFilename = form.fileType.name;
-        let type = form.fileType.type;
-        delete  form.file;
-        delete  form.fileType;
-        options.headers["Content-Type"] = type;
-        options['params'] = form;
+    let body = form;
+    let options = {
+      headers: {
       }
-      return this.request.post(
-        environment.backend + "report", body, options
-      ).pipe(
-        map( (result: any) => {
-          if (!result.error) {
-            return true;
-          }
-          return false;
-        })
-      );
+    };
+    if ( form.file ) {
+      body = form.file;
+      form.MimeType = form.fileType.type;
+      form.ClientFilename = form.fileType.name;
+      let type = form.fileType.type;
+      delete  form.file;
+      delete  form.fileType;
+      options.headers["Content-Type"] = type;
+      options['params'] = form;
     }
+    return this.request.post(
+      environment.backend + "report", body, options
+    ).pipe(
+      map( (result: any) => {
+        if (!result.error) {
+          return true;
+        }
+        return false;
+      })
+    );
   }
   //
   uploadImage(image: any, imageData: any, id): Observable<boolean> {

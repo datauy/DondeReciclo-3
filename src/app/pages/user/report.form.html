@@ -52,6 +52,22 @@
               Por favor seleccione un tipo de problema.
             </div>
           </div>
+          <ion-item>
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input formControlName="name" type="textarea"></ion-input>
+          </ion-item>
+          <div class="form-error" *ngIf="error.name">
+            <ion-icon name="close-outline"></ion-icon>
+            Por favor escribe tu nombre.
+          </div>
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input formControlName="email" type="textarea"></ion-input>
+          </ion-item>
+          <div class="form-error" *ngIf="error.email">
+            <ion-icon name="close-outline"></ion-icon>
+            Por favor escribe tu correo.
+          </div>
           <ion-row class="ion-justify-content-center section-header">
             <ion-col  size-md="6" size-lg="8" size-xs="8">
               <p class="comment-desc">
