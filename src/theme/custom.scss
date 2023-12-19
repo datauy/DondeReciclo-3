@@ -789,16 +789,15 @@ ion-img.logo {
       width: 50px;
     }
   }
-  /***   MAP PAGE   ***/
-  .leaflet-control-container .leaflet-routing-container,
-  .leaflet-control-container .leaflet-routing-container-hide {
-    display: none;
-  }
 }
 
 /***************************/
 /*        MAP PAGE        */
 /*************************/
+.leaflet-control-container .leaflet-routing-container,
+.leaflet-control-container .leaflet-routing-container-hide {
+  display: none;
+}
 .cupertinoOpen {
   #map {
     height: 32vh !important;

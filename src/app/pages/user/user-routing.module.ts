@@ -33,7 +33,7 @@ const routes: Routes = [
       {
         path: 'reportar/:containerID',
         component: ReportForm,
-        canActivate: [AuthGuardService]
+        //canActivate: [AuthGuardService]
       },
       {
         path: 'recolectar/:SubprogramID',
