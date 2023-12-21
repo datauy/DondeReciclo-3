@@ -798,6 +798,9 @@ ion-img.logo {
 .leaflet-control-container .leaflet-routing-container-hide {
   display: none;
 }
+.cupertino-pane {
+  height: calc(100% - 100px) !important;
+}
 .cupertinoOpen {
   #map {
     height: 32vh !important;
