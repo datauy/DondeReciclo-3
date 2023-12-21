@@ -32,6 +32,10 @@ const routes: Routes = [
         component: MapaPage
       },
       {
+        path: 'lugar/:coords',
+        component: MapaPage
+      },
+      {
         path: 'intro/mapa',
         component: MapaPage
       },

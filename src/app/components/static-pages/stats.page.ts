@@ -41,8 +41,9 @@ export type ChartOptions = {
   templateUrl: './stats.page.html',
   styleUrls: ['./static-pages.scss'],
 })
-export class StatsPage implements OnInit {
 
+export class StatsPage implements OnInit {
+  
   public chartPrograms: Partial<ChartOptions>;
   public chartContainers: Partial<ChartOptions>;
   public chartServices: Partial<ChartOptions>;
@@ -54,6 +55,8 @@ export class StatsPage implements OnInit {
   public users = 0;
   public programs_total = 0;
   public services_total = 0;
+  
+  statsContry = '';
 
   constructor(
     public session: SessionService,
@@ -65,95 +68,99 @@ export class StatsPage implements OnInit {
       countryName => {
         this.createChartOptions();
         if ( countryName != '' ) {
-          this.load_graph_data();
+          this.load_graph_data(countryName);
         }
       }
     );
     if ( this.session.country != undefined ) {
-      this.load_graph_data();
+      this.load_graph_data(this.session.country);
     }
   }
   /*ionViewDidEnter() {
     this.initiated = true;
   }*/
-  load_graph_data() {
-    //restart charts
-    this.programs = 0;
-    this.containers = 0;
-    this.services = 0;
-    this.users = 0;
-    this.api.getStatsTotals().subscribe(
-      (totals) => {
-        this.totals = totals;
-        this.programs_total = totals[0].total;
-        this.services_total = totals[2].total;
-      }
-    );
-    this.api.getStatsPrograms().subscribe(
-      (progs) => {
-        var progtotal = 0;
-        var series = [];
-        this.chartPrograms.chart.height = 50 * (progs.length + 2);
-        progs.forEach( prog => {
-          this.chartPrograms.labels.push(prog.name);
-          series.push(prog.total);
-          this.chartPrograms.xaxis.categories.push(prog.total);
-          progtotal += prog.total;
-        });
-        this.chartPrograms.title.text = "Programas / Total: " + progtotal;
-        this.chartPrograms.series[0].data = series;
-        this.programs = progtotal;
-      }
-    );
-    this.api.getStatsContainers().subscribe(
-      (conts) => {
-        var conttotal = 0;
-        var series = [];
-        this.chartContainers.chart.height = 40 * (conts.length + 1);
-        conts.forEach( cont => {
-          this.chartContainers.labels.push(cont.name);
-          series.push(cont.total);
-          this.chartContainers.xaxis.categories.push(cont.total);
-          conttotal += cont.total;
-        });
-        this.chartContainers.series[0].data = series;
-        this.chartContainers.title.text = "Contenedores / Total: " + conttotal;
-        this.containers = conttotal;
-      }
-    );
-    this.api.getStatsServices().subscribe(
-      (servs) => {
-        var servtotal = 0;
-        var series = [];
-        this.chartServices.chart.height = 40 * (servs.length + 1);
-        servs.forEach( serv => {
-          this.chartServices.labels.push(serv.name);
-          series.push(serv.total);
-          this.chartServices.xaxis.categories.push(serv.total);
-          servtotal += serv.total;
-        });
-        this.chartServices.series[0].data = series;
-        this.chartServices.title.text = "Servicios / Total: " + servtotal;
-        this.services = servtotal;
-      }
-    );
-    this.api.getStatsUsers().subscribe(
-      (usrs) => {
-        var usrtotal = 0;
-        var series = [];
-        this.chartUsers.chart.height = 40 * (usrs.length + 1);
-        usrs.forEach( usr => {
-          let name = usr.name == '' || usr.name == null ? 'Sin dato' : usr.name;
-          this.chartUsers.labels.push(name);
-          series.push(usr.total);
-          this.chartUsers.xaxis.categories.push(usr.total);
-          usrtotal += usr.total;
-        });
-        this.chartUsers.series[0].data = series;
-        this.chartUsers.title.text = "Programas / Total: " + usrtotal;
-        this.users = usrtotal;
-      }
-    );
+  load_graph_data(country) {
+    
+    if ( this.statsContry != country ) {
+      this.statsContry = country;
+      //restart charts
+      this.programs = 0;
+      this.containers = 0;
+      this.services = 0;
+      this.users = 0;
+      this.api.getStatsTotals().subscribe(
+        (totals) => {
+          this.totals = totals;
+          this.programs_total = totals[0].total;
+          this.services_total = totals[2].total;
+        }
+      );
+      this.api.getStatsPrograms().subscribe(
+        (progs) => {
+          var progtotal = 0;
+          var series = [];
+          this.chartPrograms.chart.height = 50 * (progs.length + 2);
+          progs.forEach( prog => {
+            this.chartPrograms.labels.push(prog.name);
+            series.push(prog.total);
+            this.chartPrograms.xaxis.categories.push(prog.total);
+            progtotal += prog.total;
+          });
+          this.chartPrograms.title.text = "Programas / Total: " + progtotal;
+          this.chartPrograms.series[0].data = series;
+          this.programs = progtotal;
+        }
+      );
+      this.api.getStatsContainers().subscribe(
+        (conts) => {
+          var conttotal = 0;
+          var series = [];
+          this.chartContainers.chart.height = 40 * (conts.length + 1);
+          conts.forEach( cont => {
+            this.chartContainers.labels.push(cont.name);
+            series.push(cont.total);
+            this.chartContainers.xaxis.categories.push(cont.total);
+            conttotal += cont.total;
+          });
+          this.chartContainers.series[0].data = series;
+          this.chartContainers.title.text = "Contenedores / Total: " + conttotal;
+          this.containers = conttotal;
+        }
+      );
+      this.api.getStatsServices().subscribe(
+        (servs) => {
+          var servtotal = 0;
+          var series = [];
+          this.chartServices.chart.height = 40 * (servs.length + 1);
+          servs.forEach( serv => {
+            this.chartServices.labels.push(serv.name);
+            series.push(serv.total);
+            this.chartServices.xaxis.categories.push(serv.total);
+            servtotal += serv.total;
+          });
+          this.chartServices.series[0].data = series;
+          this.chartServices.title.text = "Servicios / Total: " + servtotal;
+          this.services = servtotal;
+        }
+      );
+      this.api.getStatsUsers().subscribe(
+        (usrs) => {
+          var usrtotal = 0;
+          var series = [];
+          this.chartUsers.chart.height = 40 * (usrs.length + 1);
+          usrs.forEach( usr => {
+            let name = usr.name == '' || usr.name == null ? 'Sin dato' : usr.name;
+            this.chartUsers.labels.push(name);
+            series.push(usr.total);
+            this.chartUsers.xaxis.categories.push(usr.total);
+            usrtotal += usr.total;
+          });
+          this.chartUsers.series[0].data = series;
+          this.chartUsers.title.text = "Programas / Total: " + usrtotal;
+          this.users = usrtotal;
+        }
+      );
+    }
   }
   createChartOptions() {
     const chartOptions = {

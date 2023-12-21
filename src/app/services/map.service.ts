@@ -147,6 +147,7 @@ export class MapService {
     tooltipAnchor: [16, -28],
     shadowSize: [41, 41]
   });
+  //
   constructor(
     private session: SessionService,
     private router: Router,
@@ -172,7 +173,7 @@ export class MapService {
       if (this.userMarker) { // check
         this.map.removeLayer(this.userMarker); // remove
       }
-      this.userMarker = L.marker(this.userPosition, {icon: this.iconUser} ).addTo(this.map);
+      this.createUserMarker();
       mapBounds.push(this.userPosition);
     }
     var markersLayer = []
@@ -216,25 +217,15 @@ export class MapService {
       return 0;
     }
   }
-
-  locatePosition() {
-    this.map.locate({ setView: true }).on("locationfound", (e: any) => {
-      if (this.userMarker) { // check
-        this.map.removeLayer(this.userMarker); // remove
-      }
-      this.userMarker = L.marker([e.latitude, e.longitude], {
-        draggable: true
-      }).addTo(this.map);
-      this.userMarker.bindPopup('Elegir esta ubicación').openPopup();
-        //this.getAddress(e.latitude, e.longitude);
-      this.userMarker.on("dragend", () => {
-        let userPos = this.userMarker.getLatLng();
-        this.setUserPosition( [ userPos[0], userPos[1] ] );
-        //this.getAddress(position.lat, position.lng);
-        //console.log(position.lat, position.lng);
-      });
-    });
+  //
+  createUserMarker() {
+    if ( this.userPosition ) {
+      this.userMarker = L.marker(this.userPosition, {icon: this.iconUser} )
+      .bindPopup('<a class="user-popup" href="/usuario/reportar/'+this.userPosition[0]+','+this.userPosition[1] +'"><span>Reportar aquí</span><ion-icon name="dr-reportar"></ion-icon></a>')
+      .addTo(this.map);
+    }
   }
+  //
   drawRoute( start:[number, number], end:[number, number]) {
     return this.route = L.Routing.control({
       waypoints: [L.latLng(start), L.latLng(end)],
@@ -535,6 +526,7 @@ export class MapService {
   async getUserPosition() {
     return this.storage.get("userPosition").then(
       (up) => {
+        this.userPosition = up;
         return this.userPosition = up;
       }
     );

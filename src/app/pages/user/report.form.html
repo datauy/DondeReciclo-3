@@ -23,7 +23,7 @@
             <ion-row class="ion-justify-content-center section-header">
               <ion-col  size-md="7" size-lg="10" size-xs="12">
                 <ion-button  (click)="selectSubject('mapa')" id="mapa" size="large" class="submit contrast selectable">
-                  Ajustar mapa
+                  <span>Agregar/ajustar contenedor</span>
                   <ion-icon class="ion-float-left"
                   name="dr-mapa"></ion-icon>
                 </ion-button>
@@ -32,7 +32,7 @@
             <ion-row class="ion-justify-content-center section-header">
               <ion-col  size-md="7" size-lg="10" size-xs="12">
                 <ion-button  (click)="selectSubject('vandalismo')" id="vandalismo" size="large" class="submit contrast selectable">
-                  Vandalismo
+                <span>Vandalismo</span>
                   <ion-icon class="ion-float-left"
                   name="dr-vandalismo"></ion-icon>
                 </ion-button>
@@ -41,7 +41,7 @@
             <ion-row class="ion-justify-content-center section-header">
               <ion-col  size-md="7" size-lg="10" size-xs="12">
                 <ion-button  (click)="selectSubject('otro')" id="otro" size="large" class="submit contrast selectable">
-                  Otro
+                <span>Otro</span>
                   <ion-icon class="ion-float-left"
                   name="dr-otro"></ion-icon>
                 </ion-button>
@@ -51,6 +51,22 @@
               <ion-icon name="close-outline"></ion-icon>
               Por favor seleccione un tipo de problema.
             </div>
+          </div>
+          <ion-item>
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input formControlName="name" type="textarea"></ion-input>
+          </ion-item>
+          <div class="form-error" *ngIf="error.name">
+            <ion-icon name="close-outline"></ion-icon>
+            Por favor escribe tu nombre.
+          </div>
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input formControlName="email" type="textarea"></ion-input>
+          </ion-item>
+          <div class="form-error" *ngIf="error.email">
+            <ion-icon name="close-outline"></ion-icon>
+            Por favor escribe tu correo.
           </div>
           <ion-row class="ion-justify-content-center section-header">
             <ion-col  size-md="6" size-lg="8" size-xs="8">
@@ -63,6 +79,10 @@
             <ion-label position="floating">Comentarios</ion-label>
             <ion-input formControlName="comment" type="textarea"></ion-input>
           </ion-item>
+          <div class="form-error" *ngIf="error.comment">
+            <ion-icon name="close-outline"></ion-icon>
+            Por favor escribe un comentario.
+          </div>
           <ion-row class="ion-justify-content-center section-header">
             <ion-col  size-md="7" size-lg="7" size-xs="12" class="ion-text-center">
               <label color="pale-olive-green" class="add-photo" for="report-photo">

@@ -12,12 +12,21 @@
     <ion-icon name="dr-zones"></ion-icon>
     <span *ngIf="zoneVisible == 1">Zonas de recolección</span>
   </ion-button>
+  <ion-button color="transparent" [ngClass]="'map-buttons map-share share-'+shareVisible" (click)="share()">
+    <ion-icon name="dr-share"></ion-icon>
+    <span *ngIf="shareVisible == 1">Compartir ubicación</span>
+    <span class="success" *ngIf="shareVisible == 2">Enlace copiado!</span>
+  </ion-button>
 
   <div id="map"
     style="height:100%; width: 100%;"
     center='Montevideo, Uruguay' 
     #leafletMap>
   </div>
+  <ion-button class="map-report" color="transparent" [ngClass]="reportLocationActive ? 'active' : ''" (click)="reportLocation()">
+    <span>Reportar aquí</span>
+    <ion-icon name="dr-reportar"></ion-icon>
+  </ion-button>
   <div #serviceContainer class="services-pane cupertino-pane">
     <div class="subprogram-list pane-container">
       <ion-item class="header" lines="full">

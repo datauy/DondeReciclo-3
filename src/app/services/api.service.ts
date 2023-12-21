@@ -285,7 +285,12 @@ export class ApiService<T=any> {
   getCountryByLocation(latlng: number[]) {
     return  this.request.get( environment.backend + "country4Point?version="+environment.apiVersion+"&wkt=POINT("+latlng[1]+' '+latlng[0]+')' ).pipe(map(
       (country: string) => {
-        return country;
+        if ( Array.isArray(country) ) {
+          return country[0];
+        }
+        else {
+          return country;
+        }
       }
     ));
   }

@@ -18,6 +18,7 @@ import { UtilsService } from 'src/app/services/utils.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
 import { Subprogram } from "src/app/models/subprogram.model";
 
+
 import { environment } from 'src/environments/environment';
 
 import * as L from 'leaflet';
@@ -43,6 +44,7 @@ export class MapaPage implements OnInit {
   subprograms = <Subprogram[]>([]);
   subprogram: Subprogram;
   zones: any;
+  reportLocationActive = false;
   //infoPaneEl: HTMLDivElement;
   loadingImg = false;
   fileType: any = {
@@ -55,6 +57,7 @@ export class MapaPage implements OnInit {
   list = 0;
   //Estados: 0:Cerrado-Inactivo, 1:Abierto, 2:Cerrado-Activado, 3:Cerrado-Mostrando? O debiera ser abierto??
   zoneVisible = 0;
+  shareVisible = 0;
   //Load data over recommended zoom
   loadContainer = 0;
   initDataLoaded = false;
@@ -65,6 +68,8 @@ export class MapaPage implements OnInit {
   panelTop = true;
   routing = false;
   
+  public userPopup = L.popup().on("remove", this.closePopUp, this);
+
   constructor(
     private geocoder: NativeGeocoder,
     private router: Router,
@@ -150,13 +155,13 @@ export class MapaPage implements OnInit {
           userPos = [environment[countryName].center.lat, environment[countryName].center.lon];
           this.map.setUserPosition(userPos);
           // Si no está ejecutando la geoloc cargamos contenedores, sino lo maneja la geoloc
-          if ( !this.geoLocationActive ) {
+          //if ( !this.geoLocationActive ) {
             this.api.getNearbyContainers(2, userPos).subscribe(
               (containers) => {
                 this.map.loadMarkers(containers, true);
               }
             );
-          }
+          //}
         }
       }
     );
@@ -238,7 +243,7 @@ export class MapaPage implements OnInit {
         }).addTo(this.map.map);
   
         if ( this.map.userPosition ) {
-          this.map.userMarker = L.marker(this.map.userPosition, {icon: this.map.iconUser} ).addTo(this.map.map);
+          this.map.createUserMarker();
         }
         //Create user marker upon click
         this.map.map.on("click", <LeafletMouseEvent>(e) => {
@@ -249,7 +254,7 @@ export class MapaPage implements OnInit {
             }
             //Do not propagate since click is handled
             this.map.setUserPosition([e.latlng.lat, e.latlng.lng], false);
-            this.map.userMarker = L.marker(this.map.userPosition, {icon: this.map.iconUser} ).addTo(this.map.map); // add the marker onclick
+            this.map.createUserMarker();
           }
           if (this.map.route) {
             this.map.route.spliceWaypoints(0, 1, e.latlng);
@@ -316,7 +321,7 @@ export class MapaPage implements OnInit {
     if ( this.initDataLoaded && !this.routing ) {
       this.routing = true;
       var section = this.router.url.split('/')[1];
-      if ( ['', '/', 'subprograma', 'contenedores', 'contenedor', 'intro', 'residuo', 'material'].indexOf(section) != -1 ) {
+      if ( ['', '/', 'subprograma', 'contenedores', 'contenedor', 'intro', 'residuo', 'material', 'lugar'].indexOf(section) != -1 ) {
         if ( event != undefined ) {
           var url_arr = event.url.split('?');
           // Do not do anything if URL is unchanged
@@ -413,9 +418,24 @@ export class MapaPage implements OnInit {
                 this.showPane();
                 this.routing = false;
             }
+            else if ( this.route.snapshot.params['coords'] != undefined ) {
+              var latlng = this.route.snapshot.params['coords'].split(',');
+              if ( latlng[1] != undefined ) {
+                this.map.setUserPosition(latlng);
+                this.loadPosition(true);
+              }
+              else {
+                this.loadPosition(true).then((pos) => {
+                  this.gotoLocation();
+                  this.routing = false;
+                });
+              }
+            }
             else {
+              this.loadPosition(true).then((pos) => {
                 this.gotoLocation();
                 this.routing = false;
+              });
             }
           }
         });
@@ -664,37 +684,24 @@ export class MapaPage implements OnInit {
   }
   //
   gotoLocation(load=true) {
-    this.geoLocationActive = true;
-    this.geo.getCurrentPosition({ enableHighAccuracy: false }).then( (resp) => {
-      this.map.setUserPosition([resp.coords.latitude, resp.coords.longitude]);
-      this.notification.closeNotificationId('noLoc');
-      this.api.getCountryByLocation(this.map.userPosition).subscribe(
-        (country) => {
-          this.session.setCountry(country, false);
-          if ( this.autoSearch ) {
-            this.activateSearch(this.autoSearchItem);
-            this.geoLocationActive = false;  
+    if ( !this.geoLocationActive ) {
+      this.geoLocationActive = true;
+      this.geo.getCurrentPosition({ enableHighAccuracy: false }).then( (resp) => {
+        this.map.setUserPosition([resp.coords.latitude, resp.coords.longitude]);
+        this.notification.closeNotificationId('noLoc');
+        this.api.getCountryByLocation(this.map.userPosition).subscribe(
+          (country) => {
+            this.session.setCountry(country, false);
+            this.geoLocationActive = false;
+            this.loadPosition(load);
           }
-          else {
-            //Check routing load
-            if (load && this.routing_load() ) {
-              this.subprograms4location();
-              this.api.getNearbyContainers(2, [resp.coords.latitude, resp.coords.longitude])
-              .subscribe((containers) => {
-                this.map.loadMarkers(containers, true);
-                this.geoLocationActive = false;
-              });
-            }
-            else {
-              this.geoLocationActive = false;
-            }
-          }
-        }
-      );
-      //this.map.flytomarker(this.map.userPosition, 15);
-    }).catch((error) => {
-      this.noLocation(load);
-    });
+        );
+        //this.map.flytomarker(this.map.userPosition, 15);
+      }).catch((error) => {
+        this.noLocation(load);
+        this.geoLocationActive = false;
+      });
+    }
     setTimeout( () => {
       if (this.geoLocationActive ) {
         this.noLocation(load);
@@ -703,7 +710,7 @@ export class MapaPage implements OnInit {
   }
   noLocation(load=true) {
     //Desactivamos ya que las llamadas sólo se hacen desde geoloc que falla
-    this.geoLocationActive = false;
+    //this.geoLocationActive = false;
     let noRes = {
       id: 'noLoc',
       type: 'notification',
@@ -730,6 +737,7 @@ export class MapaPage implements OnInit {
             }
           }
           if ( this.map.userPosition != undefined ) {
+            this.locationLoop = 0;
             if ( this.autoSearch ) {
               //Activa search que enruta al usuario con contenedores filtrados
               this.activateSearch(this.autoSearchItem);
@@ -1018,6 +1026,62 @@ export class MapaPage implements OnInit {
         note: 'Ayudemos a otros usuarios en su búsqueda, sé el primero en subir una foto!',
       };
       this.notification.showNotification(noRes);
+    }
+  }
+  reportLocation() {
+    if ( this.reportLocationActive ) {
+      this.userPopup.remove();
+      this.reportLocationActive = false;
+    }
+    else {
+      this.reportLocationActive = true;
+      var latlng = this.map.userMarker.getLatLng();
+      this.userPopup.
+      setContent('<a class="user-popup" href="/usuario/reportar/'+latlng.lat+','+latlng.lng +'"><span>Confirmar ubicación</span><ion-icon name="check-green"></ion-icon></a>').
+      setLatLng(latlng);
+      //
+      this.map.userMarker.
+      bindPopup(this.userPopup).
+      openPopup();
+    }
+  }
+  closePopUp() {
+    this.reportLocationActive = false;
+  }
+  share() {
+    if ( this.shareVisible ) {
+      this.map.getUserPosition().then(
+        (res) => {
+          if (res != undefined ) {
+            this.shareVisible = 2;
+            var domain = 'https://dondereciclo.uy/';
+            if ( this.session.country != undefined && this.session.country == 'Colombia' ) {
+              domain = 'https://dondereciclo.co/';
+            }
+            var link = domain + 'lugar/' + res[0] + ',' + res[1];
+            const selBox = document.createElement('textarea');
+            selBox.style.position = 'fixed';
+            selBox.style.left = '0';
+            selBox.style.top = '0';
+            selBox.style.opacity = '0';
+            selBox.value = link;
+            document.body.appendChild(selBox);
+            selBox.focus();
+            selBox.select();
+            document.execCommand('copy');
+            document.body.removeChild(selBox);
+            setTimeout( () => {
+              this.shareVisible = 0;
+          }, 2500);
+          }
+        }
+      );
+    }
+    else {
+      this.shareVisible = 1;
+      setTimeout( () => {
+          this.shareVisible = 0;
+      }, 5000);
     }
   }
 }

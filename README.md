@@ -1,8 +1,8 @@
 ![Donde reciclo](src/assets/img/generico.png)
  # Donde Reciclo v4.2
 ![](https://img.shields.io/badge/version-v3.4-blue) ![](https://img.shields.io/badge/build-ionic-blue) ![](https://img.shields.io/github/issues/datauy/DondeReciclo-3) ![](https://img.shields.io/github/license/datauy/DondeReciclo-3) ![](https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2Fdatauy%2FDondeReciclo-3)
-### Versión 4.2.0
-Ésta versión agrega estadísticas a la plataforma
+### Versión 4.2.4
+Ésta versión agrega estadísticas a la plataforma y varias interaccciones como compartir mapas, filtros por chips y más.
 ## Indice
 
 * [Introducción](#Introducción)
