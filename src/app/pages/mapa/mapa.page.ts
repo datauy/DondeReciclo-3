@@ -155,13 +155,13 @@ export class MapaPage implements OnInit {
           userPos = [environment[countryName].center.lat, environment[countryName].center.lon];
           this.map.setUserPosition(userPos);
           // Si no está ejecutando la geoloc cargamos contenedores, sino lo maneja la geoloc
-          if ( !this.geoLocationActive ) {
+          //if ( !this.geoLocationActive ) {
             this.api.getNearbyContainers(2, userPos).subscribe(
               (containers) => {
                 this.map.loadMarkers(containers, true);
               }
             );
-          }
+          //}
         }
       }
     );
@@ -425,13 +425,17 @@ export class MapaPage implements OnInit {
                 this.loadPosition(true);
               }
               else {
-                this.gotoLocation();
-                this.routing = false;
+                this.loadPosition(true).then((pos) => {
+                  this.gotoLocation();
+                  this.routing = false;
+                });
               }
             }
             else {
+              this.loadPosition(true).then((pos) => {
                 this.gotoLocation();
                 this.routing = false;
+              });
             }
           }
         });
@@ -680,37 +684,24 @@ export class MapaPage implements OnInit {
   }
   //
   gotoLocation(load=true) {
-    this.geoLocationActive = true;
-    this.geo.getCurrentPosition({ enableHighAccuracy: false }).then( (resp) => {
-      this.map.setUserPosition([resp.coords.latitude, resp.coords.longitude]);
-      this.notification.closeNotificationId('noLoc');
-      this.api.getCountryByLocation(this.map.userPosition).subscribe(
-        (country) => {
-          this.session.setCountry(country, false);
-          if ( this.autoSearch ) {
-            this.activateSearch(this.autoSearchItem);
-            this.geoLocationActive = false;  
+    if ( !this.geoLocationActive ) {
+      this.geoLocationActive = true;
+      this.geo.getCurrentPosition({ enableHighAccuracy: false }).then( (resp) => {
+        this.map.setUserPosition([resp.coords.latitude, resp.coords.longitude]);
+        this.notification.closeNotificationId('noLoc');
+        this.api.getCountryByLocation(this.map.userPosition).subscribe(
+          (country) => {
+            this.session.setCountry(country, false);
+            this.geoLocationActive = false;
+            this.loadPosition(load);
           }
-          else {
-            //Check routing load
-            if (load && this.routing_load() ) {
-              this.subprograms4location();
-              this.api.getNearbyContainers(2, [resp.coords.latitude, resp.coords.longitude])
-              .subscribe((containers) => {
-                this.map.loadMarkers(containers, true);
-                this.geoLocationActive = false;
-              });
-            }
-            else {
-              this.geoLocationActive = false;
-            }
-          }
-        }
-      );
-      //this.map.flytomarker(this.map.userPosition, 15);
-    }).catch((error) => {
-      this.noLocation(load);
-    });
+        );
+        //this.map.flytomarker(this.map.userPosition, 15);
+      }).catch((error) => {
+        this.noLocation(load);
+        this.geoLocationActive = false;
+      });
+    }
     setTimeout( () => {
       if (this.geoLocationActive ) {
         this.noLocation(load);
@@ -719,7 +710,7 @@ export class MapaPage implements OnInit {
   }
   noLocation(load=true) {
     //Desactivamos ya que las llamadas sólo se hacen desde geoloc que falla
-    this.geoLocationActive = false;
+    //this.geoLocationActive = false;
     let noRes = {
       id: 'noLoc',
       type: 'notification',
@@ -1045,7 +1036,6 @@ export class MapaPage implements OnInit {
     else {
       this.reportLocationActive = true;
       var latlng = this.map.userMarker.getLatLng();
-      console.log("reportLocation", this.map.userMarker);
       this.userPopup.
       setContent('<a class="user-popup" href="/usuario/reportar/'+latlng.lat+','+latlng.lng +'"><span>Confirmar ubicación</span><ion-icon name="check-green"></ion-icon></a>').
       setLatLng(latlng);

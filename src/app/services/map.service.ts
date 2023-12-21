@@ -526,6 +526,7 @@ export class MapService {
   async getUserPosition() {
     return this.storage.get("userPosition").then(
       (up) => {
+        this.userPosition = up;
         return this.userPosition = up;
       }
     );
