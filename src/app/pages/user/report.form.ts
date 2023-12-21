@@ -85,9 +85,7 @@ export class ReportForm implements OnInit {
   }
   report() {
     this.session.isLoading = true;
-    console.log('ERRORS', this.user_data);
     Object.keys(this.user_data.controls).forEach( control => {
-      console.log("CONTORL", control);
       if (this.user_data.controls[control].status == 'INVALID' ) {
         this.error[control] = true;
       }
@@ -115,7 +113,7 @@ export class ReportForm implements OnInit {
       this.user_data.value.file = this.file;
       this.user_data.value.fileType = this.fileType;
     }
-    /*this.utils.createReport(this.user_data.value).subscribe(
+    this.utils.createReport(this.user_data.value).subscribe(
       (res) => {
         this.session.isLoading = false;
         if (res) {
@@ -144,7 +142,7 @@ export class ReportForm implements OnInit {
           }
         }
       }*/
-    //);
+    );
   }
   //
   selectSubject(id) {
