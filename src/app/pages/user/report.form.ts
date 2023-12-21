@@ -5,6 +5,7 @@ import { SessionService } from 'src/app/services/session.service';
 import { UtilsService } from "src/app/services/utils.service";
 import { ActivatedRoute } from '@angular/router';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { AuthService } from 'src/app/services/auth.service';
 //import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 @Component({
@@ -26,7 +27,9 @@ export class ReportForm implements OnInit {
     public session: SessionService,
     public utils: UtilsService,
     private route: ActivatedRoute,
-    private iab: InAppBrowser
+    private iab: InAppBrowser,
+    private auth: AuthService,
+    
     //private camera: Camera
   ) { }
   /*base64Image: string;
@@ -50,10 +53,16 @@ export class ReportForm implements OnInit {
     this.user_data = this.formBuilder.group({
       name: new FormControl('', Validators.required),
       email: new FormControl('', Validators.required),
-      subject: new FormControl('', Validators.required),
+      subject: new FormControl(''),
       comment: new FormControl('', Validators.required),
-      photo: new FormControl(null, Validators.required)
+      photo: new FormControl(null)
     });
+    this.auth.loadUserData().then(
+      (user) => {
+        this.user_data.controls['name'].setValue(user.name);
+        this.user_data.controls['email'].setValue(user.email);
+        }
+    );
   }
   ngAfterViewInit() {
     if ( this.route.snapshot.params['containerID'].includes((',')) ) {
@@ -76,28 +85,37 @@ export class ReportForm implements OnInit {
   }
   report() {
     this.session.isLoading = true;
+    console.log('ERRORS', this.user_data);
+    Object.keys(this.user_data.controls).forEach( control => {
+      console.log("CONTORL", control);
+      if (this.user_data.controls[control].status == 'INVALID' ) {
+        this.error[control] = true;
+      }
+    });
     //Subject assign
     if (!this.subject_id) {
       this.error.subject = true;
-      this.session.isLoading = false;
-      return false;
     }
     else {
       this.user_data.value.subject = this.subject_id;
     }
+    if ( Object.keys(this.error).length ) {
+      this.session.isLoading = false;
+      return false;
+    } 
     //Validates comment
-    if ( this.user_data.value.comment.length < 10 ) {
+    /*if ( this.user_data.value.comment.length < 10 ) {
       this.error.comment = true;
       this.session.isLoading = false;
       return false;
-    }
+    }*/
     this.user_data.value.id = this.route.snapshot.params['containerID'];
     //Assign file to send along
     if (this.file) {
       this.user_data.value.file = this.file;
       this.user_data.value.fileType = this.fileType;
     }
-    this.utils.createReport(this.user_data.value).subscribe(
+    /*this.utils.createReport(this.user_data.value).subscribe(
       (res) => {
         this.session.isLoading = false;
         if (res) {
@@ -126,7 +144,7 @@ export class ReportForm implements OnInit {
           }
         }
       }*/
-    );
+    //);
   }
   //
   selectSubject(id) {

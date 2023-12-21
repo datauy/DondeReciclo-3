@@ -32,7 +32,7 @@ export class SessionService {
   reloadMap: boolean = false;
   news: {News};
 
-  homeUrl = '/mapa';
+  homeUrl = '/';
   lastUrl = '';
   is_mobile = false;
 
