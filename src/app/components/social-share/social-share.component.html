@@ -1,12 +1,16 @@
 <div id="share-main" *ngIf="this.session.country == 'Uruguay'" >
-  <h1>Seguinos en Instagram</h1>
+  <h1>Seguinos en nuestras redes</h1>
   <p>Consejos para clasificar, eventos, novedades y más.</p>
   <div class="social-links">
     <ion-toolbar>
-      <ion-buttons>
+      <ion-buttons class="follow">
         <ion-button (click)="goTo('https://www.instagram.com/dondereciclouy/')" fill="clear">
           <ion-icon slot="icon-only"
             name="dr-instagram"></ion-icon>
+        </ion-button>
+        <ion-button (click)="goTo('https://www.facebook.com/dondereciclouruguay/')" fill="clear">
+          <ion-icon slot="icon-only"
+            name="dr-facebook"></ion-icon>
         </ion-button>
       </ion-buttons>
     </ion-toolbar>
