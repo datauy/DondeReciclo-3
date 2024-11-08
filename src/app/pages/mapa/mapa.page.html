@@ -42,7 +42,7 @@
         </div>
       </ion-item>
       <div class="scrollable-div" contain="none" overflow-y="scroll">
-        <ion-item *ngFor="let subp of subprograms; let i = index" lines="none" (click)="subprogramShow(i, 3)">
+        <ion-item *ngFor="let subp of subprograms; let i = index" lines="none" (click)="subprogramShow(i, 3, true)">
           <ion-avatar slot="start">
             <img src="{{subp.program_icon}}">
           </ion-avatar>

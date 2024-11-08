@@ -2,15 +2,25 @@
 <html lang="en">
 
 <head>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-39355299-1"></script>
+  <!-- Matomo -->
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-39355299-1');
+  var _paq = window._paq = window._paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//analytics.data.org.uy/";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    if (window.location.hostname == 'www.dondereciclo.co' || window.location.hostname == "dondereciclo.co"){
+      _paq.push(['setSiteId', '14']);
+    }else{
+      _paq.push(['setSiteId', '12']);
+    };
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
 </script>
+<!-- End Matomo Code -->
 
   <!-- COMMON TAGS -->
   <meta charset="utf-8">
