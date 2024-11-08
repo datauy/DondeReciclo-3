@@ -23,6 +23,8 @@ import { environment } from 'src/environments/environment';
 
 import * as L from 'leaflet';
 
+declare var _paq: any
+
 @Component({
   selector: 'app-mapa',
   templateUrl: './mapa.page.html',
@@ -101,6 +103,9 @@ export class MapaPage implements OnInit {
     this.map.pinClicked.subscribe(
       pinData => {
         if ( pinData ) {
+          console.log( 'PIN CLICKED LOAD PIN DATA ', this.map.currentContainer.class);
+          //Track pin click
+          _paq.push(['trackEvent', 'Pin', 'click', this.map.currentContainer.class]);
           this.list = 0;
           if ( this.infoPane != undefined ) {
             this.showPane();
@@ -371,33 +376,28 @@ export class MapaPage implements OnInit {
           //MAP SERVICES
           if ( this.route.snapshot.params['subsID'] != undefined && this.route.snapshot.params['subsID'].length > 0 ) {
             this.loadSubIds = this.route.snapshot.params['subsID'];
-            this.api.getSubContainers(this.loadSubIds).subscribe(
-              (containers) => {
-                this.map.loadMarkers(containers, true);
-              }
-            );
             this.api.getSubPrograms(this.loadSubIds).subscribe(
               (subp) => {                             
                 this.list = 3;
+                this.zones = subp.locations;
+                this.routing = false;
+                this.subprograms = this.formatSubProgram(subp.subprograms);
                 if ( subp.subprograms.length == 1 ) {
-                  this.subprogram = this.formatSubProgram(subp.subprograms)[0];
-                  if ( typeof(this.infoPane) != 'undefined' ) {
-                    this.infoPane.present({animate: true});
-                  }
+                  this.subprogramShow(0,3);
                 }
                 else {
-                  this.subprograms = this.formatSubProgram(subp.subprograms);
+                  this.api.getSubContainers(this.loadSubIds).subscribe(
+                    (containers) => {
+                      this.map.loadMarkers(containers, true);
+                    }
+                  );
                   if ( typeof(this.servicesPane) != 'undefined' ) {
                     this.servicesPane.moveToBreak('middle');
                     this.session.cupertinoState = 'cupertinoOpen';
                   }
+                  this.map.loadCustomZones(subp.locations);
+                  this.map.loadZones(subp.locations);
                 }
-                //if ( this.zones == undefined || this.zones.features.length <= 1 ) {
-                  this.zones = subp.locations;
-                //}
-                this.map.loadCustomZones(subp.locations);
-                this.map.loadZones(subp.locations);
-                this.routing = false;
               }
             );
           }
@@ -603,6 +603,10 @@ export class MapaPage implements OnInit {
     else {
       cid = this.map.currentContainer.id
     }
+    //Track content impression
+    console.log('TRACK IMPRESSION Container', this.infoContainer);
+    _paq.push(['trackContentImpression', 'Container', cid, environment.url]);
+    
     this.api.getContainer(cid).subscribe((container) => {
       this.formatContainer(container);
       if ( this.loadContainer > 0 ) {
@@ -901,21 +905,6 @@ export class MapaPage implements OnInit {
             }
             this.map.loadCustomZones(this.zones);
           }
-          /*else if ( subprograms.length == 1) {
-            this.map.removeZones();
-            this.map.removeCustomZones();
-            //Sobreescribe si no hay listados, para poder volver a ellos o no...
-            if ( this.zones == undefined || this.zones.features.length <= 1 ) {
-              this.zones = subprograms_zones.locations;
-            }
-            if ( this.subprograms == undefined || this.subprograms.length <= 1 ) {
-              this.subprograms = subprograms;
-            }
-            this.formatSubProgram(subprograms);
-            this.subprogramShow(0, 4, subprograms[0]);
-            //this.map.flytomarker(fixedPos, this.map.zoom);
-            this.map.loadCustomZones(this.zones);
-          }*/
           else {
             this.subprograms = [];
           }
@@ -927,14 +916,8 @@ export class MapaPage implements OnInit {
     }
   }
   //
-  subprogramShow(index: number, list = 4, subprogram?) {
-    if ( subprogram != null ) {
-      this.subprogram = subprogram;
-    }
-    else {
-      this.subprogram = this.subprograms[index];
-    }
-
+  subprogramShow(index: number, list = 4, clicked = false) {
+    this.subprogram = this.subprograms[index];
     this.list = list;
     this.map.removeZones();
     this.map.removeCustomZones();
@@ -948,7 +931,7 @@ export class MapaPage implements OnInit {
       }
       if (zone_found) {
         this.map.showSubZone(this.zones.features[i]);
-
+        
       }
     }
     this.api.getSubContainers(this.subprogram.id.toString()).subscribe(
@@ -959,6 +942,14 @@ export class MapaPage implements OnInit {
     if ( this.servicesPane.currentBreak() == 'top' ) {
       this.servicesPane.moveToBreak('middle');
     }
+    //Track content
+    if ( clicked ) {
+      console.log( 'PIN CLICKED LOAD PIN DATA ', this.map.currentContainer.class);
+      //Track pin click
+      _paq.push(['trackEvent', 'Subprogram', 'click', this.map.currentContainer.class]);
+    }
+    console.log('TRACK IMPRESSION Subprogram', this.subprogram);
+    _paq.push(['trackContentImpression', 'SubProgram', this.subprogram.id, environment.url]);
     this.infoPane.present({animate: true});
   }
   //

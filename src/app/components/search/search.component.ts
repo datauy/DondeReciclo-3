@@ -10,6 +10,8 @@ import { SessionService } from 'src/app/services/session.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
 import { environment } from 'src/environments/environment';
 
+declare var _paq: any
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -237,6 +239,9 @@ export class SearchComponent {
         }
       );
     }
+    console.log( 'SEARCH CLICKED ', item);
+    //Track pin click 
+    _paq.push(['trackEvent', 'Search', 'click', item.name]);
   }
   //
   getItemLabel(value) {
@@ -280,6 +285,18 @@ export class SearchComponent {
         this.suggestVisibility = false;
         this.api.getResults(str).subscribe(
           (result) => {
+            if ( result.length === 1 && result[0].name == "No Results" ) {
+              console.log( 'NO RESULT SEARCH ', this.dimensions);
+              let active_dimensions = [];
+              this.dimensions.forEach( dim => {
+                if (this.session.searchDimensions.includes(dim.id) ) {
+                  active_dimensions.push(dim.name);
+                }
+              });
+              //Track no result
+              _paq.push(['trackSiteSearch', str, active_dimensions.join('-'), 0]);
+            }
+            console.log(result);
             this.searchResult = result;
           }
         );

@@ -12,14 +12,22 @@ export const environment = {
     code: 'UY',
     id: 1,
     //predefinedSearch: [],
-    locale: 'es_UY'
+    locale: 'es_UY',
+    analytics: {
+      enabled: 1,
+      siteId: 12
+    }
   },
   Colombia: {
     center: {lat: 4.65087958676269, lng: -74.05580210009016},
     code: 'COL',
     id: 2,
     //predefinedSearch:[],
-    locale: 'es_CO'
+    locale: 'es_CO',
+    analytics: {
+      enabled: 0,
+      siteId: 0
+    }
   },
   geocoder: 'https://nominatim.openstreetmap.org/',
   pinSaturation: 200,
