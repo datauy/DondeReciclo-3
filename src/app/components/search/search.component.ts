@@ -241,7 +241,7 @@ export class SearchComponent {
     }
     console.log( 'SEARCH CLICKED ', item);
     //Track pin click 
-    _paq.push(['trackEvent', 'Search', 'click', item.name]);
+    _paq.push(['trackEvent', 'Búsqueda', 'click', item.name]);
   }
   //
   getItemLabel(value) {
@@ -296,7 +296,6 @@ export class SearchComponent {
               //Track no result
               _paq.push(['trackSiteSearch', str, active_dimensions.join('-'), 0]);
             }
-            console.log(result);
             this.searchResult = result;
           }
         );

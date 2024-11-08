@@ -103,9 +103,8 @@ export class MapaPage implements OnInit {
     this.map.pinClicked.subscribe(
       pinData => {
         if ( pinData ) {
-          console.log( 'PIN CLICKED LOAD PIN DATA ', this.map.currentContainer.class);
           //Track pin click
-          _paq.push(['trackEvent', 'Pin', 'click', this.map.currentContainer.class]);
+          _paq.push(['trackEvent', 'Contenedores', 'click', this.map.currentContainer.class]);
           this.list = 0;
           if ( this.infoPane != undefined ) {
             this.showPane();
@@ -604,8 +603,7 @@ export class MapaPage implements OnInit {
       cid = this.map.currentContainer.id
     }
     //Track content impression
-    console.log('TRACK IMPRESSION Container', this.infoContainer);
-    _paq.push(['trackContentImpression', 'Container', cid, environment.url]);
+    _paq.push(['trackContentImpression', 'Contenedores', cid, environment.url]);
     
     this.api.getContainer(cid).subscribe((container) => {
       this.formatContainer(container);
@@ -944,12 +942,10 @@ export class MapaPage implements OnInit {
     }
     //Track content
     if ( clicked ) {
-      console.log( 'PIN CLICKED LOAD PIN DATA ', this.map.currentContainer.class);
       //Track pin click
-      _paq.push(['trackEvent', 'Subprogram', 'click', this.map.currentContainer.class]);
+      _paq.push(['trackEvent', 'Servicios', 'click', this.subprogram.name]);
     }
-    console.log('TRACK IMPRESSION Subprogram', this.subprogram);
-    _paq.push(['trackContentImpression', 'SubProgram', this.subprogram.id, environment.url]);
+    _paq.push(['trackContentImpression', 'Servicios', this.subprogram.id, environment.url]);
     this.infoPane.present({animate: true});
   }
   //
