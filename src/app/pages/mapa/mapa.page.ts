@@ -69,6 +69,7 @@ export class MapaPage implements OnInit {
   loadSubIds: string;
   panelTop = true;
   routing = false;
+  processed_route = 0;
   
   public userPopup = L.popup().on("remove", this.closePopUp, this);
 
@@ -203,14 +204,14 @@ export class MapaPage implements OnInit {
         }
       }
     );
-    /*this.router.events.pipe(filter((event: Event): event is NavigationEnd => event instanceof NavigationEnd)).subscribe((event: Event) => {
+    this.router.events.pipe(filter((event: Event): event is NavigationEnd => event instanceof NavigationEnd)).subscribe((event: Event) => {
       console.log("ROUTER EVENT", event);
       if ( event instanceof NavigationEnd && event.id != this.processed_route ) {
         this.processed_route == event.id;
         console.log("ROUTER EVENT2", event);
         this.mapaRouter(event);
       }
-    });*/
+    });
     //load data
     this.api.initialDataLoaded.subscribe(
       (loaded) => {
@@ -321,11 +322,20 @@ export class MapaPage implements OnInit {
     this.map.removeZones();
     this.map.removeCustomZones();
   }
+  activateEager() {
+    this.map.eagerLoad = true;
+    this.map.mapChanges();
+    //Set eager load for 10 secs
+    setTimeout( () => {
+    this.map.eagerLoad = false;
+    this.router.url.replace('?eagerLoad=1', '');
+    }, 10000);
+  }
   mapaRouter(event?: any) {
     if ( this.initDataLoaded && !this.routing ) {
       this.routing = true;
-      var section = this.router.url.split('/')[1];
-      if ( ['', '/', 'subprograma', 'contenedores', 'contenedor', 'intro', 'residuo', 'material', 'lugar'].indexOf(section) != -1 ) {
+      var section = this.router.url.split('/')[1].split('?')[0];
+      if ( ['', '/', '#', 'subprograma', 'contenedores', 'contenedor', 'intro', 'residuo', 'material', 'lugar'].indexOf(section) != -1 ) {
         if ( event != undefined ) {
           var url_arr = event.url.split('?');
           // Do not do anything if URL is unchanged
@@ -334,22 +344,13 @@ export class MapaPage implements OnInit {
               this.activateZone();
             }
             if ( url_arr[1].startsWith('eagerLoad') ) {
-              this.map.eagerLoad = true;
-              this.map.mapChanges();
-              //Set eager load for 10 secs
-              setTimeout( () => {
-              this.map.eagerLoad = false;
-              }, 10000);
+              this.activateEager();
             }
             this.router.navigate([this.session.homeUrl]);
             this.routing = false;
           }
-          //No need to continue
-          /*if ( url_arr[0] == this.session.homeUrl ) {
-            return;
-          }*/
         }
-          this.loadPosition(false).then(() => {
+        this.loadPosition(false).then(() => {
           let params = this.route.snapshot.queryParams;
     
           if ( params.hasOwnProperty('zones') && params.zones == 1 ) {
@@ -357,11 +358,6 @@ export class MapaPage implements OnInit {
             this.router.navigate([this.session.homeUrl]);
             this.routing = false;
           }
-          /*No allow eager in Load
-          if ( params.hasOwnProperty('eagerLoad') && params.eagerLoad == 1 ) {
-            console.log('EAGER');
-              this.eagerLoad = true;
-          }*/
           // route for childs and params
           let objectLocation = false;
           if ( this.route.snapshot.params['materialID'] != undefined && this.route.snapshot.params['materialID'] > 0 ) {
@@ -374,6 +370,7 @@ export class MapaPage implements OnInit {
           }
           //MAP SERVICES
           if ( this.route.snapshot.params['subsID'] != undefined && this.route.snapshot.params['subsID'].length > 0 ) {
+            this.activateEager();
             this.loadSubIds = this.route.snapshot.params['subsID'];
             this.api.getSubPrograms(this.loadSubIds).subscribe(
               (subp) => {                             

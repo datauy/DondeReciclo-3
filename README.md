@@ -1,6 +1,8 @@
 ![Donde reciclo](src/assets/img/generico.png)
  # Donde Reciclo v4.3
 ![](https://img.shields.io/badge/version-v3.4-blue) ![](https://img.shields.io/badge/build-ionic-blue) ![](https://img.shields.io/github/issues/datauy/DondeReciclo-3) ![](https://img.shields.io/github/license/datauy/DondeReciclo-3) ![](https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2Fdatauy%2FDondeReciclo-3)
+### Versión 4.3.1
+Se corrige funcionamiento de EagerLoad y se agrega por defecto para visualización de subprogramas.
 ### Versión 4.3.0
 Se agrega analítica a través de Matomo
 ## Indice
