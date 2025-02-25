@@ -198,7 +198,7 @@ export class MapService {
       }
       markersLayer.push(newMarker);
       //Prevent marker load over saturation level
-      if ( i > environment.pinSaturation ) {
+      if ( i > environment.pinSaturation && !this.eagerLoad ) {
         this.saturationWarn = true;
         this.mapChanges(true);
         break;
