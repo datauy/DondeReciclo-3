@@ -173,8 +173,6 @@ export class MapaPage implements OnInit {
     this.map.mapChanged.subscribe(
       change => {
         if (change) {
-          console.log("MAP CHANGED");
-          
           if ( this.map.map != undefined && this.list == 0 ) {
             if (( this.map.map.getZoom() >= 14 && !this.map.saturationWarn ) || this.map.eagerLoad ) {
               this.notification.closeNotificationId('zoom');
@@ -281,8 +279,6 @@ export class MapaPage implements OnInit {
 
   //
   ionViewWillEnter() {
-    console.log("WILL ENTER");
-    
     //
     this.session.showBackButton = false;
     //this.loadMap();
