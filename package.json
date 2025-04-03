@@ -85,7 +85,7 @@
     "cordova-plugin-statusbar": "^2.4.2",
     "jasmine-core": "~3",
     "jasmine-spec-reporter": "~4.2.1",
-    "karma": "~6.3.16",
+    "karma": "~6.3.20",
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~2.0.1",
