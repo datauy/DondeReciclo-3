@@ -12,6 +12,7 @@ export class SessionService {
 
   // isloading for splashScreen
   isLoading: boolean = true;
+  isLoadingFirst: boolean = true;
   connectionProblem: boolean = false;
   // can go back
   showBackButton: boolean = false;
