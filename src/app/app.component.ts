@@ -42,6 +42,7 @@ export class AppComponent {
     // La cifra al final de este bloque es la cantidad de milisegundos del loading, cargador o splash
 
   ngAfterViewInit() {
+    this.session.isLoadingFirst = true;
     if ( this.session.country == undefined || this.session.country == '' ) {
       if ( window.location.host == 'dondereciclo.co' ) {
         this.session.country = 'Colombia'
@@ -53,7 +54,7 @@ export class AppComponent {
       }
     }
     setTimeout( () => {
-      this.session.isLoading = false;
+      this.session.isLoadingFirst = false;
     }, 3000);
   }
   overlayClose() {

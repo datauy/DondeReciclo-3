@@ -1,6 +1,6 @@
 <ion-app [ngClass]="session.currentPage + ' ' + session.cupertinoState">
   <!-- <app-header display="full"></app-header> -->
-  <div class="loadingOverlay" [ngClass]="session.isLoading ? 'loadingShow' : 'loadingHide'">
+  <div class="loadingOverlay" [ngClass]="(session.isLoading || session.isLoadingFirst) ? 'loadingShow' : 'loadingHide'">
     <ion-grid>
       <ion-row class="ion-justify-content-center">
         <ion-col size-md="8" size-lg="6" size-xs="12">
