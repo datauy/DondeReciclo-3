@@ -67,6 +67,7 @@ export class ReportForm implements OnInit {
   ngAfterViewInit() {
     if ( this.route.snapshot.params['containerID'].includes((',')) ) {
       this.selectSubject('mapa');
+      this.session.isLoading = false;
     }
   }
   /*getCameraPhoto() {
