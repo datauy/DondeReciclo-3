@@ -396,6 +396,8 @@ export class MapaPage implements OnInit {
                 }
               }
             );
+            this.routing = false;
+            this.session.isLoading = false;
           }
           else {
             this.subprograms4location();
