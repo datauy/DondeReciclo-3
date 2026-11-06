@@ -18,6 +18,7 @@ import { NotificationComponent } from './notification/notification.component';
 import { ImageSliderComponent } from './image-slider/image-slider.component';
 import { MaterialsChipsComponent } from './materials-chips/materials-chips.component';
 import { WalkthroughComponent } from './walkthrough/walkthrough.component';
+import { ClusterModalComponent } from './cluster-modal/cluster-modal.component';
 import { NgApexchartsModule } from "ng-apexcharts";
 import {MatTabsModule} from '@angular/material/tabs';
 //import { TestDirective } from './test.directive';
@@ -46,7 +47,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     NotificationComponent,
     ImageSliderComponent,
     MaterialsChipsComponent,
-    WalkthroughComponent
+    WalkthroughComponent,
+    ClusterModalComponent
   ],
   exports: [
     SidemenuComponent,
@@ -61,6 +63,7 @@ import {MatTabsModule} from '@angular/material/tabs';
   ],
   entryComponents: [
     SocialShareComponent,
+    ClusterModalComponent,
     // SimpleServiceComponent
   ],
   // schemas : [CUSTOM_ELEMENTS_SCHEMA],

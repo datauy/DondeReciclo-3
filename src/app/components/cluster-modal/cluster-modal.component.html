@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{count}} puntos en esta zona</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="ion-padding" *ngIf="loading" role="status">
+    <ion-spinner></ion-spinner> Cargando puntos...
+  </div>
+  <div class="ion-padding" *ngIf="loadFailed" role="alert">
+    <p>No se pudieron cargar los puntos de esta zona.</p>
+    <ion-button (click)="loadContainers()">Reintentar</ion-button>
+  </div>
+  <p class="ion-padding" *ngIf="!loading && !loadFailed && containers.length !== count">
+    Algunos puntos ya no están disponibles. Se muestran {{containers.length}} de {{count}}.
+  </p>
+  <ion-list *ngIf="!loading && !loadFailed">
+    <ion-item *ngFor="let container of containers" button detail (click)="select(container)">
+      <ion-avatar slot="start" *ngIf="container.program_icon || container.type_icon">
+        <img [src]="container.program_icon || container.type_icon">
+      </ion-avatar>
+      <ion-label>
+        <h3>{{container.site || container.program || container.address}}</h3>
+        <p class="sub-program-name" *ngIf="container.sub_program_name">{{container.sub_program_name}}</p>
+        <p *ngIf="container.address">{{container.address}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { map, mergeMap } from 'rxjs/operators';
-import { forkJoin} from 'rxjs';
+import { concatMap, map, mergeMap, toArray } from 'rxjs/operators';
+import { forkJoin, from, of } from 'rxjs';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { File } from '@ionic-native/file/ngx';
 
-import { ContainerType, Container, Material, SearchParams, Program } from "src/app/models/basic_models.model";
+import { ContainerType, Container, ClusterContainer, ContainerCluster, MapContainer, isContainerCluster, Material, SearchParams, Program } from "src/app/models/basic_models.model";
 import { News } from "src/app/models/news.model";
 import { Subprogram } from "src/app/models/subprogram.model";
 import { SessionService } from 'src/app/services/session.service';
@@ -172,13 +172,13 @@ export class ApiService<T=any> {
   }
 
   // Función genrica para cargar contenedores
-  loadNearbyContainers(bounds) {
+  loadNearbyContainers(bounds, clustered = false) {
     if ( this.session.searchItem != undefined){
       let ids = this.session.searchItem.ids !== undefined ? this.session.searchItem.ids : this.session.searchItem.id;
-      return this.getContainers4Materials(bounds, this.session.searchItem.type+"="+ids);
+      return this.getContainers4Materials(bounds, this.session.searchItem.type+"="+ids, clustered);
     }
     else {
-      return this.getContainers(bounds);
+      return this.getContainers(bounds, clustered);
     }
   }
 
@@ -198,17 +198,17 @@ export class ApiService<T=any> {
     ));
   }
 
-  getContainers(bbox: string[]) {
-    return  this.request.get(environment.backend + "containers_bbox?version="+environment.apiVersion+"&sw="+bbox[0]+"&ne="+bbox[1]).pipe(map(
-      (result: Container[]) => {
-        return this.formatMarker(result);
+  getContainers(bbox: string[], clustered = false) {
+    return  this.request.get(environment.backend + "containers_bbox?version="+environment.apiVersion+"&sw="+bbox[0]+"&ne="+bbox[1]+(clustered ? "&clustered=true" : "")).pipe(map(
+      (result: MapContainer[]) => {
+        return this.formatMapMarkers(result);
       }
     ));
   }
-  getContainers4Materials(bbox: string[], query: string) {
-    return  this.request.get(environment.backend + "containers_bbox4materials?version="+environment.apiVersion+"&sw="+bbox[0]+"&ne="+bbox[1]+"&"+query).pipe(map(
-      (result: Container[]) => {
-        return this.formatMarker(result);
+  getContainers4Materials(bbox: string[], query: string, clustered = false) {
+    return  this.request.get(environment.backend + "containers_bbox4materials?version="+environment.apiVersion+"&sw="+bbox[0]+"&ne="+bbox[1]+"&"+query+(clustered ? "&clustered=true" : "")).pipe(map(
+      (result: MapContainer[]) => {
+        return this.formatMapMarkers(result);
       }
     ));
   }
@@ -255,6 +255,25 @@ export class ApiService<T=any> {
         return this.formatMarker(result);
       }
     ));
+  }
+  getClusterContainers(ids: number[]): Observable<ClusterContainer[]> {
+    if (ids.length === 0) {
+      return of([]);
+    }
+    const batches: string[] = [];
+    for (let i = 0; i < ids.length; i += 100) {
+      batches.push(ids.slice(i, i + 100).join(','));
+    }
+    return from(batches).pipe(
+      concatMap(batch => this.request.get<ClusterContainer[]>(
+        environment.backend + "cluster_details?version=" + environment.apiVersion + "&container_ids=" + batch
+      ).pipe(map(containers => {
+        this.formatMarker(containers);
+        return containers;
+      }))),
+      toArray(),
+      map(results => ([] as ClusterContainer[]).concat(...results))
+    );
   }
   getSubprograms4Location(latlng: number[], distance?: number, dimensions?: string) {
     let ids = null;
@@ -307,6 +326,26 @@ export class ApiService<T=any> {
         return zones;
       }
     ));
+  }
+
+  formatMapMarkers(items: MapContainer[]): MapContainer[] {
+    return items.map(item => {
+      if (isContainerCluster(item)) {
+        this.validateCluster(item);
+        return item;
+      }
+      return this.formatMarker([item])[0];
+    });
+  }
+
+  private validateCluster(cluster: ContainerCluster) {
+    if (!Number.isFinite(cluster.latitude) || !Number.isFinite(cluster.longitude) ||
+        !Number.isSafeInteger(cluster.count) || cluster.count < 2 ||
+        !Array.isArray(cluster.ids) || cluster.ids.length !== cluster.count ||
+        cluster.ids.some(id => !Number.isSafeInteger(id) || id <= 0) ||
+        new Set(cluster.ids).size !== cluster.ids.length) {
+      throw new Error('Invalid cluster returned by containers search');
+    }
   }
 
   formatMarker(containers: Container[]): Container[] {
