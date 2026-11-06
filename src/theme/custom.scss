@@ -817,6 +817,17 @@ ion-img.logo {
   }
 }
 #map{
+  .dr-cluster{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, .8);
+    background: var(--ion-color-primary, #2b8a3e);
+    color: #fff;
+    font-weight: bold;
+    box-shadow: 0 0 6px rgba(0, 0, 0, .4);
+  }
   .dr-marker{
     fill: var(--ion-color-base);
     > svg{

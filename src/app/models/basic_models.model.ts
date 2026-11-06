@@ -51,6 +51,26 @@ export class Container extends Base {
     information: string;
     receives_text: string;
     custom_icon: string;
+    cluster?: false;
+}
+
+export interface ClusterContainer extends Container {
+    sub_program_id: number;
+    sub_program_name: string;
+}
+
+export interface ContainerCluster {
+    cluster: true;
+    latitude: number;
+    longitude: number;
+    count: number;
+    ids: number[];
+}
+
+export type MapContainer = Container | ContainerCluster;
+
+export function isContainerCluster(item: MapContainer): item is ContainerCluster {
+    return item.cluster === true;
 }
 
 export class ContainerType extends Base {

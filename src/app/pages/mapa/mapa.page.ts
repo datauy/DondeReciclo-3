@@ -1,12 +1,11 @@
-import { Component, OnInit, AfterViewInit, ViewChild, Renderer2, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, Renderer2, ElementRef } from '@angular/core';
 import { Event, Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 import {NativeGeocoder,NativeGeocoderOptions} from "@ionic-native/native-geocoder/ngx";
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
-import { Container, Program, Weekdays } from "src/app/models/basic_models.model";
+import { Container, Weekdays } from "src/app/models/basic_models.model";
 import { CupertinoPane } from 'cupertino-pane';
 
 import { ApiService } from "src/app/services/api.service";
@@ -17,6 +16,7 @@ import { AuthGuardService } from 'src/app/services/auth-guard.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
 import { Subprogram } from "src/app/models/subprogram.model";
+import { Subscription } from 'rxjs';
 
 
 import { environment } from 'src/environments/environment';
@@ -70,7 +70,8 @@ export class MapaPage implements OnInit {
   panelTop = true;
   routing = false;
   processed_route = 0;
-  
+  private nearbyRequest: Subscription;
+
   public userPopup = L.popup().on("remove", this.closePopUp, this);
 
   constructor(
@@ -161,53 +162,47 @@ export class MapaPage implements OnInit {
           this.map.setUserPosition(userPos);
           // Si no está ejecutando la geoloc cargamos contenedores, sino lo maneja la geoloc
           //if ( !this.geoLocationActive ) {
-            this.api.getNearbyContainers(2, userPos).subscribe(
-              (containers) => {
-                this.map.loadMarkers(containers, true);
-              }
-            );
+          this.api.getNearbyContainers(2, userPos).subscribe(
+            (containers) => {
+              this.map.loadMarkers(containers, true);
+            }
+          );
           //}
         }
       }
     );
     this.map.mapChanged.subscribe(
       change => {
-        if (change) {
-          if ( this.map.map != undefined && this.list == 0 ) {
-            if (( this.map.map.getZoom() >= 14 && !this.map.saturationWarn ) || this.map.eagerLoad ) {
-              this.notification.closeNotificationId('zoom');
-              this.api.loadNearbyContainers(this.map.getBoundingCoords())
-              .subscribe((containers) => {
-                  this.map.loadMarkers(containers, false);
-              });
-              if ( this.zoneVisible == 3 ) {
-                this.zoneVisible = 2;
-                this.getZones(false);
-              }
-            }
-            else {
-              let noZoom = {
-                id: 'zoom',
+        if (change && this.map.map != undefined && this.list == 0) {
+          if (this.nearbyRequest) {
+            this.nearbyRequest.unsubscribe();
+          }
+          const clustered = this.map.map.getZoom() < 14;
+          this.nearbyRequest = this.api.loadNearbyContainers(this.map.getBoundingCoords(), clustered)
+            .subscribe((containers) => {
+              this.notification.closeNotificationId('nearbyError');
+              this.map.loadMarkers(containers, false);
+            }, error => {
+              console.error('Error loading nearby containers', error);
+              this.notification.showNotification({
+                id: 'nearbyError',
                 type: 'notification',
                 class: 'alert',
-                title: 'No estamos cargando datos, acércate al mapa',
-                note: 'Debido al nivel de zoom y para proteger el funcionamiento de la aplicación y el dispositivo hemos desactivado la carga automática de datos mientras navega.',
-                link: this.session.homeUrl,
-                link_title: 'Cargar de todas formas',
-                link_params: {'eagerLoad': 1}
-                //link_fragment: "load-data"
-              };
-              this.notification.showNotification(noZoom);
-            }
-            this.map.saturationWarn = false;
+                title: 'No se pudieron cargar los puntos',
+                note: 'Intenta mover el mapa para volver a cargar los resultados.'
+              });
+            });
+          if (this.zoneVisible == 3) {
+            this.zoneVisible = 2;
+            this.getZones();
           }
         }
       }
     );
     this.router.events.pipe(filter((event: Event): event is NavigationEnd => event instanceof NavigationEnd)).subscribe((event: Event) => {
       console.log("ROUTER EVENT", event);
-      if ( event instanceof NavigationEnd && event.id != this.processed_route ) {
-        this.processed_route == event.id;
+      if (event instanceof NavigationEnd && event.id != this.processed_route) {
+        this.processed_route = event.id;
         console.log("ROUTER EVENT2", event);
         this.mapaRouter(event);
       }
@@ -227,7 +222,7 @@ export class MapaPage implements OnInit {
       }
     );
   }
-  
+
   ngAfterViewInit() {
     this.loadMap();
     this.loadServicesPane();
@@ -235,45 +230,45 @@ export class MapaPage implements OnInit {
   }
 
   loadMap(center?: L.LatLng) {
-    
+
     if ( center == undefined ) {
       center = L.latLng(-11.336196, -63.605775);
     }
     //this.animating = true;
     if ( this.map.map != undefined ) this.map.map.remove();
     //if ( this.map.map == undefined ) {
-        this.map.map = new L.Map(this.mapEl.nativeElement, {minZoom:4}).setView(center, 4);
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-          attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-        }).addTo(this.map.map);
-  
-        if ( this.map.userPosition ) {
-          this.map.createUserMarker();
+    this.map.map = new L.Map(this.mapEl.nativeElement, {minZoom:4}).setView(center, 4);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+    }).addTo(this.map.map);
+
+    if ( this.map.userPosition ) {
+      this.map.createUserMarker();
+    }
+    //Create user marker upon click
+    this.map.map.on("click", (e: L.LeafletMouseEvent) => {
+      //Do not change user position if zone clicked
+      if ( this.map.zoneClick < 0 ) {
+        if (this.map.userMarker) { // check
+          this.map.map.removeLayer(this.map.userMarker); // remove
         }
-        //Create user marker upon click
-        this.map.map.on("click", <LeafletMouseEvent>(e) => {
-          //Do not change user position if zone clicked
-          if ( this.map.zoneClick < 0 ) {
-            if (this.map.userMarker) { // check
-              this.map.map.removeLayer(this.map.userMarker); // remove
-            }
-            //Do not propagate since click is handled
-            this.map.setUserPosition([e.latlng.lat, e.latlng.lng], false);
-            this.map.createUserMarker();
-          }
-          if (this.map.route) {
-            this.map.route.spliceWaypoints(0, 1, e.latlng);
-          }
-          this.map.clickZone(0.0002);
-        });
-        this.map.map.on('zoomend', this.map.zoomChange, this.map);
-        this.map.map.on('dragend', this.map.centerChange, this.map);
-        //this.map.once('moveend', this.toggleAnimation, this);
-        this.session.reloadMap = false;
-      //}
-      //else {
-      //  this.map.map.invalidateSize();
-      //}
+        //Do not propagate since click is handled
+        this.map.setUserPosition([e.latlng.lat, e.latlng.lng], false);
+        this.map.createUserMarker();
+      }
+      if (this.map.route) {
+        this.map.route.spliceWaypoints(0, 1, e.latlng);
+      }
+      this.map.clickZone(0.0002);
+    });
+    this.map.map.on('zoomend', this.map.zoomChange, this.map);
+    this.map.map.on('dragend', this.map.centerChange, this.map);
+    //this.map.once('moveend', this.toggleAnimation, this);
+    this.session.reloadMap = false;
+    //}
+    //else {
+    //  this.map.map.invalidateSize();
+    //}
     return true;
   }
 
@@ -293,11 +288,19 @@ export class MapaPage implements OnInit {
       this.loadInfoPane();
     }
   }
+  ionViewDidEnter() {
+    if (this.map.map) {
+      this.map.map.invalidateSize();
+    }
+  }
   //
   ionViewWillLeave() {
+    if (this.nearbyRequest) {
+      this.nearbyRequest.unsubscribe();
+    }
+    this.notification.closeNotificationId('nearbyError');
     //Remove notification messages
     this.notification.closeNotificationId('noLoc');
-    this.notification.closeNotificationId('zoom');
     this.notification.closeNotificationId('noSub');
     this.notification.closeNotificationId('noPhoto');
     this.notification.closeNotificationId('noSearch');
@@ -312,7 +315,7 @@ export class MapaPage implements OnInit {
     //Remove search variables
     this.session.showSearchItem = false;
     delete this.session.searchItem;
-    delete this.loadContainer; 
+    delete this.loadContainer;
     delete this.autoSearch;
     delete this.autoSearchItem;
     //Remove loaded objects
@@ -321,15 +324,6 @@ export class MapaPage implements OnInit {
     delete this.loadSubIds;
     this.map.removeZones();
     this.map.removeCustomZones();
-  }
-  activateEager() {
-    this.map.eagerLoad = true;
-    this.map.mapChanges();
-    //Set eager load for 10 secs
-    setTimeout( () => {
-    this.map.eagerLoad = false;
-    this.router.url.replace('?eagerLoad=1', '');
-    }, 10000);
   }
   mapaRouter(event?: any) {
     if ( this.initDataLoaded && !this.routing ) {
@@ -343,23 +337,18 @@ export class MapaPage implements OnInit {
             if ( url_arr[1].startsWith('zones') ) {
               this.activateZone();
             }
-            if ( url_arr[1].startsWith('eagerLoad') ) {
-              this.activateEager();
-            }
             this.router.navigate([this.session.homeUrl]);
             this.routing = false;
           }
         }
         this.loadPosition(false).then(() => {
           let params = this.route.snapshot.queryParams;
-    
+
           if ( params.hasOwnProperty('zones') && params.zones == 1 ) {
             this.activateZone();
             this.router.navigate([this.session.homeUrl]);
             this.routing = false;
           }
-          // route for childs and params
-          let objectLocation = false;
           if ( this.route.snapshot.params['materialID'] != undefined && this.route.snapshot.params['materialID'] > 0 ) {
             this.autoSearch = true;
             this.autoSearchItem = this.api.materials[this.session.country][this.route.snapshot.params['materialID']];
@@ -370,10 +359,9 @@ export class MapaPage implements OnInit {
           }
           //MAP SERVICES
           if ( this.route.snapshot.params['subsID'] != undefined && this.route.snapshot.params['subsID'].length > 0 ) {
-            this.activateEager();
             this.loadSubIds = this.route.snapshot.params['subsID'];
             this.api.getSubPrograms(this.loadSubIds).subscribe(
-              (subp) => {                             
+              (subp) => {
                 this.list = 3;
                 this.zones = subp.locations;
                 this.routing = false;
@@ -387,7 +375,7 @@ export class MapaPage implements OnInit {
                       this.map.loadMarkers(containers, true);
                     }
                   );
-                  if ( typeof(this.servicesPane) != 'undefined' ) {
+                  if (typeof (this.servicesPane) != 'undefined') {
                     this.servicesPane.moveToBreak('middle');
                     this.session.cupertinoState = 'cupertinoOpen';
                   }
@@ -411,10 +399,9 @@ export class MapaPage implements OnInit {
               );
             }
             else if ( this.route.snapshot.params['containerID'] != undefined && this.route.snapshot.params['containerID'] > 0 ) {
-                this.loadContainer = this.route.snapshot.params['containerID'];
-                objectLocation = true;
-                this.showPane();
-                this.routing = false;
+              this.loadContainer = this.route.snapshot.params['containerID'];
+              this.showPane();
+              this.routing = false;
             }
             else if ( this.route.snapshot.params['coords'] != undefined ) {
               var latlng = this.route.snapshot.params['coords'].split(',');
@@ -475,7 +462,7 @@ export class MapaPage implements OnInit {
         cupertinoBrake = this.infoPane.currentBreak();
       }
     }
-     document.querySelector('.'+className).className = className + ' cupertino-pane ' + cupertinoBrake;
+    document.querySelector('.'+className).className = className + ' cupertino-pane ' + cupertinoBrake;
   }
   //
   loadInfoPane() {
@@ -488,7 +475,7 @@ export class MapaPage implements OnInit {
       //fitHeight: fit,
       buttonDestroy: false,
       showDraggable: true,
-        //simulateTouch: true,
+      //simulateTouch: true,
       topperOverflow: false,
       fitScreenHeight: false,
       topperOverflowOffset: 200,
@@ -532,7 +519,7 @@ export class MapaPage implements OnInit {
       //fitHeight: fit,
       buttonDestroy: false,
       showDraggable: true,
-        //simulateTouch: true,
+      //simulateTouch: true,
       initialBreak: initPane,
       clickBottomOpen: false,
       bottomOffset: 30,
@@ -557,13 +544,13 @@ export class MapaPage implements OnInit {
       },
       onTransitionEnd: () => this.breakPointMapCupertino('services-pane'),
     };
-    
+
     //document.querySelector(".cupertino-pane").classList.add(initPane);
     this.servicesPane = new CupertinoPane(
       this.serviceContainer.nativeElement, // Pane container selector
       panelServices
-      );
-      this.servicesPane.present({animate: true});
+    );
+    this.servicesPane.present({animate: true});
   }
   //
   toggleServices() {
@@ -603,7 +590,7 @@ export class MapaPage implements OnInit {
     }
     //Track content impression
     _paq.push(['trackContentImpression', 'Contenedores', cid, environment.url]);
-    
+
     this.api.getContainer(cid).subscribe((container) => {
       this.formatContainer(container);
       if ( this.loadContainer > 0 ) {
@@ -747,9 +734,9 @@ export class MapaPage implements OnInit {
               if ( load ) {
                 this.subprograms4location();
                 this.api.getNearbyContainers(2, this.map.userPosition)
-                .subscribe((containers) => {
-                  this.map.loadMarkers(containers, true);
-                });
+                  .subscribe((containers) => {
+                    this.map.loadMarkers(containers, true);
+                  });
               }
             }
           }
@@ -768,7 +755,7 @@ export class MapaPage implements OnInit {
   }
   //
   routing_load() {
-    return this.loadSubIds == undefined && this.loadContainers == undefined && this.loadContainer == undefined 
+    return this.loadSubIds == undefined && this.loadContainers == undefined && this.loadContainer == undefined
   }
   //
   formatContainer(container: Container) {
@@ -889,7 +876,6 @@ export class MapaPage implements OnInit {
       this.api.getSubprograms4Location(point, distance).subscribe(
         (subprograms_zones) => {
           var subprograms = subprograms_zones.subprograms;
-          let fixedPos:[number, number] = [this.map.userPosition[0] - 0.002, this.map.userPosition[1] ];
           if ( subprograms.length > 0 ) {
             this.formatSubProgram(subprograms);
             this.zones = subprograms_zones.locations;
@@ -928,7 +914,7 @@ export class MapaPage implements OnInit {
       }
       if (zone_found) {
         this.map.showSubZone(this.zones.features[i]);
-        
+
       }
     }
     this.api.getSubContainers(this.subprogram.id.toString()).subscribe(
@@ -948,8 +934,8 @@ export class MapaPage implements OnInit {
     this.infoPane.present({animate: true});
   }
   //
-  getZones(getNext = true) {
-  let zoneBtn = document.querySelector(".map-zones");
+  getZones() {
+    let zoneBtn = document.querySelector(".map-zones");
     if ( this.zoneVisible == 3 ) {
       zoneBtn.classList.remove('selected');
       this.map.removeZones();
@@ -1023,12 +1009,12 @@ export class MapaPage implements OnInit {
       this.reportLocationActive = true;
       var latlng = this.map.userMarker.getLatLng();
       this.userPopup.
-      setContent('<a class="user-popup" href="/usuario/reportar/'+latlng.lat+','+latlng.lng +'"><span>Confirmar ubicación</span><ion-icon name="check-green"></ion-icon></a>').
-      setLatLng(latlng);
+        setContent('<a class="user-popup" href="/usuario/reportar/'+latlng.lat+','+latlng.lng +'"><span>Confirmar ubicación</span><ion-icon name="check-green"></ion-icon></a>').
+        setLatLng(latlng);
       //
       this.map.userMarker.
-      bindPopup(this.userPopup).
-      openPopup();
+        bindPopup(this.userPopup).
+        openPopup();
     }
   }
   closePopUp() {
@@ -1058,7 +1044,7 @@ export class MapaPage implements OnInit {
             document.body.removeChild(selBox);
             setTimeout( () => {
               this.shareVisible = 0;
-          }, 2500);
+            }, 2500);
           }
         }
       );
@@ -1066,7 +1052,7 @@ export class MapaPage implements OnInit {
     else {
       this.shareVisible = 1;
       setTimeout( () => {
-          this.shareVisible = 0;
+        this.shareVisible = 0;
       }, 5000);
     }
   }

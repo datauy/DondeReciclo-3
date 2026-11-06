@@ -5,8 +5,6 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { HttpClientModule } from '@angular/common/http';
 import { LeafletModule } from "@asymmetrik/ngx-leaflet";
-
-import { navPage } from 'src/app/components/animations';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 import { SliderComponent } from 'src/app/components/slider/slider.component';
 import { ComponentsModule } from 'src/app/components/components.module';
