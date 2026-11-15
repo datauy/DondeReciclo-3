@@ -152,7 +152,7 @@ export class MapService {
     private router: Router,
     private  storage:  Storage
   ) {
-    this.session.getCountry().then( (country) => {
+    void this.session.getCountry().then( (country) => {
       if ( country != undefined ) {
         this.center = environment[country].center;
       }
@@ -516,7 +516,7 @@ export class MapService {
     }
     return false;
   }
-  async getUserPosition() {
+  getUserPosition() {
     return this.storage.get("userPosition").then(
       (up) => {
         this.userPosition = up;

@@ -92,7 +92,7 @@ export class MapaPage implements OnInit {
   }
   //
   ngOnInit() {
-    this.session.isShowSlider().then((toShow) => {
+    void this.session.isShowSlider().then((toShow) => {
       this.session.watchSlider(toShow);
     });
     // this.app = document.querySelector('app-search');
@@ -335,7 +335,7 @@ export class MapaPage implements OnInit {
             this.routing = false;
           }
         }
-        this.loadPosition(false).then(() => {
+        void this.loadPosition(false).then(() => {
           let params = this.route.snapshot.queryParams;
     
           if ( params.hasOwnProperty('zones') && params.zones == 1 ) {
@@ -405,17 +405,17 @@ export class MapaPage implements OnInit {
               var latlng = this.route.snapshot.params['coords'].split(',');
               if ( latlng[1] != undefined ) {
                 this.map.setUserPosition(latlng);
-                this.loadPosition(true);
+                void this.loadPosition(true);
               }
               else {
-                this.loadPosition(true).then((pos) => {
+                void this.loadPosition(true).then((pos) => {
                   this.gotoLocation();
                   this.routing = false;
                 });
               }
             }
             else {
-              this.loadPosition(true).then((pos) => {
+              void this.loadPosition(true).then((pos) => {
                 this.gotoLocation();
                 this.routing = false;
               });
@@ -679,7 +679,7 @@ export class MapaPage implements OnInit {
           (country) => {
             this.session.setCountry(country, false);
             this.geoLocationActive = false;
-            this.loadPosition(load);
+            void this.loadPosition(load);
           }
         );
         //this.map.flytomarker(this.map.userPosition, 15);
@@ -706,7 +706,7 @@ export class MapaPage implements OnInit {
     };
     this.locationLoop += 1;
     this.notification.showNotification(noRes);
-    this.loadPosition(load);
+    void this.loadPosition(load);
   }
   //
   loadPosition(load) {
@@ -1021,7 +1021,7 @@ export class MapaPage implements OnInit {
   }
   share() {
     if ( this.shareVisible ) {
-      this.map.getUserPosition().then(
+      void this.map.getUserPosition().then(
         (res) => {
           if (res != undefined ) {
             this.shareVisible = 2;
