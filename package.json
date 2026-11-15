@@ -52,6 +52,7 @@
     "ionic-cli": "0.0.0",
     "leaflet": "^1.7.1",
     "leaflet-gesture-handling": "^1.2.1",
+    "leaflet.markercluster": "^1.5.3",
     "leaflet-routing-machine": "^3.2.12",
     "ng-apexcharts": "1.2.3",
     "rxjs": "~6.5.1",

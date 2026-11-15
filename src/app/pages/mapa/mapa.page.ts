@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, ViewChild, Renderer2, ElementRef } from '@angular/core';
 import { Event, Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 import {NativeGeocoder,NativeGeocoderOptions} from "@ionic-native/native-geocoder/ngx";
@@ -70,6 +70,7 @@ export class MapaPage implements OnInit {
   panelTop = true;
   routing = false;
   processed_route = 0;
+  private mapRequest: Subscription;
   
   public userPopup = L.popup().on("remove", this.closePopUp, this);
 
@@ -173,33 +174,21 @@ export class MapaPage implements OnInit {
     this.map.mapChanged.subscribe(
       change => {
         if (change) {
+          if ( this.mapRequest ) {
+            // Cancelar la solicitud anterior de contenedores para evitar race conditions.
+            this.mapRequest.unsubscribe();
+          }
           if ( this.map.map != undefined && this.list == 0 ) {
-            if (( this.map.map.getZoom() >= 14 && !this.map.saturationWarn ) || this.map.eagerLoad ) {
-              this.notification.closeNotificationId('zoom');
-              this.api.loadNearbyContainers(this.map.getBoundingCoords())
-              .subscribe((containers) => {
-                  this.map.loadMarkers(containers, false);
-              });
-              if ( this.zoneVisible == 3 ) {
-                this.zoneVisible = 2;
-                this.getZones(false);
-              }
+            // Guardar referencia a la subscription para poder cancelar si
+            // cambia el mapa antes de los resultados.
+            this.mapRequest = this.api.loadNearbyContainers(this.map.getBoundingCoords())
+            .subscribe((containers) => {
+                this.map.loadMarkers(containers, false);
+            });
+            if ( this.zoneVisible == 3 ) {
+              this.zoneVisible = 2;
+              this.getZones(false);
             }
-            else {
-              let noZoom = {
-                id: 'zoom',
-                type: 'notification',
-                class: 'alert',
-                title: 'No estamos cargando datos, acércate al mapa',
-                note: 'Debido al nivel de zoom y para proteger el funcionamiento de la aplicación y el dispositivo hemos desactivado la carga automática de datos mientras navega.',
-                link: this.session.homeUrl,
-                link_title: 'Cargar de todas formas',
-                link_params: {'eagerLoad': 1}
-                //link_fragment: "load-data"
-              };
-              this.notification.showNotification(noZoom);
-            }
-            this.map.saturationWarn = false;
           }
         }
       }
@@ -295,9 +284,11 @@ export class MapaPage implements OnInit {
   }
   //
   ionViewWillLeave() {
+    if ( this.mapRequest ) {
+      this.mapRequest.unsubscribe();
+    }
     //Remove notification messages
     this.notification.closeNotificationId('noLoc');
-    this.notification.closeNotificationId('zoom');
     this.notification.closeNotificationId('noSub');
     this.notification.closeNotificationId('noPhoto');
     this.notification.closeNotificationId('noSearch');
@@ -323,13 +314,7 @@ export class MapaPage implements OnInit {
     this.map.removeCustomZones();
   }
   activateEager() {
-    this.map.eagerLoad = true;
     this.map.mapChanges();
-    //Set eager load for 10 secs
-    setTimeout( () => {
-    this.map.eagerLoad = false;
-    this.router.url.replace('?eagerLoad=1', '');
-    }, 10000);
   }
   mapaRouter(event?: any) {
     if ( this.initDataLoaded && !this.routing ) {
