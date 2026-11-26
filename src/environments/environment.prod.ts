@@ -18,6 +18,5 @@ export const environment = {
     locale: 'es_CO'
   },
   geocoder: 'https://nominatim.openstreetmap.org/',
-  pinSaturation: 200,
   apiVersion: '2.0'
 };

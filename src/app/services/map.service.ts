@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 import { SessionService } from 'src/app/services/session.service';
 
 import "leaflet";
+import "leaflet.markercluster";
 import "leaflet-routing-machine";
 declare let L;
 
@@ -127,8 +128,6 @@ export class MapService {
   zones: L.FeatureGroup;
   customZones: L.FeatureGroup;
   subZone: L.FeatureGroup;
-  saturationWarn = false;
-  eagerLoad = false;
   private _pinClick = new BehaviorSubject<boolean>(false);
   private _zoneClick = new BehaviorSubject<any>(0);
   private _mapChangeSub = new BehaviorSubject<boolean>(false);
@@ -153,7 +152,7 @@ export class MapService {
     private router: Router,
     private  storage:  Storage
   ) {
-    this.session.getCountry().then( (country) => {
+    void this.session.getCountry().then( (country) => {
       if ( country != undefined ) {
         this.center = environment[country].center;
       }
@@ -163,11 +162,11 @@ export class MapService {
   loadMarkers( markers: Container[], fly = true ){
     //this.loadMap();
     this.containers = markers;
-    this.saturationWarn = false;
     let mapBounds = [];
     //remove all markers and reload
     if ( this.markers != undefined ) {
       this.markers.clearLayers();
+      this.markers.remove();
     }
     if (this.userPosition) {
       if (this.userMarker) { // check
@@ -197,15 +196,9 @@ export class MapService {
         center_markers = center_markers - 1;
       }
       markersLayer.push(newMarker);
-      //Prevent marker load over saturation level
-      if ( i > environment.pinSaturation && !this.eagerLoad ) {
-        this.saturationWarn = true;
-        this.mapChanges(true);
-        break;
-      }
     }
     this.map.invalidateSize();
-    this.markers = L.layerGroup(markersLayer).addTo(this.map);
+    this.markers = L.markerClusterGroup().addLayers(markersLayer).addTo(this.map);
     if ( mapBounds.length > 0 ) {
       if ( fly ) {
         this.currentBounds = mapBounds;
@@ -523,7 +516,7 @@ export class MapService {
     }
     return false;
   }
-  async getUserPosition() {
+  getUserPosition() {
     return this.storage.get("userPosition").then(
       (up) => {
         this.userPosition = up;
